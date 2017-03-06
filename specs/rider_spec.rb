@@ -18,7 +18,7 @@ describe "Rider class" do
         RideShare::Rider.new([1,2,3,4,5])
       }.must_raise ArgumentError
     end
-    it "Has driver_id and vin as initial values" do
+    it "Has rider id, name and phone as initial values" do
       rider_hash = {32, "Natalia", "1425394958"}
       rider = RideShare::Driver.new(rider_hash)
       rider.must_respond_to :rider_id
