@@ -1,0 +1,16 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/Hyunji/Documents/Ada/Homework/ride-share-two/lib/ride_share_driver.rb": [
+        null
+      ],
+      "/Users/Hyunji/Documents/Ada/Homework/ride-share-two/specs/ride_share_rider_spec.rb": [
+
+      ],
+      "/Users/Hyunji/Documents/Ada/Homework/ride-share-two/specs/ride_share_trip_spec.rb": [
+
+      ]
+    },
+    "timestamp": 1488842429
+  }
+}
