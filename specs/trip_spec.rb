@@ -2,6 +2,11 @@ require_relative 'spec_helper'
 
 describe "Trip class" do
 
+  it "is an instance of Trip" do
+    test_trip = Trip.new({id: 1, rider_id: 33, driver_id: 22, date: "01-02-0102", rating: 5})
+    test_trip.must_be_kind_of Trip
+  end
+
   describe "Initialize method" do
     it "" do
 

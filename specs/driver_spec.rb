@@ -2,6 +2,11 @@ require_relative 'spec_helper'
 
 describe "Driver class" do
 
+  it "is an instance of Driver" do
+    test_driver = Driver.new({id: 1, name: "George", vehicle_id: 3313})
+    test_driver.must_be_kind_of Driver
+  end
+
   describe "Initialize method" do
     it "" do
 
