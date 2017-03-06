@@ -1,6 +1,6 @@
 class Rider
 
-  attr_reader
+  attr_reader id:
 
   def initialize(hash)
     @id = hash[:id]

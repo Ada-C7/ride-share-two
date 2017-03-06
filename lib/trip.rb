@@ -1,6 +1,6 @@
 class Trip
 
-  attr_reader
+  attr_reader 
 
   def initialize(hash)
     @id = hash[:id]
