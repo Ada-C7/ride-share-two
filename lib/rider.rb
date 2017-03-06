@@ -1,5 +1,6 @@
 module RideShare
   class Rider
+    attr_reader :rider_id, :name, :phone
     def initialize(hash)
       raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
       @rider_id = hash[:rider_id]
@@ -10,4 +11,4 @@ module RideShare
   end
 end
 
-rider_hash = {32, "Natalia", "1425394958"}
+rider_hash = {rider_id: 32, name: "Natalia", phone:  "1425394958"}
