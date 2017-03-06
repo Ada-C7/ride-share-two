@@ -16,7 +16,7 @@ Create a system that will manage information related to ride sharing. The system
 
 #### Driver
 Each driver should:
-- have an ID, name, license plate and vehicle identification number
+- have an ID, name and vehicle identification number
   - Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
 
 Given a driver object, you should be able to:
