@@ -1,0 +1,67 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/nataliakuleniuk/Documents/Ada_Developers_Academy/ride-share-two/lib/driver.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1
+      ],
+      "/Users/nataliakuleniuk/Documents/Ada_Developers_Academy/ride-share-two/specs/rider_spec.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/nataliakuleniuk/Documents/Ada_Developers_Academy/ride-share-two/lib/rider.rb": [
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/nataliakuleniuk/Documents/Ada_Developers_Academy/ride-share-two/specs/trip_spec.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/nataliakuleniuk/Documents/Ada_Developers_Academy/ride-share-two/lib/trip.rb": [
+        1,
+        1,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1488840799
+  }
+}
