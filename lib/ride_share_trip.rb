@@ -49,7 +49,9 @@ module Rideshare
       return Rideshare::Driver.find(@driver_id)
     end
 #instance_method2 : retrieve the associated rider instance through the rider ID
-
+    def rider_info
+      return Rideshare::Rider.find(@rider_id)
+    end
   end
 end
 

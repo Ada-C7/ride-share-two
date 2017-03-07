@@ -71,7 +71,10 @@ describe "Trip" do
 
   describe "Trip#rider" do
     it "Retreve the associated rider instance through the rider ID" do
-
+      args = {trip_id: 46 , driver_id: 98, rider_id: 1, date: 2016-06-28, rating: 2}
+      trip = Rideshare::Trip.new(args)
+      expected = {id: 1, name: "Nina Hintz Sr.", phone_num: "560.815.3059"}
+      trip.rider_info.must_equal expected
     end
   end
 
