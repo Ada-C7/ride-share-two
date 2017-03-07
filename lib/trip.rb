@@ -1,13 +1,18 @@
 # new Trip class, subclass of RideShare
-# capability to return driver_id or rider_id of trip instance (attr_readers)
+module RideShare
+  class Trip
+    # capability to return driver_id or rider_id of trip instance (attr_readers)
+    attr_reader :id, :driver_id, :rider_id, :date, :rating
 
-# initialize trip
-# take in id, driver_id, rider_id, date, rating as a hash
-@id
-@driver_id
-@rider_id
-@date
-@rating
+    # initialize trip
+    # take in id, driver_id, rider_id, date, rating as a hash
+    def initialize(trip_info) # ={}
+      @id = trip_info[:id]
+      @driver_id = trip_info[:driver_id]
+      @rider_id = trip_info[:rider_id]
+      @date = trip_info[:date]
+      @rating = trip_info[:rating]
+    end
 
 # class method: all
 # for each row in CSV file read in and create an instance of trip
@@ -29,3 +34,5 @@
 # instance method: find_rider(rider_id)
 # for each row in CSV file read in and create an instance of trip
 # return instance of rider
+  end
+end
