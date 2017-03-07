@@ -1,8 +1,10 @@
 class Driver
-  attr_reader :id, :name, :vehicle_id
+  attr_reader :id, :name, :vin
 
   def initialize(driver_hash)
-    # The length of the vehicle_id must be __, to be considered valid
+    # The length of the vehicle_id(:vin) must be __, to be considered valid
+    VIN_LENGTH = 17
+
   end
 
   # Retrieve the list of trip instances that only this driver has taken
