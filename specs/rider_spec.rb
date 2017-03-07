@@ -18,4 +18,19 @@ describe "Rider tests" do
     end
   end
 
+
+  describe "Rider.all" do
+    it "returns an array of all riders" do
+      Rider.all.class.must_equal Array
+    end
+
+    it "each element in array is a Rider" do
+
+      Rider.all.each do |element|
+        element.must_be_instance_of Rider
+      end
+    end
+
+  end
+
 end
