@@ -73,4 +73,42 @@ describe "RideShare::Driver" do
       @driver_found.vin.must_equal "KPH9RLSZ9YKNVMGH2"
     end
   end
+
+  describe "Driver#Trips" do
+    it "returns value an an Array" do
+      RideShare::Trip.all
+      driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
+      driver.trips.must_be_kind_of Array
+    end
+    it "first element is an instance of Trip" do
+      RideShare::Trip.all
+      driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
+      driver.trips[0].must_be_instance_of RideShare::Trip
+    end
+    it "last element is a Trip associated with the expected driver" do
+      RideShare::Trip.all
+      driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
+      driver.trips[-1].driver_id.must_equal "9"
+    end
+  end
+
+  describe "Driver#avg_rating" do
+    it "returns value as a Float" do
+      RideShare::Trip.all
+      driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
+      driver.avg_rating.must_be_kind_of Float
+    end
+    it "return value is min 0, max 5" do
+      RideShare::Trip.all
+      driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
+      rider.avg_rating.must_be :<= 5
+      rider.avg_rating.must_be :>= 0
+    end
+    # it "last Driver is associated with the Rider through a Trip" do
+    # skip
+    #   RideShare::Trip.all
+    #   driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
+    #   # find out how to test this
+    # end
+  end
 end
