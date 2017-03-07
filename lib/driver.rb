@@ -4,8 +4,8 @@ class Driver
 #initialize
 # @id = driver_hash[id:]
 # @name = driver_hash[name:]
-# @license_plate = driver_hash[license_plate:]
 # @vin = driver_hash[vin:]
+  #vin number should be a specific length to ensure it is a valid vehicle identification number <-method?
 #end
 
 #def trips_taken
