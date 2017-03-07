@@ -49,8 +49,8 @@ describe "Driver class" do
       all_drivers = RideShare::Driver.all
       all_drivers.length.must_equal 100
     end
-    it " - The ID and balance of the first and last
-          accounts match what's in the CSV file" do
+    it " - The ID, vin and name of the first and last
+          drivers match what's in the CSV file" do
       csv = CSV.read("support/drivers.csv", 'r')
       expected_id_first = csv[1][0].to_i
       expected_name_first = csv[1][1]
@@ -69,7 +69,7 @@ describe "Driver class" do
   end # end of all method
 
   describe "Driver.find" do
-    it "Returns an account that exists" do
+    it "Returns an driver that exists" do
       result = RideShare::Driver.find(16)
       result.must_be_kind_of RideShare::Driver
     end
@@ -88,7 +88,6 @@ describe "Driver class" do
       result.driver_id.must_equal RideShare::Driver.all[99].driver_id
       result.name.must_equal RideShare::Driver.all[99].name
       result.vin.must_equal RideShare::Driver.all[99].vin
-
     end
 
     it "Raises an error for a driver that doesn't exist" do
@@ -96,7 +95,7 @@ describe "Driver class" do
         RideShare::Driver.find(3000)
       }.must_raise ArgumentError
     end
-  end
+  end # end of find method
 
 
 

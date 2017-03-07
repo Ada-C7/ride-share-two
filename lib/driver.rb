@@ -14,6 +14,9 @@ module RideShare
       # RideShare::Trips.all_trips_by_driver
     end
 
+    def average_rating
+    end
+
     def self.all  #retrieve all drivers from the CSV file
       all_drivers = []
       csv = CSV.read("support/drivers.csv", 'r')
