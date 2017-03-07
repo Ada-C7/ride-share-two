@@ -1,6 +1,12 @@
 class Driver
+# @@drivers = {} #or []
 
-
+#initialize
+# @id = driver_hash[id:]
+# @name = driver_hash[name:]
+# @license_plate = driver_hash[license_plate:]
+# @vin = driver_hash[vin:]
+#end
 
 #def trips_taken
 #return list of trips taken by an instance of a diver
@@ -8,7 +14,7 @@ class Driver
 
 
 #def average_rating
-#average_rating = ratings.all / ratings.length 
+#average_rating = ratings.all / ratings.length
 #return average_rating
 #end
 
