@@ -14,7 +14,7 @@ module RideShare
 
     def self.all
       trips_array = []
-      CSV.read("support/trips.csv").each do |trip|
+      CSV.read("support/trips.csv", {:headers => true}).each do |trip|
         trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], trip[4])
       end
       trips_array
