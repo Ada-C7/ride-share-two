@@ -87,7 +87,25 @@ describe "Trip" do
   end # End of describe "#self.find_all_trips_for_driver"
 
   describe "#self.find_all_trips_for_rider" do
+    let(:trip_collection) {RideSharing::Trip.find_all_trips_for_rider(104)}
+    it "Will return an array" do
+      trip_collection
+      trip_collection.must_be_kind_of Array
+    end
 
+    it "Must return an array with elements of class RideSharing::Trip" do
+      trip_collection
+      trip_collection.each do |obj|
+        obj.must_be_kind_of RideSharing::Trip
+      end
+    end
+
+    it "Must return an array of Trip objects only for driver with id 1" do
+      trip_collection
+      trip_collection.each do |obj|
+        obj.rider_id.must_equal 104
+      end
+    end
 
   end # End of describe "#self.find_all_trips_for_rider"
 

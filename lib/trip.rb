@@ -33,5 +33,10 @@ module RideSharing
       return all_trips_for_driver
     end
 
+    def self.find_all_trips_for_rider(ride_id)
+      all_trips_for_rider = self.all.select { |trip| trip.rider_id == ride_id}
+      return all_trips_for_rider
+    end
+
   end # End of class Trip
 end # End of module RideSharing
