@@ -13,24 +13,8 @@ module RideShare
       @rating = info[:rating]
     end
 
-    # can change this all method to accept the trips_data
-    # this set up is very unfriendly -
-    # reading trips_datas could be in their own class
     def self.all(trips_data)
-      # you know trip_data is going to be an array - cause you are making sure of that with the FileData class specs and whatnot
-      # but you dont know if that incoming array has good data
-
-
-      # we want to validate that info in csv is good data
-      # to validate that the first string is a number/float
-      # that the second string is a number/float
-      # can use this to test:
-      # Integer(string) rescue false
-      # you are doing a loop here - you can add validation for the info so
-      # then we loop once
-      # can write helper method to validate
-      # (that returns what I want - or raises an argument error - what if you want trap the bad data - in that case you could do two loops)
-      # call helper method on each line
+      raise ArgumentError if trips_data.empty?
       trips = trips_data.map do |trip_info|
         trip = Hash.new
         trip[:id] = test_for_integer(trip_info[0])
@@ -44,8 +28,9 @@ module RideShare
     end
 
     def self.test_for_integer(num)
-      raise ArgumentError.new("Data is not integer") unless ( Integer(num) rescue false ) != false
-      Integer(num) # want to raise an argument error if this is wrong
+      Integer(num)
+      # unless ( Integer(num) rescue false ) != false
+      # Integer(num)
     end
 
     # this will throw an arugment error if not given proper format
@@ -87,5 +72,8 @@ end
 # p RideShare::Trip.find_by_driver(2, '../support/trips.csv')
 # p RideShare::Trip.test_for_date("hello")
 # p RideShare::Trip.all([['3', '1', '54', "2016-04-05", '4']])
+# p RideShare::Trip.all([['3', 'one', '54', "2016-04-05", '4']])
 # p RideShare::Trip.test_for_rating("7")
 # p RideShare::Trip.test_for_integer('7')
+# this will fail when you try to send nothing to test for intger etc...
+# p RideShare::Trip.all([[]])

@@ -58,14 +58,14 @@ describe "Trip" do
       csv_file = './support/trips.csv'
       @trips_data = RideShare::FileData.read_csv(csv_file)
       @trips_bad_data_1 = [['three', '1', '54', "2016-04-05", '4']]
-      # @trips_bad_data_1 = [ ["three"], ["1"], ["54"], ["2016-04-05"], ["5"] ]
-
       @trips_bad_data_2 = [['3', 'one', '54', "2016-04-05", '4']]
       @trips_bad_data_3 = [['3', '1', 'fifity', "2016-04-05", '4']]
       @trips_bad_data_4 = [['3', '1', '54', "hello", '4']]
       # four will not pass the 1-5 test so that is the argument error raised
       @trips_bad_data_5 = [['3', '1', '54', "2016-04-05", 'four']]
       @trips_bad_data_6 = [['3', '1', '54', "2016-04-05", '7']]
+      @trips_bad_data_7 = []
+      @trips_bad_data_8 = [[]]
     end
 
     # let does not run this block untill it is called - which is good you want
@@ -93,24 +93,21 @@ describe "Trip" do
       # ex.message.must_equal "Data is not integer"
       # this works:
       # proc also equals ->
-      err = proc {
+      proc {
         RideShare::Trip.all(@trips_bad_data_1)
       }.must_raise ArgumentError
-      err.message.must_equal "Data is not integer"
     end
 
     it "raises an argument error if not given intetger for driver_id" do
-      err = proc {
+      proc {
         RideShare::Trip.all(@trips_bad_data_2)
       }.must_raise ArgumentError
-      err.message.must_equal "Data is not integer"
     end
 
     it "raises an argument error if not given intetger for rider_id" do
-      err = proc {
+      proc {
         RideShare::Trip.all(@trips_bad_data_3)
       }.must_raise ArgumentError
-      err.message.must_equal "Data is not integer"
     end
 
     it "raises an argument error if not given proper date" do
@@ -132,6 +129,19 @@ describe "Trip" do
         RideShare::Trip.all(@trips_bad_data_6)
       }.must_raise ArgumentError
       err.message.must_equal "Rating must be 1-5"
+    end
+
+    it "raises an arugment error if given empty arrays" do
+      proc {
+        RideShare::Trip.all(@trips_bad_data_7)
+      }.must_raise ArgumentError
+    end
+
+    it "given error message when given [[]]" do
+      err = proc {
+        RideShare::Trip.all(@trips_bad_data_8)
+      }.must_raise TypeError
+      err.message.must_equal "can't convert nil into Integer"
     end
   end
 
@@ -161,7 +171,7 @@ describe "Trip" do
       trips.each { |trip| trip.driver_id.must_equal @driver_id }
     end
   end
-  #
+  
   describe "Trip#find_by_rider" do
 
     before do
