@@ -13,7 +13,7 @@ module RideShare
 
     def self.all
       riders_array = []
-      CSV.read("support/riders.csv").each do |rider|
+      CSV.read("support/riders.csv", {:headers => true}).each do |rider|
         riders_array << (Rider.new(rider[0], rider[1], rider[2]))
       end
       riders_array
