@@ -42,6 +42,14 @@ class Ride_Share::Driver
     Trip.find_driver_trips(@id)
   end
 
+  def calculate_rating
+    #access rating from trips instances
+    #calculate average
+    #returns avaerage rating
+
+  end
+
+
 end
 
 # Driver.print_all

@@ -38,6 +38,18 @@ class Ride_Share::Rider
       puts "rider id: #{rider.id}, name: #{rider.name}, phone: #{rider.phone_number}"
     end
   end
+
+  def retrieve_trips
+    #retrieve the list of trip instances for a rider
+
+  end
+
+  def retrieve_drivers
+    #retrieve the list of all previous driver instances for a rider
+    #returns list of driver instances
+
+  end
+
 end
 
 # Rider.print_all

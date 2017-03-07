@@ -35,13 +35,40 @@ class Ride_Share::Trip
     end
   end
 
-  def find_driver_trips(driver_id)
-    driver_trips = []
-    all.each do |trip|
-      driver_trips << trip if trip.driver_id == driver_id
-    end
-    return driver_trips
+  def self.find_driver_trips(driver_id)
+    #find the list of trip instances for a driver
+    #returns list of trips instances.
+
   end
+
+
+  def self.find_rider_trips(rider_id)
+    #find the list of trip instances for a rider
+    #returs list of trip instances
+
+  end
+
+  # def find_driver_trips(driver_id)
+  #   # driver_trips = []
+  #   # all.each do |trip|
+  #   #   driver_trips << trip if trip.driver_id == driver_id
+  #   # end
+  #   # return driver_trips
+  # end
+
+  def retrieve_driver
+    #retrieve the associated driver instance through driver ID
+
+
+  end
+
+  def retrieve_rider
+    #retrieve the associated rider instance through rider ID
+
+  end
+
+
+
 
 end
 
