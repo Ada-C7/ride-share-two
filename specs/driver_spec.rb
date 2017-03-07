@@ -101,8 +101,8 @@ describe "RideShare::Driver" do
     it "return value is min 0, max 5" do
       RideShare::Trip.all
       driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
-      rider.avg_rating.must_be :<= 5
-      rider.avg_rating.must_be :>= 0
+      driver.avg_rating.must_be :<=, 5
+      driver.avg_rating.must_be :>=, 0
     end
     # it "last Driver is associated with the Rider through a Trip" do
     # skip

@@ -18,11 +18,6 @@ Given a rider object, you should be able to:
 #### Trip
 -   Each rating should be within an acceptable range (1-5)
 
-You should be able to:
-- find all trip instances for a given driver ID
-- find all trip instances for a given rider ID
-- retrieve all trips from the CSV file
-
 ## Getting Started
 You will run tests by executing the `rake` command, as configured in a Rakefile. You should have **95% code coverage** using simplecov.
 

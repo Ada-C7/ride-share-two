@@ -32,7 +32,7 @@ module RideShare
       return @all # return all instances of trips
     end
 
-    # class method: by_rider(rider_id)
+    # class method: by_ridertr(rider_id)
     def self.by_rider(rider_id)
       # find all instances of trips where rider_id matches
       @all.select { |trip| trip.rider_id == rider_id }
