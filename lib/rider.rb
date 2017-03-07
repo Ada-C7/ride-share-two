@@ -13,11 +13,19 @@ class Rider
 
   def get_trips
     # calls Trip.all_with_rider and passes in rider id
+    return Trip.all_with_rider(@id)
   end
 
   def get_all_prev_drivers
     # use get_trips to get list of Trips this rider has taken
     # iterate over the list and use Driver.find(id) with each of the driver_id params from the trip to generate a list of drivers that correspond to the trips
+    trips = get_trips
+    drivers = []
+    trips.each do |trip|
+      driver = Driver.find(trip.driver_id)
+      drivers << driver
+    end
+    return drivers
   end
 
   def self.all

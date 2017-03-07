@@ -38,7 +38,8 @@ class Driver
       driver_hash = {}
       driver_hash[:id] = line[0].to_i
       driver_hash[:name] = line[1]
-      driver_hash[:vehicle_id] = line[2]
+
+      driver_hash[:vehicle_id] = line[2] if line[2].length == 17
 
       all_driver_info << driver_hash
     end

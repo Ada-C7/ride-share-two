@@ -13,23 +13,35 @@ describe "Rider class" do
   end
 
   describe "get_trips method" do
+    before do
+      @rider = Rider.new(id: 9, name: "Merl Glover III", phone_number: "1-602-620-2330 x3723")
+    end
     it "returns an array of trips" do
-
+      @rider.get_trips.must_be_kind_of Array
     end
     it "each item in array is a Trip instance" do
-
+      @rider.get_trips.each do |trip|
+        trip.must_be_kind_of Trip
+      end
+    end
+    it "all Trips must have the same Rider id" do
+      @rider.get_trips.each do |trip|
+        trip.rider_id.must_equal 9
+      end
     end
   end
 
   describe "get_all_prev_drivers method" do
+    before do
+      @rider = Rider.new(id: 9, name: "Merl Glover III", phone_number: "1-602-620-2330 x3723")
+    end
     it "returns an array" do
-
+      @rider.get_all_prev_drivers.must_be_kind_of Array
     end
     it "all items in array are Driver instances" do
-
-    end
-    it "list should not have any duplicates" do
-      # is this necessary?
+      @rider.get_all_prev_drivers.each do |driver|
+        driver.must_be_kind_of Driver
+      end
     end
   end
 
