@@ -1,6 +1,3 @@
-# require 'csv'
-# require_relative 'trip'
-
 class Driver
   attr_reader :id, :name, :vin
 

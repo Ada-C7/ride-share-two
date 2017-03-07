@@ -1,7 +1,3 @@
-# require 'csv'
-# require_relative 'driver'
-# require_relative 'rider'
-
 class Trip
   attr_reader :id, :driver_id, :rider_id, :date, :rating
 
