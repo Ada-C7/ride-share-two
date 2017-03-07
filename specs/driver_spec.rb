@@ -64,6 +64,15 @@ describe "Driver Class" do
     end
 
     it "Returns the correct driver object" do
+      driver = RideShare::Driver.find("1")
+      driver.name.must_equal "Bernardo Prosacco"
+      driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+    end
+
+    it "Finds the first driver in the CSV file" do
+    end
+
+    it "Finds the last driver in ther CSV file" do
     end
 
   end
