@@ -7,8 +7,9 @@ module Rideshare
     def initialize(args)
       @id = args[:id]
       @name = args[:name]
-      @license_num = args[:license_num]
-      @vehicle_id_num = args[:vin]
+      @license_num = ""
+      @vin = args[:vin]
+      raise ArgumentError.new("Not a valid vin number") if @vin.length > 17
     end
 #(vehicle id # should be a specific length to ensure it's a valid vehicle)
 

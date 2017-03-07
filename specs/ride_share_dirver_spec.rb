@@ -8,8 +8,13 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe "Driver#initialize" do
   it "Creates a Driver class" do
-    # args = (id: 1, name: "Bernardo Prosacco", license_num: "HXIK386F3", vin: "WBWSS52P9NEYLVDE9")
-    driver = Rideshare::Driver.new(id: 1, name: "Bernardo Prosacco", license_num: "HXIK386F3", vin: "WBWSS52P9NEYLVDE9")
+    args = {id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9"}
+    driver = Rideshare::Driver.new(args)
     driver.must_be_kind_of Rideshare::Driver
+  end
+
+  it "Raise an argument error if vin number is longer than 17" do
+    args = {id: 1, name: "Bernardo Prosacco", vin: "WBWSS5245P9NEYLVDE29"}
+    proc {Rideshare::Driver.new(args)}.must_raise ArgumentError
   end
 end
