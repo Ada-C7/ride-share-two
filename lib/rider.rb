@@ -31,7 +31,14 @@ module RideShare
       all_riders
     end
 
-
+    def self.find(id)
+      result = RideShare::Rider.all.select {|rider| rider.rider_id == id}
+      if result[0].nil?
+        raise ArgumentError.new("Cannot find this ID in riders")
+      else
+        return result[0]
+      end
+    end
 
   end
 end

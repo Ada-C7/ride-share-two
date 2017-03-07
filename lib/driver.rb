@@ -40,14 +40,6 @@ module RideShare
       end
     end
 
-
-
-
-
-
-
-
-
   end
 end
 
