@@ -15,7 +15,19 @@ class Rider
 #end
 
 #def previous_drivers
-#retrieve the list of all previous driver instances (through the trips functionality)
+#retrieve the list of all previous driver instances from trips_take method
+#return list of all previous drivers
+#end
 
-#find all trips from this rider
+#def self.all
+#reads csv
+#creates rider instances
+#returns all drivers
+#end
+
+#def self.find(rider_id)
+#checks @@riders
+#returns rider data with associating id
+#end
+
 end
