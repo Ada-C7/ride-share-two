@@ -13,12 +13,18 @@ module RideShareTwo
     end
 
     def self.all_drivers
-        all_drivers = []
-        CSV.open("support/drivers.csv",{:headers => true}).each do |array|
-            all_drivers << self.new(array[0], array[1], array[2].to_s)
-        end
-        return all_drivers
+      all_drivers = []
+      CSV.open("support/drivers.csv",{:headers => true}).each do |array|
+        all_drivers << self.new(array[0], array[1], array[2].to_s)
+      end
+      return all_drivers
     end
+
+    def self.find_driver(driver_id)
+      result = self.all_drivers.select { |a| a.driver_id == driver_id }
+      return result.first
+    end
+
 
   end
 
