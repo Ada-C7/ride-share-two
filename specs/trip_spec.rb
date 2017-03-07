@@ -109,7 +109,6 @@ describe "RideShare::Trip" do
       proc { RideShare::Trip.riders_trips(40000) }.must_raise ArgumentError
     end
 
-
   end
 
 end

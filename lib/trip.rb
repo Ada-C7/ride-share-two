@@ -13,13 +13,15 @@ module RideShare
     end
 
 
-    # retrieve the associated driver instance through the driver ID
+    # retrieve the associated driver instance using the driver ID
     def trip_driver
+      RideShare::Driver.find(@driver_id)
     end
 
 
-    # retrieve the associated rider instance through the rider ID
+    # retrieve the associated rider instance using the rider ID
     def trip_rider
+      RideShare::Rider.find(@rider_id)
     end
 
 
@@ -47,7 +49,7 @@ module RideShare
 
       all_trips.reject! { | trip | driver_id != trip.driver_id }
 
-      if all_trips.length >= 1
+      if all_trips.length >= 1 # consider making new exception
         return all_trips
       else
         raise ArgumentError.new("Invalid Driver ID")
@@ -64,7 +66,7 @@ module RideShare
       if all_trips.length >= 1
         return all_trips
       else
-        raise ArgumentError.new("Invalid Rider ID")
+        raise ArgumentError.new("Invalid Rider ID") # consider making new exception
       end
     end
 

@@ -20,10 +20,36 @@ describe "RideShare::Driver" do
 
 
   describe "RideShare::Driver#trips" do
+
+    let (:list_trips) { RideShare::Driver.find(17).trips }
+
+    it "Returns an array" do
+      list_trips.must_be_instance_of Array
+    end
+
+    it "All objects in the array are RideShare::Trip" do
+      list_trips.each do | trip |
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "The driver_id of each trip matches the given argument" do
+      list_trips.each do | trip |
+        trip.driver_id.must_equal 17
+      end
+    end
+
   end
 
 
   describe "RideShare::Driver#avg_rating" do
+
+    # let (:avg) { RideShare::Driver.find(17).avg_rating}
+    #
+    # it "Returns an integer" do
+    #    avg.must_be_kind_of Integer
+    # end
+
   end
 
 

@@ -13,11 +13,19 @@ module RideShare
 
     # retreives lists of all trips for specific driver
     def trips
+      RideShare::Trip.drivers_trips(@id)
     end
 
 
     # calculates an average rating of all trips for specific driver
     def avg_rating
+      # total = 0
+      #
+      # trips.each do | trip |
+      #   total += trip.rating
+      # end
+      #
+      # avg_rating / RideShare::Trip.drivers_trips.length
     end
 
 
@@ -45,7 +53,7 @@ module RideShare
         return driver if driver_id == driver.id
       end
 
-      raise ArgumentError.new("Invalid Driver ID") 
+      raise ArgumentError.new("Invalid Driver ID")
     end
 
   end
