@@ -1,14 +1,17 @@
 #require csv??
 #require anything else?
+require 'pry'
 module RideShare
-    attr_reader :id, :name, :vin
-    class Driver(id, name, vin)
-        #hmmm.. this isn't working
-        @id = id
-        @name = name
-        #vin should be of a certain length and needs to be checked
-        @vin = vin
-    end
+
+    class Driver
+        attr_reader :id, :name, :vin
+
+        def initialize (id, name, vin)
+            @id = id
+            @name = name
+            #vin should be of a certain length and needs to be checked
+            @vin = vin
+        end
 
 #find_trips(id)
     #retrieve list of all trip instances based on the drivers id
@@ -41,9 +44,5 @@ module RideShare
     #if it does, then return this instance of driver
 # end
 
-
-
-
-
-
+    end
 end

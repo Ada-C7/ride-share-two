@@ -8,7 +8,5 @@ describe "Driver" do
             @my_driver = RideShare::Driver.new(16, "Travis Bickle", 123456)
             @my_driver.must_be_instance_of RideShare::Driver
         end
-
     end
-
 end
