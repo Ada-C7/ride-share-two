@@ -58,4 +58,19 @@ describe "Rider Class" do
     end
   end
 
+  describe "self.find" do
+
+    let(:rider) { RideShare::Rider.find("1") }
+
+    it "Returns a rider object based on ID" do
+      rider.must_be_instance_of RideShare::Rider
+    end
+
+    it "Returns the correct rider object" do
+      rider.name.must_equal "Nina Hintz Sr."
+      rider.phone_num.must_equal "560.815.3059"
+    end
+
+  end
+
 end

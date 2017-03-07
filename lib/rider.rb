@@ -8,7 +8,7 @@
       @phone_num = rider_data[:phone_num]
     end
 
-    def riders
+    def drivers
     end
 
     def self.all
@@ -25,7 +25,11 @@
       return rider_array
     end
 
-    def self.find
+    def self.find(id)
+      riders = RideShare::Rider.all
+      riders.each do |rider|
+        return rider if rider.id == id
+      end
     end
 
   end
