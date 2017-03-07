@@ -9,7 +9,7 @@
     end
 
     def trips
-      return RideShare::Trip.all_drivers(id)    
+      return RideShare::Trip.all_drivers(id)
     end
 
     def rating

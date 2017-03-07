@@ -84,6 +84,7 @@ describe "Rider Class" do
     it "Returns an array of driver objects" do
       drivers.each {|d| d.must_be_instance_of RideShare::Driver }
     end
+    
   end
 
 end
