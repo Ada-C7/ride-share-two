@@ -20,11 +20,15 @@ class Trip
     return hash
   end
 
-  # def self.view
-  #   @all_trips
-  # end
-end
-Trip.create_all_trips.collect(2){|hash| hash.include(memo)}
 
-# print Trip.driver_id
+  def self.find_driver(param)
+    CSV.foreach('support/trips.csv', {:headers=> true, :header_converters => :symbol}) do |row|
+
+        return  Trip.new({trip_id:row[0], driver_id:row[1], rider_id:row[2],date:Date.parse(row[3]), rating:row[4]}) if row[1] == param
+
+    end
+  end
+end
+print Trip.find_driver("23").rider_id
+
 # print Trip.rider_id
