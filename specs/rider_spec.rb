@@ -73,4 +73,46 @@ describe "RideShare::Rider" do
       @rider_found.phone_number.must_equal "(229) 074-9445"
     end
   end
+
+  describe "Rider#past_trips" do
+    it "returns value an an Array" do
+    skip
+      RideShare::Trip.all
+      rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
+      rider.past_trips.must_be_kind_of Array
+    end
+    it "first element is an instance of Trip" do
+    skip
+      RideShare::Trip.all
+      rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
+      rider.past_trips[0].must_be_instance_of RideShare::Trip
+    end
+    it "last element is a Trip associated with the expected rider" do
+    skip
+      RideShare::Trip.all
+      rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
+      rider.past_trips[-1].id.must_equal "13"
+    end
+  end
+
+  describe "Rider#past_drivers" do
+    it "returns value as an Array" do
+    skip
+      RideShare::Trip.all
+      rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
+      rider.past_drivers.must_be_kind_of Array
+    end
+    it "first element is an instance of Driver" do
+    skip
+      RideShare::Trip.all
+      rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
+      rider.past_drivers[0].must_be_instance_of RideShare::Driver
+    end
+    it "last Driver is associated with the Rider through a Trip" do
+    skip
+      RideShare::Trip.all
+      rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
+      # find out how to test this
+    end
+  end
 end
