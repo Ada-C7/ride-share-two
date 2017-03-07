@@ -1,6 +1,6 @@
 
 class RideShare::Trip
-  attr_reader :id
+  attr_reader :id, :driver_id, :rider_id, :date, :rating
 
   def initialize(id, driver_id, rider_id, date, rating)
     @id = id
@@ -23,7 +23,7 @@ class RideShare::Trip
           puts "#{ e }"
         end
       end
-      trips.shift
+      # trips.shift
       return trips
   end
 

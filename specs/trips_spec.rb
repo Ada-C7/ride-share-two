@@ -5,6 +5,7 @@ require 'pry'
 describe "Trip" do
   let(:my_trip) {RideShare::Trip.new(1, 2, 3, 4, 5)}
   let(:all_trips) {RideShare::Trip.find_all}
+  let(:csv) {CSV.read("support/trips.csv")}
 
   describe "Trip#initialize" do
     it "takes an ID, Driver ID, Rider ID, Date and Rating to initialize" do
@@ -27,13 +28,15 @@ describe "Trip" do
       end
     end
 
-    # it "number of owners matches number of lines in CSV - 1 for headder line" do
-    #   csv_lines = CSV.read("support/trips.csv")
-    #
-    #   all_trips.length.must_equal
-    # end
-    # #number of owners match number of lines - 1 in CSV
-    #Id of first and last match ID of first and last in CSV
+    it "number of owners matches number of lines in CSV - 1 for headder line" do
+      csv_length = csv.length
+      all_trips.length.must_equal(csv_length - 1)
+    end
+
+    it "date of first & last match date of first & last in CSV" do
+      all_trips[0].date.must_equal(csv[1][3])
+      all_trips[-1].date.must_equal(csv[-1][3])
+    end
   end
 
 end
