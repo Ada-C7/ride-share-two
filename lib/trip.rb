@@ -1,8 +1,10 @@
+require 'csv'
+
 # new Trip class, subclass of RideShare
 module RideShare
   class Trip
     # capability to return driver_id or rider_id of trip instance (attr_readers)
-    attr_reader :id, :driver_id, :rider_id, :date, :rating
+    attr_reader :id, :driver_id, :rider_id, :date, :rating, :all
 
     # initialize trip
     # take in id, driver_id, rider_id, date, rating as a hash
@@ -14,9 +16,16 @@ module RideShare
       @rating = trip_info[:rating]
     end
 
-# class method: all
-# for each row in CSV file read in and create an instance of trip
-# return all instances of trips
+    # class method: all
+    def self.all
+      @all = []
+      CSV.foreach("support/trips.csv", {:headers => true}) do |row| # file directory for rake
+        @all << RideShare::Trip.new({id: row[0], driver_id: row[1], rider_id: row[2], date: row[3], rating: row[4]})
+      end
+      return @all
+    end
+    # for each row in CSV file read in and create an instance of trip
+    # return all instances of trips
 
 # class method: trips_rode(rider_id)
 # find instances of trips where rider_id matches argument
@@ -36,3 +45,5 @@ module RideShare
 # return instance of rider
   end
 end
+
+# p RideShare::Trip.all
