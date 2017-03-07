@@ -23,10 +23,22 @@ class RideShare::Trip
           puts "#{ e }"
         end
       end
-      # trips.shift
+      # trips.shift => I guess I don't need this.
       return trips
   end
 
+  def self.find_all_driver(driver_id)
+    all_trips = find_all
+    driver_trips = []
+
+    all_trips.each do |trip|
+      if trip.driver_id == driver_id
+        driver_trips << trip
+      end
+    end
+
+    return driver_trips
+  end
   # Retrieve associated driver instance through driver ID
   #   input: Driver ID
   #   output: Driver Object associated w/ trip
