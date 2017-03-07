@@ -30,9 +30,9 @@ describe "Trip initialize" do
     trip.rating.must_equal 2
   end
 
-  xit "raises an error if rating is not in the range 1-5" do
+  it "raises an error if rating is not in the range 1-5" do
     proc {
-      RideShare::Driver.new(@bad_rating_hash)
+      RideShare::Trip.new(@bad_rating_hash)
     }.must_raise InvalidRatingError
   end
 end
@@ -87,5 +87,5 @@ describe "get_driver" do
 end
 
 describe "get_rider" do
-  
+
 end

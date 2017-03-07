@@ -3,7 +3,10 @@ module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
     def initialize(trip_hash)
-      # raise error if rating is not valid
+      unless trip_hash[:rating] > 0 && trip_hash[:rating] < 6
+        raise InvalidRatingError.new("Rating must be in the range 1-5")
+      end
+
       @id = trip_hash[:id]
       @driver_id = trip_hash[:driver_id]
       @rider_id = trip_hash[:rider_id]
