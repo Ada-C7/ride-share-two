@@ -43,6 +43,7 @@ class Driver
       all_driver_info << driver_hash
     end
     all_drivers = []
+    all_driver_info.delete_at(0)
     all_driver_info.each do |driver|
       new_driver = Driver.new(driver)
       all_drivers << new_driver
@@ -64,5 +65,3 @@ class Driver
   end
 
 end
-
-puts Driver.all

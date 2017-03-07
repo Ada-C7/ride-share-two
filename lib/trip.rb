@@ -2,7 +2,7 @@ require 'csv'
 
 class Trip
 
-  attr_reader :rider_id, :driver_id, :rating
+  attr_reader :rider_id, :driver_id, :rating, :id
 
   def initialize(hash)
     @id = hash[:id]
@@ -57,6 +57,7 @@ class Trip
 
       all_trip_info << trip_hash
     end
+    all_trip_info.delete_at(0)
     all_trips = []
     all_trip_info.each do |trip|
       new_trip = Trip.new(trip)

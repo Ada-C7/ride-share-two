@@ -33,6 +33,7 @@ class Rider
       all_rider_info << rider_hash
     end
     all_riders = []
+    all_rider_info.delete_at(0)
     all_rider_info.each do |rider|
       new_rider = Rider.new(rider)
       all_riders << new_rider
