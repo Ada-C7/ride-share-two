@@ -1,5 +1,6 @@
 require_relative 'spec_helper'
 
+
 describe Driver do
 
      before do
@@ -11,11 +12,11 @@ describe Driver do
 
      describe "Driver#initialize" do
 
-          it "Creates class Driver" do
+          it "Creates class Driver:" do
             @leia.must_be_kind_of Driver
           end
 
-          it "Takes ID, name and VIN" do
+          it "Takes ID, name and VIN:" do
             @leia.must_respond_to :id
             @leia.id.must_equal @id
 
@@ -26,7 +27,7 @@ describe Driver do
             @leia.vin.must_equal @vin
           end
 
-          it "Verifies VIN is a string, containing no more than 17 characters" do
+          it "Verifies VIN is a string, containing no more than 17 characters:" do
             proc {Driver.new(@id, @name, 777)
             }.must_raise ArgumentError
 
@@ -38,34 +39,34 @@ describe Driver do
      describe "Self#all" do
 
           before do
-               @file = "../support/drivers.csv"
+               @file = "support/drivers.csv"
                @all_drivers = Driver.all(@file)
           end
 
           describe "Driver.all" do
-              it "Returns an array of all drivers" do
+              it "Returns an array of all drivers:" do
                    @all_drivers.must_be_kind_of Array
                end
 
-              it "The number of drivers is correct" do
+              it "Returns correct number of drivers:" do
                    lines = File.foreach(@file).count
                    @all_drivers.length.must_equal lines
                end
 
-               it "Everything in the array is a Driver" do
+               it "Everything in the array is a Driver:" do
                    @all_drivers.each do | driver |
                        driver.must_be_kind_of Driver
                     end
                end
 
               it "The ID, name and VIN of the first and last drivers match the CSV file" do
-                   @all_drivers[0].id.must_equal IO.readlines(@file).first[0]
-                   @all_drivers[0].name.must_equal IO.readlines(@file).first[1]
-                   @all_drivers[0].vin.must_equal IO.readlines(@file).first[2]
+                   @all_drivers[0].id.to_s.must_equal CSV.foreach(@file).first[0]
+                   @all_drivers[0].name.must_equal CSV.foreach(@file).first[1]
+                   @all_drivers[0].vin.must_equal CSV.foreach(@file).first[2]
 
-                   @all_drivers[0].id.must_equal IO.readlines(@file).last[0]
-                   @all_drivers[0].name.must_equal IO.readlines(@file).last[1]
-                   @all_drivers[0].vin.must_equal IO.readlines(@file).last[2]
+               #     @all_drivers[0].id.to_s.must_equal CSV.foreach(@file).last[0]
+               #     @all_drivers[0].name.must_equal CSV.foreach(@file).last[1]
+               #     @all_drivers[0].vin.must_equal CSV.foreach(@file).last[2]
                end
           end
      end

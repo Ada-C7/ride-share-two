@@ -1,4 +1,5 @@
-require_relative 'trip'
+require 'csv'
+#require 'pry'
 
 
 class Driver
@@ -30,17 +31,26 @@ class Driver
      #      @average_rating = all_trips.rating.map { | sum, rating | sum + rating }/all_trips.length
      #      return @average_rating
      # end
+     #binding.pry
 
-     # def self.all(file)
-     #      all_accounts = []
-     #      CSV.open(file).each do | line |
-     #           id = line[0].to_i
-     #           balance = line[1].to_i
-     #           date_opened = line[2]
-     #           account = Account.new(id, balance, date_opened)
-     #           all_accounts << account
-     #      end
-     #
-     #      return all_accounts
-     # end
+     def self.all(file)
+          all_drivers = []
+
+          CSV.open(file).each do | line |
+               @id = line[0].to_i
+               @name = line[1]
+               @vin = line[2]
+               driver = Driver.new(@id, @name, @vin)
+               all_drivers << driver
+          end
+
+          return all_drivers
+     end
 end
+
+# file = "../support/drivers.csv"
+#
+# drivers = Driver.all(file)
+#
+# puts drivers.class
+# puts drivers[7].vin
