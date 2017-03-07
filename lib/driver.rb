@@ -6,11 +6,11 @@ require_relative 'rideshare'
     def initialize(id, name, vin)
       raise ArgumentError.new("The ID is invalid.") if id.class != Integer
       raise ArgumentError.new("The name is invalid.") if name.class != String
-      raise InvalidVinError.new("The VIN number is invalid.") if vin.length != 17 || !vin.upcase.match(/[0-9A-Z]/)
+      raise InvalidVinError.new("The VIN number is invalid.") if vin.length != 17 || !vin.upcase.match(/^[0-9A-Z]+$/)
 
       @id = id
       @name = name
-      @vin_num = vin
+      @vin = vin.upcase
     end
 
 
