@@ -20,27 +20,27 @@
         null,
         null,
         1,
-        1,
-        1,
-        100,
+        3,
+        3,
+        300,
         null,
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
+        3,
         null,
         null,
         1,
         null,
         null,
         null,
+        1,
+        null,
+        null,
+        1,
         null,
         null,
         null,
+        null,
+        null,
+        1,
         null
       ],
       "/Users/Hyunji/Documents/Ada/Homework/ride-share-two/specs/ride_share_rider_spec.rb": [
@@ -50,6 +50,6 @@
 
       ]
     },
-    "timestamp": 1488912406
+    "timestamp": 1488913617
   }
 }

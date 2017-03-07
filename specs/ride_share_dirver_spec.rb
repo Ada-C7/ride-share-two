@@ -28,6 +28,12 @@ describe "Driver" do
     it "Retrieve all drivers from the CSV file" do
       Rideshare::Driver.all.length.must_equal 100
     end
+
+    it "Retrieve all drivers from the CSV file" do
+      all = Rideshare::Driver.all
+      expected = {id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT"}
+      all.last.must_equal expected
+    end
   end
 
   # describe "Driver.find" do

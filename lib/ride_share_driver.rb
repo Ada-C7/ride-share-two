@@ -36,5 +36,5 @@ module Rideshare
   end
 end
 
-# Rideshare::Driver.all
+puts Rideshare::Driver.all.last
 # Rideshare::Driver.new(id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9")
