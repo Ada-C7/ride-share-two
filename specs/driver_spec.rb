@@ -14,8 +14,8 @@ describe Driver do
      before do
           @id = 3
           @name = "Leia"
-          @vehicle_id = "VWING33"
-          @leia = Driver.new(@id, @name, @vehicle_id)
+          @vin = "VWING33"
+          @leia = Driver.new(@id, @name, @vin)
      end
 
      describe "Driver#initialization" do
@@ -31,15 +31,15 @@ describe Driver do
             @leia.must_respond_to :name
             @leia.name.must_equal @name
 
-            @leia.must_respond_to :vehicle_id
-            @leia.vehicle_id.must_equal @vehicle_id
+            @leia.must_respond_to :vin
+            @leia.vin.must_equal @vin
           end
 
-          it "Verifies vehicle ID is a string, containing no more than 7 characters" do
+          it "Verifies vehicle ID is a string, containing no more than 17 characters" do
             proc {Driver.new(@id, @name, 777)
             }.must_raise ArgumentError
-            
-            proc {Driver.new(@id, @name, "777333777")
+
+            proc {Driver.new(@id, @name, "777333777333777333")
             }.must_raise ArgumentError
           end
      end
