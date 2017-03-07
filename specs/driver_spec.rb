@@ -1,12 +1,26 @@
 require_relative 'spec_helper'
 
 # Each driver should:
-# have an ID
-# have a name
 
-# have a vehicle identification number
 # Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
 # use InvalidVinError
+describe Driver do
+  let(:vindiesel) { Driver.new(0.5, "Vin Diesel", "FASTNFURIOUS00007") }
+
+  describe "Driver#initialize" do
+
+    it "Driver has a name, ID, and VIN" do
+      vindiesel.id.must_equal 0.5
+      vindiesel.name.must_equal "Vin Diesel"
+      vindiesel.vin.must_equal "FASTNFURIOUS00007"
+    end
+
+
+  end
+
+
+end
+
 
 # Given a driver object, you should be able to:
 # retrieve the list of trip instances that only this driver has taken
