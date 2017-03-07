@@ -34,6 +34,12 @@ describe "Rider class" do
         RideShare::Rider.new(hash)
       }.must_raise ArgumentError
     end
+    it "Raise ArgumentError if passing rider id is <= 0 " do
+      proc {
+        hash = {rider_id: -3, name: "Natalia", phone:  "1425394958"}
+        RideShare::Rider.new(hash)
+      }.must_raise ArgumentError
+    end
     it "Raise ArgumentError if passing phone is not an integer" do
       proc {
         hash = {rider_id: 32,  name: "Natalia", phone:  1425394958}
@@ -44,33 +50,27 @@ describe "Rider class" do
 
   describe "Rider#all_rider_trips" do
     it "Return an array"do
-      # rider = RideShare::Rider.all[3]
       rider2.all_rider_trips.class.must_equal Array
     end
     it "Returned array must contain object(s) of class Trip" do
-      # rider = RideShare::Rider.all[3]
       rider2.all_rider_trips.each do |trip|
         trip.class.must_equal RideShare::Trip
       end
     end
     it "Returned empty array if there is no trip associated
     with this rider id" do
-      # rider3 = RideShare::Rider.new(rider_hash2)
       rider3.all_rider_trips.must_be_empty
     end
   end # end of all_rider_trips test
 
   describe "Rider#all_rider_drivers" do
     it "Returns array" do
-      # rider = RideShare::Rider.all[25]
       rider2.all_rider_drivers.class.must_equal Array
     end
     it "Returns empty array if rider is not found" do
-      # rider = RideShare::Rider.new(rider_hash2)
       rider3.all_rider_drivers.must_be_empty
     end
     it "Returns array that has object(s) of class Driver" do
-      # rider = RideShare::Rider.all[25]
       rider2.all_rider_drivers.each do |driver|
         driver.class.must_equal RideShare::Driver
       end
@@ -89,13 +89,11 @@ describe "Rider class" do
       all_riders.must_be_kind_of Array
     end
     it "Everything in the array is an Rider class" do
-      # all_riders = RideShare::Rider.all
       all_riders.each do |rider|
         rider.must_be_kind_of RideShare::Rider
       end
     end
     it " The number of riders is correct" do
-      # all_riders = RideShare::Rider.all
       all_riders.length.must_equal 300
     end
     it "The ID, name and phone of the first and last
@@ -107,7 +105,6 @@ describe "Rider class" do
       expected_id_last = csv[300][0].to_i
       expected_name_last = csv[300][1]
       expected_phone_last = csv[300][2]
-      # all_riders = RideShare::Rider.all
 
       all_riders[0].rider_id.must_equal expected_id_first
       all_riders[0].name.must_equal expected_name_first
@@ -140,11 +137,15 @@ describe "Rider class" do
       result.phone.must_equal RideShare::Rider.all[299].phone
     end
 
-    it "Raises an error for a rider that doesn't exist" do
+    it "Raises an error for a rider that doesn't exist or
+      if passing parameter is not positive integer" do
       proc {
         RideShare::Rider.find(3000)
       }.must_raise ArgumentError
+      proc {
+        RideShare::Rider.find(-3)
+      }.must_raise ArgumentError
     end
-  end # end of find method
 
+  end # end of find method
 end # end of class

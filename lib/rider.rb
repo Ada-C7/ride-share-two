@@ -5,16 +5,21 @@ module RideShare
   class Rider
     attr_reader :rider_id, :name, :phone
     def initialize(hash)
+      validate_input(hash)
+      @rider_id = hash[:rider_id]
+      @name = hash[:name]
+      @phone = hash[:phone]
+    end
+
+    def validate_input(hash)
       raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
-      raise ArgumentError.new("Rider id must be an integer") if hash[:rider_id].class != Integer
+      if (hash[:rider_id].class != Integer || hash[:rider_id] <= 0)
+        raise ArgumentError.new("Rider id must be an positive integer")
+      end
       if  !(hash[:name][/['. a-zA-Z]+/] == hash[:name])
         raise ArgumentError.new("Name must contain letters only")
       end
       raise ArgumentError.new("Phone must be a string") if hash[:phone].class != String
-
-      @rider_id = hash[:rider_id]
-      @name = hash[:name]
-      @phone = hash[:phone]
     end
 
     def all_rider_trips

@@ -5,11 +5,24 @@ module RideShare
   class Driver
     attr_reader :driver_id, :vin, :name
     def initialize(hash)
-      raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
+      validate_input(hash)
       @driver_id = hash[:driver_id]
-      raise ArgumentError.new("VIn number must contain 17 character only") if hash[:vin].to_s.length != 17
       @vin = hash[:vin]
       @name = hash[:name]
+    end
+
+    def validate_input(hash)
+      raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
+      if hash[:vin].class != String || hash[:vin].length != 17
+        raise ArgumentError.new("Vin number must be string and contain 17 character only")
+      end
+      if (hash[:driver_id].class != Integer || hash[:driver_id] <= 0)
+        raise ArgumentError.new("Driver id must be an positive integer")
+      end
+      if  !(hash[:name][/['. a-zA-Z]+/] == hash[:name])
+        raise ArgumentError.new("Name must contain letters only")
+      end
+      raise ArgumentError.new("VIN must be a string") if hash[:vin].class != String
     end
 
     def all_driver_trips
