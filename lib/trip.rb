@@ -14,6 +14,14 @@ class Trip
   def self.all
     # reads CSV
     # returns a list of all trip instances
+    trips = CSV.read("support/trips.csv", { :headers => true })
+    trips_array = []
+
+    trips.each do |line|
+      trips_array << Trip.new(line[0].to_i, line[1].to_i, line[2].to_i, line[3], line[4].to_i)
+    end
+
+    return trips_array
   end
 
   def self.find_trips_per_driver(driver_id)
