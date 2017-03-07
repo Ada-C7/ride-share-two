@@ -36,17 +36,20 @@ describe "Driver" do
     end
   end
 
-  # describe "Driver.find" do
-  #   it do
-  #
-  #   end
-  # end
-  #
-  # describe "Driver#all_trips" do
-  #   it do
-  #
-  #   end
-  # end
+  describe "Driver.find" do
+    it "Find a specific driver using their numeric ID" do
+      found = Rideshare::Driver.find(3)
+      expected = {id: 3, name: "Daryl Nitzsche", vin: "SAL6P2M2XNHC5Y656"}
+      found.must_equal expected
+    end
+  end
+
+  describe "Driver#all_trips" do
+    it "Retrieve the list of trip instances that only this driver has taken" do
+
+
+    end
+  end
   #
   # describe "Driver#average_rating" do
   #   it do

@@ -23,8 +23,10 @@ module Rideshare
       return csv
     end
 #self.method2 : find a specific driver using their numeric ID
-    def self.find
-
+    def self.find(id_num)
+      self.all.each do |driver|
+        return driver if driver[:id] == id_num
+      end
     end
 #instance_method1 : retrieve the list of trip instances that only this drver has taken
     def all_trips
@@ -36,5 +38,5 @@ module Rideshare
   end
 end
 
-puts Rideshare::Driver.all.last
+# puts Rideshare::Driver.all.last
 # Rideshare::Driver.new(id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9")
