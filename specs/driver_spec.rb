@@ -1,8 +1,22 @@
 require_relative 'spec_helper'
+#require 'pry'
 
 describe "Driver" do
 
   describe "initialize" do
+    it "takes an id, name, and vin" do
+      new_driver = Driver.new(1, "Santa Claus", 98109)
+
+      new_driver.must_respond_to :id
+      new_driver.id.must_equal 1
+
+      new_driver.must_respond_to :name
+      new_driver.name.must_equal "Santa Claus"
+
+      new_driver.must_respond_to :vin
+      new_driver.vin.must_equal 98109
+    end
+
     it "must be an instance of the Driver class" do
       kind_driver = Driver.new(1, "Santa Claus", 98109)
       kind_driver.must_be_instance_of Driver
@@ -11,9 +25,13 @@ describe "Driver" do
 
   describe "trips" do
     it "returns the list of trip instances that only this driver has taken" do
-      skip
-      kind_driver = Driver.new(1, "Santa Claus", 98109)
-      kind_driver.trips.must_be_instance_of Array
+      first_driver = Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+      first_driver_trips = first_driver.trips(1)
+      first_driver_trips.must_be_instance_of Array
+      first_driver_trips.each { |trip| return trip }.must_be_instance_of Array
+
+      # takes in driver id
+      # returns a list of all this driver's trips
       # each trip (element) must be an Array, as trips is an array of arrays
     end
   end
@@ -43,7 +61,7 @@ describe "Driver" do
     end
 
     it "can find the first driver from the CSV" do
-      driver = Driver.find(0)
+      driver = Driver.find(1)
       driver.id.must_equal @drivers[0].id
     end
 
@@ -61,7 +79,8 @@ describe "Driver" do
 
 
   describe "rating" do
-
+    #calls trips(id)
+    #
   end
 
 end
