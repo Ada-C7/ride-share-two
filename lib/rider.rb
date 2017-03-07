@@ -6,20 +6,31 @@ module RideShare
     def initialize(rider_info) # ={}
       @id = rider_info[:id]
       @name = rider_info[:name]
-      @vin = rider_info[:phone_number]
+      @phone_number = rider_info[:phone_number]
     end
+    # instance method: past_trips
+    # return collection of trip instances by this rider
+
+    # instance method: past_riders
+    # return collection of rider instances (through the trips functionality)
+
+    # class method: all
+    # read in CSV file for all instances of riders
+
+    def self.all
+      @all_riders = []
+      # read in CSV file for all instances of riders
+      CSV.foreach("support/riders.csv", {:headers => true}) do |row| # file directory for rake
+        @all_riders << RideShare::Rider.new({
+          id: row[0],
+          name: row[1],
+          phone_number: row[2]
+        })
+      end
+      return @all_riders
+      # return all instances of rier
+    end
+    # class method: find(id)
+    # return specific instance of rider (previously instantiated)
   end
 end
-
-# instance method: past_trips
-# return collection of trip instances by this rider
-
-# instance method: past_drivers
-# return collection of driver instances (through the trips functionality)
-
-# class method: all
-# read in CSV file for all instances of riders
-# return all instances of driver
-
-# class method: find(id)
-# return specific instance of rider (previously instantiated)

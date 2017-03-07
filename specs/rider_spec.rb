@@ -49,13 +49,13 @@ describe "RideShare::Rider" do
       # last row of data: 1,Nina Hintz Sr.,560.815.3059
       @riders[0].id.must_equal "1"
       @riders[0].name.must_equal "Nina Hintz Sr."
-      @riders[0].vin.must_equal "560.815.3059"
+      @riders[0].phone_number.must_equal "560.815.3059"
     end
     it "correctly reads in the last row of the CSV file" do
       # last row of data: 300,Miss Isom Gleason,791-114-8423 x70188
       @riders[-1].id.must_equal "300"
       @riders[-1].name.must_equal "Miss Isom Gleason"
-      @riders[-1].vin.must_equal "791-114-8423 x70188"
+      @riders[-1].phone_number.must_equal "791-114-8423 x70188"
     end
   end
 end

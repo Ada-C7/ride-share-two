@@ -37,7 +37,7 @@ describe "RideShare::Driver" do
     it "returns an array" do
       @drivers.must_be_kind_of Array
     end
-    it "each returned element is a trip instances" do
+    it "each returned element is a Driver instances" do
       @drivers.each do |object|
         object.must_be_instance_of RideShare::Driver
       end
@@ -48,8 +48,8 @@ describe "RideShare::Driver" do
     it "correctly reads in the first row of the CSV file" do
       # last row of data: 1,Bernardo Prosacco,WBWSS52P9NEYLVDE9
       @drivers[0].id.must_equal "1"
-      @drivers[0].driver_id.must_equal "Bernardo Prosacco"
-      @drivers[0].rider_id.must_equal "WBWSS52P9NEYLVDE9"
+      @drivers[0].name.must_equal "Bernardo Prosacco"
+      @drivers[0].vin.must_equal "WBWSS52P9NEYLVDE9"
     end
     it "correctly reads in the last row of the CSV file" do
       # last row of data: 100,Minnie Dach,XF9Z0ST7X18WD41HT

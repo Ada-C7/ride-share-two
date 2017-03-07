@@ -33,6 +33,5 @@ module RideShare
     end
     # class method: find(id)
     # return specific instance of driver (previously instantiated)
-
   end
 end
