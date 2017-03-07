@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'ride_share_driver'
+require_relative 'ride_share_rider'
 #Create Rideshare module
 module Rideshare
 #Create Trip class
@@ -33,6 +35,7 @@ module Rideshare
       return trips
     end
 
+    #self.method3 : find all trip instances for a given rider ID
     def self.find_trip_by_rider(rider_id)
       trips = []
       self.all.each do |trip|
@@ -41,10 +44,10 @@ module Rideshare
       return trips
     end
 
-
-
 #instance_method1 : retrieve the associated driver instance through the driver ID
-    # def find_driver
+    def driver_info
+      return Rideshare::Driver.find(@driver_id)
+    end
 #instance_method2 : retrieve the associated rider instance through the rider ID
 
   end
@@ -52,4 +55,7 @@ end
 
 # print Rideshare::Trip.find_trip_by_driver(1)
 # print Rideshare::Trip.all
-print Rideshare::Trip.find_trip_by_rider(1)
+# print Rideshare::Trip.find_trip_by_rider(1)
+# args = {trip_id: 600, driver_id: 61, rider_id: 168, date: "2016-04-25", rating: 3}
+# a = Rideshare::Trip.new(args)
+# print a.driver_info

@@ -9,6 +9,8 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative '../lib/ride_share_trip.rb'
 
 describe "Trip" do
+
+
   describe "Trip#initialize" do
     it "Creates a Trip class" do
       args = {trip_id: 2 , driver_id: 67, rider_id: 146, date: 2016-01-13, rating: 5}
@@ -24,7 +26,7 @@ describe "Trip" do
 
 
   describe "Trip#find_trip_by_driver(driver_id)" do
-    it "Retrieve the associated driver instance through the driver id" do
+    it "Find all trip instances for a given driver ID" do
       expected = [
         {:trip_id=>1, :driver_id=>1, :rider_id=>54, :date=>"2016-04-05", :rating=>3},
         {:trip_id=>122, :driver_id=>1, :rider_id=>247, :date=>"2015-12-24", :rating=>5},
@@ -41,7 +43,7 @@ describe "Trip" do
   end
 
   describe "Trip#find_trip_by_rider(rider_id)" do
-    it "Retrieve the associated rider instance through the rider id" do
+    it "Find all trip instances for a given rider ID" do
       expected = [
         {:trip_id=>46, :driver_id=>98, :rider_id=>1, :date=>"2016-06-28", :rating=>2},
         {:trip_id=>272, :driver_id=>17, :rider_id=>1, :date=>"2015-09-14", :rating=>4}
@@ -57,4 +59,21 @@ describe "Trip" do
       all.last.must_equal expected
     end
   end
+
+  describe "Trip#driver_info" do
+    it "Retrieve the associated driver instance through the driver ID" do
+      args = {trip_id: 1 , driver_id: 1, rider_id: 54, date: 2016-04-05, rating: 3}
+      trip = Rideshare::Trip.new(args)
+      expected = {id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9"}
+      trip.driver_info.must_equal expected
+    end
+  end
+
+  describe "Trip#rider" do
+    it "Retreve the associated rider instance through the rider ID" do
+
+    end
+  end
+
+
 end
