@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-#require 'pry'
 
 describe "Driver" do
 
@@ -25,6 +24,7 @@ describe "Driver" do
 
   describe "trips" do
     it "returns the list of trip instances that only this driver has taken" do
+      skip
       first_driver = Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
       first_driver_trips = first_driver.trips(1)
       first_driver_trips.must_be_instance_of Array
@@ -71,9 +71,9 @@ describe "Driver" do
     end
 
     it "Raises an error for a driver that doesn't exist" do
-        proc {
-          Driver.find(111111)
-        }.must_raise ArgumentError
+      proc {
+        Driver.find(111111)
+      }.must_raise ArgumentError
     end
   end
 
