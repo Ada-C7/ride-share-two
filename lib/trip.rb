@@ -13,19 +13,25 @@ module RideShare
       @rating = hash[:rating]
     end
 
-    def driver# ????????????
+    def driver
         #retrieve the associated driver instance through the driver ID
         return RideShare::Driver.find(@driver_id)
     end
 
     def rider
         #retrieve the associated driver instance through the driver ID
-        return RideShare::Rider.find(@@rider_id)
+        return RideShare::Rider.find(@rider_id)
     end
 
     # find all trip instances for a given driver ID
+    def self.all_trips_by_driver(rider_id)
+
+    end
 
     # find all trip instances for a given rider ID
+    def self.all_trips_by_rider(driver_id)
+
+    end
 
     # retrieve all trips from the CSV file
 
