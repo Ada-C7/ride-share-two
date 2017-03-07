@@ -1,12 +1,5 @@
-require 'simplecov'
-SimpleCov.start
 
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require_relative '../lib/rider'
-require 'csv'
-Minitest::Reporters.use!
+require_relative 'spec_helper'
 
 describe "Rider class" do
   describe "Rider#initialize" do

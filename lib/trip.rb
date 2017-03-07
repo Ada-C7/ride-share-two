@@ -1,6 +1,7 @@
 require_relative 'driver'
 require_relative 'rider'
 require 'csv'
+
 module RideShare
   class Trip
     attr_reader :trip_id, :rider_id, :driver_id, :date, :rating
@@ -59,15 +60,27 @@ module RideShare
 
     # retrieve all trips from the CSV file
     def self.all_trips
+      all_trips = []
+      csv = CSV.read("support/trips.csv", 'r')
+      csv.each do |line|
+      #to avoid putting first line from CSV file that contains column name:
+        next if line[0] == "trip_id"
+        hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i}
+        all_trips << Trip.new(hash)
+      end
+      all_trips
     end
 
-  end
-end
+  end # end of class
+end # end of method
 
 # trip_hash = {trip_id: 123, rider_id: 2, driver_id: 34, date: "03/06/2017", rating: 4}
 #
 # trip = RideShare::Trip.new(trip_hash)
 # # puts trip.driver.driver_id
 
-all_trips =  RideShare::Trip.all_trips_by_rider(1)
-puts all_trips
+# all_trips =  RideShare::Trip.all_trips_by_rider(1)
+# puts all_trips
+
+
+puts RideShare::Trip.all_trips.length

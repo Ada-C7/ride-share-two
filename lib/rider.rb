@@ -10,7 +10,7 @@ module RideShare
     end
 
     def trips
-      # RideShare::Trips.all_trips_by_rider
+      RideShare::Trips.all_trips_by_rider
     end
 
     def drivers #return list of drivers that rider used

@@ -1,13 +1,5 @@
-require 'simplecov'
-SimpleCov.start
 
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require_relative '../lib/driver'
-require 'csv'
-require 'date'
-Minitest::Reporters.use!
+require_relative 'spec_helper'
 
 describe "Driver class" do
   describe "Driver#initialize" do

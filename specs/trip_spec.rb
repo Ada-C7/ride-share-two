@@ -1,12 +1,5 @@
-require 'simplecov'
-SimpleCov.start
 
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require_relative '../lib/trip'
-require 'csv'
-Minitest::Reporters.use!
+require_relative 'spec_helper'
 
 describe "Trip class" do
   describe "Trip#initialize" do
@@ -93,8 +86,6 @@ describe "Trip#all_trips_by_driver" do
       trip.driver_id.must_equal driver_id
     end
   end
-
-
 end # end of all_trips_by_driver method
 
 describe "Trip#all_trips_by_rider" do
@@ -121,5 +112,50 @@ describe "Trip#all_trips_by_rider" do
     end
   end # end of all_trips_by_rider method
 
+  describe "Trip#all_trips" do
+    it "Trip#all_trips return an array" do
+      RideShare::Trip.all_trips.must_be_kind_of Array
+    end
+    it "Everything in the array is an Trip class" do
+      all_trips = RideShare::Trip.all_trips
+      all_trips.each do |trip|
+        trip.must_be_kind_of RideShare::Trip
+      end
+    end
+    it " The number of trips is correct" do
+      all_trips = RideShare::Trip.all_trips
+      all_trips.length.must_equal 600
+    end
+    it " - The trip_id, driver_id, rider_id, date and rating of the first and last
+          trips match what's in the CSV file" do
+      csv = CSV.read("support/trips.csv", 'r')
+
+      expected_trip_id_first = csv[1][0].to_i
+      expected_driver_id_first = csv[1][1].to_i
+      expected_rider_id_first = csv[1][2].to_i
+      expected_date_first = csv[1][3]
+      expected_rating_first = csv[1][4].to_i
+
+      expected_trip_id_last = csv[600][0].to_i
+      expected_driver_id_last = csv[600][1].to_i
+      expected_rider_id_last = csv[600][2].to_i
+      expected_date_last = csv[600][3]
+      expected_rating_last = csv[600][4].to_i
+
+      all_trips = RideShare::Trip.all_trips
+
+      all_trips[0].trip_id.must_equal expected_trip_id_first
+      all_trips[0].driver_id.must_equal expected_driver_id_first
+      all_trips[0].rider_id.must_equal expected_rider_id_first
+      all_trips[0].date.must_equal expected_date_first
+      all_trips[0].rating.must_equal expected_rating_first
+
+      all_trips[599].trip_id.must_equal expected_trip_id_last
+      all_trips[599].driver_id.must_equal expected_driver_id_last
+      all_trips[599].rider_id.must_equal expected_rider_id_last
+      all_trips[599].date.must_equal expected_date_last
+      all_trips[599].rating.must_equal expected_rating_last
+    end
+  end # end of method  all_trips
 end
 end
