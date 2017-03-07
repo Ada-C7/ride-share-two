@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'trip'
+# require_relative 'rider'
 module RideShare
   class Driver
     attr_reader :driver_id, :vin, :name
@@ -10,8 +12,8 @@ module RideShare
       @name = hash[:name]
     end
 
-    def trips
-      # RideShare::Trips.all_trips_by_driver
+    def all_driver_trips
+      RideShare::Trip.all_trips_by_driver(@driver_id)
     end
 
     def average_rating
@@ -42,5 +44,9 @@ module RideShare
 end
 
 # driver_hash = {driver_id: 2, name: "Natalia", license: 3044043, vin: 12213449}
-# puts RideShare::Driver.all.length
+dr =  RideShare::Driver.all[0]
+dr.all_driver_trips.each do |trip|
+  puts trip.driver_id
+end
+
 # puts RideShare::Driver.all

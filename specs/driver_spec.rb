@@ -27,6 +27,25 @@ describe "Driver class" do
     end
   end # end of initialize method test
 
+  describe "Driver#all_driver_trips" do
+    it "Return an array"do
+      driver = RideShare::Driver.all[1]
+      driver.all_driver_trips.class.must_equal Array
+    end
+    it "Returned array must contain object(s) of class Trip" do
+      driver = RideShare::Driver.all[3]
+      driver.all_driver_trips.each do |trip|
+        trip.class.must_equal RideShare::Trip
+      end
+    end
+    it "Returned empty array if there is no trip associated
+    with this driver id" do
+    driver_hash = {driver_id: 9000,name: "Natalia", vin: 12218997344900008}
+    driver = RideShare::Driver.new(driver_hash)
+      driver.all_driver_trips.must_be_empty
+    end
+  end # end of all_driver_trips ,ethod
+
   describe "Driver#all" do
     it "Driver.all returns an array" do
       RideShare::Driver.all.must_be_kind_of Array
