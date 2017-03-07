@@ -17,9 +17,9 @@ class Trip
     trips = []
 
     CSV.foreach("./support/trips.csv", {:headers => true}) do |line|
-      id = line[0]
-      driver = line[1]
-      rider = line[2]
+      id = line[0].to_i
+      driver = line[1].to_i
+      rider = line[2].to_i
       date = line[3]
       rating = line[4].to_i
 
