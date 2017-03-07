@@ -56,7 +56,20 @@ describe "Rider" do
             @my_riders[215].name.must_equal "Assunta Waters Jr."
             @my_riders[215].phone_number.must_equal "(319) 982-0908"
         end
+    end
 
+
+    describe "Self.find method" do
+        it "Takes an id and returns the correct rider" do
+            my_rider = RideShare::Rider.find(116)
+            my_rider.name.must_equal "Laurianne Larkin"
+            my_rider.phone_number.must_equal "567.228.1637 x86366"
+        end
+
+        it "Raises and argument error for invalid ids" do
+            proc { RideShare::Driver.find(416) }.must_raise ArgumentError
+
+        end
 
     end
 

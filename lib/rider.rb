@@ -12,8 +12,6 @@ module RideShare
             @phone_number = phone_number
         end
 
-
-
         def self.all
             riders = []
 
@@ -29,6 +27,20 @@ module RideShare
         end
             return riders
         end
+
+        def self.find(id)
+            riders = RideShare::Rider.all
+
+            riders.each do |rider|
+                if rider.id == id
+                    return rider
+                end
+                end
+            raise ArgumentError.new("Invalid rider")
+
+        end
+
+
 
 
 
