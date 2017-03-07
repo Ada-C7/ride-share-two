@@ -1,29 +1,35 @@
-require_relative 'spec_helper.rb'
+require_relative 'spec_helper'
 
 describe "Rider" do
+   let(:riders) {RideShare::Rider.all}
+
   describe "initialize" do
+
     #responds to all the arguments
 
   end
 
   describe "all" do
     it "returns an Array" do
-
+      riders.must_be_instance_of Array
     end
 
     it "everything in the Array is a Rider instance" do
-
+      riders.each do |rider|
+        rider.must_be_instance_of RideShare::Rider
+      end
     end
 
     it "gets everything in the csv" do
-
+       riders.length.must_equal 300
     end
 
     it "gets the first item" do
-
+        riders[0].name.must_equal "Nina Hintz Sr."
     end
 
     it "gets the last item"  do
+        riders.last.phone.must_equal "791-114-8423 x70188"
 
     end
 
@@ -36,14 +42,24 @@ describe "Rider" do
   end
 
   describe "find" do
+
     it "returns an instance of Rider" do
-      #must_be_instance of Rider
+      rider = RideShare::Rider.find 22
+      rider.must_be_instance_of RideShare::Rider
+      rider.id.must_equal 22
+
+    end
+
+    it "returns nil if Rider is not found" do
+      rider = RideShare::Rider.find 450
+      rider.must_be_instance_of NilClass
     end
 
   end
 
 
   describe "trips" do
+
     it "returns an Array of trips" do
       #object is an Array
       #all elements in Array are Trip instances
@@ -57,6 +73,7 @@ describe "Rider" do
   end
 
   describe "drivers" do
+
     it "returns an Array" do
     end
 
