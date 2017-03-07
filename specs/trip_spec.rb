@@ -28,7 +28,7 @@ describe "Trip" do
       trip.rating.must_equal rating
     end
 
-    it "Is a kind of Driver" do
+    it "Is a kind of Trip" do
       id = 12345
       driver_id = 45678
       rider_id = 9876
@@ -39,5 +39,42 @@ describe "Trip" do
       trip.must_be_kind_of Trip
     end
   end
+
+  describe "Trip#all" do
+
+    before do
+      @trips = Trip.all
+    end
+
+    it "Returns an array of all trips" do
+      @trips.class.must_equal Array
+      @trips.each { |trip| trip.must_be_instance_of Trip }
+      @trips.length.must_equal 600
+
+      @trips.first.id.must_equal 1
+      @trips[0].driver_id.must_equal 1
+      @trips.first.rider_id.must_equal 54
+      @trips.first.date.must_equal "2016-04-05"
+      @trips.first.rating.must_equal 3
+
+      @trips.last.id.must_equal 600
+      @trips[-1].driver_id.must_equal 61
+      @trips.last.rider_id.must_equal 168
+      @trips.last.date.must_equal "2016-04-25"
+      @trips.last.rating.must_equal 3
+
+      index = 0
+      CSV.read("support/trips.csv") do |line|
+
+        @trips[index].id.must_equal line[0].to_i
+        @trips[index].driver_id.must_equal line[1].to_i
+        @trips[index].rider_id.must_equal line[2].to_i
+        @trips[index].date.must_equal line[3]
+        @trips[index].rating.must_equal line[4].to_i
+        index += 1
+      end
+    end
+  end
+
 
 end
