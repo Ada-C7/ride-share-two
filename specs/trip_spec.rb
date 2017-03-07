@@ -1,17 +1,8 @@
-require 'simplecov'
-SimpleCov.start
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
 require 'date'
-require_relative '../lib/trip'
+require_relative './spec_helper.rb'
 require_relative '../lib/file'
 
-
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
 describe "Trip" do
-
   # trip_id,driver_id,rider_id,date,rating
   # 12,12,237,2016-08-21,1
 
@@ -50,7 +41,7 @@ describe "Trip" do
   describe "Trip#all" do
 
     #example of trip data
-
+    # trip_id,driver_id,rider_id,date,rating
     # 1,1,54,2016-04-05,3
     # 2,67,146,2016-01-13,5
     # 3,50,87,2016-05-02,3
@@ -64,28 +55,22 @@ describe "Trip" do
     # [ [], [], [], [] ]
 
     before do
-      @trips_data = RideShare::FileData.read_csv('./support/trips.csv')
-      # all data is words - wont pass integer test
-      @trips_data_bad_1 = [
-                          ["three"], ["one"], ["january 13, 2020"], ["five"]
-                          ]
-      # @trips_data_bad_2 =
-      # @trips_data_bad_3 =
+      csv_file = './support/trips.csv'
+      @trips_data = RideShare::FileData.read_csv(csv_file)
+      @trips_bad_data_1 = [['three', '1', '54', "2016-04-05", '4']]
+      # @trips_bad_data_1 = [ ["three"], ["1"], ["54"], ["2016-04-05"], ["5"] ]
+
+      @trips_bad_data_2 = [['3', 'one', '54', "2016-04-05", '4']]
+      @trips_bad_data_3 = [['3', '1', 'fifity', "2016-04-05", '4']]
+      @trips_bad_data_4 = [['3', '1', '54', "hello", '4']]
+      # four will not pass the 1-5 test so that is the argument error raised
+      @trips_bad_data_5 = [['3', '1', '54', "2016-04-05", 'four']]
+      @trips_bad_data_6 = [['3', '1', '54', "2016-04-05", '7']]
     end
 
+    # let does not run this block untill it is called - which is good you want
+    # the testing of the all method to happen in the it - do - end block
     let(:trips) {RideShare::Trip.all(@trips_data)}
-
-    # can I make a loop out of these assertions and then set lets
-    # format:
-    # let
-    # run loop
-    # new let
-    # run loop
-    # etc...
-
-    it "takes an array of data" do
-      skip
-    end
 
     it "returns an array" do
       trips.must_be_instance_of Array
@@ -95,10 +80,59 @@ describe "Trip" do
       trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
+    # this spec only well with the data in the csv file
     it "has the same number of trips as the CSV file" do
       trips.length.must_equal 600
     end
 
+    it "raises an argument error if not given integer for trip ID  " do
+      # below is not working - says undefined
+      # proc {
+      #   RideShare::Trip.all(@trips_data_bad_1)
+      # }.must_raise ArgumentError => ex
+      # ex.message.must_equal "Data is not integer"
+      # this works:
+      # proc also equals ->
+      err = proc {
+        RideShare::Trip.all(@trips_bad_data_1)
+      }.must_raise ArgumentError
+      err.message.must_equal "Data is not integer"
+    end
+
+    it "raises an argument error if not given intetger for driver_id" do
+      err = proc {
+        RideShare::Trip.all(@trips_bad_data_2)
+      }.must_raise ArgumentError
+      err.message.must_equal "Data is not integer"
+    end
+
+    it "raises an argument error if not given intetger for rider_id" do
+      err = proc {
+        RideShare::Trip.all(@trips_bad_data_3)
+      }.must_raise ArgumentError
+      err.message.must_equal "Data is not integer"
+    end
+
+    it "raises an argument error if not given proper date" do
+      # at this point using Ruby's built in error for this
+      proc {
+        RideShare::Trip.all(@trips_bad_data_4)
+      }.must_raise ArgumentError
+    end
+
+    # if you send "four" as rating - it wont pass the test_rating method
+    it "raises an argument error if not given integer for rating" do
+      proc {
+        RideShare::Trip.all(@trips_bad_data_5)
+      }.must_raise ArgumentError
+    end
+
+    it "raises an argument error if not given 1-5 integer for rating" do
+      err = proc {
+        RideShare::Trip.all(@trips_bad_data_6)
+      }.must_raise ArgumentError
+      err.message.must_equal "Rating must be 1-5"
+    end
   end
 
   describe "Trip#find_by_driver" do
