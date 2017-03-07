@@ -9,9 +9,11 @@ describe "RideShare::Trip" do
       new_trip.must_be_instance_of RideShare::Trip
     end
 
-  end
+    it "Checks if rating is valid (between 1 and 5). If invalid, defaault rating is set to 3" do
+      new_trip = RideShare::Trip.new(1234, 2345, 3456, "2016-03-06", 10)
+      new_trip.rating.must_equal 3
+    end
 
-  describe "RideShare::Trip#valid_rating?" do
   end
 
   describe "RideShare::Trip#trip_driver" do

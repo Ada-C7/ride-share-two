@@ -25,7 +25,7 @@ module RideShare
     end
 
     # finds a specific rider using their numeric ID
-    def self.find(id)
+    def self.find(rider_id)
     end
 
   end

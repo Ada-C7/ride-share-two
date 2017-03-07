@@ -4,7 +4,7 @@ require_relative 'rider'
 module RideShare
 
   class Trip
-  attr_reader
+  attr_reader :id, :rider_id, :driver_id, :date, :rating
 
     # creates trips that have an ID, rider ID, driver ID, date, and rating
     def initialize(id, rider_id, driver_id, date, rating)
@@ -12,11 +12,7 @@ module RideShare
       @rider_id = rider_id
       @driver_id = driver_id
       @date = date
-      @rating = rating
-    end
-
-    # verifies that rating is valid
-    def valid_rating?
+      @rating = (1..5).include?(rating) ? rating : 3
     end
 
     # retrieve the associated driver instance through the driver ID
@@ -27,16 +23,16 @@ module RideShare
     def trip_rider
     end
 
-    # find all trip instances for a given driver ID
+    # retrieve all trips from the CSV file
     def self.all_trips
     end
 
-    # find all trip instances for a given rider ID
-    def self.drivers_trips(driver)
+    # find all trip instances for a given driver ID
+    def self.drivers_trips(driver_id)
     end
 
-    # retrieve all trips from the CSV file
-    def self.riders_trips(rider)
+    # find all trip instances for a given rider ID
+    def self.riders_trips(rider_id)
     end
 
   end
