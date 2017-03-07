@@ -36,14 +36,19 @@ describe "Driver class" do
   end
 
   describe "average_rating method" do
+    before do
+      @driver = Driver.new({id: 54, name: "Rogers Bartell IV", vehicle_id: "1C9EVBRM0YBC564DZ"})
+    end
     it "returns a float" do
-
+      @driver.average_rating.must_be_kind_of Float
     end
     it "float is >= 1.0" do
-
+      average = @driver.average_rating
+      average.must_be :>=, 1.0
     end
     it "float is <= 5.0" do
-
+      average = @driver.average_rating
+      average.must_be :<=, 5.0
     end
   end
 
@@ -62,11 +67,17 @@ describe "Driver class" do
 
   describe "self.find(id) method" do
     it "returns a Driver instance" do
-
+      Driver.find(1).must_be_kind_of Driver
     end
     it "Driver's id matches the id passed in" do
-
+      id = 1
+      driver = Driver.find(id)
+      driver.id.must_equal id
     end
+    it "raises an error if no Driver returned" do
+      proc {Driver.find(101)}.must_raise ArgumentError
+    end
+
   end
 
 end

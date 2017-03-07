@@ -1,6 +1,6 @@
 class Trip
 
-  attr_reader :rider_id, :driver_id
+  attr_reader :rider_id, :driver_id, :rating
 
   def initialize(hash)
     @id = hash[:id]
@@ -48,8 +48,8 @@ class Trip
       trip_hash[:id] = line[0].to_i
       trip_hash[:rider_id] = line[1].to_i
       trip_hash[:driver_id] = line[2].to_i
-      trip_hash[:date] = line[2]
-      trip_hash[:rating] = line[2].to_f
+      trip_hash[:date] = line[3]
+      trip_hash[:rating] = line[4].to_f
 
       all_trip_info << trip_hash
     end

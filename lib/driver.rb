@@ -18,6 +18,14 @@ class Driver
   def average_rating
     # average rating for driver based on all trips taken
     # calls get_trips, adds the rating and divides by how many
+    trips = get_trips
+    total_ratings = 0
+    trips.each do |trip|
+      total_ratings += trip.rating
+    end
+    average = total_ratings / trips.length
+
+    return average
   end
 
   def self.all
@@ -43,6 +51,13 @@ class Driver
 
   def self.find(id)
     # locates a driver in the all list given a driver id
+    all_drivers = Driver.all
+    found_driver = nil
+    all_drivers.each do |driver|
+      found_driver = driver if driver.id == id
+    end
+    raise ArgumentError.new("No driver found") if found_driver == nil
+    return found_driver
   end
 
 end
