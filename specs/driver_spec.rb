@@ -19,6 +19,10 @@ describe "Driver" do
       @new_driver = RideShare::Driver.new(driver_info)
     end
 
+    it "raises an argument error if..." do
+      skip
+    end
+
     it "initializes with 1 argument: a driver info hash" do
       @new_driver.must_be_instance_of RideShare::Driver
     end
@@ -56,7 +60,7 @@ describe "Driver" do
       drivers.each { |driver| driver.must_be_instance_of RideShare::Driver }
     end
 
-    it "has the same number of driver instances as the csv file" do
+    it "has the same number of driver instances as the CSV file" do
       drivers.length.must_equal 100
     end
   end
