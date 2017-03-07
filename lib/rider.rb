@@ -25,6 +25,13 @@ class Rider
   def self.find(rider_id)
     # searches .all for rider matching the parameter
     # returns a driver instance
+    Rider.all.each do |rider|
+      if rider.id == rider_id
+        return rider
+      end
+    end
+    # create a special NoDriver error, maybe rescue it?
+    raise ArgumentError.new("rider #{rider_id} does not exist")
   end
 
   def list_trips
