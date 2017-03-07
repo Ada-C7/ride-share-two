@@ -1,10 +1,6 @@
-# INSTANCE METHODS
-# trips: retrieve the list of trip instances that only this rider has taken
-# drivers: retrieve the list of all previous driver instances (through the trips functionality built above)
-
 module RideShare
   class Rider
-    attr_reader :id, :name
+    attr_reader :id, :name, :trips
 
     def initialize(params)
       validate_params(params)
@@ -12,6 +8,8 @@ module RideShare
       @id = params[:id]
       @name = params[:name]
       @phone_number = params[:phone_number]
+      @trips = params[:trips]
+
       @trips ||= []
     end
 
@@ -36,7 +34,11 @@ module RideShare
     end
 
     def import_trips
+      @trips = Trip.by_rider(@id)
+    end
 
+    def drivers
+      @trips.map { |trip| Driver.find(trip.driver_id) }
     end
 
   end
