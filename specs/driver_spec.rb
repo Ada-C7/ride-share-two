@@ -19,45 +19,34 @@ describe RideShare::Driver do
         end
     end
 
-    describe 'trips' do
+    describe 'avg_rating' do
+        it 'Returns a Float' do
+            new_driver.avg_rating.must_be_kind_of Float
+        end
+        it 'Cant have a negative rating' do
+            new_driver.avg_rating.wont_be :<, 0
+        end
+        it 'Calculates the average rating correctly' do
+            new_driver.avg_rating.must_equal 3.4
+        end
+    end
+    describe 'self.all' do
         it 'Returns an Array' do
-            new_driver.trips.must_be_kind_of Array
+            RideShare::Driver.all.must_be_kind_of Array
         end
-        it 'Returns the trips for only the specific driver' do
-            new_driver.trips.each do |trip|
-                trip[1].must_equal '18'
-            end
+        it 'Array contains correct Driver info' do
+            RideShare::Driver.all[17].must_equal ['18', 'Ms. Kamille Wyman', 'SUA4ALKJ0YRFMASB2']
         end
-
-        describe 'avg_rating' do
-            it 'Returns a Float' do
-                new_driver.avg_rating.must_be_kind_of Float
-            end
-            it 'Cant have a negative rating' do
-                new_driver.avg_rating.wont_be :<, 0
-            end
-            it 'Calculates the average rating correctly' do
-                new_driver.avg_rating.must_equal 3.4
-            end
+        it 'Array contains the right amount of drivers' do
+            RideShare::Driver.all.length.must_equal 100
         end
-        describe 'self.all' do
-            it 'Returns an Array' do
-                RideShare::Driver.all.must_be_kind_of Array
-            end
-            it 'Array contains correct Driver info' do
-                RideShare::Driver.all[17].must_equal ['18', 'Ms. Kamille Wyman', 'SUA4ALKJ0YRFMASB2']
-            end
-            it 'Array contains the right amount of drivers' do
-                RideShare::Driver.all.length.must_equal 100
-            end
+    end
+    describe 'self.find' do
+        it 'Returns an array of Driver info' do
+            RideShare::Driver.find(18).must_be_kind_of Array
         end
-        describe 'self.find' do
-            it 'Returns an array of Driver info' do
-                RideShare::Driver.find(18).must_be_kind_of Array
-            end
-            it 'Returns the correct Driver' do
-                RideShare::Driver.find(18)[0].must_equal ['18', 'Ms. Kamille Wyman', 'SUA4ALKJ0YRFMASB2']
-            end
+        it 'Returns the correct Driver' do
+            RideShare::Driver.find(18)[0].must_equal ['18', 'Ms. Kamille Wyman', 'SUA4ALKJ0YRFMASB2']
         end
     end
 end

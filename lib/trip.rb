@@ -1,10 +1,15 @@
 require 'csv'
+# require_relative 'driver'
+# require_relative 'rider'
 
 module RideShare
     class Trip
         TRIP_INFO = CSV.read('support/trips.csv')
 
+        attr_reader :trip_id, :driver_id, :rider_id, :trip_date, :trip_rating
+
         def initialize(id)
+            raise ArgumentError, '#{id} is not a valid ID number' unless (1..600).cover? id
             TRIP_INFO.each do |line|
                 next unless line[0].to_i == id
                 @trip_id = id
@@ -16,15 +21,15 @@ module RideShare
         end
 
         def driver
-            @driver_info = RideShare::Driver.find(@driver_id)
+            Driver.find(@driver_id)
         end
 
         def rider
-            @rider_info = RideShare::Driver.find(@rider_id)
+            Rider.find(@rider_id)
         end
 
         def self.all
-            TRIP_INFO
+            TRIP_INFO[1..600]
         end
 
         def self.driver_trips(id)
@@ -36,3 +41,7 @@ module RideShare
         end
     end
 end
+
+# trip = RideShare::Trip.new(30)
+#
+# print trip.driver
