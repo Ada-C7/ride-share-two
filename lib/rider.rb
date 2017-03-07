@@ -23,10 +23,7 @@ module RideShare
 
     def self.find rider_id
       all_riders = Rider.all
-      all_riders.each do |rider|
-        return rider if rider.id == rider_id
-      end
-      return nil #if this isn't here, then the entire array is returned if no rider_id is matched
+      return all_riders.find { |rider| rider.id == rider_id }
     end
     #will return nil if rider is not found
 

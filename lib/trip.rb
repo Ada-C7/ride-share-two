@@ -1,3 +1,4 @@
+require 'csv'
 module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -25,26 +26,15 @@ module RideShare
 
     def self.find_trips_by_rider rider_id
       all_trips = Trip.all
-      rider_trips = all_trips.find_all { |trip| trip.rider_id == rider_id }
-      if rider_trips.length > 0
-        return rider_trips
-      else
-        return nil
-      end
+      return all_trips.find_all { |trip| trip.rider_id == rider_id }
       #call all
       #search by rider_id to return array of Trip instances associated with that rider
     end
 
     def self.find_trips_by_driver driver_id
       all_trips = Trip.all
-      driver_trips = all_trips.find_all { |trip| trip.driver_id == driver_id }
-      if driver_trips.length > 0
-        return driver_trips
-      else
-        return nil
-      end
-      #call all
-      #search by driver to return array of Trip instances associated with that driver
+      return all_trips.find_all { |trip| trip.driver_id == driver_id }
+      #will return empty array if no trips found
     end
 
     def driver

@@ -1,30 +1,53 @@
-class Driver
+require 'csv'
 
-  def initialize (driver_id, name, vin) #order matches csv file
-    @id = id
-    @name = name
-    @vin = vin #check that this is of valid length
+module RideShare
+  class Driver
+
+    attr_reader :id, :name, :phone
+
+    def initialize driver_id, name, vin #order matches csv file
+      @id = driver_id
+      @name = name
+      @vin = vin #check that this is of valid length
+    end
+
+    def self.all
+      drivers = []
+      temp_csv = CSV.read("/Users/sai/Documents/ada/projects/ride-share-two/support/drivers.csv")
+      temp_csv.shift #removes first row, which is a header row (thx, google)
+      temp_csv.each do |driver|
+        drivers << Driver.new(driver[0].to_i, driver[1], driver[2].to_i)
+      end
+
+      return drivers
+      #check to make sure the entries are valid, if they are not make decisions about how to handle them
+    end
+
+    def self.find driver_id
+      all_drivers = Driver.all
+      return all_drivers.find { |driver| driver_id == driver.id}
+
+
+      # def self.find rider_id
+      #   all_riders = Rider.all
+      #   return all_riders.find { |rider| rider.id == rider_id }
+      # end
+    end
+
+    def trips
+      return Trip.find_trips_by_driver @id
+    end
+
+    def rating
+      driver_trips = Trip.find_trips_by_driver @id
+      total_rating = driver_trips.inject { |total, trip| total + trip.rating}.to_f
+      avg_rating = total_rating/driver.trips.length
+      return avg_rating
+
+
+      #returns average rating of those trips
+    end
+
+
   end
-
-  def self.all
-    #reads in lines from CSV file and process them as new Driver objects
-    #check to make sure the entries are valid, if they are not make decisions about how to handle them
-  end
-
-  def self.find driver_id
-    #calls self.all to create array of Driver instances
-    #looks through array to see if one has a driver_id that matches search field
-  end
-
-  def trips
-    #calls Trip.file_trips_by_driver (will pass driver.id)
-    #returns array of trips that this driver has completed
-  end
-
-  def rating
-    #calls trips
-    #returns average rating of those trips
-  end
-
-
 end

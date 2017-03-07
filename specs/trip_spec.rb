@@ -54,9 +54,10 @@ describe "Trip" do
       end
     end
 
-    it "must return nil if that rider id can't be found" do
+    it "must return empty Array if that rider id can't be found" do
       rider_trips = RideShare::Trip.find_trips_by_rider 777
-      rider_trips.must_be_instance_of NilClass
+      rider_trips.must_be_instance_of Array
+      rider_trips.length.must_equal 0
     end
     #all rider_ids must match the passed argument
   end
