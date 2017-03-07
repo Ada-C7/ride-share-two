@@ -2,9 +2,38 @@
   "RSpec": {
     "coverage": {
       "/Users/ashtn/ADA/Projects/ride-share-two/lib/driver.rb": [
-        null,
-        null,
         1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ],
@@ -15,6 +44,6 @@
         1
       ]
     },
-    "timestamp": 1488846576
+    "timestamp": 1488922495
   }
 }
