@@ -8,17 +8,13 @@ class Rider
     @id = hash[:id]
     @name = hash[:name]
     @phone_number = hash[:phone_number]
-    # has a valid length to check for
   end
 
   def get_trips
-    # calls Trip.all_with_rider and passes in rider id
     return Trip.all_with_rider(@id)
   end
 
   def get_all_prev_drivers
-    # use get_trips to get list of Trips this rider has taken
-    # iterate over the list and use Driver.find(id) with each of the driver_id params from the trip to generate a list of drivers that correspond to the trips
     trips = get_trips
     drivers = []
     trips.each do |trip|
@@ -29,7 +25,6 @@ class Rider
   end
 
   def self.all
-    # read in csv file to create master list of all riders
     my_file = CSV.open("support/riders.csv")
     all_rider_info = []
     my_file.each do |line|
@@ -51,7 +46,6 @@ class Rider
   end
 
   def self.find(id)
-    # locates a rider in the all list given a rider id
     all_riders = Rider.all
     found_rider = nil
     all_riders.each do |rider|
