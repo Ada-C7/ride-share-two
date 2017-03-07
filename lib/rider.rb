@@ -1,39 +1,58 @@
-#require csv?
+require 'csv'
+require 'pry'
 #require anything else??
 
 module RideShare
     class Rider
         attr_reader :id, :name, :phone_number
-        def intialize (id, name, phone_number)
-            @id = id
+
+        def initialize(id, name, phone_number)
+            @id = id.to_i
             @name = name
             @phone_number = phone_number
         end
 
 
-        #find_trips(id)
-        #calls rider_find_all in trips
-        #this will loop through the list of trips looking for matches with this id
-        #and then return an array of all of the trips
-        # end
 
-        #previous_drivers(id)
-        #rider_find_all to get the list of trips the rider with this id has taken
-        #this method then takes that array and loops through looking for drivers
-        #drivers are pushed to an array of drivers
-        #somehow duplicates are then taken out of that array
-        # end
+        def self.all
+            riders = []
 
-        #self.all
-        #reads in CSV files
-        #returns an array containing all of the information in the CSV file
-        # end
+        CSV.open("support/riders.csv").each do |line|
+            id = line[0].to_i
+            name = line[1]
+            phone_number = line[2]
 
-        #self.find(id)
-        #calls self.all
-        #loops through the array returned by CSV file looking for array.id == id
-        #if/when there is a match, return that rider object
-        # end
+            if id !=0
+                rider = RideShare::Rider.new(id, name, phone_number)
+                riders << rider
+            end
+        end
+            return riders
+        end
+
+
+
     end
-
 end
+
+
+# find_trips(id)
+#calls rider_find_all in trips
+#this will loop through the list of trips looking for matches with this id
+#and then return an array of all of the trips
+# end
+
+#previous_drivers(id)
+#rider_find_all to get the list of trips the rider with this id has taken
+#this method then takes that array and loops through looking for drivers
+#drivers are pushed to an array of drivers
+#somehow duplicates are then taken out of that array
+# end
+
+
+
+#self.find(id)
+#calls self.all
+#loops through the array returned by CSV file looking for array.id == id
+#if/when there is a match, return that rider object
+# end
