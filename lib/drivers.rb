@@ -18,9 +18,9 @@ module RideShare
     def self.read_csv
       @@drivers = CSV.read("support/drivers.csv")[1..-1].map! do |array_of_details|
         {
-          id: array_of_details[0],
-          name: array_of_details[1],
-          vin: array_of_details[2]
+          id: array_of_details[0].to_i,
+          name: array_of_details[1].to_s,
+          vin: array_of_details[2].to_s
         }
       end
     end
@@ -53,18 +53,15 @@ module RideShare
 
     # Find a specific driver(driver_id)
     # return the instance of that driver (hash of details)
+    
     def self.find(id)
-      # @@drivers.each do |driver|
-      #   if driver[:id] == id
-      #     driver_details = driver
-      #   end
-      # end
-      # ## TW: Should I return driver instead of puts?
-      # p driver_object
+      driver_details = nil
+      @@drivers.each do |driver|
+        if driver[:id] == id
+          driver_details = driver
+        end
+      end
+      driver_details
     end
   end
 end
-# end
-
-RideShare::Drivers.read_csv
-RideShare::Drivers.find(99)
