@@ -59,7 +59,34 @@ describe "Rider" do
         index += 1
       end
     end
+  end
 
+  describe "Driver#find" do
+
+    before do
+      @riders = Rider.all
+    end
+
+    it "Returns a rider that exists" do
+      rider = Rider.find(150)
+      rider.must_be_instance_of Rider
+    end
+
+    it "Can find the first rider from the CSV" do
+      rider = Rider.find(1)
+      rider.name.must_equal @riders.first.name
+    end
+
+    it "Can find the last rider from the CSV" do
+      rider = Rider.find(300)
+      rider.name.must_equal @riders.last.name
+    end
+
+    it "Raises an error for a rider that doesn't exist" do
+      proc {
+        Rider.find(301)
+      }.must_raise ArgumentError
+    end
   end
 
 end
