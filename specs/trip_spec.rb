@@ -1,8 +1,6 @@
-require 'minitest'
+
 require 'minitest/autorun'
 require 'minitest/reporters'
-# Add simplecov
-
+require 'minitest/skip_dsl'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
-# Require_relative your lib files here!
+require_relative '../lib/spec.rb'
