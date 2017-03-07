@@ -76,12 +76,12 @@ After a few minutes, then you'll get together with your seat squad to discuss th
 Create a diagram that describes how each of these classes and methods (messages) will interact with one another as well as the CSV files.
 
 ### Setup
-1. Fork this repository in GitHub
-1. Clone the repository to your computer
-1. Create/copy a rakefile to run your tests
-1. Open the `specs/spec_helper.rb` file to load your classes and start up simple coverage.  This file will load all the required gems and source files your spec files need so they only need to require the helper.  
-  - Each of your spec files should `require_relative` the spec helper file.
-1. Create a test to check the instantiation of one of your object types (**RED**)
+**1. Fork this repository in GitHub**
+**1. Clone the repository to your computer**
+**1. Create/copy a rakefile to run your tests**
+**1. Open the `specs/spec_helper.rb` file to load your classes and start up simple coverage.  This file will load all the required gems and source files your spec files need so they only need to require the helper.  
+  - Each of your spec files should `require_relative` the spec helper file.**
+**1. Create a test to check the instantiation of one of your object types (**RED**)
 1. Create the class for the object tested in the step above (**GREEN**)
 1. Use git add, commit and push commands to push your initial code to GitHub
 
