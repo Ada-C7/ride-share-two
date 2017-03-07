@@ -22,4 +22,15 @@ class Rider
     end
     return riders
   end
+
+  def trips
+    rider_trips = []
+    Trip.all.each do |trip|
+      if trip.rider == @id
+        rider_trips << trip
+      end
+    end
+    return rider_trips
+  end
+
 end

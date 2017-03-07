@@ -33,4 +33,25 @@ describe "Rider tests" do
 
   end
 
+  describe "Rider#trips" do
+    it "returns an array of trips taken" do
+      new_rider = Rider.new(1, "Jan Brown", "702-123-4567")
+
+      new_rider.trips.class.must_equal Array
+
+    end
+
+    it "each element in the array is a trip" do
+      new_rider = Rider.new(2, "Kaia Klocko", "(392) 217-0777")
+
+      new_rider.trips.each do |element|
+        element.must_be_instance_of Trip
+      end
+
+    end
+
+  end
+
+
+
 end
