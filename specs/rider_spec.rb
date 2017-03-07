@@ -51,7 +51,7 @@ describe Rider do
                     end
                end
 
-              it "The ID, name and VIN of the first and last drivers match the CSV file" do
+              it "The ID, name and phone of the first and last riders match the CSV file" do
                     @all_riders[0].id.to_s.must_equal CSV.readlines(@file)[0][0]
                     @all_riders[0].name.must_equal CSV.readlines(@file)[0][1]
                     @all_riders[0].phone.must_equal CSV.readlines(@file)[0][2]

@@ -4,11 +4,11 @@ describe Trip do
 
      before do
           @id = 300
-          @rider_id = 3
           @driver_id = 7
+          @rider_id = 3
           @date = "3 March 2017"
           @rating = 5
-          @deathstar = Trip.new(@id, @rider_id, @driver_id, @date, @rating)
+          @deathstar = Trip.new(@id, @driver_id, @rider_id, @date, @rating)
 
      end
 
@@ -44,6 +44,46 @@ describe Trip do
 
             proc {Driver.new(@id, @rider_id, @driver_id, @date, "777333777333777333")
             }.must_raise ArgumentError
+          end
+     end
+
+     describe "Self#all" do
+
+          before do
+               @file = "support/trips.csv"
+               @all_trips = Trip.all(@file)
+          end
+
+          describe "Trip.all" do
+               it "Returns an array of all trips:" do
+                   @all_trips.must_be_kind_of Array
+               end
+
+              it "Returns correct number of trips:" do
+                   lines = File.foreach(@file).count
+                   @all_trips.length.must_equal lines
+               end
+
+               it "Everything in the array is a Trip:" do
+                   @all_trips.each do | trip |
+                       trip.must_be_kind_of Trip
+                    end
+               end
+
+              it "The ID, Driver ID, Rider ID, date and rating of the first and last trips match the CSV file:" do
+                    @all_trips[0].id.to_s.must_equal CSV.readlines(@file)[0][0]
+                    @all_trips[0].driver_id.to_s.must_equal CSV.readlines(@file)[0][1]
+                    @all_trips[0].rider_id.to_s.must_equal CSV.readlines(@file)[0][2]
+                    @all_trips[0].date.must_equal CSV.readlines(@file)[0][3]
+                    @all_trips[0].rating.to_s.must_equal CSV.readlines(@file)[0][4]
+
+                    @all_trips[-1].id.to_s.must_equal CSV.readlines(@file)[-1][0]
+                    @all_trips[-1].driver_id.to_s.must_equal CSV.readlines(@file)[-1][1]
+                    @all_trips[-1].rider_id.to_s.must_equal CSV.readlines(@file)[-1][2]
+                    @all_trips[-1].date.must_equal CSV.readlines(@file)[-1][3]
+                    @all_trips[-1].rating.to_s.must_equal CSV.readlines(@file)[-1][4]
+
+               end
           end
      end
 end
