@@ -1,5 +1,5 @@
 require_relative 'driver'
-require_relative 'rider'
+# require_relative 'rider'
 require 'csv'
 
 module RideShare
@@ -83,4 +83,4 @@ end # end of method
 # puts all_trips
 
 
-puts RideShare::Trip.all_trips.length
+# puts RideShare::Trip.all_trips.length

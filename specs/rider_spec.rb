@@ -1,4 +1,3 @@
-
 require_relative 'spec_helper'
 
 describe "Rider class" do
@@ -21,6 +20,52 @@ describe "Rider class" do
     end
   end # end of initialize method test
 
+  describe "Rider#all_rider_trips" do
+    it "Return an array"do
+      rider = RideShare::Rider.all[3]
+      rider.all_rider_trips.class.must_equal Array
+    end
+    it "Returned array must contain object(s) of class Trip" do
+      rider = RideShare::Rider.all[3]
+      rider.all_rider_trips.each do |trip|
+        trip.class.must_equal RideShare::Trip
+      end
+    end
+    it "Returned empty array if there is no trip associated
+    with this rider id" do
+    rider_hash = {rider_id: 90000, name: "Natalia", phone:  "1425394958"}
+      rider = RideShare::Rider.new(rider_hash)
+      rider.all_rider_trips.must_be_empty
+    end
+  end # end of all_rider_trips test
+
+  describe "Rider#all_rider_drivers" do
+    it "Returns array" do
+      rider = RideShare::Rider.all[25]
+      rider.all_rider_drivers.class.must_equal Array
+    end
+    it "Returns empty array if rider is not found" do
+      rider_hash = {rider_id: 90000, name: "Natalia", phone:  "1425394958"}
+      rider = RideShare::Rider.new(rider_hash)
+      rider.all_rider_drivers.must_be_empty
+    end
+    it "Returns array that has object(s) of class Driver" do
+      rider = RideShare::Rider.all[25]
+      rider.all_rider_drivers.each do |driver|
+        driver.class.must_equal RideShare::Driver
+      end
+    end
+    it "Driver id of returned driver must be the same as in CSV file" do
+      csv = CSV.read("support/trips.csv", 'r')
+      rider = RideShare::Rider.all[25]#(rider_id = 26)
+      actual_driver_id = rider.all_rider_drivers[0].driver_id
+      expected_driver_id = csv[103][1].to_i
+      actual_driver_id.must_equal expected_driver_id
+    end
+  end # end of all_rider_drivers test
+
+
+
   describe "Rider#all" do
     it "Rider.all returns an array" do
       RideShare::Rider.all.must_be_kind_of Array
@@ -35,8 +80,8 @@ describe "Rider class" do
       all_riders = RideShare::Rider.all
       all_riders.length.must_equal 300
     end
-    it " - The ID, name and phone of the first and last
-          riders match what's in the CSV file" do
+    it "The ID, name and phone of the first and last
+      riders match what's in the CSV file" do
       csv = CSV.read("support/riders.csv", 'r')
       expected_id_first = csv[1][0].to_i
       expected_name_first = csv[1][1]

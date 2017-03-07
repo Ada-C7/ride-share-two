@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'trip'
+require_relative 'driver'
 module RideShare
   class Rider
     attr_reader :rider_id, :name, :phone
@@ -9,12 +11,18 @@ module RideShare
       @phone = hash[:phone]
     end
 
-    def trips
-      RideShare::Trips.all_trips_by_rider
+    def all_rider_trips
+      RideShare::Trip.all_trips_by_rider(@rider_id)
     end
 
-    def drivers #return list of drivers that rider used
-
+    def all_rider_drivers #return list of drivers that rider used
+      all_rider_drivers = []
+      #for each trip that rider has, find driver objects
+      # using Driver.find method
+      all_rider_trips.each do |trip|
+        all_rider_drivers << RideShare::Driver.find(trip.driver_id)
+      end
+      return all_rider_drivers
     end
 
     def self.all
@@ -26,7 +34,7 @@ module RideShare
         hash = {rider_id: line[0].to_i, name: line[1], phone: line[2]}
         all_riders << Rider.new(hash)
       end
-      all_riders
+       all_riders
     end
 
     def self.find(id)
@@ -41,5 +49,21 @@ module RideShare
   end
 end
 
-# rider_hash = {rider_id: 32, name: "Natalia", phone:  "1425394958"}
-# puts RideShare::Rider.all[299].name
+ #
+#  rider = RideShare::Rider.all[25]
+# rider.all_rider_drivers.each do  |driver|
+#   puts driver.name
+#   puts driver.driver_id
+# end
+ # puts rider.rider_id
+ # puts rider.all_rider_trips[0].trip_id
+ #
+ #
+ #
+
+
+
+ # puts rider
+ # puts "a"
+ # puts rider.rider_id
+ # puts rider.all_rider_trips
