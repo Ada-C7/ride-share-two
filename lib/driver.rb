@@ -39,6 +39,7 @@ module RideShare
     def get_trips
       # passes driver id to Trip.find_by_driver
       # returns collection of trips taken by this driver
+      trips = Trip.find_by_driver(id)
     end
 
     def avg_rating
