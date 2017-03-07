@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Trip tests" do
-  let(:trip) { Trip.new({ id: 2, driver_id: 4, rider_id: 8, date: "2014-07-12", rating: 5 }) }
+  let(:trip) { RideShare::Trip.new({ id: 2, driver_id: 4, rider_id: 8, date: "2014-07-12", rating: 5 }) }
 
   describe "Trip#initialize" do
     it "Takes an ID, driver_id, rider_id, date, and rating" do

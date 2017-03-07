@@ -1,4 +1,4 @@
-class Rider
+class RideShare::Rider
   attr_reader :id, :name, :phone
 
   def initialize(rider_hash)

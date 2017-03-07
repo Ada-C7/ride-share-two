@@ -1,4 +1,4 @@
-class Trip
+class RideShare::Trip
   attr_reader :id, :driver_id, :rider_id, :date, :rating
 
   def initialize(trip_hash)

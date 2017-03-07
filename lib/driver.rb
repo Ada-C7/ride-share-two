@@ -1,4 +1,4 @@
-class Driver
+class RideShare::Driver
   attr_reader :id, :name, :vin
 
   def initialize(driver_hash)

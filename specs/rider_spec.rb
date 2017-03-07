@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Rider tests" do
-  let(:rider) { Rider.new({ id: 8, name: "Galois", phone: "206-555-2468" }) }
+  let(:rider) { RideShare::Rider.new({ id: 8, name: "Galois", phone: "206-555-2468" }) }
 
   describe "Rider#initialize" do
     it "Takes an ID, name, and phone number" do
