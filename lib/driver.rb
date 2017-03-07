@@ -2,7 +2,14 @@ require 'csv'
 
 module RideShare
   class Driver
-    def initialize
+    attr_reader :name, :id, :vin
+
+    def initialize(args)
+
+
+      @name = args[:name]
+      @id = args[:id]
+      @vin = args[:vin]
     end
   end
 end
