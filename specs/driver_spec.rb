@@ -55,12 +55,20 @@ describe "self.all" do
 end
 
 describe "self.find" do
+
   it "returns a driver that exists" do
+    RideShare::Driver.find(24).wont_be_nil
 
   end
 
-  it "can find the first driver from the CSV" do
+  it "can find a selection of drivers from the CSV" do
+    RideShare::Driver.find(25).name.must_equal "Briana Braun"
+    RideShare::Driver.find(92).name.must_equal "Oceane O'Kon"
 
+  end
+
+  it "raises an error for an account that doesn't exist" do
+    proc { RideShare::Driver.find(104)}.must_raise ArgumentError
   end
 
 end

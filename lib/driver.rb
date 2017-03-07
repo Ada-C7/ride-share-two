@@ -13,23 +13,8 @@ module RideShare
 
     def self.all
       all_drivers = []
-      # driver_file = CSV.open(csv_file)
-      # driver_file = CSV.open("support/drivers.csv")
-      # creates and collects instances of Driver from CSV file
       driver_hash = {}
-      # driver_file.each do |line|
-      #   driver_hash[:id] = line[0].to_i
-      #   driver_hash[:name] = line[1]
-      #   driver_hash[:vin] = line[2]
-      #
-      #   unless driver_hash[:name] == "name" #eliminate header line
-      #     begin
-      #       all_drivers << Driver.new(driver_hash)
-      #     rescue InvalidVINError => e
-      #       puts "Encountered an error: #{e.message}"
-      #     end
-      #   end
-      # end
+
       CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
           driver_hash[:id] = line[0].to_i
           driver_hash[:name] = line[1]
@@ -44,6 +29,10 @@ module RideShare
       return all_drivers
     end
 
+    def self.find(driver_id)
+      # finds a specific instance of Driver based on driver ID
+    end
+
     def get_trips
       # passes driver id to Trip.find_trips_by_driver
       # returns collection of trips taken by this driver
@@ -54,11 +43,6 @@ module RideShare
       # calculates average rating across all trips
     end
 
-
-
-    def self.find
-      # finds a specific instance of Driver based on driver ID
-    end
   end
 
 end
