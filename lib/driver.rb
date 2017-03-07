@@ -38,7 +38,7 @@ module RideShare
     end
 
     def get_trips
-      # passes driver id to Trip.find_trips_by_driver
+      # passes driver id to Trip.find_by_driver
       # returns collection of trips taken by this driver
     end
 

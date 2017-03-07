@@ -6,13 +6,13 @@ describe "Driver initialize" do
     @driver_hash = {
       id: 88,
       name: "Scylla Bankroll",
-      vin: "1G1H34JZ889X9LT46",
+      vin: "1G1H34JZ889X9LT46"
     }
 
     @bad_vin_hash = {
       id: 88,
       name: "Scylla Bankroll",
-      vin: "1G1H3",
+      vin: "1G1H3"
     }
   end
 
@@ -67,7 +67,7 @@ describe "self.find" do
 
   end
 
-  it "raises an error for an account that doesn't exist" do
+  it "raises an error for a driver ID that doesn't exist" do
     proc { RideShare::Driver.find(104)}.must_raise ArgumentError
   end
 
