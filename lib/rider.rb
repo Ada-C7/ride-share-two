@@ -29,12 +29,15 @@ module RideShare
 
 
     def trips
-      #call Trip.find_trips_by_rider
-      #returns array of trip instances that this rider has taken
+      return Trip.find_trips_by_rider @id
     end
 
     def drivers
-      #call trips
+      all_trips = trips
+      driver_ids = all_trips.map { |trip| trip.driver_id }
+      return driver_ids.map { |id| Driver.find(id) }
+
+
       #look through trips and for each trip instance, use the driver_id associated with the trip (trip.driver_id) to call Driver.find(driver_id)
       #store those Driver class instances in an array that gets returned
     end

@@ -61,26 +61,33 @@ describe "Rider" do
   describe "trips" do
 
     it "returns an Array of trips" do
-      #object is an Array
-      #all elements in Array are Trip instances
-    end
-
-    it "finds all trips associated with the rider" do
-      #all rider_ids match the rider's rider_id
-      #no trips left behind
+      rider = riders[53]
+      rider.trips.must_be_instance_of Array
+      rider.trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+        trip.rider_id.must_equal rider.id
+      end
     end
 
   end
 
   describe "drivers" do
 
-    it "returns an Array" do
-    end
+    it "returns an Array of Trips" do
+      rider = riders[53]
+      rider.id.must_equal 54
+      rider.must_be_instance_of RideShare::Rider
 
-    it "everything in the Array is a Trip" do
+      all_drivers = rider.drivers
+      all_drivers.must_be_instance_of Array
+      all_drivers.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
+      end
+      all_drivers.length.must_equal 2
     end
 
     it "finds all the trips in the given array that match the driver instance" do
+      #HOW TO DO THIS??
     end
 
   end

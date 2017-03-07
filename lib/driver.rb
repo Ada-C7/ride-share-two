@@ -26,12 +26,6 @@ module RideShare
     def self.find driver_id
       all_drivers = Driver.all
       return all_drivers.find { |driver| driver_id == driver.id}
-
-
-      # def self.find rider_id
-      #   all_riders = Rider.all
-      #   return all_riders.find { |rider| rider.id == rider_id }
-      # end
     end
 
     def trips
