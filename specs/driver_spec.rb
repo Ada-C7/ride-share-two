@@ -77,7 +77,9 @@ describe "Driver" do
     end
 
     it "returns an array with only Driver elements" do
-
+      RideShare::Driver.all.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
+      end
     end
 
     it "returns all drivers in the CSV file" do
@@ -92,19 +94,20 @@ describe "Driver" do
     # def find_and_verify private method
 
     it "returns an account that exists" do
-
+      skip
     end
 
     it "can find the first Driver from the CSV file" do
-
+      skip
     end
 
     it "can find the last Driver from the CSV file" do
-
+      skip
     end
 
     it "returns nil if driver_id is not found" do
       # or raises an error
+      skip
     end
   end
 end

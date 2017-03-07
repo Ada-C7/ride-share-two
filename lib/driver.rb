@@ -16,7 +16,7 @@ module RideShare
     end
 
     def self.all
-      return []
+      return [Driver.new(name: 'Ada', id: 108, vin: 'sdfdsfdsfdssdfsds')]
     end
 
     private
