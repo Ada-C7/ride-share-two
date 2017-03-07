@@ -12,9 +12,11 @@
     end
 
     def driver
+      driver = RideShare::Driver.find(driver_id)
     end
 
-    def trip
+    def rider
+      rider = RideShare::Rider.find(rider_id)
     end
 
     def self.all
