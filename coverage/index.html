@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-06T16:58:48-08:00">2017-03-06T16:58:48-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-06T17:10:20-08:00">2017-03-06T17:10:20-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         209.01
+         334.94
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>127</b> relevant lines. 
-    <span class="green"><b>127</b> lines covered</span> and
+    <b>151</b> relevant lines. 
+    <span class="green"><b>151</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -73,11 +73,11 @@
       <tr>
         <td class="strong"><a href="#6f7593a61e1f7155a1b0b7557f6856986b28578a" class="src_link" title="lib/trip.rb">lib/trip.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>14</td>
-        <td>10</td>
-        <td>10</td>
+        <td>32</td>
+        <td>23</td>
+        <td>23</td>
         <td>0</td>
-        <td>2.0</td>
+        <td>1019.0</td>
       </tr>
       
       <tr>
@@ -93,11 +93,11 @@
       <tr>
         <td class="strong"><a href="#1dc8371ceed32c4627bd1b1f0803a61da09990d1" class="src_link" title="specs/trip_spec.rb">specs/trip_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>48</td>
-        <td>22</td>
-        <td>22</td>
+        <td>70</td>
+        <td>33</td>
+        <td>33</td>
         <td>0</td>
-        <td>1.2</td>
+        <td>19.4</td>
       </tr>
       
     </tbody>
@@ -565,8 +565,8 @@
     <h3>lib/trip.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>10</b> relevant lines. 
-      <span class="green"><b>10</b> lines covered</span> and
+      <b>23</b> relevant lines. 
+      <span class="green"><b>23</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -610,32 +610,32 @@
           <code class="ruby">    def initialize(info)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="7">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1803" data-linenumber="7">
+          <span class="hits">1803</span>
           
           <code class="ruby">      @id = info[:id]</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="8">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1803" data-linenumber="8">
+          <span class="hits">1803</span>
           
           <code class="ruby">      @driver_id = info[:driver_id]</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="9">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1803" data-linenumber="9">
+          <span class="hits">1803</span>
           
           <code class="ruby">      @rider_id = info[:rider_id]</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="10">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1803" data-linenumber="10">
+          <span class="hits">1803</span>
           
           <code class="ruby">      @date = info[:date]</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="11">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1803" data-linenumber="11">
+          <span class="hits">1803</span>
           
           <code class="ruby">      @rating = info[:rating]</code>
         </li>
@@ -649,10 +649,118 @@
         <li class="never" data-hits="" data-linenumber="13">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="14">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def self.all(csv_file)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="15">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      trips = CSV.read(csv_file)</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="16">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      trips.shift</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="17">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      trips.map! do |trip_info|</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="18">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip = Hash.new</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="19">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip[:id] = trip_info[0].to_i</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="20">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip[:driver_id] = trip_info[1].to_i</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="21">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip[:rider_id] = trip_info[2].to_i</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">        # want date to be date object?</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="23">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip[:date] = trip_info[3]</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="24">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip[:rating] = trip_info[4].to_i</code>
+        </li>
+      
+        <li class="covered" data-hits="1800" data-linenumber="25">
+          <span class="hits">1800</span>
+          
+          <code class="ruby">        trip_info = trip</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1803" data-linenumber="28">
+          <span class="hits">1803</span>
+          
+          <code class="ruby">      trips.map! { |info| self.new(info) }</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="29">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      return trips</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="14">
+        <li class="never" data-hits="" data-linenumber="32">
           
           
           <code class="ruby">end</code>
@@ -1249,8 +1357,8 @@
     <h3>specs/trip_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>22</b> relevant lines. 
-      <span class="green"><b>22</b> lines covered</span> and
+      <b>33</b> relevant lines. 
+      <span class="green"><b>33</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -1480,52 +1588,52 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="38">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="38">
           
-          <code class="ruby">    it &quot;assigns instance variables: id, driver_id, rider_id, date, rating&quot; do</code>
+          
+          <code class="ruby">    # this is more testing the reader methods for the instance variables</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
-          <code class="ruby">      @new_trip.id.must_equal 12</code>
+          <code class="ruby">    it &quot;assigns instance variables: id, driver_id, rider_id, date, rating&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
-          <code class="ruby">      @new_trip.driver_id.must_equal 12</code>
+          <code class="ruby">      @new_trip.id.must_equal 12</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="41">
           <span class="hits">1</span>
           
-          <code class="ruby">      @new_trip.rider_id.must_equal 237</code>
+          <code class="ruby">      @new_trip.driver_id.must_equal 12</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="42">
           <span class="hits">1</span>
           
-          <code class="ruby">      @new_trip.date.must_equal &quot;2016-08-21&quot;</code>
+          <code class="ruby">      @new_trip.rider_id.must_equal 237</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
-          <code class="ruby">      @new_trip.rating.must_equal 1</code>
+          <code class="ruby">      @new_trip.date.must_equal &quot;2016-08-21&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="covered" data-hits="1" data-linenumber="44">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      @new_trip.rating.must_equal 1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="45">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
@@ -1540,7 +1648,139 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;Trip#all&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="50">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    let(:trips) { RideShare::Trip.all(&#39;./support/trips.csv&#39;) }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;requires a csv file&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      proc {</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        RideShare::Trip.all(&quot;random text&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">      }.must_raise Errno::ENOENT</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns an array&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      trips.must_be_instance_of Array</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="62">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;has instances of trips in the array&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="601" data-linenumber="63">
+          <span class="hits">601</span>
+          
+          <code class="ruby">      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;has the same number of trips as the CSV file&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      trips.length.must_equal 600</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
           
           
           <code class="ruby">end</code>

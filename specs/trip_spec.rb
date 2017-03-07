@@ -67,7 +67,4 @@ describe "Trip" do
       trips.length.must_equal 600
     end
   end
-
-
-
 end
