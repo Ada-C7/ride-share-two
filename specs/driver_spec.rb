@@ -68,6 +68,36 @@ describe "Driver class" do
     end
   end # end of all method
 
+  describe "Driver.find" do
+    it "Returns an account that exists" do
+      result = RideShare::Driver.find(16)
+      result.must_be_kind_of RideShare::Driver
+    end
+
+    it "Can find the first driver from the CSV" do
+      csv = CSV.read("support/drivers.csv", 'r')
+      result = RideShare::Driver.find(csv[1][0].to_i)
+      result.driver_id.must_equal RideShare::Driver.all[0].driver_id
+      result.name.must_equal RideShare::Driver.all[0].name
+      result.vin.must_equal RideShare::Driver.all[0].vin
+    end
+
+    it "Can find the last driver from the CSV" do
+      csv = CSV.read("support/drivers.csv", 'r')
+      result = RideShare::Driver.find(csv[100][0].to_i)
+      result.driver_id.must_equal RideShare::Driver.all[99].driver_id
+      result.name.must_equal RideShare::Driver.all[99].name
+      result.vin.must_equal RideShare::Driver.all[99].vin
+
+    end
+
+    it "Raises an error for a driver that doesn't exist" do
+      proc {
+        RideShare::Driver.find(3000)
+      }.must_raise ArgumentError
+    end
+  end
+
 
 
 

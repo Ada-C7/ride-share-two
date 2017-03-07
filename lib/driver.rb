@@ -28,6 +28,15 @@ module RideShare
       all_drivers
     end
 
+    def self.find(id)
+      result = RideShare::Driver.all.select {|driver| driver.driver_id == id}
+      if result[0].nil?
+        raise ArgumentError.new("Cannot find this ID in drivers")
+      else
+        return result[0]
+      end
+    end
+
 
 
 
