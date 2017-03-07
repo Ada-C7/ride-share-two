@@ -1,15 +1,3 @@
-# HAS
-# @id, @name, @vin
-# have an ID, name, and vehicle identification number
-# Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
-#
-# INSTANCE METHODS
-# trips: retrieve the list of trip instances that only this driver has taken
-# average_rating: retrieve an average rating for that driver based on all trips taken
-#
-# CLASS METHODS
-# all: retrieve all drivers from the CSV file
-# find: find a specific driver using their numeric ID
 require 'csv'
 
 module RideShare
@@ -36,6 +24,15 @@ module RideShare
 
     def self.find(target_id)
       all.find { |driver| driver.id == target_id }
+    end
+
+    def trips
+      @trips ||= Trip.by_driver(@id)
+    end
+
+    def average_rating
+      return nil if trips.length == 0
+      trips.map { |trip| trip.rating }.reduce(:+).to_f/trips.length.round(1)
     end
 
   end
