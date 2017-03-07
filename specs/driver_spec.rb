@@ -16,7 +16,7 @@ describe RideShare::Driver do
             @new_driver.must_be_instance_of RideShare::Driver
         end
         it 'Initializes with the correct information' do
-            @new_driver.id.must_equal 18
+            @new_driver.driver_id.must_equal 18
             @new_driver.name.must_equal 'Ms. Kamille Wyman'
             @new_driver.vn.must_equal 'SUA4ALKJ0YRFMASB2'
         end
@@ -27,7 +27,7 @@ describe RideShare::Driver do
             @new_driver.trips.must_be_instance_of RideShare::Trip
         end
         it 'Returns an Array' do
-            @new_driver.trips.must_be_kind_of Arrray
+            @new_driver.trips.must_be_kind_of Array
         end
         it 'Returns the trips for only the specific driver' do
             @new_driver.trips.each do |trip|
