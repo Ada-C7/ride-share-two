@@ -1,8 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-
-require_relative '../lib/driver'
+require_relative 'spec_helper.rb'
 
 describe "RideShare::Driver" do
   before do

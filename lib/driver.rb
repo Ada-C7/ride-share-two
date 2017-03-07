@@ -1,4 +1,4 @@
-require 'csv'
+require 'csv'ads
 
 # new Driver, subclass of RideShare
 module RideShare
@@ -31,7 +31,12 @@ module RideShare
       return @all_drivers
       # return all instances of driver
     end
+
     # class method: find(id)
-    # return specific instance of driver (previously instantiated)
+    def self.find(driver_id)
+      # read in CSV file for all instances of drivers
+      @all_drivers.select { |instance| instance.id == driver_id }
+      # return specific instance of driver (previously instantiated)
+    end
   end
 end
