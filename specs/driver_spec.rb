@@ -63,5 +63,5 @@ describe "class Driver" do
     end
   end # End of describe "Driver#self.find"
 
-  
+
 end # End of describe "class Driver"
