@@ -3,18 +3,37 @@
     "coverage": {
       "/Users/caraecomfort/ada/ruby/projects/ride-share-two/lib/driver.rb": [
         1,
-        null,
-        1,
-        1,
         1,
         null,
         1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
         null,
         null,
         0,
         0,
         0,
         null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/caraecomfort/ada/ruby/projects/ride-share-two/lib/invalid_vin_error.rb": [
+        1,
+        1,
         null,
         null
       ],
@@ -31,6 +50,6 @@
 
       ]
     },
-    "timestamp": 1488914406
+    "timestamp": 1488915712
   }
 }

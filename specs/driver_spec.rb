@@ -50,7 +50,7 @@ describe "Driver" do
 
     it "takes a name, VIN, and ID" do
       driver = RideShare::Driver.new(name: @name, id: @id, vin: @vin)
-      
+
       driver.must_respond_to :name
       driver.name.must_equal @name
 
@@ -66,15 +66,15 @@ describe "Driver" do
 
       proc {
         RideShare::Driver.new(name: @name, id: @id, vin: invalid_vin)
-      }.must_raise ArgumentError
+      }.must_raise RideShare::InvalidVinError
     end
 
     it "raises an error if the VIN has a character other than a letter or number" do
-      invalid_vin = '12345!!12345ddegd'
+      invalid_vin = '12345!!#2345ddegd'
 
       proc {
         RideShare::Driver.new(name: @name, id: @id, vin: invalid_vin)
-      }.must_raise ArgumentError
+      }.must_raise RideShare::InvalidVinError
     end
   end
 end
