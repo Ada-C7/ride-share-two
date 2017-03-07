@@ -47,11 +47,16 @@ describe "Rider class" do
   end
 
   describe "self.find(id) method" do
-    it "returns an instance of Rider" do
-
+    it "returns a Rider instance" do
+      Rider.find(1).must_be_kind_of Rider
     end
-    it "Rider's id matches the id passed in to the method" do
-
+    it "Rider's id matches the id passed in" do
+      id = 1
+      rider = Rider.find(id)
+      rider.id.must_equal id
+    end
+    it "raises an error if no Rider returned" do
+      proc {Rider.find(301)}.must_raise ArgumentError
     end
   end
 

@@ -41,6 +41,13 @@ class Rider
 
   def self.find(id)
     # locates a rider in the all list given a rider id
+    all_riders = Rider.all
+    found_rider = nil
+    all_riders.each do |rider|
+      found_rider = rider if rider.id == id
+    end
+    raise ArgumentError.new("No rider found") if found_rider == nil
+    return found_rider
   end
 
 end

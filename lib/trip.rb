@@ -13,10 +13,14 @@ class Trip
 
   def get_driver
     # uses Driver.find(id) to retrieve the Driver object for that Trip
+    driver = Driver.find(@driver_id)
+    return driver
   end
 
   def get_rider
     # uses Rider.find(id) to retrieve the Rider object for that Trip
+    rider = Rider.find(@rider_id)
+    return rider
   end
 
   def self.all_with_driver(id)
