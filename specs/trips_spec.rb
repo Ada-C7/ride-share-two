@@ -6,6 +6,7 @@ describe "Trip" do
   let(:my_trip) {RideShare::Trip.new(1, 2, 3, 4, 5)}
   let(:all_trips) {RideShare::Trip.find_all}
   let(:all_driver_trips) {RideShare::Trip.find_all_driver(39)}
+  let(:all_rider_trips) {RideShare::Trip.find_all_rider(54)}
   let(:csv) {CSV.read("support/trips.csv")}
 
   describe "Trip#initialize" do
@@ -45,6 +46,32 @@ describe "Trip" do
       all_driver_trips.must_be_instance_of(Array)
     end
 
+    it "Each item in array is of class Trip" do
+      all_driver_trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "Returns 0 if driver ID not found" do
+      bad_id = RideShare::Trip.find_all_driver("bad driver ID")
+        bad_id.must_equal 0
+    end
   end
 
+  describe "Testing Trip#find_all_rider class method" do
+    it "returns an array of Trip instances" do
+      all_rider_trips.must_be_instance_of(Array)
+    end
+
+    it "Each item in array is of class Trip" do
+      all_rider_trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "Returns 0 if ID not found" do
+      bad_id = RideShare::Trip.find_all_rider("bad rider ID")
+        bad_id.must_equal 0
+    end
+  end
 end
