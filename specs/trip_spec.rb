@@ -18,7 +18,7 @@ describe "Trip" do
   describe "Trip#Initialize" do
     before do
       trip_info = {
-        trip_id: 12,
+        id: 12,
         driver_id: 12,
         rider_id: 237,
         date: "2016-08-21",
@@ -35,12 +35,39 @@ describe "Trip" do
       @new_trip.must_be_instance_of RideShare::Trip
     end
 
+    # this is more testing the reader methods for the instance variables
     it "assigns instance variables: id, driver_id, rider_id, date, rating" do
       @new_trip.id.must_equal 12
       @new_trip.driver_id.must_equal 12
       @new_trip.rider_id.must_equal 237
+      @new_trip.date.must_equal "2016-08-21"
+      @new_trip.rating.must_equal 1
+    end
+  end
+
+  describe "Trip#all" do
+
+    let(:trips) { RideShare::Trip.all('./support/trips.csv') }
+
+    it "requires a csv file" do
+      proc {
+        RideShare::Trip.all("random text")
+      }.must_raise Errno::ENOENT
     end
 
+    it "returns an array" do
+      trips.must_be_instance_of Array
+    end
+
+    it "has instances of trips in the array" do
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
+    end
+
+    it "has the same number of trips as the CSV file" do
+      trips.length.must_equal 600
+    end
   end
+
+
 
 end
