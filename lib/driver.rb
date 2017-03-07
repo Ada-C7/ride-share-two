@@ -13,7 +13,8 @@ module RideSharing
 
     def self.all(path = "./support/drivers.csv")
       all_drivers =[]
-      CSV.open(path).each do |line_array|
+      CSV.foreach(path, {:headers => true}) do |line_array|
+      # CSV.open(path).each do |line_array|
         begin
           raise ArgumentError.new("Vehicle number (vin) not valid for driver \"#{line_array[1]}\" with id# #{line_array[0]}" ) if line_array[2].length != 17
         rescue ArgumentError => exception

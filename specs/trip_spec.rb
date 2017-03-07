@@ -4,7 +4,7 @@ describe "Trip" do
   describe "#initialize" do
     let(:trip1) { RideSharing::Trip.new(1, 1, 54, "2016-04-05", 3)}
     it " : Takes an id, driver_id, rider_id, date and rating as parameters" do
-
+      trip1
       trip1.must_respond_to :id
       trip1.id.must_equal 1
 
@@ -22,6 +22,7 @@ describe "Trip" do
     end
 
     it "All parameters are integers except date that is a string" do
+      trip1
       trip1.id.must_be_kind_of Integer
       trip1.driver_id.must_be_kind_of Integer
       trip1.rider_id.must_be_kind_of Integer
@@ -51,8 +52,9 @@ describe "Trip" do
       path = "./support/trips_spec_false.csv"
       all_trips = RideSharing::Trip.all(path)
       all_trips.length.must_equal 3
-      all_trips[0].rating.must_equal 3
-      all_trips[1].rating.wont_equal 6
+      all_trips.first.id.must_equal 1
+      all_trips[1].id.wont_equal 2
+      all_trips.last.id.wont_equal 5
     end
 
     it "trips.csv should return 600 trips" do
@@ -60,6 +62,29 @@ describe "Trip" do
       all_trips.length.must_equal 600
     end
   end # End of describe "Trip#self.all"
+
+  describe "#self.find_all_trips_for_driver" do
+    let(:trip_collection) {RideSharing::Trip.find_all_trips_for_driver(1)}
+    it "Will return an array" do
+      trip_collection
+      trip_collection.must_be_kind_of Array
+    end
+
+    it "Must return an array with elements of class RideSharing::Trip" do
+      trip_collection
+      trip_collection.each do |obj|
+        obj.must_be_kind_of RideSharing::Trip
+      end
+    end
+
+    it "Must return an array of Trip objects only for driver with id 1" do
+      trip_collection
+      trip_collection.each do |obj|
+        obj.driver_id.must_equal 1
+      end
+    end
+
+  end # End of describe "#self.find_all_trips_for_driver"
 
 
 
