@@ -33,18 +33,18 @@ class Rider
 
           return all_riders
      end
-     #
-     # def self.find(file, id)
-     #
-     #      Driver.all(file).each do | account |
-     #
-     #           if account.id == id
-     #                return account
-     #           end
-     #
-     #      end
-     #
-     #      raise ArgumentError.new "Driver #{id} does not exist."
-     #
-     # end
+
+     def self.find(file, id)
+
+          Rider.all(file).each do | rider |
+     
+               if rider.id == id
+                    return rider
+               end
+
+          end
+
+          raise ArgumentError.new "Rider #{id} does not exist."
+
+     end
 end
