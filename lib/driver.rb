@@ -4,6 +4,8 @@ module RideShare
     attr_reader :id, :name, :vin
 
     def initialize(driver_hash)
+      raise InvalidVINError.new("VIN must have 17 characters") if driver_hash[:vin].length != 17
+
       @id = driver_hash[:id]
       @name = driver_hash[:name]
       @vin = driver_hash[:vin]
@@ -15,14 +17,16 @@ module RideShare
       # creates and collects instances of Driver from CSV file
       driver_hash = {}
       driver_file.each do |line|
-
         driver_hash[:id] = line[0].to_i
         driver_hash[:name] = line[1]
         driver_hash[:vin] = line[2]
 
-        # TODO: test VIN - must have 17 digits and must not contain I, O or Q
-        unless driver_hash[:name] == "name"
-          all_drivers << Driver.new(driver_hash)
+        unless driver_hash[:name] == "name" #eliminate header line
+          begin
+            all_drivers << Driver.new(driver_hash)
+          rescue InvalidVINError => e
+            puts "Encountered an error: #{e.message}"
+          end
         end
       end
 

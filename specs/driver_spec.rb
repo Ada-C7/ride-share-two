@@ -8,14 +8,27 @@ describe "Driver initialize" do
       name: "Scylla Bankroll",
       vin: "1G1H34JZ889X9LT46",
     }
+
+    @bad_vin_hash = {
+      id: 88,
+      name: "Scylla Bankroll",
+      vin: "1G1H3",
+    }
   end
 
   let(:driver) { RideShare::Driver.new(@driver_hash) }
+  
 
   it "has required attributes" do
     driver.name.must_equal "Scylla Bankroll"
     driver.id.must_equal 88
     driver.vin.must_equal "1G1H34JZ889X9LT46"
+  end
+
+  it "raises an error if VIN does not have seventeen digits" do
+    proc {
+      RideShare::Driver.new(@bad_vin_hash)
+    }.must_raise InvalidVINError
   end
 end
 
