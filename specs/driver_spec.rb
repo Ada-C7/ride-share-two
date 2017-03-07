@@ -57,4 +57,33 @@ describe "Driver" do
       }.must_raise ArgumentError
     end
   end
+
+  describe "Driver#trips" do
+
+    it "Can be called on an instance of the Driver class" do
+      @driver.must_respond_to :trips
+    end
+
+  end
+
+  describe "Driver#rating" do
+
+    it "Can be called on an instance of the Driver class" do
+      @driver.must_respond_to :rating
+    end
+  end
+
+  describe "Driver#all" do
+
+    it "Can be called as a class method for the Driver class" do
+      RideShare::Driver.must_respond_to :all
+    end
+  end
+
+  describe "Driver#find" do
+
+    it "Can be called as a class method for the Driver class" do
+      RideShare::Driver.must_respond_to :find
+    end
+  end 
 end

@@ -11,5 +11,22 @@ module RideShare
       raise ArgumentError.new("vehicle id must be a string") unless @vehicle_id.class == String
       raise ArgumentError.new("vehicle id must be 17 characters long") unless @vehicle_id.length == 17
     end
+
+    def trips
+
+    end
+
+    def rating
+
+    end
+
+    def self.all
+
+    end
+
+    def self.find
+
+    end 
+
   end
 end
