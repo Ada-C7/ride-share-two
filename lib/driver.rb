@@ -44,5 +44,5 @@ module RideShare
 end
 
 driver_hash = {driver_id: 2, name: "Natalia", license: 3044043, vin: 12213449}
-puts RideShare::Driver.all.length
-puts RideShare::Driver.all
+# puts RideShare::Driver.all.length
+# puts RideShare::Driver.all

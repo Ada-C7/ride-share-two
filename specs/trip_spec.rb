@@ -29,4 +29,21 @@ describe "Trip class" do
     end
   end # end of initialize method test
 
+  describe "Trip#driver" do
+    it " Return instance of class Driver" do
+      trip_hash = {trip_id: 123, rider_id: 2, driver_id: 34, date: "03/06/2017", rating: 4}
+      trip = RideShare::Trip.new(trip_hash)
+      trip.driver.class.must_equal RideShare::Driver
+    end
+    it " Id of returned driver must be the same as instance variable @driver_id of Trip class" do
+      trip_hash = {trip_id: 123, rider_id: 2, driver_id: 34, date: "03/06/2017", rating: 4}
+      trip = RideShare::Trip.new(trip_hash)
+      trip.driver.driver_id.must_equal trip.driver_id
+    end
+
+  end
+
+  describe "Trip#rider" do
+  end
+
 end

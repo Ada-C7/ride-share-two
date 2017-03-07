@@ -44,4 +44,4 @@ module RideShare
 end
 
 rider_hash = {rider_id: 32, name: "Natalia", phone:  "1425394958"}
-puts RideShare::Rider.all[299].name
+# puts RideShare::Rider.all[299].name
