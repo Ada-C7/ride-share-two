@@ -30,6 +30,9 @@
         1,
         null,
         1,
+        1,
+        null,
+        1,
         null
       ],
       "/Users/janice/Documents/a/ada/projects/ride-share-two/specs/trip_spec.rb": [
@@ -48,6 +51,6 @@
         null
       ]
     },
-    "timestamp": 1488844779
+    "timestamp": 1488846677
   }
 }
