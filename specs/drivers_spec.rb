@@ -31,12 +31,30 @@ describe "Driver class" do
   end
 
   it "can find all a single driver's trips" do
-    skip
+    driver.all_trips(driver.id).must_be_kind_of Array
+    driver.all_trips(driver.id).length.must_equal 9
+  end
 
+  it "raises an ArgumentError if id is not a driver number in CSV" do
+      proc {
+        driver.all_trips(101)
+      }.must_raise ArgumentError
+  end
+
+  it "rejects completely invalid input" do
+    proc {
+      driver.all_trips("bad string of input")
+    }.must_raise ArgumentError
+
+    proc {
+      driver.all_trips("#{$12}")
+    }.must_raise ArgumentError
   end
 
   it "can find  a single driver's average rating" do
-    skip
+    ron = driver.average_rating(driver.id)
+    ron.must_be_kind_of Float
+    ron.must_equal 2.33
 
   end
 end
