@@ -72,7 +72,5 @@ describe "RideShare::Driver" do
       @driver_found.name.must_equal "Sheila VonRueden"
       @driver_found.vin.must_equal "KPH9RLSZ9YKNVMGH2"
     end
-
-
   end
 end

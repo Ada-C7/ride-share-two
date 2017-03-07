@@ -34,7 +34,7 @@ module RideShare
 
     # class method: find(id)
     def self.find(driver_id)
-      # read in CSV file for all instances of drivers
+      # return specific instance of driver (previously instantiated)
       found_driver = @all_drivers.select { |instance| instance.id == driver_id }
       return found_driver[0]
     end
