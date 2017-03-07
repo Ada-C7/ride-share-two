@@ -1,5 +1,9 @@
 require 'csv'
 
+require_relative '../lib/driver'
+require_relative '../lib/rider'
+require_relative '../lib/trips'
+
 module Rideshare
 
   class Driver
@@ -16,7 +20,7 @@ module Rideshare
     end
 
     def all
-      
+
     end
 
     def find driver_id

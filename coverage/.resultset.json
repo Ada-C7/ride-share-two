@@ -1,0 +1,72 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/adai/Documents/ada/projects/ride-share-two/rideshare.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1
+      ],
+      "/Users/adai/Documents/ada/projects/ride-share-two/lib/driver.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/adai/Documents/ada/projects/ride-share-two/lib/rider.rb": [
+        1,
+        null,
+        1,
+        1,
+        1
+      ],
+      "/Users/adai/Documents/ada/projects/ride-share-two/lib/trips.rb": [
+        1,
+        null,
+        1,
+        1,
+        1
+      ],
+      "/Users/adai/Documents/ada/projects/ride-share-two/specs/rider_spec.rb": [
+        1
+      ],
+      "/Users/adai/Documents/ada/projects/ride-share-two/specs/trips_spec.rb": [
+        1
+      ]
+    },
+    "timestamp": 1488862277
+  }
+}
