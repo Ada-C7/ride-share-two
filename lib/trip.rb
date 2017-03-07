@@ -16,18 +16,15 @@ class RideShare::Trip
 
   def self.find_all
     trips = []
-      begin
-        CSV.open("support/trips.csv").each do |trip|
+      CSV.open("support/trips.csv").each do |trip|
+        begin
           trips << RideShare::Trip.new(trip[0].to_i, trip[1].to_i, trip[2].to_i, trip[3], trip[4].to_i)
+        rescue InvalidRatingError => e
+          puts "#{ e }"
         end
-      rescue InvalidRatingError => e
-        puts " #{e} "
       end
-
+      trips.shift
       return trips
-    # Retrieve all trips from CSV file CLASS METHOD
-    #   input: calling Class method Trips.find_all
-    #   output: list all trips from CSV file as an array.
   end
 
   # Retrieve associated driver instance through driver ID
