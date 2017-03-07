@@ -50,7 +50,7 @@
 # def find_my_trips
 #    self.create_my_trips unless mytrips_created?
 #    return @mytrips
-# end
+#end
 
 # find_my_drivers()
 # create my_drivers = []
