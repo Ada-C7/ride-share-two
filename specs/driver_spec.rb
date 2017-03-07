@@ -21,22 +21,18 @@ describe Driver do
      describe 'Driver#initialization' do
 
           it "Creates class Driver" do
-
             @leia.must_be_kind_of Driver
-
           end
 
           it "Takes ID, name and vehicle ID" do
-
-            @leia.must_respond_to @id
+            @leia.must_respond_to :id
             @leia.id.must_equal @id
 
-            @leia.must_respond_to @name
+            @leia.must_respond_to :name
             @leia.name.must_equal @name
 
-            @leia.must_respond_to @vehicle_id
+            @leia.must_respond_to :vehicle_id
             @leia.vehicle_id.must_equal @vehicle_id
-
           end
 
 

@@ -5,6 +5,16 @@
         1,
         null,
         1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        2,
+        2,
+        null,
+        null,
+        null,
         null
       ],
       "/Users/janice/Documents/a/ada/projects/ride-share-two/lib/trip.rb": [
@@ -51,6 +61,6 @@
         null
       ]
     },
-    "timestamp": 1488846677
+    "timestamp": 1488847346
   }
 }
