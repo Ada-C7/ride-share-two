@@ -28,5 +28,12 @@ module RideShare
       trips.map! { |info| self.new(info) }
       return trips
     end
+
+    def self.find_by_driver(id, csv_file)
+      trips = all(csv_file)
+      trips.map! { |trip| trip if trip.driver_id == id }.compact!
+      return trips
+    end
   end
 end
+# p RideShare::Trip.find_by_driver(2, '../support/trips.csv')

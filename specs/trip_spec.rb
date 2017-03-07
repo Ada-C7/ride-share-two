@@ -75,37 +75,44 @@ describe "Trip" do
       @driver_id = 7
     end
 
-    let(:trips_by_driver) { RideShare::Trip.find_by_driver(@driver_id, @csv_file)}
+    let(:trips) { RideShare::Trip.find_by_driver(@driver_id, @csv_file)}
 
     it "requires two arguments" do
       skip
     end
 
     it "returns an array" do
-      trips_by_driver.must_be_instance_of Array
+      trips.must_be_instance_of Array
     end
 
     it "returns an array of trip instances" do
-      trips_by_driver.each { |trip| trip.must_be_instance_of RideShare::Trip }
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "has same driver id for all trip instances" do
-      trips_by_driver.each { |trip| trip.driver_id.must_equal 7 }
+      trips.each { |trip| trip.driver_id.must_equal @driver_id }
     end
   end
 
   describe "Trip#find_by_rider" do
 
-    it "returns an array" do
+    before do
+      @csv_file = './support/trips.csv'
+      @rider_id = 120
+    end
 
+    let(:trips) { RideShare::Trip.find_by_rider(@rider_id, @csv_file)}
+
+    it "returns an array" do
+      trips.must_be_instance_of Array
     end
 
     it "returns an array of trip instances" do
-
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "has same rider id for all trip instances" do
-
+      trips.each { |trip| trip.rider_id.must_equal @rider_id }
     end
   end
 end
