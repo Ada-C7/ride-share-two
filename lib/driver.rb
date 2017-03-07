@@ -8,8 +8,10 @@ module RideShare
     def initialize(args)
       @driver_id = args[:driver_id]
       raise ArgumentError.new("driver id must be an integer") unless @driver_id.class == Integer
+
       @name = args[:name]
       raise ArgumentError.new("driver name must be a string") unless @name.class == String
+
       @vin = args[:vin]
       raise ArgumentError.new("vehicle id must be a string") unless @vin.class == String
       raise ArgumentError.new("vehicle id must be 17 characters long") unless @vin.length == 17
@@ -38,7 +40,7 @@ module RideShare
           return driver
         end
       end
-      raise InvalidDriver.new("that driver does not exist")
+      raise InvalidDriver.new("that driver does not exist")  # maybe refactor later?
     end
 
   end

@@ -68,30 +68,34 @@ describe "Driver" do
 
   describe "Driver.all" do
 
+    before do
+      @all_drivers = RideShare::Driver.all
+    end
+
     it "Can be called as a class method for the Driver class" do
       RideShare::Driver.must_respond_to :all
     end
 
     it "Returns an array of all driver information" do
-      RideShare::Driver.all.must_be_instance_of Array
+      @all_drivers.must_be_instance_of Array
 
-      RideShare::Driver.all.each do |driver|
+      @all_drivers.each do |driver|
         driver.must_be_instance_of RideShare::Driver
       end
     end
 
     it "Contains the correct amount of drivers" do
-      RideShare::Driver.all.length.must_equal 100
+      @all_drivers.length.must_equal 100
     end
 
     it "Matches the driver id, name, and vehicle id number of the first and last drivers in csv" do
-      RideShare::Driver.all.first.driver_id.must_equal 1
-      RideShare::Driver.all.first.name.must_equal "Bernardo Prosacco"
-      RideShare::Driver.all.first.vin.must_equal "WBWSS52P9NEYLVDE9"
+      @all_drivers.first.driver_id.must_equal 1
+      @all_drivers.first.name.must_equal "Bernardo Prosacco"
+      @all_drivers.first.vin.must_equal "WBWSS52P9NEYLVDE9"
 
-      RideShare::Driver.all.last.driver_id.must_equal 100
-      RideShare::Driver.all.last.name.must_equal "Minnie Dach"
-      RideShare::Driver.all.last.vin.must_equal "XF9Z0ST7X18WD41HT"
+      @all_drivers.last.driver_id.must_equal 100
+      @all_drivers.last.name.must_equal "Minnie Dach"
+      @all_drivers.last.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 
   end
