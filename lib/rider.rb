@@ -17,34 +17,31 @@ module RideShare
 
     # Retrieve the list of trip instances that only this rider has taken
     def trips
-      return Trip.trips_by_rider(@id)
+      return RideShare::Trip.trips_by_rider(@id)
     end
 
     # Retrieve the list of all previous driver instances
     def drivers
       all_trips_by_rider = trips
-      drivers = all_trips_by_rider.map { |trip| Driver.find(trip.driver_id) }
+      drivers = all_trips_by_rider.map { |trip| RideShare::Driver.find(trip.driver_id) }
       return drivers
     end
 
     # Retrieve all riders from the CSV file
     def self.all
       all_riders_array= []
-      CSV.read("support/riders.csv").each do |line|
-        begin
-          all_riders_array << Rider.new( line[0].to_i, line[1], line[2] )
-        rescue
-          puts "Invalid data entry detected in the CSV file"
-        end
+      CSV.foreach("support/riders.csv", {:headers => true}) do |line|
+          all_riders_array << RideShare::Rider.new({id: line[0].to_i, name: line[1], phone_number: line[2]})
       end
       return all_riders_array
     end
 
     # Find a specific rider using their numeric ID
     def self.find(rider_id)
-      raise ArgumentError.new ("Driver id must be a positive integer value") if ( id.class != Integer || id < 1 )
-      all_riders_array = Rider.all
-      return all_riders_array.select { |rider| rider.id == rider_id }
+      raise ArgumentError.new ("Rider id must be a positive integer value") if ( rider_id.class != Integer || rider_id < 1 )
+      all_riders_array = RideShare::Rider.all
+      raise ArgumentError.new ("That rider ID does not currently exist") if !all_riders_array.any? { |rider| rider.id == rider_id }
+      return all_riders_array.select { |rider| rider.id == rider_id }[0]
     end
   end
 end

@@ -19,7 +19,7 @@ module RideShare
 
     # Retrieve the list of trip instances that only this driver has taken
     def trips
-      return Trip.trips_by_driver(@id)
+      return RideShare::Trip.trips_by_driver(id)
     end
 
     # Retrieve an average rating for that driver based on all trips taken
@@ -33,21 +33,18 @@ module RideShare
     # Retrieve all drivers from the CSV file
     def self.all
       all_drivers_array= []
-      CSV.read("support/drivers.csv").each do |line|
-        begin
-          all_drivers_array << Driver.new( line[0].to_i, line[1], line[2] )
-        rescue
-          puts "Invalid data entry detected in the CSV file"
-        end
+      CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
+          all_drivers_array << RideShare::Driver.new({ id: line[0].to_i, name: line[1], vin: line[2] })
       end
       return all_drivers_array
     end
 
     # Find a specific driver using their numeric ID
     def self.find(driver_id)
-      raise ArgumentError.new ("Driver id must be a positive integer value") if ( id.class != Integer || id < 1 )
-      all_drivers_array = Driver.all
-      return all_drivers_array.select { |driver| driver.id == driver_id}
+      raise ArgumentError.new ("Driver id must be a positive integer value") if ( driver_id.class != Integer || driver_id < 1 )
+      all_drivers_array = RideShare::Driver.all
+      raise ArgumentError.new ("That driver ID does not currently exist") if !all_drivers_array.any? { |driver| driver.id == driver_id }
+      return all_drivers_array.select { |driver| driver.id == driver_id}[0]
     end
   end
 end

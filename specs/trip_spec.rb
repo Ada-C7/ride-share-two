@@ -51,25 +51,47 @@ describe "Trip class" do
     end
   end
 
-  # describe "#find_driver method" do
-  #   it "Retrieve the associated driver instance through the driver ID" do
-  #     trips_by_rider = rider.trips.class
-  #     trips_by_rider.must_equal Array
-  #     trips_by_rider.length.must_equal 3
-  #   end
-  # end
-  #
-  # describe "#find_rider method" do
-  #   it "Retrieve the associated rider instance through the rider ID" do
-  #
-  #   end
-  # end
-  #
-  # describe "#self.all method" do
-  #   it "Retrieve all trips from the CSV file" do
-  #
-  #   end
-  # end
+  describe "#find_driver method" do
+    it "Retrieve the associated driver instance through the driver ID" do
+      driver = trip.find_driver
+      driver.class.must_equal RideShare::Driver
+      driver.id.must_equal 6
+      driver.name.must_equal "Mr. Hyman Wolf"
+      driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
+    end
+
+    it "Raises an argument error if the driver id missing from the driver.csv" do
+      trip = RideShare::Trip.new({ id: 162, driver_id: 123456789, rider_id: 93, date: "2015-03-09", rating: 4 })
+      proc {
+        trip.find_driver
+      }.must_raise ArgumentError
+    end
+  end
+
+  describe "#find_rider method" do
+    it "Retrieve the associated rider instance through the rider ID" do
+      driver = trip.find_rider
+      driver.class.must_equal RideShare::Rider
+      driver.id.must_equal 93
+      driver.name.must_equal "Kaylie Okuneva IV"
+      driver.phone_number.must_equal "(170) 751-2406"
+    end
+
+    it "Raises an argument error if the rider id missing from the rider.csv" do
+      trip = RideShare::Trip.new({ id: 162, driver_id: 93, rider_id: 123456789, date: "2015-03-09", rating: 4 })
+      proc {
+        trip.find_rider
+      }.must_raise ArgumentError
+    end
+  end
+
+  describe "#self.all method" do
+    it "Retrieve all trips from the CSV file" do
+      all_trips_array = RideShare::Trip.all
+      all_trips_array.must_be_instance_of Array
+      all_trips_array.length.must_equal 600
+    end
+  end
   #
   # describe "#self.trips_by_driver method" do
   #   it "Find all trip instances for a given driver ID" do

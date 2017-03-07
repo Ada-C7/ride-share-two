@@ -33,12 +33,8 @@ module RideShare
     # Find all trip instances for a given driver ID
     def self.all
       all_trips_array= []
-      CSV.read("support/trips.csv").each do |line|
-        begin
-          all_trips_array << Trip.new( line[0].to_i, line[1].to_i, line[2].to_i, line[3], line[4].to_f )
-        rescue
-          puts "Invalid data entry detected in the CSV file"
-        end
+      CSV.foreach("support/trips.csv", {:headers => true}) do |line|
+          all_trips_array << Trip.new( id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_f )
       end
       return all_trips_array
     end

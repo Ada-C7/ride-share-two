@@ -47,17 +47,42 @@ describe "Driver class" do
     end
   end
 
-  # describe "#trips method" do
-  #   it "Retrieve the list of trip instances that only this driver has taken" do
-  #     trips_by_driver = driver.trips.class
-  #     trips_by_driver.must_equal Array
-  #     trips_by_driver.length.must_equal 3
-  #   end
-  #
-  #   it "" do
-  #
-  #   end
-  # end
+  xdescribe "#trips method" do
+    it "Retrieve the list of trip instances that only this driver has taken" do
+      trips_by_driver = driver.trips
+      trips_by_driver.must_equal Array
+      trips_by_driver.length.must_equal 3
+      trips_by_driver.must_equal [
+        RideShare::Trip.new(
+        {
+          id: 162,
+          driver_id: 6,
+          rider_id: 93,
+          date: "2015-03-09",
+          rating: 4
+          }
+        ),
+        RideShare::Trip.new(
+        {
+          id: 169,
+          driver_id: 6,
+          rider_id:	204,
+          date:	"2015-05-19",
+          rating:	4
+        }
+        ),
+        RideShare::Trip.new(
+        {
+          id: 295,
+          driver_id: 6,
+          rider_id: 87,
+          date: "2015-08-14",
+          rating: 1
+        }
+        )
+      ]
+    end
+  end
   #
   # describe "#avg_rating method" do
   #   it "Retrieve an average rating for that driver based on all trips taken" do
