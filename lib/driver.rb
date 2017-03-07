@@ -1,10 +1,20 @@
+require 'csv'
 module RideShare
   class Driver
-    attr_accessor :id, :name, :vin
-    def initialize(id, name, vin)
-      @id = id
+    attr_accessor :driver_id, :name, :vin
+    def initialize(driver_id, name, vin)
+      @driver_id = driver_id
       @name = name
       @vin = vin
     end
+
+    def self.all
+      drivers = []
+      CSV.open("./support/drivers.csv", "r").each do |line|
+        drivers << self.new(line[0].to_s, line[1].to_s, line[2].to_s)
+      end
+      return drivers
+    end
+
   end
 end
