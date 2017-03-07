@@ -26,7 +26,7 @@ module RideShare
       all_riders.each do |rider|
         return rider if rider.id == rider_id
       end
-      return nil
+      return nil #if this isn't here, then the entire array is returned if no rider_id is matched
     end
     #will return nil if rider is not found
 
