@@ -23,7 +23,7 @@ module RideShare
     def self.find(id)
       trip_array = RideShare::Trip.all
       trip_array.each do |trip|
-        if id == trip.id
+        if id == trip.trip_id
           return trip
         end
       end
