@@ -10,7 +10,8 @@ class Driver
   end
 
   def self.all
-
+    # read SCV
+    # returns a list of driver instances
     drivers = CSV.read("support/drivers.csv", { :headers => true })
     drivers_array = []
 
@@ -19,13 +20,18 @@ class Driver
     end
 
     return drivers_array
-    # read SCV
-    # returns a list of driver instances
   end
 
   def self.find(driver_id)
     # searches .all for all driver matching parameter
     # returns an instance of a driver
+    Driver.all.each do |driver|
+      if driver.id == driver_id
+        return driver
+      end
+    end
+    # create a special NoDriver error, maybe rescue it?
+    raise ArgumentError.new("driver #{driver_id} does not exist")
   end
 
   def lists_trips
