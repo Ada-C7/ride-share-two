@@ -1,7 +1,8 @@
 
 require_relative 'spec_helper'
 
-describe "Driver Class" do
+
+describe "Driver" do
 
   # before do
   #   @name
@@ -11,11 +12,16 @@ describe "Driver Class" do
 
   describe "self.all" do
 
-    it "returns an array"do
+    it "returns an array" do
+      all_drivers = Driver.all
+      all_drivers.must_be_instance_of Array
 
     end
     it "all elements of array should be drivers" do
-
+      all_drivers = Driver.all
+      all_drivers.each do |driver|
+        driver.must_be_instance_of Driver
+      end
     end
     it "includes first data line" do
 
@@ -26,7 +32,7 @@ describe "Driver Class" do
     it "includes line 50 of array" do
 
     end
-
+  end
 
 
   describe "driver_trips(trips)" do
@@ -35,7 +41,8 @@ describe "Driver Class" do
     end
     it "all elements of array should be trip instances" do
     end
-    it "each trip should have an driver_ID that matches the driver_ID that i'm in. "
+    it "each trip should have an driver_ID that matches the driver_ID that i'm in. " do
+    end
   end
 
 
@@ -58,37 +65,21 @@ describe "Driver Class" do
   describe "self.find" do
     it "Should return an instance of driver"do
 
-    end
-    it "Driver ID should return an integer"do
-
-    end
-    it "Should raise ArgumentError if search doesn't
-    return a match" do
-
-    end
-
   end
+  it "Driver ID should return an integer"do
 
+end
+it "Should raise ArgumentError if search doesn't
+return a match" do
 
+end
 
-  end
-
-
-  # it "this is is an instance of a driver" do
-  #   driver = Driver.new
-  #   driver.must_be_instance_of Driver
-  # end
-  #
-  # it "driver ID must be an integer" do
-  #   driver = Driver.new
-  #   driver.id = 1
-  #   driver.id.must_be_instance_of Fixnum
-  # end
-  #
-  # if driver should be a hash
-  #   driver [1] [name, num]
-  #   driver [100] [name, num]
+end
 
 
 
 end
+
+
+
+# my_driver = Driver.new( {name: "Olivia", id: 1, vehicle_id: "7GD5"} )
