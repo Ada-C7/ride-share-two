@@ -3,8 +3,8 @@ require_relative 'invalid_vin_error'
 
 module RideShare
   class Driver
-    def initialize (driver_id, name, vin) #Instantiated Driver class with ID, name and vehicle identification number
-      @id = id
+    def initialize #Instantiated Driver class with ID, name and vehicle identification number
+      @id = driver_id
       @name = name
       @vin = vin #check vehicle identification number should be a specific length else raise InvalidVinError
     end
@@ -19,10 +19,10 @@ module RideShare
 
 
     def self.all
-      #Use CSV.read method passing file name as argument
+      #Use CSV.read method passing file name as argument to retrieve all drivers
     end
 
-    def self.find driver_id
+    def self.find
       #check if driver_id is included in the list of drivers found in all method above
     end
 
