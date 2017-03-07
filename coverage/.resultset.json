@@ -239,6 +239,43 @@
         1,
         null,
         null,
+        null,
+        1,
+        null,
+        1,
+        3,
+        3,
+        null,
+        null,
+        4,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
         null
       ],
       "/Users/Cynthia/Documents/ADA/queues/ruby_exercises/ruby_week5/ride-share-two/lib/trip.rb": [
@@ -276,6 +313,6 @@
         null
       ]
     },
-    "timestamp": 1488849020
+    "timestamp": 1488849645
   }
 }
