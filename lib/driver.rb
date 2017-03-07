@@ -22,9 +22,7 @@ module RideShare
       csv = CSV.read("support/drivers.csv", 'r')
       csv.each do |line|
       #to avoid putting first line from CSV file that contains column name:
-        if line[0] == "driver_id"
-          next
-        end
+        next if line[0] == "driver_id"
         hash = {driver_id: line[0].to_i, name: line[1], vin: line[2]}
         all_drivers << Driver.new(hash)
       end
@@ -43,6 +41,6 @@ module RideShare
   end
 end
 
-driver_hash = {driver_id: 2, name: "Natalia", license: 3044043, vin: 12213449}
+# driver_hash = {driver_id: 2, name: "Natalia", license: 3044043, vin: 12213449}
 # puts RideShare::Driver.all.length
 # puts RideShare::Driver.all
