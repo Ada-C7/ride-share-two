@@ -29,7 +29,10 @@ describe "Driver class" do
     it "returns a float" do
 
     end
-    it "is between 1 and 5" do
+    it "is >= 1" do
+
+    end
+    it "is <= 5" do
 
     end
   end
