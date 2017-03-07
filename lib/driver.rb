@@ -12,10 +12,18 @@ module RideShare
     end
 
     # instance method: trips
+    def trips
     # return collection of trip instances by this driver
+    RideShare::Trip.by_driver(@id)
+    end
 
     # instance method: avg-rating
-    # return rounded average rating across all trips by this driver
+    def avg_rating
+      ratings = trips.map {|trip| trip.rating.to_i }
+      average = ratings.inject(:+)/ratings.length
+      return average.round(2)
+      # return rounded average rating across all trips by this driver
+    end
 
     # class method: all
     def self.all
