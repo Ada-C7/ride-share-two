@@ -58,5 +58,35 @@ describe "Driver" do
         index += 1
       end
     end
+
+  end
+
+  describe "Driver#find" do
+
+    before do
+      @drivers = Driver.all
+    end
+
+    it "Returns a driver that exists" do
+      driver = Driver.find(54)
+      driver.must_be_instance_of Driver
+    end
+
+    it "Can find the first driver from the CSV" do
+      driver = Driver.find(1)
+      driver.name.must_equal @drivers.first.name
+    end
+
+    it "Can find the last driver from the CSV" do
+      driver = Driver.find(100)
+      driver.name.must_equal @drivers.last.name
+    end
+
+    it "Raises an error for a driver that doesn't exist" do
+      proc {
+        Driver.find(101)
+      }.must_raise ArgumentError
+    end
+
   end
 end
