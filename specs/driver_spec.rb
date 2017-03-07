@@ -56,6 +56,26 @@ describe "Driver class" do
       # skip
         RideShare::Driver.find("1").name.must_equal "Bernardo Prosacco"
     end
+
+    it "Finds the first driver in the database" do
+      # skip
+      if RideShare::Driver.all[1].driver_id == "1"
+        RideShare::Driver.find("1").vin.must_equal "WBWSS52P9NEYLVDE9"
+      else
+        # Add argument error functionality
+        puts "Error"
+      end
+    end
+
+    it "Finds the last driver in the database" do
+      # skip
+      if RideShare::Driver.all[-1].driver_id == "100"
+        RideShare::Driver.find("100").name.must_equal "Minnie Dach"
+      else
+        # Add argument error functionality
+        puts "Error"
+      end
+    end
   end
 
 end
