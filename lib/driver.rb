@@ -27,11 +27,15 @@ module RideShare
     def self.all
       @@all ||= CSV.read("support/drivers.csv", headers:true).map do |line|
         Driver.new(
-          id: line[0],
+          id: line[0].to_i,
           name: line[1],
           vin: line[2]
         )
       end
+    end
+
+    def self.find(target_id)
+      all.find { |driver| driver.id == target_id }
     end
 
   end

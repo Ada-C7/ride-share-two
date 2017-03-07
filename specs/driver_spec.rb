@@ -35,6 +35,19 @@ describe RideShare::Driver do
     end
   end
 
+  describe "self.find" do
+    it "Returns a driver object when given a valid driver ID" do
+      driver = RideShare::Driver.find(94)
+
+      driver.must_be_instance_of RideShare::Driver
+      driver.name.must_equal "Arlo Douglas"
+    end
+
+    it "Returns nil when given an invalid driver ID" do
+      RideShare::Driver.find("TRICKERY!").must_be_nil
+    end
+  end
+
   describe "Instance Methods" do
     before do
       @driver = RideShare::Driver.new(id: 200, name: "Alix Hamilton", vin: "WBWSS52SALMONVDE9")
