@@ -20,7 +20,7 @@ module RideShare
       trips_array
     end
 
-    def self.find(id)
+    def self.find(id)  #Should we rescue this??
       trip_array = RideShare::Trip.all
       trip_array.each do |trip|
         if id == trip.trip_id

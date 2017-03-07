@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+require 'pry'
 
 describe "Rider initialize" do
   it "Takes an ID, name, and phone number" do
@@ -47,10 +48,13 @@ describe "Rider.all" do
   #       riders match what's in the CSV file
   it " riders match what's in the CSV file" do
     index = 0
-    CSV.read("support/riders.csv") do |line|
-      riders[index].id.must_equal line[0]
-      riders[index].id.must_equal line[1]
-      riders[index].id.must_equal line[2]
+    # binding.pry
+    CSV.read("support/riders.csv", {:headers => true}).each do |line|
+      # binding.pry
+      @rider_array[index].id.must_equal line[0]
+      @rider_array[index].name.must_equal line[1]
+      @rider_array[index].phone_num.must_equal line[2]
+      # binding.pry
       index += 1
     end
   end
@@ -66,23 +70,23 @@ describe "Rider.all" do
 end
 
 describe "Rider.find" do
-    before do
-      @test_array = RideShare::Rider.all
-    end
-    # self.find(id) - returns an instance of a Rider
-    # where the value of the id field in the CSV matches
-    # the passed parameter.
-    it "Returns a rider that exists" do
-      test_variable = RideShare::Rider.find("2")
-      test_variable.must_be_instance_of RideShare::Rider
-      test_variable.id.must_equal "2"
-    end
-
-    it "Can find the first account from the CSV" do
-      RideShare::Rider.find(@test_array[0].id).id.must_equal "1"
-    end
-
-    it "Can find the last account from the CSV" do
-      RideShare::Rider.find(@test_array[-1].id).id.must_equal "300"
-    end
+  before do
+    @test_array = RideShare::Rider.all
   end
+  # self.find(id) - returns an instance of a Rider
+  # where the value of the id field in the CSV matches
+  # the passed parameter.
+  it "Returns a rider that exists" do
+    test_variable = RideShare::Rider.find("2")
+    test_variable.must_be_instance_of RideShare::Rider
+    test_variable.id.must_equal "2"
+  end
+
+  it "Can find the first account from the CSV" do
+    RideShare::Rider.find(@test_array[0].id).id.must_equal "1"
+  end
+
+  it "Can find the last account from the CSV" do
+    RideShare::Rider.find(@test_array[-1].id).id.must_equal "300"
+  end
+end
