@@ -5,7 +5,7 @@ describe "Driver Class" do
   describe "Initialize Method" do
 
     let(:driver) {
-      @driver = RideShare::Driver.new({
+        RideShare::Driver.new({
         :id => 1,
         :name => "Bob McBob",
         :vin => 12345
