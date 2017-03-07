@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-06T15:40:01-08:00">2017-03-06T15:40:01-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-06T16:05:20-08:00">2017-03-06T16:05:20-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.36
+         3.09
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>25</b> relevant lines. 
-    <span class="green"><b>25</b> lines covered</span> and
+    <b>29</b> relevant lines. 
+    <span class="green"><b>29</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -53,11 +53,11 @@
       <tr>
         <td class="strong"><a href="#5e4d671d93e74b559d1c23148d600ca65192c893" class="src_link" title="lib/driver.rb">lib/driver.rb</a></td>
         <td class="green strong">100.0 %</td>
+        <td>15</td>
         <td>11</td>
-        <td>7</td>
-        <td>7</td>
+        <td>11</td>
         <td>0</td>
-        <td>2.3</td>
+        <td>6.5</td>
       </tr>
       
       <tr>
@@ -121,8 +121,8 @@
     <h3>lib/driver.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>7</b> relevant lines. 
-      <span class="green"><b>7</b> lines covered</span> and
+      <b>11</b> relevant lines. 
+      <span class="green"><b>11</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -160,37 +160,61 @@
           <code class="ruby">    def initialize(args)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="6">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="11" data-linenumber="6">
+          <span class="hits">11</span>
           
           <code class="ruby">      @id = args[:id]</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="7">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="11" data-linenumber="7">
+          <span class="hits">11</span>
+          
+          <code class="ruby">      raise ArgumentError.new(&quot;driver id must be an integer&quot;) unless @id.class == Integer</code>
+        </li>
+      
+        <li class="covered" data-hits="10" data-linenumber="8">
+          <span class="hits">10</span>
           
           <code class="ruby">      @name = args[:name]</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="8">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="10" data-linenumber="9">
+          <span class="hits">10</span>
+          
+          <code class="ruby">      raise ArgumentError.new(&quot;driver name must be a string&quot;) unless @name.class == String</code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="10">
+          <span class="hits">9</span>
           
           <code class="ruby">      @vehicle_id = args[:vehicle_id]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="9">
+        <li class="covered" data-hits="9" data-linenumber="11">
+          <span class="hits">9</span>
+          
+          <code class="ruby">      raise ArgumentError.new(&quot;vehicle id must be a string&quot;) unless @vehicle_id.class == String</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="12">
+          <span class="hits">8</span>
+          
+          <code class="ruby">      raise ArgumentError.new(&quot;vehicle id must be 17 characters long&quot;) unless @vehicle_id.length == 17</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="13">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="10">
+        <li class="never" data-hits="" data-linenumber="14">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="11">
+        <li class="never" data-hits="" data-linenumber="15">
           
           
           <code class="ruby">end</code>
