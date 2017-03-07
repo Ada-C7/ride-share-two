@@ -1,7 +1,7 @@
 
 require "csv"
 
-class Driver
+class Ride_Share::Driver
 
   attr_reader :id, :name, :vin
 

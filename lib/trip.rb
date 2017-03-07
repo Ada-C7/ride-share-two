@@ -1,5 +1,5 @@
 require "csv"
-class Trip
+class Ride_Share::Trip
 
   attr_reader :id, :driver_id, :rider_id, :date, :rating
 

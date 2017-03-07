@@ -1,6 +1,7 @@
 
 require "csv"
-class Rider
+
+class Ride_Share::Rider
 
   attr_reader :id, :name, :phone_number
 
