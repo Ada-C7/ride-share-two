@@ -3,9 +3,21 @@ require_relative '../lib/driver'
 
 describe RideShare::Driver do
   describe "#initialize" do
-    it "Doesn't create a driver with missing parameters" do
+    it "Doesn't create a driver with a missing ID" do
       proc {
-        RideShare::Driver.new
+        RideShare::Driver.new(name: "Alix", vin: "12345678911234567")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a driver with a missing name" do
+      proc {
+        RideShare::Driver.new(id: 4444, vin: "12345678911234567")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a driver with a missing VIN" do
+      proc {
+        RideShare::Driver.new(id: 4444, name: "Alix")
       }.must_raise ArgumentError
     end
 

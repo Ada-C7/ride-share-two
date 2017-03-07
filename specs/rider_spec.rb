@@ -3,9 +3,21 @@ require_relative '../lib/rider'
 
 describe RideShare::Rider do
   describe "#initialize" do
-    it "Doesn't create a rider with missing parameters" do
+    it "Doesn't create a rider without an id" do
       proc {
-        RideShare::Rider.new
+        RideShare::Rider.new(name: "Alix", phone_number: "123-4567")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a rider without a name" do
+      proc {
+        RideShare::Rider.new(id: 4, phone_number: "123-4567")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a rider without a phone number" do
+      proc {
+        RideShare::Rider.new(id: 4, name: "Alix")
       }.must_raise ArgumentError
     end
   end

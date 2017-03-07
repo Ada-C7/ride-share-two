@@ -7,9 +7,18 @@ module RideShare
     attr_reader :id, :name
 
     def initialize(params)
-      @id = params[:id].to_i
+      validate_params(params)
+
+      @id = params[:id]
       @name = params[:name]
       @phone_number = params[:phone_number]
+      @trips ||= []
+    end
+
+    def validate_params(params)
+      if [params[:id], params[:name], params[:phone_number]].include? nil
+        raise ArgumentError.new("Riders must have an ID, name, and phone number.")
+      end
     end
 
     def self.all
@@ -24,6 +33,10 @@ module RideShare
 
     def self.find(target_id)
       all.find { |rider| rider.id == target_id }
+    end
+
+    def import_trips
+
     end
 
   end

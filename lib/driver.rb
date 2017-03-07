@@ -5,14 +5,21 @@ module RideShare
     attr_reader :id, :name, :trips
 
     def initialize(params)
-      raise ArgumentError.new("VIN must be 17 characters.") if params[:vin].length != 17
+      validate_params(params)
 
       @id = params[:id]
       @name = params[:name]
       @vin = params[:vin]
       @trips = params[:trips]
       @trips ||= []
+    end
 
+    def validate_params(params)
+      if [params[:id], params[:name], params[:vin]].include? nil
+        raise ArgumentError.new("Drivers must have an ID, name, and VIN.")
+      elsif params[:vin].length != 17
+        raise ArgumentError.new("VIN must be 17 characters.")
+      end
     end
 
     def self.all
