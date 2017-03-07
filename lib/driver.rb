@@ -1,5 +1,6 @@
 require 'csv'
 require 'pry'
+require_relative 'trip'
 
 class Driver
   attr_reader :id, :name, :vin
@@ -22,6 +23,16 @@ class Driver
       drivers << Driver.new(id, name, vin)
     end
     return drivers
+  end
+
+  def trips
+    driver_trips = []
+    Trip.all.each do |trip|
+      if trip.driver == @id
+        driver_trips << trip
+      end
+    end
+    return driver_trips
   end
 
 end

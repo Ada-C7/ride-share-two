@@ -44,4 +44,23 @@ describe "Driver tests" do
 
   end
 
+  describe "Driver#trips" do
+    it "returns an array of trips taken" do
+      new_driver = Driver.new(1, "Jan Brown", "HFG347DJ84HKX9872")
+
+      new_driver.trips.class.must_equal Array
+
+    end
+
+    it "each element in the array is a trip" do
+      new_driver = Driver.new(7, "Lizeth Dickens", "W09XNTZR9KTFK10WW")
+
+      new_driver.trips.each do |element|
+        element.must_be_instance_of Trip
+      end
+
+    end
+
+  end
+
 end
