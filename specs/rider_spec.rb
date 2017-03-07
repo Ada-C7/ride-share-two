@@ -8,30 +8,45 @@ describe "Rider class" do
 
   describe "Initialize method" do
     it "" do
-
+      # what goes here? nothing?
     end
   end
 
   describe "get_trips method" do
-    it "" do
+    it "returns an array of trips" do
+
+    end
+    it "each item in array is a Trip instance" do
 
     end
   end
 
   describe "get_all_prev_drivers method" do
-    it "" do
+    it "returns an array" do
 
+    end
+    it "all items in array are Driver instances" do
+
+    end
+    it "list should not have any duplicates" do
+      # is this necessary?
     end
   end
 
   describe "self.all method" do
-    it "" do
+    it "returns an array" do
+
+    end
+    it "all items in array are Riders" do
 
     end
   end
 
   describe "self.find(id) method" do
-    it "" do
+    it "returns an instance of Rider" do
+
+    end
+    it "Rider's id matches the id passed in to the method" do
 
     end
   end

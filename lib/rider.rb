@@ -14,9 +14,8 @@ class Rider
   end
 
   def get_all_prev_drivers
-    # call get_trips
-    # iterate through list and make list of all the driver ids
-    # use Driver.find to create list of Driver instances relating to trips previously taken by the rider
+    # use get_trips to get list of Trips this rider has taken
+    # iterate over the list and use Driver.find(id) with each of the driver_id params from the trip to generate a list of drivers that correspond to the trips
   end
 
   def self.all

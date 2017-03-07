@@ -1,6 +1,6 @@
 class Trip
 
-  attr_reader 
+  attr_reader
 
   def initialize(hash)
     @id = hash[:id]
@@ -8,7 +8,7 @@ class Trip
     @driver_id = hash[:driver_id]
     @date = hash[:date]
     @rating = hash[:rating]
-    # has a valid length to check for
+    # must be between 1 and 5
   end
 
   def get_driver
@@ -20,10 +20,22 @@ class Trip
   end
 
   def self.all_with_driver(id)
+    list_of_trips = []
+    all_trips = Trip.all
+    all_trips.each do |trip|
+      list_of_trips << trip if trip.driver_id == id
+    end
+    return list_of_trips
     # locates all trips in the all list given a driver id
   end
 
   def self.all_with_rider(id)
+    list_of_trips = []
+    all_trips = Trip.all
+    all_trips.each do |trip|
+      list_of_trips << trip if trip.rider_id == id
+    end
+    return list_of_trips
     # locates all trips in the all list given a rider id
   end
 
