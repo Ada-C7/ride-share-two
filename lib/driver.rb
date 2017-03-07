@@ -17,6 +17,11 @@ module RideShare
     end
 
     def average_rating
+      total_rating = 0
+      all_driver_trips.each do |trip|
+        total_rating += trip.rating
+      end
+      (total_rating/all_driver_trips.length.to_f).round(2)
     end
 
     def self.all  #retrieve all drivers from the CSV file
@@ -40,13 +45,13 @@ module RideShare
       end
     end
 
-  end
-end
+  end # end of class
+end # end of module
 
 # driver_hash = {driver_id: 2, name: "Natalia", license: 3044043, vin: 12213449}
-dr =  RideShare::Driver.all[0]
-dr.all_driver_trips.each do |trip|
-  puts trip.driver_id
-end
+dr =  RideShare::Driver.all[66]
+puts dr.driver_id
+puts dr.all_driver_trips.length
+puts dr.average_rating
 
 # puts RideShare::Driver.all

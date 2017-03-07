@@ -6,6 +6,12 @@ module RideShare
     attr_reader :rider_id, :name, :phone
     def initialize(hash)
       raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
+      raise ArgumentError.new("Rider id must be an integer") if hash[:rider_id].class != Integer
+      if  !(hash[:name][/['. a-zA-Z]+/] == hash[:name])
+        raise ArgumentError.new("Name must contain letters only")
+      end
+      raise ArgumentError.new("Phone must be a string") if hash[:phone].class != String
+
       @rider_id = hash[:rider_id]
       @name = hash[:name]
       @phone = hash[:phone]
@@ -49,6 +55,9 @@ module RideShare
   end
 end
 
+# rider_hash = {rider_id: 32, name: "Natalia", phone:  "1425394958"}
+# r = RideShare::Rider.new(rider_hash)
+# puts r.name
  #
 #  rider = RideShare::Rider.all[25]
 # rider.all_rider_drivers.each do  |driver|
