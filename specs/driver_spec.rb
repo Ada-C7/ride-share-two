@@ -58,4 +58,24 @@ describe "RideShare::Driver" do
       @drivers[-1].vin.must_equal "XF9Z0ST7X18WD41HT"
     end
   end
+
+  describe "Driver#find" do
+    before do
+      # 31,Sheila VonRueden,KPH9RLSZ9YKNVMGH2
+      @driver_found = RideShare::Driver.find("31")
+    end
+    it "return value is a Driver instance" do
+    skip
+      @driver_found.must_be_instance_of RideShare::Driver
+    end
+    # it "displays a message if the Driver is not found" do
+    #   @no_driver = RideShare::Driver.find("9999")
+    # end
+    it "finds the correct instance of Driver" do
+    skip
+      @driver_found.id.must_equal "31"
+      @driver_found.name.must_equal "Sheila VonRueden"
+      @driver_found.vin.must_equal "KPH9RLSZ9YKNVMGH2"
+    end
+  end
 end
