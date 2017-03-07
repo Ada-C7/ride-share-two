@@ -3,7 +3,7 @@ require_relative 'trip'
 module RideShare
 
   class Driver
-    attr_reader
+    attr_reader :id, :name, :vin
 
     def self.all
     end
@@ -11,7 +11,10 @@ module RideShare
     def self.find
     end
 
-    def initialize
+    def initialize(driver)
+      @id = driver[:id]
+      @name = driver[:name]
+      @vin = driver[:vin]
     end
 
     def trips
