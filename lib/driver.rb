@@ -16,5 +16,13 @@ module RideShare
       return drivers
     end
 
+    def self.find(id)
+      drivers = self.all
+      drivers.each do |driver|
+        if driver.driver_id == id
+          return driver
+        end
+      end
+    end
   end
 end

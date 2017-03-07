@@ -29,7 +29,7 @@ describe "Driver class" do
     it "Retrieve list of all drivers from the CSV file" do
       # skip
       RideShare::Driver.all.must_be_instance_of Array, "This is not an array"
-      puts RideShare::Driver.all
+      # puts RideShare::Driver.all
     end
 
     it "For first and last drivers, Driver ID and Driver VIN must match what's in CSV file" do
@@ -50,8 +50,12 @@ describe "Driver class" do
     end
 
   end
-  it "Finds a specific driver using their numeric ID" do
-    skip
+
+  describe "self.find class method for Driver class" do
+    it "Finds a specific driver using their numeric ID" do
+      # skip
+        RideShare::Driver.find("1").name.must_equal "Bernardo Prosacco"
+    end
   end
 
 end
