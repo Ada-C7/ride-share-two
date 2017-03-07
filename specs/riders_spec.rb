@@ -5,8 +5,8 @@ describe "Rider class" do
     # skip
     initialization_hash = {
       name: "Ron Weasley",
-      id: 2,
-      phone_number: "2062424564"
+      rider_id: 2,
+      phone_num: "2062424564"
     }
     rider = RideShare::Rider.new(initialization_hash)
 
@@ -16,8 +16,8 @@ describe "Rider class" do
     rider.must_respond_to :name
     rider.name.must_equal "Ron Weasley"
 
-    rider.must_respond_to :phone_number
-    rider.phone_number.must_equal "2062424564"
+    rider.must_respond_to :phone_num
+    rider.phone_num.must_equal "2062424564"
   end
 
   it "returns a list of riders of the correct length when you call .all" do

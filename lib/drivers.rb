@@ -3,21 +3,25 @@ require_relative 'loadable'
 
 module RideShare
   class Driver < Loadable
+
     attr_reader :name, :id
-    # initialize method needs ID and name
-    #   -> initialize via hash?
+
     def initialize(params)
       @name = params[:name]
-      @id = params[:id]
+      @id = params[:driver_id].to_i
     end
 
     def self.all
-      super("./support/drivers.csv", "driver")
+      super("./support/drivers.csv")
     end
 
     def self.find(id)
       account = super(id)
-      account = [account.name, account.id]
+      account = [account.id, account.name]
+    end
+
+    def find_all_trips(id)
+
     end
 
   #     data has one-line of header then the content

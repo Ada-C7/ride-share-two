@@ -3,12 +3,11 @@ require 'csv'
 module RideShare
   class Loadable
 
-    def self.all(csv, arg)
+    def self.all(csv)
       csv_organized = []
-      CSV.open(csv, {:headers => true}).each do |line|
-        csv_organized << self.new({id: line[0].to_i, name: line[1]}) if arg == "driver"
-        csv_organized << self.new({id: line[0].to_i, name: line[1], phone_number: line[2]}) if arg == "rider"
-        csv_organized << self.new({id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i}) if arg == "trip"
+      csv = CSV.open(csv, :headers => true, :header_converters => :symbol) #, :converters => :integer)
+      csv.map do |row|
+        csv_organized << self.new(row.to_hash)
       end
       csv_organized
     end

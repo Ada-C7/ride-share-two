@@ -7,7 +7,7 @@ describe "Loadable Class" do
   end
 
   it "can find the correct data when passed the driver CSV" do
-    RideShare::Driver.find(100).must_equal ["Minnie Dach", 100]
+    RideShare::Driver.find(100).must_equal [100, "Minnie Dach"]
   end
 
   it "can find the correct data when passed the rider CSV" do
