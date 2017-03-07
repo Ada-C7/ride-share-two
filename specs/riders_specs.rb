@@ -64,3 +64,25 @@ describe "Rider.all" do
     @rider_array.last.phone_num.must_equal "791-114-8423 x70188"
   end
 end
+
+describe "Rider.find" do
+    before do
+      @test_array = RideShare::Rider.all
+    end
+    # self.find(id) - returns an instance of a Rider
+    # where the value of the id field in the CSV matches
+    # the passed parameter.
+    it "Returns a rider that exists" do
+      test_variable = RideShare::Rider.find("2")
+      test_variable.must_be_instance_of RideShare::Rider
+      test_variable.id.must_equal "2"
+    end
+
+    it "Can find the first account from the CSV" do
+      RideShare::Rider.find(@test_array[0].id).id.must_equal "1"
+    end
+
+    it "Can find the last account from the CSV" do
+      RideShare::Rider.find(@test_array[-1].id).id.must_equal "300"
+    end
+  end

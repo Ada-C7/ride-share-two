@@ -20,6 +20,13 @@ module RideShare
     end
 
     def self.find(id)
+      rider_array = RideShare::Rider.all
+      rider_array.each do |rider|
+        if id == rider.id
+          return rider
+        end
+      end
+      #raise error??
 
     end
 
