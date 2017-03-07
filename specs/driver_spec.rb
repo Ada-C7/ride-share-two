@@ -54,13 +54,17 @@ describe "Driver class" do
       csv = CSV.read("support/drivers.csv", 'r')
       expected_id_first = csv[1][0].to_i
       expected_name_first = csv[1][1]
+      expected_vin_first = csv[1][2]
       expected_id_last = csv[100][0].to_i
       expected_name_last = csv[100][1]
+      expected_vin_last = csv[100][2]
       all_drivers = RideShare::Driver.all
       all_drivers[0].driver_id.must_equal expected_id_first
       all_drivers[0].name.must_equal expected_name_first
+      all_drivers[0].vin.must_equal expected_vin_first
       all_drivers[99].driver_id.must_equal expected_id_last
       all_drivers[99].name.must_equal expected_name_last
+      all_drivers[99].vin.must_equal expected_vin_last
     end
   end # end of all method
 
