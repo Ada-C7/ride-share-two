@@ -14,6 +14,7 @@ module RideShare
     def self.all(trips_data)
       raise ArgumentError if trips_data.empty?
       trips = trips_data.map do |trip_info|
+        raise ArgumentError unless trip_info.length == 5
         trip = Hash.new
         trip[:id] = test_for_integer(trip_info[0])
         trip[:driver_id] = test_for_integer(trip_info[1])

@@ -9,7 +9,9 @@ module RideShare
     end
 
     def self.all(drivers_data)
+      raise ArgumentError.new("data is empty array") if drivers_data.empty?
       drivers = drivers_data.map do |driver_info|
+        raise ArgumentError.new("driver info must have 3 parts") if driver_info.length != 3
         driver = Hash.new
         driver[:id] = test_for_integer(driver_info[0])
         driver[:name] = test_for_string(driver_info[1])
@@ -28,7 +30,7 @@ module RideShare
     end
 
     def self.test_for_vin(vin)
-      raise ArgumentError unless vin.length == 17
+      raise ArgumentError.new("vin must be 17 characters") unless vin.length == 17
       vin
     end
 

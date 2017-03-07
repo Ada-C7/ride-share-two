@@ -63,6 +63,7 @@ describe "Trip" do
       @trips_bad_data_6 = [['3', '1', '54', "2016-04-05", '7']]
       @trips_bad_data_7 = []
       @trips_bad_data_8 = [[]]
+      @trips_bad_data_9 = [['3', '1', '54', "2016-04-05"]]
     end
 
     # let does not run this block untill it is called - which is good you want
@@ -129,11 +130,16 @@ describe "Trip" do
     end
 
     # good example of testing an error with the expected error message
-    it "given error message when given [[]]" do
-      err = proc {
+    it "raises an error message when given [[]]" do
+      proc {
         RideShare::Trip.all(@trips_bad_data_8)
-      }.must_raise TypeError
-      err.message.must_equal "can't convert nil into Integer"
+      }.must_raise ArgumentError
+    end
+
+    it "riases an error if not given all info pieces" do
+      proc {
+        RideShare::Trip.all(@trips_bad_data_9)
+      }.must_raise ArgumentError
     end
   end
 

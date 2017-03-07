@@ -36,20 +36,23 @@ describe "Driver" do
 
   describe "Driver#all" do
 
+    # Examples of driver data:
+    # driver_id,name,vin
+    # 1,Bernardo Prosacco,WBWSS52P9NEYLVDE9
+    # 2,Emory Rosenbaum,1B9WEX2R92R12900E
+    # 3,Daryl Nitzsche,SAL6P2M2XNHC5Y656
+
     before do
       csv_file = './support/drivers.csv'
       # @trips_data = RideShare::FileData.read_csv(csv_file)
       data = FileData.new(csv_file)
       @drivers_data = data.read_csv_and_remove_headings
-      @driver_bad_data_1 = [['three', '1', '54', "2016-04-05", '4']]
-      @drivers_bad_data_2 = [['3', 'one', '54', "2016-04-05", '4']]
-      @drivers_bad_data_3 = [['3', '1', 'fifity', "2016-04-05", '4']]
-      @drivers_bad_data_4 = [['3', '1', '54', "hello", '4']]
-      # four will not pass the 1-5 test so that is the argument error raised
-      @drivers_bad_data_5 = [['3', '1', '54', "2016-04-05", 'four']]
-      @drivers_bad_data_6 = [['3', '1', '54', "2016-04-05", '7']]
-      @drivers_bad_data_7 = []
-      @drivers_bad_data_8 = [[]]
+      @drivers_bad_data_1 = [['ten', 'name', 'WBWSS52P9NEYLVDE9']]
+      @drivers_bad_data_2 = [['10', 'name', 'WBWSS52P9NE']]
+      @drivers_bad_data_3 = [['15', 'name', 'WBWSS52P9NE']]
+      @drivers_bad_data_4 = [['10', 'name']]
+      @drivers_bad_data_5 = []
+      @drivers_bad_data_6 = [[],[],[]]
     end
 
     let(:drivers) { RideShare::Driver.all(@drivers_data) }
@@ -66,8 +69,36 @@ describe "Driver" do
       drivers.length.must_equal 100
     end
 
-    it "raises an arugment error if given bad data" do
-      
+    it "raises an error if given bad data for driver_id" do
+      proc { RideShare::Driver.all(@drivers_bad_data_1) }.must_raise ArgumentError
+    end
+
+    it "raises an error if given bad data for vin " do
+      err = proc {
+                   RideShare::Driver.all(@drivers_bad_data_2)
+                 }.must_raise ArgumentError
+      err.message.must_equal "vin must be 17 characters"
+    end
+
+    it "raises an error if given a info missing parts" do
+      err = proc {
+                   RideShare::Driver.all(@drivers_bad_data_4)
+                 }.must_raise ArgumentError
+      err.message.must_equal "driver info must have 3 parts"
+    end
+
+    it "raises an error if given an empty array" do
+      err = proc {
+                   RideShare::Driver.all(@drivers_bad_data_5)
+                 }.must_raise ArgumentError
+      err.message.must_equal "data is empty array"
+    end
+
+    it "raises an error if given empty nested arrays" do
+      err = proc {
+                   RideShare::Driver.all(@drivers_bad_data_6)
+                 }.must_raise ArgumentError
+      err.message.must_equal "driver info must have 3 parts"
     end
   end
 
