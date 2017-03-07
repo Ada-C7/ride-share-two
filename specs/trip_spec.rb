@@ -1,34 +1,34 @@
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
-
 require_relative '../lib/trip'
 
 describe "RideShare::Trip" do
   describe "Trip#initialize" do
-    before do
-      trip = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
-    end
+  before do
+    @trip = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
+  end
     it "creates a new instance of trip" do
-      trip.must_be_instance_of RideShare::Trip
+      @trip.must_be_instance_of RideShare::Trip
     end
     it "passes in the id" do
-      trip.id.must_equal 13
+      @trip.id.must_equal 13
     end
     it "passes in the driver_id" do
-      trip.driver_id.must_equal 83
+      @trip.driver_id.must_equal 83
     end
     it "passes in the rider_id" do
-      trip.rider_id.must_equal 298
+      @trip.rider_id.must_equal 298
     end
     it "passes in the date" do
-      trip.date.must_equal "2015-05-27"
+      @trip.date.must_equal "2015-05-27"
     end
     it "passes in the rating" do
-      trip.rating.must_equal 5
+      @trip.rating.must_equal 5
     end
     it "can create a new trip with a missing date" do
-    skip
+      new_trip = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, rating: 5})
+      new_trip.date.must_equal nil
     end
   end
 
