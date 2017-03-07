@@ -1,7 +1,9 @@
-module RideShare
 
-  class Trip
-    attr_reader 
+  class RideShare::Trip
+    attr_reader
+
+    def initialize
+    end
 
     def self.all
     end
@@ -12,9 +14,4 @@ module RideShare
     def self.all_riders
     end
 
-    def initialize
-    end
-
   end
-
-end

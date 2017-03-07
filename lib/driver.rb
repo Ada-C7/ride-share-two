@@ -1,15 +1,23 @@
-require_relative 'trip'
-require 'csv'
 
-module RideShare
-
-  class Driver
+  class RideShare::Driver
     attr_reader :id, :name, :vin
+
+    def initialize(driver_data)
+      @id = driver_data[:id]
+      @name = driver_data[:name]
+      @vin = driver_data[:vin]
+    end
+
+    def trips
+    end
+
+    def rating
+    end
 
     def self.all
       driver_array = []
       CSV.open("support/drivers.csv", 'r').each do |driver|
-        new_driver = Driver.new({
+        new_driver = RideShare::Driver.new({
           :id => driver[0],
           :name => driver[1],
           :vin => driver[2]
@@ -21,24 +29,10 @@ module RideShare
     end
 
     def self.find(id)
-      drivers = Driver.all
+      drivers = RideShare::Driver.all
       drivers.each do |driver|
         return driver if driver.id == id
       end
     end
 
-    def initialize(driver)
-      @id = driver[:id]
-      @name = driver[:name]
-      @vin = driver[:vin]
-    end
-
-    def trips
-    end
-
-    def rating
-    end
-
   end
-
-end

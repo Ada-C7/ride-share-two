@@ -26,7 +26,7 @@ describe "Driver Class" do
 
   describe "self.all" do
 
-    let(:drivers) { RideShare::Driver.all }
+    let(:drivers) {RideShare::Driver.all }
 
     it "Returns an array" do
       drivers.must_be_instance_of Array

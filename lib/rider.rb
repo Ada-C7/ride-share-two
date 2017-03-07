@@ -1,7 +1,12 @@
-module RideShare
 
-  class Rider
-    attr_reader 
+  class RideShare::Rider
+    attr_reader
+
+    def initialize(rider_data)
+    end
+
+    def drivers
+    end
 
     def self.all
     end
@@ -9,12 +14,4 @@ module RideShare
     def self.find
     end
 
-    def initialize
-    end
-
-    def drivers
-    end
-
   end
-
-end
