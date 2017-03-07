@@ -7,7 +7,7 @@ module rideshare
       initialize with driver id, name, and vin
 
     define method for getting driver's trips
-      find in the trips method all trips contaning driver id
+      find in the trips method all trips containing driver id
       execute the trips.all
       return array with trip instances back
 
