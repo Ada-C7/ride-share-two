@@ -1,0 +1,38 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/maria/Documents/Ada/Projects/ride-share-two/lib/driver.rb": [
+        1,
+        1,
+        1,
+        1,
+        9,
+        9,
+        9,
+        9,
+        null,
+        null,
+        1,
+        7,
+        null,
+        null,
+        1,
+        13,
+        null,
+        null,
+        null
+      ],
+      "/Users/maria/Documents/Ada/Projects/ride-share-two/lib/trip.rb": [
+        1,
+        1,
+        1,
+        1,
+        11,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1488856614
+  }
+}
