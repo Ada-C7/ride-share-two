@@ -1,37 +1,53 @@
 require 'csv'
-require_relative 'trip'
 
-class Driver
-  attr_reader :id, :name, :vin
+module RideShare
+  class Driver
+    attr_reader :id, :name, :vin
 
-  def initialize(driver_hash)
-    raise ArgumentError.new("Invalid argument type: must be a hash object") if driver_hash.class != Hash
+    def initialize(driver_hash)
+      raise ArgumentError.new("Invalid argument type: must be a hash object") if driver_hash.class != Hash
+      raise ArgumentError.new("Invalid argument type: must have driver id(Integer)") if !driver_hash.keys.include?(:id)
+      raise ArgumentError.new("Invalid argument type: must have driver name(String)") if !driver_hash.keys.include?(:name)
 
-    raise ArgumentError.new("Invalid argument type: must have driver id(Integer)") if !driver_hash.keys.include?(:id)
+      # The length of the vehicle_id(:vin) must equal 17, to be considered valid
+      raise ArgumentError.new("Invalid argument type: vin(String) number must be 17 chracters, mix of letters and numerals") if driver_hash[:vin] !~ /^([a-zA-Z]|\d){17}$/
 
-    raise ArgumentError.new("Invalid argument type: must have driver name(String)") if !driver_hash.keys.include?(:name)
+      @id = driver_hash[:id]
+      @name = driver_hash[:name]
+      @vin = driver_hash[:vin]
+    end
 
-    # The length of the vehicle_id(:vin) must equal 17, to be considered valid
-    raise ArgumentError.new("Invalid argument type: vin(String) number must be 17 chracters, mix of letters and numerals") if driver_hash[:vin] !~ /^([a-zA-Z]|\d){17}$/
+    # Retrieve the list of trip instances that only this driver has taken
+    def trips
+      return Trip.trips_by_driver(@id)
+    end
 
-    @id = driver_hash[:id]
-    @name = driver_hash[:name]
-    @vin = driver_hash[:vin]
-  end
+    # Retrieve an average rating for that driver based on all trips taken
+    def avg_rating
+      all_trips_by_driver_array = trips
+      sum_rate = 0.0
+      all_trips_by_driver_array.each { |trip| sum_rate += trip.rating }
+      return (sum_rate / all_trips_by_driver_array.legnth).round(2)
+    end
 
-  # Retrieve the list of trip instances that only this driver has taken
-  def trips
-  end
+    # Retrieve all drivers from the CSV file
+    def self.all
+      all_drivers_array= []
+      CSV.read("support/drivers.csv").each do |line|
+        begin
+          all_drivers_array << Driver.new( line[0].to_i, line[1], line[2] )
+        rescue
+          puts "Invalid data entry detected in the CSV file"
+        end
+      end
+      return all_drivers_array
+    end
 
-  # Retrieve an average rating for that driver based on all trips taken
-  def avg_rating
-  end
-
-  # Retrieve all drivers from the CSV file
-  def self.all
-  end
-
-  # Find a specific driver using their numeric ID
-  def self.find(id)
+    # Find a specific driver using their numeric ID
+    def self.find(driver_id)
+      raise ArgumentError.new ("Driver id must be a positive integer value") if ( id.class != Integer || id < 1 )
+      all_drivers_array = Driver.all
+      return all_drivers_array.select { |driver| driver.id == driver_id}
+    end
   end
 end

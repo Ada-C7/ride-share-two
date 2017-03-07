@@ -1,27 +1,58 @@
-class Trip
-  attr_reader :id, :rider_id, :driver_id, :date, :rating
+require 'csv'
 
-  def initialize(trip_hash)
-    # Each rating should be within an acceptable range (1-5)
-  end
+module RideShare
+  class Trip
+    attr_reader :id, :driver_id, :rider_id, :date, :rating
 
-  # Retrieve the associated driver instance through the driver ID
-  def find_driver(driver_id)
-  end
+    def initialize(trip_hash)
+      raise ArgumentError.new("Invalid argument type: must be a hash object") if trip_hash.class != Hash
 
-  # Retrieve the associated rider instance through the rider ID
-  def find_rider(rider_id)
-  end
+      [:id, :rider_id, :driver_id, :date, :rating].each { |sym_key|
+        raise ArgumentError.new("Invalid argument type: must have #{sym_key} value") if !trip_hash.keys.include?(sym_key)
+      }
+      # Each rating should be within an acceptable range (1-5)
+      raise ArgumentError.new("Invalid argument type: rating(Integer) value must be in the range (1-5)") if trip_hash[:rating] < 1 || trip_hash[:rating] > 5
 
-  # Find all trip instances for a given driver ID
-  def self.all
-  end
+      @id = trip_hash[:id]
+      @rider_id = trip_hash[:rider_id]
+      @driver_id = trip_hash[:driver_id]
+      @date = trip_hash[:date]
+      @rating = trip_hash[:rating]
+    end
 
-  # Find all trip instances for a given rider ID
-  def self.trips_by_driver(driver_id)
-  end
+    # Retrieve the associated driver instance through the driver ID
+    def find_driver
+      return Driver.find(driver_id)
+    end
 
-  # Retrieve all trips from the CSV file
-  def self.trips_by_rider(rider_id)
+    # Retrieve the associated rider instance through the rider ID
+    def find_rider
+      return Rider.find(rider_id)
+    end
+
+    # Find all trip instances for a given driver ID
+    def self.all
+      all_trips_array= []
+      CSV.read("support/trips.csv").each do |line|
+        begin
+          all_trips_array << Trip.new( line[0].to_i, line[1].to_i, line[2].to_i, line[3], line[4].to_f )
+        rescue
+          puts "Invalid data entry detected in the CSV file"
+        end
+      end
+      return all_trips_array
+    end
+
+    # Find all trip instances for a given rider ID
+    def self.trips_by_driver(driver_id)
+      all_trips_array = Trip.all
+      return all_trips_array.reject { |trip| trip.driver_id != driver_id }
+    end
+
+    # Retrieve all trips from the CSV file
+    def self.trips_by_rider(rider_id)
+      all_trips_array = Trip.all
+      return all_trips_array.reject { |trip| trip.rider_id != rider_id }
+    end
   end
 end
