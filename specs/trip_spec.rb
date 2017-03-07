@@ -36,8 +36,11 @@ describe Trip do
           end
 
           it "Verifies rating is an integer, between and including 1 - 5:" do
-            proc {Trip.new(@id, @rider_id, @driver_id, @date, 777)
+            proc {Trip.new(@id, @rider_id, @driver_id, @date, 0)
             }.must_raise ArgumentError
+
+            proc {Trip.new(@id, @rider_id, @driver_id, @date, 6)
+           }.must_raise ArgumentError
 
             proc {Driver.new(@id, @rider_id, @driver_id, @date, "777333777333777333")
             }.must_raise ArgumentError
