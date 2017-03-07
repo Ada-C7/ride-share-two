@@ -9,12 +9,22 @@ class RideShare::Trip
     @date = date
 
     unless rating > 0 && rating < 6
-      raise InvalidRatingError.new("Ride rating must be 1-5")
+      raise InvalidRatingError.new("Ride rating must be 1-5, your rating was #{ rating }")
     end
     @rating = rating
   end
 
   def self.find_all
+    trips = []
+      begin
+        CSV.open("support/trips.csv").each do |trip|
+          trips << RideShare::Trip.new(trip[0].to_i, trip[1].to_i, trip[2].to_i, trip[3], trip[4].to_i)
+        end
+      rescue InvalidRatingError => e
+        puts " #{e} "
+      end
+
+      return trips
     # Retrieve all trips from CSV file CLASS METHOD
     #   input: calling Class method Trips.find_all
     #   output: list all trips from CSV file as an array.
