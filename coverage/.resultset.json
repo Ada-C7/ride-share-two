@@ -2,14 +2,53 @@
   "RSpec": {
     "coverage": {
       "/Users/sushiigirl/Documents/ada/projects/ride-share-two/lib/driver.rb": [
-
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
       ],
       "/Users/sushiigirl/Documents/ada/projects/ride-share-two/specs/rider_spec.rb": [
         1,
-        1
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
       ],
       "/Users/sushiigirl/Documents/ada/projects/ride-share-two/lib/rider.rb": [
-
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
       ],
       "/Users/sushiigirl/Documents/ada/projects/ride-share-two/specs/trip_spec.rb": [
         1,
@@ -41,8 +80,6 @@
         null
       ],
       "/Users/sushiigirl/Documents/ada/projects/ride-share-two/lib/trip.rb": [
-        null,
-        null,
         1,
         1,
         null,
@@ -58,6 +95,6 @@
         null
       ]
     },
-    "timestamp": 1488914354
+    "timestamp": 1488915448
   }
 }
