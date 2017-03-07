@@ -1,7 +1,5 @@
 require_relative 'spec_helper.rb'
 
-require_relative '../lib/rider'
-
 describe "RideShare::Rider" do
   before do
     # 13,Dr. Leilani Mertz,777.380.7540
