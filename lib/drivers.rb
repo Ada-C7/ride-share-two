@@ -7,7 +7,7 @@ module RideShare
     def initialize(id, name, vin)
       @id = id
       @name = name
-      @vin = vin
+      @vin = vin #ensure correct length
     end
 
 
@@ -19,7 +19,7 @@ module RideShare
       drivers_array
     end
 
-    def self.find(id)
+    def self.find(id) #Should we rescue this??
       drivers_array = RideShare::Driver.all
       drivers_array.each do |driver|
         if id == driver.id
@@ -28,6 +28,25 @@ module RideShare
       end
       # raise ArgumentError.new "Driver #{id} does not exist"
     end
+
+  def trips
+  #instance method - retrieve the list of trip instances that only this driver has taken
+#RETURN ARRAY OF TRIPS
+  end
+
+
+  def average_rating
+
+  #instance method - retrieve an average rating for that driver based on all trips taken
+ # call trips
+  end
+
+end
+
+
+
+
+
 
   end #class
 

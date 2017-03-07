@@ -19,7 +19,7 @@ module RideShare
       riders_array
     end
 
-    def self.find(id)
+    def self.find(id)  #Should we rescue this??
       rider_array = RideShare::Rider.all
       rider_array.each do |rider|
         if id == rider.id
@@ -27,9 +27,28 @@ module RideShare
         end
       end
       #raise error??
-
     end
 
+    def trips
+      array = []
 
+      array << trip
+      if trip.rider_id == id
+        return array
+        #retrieve the list of trip instances
+        #that only this rider has taken
+
+      end
+
+      def drivers
+        trips
+        #retrieve the list of all
+        #previous driver instances
+        #(through the trips functionality built above)
+      end
+
+
+
+    end
   end
 end

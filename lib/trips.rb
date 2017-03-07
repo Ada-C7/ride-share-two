@@ -30,6 +30,23 @@ module RideShare
       # raise ArgumentError.new "Driver #{id} does not exist"
     end
 
+    def find_by_rider(rider_id)
+      #class method - find all trip instances for a given Rider ID
+    end
+
+    def find_by_driver(driver_id)
+      #class method - find all trip instances for a given Driver ID
+    end
+
+    def find_driver
+      #instance method retrieve the associated driver instance through the driver ID
+    end
+
+    def find_rider
+      #instance method retrieve the associated rider instance through the rider ID
+    end
+
+
 
   end
 end
