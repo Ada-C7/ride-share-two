@@ -22,6 +22,20 @@ describe "Trip tests" do
         new_trip.must_respond_to :rating
         new_trip.rating.must_equal 5
     end
+
+    it "rating must be on a 1-5 scale and an integer" do
+
+      proc {Trip.new("1234", "1", "56", "2016-04-05", 7)}.must_raise ArgumentError
+
+      proc {Trip.new("1234", "1", "56", "2016-04-05", 0)}.must_raise ArgumentError
+
+      proc {Trip.new("1234", "1", "56", "2016-04-05", -1)}.must_raise ArgumentError
+
+      proc {Trip.new("1234", "1", "56", "2016-04-05", 1.5)}.must_raise ArgumentError
+
+    end
+
+
   end
 
   describe "Trip.all" do

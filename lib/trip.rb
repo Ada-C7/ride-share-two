@@ -8,6 +8,7 @@ class Trip
     @driver = driver_id
     @rider = rider_id
     @date = date
+    raise ArgumentError.new("rating must be an integer 1-5") if rating <= 0 || rating > 5 || rating.class != Integer
     @rating = rating
 
   end
@@ -20,7 +21,7 @@ class Trip
       driver = line[1]
       rider = line[2]
       date = line[3]
-      rating = line[4]
+      rating = line[4].to_i
 
       trips << Trip.new(id, driver, rider, date, rating)
     end
