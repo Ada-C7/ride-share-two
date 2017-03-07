@@ -13,6 +13,7 @@ module RideShare
 
     def self.all
       all_drivers = []
+      # driver_file = CSV.open(csv_file)
       driver_file = CSV.open("support/drivers.csv")
       # creates and collects instances of Driver from CSV file
       driver_hash = {}

@@ -17,7 +17,7 @@ describe "Driver initialize" do
   end
 
   let(:driver) { RideShare::Driver.new(@driver_hash) }
-  
+
 
   it "has required attributes" do
     driver.name.must_equal "Scylla Bankroll"
@@ -48,7 +48,25 @@ describe "self.all" do
     all_drivers.last.name.must_equal "Minnie Dach"
   end
 
+  # it "handles a bad VIN by skipping that line in the CSV data" do
+  #   test_drivers = RideShare::Driver.all('specs/test_driver.csv')
+  #   test_drivers.last.name.must_equal "Lizeth Dickens"
+  # end
 end
+
+describe "self.find" do
+  it "returns a driver that exists" do
+
+  end
+
+  it "can find the first driver from the CSV" do
+
+  end
+
+end
+
+
+
 
 xdescribe "get_trips" do
   it "retrieves a list of trip instances with this driver's id" do
