@@ -49,21 +49,22 @@ describe "Driver" do
     end
 
     it "returns an array with only Trip objects" do
-
+      skip
     end
 
     it "returns Trips that only THIS driver has taken" do
-
+      skip
     end
   end
 
   describe "avg_rating" do
     it "returns a float to 1 decimal point" do
-
+      skip
     end
 
     it "returns the overall avg_rating for a driver" do
       #test decimal point
+      skip
     end
   end
 
@@ -72,7 +73,7 @@ describe "Driver" do
     # rescue CSV?
 
     it "returns an array" do
-
+      RideShare::Driver.all.must_be_instance_of Array
     end
 
     it "returns an array with only Driver elements" do

@@ -15,8 +15,9 @@ module RideShare
       @vin = args[:vin]
     end
 
-    
-
+    def self.all
+      return []
+    end
 
     private
 
