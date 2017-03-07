@@ -10,3 +10,29 @@
 # CLASS METHODS
 # all: retrieve all drivers from the CSV file
 # find: find a specific driver using their numeric ID
+require 'csv'
+
+module RideShare
+  class Driver
+    attr_reader :id, :name
+
+    def initialize(params)
+      raise ArgumentError.new("VIN must be 17 characters.") if params[:vin].length != 17
+
+      @id = params[:id]
+      @name = params[:name]
+      @vin = params[:vin]
+    end
+
+    def self.all
+      @@all ||= CSV.read("support/drivers.csv", headers:true).map do |line|
+        Driver.new(
+          id: line[0],
+          name: line[1],
+          vin: line[2]
+        )
+      end
+    end
+
+  end
+end
