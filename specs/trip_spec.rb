@@ -82,6 +82,13 @@ describe "Trip Class" do
         trip.driver_id.must_equal id
       end
     end
+
+    it "Does not allow an invalid ID" do
+      proc {
+        RideShare::Trip.all_drivers("WBWSS52P9NEYLVDE9")
+      }.must_raise InvalidIdError
+    end
+    
   end
 
   describe "self.all_riders" do
@@ -101,6 +108,12 @@ describe "Trip Class" do
       trips.each do |trip|
         trip.rider_id.must_equal id
       end
+    end
+
+    it "Does not allow an invalid ID" do
+      proc {
+        RideShare::Trip.all_riders("WBWSS52P9NEYLVDE9")
+      }.must_raise InvalidIdError
     end
   end
 

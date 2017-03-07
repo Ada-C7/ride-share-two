@@ -35,12 +35,14 @@
     end
 
     def self.all_drivers(id)
+      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/))
       trips = RideShare::Trip.all
       drivers = trips.select { |t| t.driver_id == id }
       return drivers
     end
 
     def self.all_riders(id)
+      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/))
       trips = RideShare::Trip.all
       riders = trips.select { |t| t.rider_id == id }
       return riders
