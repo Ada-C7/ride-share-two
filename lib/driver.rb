@@ -37,7 +37,7 @@ attr_accessor :driver_id, :name, :vin
     a_driver = RideShare::Driver.new(driver_id, name, vin)
     all_drivers_array << a_driver
   end
-  print all_drivers_array
+  # print all_drivers_array
   return all_drivers_array
   end
 

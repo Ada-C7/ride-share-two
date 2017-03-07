@@ -48,6 +48,34 @@ describe "driver class" do
   }.must_raise ArgumentError
   end
 
+  it "returns an array of all driver info" do
+    info = RideShare::Driver.all_driver_info
+    info.must_be_instance_of Array
+  end
 
+  it "Everything in the array is an instance of Driver" do
+    info = RideShare::Driver.all_driver_info
+    info.each do |object|
+      object.must_be_instance_of RideShare::Driver
+    end
+  end
+
+  it "The driver_id, name and vin must match" do
+    info = RideShare::Driver.all_driver_info
+    info.first.driver_id.must_equal 1
+    info.first.name.must_equal "Bernardo Prosacco"
+    info.first.vin.must_equal "WBWSS52P9NEYLVDE9"
+  end
+
+  it "the elements match what's in the file" do
+    info = RideShare::Driver.all_driver_info
+    index = 0
+    CSV.read('support/drivers.csv') do |line|
+    info[index].driver_id.must_equal line[0].to_i
+    info[index].driver_id.must_equal line[1].to_i
+    info[index].driver_id.must_equal line[2]
+    index += 1
+    end
+  end 
 
 end
