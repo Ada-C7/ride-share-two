@@ -70,4 +70,41 @@ describe Driver do
                end
           end
      end
+
+     describe "Self#find" do
+
+          before do
+               @file = "support/drivers.csv"
+               @one_driver = Driver.find(@file, id)
+          end
+
+          it "Returns an account that exists" do
+               id = 7
+               @one_driver = Driver.find(@file, id)
+               @one_driver.must_be_kind_of Driver
+               @one_driver.id.must_equal CSV.readlines(@file)[index - 1][1]
+          end
+
+          it "Can find the first account from the CSV" do
+               index = 0
+               first_account = Driver.find_with_index(@file, index)
+               first_account.must_be_kind_of Driver
+               find_account.id.must_equal CSV.readlines(@file)[index][1]
+
+          end
+
+          it "Can find the last account from the CSV" do
+               index = -1
+               last_account = Driver.find_with_index(@file, index)
+               last_account.must_be_kind_of Driver
+               last_account.id.must_equal CSV.readlines(@file)[index][1]
+
+          end
+
+          it "Raises an error for an account that doesn't exist" do
+               id = 9033
+               proc {@one_driver}.must_raise ArgumentError
+          end
+
+     end
 end
