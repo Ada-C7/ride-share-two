@@ -1,54 +1,70 @@
 # Rideshare Module --Namespace to hold all the classes
 #
-# Driver Class
-#
+# class Trips
+# require '..support/drivers.csv'
+# require '..support/riders.csv'
+# require '..support/trips.csv'
+
 # def initialize
 #   attributes are set to default values and ready to be assigned in class methods
 #   @id
-#   @name
-#   @vin
-#   @allarray =
-#   @my_trips---this may be a helper method to dry out  code
+#   @rider_id
+#   @driver_id
+#   @alltrips = ""
+#
+
+# def trips_created?
+# alltrips.length >0
 # end
 #
-# self.find(param)
+# def self.create_trips
+#   alltrips << open csv and create instances of each trip
+# end
+#
+# self.find_driver_trips(param)
 #   raise error if no number given
 #   raise catchable error if valid id type and driver does not exist
-#   if array.length == 0
-#   Open drivers.csv and instantiates the line for which param == true
-# else
-#   my_rides = collect all instances of trip for this dripver
 #
+#   self.create_trips unless trips_created?
+#   alltrips.collect(driver_id){|trip| trip[2] == driver_id}
+#   # end
+#
+# self.find_rider_trips(param)
+#   raise error if no number given
+#   raise catchable error if valid id type and rider does not exist
+#
+#    self.create_trips unless trips_created?
+#    alltrips.collect(rider_id){|trip| trip[2] == rider_id}
 # end
-#
+
 # self.find_all
-#   if array.length == 0
-#     Open drivers.csv and instantiates all driver objects
-#   else
-#     all drivers = collect all driver instances
-#   end
+#    self.create_trips unless trips_created?
+#    returns @alltrips
 # end
 #
-# def all_trips(param)
-#   if my_trips.length == 0
-#     Open drivers.csv and instantiates all trips for which drivers == self.driver_id
-#   else
-#     my trips = collect all instances of trip for which driver == self.driver_id
-#   end
+
+# find_rider(param)
+#    self.create_trips unless trips_created?
+#   if @alltrips.each |array| do
+#  array[2] == param
+#  rider_id = csv.open rider_id
+#  return rider_id
+#  end
+# end
+
+# find_driver(param)
+#    self.create_trips unless trips_created?
+#   if @alltrips.each |array| do
+#  array[1] == param
+#  driver_id = csv.open driver_id
+#  return driver_id
+#  end
+# end
+
+# end
 # end
 #
-# def avg_rating
-#   if my_trips.length == 0
-#     Open drivers.csv and instantiates the line for which drivers == self.driver_id
-#   else
-#     my trips =  collect all instances of trip for which driver == self.driver_id
-#   end
-#   my_trips.each
-#   use inject enumberable to average ratings and
-#   return average
-# end
-# end
-#
+
 #
 #
 #
