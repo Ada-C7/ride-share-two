@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-07T10:46:48-08:00">2017-03-07T10:46:48-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-07T10:51:23-08:00">2017-03-07T10:51:23-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">45.07%</span></span>
+    (<span class="covered_percent"><span class="red">44.76%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.48
+         0.47
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>142</b> relevant lines. 
+    <b>143</b> relevant lines. 
     <span class="green"><b>64</b> lines covered</span> and
-    <span class="red"><b>78</b> lines missed </span>
+    <span class="red"><b>79</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,12 +52,12 @@
       
       <tr>
         <td class="strong"><a href="#2bbb1978ad2508396e54e574f12b74c515c21a57" class="src_link" title="lib/driver.rb">lib/driver.rb</a></td>
-        <td class="red strong">46.67 %</td>
+        <td class="red strong">43.75 %</td>
         <td>42</td>
-        <td>15</td>
+        <td>16</td>
         <td>7</td>
-        <td>8</td>
-        <td>0.5</td>
+        <td>9</td>
+        <td>0.4</td>
       </tr>
       
       <tr>
@@ -119,11 +119,11 @@
         <div class="source_table" id="2bbb1978ad2508396e54e574f12b74c515c21a57">
   <div class="header">
     <h3>lib/driver.rb</h3>
-    <h4><span class="red">46.67 %</span> covered</h4>
+    <h4><span class="red">43.75 %</span> covered</h4>
     <div>
-      <b>15</b> relevant lines. 
+      <b>16</b> relevant lines. 
       <span class="green"><b>7</b> lines covered</span> and
-      <span class="red"><b>8</b> lines missed.</span>
+      <span class="red"><b>9</b> lines missed.</span>
     </div>
   </div>
   
@@ -355,13 +355,13 @@
         <li class="missed" data-hits="0" data-linenumber="38">
           
           
-          <code class="ruby">      @all_drivers.select { |instance| instance.id == driver_id }</code>
+          <code class="ruby">      found_driver = @all_drivers.select { |instance| instance.id == driver_id }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="missed" data-hits="0" data-linenumber="39">
           
           
-          <code class="ruby">      # return specific instance of driver (previously instantiated)</code>
+          <code class="ruby">      return found_driver</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
