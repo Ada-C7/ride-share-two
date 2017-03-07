@@ -32,7 +32,7 @@ describe "Driver Initialize" do
 end
 
 describe "self.all_drivers" do
-  let(:driver_list) {driver_list = RideShareTwo::Driver.all_drivers}
+  let(:driver_list) {RideShareTwo::Driver.all_drivers}
 
   it "Returns an array of all drivers" do
     driver_list
@@ -69,6 +69,13 @@ describe "self.all_drivers" do
   it "The vin of the last driver match what's in the CSV file" do
     driver_list
     driver_list[99].vin.must_equal "XF9Z0ST7X18WD41HT", "Oops the last vin is not in the array"
+  end
+
+end
+
+describe "self.find_driver" do
+  it "finds a specific driver using their numeric ID" do
+    RideShareTwo::Driver.find_driver("88").must_be_kind_of RideShareTwo::Driver, "Oops that ID does not match a driver"
   end
 
 end
