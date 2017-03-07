@@ -31,7 +31,7 @@ describe "Driver.all" do
 
   #   - The number of accounts is correct
 it "The number of accounts is correct" do
-  @driver_array.length.must_equal CSV.read("support/drivers.csv").length
+  @driver_array.length.must_equal CSV.read("support/drivers.csv").length - 1
 end
 #   - account is an Array
 it "account is an Array" do
@@ -56,11 +56,11 @@ end
   end
 
   it "The info of the first and last match csv" do
-    @driver_array[1].id.must_equal "1"
-    @driver_array[1].name.must_equal "Bernardo Prosacco"
-    @driver_array[1].vin.must_equal "WBWSS52P9NEYLVDE9"
-    @driver_array[-1].id.must_equal "100"
-    @driver_array[-1].name.must_equal "Minnie Dach"
-    @driver_array[-1].vin.must_equal "XF9Z0ST7X18WD41HT"
+    @driver_array.first.id.must_equal "1"
+    @driver_array.first.name.must_equal "Bernardo Prosacco"
+    @driver_array.first.vin.must_equal "WBWSS52P9NEYLVDE9"
+    @driver_array.last.id.must_equal "100"
+    @driver_array.last.name.must_equal "Minnie Dach"
+    @driver_array.last.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 end

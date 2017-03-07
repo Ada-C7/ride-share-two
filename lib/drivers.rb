@@ -13,7 +13,7 @@ module RideShare
 
     def self.all
       drivers_array = []
-      CSV.read("support/drivers.csv").each do |driver|
+      CSV.read("support/drivers.csv", {:headers => true}).each do |driver|
         drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
       end
       drivers_array
