@@ -25,12 +25,5 @@ module RideShare
     def self.find
       #check if driver_id is included in the list of drivers found in all method above
     end
-
-
-
   end
-
-
-
-
 end
