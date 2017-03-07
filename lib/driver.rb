@@ -23,6 +23,7 @@ module RideShare
           return driver
         end
       end
+      raise ArgumentError.new("Driver not found")
     end
   end
 end

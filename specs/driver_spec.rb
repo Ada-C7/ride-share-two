@@ -61,9 +61,6 @@ describe "Driver class" do
       # skip
       if RideShare::Driver.all[1].driver_id == "1"
         RideShare::Driver.find("1").vin.must_equal "WBWSS52P9NEYLVDE9"
-      else
-        # Add argument error functionality
-        puts "Error"
       end
     end
 
@@ -71,11 +68,15 @@ describe "Driver class" do
       # skip
       if RideShare::Driver.all[-1].driver_id == "100"
         RideShare::Driver.find("100").name.must_equal "Minnie Dach"
-      else
-        # Add argument error functionality
-        puts "Error"
       end
     end
+
+    it "Raises ArgumentError if no driver is found that matches argument given" do
+      proc {
+        RideShare::Driver.find("700")
+      }.must_raise ArgumentError
+    end
+
   end
 
 end
