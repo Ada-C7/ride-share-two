@@ -53,15 +53,32 @@ describe "Driver class" do
   end
 
   describe "self.all method" do
+    let(:all_drivers) {Driver.all("support/drivers.csv")}
     it "returns an array" do
-      all_drivers = Driver.all
       all_drivers.must_be_kind_of Array
     end
     it "all elements are Driver instances" do
-      all_drivers = Driver.all
       all_drivers.each do |driver|
         driver.must_be_kind_of Driver
       end
+    end
+    it "grabs first line of data from csv" do
+      test_driver = nil
+      test_driver = all_drivers.find {|driver| driver.id == 1}
+      test_driver.must_be_kind_of Driver
+    end
+    it "grabs last line of data from csv" do
+      test_driver = nil
+      test_driver = all_drivers.find {|driver| driver.id == 100}
+      test_driver.name.must_equal "Minnie Dach"
+    end
+    it "grabs random middle line of data from csv" do
+      test_driver = nil
+      test_driver = all_drivers.find {|driver| driver.id == 60}
+      test_driver.vehicle_id.must_equal "TAMCBRPM7EN5GD88L"
+    end
+    it "raises no data error if no drivers in csv" do
+      proc {Driver.all("support/empty.csv")}.must_raise NoDataError
     end
   end
 

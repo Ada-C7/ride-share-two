@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 
 class Trip
 
@@ -62,3 +63,5 @@ class Trip
   end
 
 end
+
+Trip.all
