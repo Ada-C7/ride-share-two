@@ -14,14 +14,24 @@ describe "Driver class" do
   end
 
   describe "get_trips method" do
-    it "returns an array" do
+    before do
+      @driver = Driver.new({id: 1, name: "Bernardo Prosacco", vehicle_id: "WBWSS52P9NEYLVDE9"})
+      @trips = Trip.all_with_driver(@driver.id)
+    end
 
+    it "returns an array" do
+      @trips.must_be_kind_of Array
     end
     it "all elements are Trip instances" do
-
+      @trips.each do |trip|
+        trip.must_be_kind_of Trip
+      end
     end
     it "all Trips in array have same driver_id as id passed in" do
-
+      this_id = @driver.id
+      @trips.each do |trip|
+        trip.driver_id.must_equal this_id
+      end
     end
   end
 

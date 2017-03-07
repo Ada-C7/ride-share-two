@@ -11,6 +11,8 @@ class Driver
 
   def get_trips
     # calls Trip.all_with_driver and passes in Driver id
+    trips = Trip.all_with_driver(@id)
+    return trips
   end
 
   def average_rating
