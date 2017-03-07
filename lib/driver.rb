@@ -6,44 +6,77 @@ require_relative 'trips'
 module Rideshare
 
   class Driver
-    attr_reader :id, :name, :vin, :drivers
+    attr_accessor :id, :name, :vin, :drivers
 
-    def initialize id, name, vin
+    def initialize id, name, vin #used by .all to create instances of Drivers
       @id = id
       @name = name
       @vin = vin
     end
 
-    def trips driver_id
-      driver_trips = []
-      Rideshare::Trips.trips.each do |trip|
-        if driver_id == trip[1]
-          driver_trips << trip
-        end
-      end
-      return driver_trips
-
-    end
-
-    def self.all
+    def self.all #method to create instances of Drivers
       @drivers = []
 
       CSV.open("/Users/adai/Documents/ada/projects/ride-share-two/support/drivers.csv", {:headers => true}).each do |line|
         driver = Rideshare::Driver.new(line[0].to_i, line[1], line[2])
-        @drivers << driver
-
+        @drivers << driver #class variable to store all driver objects
       end
+
+    end
+
+    def self.all_drivers #method to return the class variable drivers
       return @drivers
-
     end
 
 
-    def find driver_id
+    def self.find id #class method
+      raise ArgumentError.new "Not a valid driver id" if id >= 100 || id <= 1
+
+      Rideshare::Driver.all_drivers.each do |drivers|
+        if id == drivers.id
+          puts drivers.name
+          return drivers
+        end
+      end
     end
 
-    def rating driver_id
+    def trips #instance method
+
+      driver_trips = []
+      Rideshare::Trips.all_trips.each do |trip|
+        if @id == trip.driver_id.to_i
+          driver_trips << trip
+        end
+      end
+      return driver_trips #returns all Trip instances in array
+
     end
 
+    def rating #instance method
+      driver_rating = []
+      # puts @id.class # integer
+      Rideshare::Trips.all_trips.each do |trip|
+        if trip.driver_id == @id #both are integers now, still not working
+          driver_rating << trip.rating #rating must be integer
+        end
+      end
 
+      raise ArgumentError.new "Driver has no ratings" if driver_rating.length == 0
+      total_rating = driver_rating.inject { |sum, n| sum + n }
+      number_of_ratings = driver_rating.length
+      average_rating = total_rating/number_of_ratings
+      return average_rating.round(2)
+
+
+    end
   end
 end
+
+
+#
+# # puts Rideshare::Driver.find(2)
+#
+# # puts Rideshare::Trips.all
+# # puts Rideshare::Trips.all_trips
+# # puts Rideshare::Trips.all_trips.last
+# puts Rideshare::Trips.all_trips.last.rating
