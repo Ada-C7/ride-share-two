@@ -1,8 +1,20 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/reporters'
-# Add simplecov
+require 'minitest/skip_dsl'
+# rainbow version of test output
+#require 'minitest/pride'
+require 'csv'
+require 'simplecov'
 
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+reporter_options = { color: true }
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
 
-# Require_relative your lib files here!
+SimpleCov.start
+
+#colorized version of test output
+#Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+
+require_relative '../lib/driver'
+require_relative '../lib/rider'
+require_relative '../lib/trip'
