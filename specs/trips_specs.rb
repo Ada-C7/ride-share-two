@@ -56,12 +56,12 @@ describe "Trip.all" do
     #       trips match what's in the CSV file
     it "trips match what's in the CSV file" do
       index = 0
-      CSV.read("support/trips.csv") do |line|
-        trips[index].id.must_equal line[0]
-        trips[index].id.must_equal line[1]
-        trips[index].id.must_equal line[2]
-        trips[index].id.must_equal line[3]
-        trips[index].id.must_equal line[3]
+      CSV.read("support/trips.csv", {:headers => true}) do |line|
+        @trip_array[index].trip_id.must_equal line[0]
+        @trip_array[index].driver_id.must_equal line[1]
+        @trip_array[index].rider_id.must_equal line[2]
+        @trip_array[index].date.must_equal line[3]
+        @trip_array[index].rating.must_equal line[3]
         index += 1
       end
     end
@@ -80,3 +80,25 @@ describe "Trip.all" do
     end
 
 end
+
+describe "Trip.find" do
+    before do
+      @test_array = RideShare::Trip.all
+    end
+    # self.find(id) - returns an instance of a Driver
+    # where the value of the id field in the CSV matches
+    # the passed parameter.
+    it "Returns a Trip that exists" do
+      test_variable = RideShare::Trip.find("2")
+      test_variable.must_be_instance_of RideShare::Trip
+      test_variable.trip_id.must_equal "2"
+    end
+
+    it "Can find the first account from the CSV" do
+      RideShare::Trip.find(@test_array[0].trip_id).trip_id.must_equal "1"
+    end
+
+    it "Can find the last account from the CSV" do
+      RideShare::Trip.find(@test_array[-1].trip_id).trip_id.must_equal "600"
+    end
+  end

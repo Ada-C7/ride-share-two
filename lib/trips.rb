@@ -20,8 +20,14 @@ module RideShare
       trips_array
     end
 
-    def self.find
-
+    def self.find(id)
+      trip_array = RideShare::Trip.all
+      trip_array.each do |trip|
+        if id == trip.id
+          return trip
+        end
+      end
+      # raise ArgumentError.new "Driver #{id} does not exist"
     end
 
 

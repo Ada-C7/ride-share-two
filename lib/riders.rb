@@ -19,7 +19,7 @@ module RideShare
       riders_array
     end
 
-    def self.find
+    def self.find(id)
 
     end
 
