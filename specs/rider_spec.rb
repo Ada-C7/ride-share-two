@@ -54,4 +54,23 @@ describe "RideShare::Rider" do
       @riders[-1].phone_number.must_equal "791-114-8423 x70188"
     end
   end
+
+  describe "Rider#find" do
+    before do
+      # 29,Florence Fisher IV,(229) 074-9445
+      @riders = RideShare::Rider.all
+      @rider_found = RideShare::Rider.find("29")
+    end
+    it "return value is a Rider instance" do
+      @rider_found.must_be_instance_of RideShare::Rider
+    end
+    # it "displays a message if the Rider is not found" do
+    #   @no_rider = RideShare::Rider.find("9999")
+    # end
+    it "finds the correct instance of Rider" do
+      @rider_found.id.must_equal "29"
+      @rider_found.name.must_equal "Florence Fisher IV"
+      @rider_found.phone_number.must_equal "(229) 074-9445"
+    end
+  end
 end
