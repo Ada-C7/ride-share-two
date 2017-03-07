@@ -19,6 +19,16 @@ module RideShare
       drivers_array
     end
 
+    def self.find(id)
+      account_array = RideShare::Driver.all
+      account_array.each do |driver|
+        if id == driver.id
+          return driver
+        end
+      end
+      # raise ArgumentError.new "Driver #{id} does not exist"
+    end
 
-  end
-end
+  end #class
+
+end #Module

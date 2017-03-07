@@ -19,6 +19,10 @@ module RideShare
       riders_array
     end
 
+    def self.find
+
+    end
+
 
   end
 end

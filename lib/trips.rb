@@ -20,6 +20,10 @@ module RideShare
       trips_array
     end
 
+    def self.find
+
+    end
+
 
   end
 end
