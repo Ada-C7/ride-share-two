@@ -1,11 +1,15 @@
 # new Driver, subclass of RideShare
-
-# create new trip and take in id, name, license, vin
-@id
-@name
-@license
-@vin
-
+module RideShare
+  class Driver
+    attr_reader :id, :name, :vin
+    # create new driver and take in id, name, vin
+    def initialize(driver_info) # ={}
+      @id = driver_info[:id]
+      @name = driver_info[:name]
+      @vin = driver_info[:vin]
+    end
+  end
+end
 # instance method: trips
 # return collection of trip instances by this driver
 

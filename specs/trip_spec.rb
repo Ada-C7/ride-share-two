@@ -4,10 +4,12 @@ require 'minitest/skip_dsl'
 require_relative '../lib/trip'
 
 describe "RideShare::Trip" do
-  describe "Trip#initialize" do
+
   before do
     @trip = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
   end
+
+  describe "Trip#initialize" do
     it "creates a new instance of trip" do
       @trip.must_be_instance_of RideShare::Trip
     end
@@ -33,9 +35,11 @@ describe "RideShare::Trip" do
   end
 
   describe "Trip#all" do
+
   before do
     @all_trips = RideShare::Trip.all
   end
+
     it "returns an array" do
       @all_trips.must_be_kind_of Array
     end
@@ -68,6 +72,8 @@ describe "RideShare::Trip" do
   describe "Trip#trips_rode(rider_id)" do
     it "returns an array" do
     skip
+      rider_id = 54
+      @trip.trips_rode(rider_id).must_be_kind_of Array
     end
     it "each returned element is a trip instances" do
     skip
@@ -77,6 +83,8 @@ describe "RideShare::Trip" do
   describe "Trip#trips_driver(driver_id)" do
     it "returns an array" do
     skip
+      driver_id = 61
+      @trip.trips_driver(driver_id).must_be_kind_of Array
     end
     it "each returned element is a trip instances" do
     skip

@@ -1,9 +1,9 @@
 # new Rider, subclass of RideShare
 
 # create new trip and take in id, name, license, vin
-@id
-@name
-@phone_number
+# @id
+# @name
+# @phone_number
 
 # instance method: past_trips
 # return collection of trip instances by this rider

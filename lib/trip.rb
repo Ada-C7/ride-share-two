@@ -19,30 +19,35 @@ module RideShare
     # class method: all
     def self.all
       @all = []
+      # for each row in CSV file read in and create an instance of trip
       CSV.foreach("support/trips.csv", {:headers => true}) do |row| # file directory for rake
-        @all << RideShare::Trip.new({id: row[0], driver_id: row[1], rider_id: row[2], date: row[3], rating: row[4]})
+        @all << RideShare::Trip.new({
+          id: row[0],
+          driver_id: row[1],
+          rider_id: row[2],
+          date: row[3],
+          rating: row[4]
+        })
       end
-      return @all
+      return @all # return all instances of trips
     end
+
+    # class method: trips_rode(rider_id)
+    # find instances of trips where rider_id matches argument
+    # alert user if no trips with matching rider_id is found
+    # return collection of trips by specific rider
+
+    # class method: trips_driven(driver_id)
+    # find instances of trips where driver_id matches argument
+    # alert user if no trips with matching rider_id is found
+    # return collection of trips by specific driver
+
+    # instance method: find_driver(driver_id)
+    # return instance of driver
+
+    # instance method: find_rider(rider_id)
     # for each row in CSV file read in and create an instance of trip
-    # return all instances of trips
-
-# class method: trips_rode(rider_id)
-# find instances of trips where rider_id matches argument
-# alert user if no trips with matching rider_id is found
-# return collection of trips by specific rider
-
-# class method: trips_driven(driver_id)
-# find instances of trips where driver_id matches argument
-# alert user if no trips with matching rider_id is found
-# return collection of trips by specific driver
-
-# instance method: find_driver(driver_id)
-# return instance of driver
-
-# instance method: find_rider(rider_id)
-# for each row in CSV file read in and create an instance of trip
-# return instance of rider
+    # return instance of rider
   end
 end
 
