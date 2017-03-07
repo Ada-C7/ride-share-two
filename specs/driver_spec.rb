@@ -60,13 +60,13 @@ describe Driver do
                end
 
               it "The ID, name and VIN of the first and last drivers match the CSV file" do
-                   @all_drivers[0].id.to_s.must_equal CSV.foreach(@file).first[0]
-                   @all_drivers[0].name.must_equal CSV.foreach(@file).first[1]
-                   @all_drivers[0].vin.must_equal CSV.foreach(@file).first[2]
+                    @all_drivers[0].id.to_s.must_equal CSV.readlines(@file)[0][0]
+                    @all_drivers[0].name.must_equal CSV.readlines(@file)[0][1]
+                    @all_drivers[0].vin.must_equal CSV.readlines(@file)[0][2]
 
-               #     @all_drivers[0].id.to_s.must_equal CSV.foreach(@file).last[0]
-               #     @all_drivers[0].name.must_equal CSV.foreach(@file).last[1]
-               #     @all_drivers[0].vin.must_equal CSV.foreach(@file).last[2]
+                    @all_drivers[-1].id.to_s.must_equal CSV.readlines(@file)[-1][0]
+                    @all_drivers[-1].name.must_equal CSV.readlines(@file)[-1][1]
+                    @all_drivers[-1].vin.must_equal CSV.readlines(@file)[-1][2]
                end
           end
      end
@@ -75,35 +75,35 @@ describe Driver do
 
           before do
                @file = "support/drivers.csv"
-               @one_driver = Driver.find(@file, id)
           end
 
           it "Returns an account that exists" do
-               id = 7
-               @one_driver = Driver.find(@file, id)
-               @one_driver.must_be_kind_of Driver
-               @one_driver.id.must_equal CSV.readlines(@file)[index - 1][1]
+               id = 8
+               index = id - 1
+               one_driver = Driver.find(@file, id)
+               one_driver.must_be_kind_of Driver
+               one_driver.id.to_s.must_equal CSV.readlines(@file)[index][0]
           end
 
           it "Can find the first account from the CSV" do
-               index = 0
-               first_account = Driver.find_with_index(@file, index)
+               id = 1
+               index = id - 1
+               first_account = Driver.find(@file, id)
                first_account.must_be_kind_of Driver
-               find_account.id.must_equal CSV.readlines(@file)[index][1]
-
+               first_account.id.to_s.must_equal CSV.readlines(@file)[index][0]
           end
 
           it "Can find the last account from the CSV" do
-               index = -1
-               last_account = Driver.find_with_index(@file, index)
-               last_account.must_be_kind_of Driver
-               last_account.id.must_equal CSV.readlines(@file)[index][1]
-
+               id = 100
+               index = id - 1
+               first_account = Driver.find(@file, id)
+               first_account.must_be_kind_of Driver
+               first_account.id.to_s.must_equal CSV.readlines(@file)[index][0]
           end
 
           it "Raises an error for an account that doesn't exist" do
                id = 9033
-               proc {@one_driver}.must_raise ArgumentError
+               proc {Driver.find(@file, id)}.must_raise ArgumentError
           end
 
      end

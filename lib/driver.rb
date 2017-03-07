@@ -46,6 +46,20 @@ class Driver
 
           return all_drivers
      end
+
+     def self.find(file, id)
+
+          Driver.all(file).each do | account |
+
+               if account.id == id
+                    return account
+               end
+
+          end
+
+          raise ArgumentError.new "Driver #{id} does not exist."
+
+     end
 end
 
 # file = "../support/drivers.csv"
