@@ -6,19 +6,29 @@ require_relative '../lib/trip'
 
 describe "RideShare::Trip" do
   describe "Trip#initialize" do
+    before do
+      trip = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
+    end
     it "creates a new instance of trip" do
+      trip.must_be_instance_of RideShare::Trip
     end
-    it "can pass in an id" do
+    it "passes in the id" do
+      trip.id.must_equal 13
     end
-    it "can pass in a driver_id" do
+    it "passes in the driver_id" do
+      trip.driver_id.must_equal 83
     end
-    it "can pass in a rider_id" do
+    it "passes in the rider_id" do
+      trip.rider_id.must_equal 298
     end
-    it "can pass in a date" do
+    it "passes in the date" do
+      trip.date.must_equal "2015-05-27"
     end
-    it "can pass in rating" do
+    it "passes in the rating" do
+      trip.rating.must_equal 5
     end
     it "can create a new trip with a missing date" do
+    skip
     end
   end
 
