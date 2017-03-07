@@ -71,20 +71,31 @@ describe "Driver" do
   describe "Driver.all" do
     # need to isolate opening CSV in own method/class variable?
     # rescue CSV?
+    let (:drivers) {RideShare::Driver.all}
 
     it "returns an array" do
-      RideShare::Driver.all.must_be_instance_of Array
+      drivers.must_be_instance_of Array
     end
 
-    it "returns an array with only Driver elements" do
-      RideShare::Driver.all.each do |driver|
+    it "contains only Driver elements in the returned array" do
+      drivers.each do |driver|
         driver.must_be_instance_of RideShare::Driver
       end
     end
 
-    it "returns all drivers in the CSV file" do
-      # [d1,d2,d3,d4].length = x
-      # &/or [d1, d2, d3] = expected_array
+    it "returns the correct number of drivers" do
+      expected_num_of_drivers = CSV.read("support/drivers.csv").size - 1
+      num_of_drivers = drivers.length
+
+      num_of_drivers.must_equal expected_num_of_drivers
+    end
+
+    it "initializes a first Driver with the CSV's first listed name, id, and vin" do
+      
+    end
+
+    it "initializes a last Driver with the CSV's last listed name, id, and vin" do
+
     end
   end
 

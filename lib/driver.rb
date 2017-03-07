@@ -16,7 +16,15 @@ module RideShare
     end
 
     def self.all
-      return [Driver.new(name: 'Ada', id: 108, vin: 'sdfdsfdsfdssdfsds')]
+      drivers = []
+      CSV.foreach('support/drivers.csv', headers: true) do |row|
+        drivers << self.new(id: row['driver_id'.to_i], name: row['name'], vin: row['vin'])
+      end
+
+      return drivers
+
+        #return [Driver.new(name: 'Ada', id: 108, vin: 'sdfdsfdsfdssdfsds')]
+        #CSV.foreach('support/drivers.csv', headers: true, header_converters: :symbol) do |row|
     end
 
     private
