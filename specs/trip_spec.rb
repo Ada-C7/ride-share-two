@@ -13,27 +13,31 @@ describe "Trip class" do
     end
   end
 
-  before do
-    @trip = Trip.new({id: 8, rider_id: 93, driver_id: 104, date: "2016-08-08", rating: 5})
-  end
+
 
   describe "get_driver method" do
+    before do
+      @trip = Trip.new({id: 8, driver_id: 93, rider_id: 104, date: "2016-08-08", rating: 5})
+    end
+
     it "returns an instance of Driver" do
       @trip.get_driver.must_be_kind_of Driver
     end
+
     it "Driver's id matches driver_id on instance of Trip" do
-      driver = @trip.get_driver
-      puts driver
-      driver.id.must_equal @trip.driver_id
+      @trip.get_driver.id.must_equal 93
     end
   end
 
   describe "get_rider method" do
+    before do
+      @trip = Trip.new({id: 8, driver_id: 93, rider_id: 104, date: "2016-08-08", rating: 5})
+    end
     it "returns an instance of Rider" do
       @trip.get_rider.must_be_kind_of Rider
     end
     it "Rider's id matches rider_id on instance of Trip" do
-      @trip.get_rider.id.must_equal @trip.rider_id
+      @trip.get_rider.id.must_equal 104
     end
   end
 

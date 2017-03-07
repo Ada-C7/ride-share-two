@@ -1,11 +1,13 @@
+require 'csv'
+
 class Trip
 
   attr_reader :rider_id, :driver_id, :rating
 
   def initialize(hash)
     @id = hash[:id]
-    @rider_id = hash[:rider_id]
     @driver_id = hash[:driver_id]
+    @rider_id = hash[:rider_id]
     @date = hash[:date]
     @rating = hash[:rating]
     # must be between 1 and 5
@@ -13,14 +15,12 @@ class Trip
 
   def get_driver
     # uses Driver.find(id) to retrieve the Driver object for that Trip
-    driver = Driver.find(@driver_id)
-    return driver
+    return Driver.find(@driver_id)
   end
 
   def get_rider
     # uses Rider.find(id) to retrieve the Rider object for that Trip
-    rider = Rider.find(@rider_id)
-    return rider
+    return Rider.find(@rider_id)
   end
 
   def self.all_with_driver(id)
@@ -50,8 +50,8 @@ class Trip
     my_file.each do |line|
       trip_hash = {}
       trip_hash[:id] = line[0].to_i
-      trip_hash[:rider_id] = line[1].to_i
-      trip_hash[:driver_id] = line[2].to_i
+      trip_hash[:driver_id] = line[1].to_i
+      trip_hash[:rider_id] = line[2].to_i
       trip_hash[:date] = line[3]
       trip_hash[:rating] = line[4].to_f
 

@@ -1,3 +1,5 @@
+require 'csv'
+
 class Driver
 
   attr_reader :id
@@ -49,15 +51,18 @@ class Driver
     return all_drivers
   end
 
-  def self.find(id)
+  def self.find(look_for_id)
     # locates a driver in the all list given a driver id
     all_drivers = Driver.all
     found_driver = nil
     all_drivers.each do |driver|
-      found_driver = driver if driver.id == id
+      found_driver = driver if driver.id == look_for_id
     end
+    puts "found driver is #{found_driver}"
     raise ArgumentError.new("No driver found") if found_driver == nil
     return found_driver
   end
 
 end
+
+puts Driver.all

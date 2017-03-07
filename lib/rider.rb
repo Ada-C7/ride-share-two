@@ -1,3 +1,5 @@
+require 'csv'
+
 class Rider
 
   attr_reader :id
