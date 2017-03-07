@@ -25,7 +25,7 @@ class Driver
 #@@drivers <<
 #end
 
-#self.find_driver(id)
+#self.find(id)
 #find id in @@drivers
 #returns a single driver associated with that id
 #end
