@@ -13,7 +13,7 @@ module RideShare
     def self.all
       all_drivers = []
       CSV.open("./support/drivers.csv", {:headers => true}).each do |line|
-        all_drivers << self.new({name: line[1], id: line[2]})
+        all_drivers << self.new({name: line[1], id: line[0].to_i})
       end
       all_drivers
     end
@@ -26,15 +26,6 @@ module RideShare
       driver
     end
 
-    # .all method should read in CSV
-    # just like this code i copied from bank accounts
-    # def self.all
-    #   many_accounts = []
-    #   CSV.open("./support/accounts.csv").each do |line|
-    #     many_accounts << self.new(line[0].to_i, line[1].to_f)
-    #   end
-    #   return many_accounts
-    # end
   #     data has one-line of header then the content
   #     .find_by_id method
   #       id numbers are a mix of numbers and letters, so must be strings

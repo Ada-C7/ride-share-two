@@ -8,7 +8,7 @@ describe "Rider class" do
       id: 2,
       phone_number: "2062424564"
     }
-    rider = RideShare::Rider.new
+    rider = RideShare::Rider.new(initialization_hash)
 
     rider.must_respond_to :id
     rider.id.must_equal 2
@@ -21,17 +21,17 @@ describe "Rider class" do
   end
 
   it "returns a list of riders of the correct length when you call .all" do
-    skip
+    # skip
     RideShare::Rider.all.length == CSV.read("./support/riders.csv").length - 1
   end
 
   it "can find the first rider in the csv" do
-    skip
+    # skip
     RideShare::Rider.find(1).must_equal [1, "Nina Hintz Sr.", "560.815.3059"]
   end
 
   it "can find the last rider in the csv" do
-    skip
+    # skip
     RideShare::Rider.find(300).must_equal [300, "Miss Isom Gleason", "791-114-8423 x70188"]
   end
 
