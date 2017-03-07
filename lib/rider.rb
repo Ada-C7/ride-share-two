@@ -15,8 +15,6 @@ module RideShare
     # return collection of rider instances (through the trips functionality)
 
     # class method: all
-    # read in CSV file for all instances of riders
-
     def self.all
       @all_riders = []
       # read in CSV file for all instances of riders
@@ -30,7 +28,12 @@ module RideShare
       return @all_riders
       # return all instances of rier
     end
+
     # class method: find(id)
-    # return specific instance of rider (previously instantiated)
+    def self.find(rider_id)
+      # return specific instance of rider (previously instantiated)
+      found_rider = @all_riders.select { |instance| instance.id == rider_id }
+      return found_rider[0]
+    end
   end
 end
