@@ -28,8 +28,8 @@ module RideShare
         if file.id == id
           return file
         end
-        #  "We did not find this ID"
       end
+      raise ArgumentError.new("This account does not exist")
     end
     #Should be able to retrieve list of trip instances that a specific driver has taken
     #Should be able to retrieve the average rating for that driver based on all trips taken

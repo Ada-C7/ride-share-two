@@ -1,7 +1,6 @@
 require 'csv'
 
 require_relative '../specs/spec_helper.rb'
-# require_relative '../lib/driver'
 
 describe "Driver" do
 
@@ -15,23 +14,40 @@ describe "Driver" do
 
     it "Should be associated with :id and :name" do
       new_driver.must_respond_to(:id)
-      new_driver.must_respond_to :name
+      new_driver.must_respond_to(:name)
     end
+  end
+
+  describe "Driver#all" do
 
     it "Should create instances of drivers and their associated data" do
       RideShare::Driver.all.must_be_kind_of Array
     end
-    
-    it "Returns an id from CSV" do
+  end
+
+  describe "Driver#find" do
+
+    it "Returns the first account from the CSV file" do
       RideShare::Driver.find(1).id.must_equal(1)
-      # let (:new_driver) {Rideshare::Driver.find(1)}
-      # new_driver.find(1).id.must_equal(1)
-      # @new_driver.id.must_equal 1
-      # new_id.find(2)
-      # new_id.must_equal 2
-      # accounts = RideShare::Driver.all.find(8)
-      # # new_id = RideShare::Driver.find(8)
-      # accounts.id.must_equal 8
+      RideShare::Driver.find(1).name.must_equal("Bernardo Prosacco")
+      RideShare::Driver.find(1).vin.must_equal("WBWSS52P9NEYLVDE9")
     end
+
+    it "Returns an account that exists" do
+      RideShare::Driver.find(5).id.must_equal(5)
+      RideShare::Driver.find(5).name.must_equal("Verla Marquardt")
+      RideShare::Driver.find(5).vin.must_equal("TAMLE35L3MAYRV1JD")
+    end
+
+    it "Can find the last account of the CSV file" do
+      RideShare::Driver.find(100).id.must_equal(100)
+      RideShare::Driver.find(100).name.must_equal("Minnie Dach")
+      RideShare::Driver.find(100).vin.must_equal("XF9Z0ST7X18WD41HT")
+    end
+
+    it "Raises an error when the account does not exist" do
+      proc { RideShare::Driver.find(101)}.must_raise(ArgumentError)
+    end
+
   end
 end
