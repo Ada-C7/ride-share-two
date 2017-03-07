@@ -1,9 +1,8 @@
 require 'csv'
-require_relative 'driver'
 
 module RideShare
     class Trip
-        TRIP_INFO = CSV.open('support/trips.csv')
+        TRIP_INFO = CSV.read('support/trips.csv')
 
         def initialize(id)
             TRIP_INFO.each do |line|
@@ -29,21 +28,11 @@ module RideShare
         end
 
         def self.driver_trips(id)
-            @driver_trips = []
-            TRIP_INFO.each do |line|
-                next unless line[1] == id
-                @driver_trips << line
-            end
-            @driver_trips
+            @driver_trips = (TRIP_INFO.map { |line| line if line[1].to_i == id }).compact!
         end
 
         def self.rider_trips(id)
-            @rider_trips = []
-            TRIP_INFO.each do |line|
-                next unless line[2] == id
-                @rider_trips << line
-            end
-            @driver_trips
+            @rider_trips = (TRIP_INFO.map { |line| line if line[2].to_i == id }).compact!
         end
     end
 end

@@ -5,9 +5,10 @@ module RideShare
     class Driver
         attr_reader :driver_id, :name, :vin
 
-        DRIVER_INFO = CSV.open('../support/drivers.csv')
+        DRIVER_INFO = CSV.read('support/drivers.csv')
 
         def initialize(id)
+            raise ArgumentError, '#{id} is not a valid ID number' unless (1..100).cover? id
             DRIVER_INFO.each do |line|
                 next unless line[0].to_i == id
                 @driver_id = id
@@ -17,36 +18,36 @@ module RideShare
       end
 
         def trips
-            @driver_trips = RideShare::Trip.driver_trips(@driver_id)
+            Trip.driver_trips(@driver_id)
         end
 
         def avg_rating
-            @all_ratings = []
-            trips
+            all_ratings = []
+            @driver_trips = trips
             @driver_trips.each do |trip|
-                @all_ratings << trip.last.to_i
+                all_ratings << trip.last.to_i
             end
 
-            @total_ratings = @all_ratings.reduce(:+)
-            @avg_rating =  @total_ratings / @all_ratings.length
-            @avg_rating
+            avg_rating = all_ratings.reduce(:+) / all_ratings.length.to_f
+            avg_rating
         end
 
         def self.all
-            DRIVER_INFO
+            DRIVER_INFO[1..100]
         end
 
         def self.find(id)
-            @driver_found = []
-            DRIVER_INFO.each do |line|
-                next unless line[0].to_i == id
-                @driver_found << line
-            end
-            @driver_found
+            @driver_found = (DRIVER_INFO.map { |line| line if line[0].to_i == id }).compact!
           end
   end
 end
 
-test = RideShare::Driver.new(18)
-
-test.avg_rating
+# test = RideShare::Driver.new(18)
+#
+# print test.trips
+# puts
+# print test.trips
+# puts
+# puts test.avg_rating
+# puts test.avg_rating
+# print test.trips

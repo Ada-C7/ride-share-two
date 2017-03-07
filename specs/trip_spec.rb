@@ -1,11 +1,4 @@
-require 'simplecov'
-SimpleCov.start
-
-require 'minitest/autorun'
-require 'minitest/reporters'
-require_relative '../lib/trip'
-
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+require_relative 'spec_helper'
 
 describe RideShare::Trip do
     before do
