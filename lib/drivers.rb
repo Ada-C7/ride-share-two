@@ -20,8 +20,8 @@ module RideShare
     end
 
     def self.find(id)
-      account_array = RideShare::Driver.all
-      account_array.each do |driver|
+      drivers_array = RideShare::Driver.all
+      drivers_array.each do |driver|
         if id == driver.id
           return driver
         end

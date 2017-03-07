@@ -64,3 +64,31 @@ end
     @driver_array.last.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 end
+
+describe "Driver.find" do
+    before do
+      @test_array = RideShare::Driver.all
+    end
+    # self.find(id) - returns an instance of a Driver
+    # where the value of the id field in the CSV matches
+    # the passed parameter.
+    it "Returns a driver that exists" do
+      test_variable = RideShare::Driver.find("2")
+      test_variable.must_be_instance_of RideShare::Driver
+      test_variable.id.must_equal "2"
+    end
+
+    it "Can find the first account from the CSV" do
+      RideShare::Driver.find(@test_array[0].id).id.must_equal "1"
+    end
+
+    it "Can find the last account from the CSV" do
+      RideShare::Driver.find(@test_array[-1].id).id.must_equal "100"
+    end
+
+    # it "Raises an error for an account that doesn't exist" do
+    #   proc {
+    #     RideShare::Driver.find("0000")
+    #   }.must_raise ArgumentError
+    # end
+  end
