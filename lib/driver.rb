@@ -15,6 +15,8 @@ module RideShare
       @vin = args[:vin]
     end
 
+    
+
 
     private
 
