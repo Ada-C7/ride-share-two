@@ -37,7 +37,7 @@ describe "Trip initialize" do
   end
 end
 
-xdescribe "self.all" do
+describe "self.all" do
   let(:all_trips) { RideShare::Trip.all }
 
   it "creates an array of new Trip instances from a CSV file" do
@@ -55,7 +55,7 @@ xdescribe "self.all" do
 
 end
 
-xdescribe "self.find_by_driver" do
+describe "self.find_by_driver" do
   let(:driver_trips) {RideShare::Trip.find_by_driver(99)}
 
   it "returns an array of Trip instances" do

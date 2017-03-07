@@ -17,6 +17,23 @@ module RideShare
     def self.all
       # creates instances of Trip from CSV
       # include rescue for invalid rating
+      all_trips = []
+      trip_hash = {}
+
+      CSV.foreach("support/trips.csv", {:headers => true}) do |line|
+          trip_hash[:id] = line[0].to_i
+          trip_hash[:driver_id] = line[1].to_i
+          trip_hash[:rider_id] = line[2].to_i
+          trip_hash[:date] = line[3]
+          trip_hash[:rating] = line[4].to_i
+
+          begin
+            all_trips << Trip.new(trip_hash)
+          rescue InvalidRatingError => e
+            puts "Encountered an error: #{e.message}"
+          end
+      end
+      return all_trips
     end
 
     def self.find_by_driver
