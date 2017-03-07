@@ -60,7 +60,7 @@ describe "self.find_by_driver" do
 
   it "returns an array of Trip instances" do
     driver_trips.must_be_instance_of Array
-    driver_trips[0].must_be_instance_of Trip
+    driver_trips[0].must_be_instance_of RideShare::Trip
   end
 
   it "correctly finds the trips for a given driver" do
