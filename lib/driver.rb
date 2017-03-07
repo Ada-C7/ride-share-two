@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'invalid_driver'
+
 module RideShare
   class Driver
     attr_accessor :driver_id, :name, :vin
@@ -36,7 +38,7 @@ module RideShare
           return driver
         end
       end
-      raise ArgumentError.new("that driver does not exist")
+      raise InvalidDriver.new("that driver does not exist")
     end
 
   end

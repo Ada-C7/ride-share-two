@@ -4,6 +4,8 @@
       "/Users/sahanamurthy/Ada/Projects/ride-share-two/lib/driver.rb": [
         1,
         1,
+        null,
+        1,
         1,
         1,
         null,
@@ -48,6 +50,12 @@
         null,
         null
       ],
+      "/Users/sahanamurthy/Ada/Projects/ride-share-two/lib/invalid_driver.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/sahanamurthy/Ada/Projects/ride-share-two/lib/rider.rb": [
         1,
         1,
@@ -69,6 +77,6 @@
 
       ]
     },
-    "timestamp": 1488912793
+    "timestamp": 1488913740
   }
 }

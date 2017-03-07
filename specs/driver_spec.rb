@@ -72,7 +72,7 @@ describe "Driver" do
       RideShare::Driver.must_respond_to :all
     end
 
-    it "Returns an array of all accounts" do
+    it "Returns an array of all driver information" do
       RideShare::Driver.all.must_be_instance_of Array
 
       RideShare::Driver.all.each do |driver|
@@ -80,11 +80,11 @@ describe "Driver" do
       end
     end
 
-    it "Contains the correct amount of accounts" do
+    it "Contains the correct amount of drivers" do
       RideShare::Driver.all.length.must_equal 100
     end
 
-    it "Matches the ID and balance of the first and last accounts" do
+    it "Matches the driver id, name, and vehicle id number of the first and last drivers in csv" do
       RideShare::Driver.all.first.driver_id.must_equal 1
       RideShare::Driver.all.first.name.must_equal "Bernardo Prosacco"
       RideShare::Driver.all.first.vin.must_equal "WBWSS52P9NEYLVDE9"
@@ -123,10 +123,10 @@ describe "Driver" do
       driver.driver_id.must_equal driver_id
     end
 
-    it "Raises an error for an account that doesn't exist" do
+    it "Raises an error for a driver who doesn't exist" do
       proc {
         RideShare::Driver.find(1111)
-      }.must_raise ArgumentError
+      }.must_raise RideShare::InvalidDriver
     end
 
   end
