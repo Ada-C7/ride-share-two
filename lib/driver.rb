@@ -30,6 +30,23 @@ module RideShare
 
             return drivers
         end
+
+        def self.find(id)
+            drivers = RideShare::Driver.all
+
+            drivers.each do |driver|
+                if driver.id == id
+                    return driver
+                end
+
+            end
+
+            raise ArgumentError.new("Invalid driver id")
+        end
+
+
+
+
     end
 end
 

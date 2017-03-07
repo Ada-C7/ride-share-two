@@ -60,44 +60,22 @@ describe "Driver" do
         it "All elements in the Driver instance match the data in the CSV file" do
             @drivers[11].id.must_equal 12
             @drivers[11].name.must_equal "Ms. Llewellyn Marquardt"
-            @drivers[11].vin.must_equal "TAMX2B609RPZY1XHT"
-
-            #this is not working, but feel like need to move on and will come back to it
-            # index = 0
-            # CSV.read("support/driver.csv") do
-            #     @drivers[index].id.must_equal line[0].to_i
-            #     @drivers[index].name.must_equal line[1]
-            #     @drivers[index].vin.must_equal line[2]
-            #     index +=1
-            # end
+            @drivers[11].vin.must_equal "TAMX2B609RPZY1XHT"    
         end
 
     end
 
-    describe "self.find method"
+    describe "self.find method" do
+
         it "Returns a driver that exists" do
-
+            @driver = RideShare::Driver.find(32)
+            @driver.must_be_instance_of RideShare::Driver
+            @driver.name.must_equal "Belle Rohan"
         end
 
-
-        it "Finds the first element in the CSV" do
-
+        it "Raises an Error for an incorrect " do
+            proc { RideShare::Driver.find(116) }.must_raise ArgumentError
         end
 
-        it "Finds the last element in the CSV" do
-
-        end
-
-        it "Raises and Error for an incorrect " do
-
-        end
     end
-
-
-
-
-
-
-
-
 end
