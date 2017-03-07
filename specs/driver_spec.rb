@@ -18,7 +18,7 @@ describe Driver do
           @leia = Driver.new(@id, @name, @vehicle_id)
      end
 
-     describe 'Driver#initialization' do
+     describe "Driver#initialization" do
 
           it "Creates class Driver" do
             @leia.must_be_kind_of Driver
@@ -35,8 +35,12 @@ describe Driver do
             @leia.vehicle_id.must_equal @vehicle_id
           end
 
-
+          it "Verifies vehicle ID is a string, containing no more than 7 characters" do
+            proc {Driver.new(@id, @name, 777)
+            }.must_raise ArgumentError
+            
+            proc {Driver.new(@id, @name, "777333777")
+            }.must_raise ArgumentError
+          end
      end
-
-
 end
