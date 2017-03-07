@@ -62,8 +62,12 @@ describe "RideShare::Driver" do
       found_driver.must_be_instance_of RideShare::Driver
     end
 
-    it "Is able to find random driver using the driver's id" do
+    it "Is able to find random driver using the driver's ID" do
       found_driver.name.must_equal "Federico Bins V"
+    end
+
+    it "Will raise an argument error if Driver ID is not found" do
+      proc { RideShare::Driver.find(105) }.must_raise ArgumentError
     end
 
   end

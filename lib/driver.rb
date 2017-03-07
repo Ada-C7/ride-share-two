@@ -5,7 +5,7 @@ module RideShare
 
     # creates driver that has an ID, name, and vehicle identification number (vin)
     def initialize(id, name, vin)
-      @id = id
+      @id = id.to_i
       @name = name
       @vin = vin.length == 17 ? vin : "00000000000000000"
     end
@@ -26,7 +26,7 @@ module RideShare
       all_drivers = []
 
       CSV.open("support/drivers.csv").each do | line |
-        id = line[0].to_i
+        id = line[0]
         name = line[1]
         vin = line[2]
 
@@ -44,6 +44,8 @@ module RideShare
       all_drivers.each do | driver |
         return driver if driver_id == driver.id
       end
+
+      raise ArgumentError.new("Invalid Driver ID") 
     end
 
   end
