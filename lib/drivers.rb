@@ -1,7 +1,8 @@
 require 'csv'
+require_relative 'loadable'
 
 module RideShare
-  class Driver
+  class Driver < Loadable
     attr_reader :name, :id
     # initialize method needs ID and name
     #   -> initialize via hash?
@@ -11,19 +12,12 @@ module RideShare
     end
 
     def self.all
-      all_drivers = []
-      CSV.open("./support/drivers.csv", {:headers => true}).each do |line|
-        all_drivers << self.new({name: line[1], id: line[0].to_i})
-      end
-      all_drivers
+      super("./support/drivers.csv", "driver")
     end
 
     def self.find(id)
-      driver = []
-      self.all.each do |account|
-        driver = [account.name, account.id] if account.id == id
-      end
-      driver
+      account = super(id)
+      account = [account.name, account.id]
     end
 
   #     data has one-line of header then the content
