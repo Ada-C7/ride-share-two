@@ -12,32 +12,34 @@ require_relative '../lib/ride-share-rider'
 
 describe "RideShare::Rider" do
 
-  before do
-    @my_rider = RideShare::Rider.new(2, "name", 4567435534)
-  end
+  let(:my_rider) { RideShare::Rider.new(2,"name", 395873456958409)}
+
+  # before do
+  #   @my_rider = RideShare::Rider.new(2, "name", 4567435534)
+  # end
 
   describe "initialize method" do
 
     it "must be an instance of Rider class" do
-      @my_rider.must_be_instance_of RideShare::Rider
+      my_rider.must_be_instance_of RideShare::Rider
     end
 
     it "name must be a string" do
-      @my_rider.name.must_be_kind_of String
+      my_rider.name.must_be_kind_of String
     end
 
     it "id must be a number" do
-      @my_rider.id.must_be_kind_of Integer
+      my_rider.id.must_be_kind_of Integer
     end
 
     it "phone number must be a number" do
-      @my_rider.phone.must_be_kind_of Integer
+      my_rider.phone.must_be_kind_of Integer
     end
   end
 
   describe "all method" do
 
-    it "returns an array of all accounts" do
+    it "returns an array of all riders" do
 
       riders_array = RideShare::Rider.all
       riders_array.must_be_instance_of Array
@@ -67,7 +69,7 @@ describe "RideShare::Rider" do
       RideShare::Rider.find(1).wont_be_nil
     end
 
-    it "can find the last account from the CSV" do
+    it "can find the last rider from the CSV" do
       RideShare::Rider.find(300).wont_be_nil
     end
   end
@@ -75,7 +77,7 @@ describe "RideShare::Rider" do
   describe "to_s method" do
 
     it "returns string" do
-      @my_rider.to_s.must_be_kind_of String
+      my_rider.to_s.must_be_kind_of String
     end
   end
 end
