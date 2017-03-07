@@ -30,11 +30,19 @@ module RideShare
       # raise ArgumentError.new "Driver #{id} does not exist"
     end
 
-    def find_by_rider(rider_id)
+    def self.find_by_rider(rider_id)
       #class method - find all trip instances for a given Rider ID
+      trip_array = RideShare::Trip.all
+      riders_trips = []
+      trip_array.each do |trip|
+        if rider_id == trip.rider_id
+          riders_trips << trip
+        end
+      end
+      return riders_trips
     end
 
-    def find_by_driver(driver_id)
+    def self.find_by_driver(driver_id)
       #class method - find all trip instances for a given Driver ID
     end
 

@@ -101,3 +101,14 @@ describe "Trip.find" do
     RideShare::Trip.find(@test_array[-1].trip_id).trip_id.must_equal "600"
   end
 end
+
+describe "find_by_rider" do
+  before do
+    @trip_array = RideShare::Trip.find_by_rider("2")
+  end
+
+
+  it "returns an array" do
+    @trip_array.must_be_instance_of Array
+  end
+end

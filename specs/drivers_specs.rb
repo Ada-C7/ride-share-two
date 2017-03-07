@@ -92,3 +92,14 @@ describe "Driver.find" do
   #   }.must_raise ArgumentError
   # end
 end
+
+# describe "driver.trips" do
+#
+#   before do
+#     @test_driver = Driver.new("7", "Kelly", "WBWSS52P9NEYLVDE9")
+#   end
+#
+#   it "Returns an array of all drivers" do
+#     @driver_array.must_be_instance_of Array
+#   end
+# end

@@ -30,11 +30,8 @@ module RideShare
     end
 
     def trips
-      array = []
 
-      array << trip
-      if trip.rider_id == id
-        return array
+      # array = find_by_rider(id)
         #retrieve the list of trip instances
         #that only this rider has taken
 
@@ -49,6 +46,6 @@ module RideShare
 
 
 
-    end
+    
   end
 end

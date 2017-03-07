@@ -29,6 +29,8 @@ module RideShare
       # raise ArgumentError.new "Driver #{id} does not exist"
     end
 
+
+
   def trips
   #instance method - retrieve the list of trip instances that only this driver has taken
 #RETURN ARRAY OF TRIPS
@@ -41,7 +43,7 @@ module RideShare
  # call trips
   end
 
-end
+
 
 
 
