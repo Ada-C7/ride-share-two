@@ -42,13 +42,16 @@ module RideShare
     # alert user if no trips with matching rider_id is found
     # return collection of trips by specific driver
 
-    # instance method: find_driver(driver_id)
-    # return instance of driver
+    # instance method: find_driver
+    def find_driver
+      RideShare::Driver.find(@driver_id)
+      # return instance of Driver
+    end
 
-    # instance method: find_rider(rider_id)
-    # for each row in CSV file read in and create an instance of trip
-    # return instance of rider
+  # instance method: find_rider
+    def find_rider
+      RideShare::Rider.find(@rider_id)
+      # return instance of Rider
+    end
   end
 end
-
-# p RideShare::Trip.all

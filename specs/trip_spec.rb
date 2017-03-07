@@ -90,36 +90,34 @@ describe "RideShare::Trip" do
 
   describe "Trip#find_driver" do
     it "returns the instance of Driver" do
-    skip
-      ride = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
+      ride = RideShare::Trip.new({id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5"})
+      RideShare::Driver.all
       trip_driver = ride.find_driver
-      trip_driver.must_be_instance_of_an_instance_of RideShare::Driver
+      trip_driver.must_be_instance_of RideShare::Driver
     end
 
     it "returns correct instance of driver by driver_id" do
-    skip
-      ride = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
+      ride = RideShare::Trip.new({id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5"})
+      RideShare::Driver.all
       trip_driver = ride.find_driver
-      Rider_Share::Driver.all
-      expected_value = Rider_Share::Driver.find("83")
+      expected_value = RideShare::Driver.find("83")
       trip_driver.must_equal expected_value
     end
   end
 
   describe "Trip#find_rider" do
     it "returns the instance of Rider" do
-    skip
-      ride = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
+      RideShare::Rider.all
+      ride = RideShare::Trip.new({id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5"})
       trip_rider = ride.find_rider
-      trip_rider.must_be_instance_of_an_instance_of RideShare::Rider
+      trip_rider.must_be_instance_of RideShare::Rider
     end
 
     it "returns correct instance of driver by driver_id" do
-    skip
-      ride = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
+      RideShare::Rider.all
+      ride = RideShare::Trip.new({id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5"})
       trip_rider = ride.find_rider
-      Rider_Share::Rider.all
-      expected_value = Rider_Share::Rider.find("83")
+      expected_value = RideShare::Rider.find("298")
       trip_rider.must_equal expected_value
     end
   end
