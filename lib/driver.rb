@@ -42,9 +42,7 @@ module RideShare
       all_drivers = RideShare::Driver.all
 
       all_drivers.each do | driver |
-        if driver_id == driver.id
-          return driver
-        end
+        return driver if driver_id == driver.id
       end
     end
 
