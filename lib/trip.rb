@@ -1,4 +1,4 @@
-module RideShare
+require_relative 'rideshare'
 
   class Trip
 
@@ -18,5 +18,3 @@ module RideShare
     # returns array of all instances of trip with driver_ID
 
   end
-
-end

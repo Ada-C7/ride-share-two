@@ -1,4 +1,4 @@
-module RideShare
+require_relative 'rideshare'
 
   class Driver
 
@@ -29,5 +29,3 @@ module RideShare
 
 
   end
-
-end

@@ -1,4 +1,4 @@
-module RideShare
+require_relative 'rideshare'
 
   class Rider
 
@@ -25,5 +25,3 @@ module RideShare
 
 
   end
-
-end
