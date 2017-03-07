@@ -49,12 +49,6 @@ describe "Trip" do
     # 4,13,70,2016-05-14,4
     # 5,3,12,2015-12-14,2
 
-    # so if you passed in trip_data arrays you can more easily make bad data
-    # writing these are easier than making csv files (more contained)
-    # chris says write one for each type of error - good luck figuring out all errors
-    # you can use let to pass in the bad arrays
-    # [ [], [], [], [] ]
-
     before do
       csv_file = './support/trips.csv'
       # @trips_data = RideShare::FileData.read_csv(csv_file)

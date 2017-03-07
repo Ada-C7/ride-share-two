@@ -1,4 +1,3 @@
-require 'csv'
 require 'date'
 module RideShare
   class Trip
@@ -45,15 +44,15 @@ module RideShare
     # don't have access to reader methods unless you have an instance of this class
     # Chris would figure out how to make this work
     def self.find_by_driver(id, trips_data)
-      trips_data = all(trips_data)
-      trips = trips_data.map { |trip| trip if trip.driver_id == id }.compact
-      return trips
+      trips = all(trips_data)
+      trips_of_driver = trips.map { |trip| trip if trip.driver_id == id }.compact
+      return trips_of_driver
     end
 
     def self.find_by_rider(id, trips_data)
       trips = all(trips_data)
-      trips.map! { |trip| trip if trip.rider_id == id }.compact!
-      return trips
+      trips_of_rider = trips.map { |trip| trip if trip.rider_id == id }.compact
+      return trips_of_rider
     end
 
     # helper method to use in place of the two above methods - CHRIS WOULD FIGURE OUT HOW TO USE THIS

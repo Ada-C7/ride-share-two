@@ -1,4 +1,3 @@
-require 'csv'
 module RideShare
   class Driver
     attr_reader :id, :name, :vin
@@ -9,27 +8,35 @@ module RideShare
       @vin = info[:vin]
     end
 
-
-    def self.all(csv_file)
-      drivers = CSV.read(csv_file)
-      drivers.shift
-
-      drivers.map! do |driver_info|
+    def self.all(drivers_data)
+      drivers = drivers_data.map do |driver_info|
         driver = Hash.new
-        driver[:id] = driver_info[0].to_i
-        driver[:name] = driver_info[1]
-        driver[:vin] = driver_info[2]
-        driver_info = driver
+        driver[:id] = test_for_integer(driver_info[0])
+        driver[:name] = test_for_string(driver_info[1])
+        driver[:vin] = test_for_vin(driver_info[2])
+        self.new(driver)
       end
-
-      drivers.map! { |info| self.new(info) }
       return drivers
     end
 
+    def self.test_for_integer(num)
+      Integer(num)
+    end
+
+    def self.test_for_string(name)
+      name
+    end
+
+    def self.test_for_vin(vin)
+      raise ArgumentError unless vin.length == 17
+      vin
+    end
+
     # return nil if the account does not exist
-    def self.find(driver_id, file)
-      drivers = all(file)
-      drivers.each { |info| return info if info.id == driver_id }
+    # this should also only return one account
+    def self.find(driver_id, drivers_data)
+      drivers = all(drivers_data)
+      driver = drivers.each { |info| return info if info.id == driver_id }
       nil
     end
   end
