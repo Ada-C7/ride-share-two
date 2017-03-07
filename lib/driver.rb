@@ -40,11 +40,9 @@ module RideShare
 
     def rating
       driver_trips = Trip.find_trips_by_driver @id
-      total_rating = driver_trips.inject { |total, trip| total + trip.rating}.to_f
-      avg_rating = total_rating/driver.trips.length
-      return avg_rating
-
-
+      ratings = driver_trips.map { |trip| trip.rating}
+      total_rating = ratings.inject(:+).to_f
+      return total_rating/driver_trips.length
       #returns average rating of those trips
     end
 

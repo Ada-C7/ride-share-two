@@ -30,7 +30,6 @@ describe "Drivers" do
 
     it "gets the last item"  do
         drivers.last.name.must_equal "Minnie Dach"
-
     end
 
     describe "Error Checking" do
@@ -38,32 +37,31 @@ describe "Drivers" do
       #rider_id is an integer
       #phone_number is ??
     end
-
   end
 
   describe "find" do
 
     it "returns an instance of Driver" do
-
       driver = RideShare::Driver.find 80
       driver.must_be_instance_of RideShare::Driver
       driver.id.must_equal 80
       driver.name.must_equal "Victoria Windler"
-      # driver.must_be_instance_of NilClass
     end
 
     it "returns nil if Driver is not found" do
       driver = RideShare::Driver.find 450
       driver.must_be_instance_of NilClass
     end
-
   end
-
 
   describe "trips" do
 
     it "returns an Array of trips" do
-      #object is an Array
+      driver = drivers[50]
+      driver.trips.must_be_instance_of Array
+      driver.trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
       #all elements in Array are Trip instances
     end
 
@@ -83,11 +81,11 @@ describe "Drivers" do
 
   describe "rating" do
 
-    it "returns an Integer" do
+    it "returns a float" do
+      driver = drivers[34]
+      driver.rating.must_be_instance_of Float
+      driver.rating.must_be :<=, 5
+      driver.rating.must_be :>=, 1
     end
-
-
   end
-
-
 end
