@@ -12,6 +12,7 @@ module RideShare
     def self.all(csv_file)
       riders = CSV.read(csv_file)
       riders.shift
+
       riders.map! do |rider_info|
         rider = Hash.new
         rider[:id] = rider_info[0].to_i

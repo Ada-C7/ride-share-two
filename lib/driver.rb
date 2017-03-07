@@ -13,6 +13,7 @@ module RideShare
     def self.all(csv_file)
       drivers = CSV.read(csv_file)
       drivers.shift
+
       drivers.map! do |driver_info|
         driver = Hash.new
         driver[:id] = driver_info[0].to_i
