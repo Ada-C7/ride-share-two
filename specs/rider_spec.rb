@@ -16,6 +16,27 @@ describe "Rider tests" do
       rider.must_respond_to :phone
       rider.phone.must_equal "206-555-2468"
     end
+
+    it "only accepts integer IDs" do
+      rider_hash = { id: "id", name: "Ada", phone: "2065552468" }
+      proc { RideShare::Rider.new(rider_hash) }.must_raise ArgumentError
+    end
+
+    it "only accepts non-empty strings for names" do
+      rider_hash1 = { id: 4, name: "", phone: "2065552468" }
+      rider_hash2 = { id: 4, name: 45, phone: "2065552468" }
+
+      proc { RideShare::Rider.new(rider_hash1) }.must_raise ArgumentError
+      proc { RideShare::Rider.new(rider_hash2) }.must_raise ArgumentError
+    end
+
+    it "only accepts non-empty strings for VINs" do
+      rider_hash1 = { id: 4, name: "Ada", phone: "" }
+      rider_hash2 = { id: 4, name: "Ada", phone: [] }
+
+      proc { RideShare::Rider.new(rider_hash1) }.must_raise ArgumentError
+      proc { RideShare::Rider.new(rider_hash2) }.must_raise ArgumentError
+    end
   end
 
   describe "Rider.all" do
