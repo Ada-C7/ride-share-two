@@ -4,7 +4,7 @@ require_relative '../lib/driver'
 describe "Driver class" do
   before do
     @driver_hash = {id: 6, name: "Mr. Hyman Wolf", vin: "L1CXMYNZ3MMGTTYWU" }
-    @driver = Driver.new(driver_hash)
+    @driver = Driver.new(@driver_hash)
   end
 
   describe "#initialize method" do
@@ -24,7 +24,7 @@ describe "Driver class" do
       }.must_raise ArgumentError
     end
 
-    it "Raises an argument error if the hash is incomplete" do
+    it "Raises an argument error if the ID is incomplete" do
       proc {
         driver = Driver.new({})
       }.must_raise ArgumentError
