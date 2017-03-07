@@ -29,9 +29,17 @@ module RideShare
       return trips
     end
 
+    # these two method are very similar - maybe should be writing one method
+    # or a helper method
     def self.find_by_driver(id, csv_file)
       trips = all(csv_file)
       trips.map! { |trip| trip if trip.driver_id == id }.compact!
+      return trips
+    end
+
+    def self.find_by_rider(id, csv_file)
+      trips = all(csv_file)
+      trips.map! { |trip| trip if trip.rider_id == id }.compact!
       return trips
     end
   end
