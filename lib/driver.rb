@@ -5,10 +5,10 @@ class Driver
      attr_reader :id, :name, :vehicle_id
 
      def initialize(id, name, vehicle_id)
+          raise ArgumentError if vehicle_id.class != String || vehicle_id.length > 7
           @id = id
           @name = name
           @vehicle_id = vehicle_id
-          #driver should have a vehicle identification number (limited to 8 characters)
      end
 
 end
