@@ -86,6 +86,11 @@ describe "Trip" do
 
   end # End of describe "#self.find_all_trips_for_driver"
 
+  describe "#self.find_all_trips_for_rider" do
+
+
+  end # End of describe "#self.find_all_trips_for_rider"
+
 
 
 end # End of describe "class Trip"
