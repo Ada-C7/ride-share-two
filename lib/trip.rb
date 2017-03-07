@@ -4,7 +4,6 @@ module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
 
-    # rating can only be 1-5 - should you test here...
     def initialize(info)
       @id = info[:id]
       @driver_id = info[:driver_id]
@@ -29,8 +28,6 @@ module RideShare
 
     def self.test_for_integer(num)
       Integer(num)
-      # unless ( Integer(num) rescue false ) != false
-      # Integer(num)
     end
 
     # this will throw an arugment error if not given proper format

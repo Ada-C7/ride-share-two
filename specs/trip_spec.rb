@@ -1,6 +1,7 @@
 require 'date'
 require_relative './spec_helper.rb'
 require_relative '../lib/file'
+require_relative '../lib/trip'
 
 describe "Trip" do
   # trip_id,driver_id,rider_id,date,rating
@@ -29,7 +30,7 @@ describe "Trip" do
     end
 
     # this is more testing the reader methods for the instance variables
-    it "assigns instance variables: id, driver_id, rider_id, date, rating" do
+    it "assigns reader method for instance variables" do
       @new_trip.id.must_equal 12
       @new_trip.driver_id.must_equal 12
       @new_trip.rider_id.must_equal 237
@@ -56,7 +57,9 @@ describe "Trip" do
 
     before do
       csv_file = './support/trips.csv'
-      @trips_data = RideShare::FileData.read_csv(csv_file)
+      # @trips_data = RideShare::FileData.read_csv(csv_file)
+      data = FileData.new(csv_file)
+      @trips_data = data.read_csv_and_remove_headings
       @trips_bad_data_1 = [['three', '1', '54', "2016-04-05", '4']]
       @trips_bad_data_2 = [['3', 'one', '54', "2016-04-05", '4']]
       @trips_bad_data_3 = [['3', '1', 'fifity', "2016-04-05", '4']]
@@ -86,12 +89,6 @@ describe "Trip" do
     end
 
     it "raises an argument error if not given integer for trip ID  " do
-      # below is not working - says undefined
-      # proc {
-      #   RideShare::Trip.all(@trips_data_bad_1)
-      # }.must_raise ArgumentError => ex
-      # ex.message.must_equal "Data is not integer"
-      # this works:
       # proc also equals ->
       proc {
         RideShare::Trip.all(@trips_bad_data_1)
@@ -137,6 +134,7 @@ describe "Trip" do
       }.must_raise ArgumentError
     end
 
+    # good example of testing an error with the expected error message
     it "given error message when given [[]]" do
       err = proc {
         RideShare::Trip.all(@trips_bad_data_8)
@@ -149,7 +147,9 @@ describe "Trip" do
 
     before do
       csv_file = './support/trips.csv'
-      @trips_data = RideShare::FileData.read_csv(csv_file)
+      # @trips_data = RideShare::FileData.read_csv(csv_file)
+      data = FileData.new(csv_file)
+      @trips_data = data.read_csv_and_remove_headings
       @driver_id = 7
     end
 
@@ -171,12 +171,14 @@ describe "Trip" do
       trips.each { |trip| trip.driver_id.must_equal @driver_id }
     end
   end
-  
+
   describe "Trip#find_by_rider" do
 
     before do
       csv_file = './support/trips.csv'
-      @trips_data = RideShare::FileData.read_csv(csv_file)
+      # @trips_data = RideShare::FileData.read_csv(csv_file)
+      data = FileData.new(csv_file)
+      @trips_data = data.read_csv_and_remove_headings
       @rider_id = 120
     end
 
