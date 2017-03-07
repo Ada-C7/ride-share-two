@@ -15,22 +15,41 @@ module Rideshare
       raise ArgumentError.new("Not a valid rating") if @rating > 5 || @rating < 0
     end
 
-#self.method1 : find all trip instances for a given driver ID
-    def self.find_driver(driver_id)
-      Rideshare::Driver.find(driver_id)
+    #self.method1 : retrieve all trips from the CSV file
+    def self.all
+      trips = []
+      CSV.read('./support/trips.csv').drop(1).each do |trip|
+        trips << {trip_id: trip[0].to_i , driver_id: trip[1].to_i, rider_id: trip[2].to_i, date: trip[3], rating: trip[4].to_i}
+      end
+      return trips
     end
 
-    def self.find_rider(rider_id)
-      Rideshare::Rider.find(rider_id)
+    #self.method2 : find all trip instances for a given driver ID
+    def self.find_trip_by_driver(driver_id)
+      trips = []
+      self.all.each do |trip|
+        trips << trip if trip[:driver_id] == driver_id
+      end
+      return trips
     end
 
-#self.method2 : find all trip instances for a given rider ID
+    def self.find_trip_by_rider(rider_id)
+      trips = []
+      self.all.each do |trip|
+        trips << trip if trip[:rider_id] == rider_id
+      end
+      return trips
+    end
 
-#self.method3 : retrieve all trips from the CSV file
+
 
 #instance_method1 : retrieve the associated driver instance through the driver ID
-
+    # def find_driver
 #instance_method2 : retrieve the associated rider instance through the rider ID
 
   end
 end
+
+# print Rideshare::Trip.find_trip_by_driver(1)
+# print Rideshare::Trip.all
+print Rideshare::Trip.find_trip_by_rider(1)
