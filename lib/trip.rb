@@ -32,15 +32,21 @@ module RideShare
       return @all # return all instances of trips
     end
 
-    # class method: trips_rode(rider_id)
-    # find instances of trips where rider_id matches argument
-    # alert user if no trips with matching rider_id is found
-    # return collection of trips by specific rider
+    # class method: by_rider(rider_id)
+    def self.by_rider(rider_id)
+      # find all instances of trips where rider_id matches
+      @all.select { |trip| trip.rider_id == rider_id }
+      # alert user if no trips with matching rider_id is found
+      # return collection of trips by specific rider
+    end
 
-    # class method: trips_driven(driver_id)
-    # find instances of trips where driver_id matches argument
-    # alert user if no trips with matching rider_id is found
-    # return collection of trips by specific driver
+      # class method: by_driver(driver_id)
+    def self.by_driver(driver_id)
+      # find all instances of trips where driver_id matches
+        @all.select { |trip| trip.driver_id == driver_id }
+      # alert user if no trips with matching driver_id is found
+      # return collection of trips by specific driver
+    end
 
     # instance method: find_driver
     def find_driver

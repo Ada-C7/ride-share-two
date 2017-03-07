@@ -18,10 +18,6 @@ Given a rider object, you should be able to:
 #### Trip
 -   Each rating should be within an acceptable range (1-5)
 
-Given a trip object, you should be able to:
-- retrieve the associated driver instance through the driver ID
-- retrieve the associated rider instance through the rider ID
-
 You should be able to:
 - find all trip instances for a given driver ID
 - find all trip instances for a given rider ID
