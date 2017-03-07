@@ -1,6 +1,6 @@
 class Driver
 
-  attr_reader id:
+  attr_reader :id
 
   def initialize(hash)
     @id = hash[:id]

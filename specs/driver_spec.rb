@@ -9,30 +9,45 @@ describe "Driver class" do
 
   describe "Initialize method" do
     it "" do
-
+      # nada?
     end
   end
 
   describe "get_trips method" do
-    it "" do
+    it "returns an array" do
+
+    end
+    it "all elements are Trip instances" do
+
+    end
+    it "all Trips in array have same driver_id as id passed in" do
 
     end
   end
 
   describe "average_rating method" do
-    it "" do
+    it "returns a float" do
+
+    end
+    it "is between 1 and 5" do
 
     end
   end
 
   describe "self.all method" do
-    it "" do
+    it "returns an array" do
+
+    end
+    it "all elements are Driver instances" do
 
     end
   end
 
   describe "self.find(id) method" do
-    it "" do
+    it "returns a Driver instance" do
+
+    end
+    it "Driver's id matches the id passed in" do
 
     end
   end
