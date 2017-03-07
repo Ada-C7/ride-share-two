@@ -4,6 +4,7 @@ SimpleCov.start
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'csv'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
@@ -13,8 +14,6 @@ describe "RideShare::Rider" do
 
   before do
     @my_rider = RideShare::Rider.new(2, "name", 4567435534)
-
-
   end
 
   describe "initialize method" do
@@ -28,7 +27,7 @@ describe "RideShare::Rider" do
     end
 
     it "id must be a number" do
-      @my_rider.number.must_be_kind_of Integer
+      @my_rider.id.must_be_kind_of Integer
     end
 
     it "phone number must be a number" do
@@ -40,7 +39,7 @@ describe "RideShare::Rider" do
 
     it "returns an array of all accounts" do
 
-      riders_array = @my_rider.all
+      riders_array = RideShare::Rider.all
       riders_array.must_be_instance_of Array
 
       riders_array.each do |rider|
@@ -70,6 +69,13 @@ describe "RideShare::Rider" do
 
     it "can find the last account from the CSV" do
       RideShare::Rider.find(300).wont_be_nil
+    end
+  end
+
+  describe "to_s method" do
+
+    it "returns string" do
+      @my_rider.to_s.must_be_kind_of String
     end
   end
 end
