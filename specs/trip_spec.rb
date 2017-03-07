@@ -67,15 +67,33 @@ describe "Trip class" do
   end
 
   describe "self.all method" do
+    let(:all_trips) {Trip.all("support/trips.csv")}
+    let(:trip_test) {nil}
     it "returns an array" do
-      all_trips = Trip.all
       all_trips.must_be_kind_of Array
     end
     it "all elements are Rider instances" do
-      all_trips = Trip.all
       all_trips.each do |trip|
         trip.must_be_kind_of Trip
       end
+    end
+    it "grabs first line of data from csv" do
+      # test_trip = nil
+      trip_test = all_trips.find {|trip| trip.id == 1}
+      trip_test.must_be_kind_of Trip
+    end
+    it "grabs last line of data from csv" do
+      # test_trip = nil
+      trip_test = all_trips.find {|trip| trip.id == 600}
+      trip_test.driver_id.must_equal 61
+    end
+    it "grabs random middle line of data from csv" do
+      # test_trip = nil
+      trip_test = all_trips.find {|trip| trip.id == 230}
+      trip_test.date.must_equal "2016-10-12"
+    end
+    it "raises no data error if no trips in csv" do
+      proc {Trip.all("support/empty.csv")}.must_raise NoDataError
     end
   end
 

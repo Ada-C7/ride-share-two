@@ -3,7 +3,7 @@ require 'pry'
 
 class Trip
 
-  attr_reader :rider_id, :driver_id, :rating, :id
+  attr_reader :rider_id, :driver_id, :rating, :id, :date
 
   def initialize(hash)
     @id = hash[:id]
@@ -23,7 +23,7 @@ class Trip
 
   def self.all_with_driver(id)
     list_of_trips = []
-    all_trips = Trip.all
+    all_trips = Trip.all("support/trips.csv")
     all_trips.each do |trip|
       list_of_trips << trip if trip.driver_id == id
     end
@@ -32,15 +32,15 @@ class Trip
 
   def self.all_with_rider(id)
     list_of_trips = []
-    all_trips = Trip.all
+    all_trips = Trip.all("support/trips.csv")
     all_trips.each do |trip|
       list_of_trips << trip if trip.rider_id == id
     end
     return list_of_trips
   end
 
-  def self.all
-    my_file = CSV.open("support/trips.csv")
+  def self.all(csv)
+    my_file = CSV.open(csv)
     all_trip_info = []
     my_file.each do |line|
       trip_hash = {}
@@ -52,6 +52,7 @@ class Trip
 
       all_trip_info << trip_hash
     end
+    raise NoDataError.new("no data") if all_trip_info.empty?
     all_trip_info.delete_at(0)
     all_trips = []
     all_trip_info.each do |trip|
@@ -63,5 +64,3 @@ class Trip
   end
 
 end
-
-Trip.all

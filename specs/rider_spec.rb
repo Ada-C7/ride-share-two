@@ -46,15 +46,32 @@ describe "Rider class" do
   end
 
   describe "self.all method" do
+    let(:all_riders) {Rider.all("support/riders.csv")}
     it "returns an array" do
-      all_riders = Rider.all
       all_riders.must_be_kind_of Array
     end
     it "all elements are Rider instances" do
-      all_riders = Rider.all
       all_riders.each do |rider|
         rider.must_be_kind_of Rider
       end
+    end
+    it "grabs first line of data from csv" do
+      test_rider = nil
+      test_rider = all_riders.find {|rider| rider.id == 1}
+      test_rider.must_be_kind_of Rider
+    end
+    it "grabs last line of data from csv" do
+      test_rider = nil
+      test_rider = all_riders.find {|rider| rider.id == 300}
+      test_rider.name.must_equal "Miss Isom Gleason"
+    end
+    it "grabs random middle line of data from csv" do
+      test_rider = nil
+      test_rider = all_riders.find {|rider| rider.id == 153}
+      test_rider.phone_number.must_equal "1-227-712-3316 x290"
+    end
+    it "raises no data error if no riders in csv" do
+      proc {Rider.all("support/empty.csv")}.must_raise NoDataError
     end
   end
 

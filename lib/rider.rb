@@ -2,7 +2,7 @@ require 'csv'
 
 class Rider
 
-  attr_reader :id
+  attr_reader :id, :name, :phone_number
 
   def initialize(hash)
     @id = hash[:id]
@@ -24,8 +24,8 @@ class Rider
     return drivers
   end
 
-  def self.all
-    my_file = CSV.open("support/riders.csv")
+  def self.all(csv)
+    my_file = CSV.open(csv)
     all_rider_info = []
     my_file.each do |line|
       rider_hash = {}
@@ -35,6 +35,7 @@ class Rider
 
       all_rider_info << rider_hash
     end
+    raise NoDataError.new("no data") if all_rider_info.empty?
     all_riders = []
     all_rider_info.delete_at(0)
     all_rider_info.each do |rider|
@@ -46,7 +47,7 @@ class Rider
   end
 
   def self.find(id)
-    all_riders = Rider.all
+    all_riders = Rider.all("support/riders.csv")
     found_rider = nil
     all_riders.each do |rider|
       found_rider = rider if rider.id == id
