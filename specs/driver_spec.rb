@@ -11,7 +11,7 @@ Minitest::Reporters.use!
 Minitest::Reporters::SpecReporter.new
 
 describe "RideShare: Drivers" do
-  # let(:drivers) {RideShare::Drivers.read_csv}
+  let(:drivers) {RideShare::Drivers.read_csv}
   before do
     RideShare::Drivers.read_csv
   end
@@ -53,10 +53,12 @@ describe "RideShare: Drivers" do
   end
 
   describe "Driver.find(id)" do
-    it "returns a driver object" do
-      driver = RideShare::Drivers.find(99)
-      # driver.must_be_instance_of 
-    end
+    # it "returns a driver object" do
+    #   skip
+    #   driver = RideShare::Drivers.find(99)
+    #   driver.must_be_kind_of
+    #   # p driver
+    # end
   end
 
 

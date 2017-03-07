@@ -2,7 +2,8 @@ require 'csv'
 
 module RideShare
   class Drivers
-    attr_reader :id, :name, :VIN, :drivers
+    attr_reader :id, :name, :VIN
+    @@drivers
     # Initialize Drivers
     # set ID, Name, License and VIN as attr_reader
     # import csv file
@@ -53,25 +54,17 @@ module RideShare
     # Find a specific driver(driver_id)
     # return the instance of that driver (hash of details)
     def self.find(id)
-      #write as a one-liner
-      @@drivers.each do |driver|
-          if driver[:id] == id
-            return driver
-          end
-        end
-      end
-    end
-
+      # @@drivers.each do |driver|
+      #   if driver[:id] == id
+      #     driver_details = driver
+      #   end
       # end
-      #
-
-      # Class Method (self.all)
-      # listing out all driver instances in an array of hashes
-      # def self.all
-      #   @drivers
-      # end
-
-      # end
-      # end
+      # ## TW: Should I return driver instead of puts?
+      # p driver_object
     end
   end
+end
+# end
+
+RideShare::Drivers.read_csv
+RideShare::Drivers.find(99)
