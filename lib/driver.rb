@@ -24,5 +24,12 @@ module RideShare
       drivers.map! { |info| self.new(info) }
       return drivers
     end
+
+    # return nil if the account does not exist
+    def self.find(driver_id, file)
+      drivers = all(file)
+      drivers.each { |info| return info if info.id == driver_id }
+      nil
+    end
   end
 end
