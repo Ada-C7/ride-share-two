@@ -8,7 +8,13 @@
       @phone_num = rider_data[:phone_num]
     end
 
+    def trips
+      return RideShare::Trip.all_riders(id)
+    end
+
     def drivers
+      drivers = trips.map{ |t| RideShare::Driver.find(t.driver_id) }
+      return drivers
     end
 
     def self.all

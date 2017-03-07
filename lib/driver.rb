@@ -9,13 +9,12 @@
     end
 
     def trips
-      drives = RideShare::Trip.all_drivers(id)
-      return drives
+      return RideShare::Trip.all_drivers(id)    
     end
 
     def rating
       ratings = trips.map{ |t| t.rating.to_f }
-      return (ratings.reduce(:+) / ratings.length)
+      return (ratings.reduce(:+) / ratings.length).round(1)
     end
 
     def self.all

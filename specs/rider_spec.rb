@@ -73,4 +73,17 @@ describe "Rider Class" do
 
   end
 
+  describe "Drivers method" do
+    let(:rider) { RideShare::Rider.all.first }
+    let(:drivers) { rider.drivers }
+
+    it "Returns an array" do
+      drivers.must_be_instance_of Array
+    end
+
+    it "Returns an array of driver objects" do
+      drivers.each {|d| d.must_be_instance_of RideShare::Driver }
+    end
+  end
+
 end
