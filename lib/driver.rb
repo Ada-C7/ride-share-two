@@ -20,6 +20,23 @@ class Driver
 
   def self.all
     # read in csv file to create master list of all drivers
+    my_file = CSV.open("support/drivers.csv")
+    all_driver_info = []
+    my_file.each do |line|
+      driver_hash = {}
+      driver_hash[:id] = line[0].to_i
+      driver_hash[:name] = line[1]
+      driver_hash[:vehicle_id] = line[2]
+
+      all_driver_info << driver_hash
+    end
+    all_drivers = []
+    all_driver_info.each do |driver|
+      new_driver = Driver.new(driver)
+      all_drivers << new_driver
+    end
+
+    return all_drivers
   end
 
   def self.find(id)

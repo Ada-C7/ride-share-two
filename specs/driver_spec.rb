@@ -29,20 +29,24 @@ describe "Driver class" do
     it "returns a float" do
 
     end
-    it "is >= 1" do
+    it "float is >= 1.0" do
 
     end
-    it "is <= 5" do
+    it "float is <= 5.0" do
 
     end
   end
 
   describe "self.all method" do
     it "returns an array" do
-
+      all_drivers = Driver.all
+      all_drivers.must_be_kind_of Array
     end
     it "all elements are Driver instances" do
-
+      all_drivers = Driver.all
+      all_drivers.each do |driver|
+        driver.must_be_kind_of Driver
+      end
     end
   end
 

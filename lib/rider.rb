@@ -20,6 +20,23 @@ class Rider
 
   def self.all
     # read in csv file to create master list of all riders
+    my_file = CSV.open("support/riders.csv")
+    all_rider_info = []
+    my_file.each do |line|
+      rider_hash = {}
+      rider_hash[:id] = line[0].to_i
+      rider_hash[:name] = line[1]
+      rider_hash[:phone_number] = line[2]
+
+      all_rider_info << rider_hash
+    end
+    all_riders = []
+    all_rider_info.each do |rider|
+      new_rider = Rider.new(rider)
+      all_riders << new_rider
+    end
+
+    return all_riders
   end
 
   def self.find(id)

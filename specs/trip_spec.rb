@@ -55,4 +55,17 @@ describe "Trip class" do
     end
   end
 
+  describe "self.all method" do
+    it "returns an array" do
+      all_trips = Trip.all
+      all_trips.must_be_kind_of Array
+    end
+    it "all elements are Rider instances" do
+      all_trips = Trip.all
+      all_trips.each do |trip|
+        trip.must_be_kind_of Trip
+      end
+    end
+  end
+
 end

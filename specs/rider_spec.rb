@@ -35,10 +35,14 @@ describe "Rider class" do
 
   describe "self.all method" do
     it "returns an array" do
-
+      all_riders = Rider.all
+      all_riders.must_be_kind_of Array
     end
-    it "all items in array are Riders" do
-
+    it "all elements are Rider instances" do
+      all_riders = Rider.all
+      all_riders.each do |rider|
+        rider.must_be_kind_of Rider
+      end
     end
   end
 

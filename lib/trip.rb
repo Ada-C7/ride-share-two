@@ -41,6 +41,25 @@ class Trip
 
   def self.all
     # read in CSV file to creat list of all trip instances
+    my_file = CSV.open("support/trips.csv")
+    all_trip_info = []
+    my_file.each do |line|
+      trip_hash = {}
+      trip_hash[:id] = line[0].to_i
+      trip_hash[:rider_id] = line[1].to_i
+      trip_hash[:driver_id] = line[2].to_i
+      trip_hash[:date] = line[2]
+      trip_hash[:rating] = line[2].to_f
+
+      all_trip_info << trip_hash
+    end
+    all_trips = []
+    all_trip_info.each do |trip|
+      new_trip = Trip.new(trip)
+      all_trips << new_trip
+    end
+
+    return all_trips
   end
 
 end
