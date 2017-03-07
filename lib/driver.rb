@@ -20,9 +20,21 @@ module RideSharing
           puts "#{exception.message}"
           next
         end
-        all_drivers << self.new(driver[0], driver[1], driver[2])
+        all_drivers << self.new(driver[0].to_i, driver[1], driver[2])
       end
       return all_drivers
+    end
+
+    def self.find(id)
+      found_driver = nil
+      self.all.each do |driver|
+        if driver.id == id
+          found_driver = driver
+          break
+        end
+      end
+      raise ArgumentError.new("No such id number exist") if found_driver == nil
+      return found_driver
     end
 
 
