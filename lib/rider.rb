@@ -1,5 +1,5 @@
-require 'csv'
-require_relative 'trip'
+# require 'csv'
+# require_relative 'trip'
 
 class Rider
   attr_reader :id, :name, :phone
