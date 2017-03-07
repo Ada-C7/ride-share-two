@@ -17,25 +17,38 @@ describe "Rider tests" do
       rider.phone.must_equal "206-555-2468"
     end
 
-    it "only accepts integer IDs" do
-      rider_hash = { id: "id", name: "Ada", phone: "2065552468" }
-      proc { RideShare::Rider.new(rider_hash) }.must_raise ArgumentError
+    it "Only accepts positive integer IDs" do
+      rider_hash1 = { id: "id", name: "Ada", phone: "2065552468" }
+      rider_hash2 = { id: 0, name: "Ada", phone: "2065552468" }
+      rider_hash3 = { id: -4, name: "Ada", phone: "2065552468" }
+
+      proc { RideShare::Rider.new(rider_hash1) }.must_raise ArgumentError
+      proc { RideShare::Rider.new(rider_hash2) }.must_raise ArgumentError
+      proc { RideShare::Rider.new(rider_hash3) }.must_raise ArgumentError
     end
 
-    it "only accepts non-empty strings for names" do
+    it "Only accepts non-empty strings for Name and Phone Number" do
       rider_hash1 = { id: 4, name: "", phone: "2065552468" }
       rider_hash2 = { id: 4, name: 45, phone: "2065552468" }
 
       proc { RideShare::Rider.new(rider_hash1) }.must_raise ArgumentError
       proc { RideShare::Rider.new(rider_hash2) }.must_raise ArgumentError
+
+      rider_hash3 = { id: 4, name: "Ada", phone: "" }
+      rider_hash4 = { id: 4, name: "Ada", phone: [] }
+
+      proc { RideShare::Rider.new(rider_hash3) }.must_raise ArgumentError
+      proc { RideShare::Rider.new(rider_hash4) }.must_raise ArgumentError
     end
 
-    it "only accepts non-empty strings for VINs" do
-      rider_hash1 = { id: 4, name: "Ada", phone: "" }
-      rider_hash2 = { id: 4, name: "Ada", phone: [] }
+    it "All fields are required" do
+      rider_hash1 = { name: "Galois", phone: "206-555-2468" }
+      rider_hash2 = { id: 8, phone: "206-555-2468" }
+      rider_hash3 = { id: 8, name: "Galois" }
 
       proc { RideShare::Rider.new(rider_hash1) }.must_raise ArgumentError
       proc { RideShare::Rider.new(rider_hash2) }.must_raise ArgumentError
+      proc { RideShare::Rider.new(rider_hash3) }.must_raise ArgumentError
     end
   end
 
@@ -44,10 +57,9 @@ describe "Rider tests" do
       riders_array.must_be_instance_of Array
     end
 
-    it "Everything in the array is a Rider" do
-      riders_array.each do |rider|
-        rider.must_be_instance_of RideShare::Rider
-      end
+    it "The first and last element of the array is a Rider" do
+      riders_array[0].must_be_instance_of RideShare::Rider
+      riders_array[-1].must_be_instance_of RideShare::Rider
     end
 
     it "The number of riders is correct" do

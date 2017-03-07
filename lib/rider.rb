@@ -2,13 +2,9 @@ class RideShare::Rider
   attr_reader :id, :name, :phone
 
   def initialize(rider_hash)
-    raise ArgumentError.new("Rider ID must be an integer") if rider_hash[:id].class != Integer
-    raise ArgumentError.new("Name must be a non-empty string") if rider_hash[:name].class != String || rider_hash[:name] == ""
-    raise ArgumentError.new("Phone must be a non-empty string") if rider_hash[:phone].class != String || rider_hash[:phone] == ""
-
-    @id = rider_hash[:id]
-    @name = rider_hash[:name]
-    @phone = rider_hash[:phone]
+    @id = RideShare::validate_int(rider_hash[:id], "Rider ID")
+    @name = RideShare::validate_string(rider_hash[:name], "Name")
+    @phone = RideShare::validate_string(rider_hash[:phone], "Phone Number")
   end
 
   def self.all
