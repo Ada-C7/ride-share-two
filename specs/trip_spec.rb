@@ -35,10 +35,6 @@ describe "Trip" do
 
   describe "find_trips_by_rider" do
     it "takes a rider_id" do
-
-    end
-
-    it "raises/does something if it can't find that rider id" do
       skip
     end
 
@@ -63,8 +59,6 @@ describe "Trip" do
       rider_trips.must_be_instance_of NilClass
     end
     #all rider_ids must match the passed argument
-
-
   end
 
   describe "find_trips_by_Driver" do
@@ -95,9 +89,19 @@ describe "Trip" do
 
   describe "rider" do
     it "returns a Rider instance" do
+      trip = trips[23]
+      rider_info = trip.rider
+      rider_info.must_be_instance_of RideShare::Rider
+      rider_info.id.must_equal trip.rider_id
+      rider_info.id.must_equal 280
+    # CSV file: 24,75,280,2015-11-04,4
     end
 
-    it "lets you know if it doesn't have the rider info" do
+    it "returns nil if the rider isn't found" do
+      #don't think this is possible to test through current CSV files?
+      trip =  RideShare::Trip.new(6500, 727272, 7845, "2016-12-29", 4)
+      rider_info = trip.rider
+      rider_info.must_be_instance_of NilClass
     end
   end
 

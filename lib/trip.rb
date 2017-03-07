@@ -35,16 +35,27 @@ module RideShare
       #search by rider_id to return array of Trip instances associated with that rider
     end
 
-    def self.find_trips_by_driver
+    def self.find_trips_by_driver driver_id
+      all_trips = Trip.all
+      driver_trips = all_trips.find_all { |trip| trip.driver_id == driver_id }
+      if driver_trips.length > 0
+        return driver_trips
+      else
+        return nil
+      end
       #call all
       #search by driver to return array of Trip instances associated with that driver
     end
 
     def driver
+      driver_info = Diver.find @driver_id
+      return driver_info
       #call Driver.find to return Driver instance associated with the driver_id of the trip instance
     end
 
     def rider
+      rider_info = Rider.find @rider_id
+      return rider_info
       #call Rider.find to return Rider instance associated with the rider_id of the trip instance
     end
 
