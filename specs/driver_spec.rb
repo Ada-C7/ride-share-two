@@ -28,4 +28,34 @@ describe "RideShare::Driver" do
       no_vin.vin.must_equal nil
     end
   end
+
+  describe "Driver#all" do
+    before do
+      @drivers = RideShare::Driver.all
+    end
+
+    it "returns an array" do
+      @drivers.must_be_kind_of Array
+    end
+    it "each returned element is a trip instances" do
+      @drivers.each do |object|
+        object.must_be_instance_of RideShare::Driver
+      end
+    end
+    it "returns the correct number of elements" do
+      @drivers.length.must_equal 100 # rows in CSV file
+    end
+    it "correctly reads in the first row of the CSV file" do
+      # last row of data: 1,Bernardo Prosacco,WBWSS52P9NEYLVDE9
+      @drivers[0].id.must_equal "1"
+      @drivers[0].driver_id.must_equal "Bernardo Prosacco"
+      @drivers[0].rider_id.must_equal "WBWSS52P9NEYLVDE9"
+    end
+    it "correctly reads in the last row of the CSV file" do
+      # last row of data: 100,Minnie Dach,XF9Z0ST7X18WD41HT
+      @drivers[-1].id.must_equal "100"
+      @drivers[-1].name.must_equal "Minnie Dach"
+      @drivers[-1].vin.must_equal "XF9Z0ST7X18WD41HT"
+    end
+  end
 end
