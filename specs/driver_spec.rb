@@ -2,6 +2,8 @@ require_relative 'spec_helper'
 
 describe "Driver tests" do
   let(:driver) { RideShare::Driver.new({ id: 4, name: "Ada", vin: "1XKAD49X2DJ395724" }) }
+  let(:drivers_array) { RideShare::Driver.all }
+  let(:csv_info) { CSV.read('support/drivers.csv') }
 
   describe "Driver#initialize" do
     it "Takes an ID, name, and VIN" do
@@ -34,6 +36,32 @@ describe "Driver tests" do
 
       proc { RideShare::Driver.new(driver_hash1) }.must_raise ArgumentError
       proc { RideShare::Driver.new(driver_hash2) }.must_raise ArgumentError
+    end
+  end
+
+  describe "Driver.all" do
+    it "Driver.all returns an array" do
+      drivers_array.must_be_instance_of Array
+    end
+
+    it "Everything in the array is a Driver" do
+      drivers_array.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
+      end
+    end
+
+    it "The number of drivers is correct" do
+      drivers_array.length.must_equal csv_info.count - 1
+    end
+
+    it "The information for the first & last driver is correct" do
+      drivers_array[0].id.must_equal csv_info[1][0].to_i
+      drivers_array[0].name.must_equal csv_info[1][1]
+      drivers_array[0].vin.must_equal csv_info[1][2]
+
+      drivers_array[-1].id.must_equal csv_info[-1][0].to_i
+      drivers_array[-1].name.must_equal csv_info[-1][1]
+      drivers_array[-1].vin.must_equal csv_info[-1][2]
     end
   end
 end

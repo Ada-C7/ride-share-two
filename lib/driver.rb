@@ -10,4 +10,16 @@ class RideShare::Driver
     @name = driver_hash[:name]
     @vin = driver_hash[:vin]
   end
+
+  def self.all
+    drivers = []
+    CSV.read("support/drivers.csv")[1..-1].each do |line|
+      drivers << RideShare::Driver.new( {
+        id: line[0].to_i,
+        name: line[1],
+        vin: line[2]
+      } )
+    end
+    return drivers
+  end
 end
