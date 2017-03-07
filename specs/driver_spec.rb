@@ -1,6 +1,5 @@
 require_relative 'spec_helper'
 
-
 describe Driver do
 
      before do
@@ -59,7 +58,7 @@ describe Driver do
                     end
                end
 
-              it "The ID, name and VIN of the first and last drivers match the CSV file" do
+              it "The ID, name and VIN of the first and last drivers match the CSV file:" do
                     @all_drivers[0].id.to_s.must_equal CSV.readlines(@file)[0][0]
                     @all_drivers[0].name.must_equal CSV.readlines(@file)[0][1]
                     @all_drivers[0].vin.must_equal CSV.readlines(@file)[0][2]
@@ -77,7 +76,7 @@ describe Driver do
                @file = "support/drivers.csv"
           end
 
-          it "Returns an account that exists" do
+          it "Returns an account that exists:" do
                id = 8
                index = id - 1
                one_driver = Driver.find(@file, id)
@@ -85,7 +84,7 @@ describe Driver do
                one_driver.id.to_s.must_equal CSV.readlines(@file)[index][0]
           end
 
-          it "Can find the first account from the CSV" do
+          it "Can find the first account from the CSV:" do
                id = 1
                index = id - 1
                first_account = Driver.find(@file, id)
@@ -93,7 +92,7 @@ describe Driver do
                first_account.id.to_s.must_equal CSV.readlines(@file)[index][0]
           end
 
-          it "Can find the last account from the CSV" do
+          it "Can find the last account from the CSV:" do
                id = 100
                index = id - 1
                first_account = Driver.find(@file, id)
@@ -101,7 +100,7 @@ describe Driver do
                first_account.id.to_s.must_equal CSV.readlines(@file)[index][0]
           end
 
-          it "Raises an error for an account that doesn't exist" do
+          it "Raises an error for an account that doesn't exist:" do
                id = 9033
                proc {Driver.find(@file, id)}.must_raise ArgumentError
           end

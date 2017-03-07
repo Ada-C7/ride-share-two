@@ -31,7 +31,6 @@ class Driver
      #      @average_rating = all_trips.rating.map { | sum, rating | sum + rating }/all_trips.length
      #      return @average_rating
      # end
-     #binding.pry
 
      def self.all(file)
           all_drivers = []
@@ -61,10 +60,3 @@ class Driver
 
      end
 end
-
-# file = "../support/drivers.csv"
-#
-# drivers = Driver.all(file)
-#
-# puts drivers.class
-# puts drivers[7].vin

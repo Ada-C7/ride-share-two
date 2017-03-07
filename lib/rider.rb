@@ -13,22 +13,14 @@ class Rider
           #@average_rating = calculate_average_rating
      end
 
-     # #retrieve the list of trip instances that only this driver has taken
+     # #retrieve the list of trip instances that only this rider has taken
      # def recall_trips(@id)
      #      #TODO Build block after trip.rb has been completed.
      #      #Calls Trip class method to retrieve list of trip instances according to @id.
      #      #@trips = Trip.find(@id)
      #      #return @trips
      # end
-     #
-     # #retrieve an average rating for that driver based on all trips taken
-     # def calculate_average_rating(@id)
-     #      #TODO Build block after trip.rb has been completed.
-     #      all_trips = recall_trips(@id)
-     #      @average_rating = all_trips.rating.map { | sum, rating | sum + rating }/all_trips.length
-     #      return @average_rating
-     # end
-     #binding.pry
+     
 
      # def self.all(file)
      #      all_drivers = []
