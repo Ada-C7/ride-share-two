@@ -5,10 +5,21 @@ module RideShare
   class Rider
     attr_reader :id, :name, :phone_number
     def initialize(id, name, phone_number)
-      @id = id
+      @id = id.to_i
       @name = name
-      @phone_number = phone_number.to_i
+      @phone_number = phone_number
     end
+
+  def self.all
+    rider_array = []
+    CSV.open('support/riders.csv', 'r', :headers => true).each do |line|
+      id = line["rider_id"].to_i
+      name = line["name"].to_s
+      phone_number = line["phone_number"].to_s
+      rider_array << self.new(id, name, phone_number)
+    end
+    return rider_array
+  end
 
 
 
