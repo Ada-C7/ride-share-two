@@ -7,6 +7,6 @@ require 'minitest/reporters'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-require_relative '../lib/riders.rb'
-require_relative '../lib/drivers.rb'
+require_relative '../lib/rider.rb'
+require_relative '../lib/driver.rb'
 require_relative '../lib/trip.rb'

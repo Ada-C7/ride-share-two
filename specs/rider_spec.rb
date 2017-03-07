@@ -1,5 +1,5 @@
 require_relative 'spec_helper.rb'
 
-describe "Riders" do
+describe "Rider" do
 
 end

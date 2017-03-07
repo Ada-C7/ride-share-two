@@ -1,5 +1,5 @@
 require_relative 'spec_helper.rb'
 
-describe "Trips" do
-  
+describe "Trip" do
+
 end
