@@ -33,6 +33,20 @@ describe "Driver class" do
     end
 
     it "For first and last drivers, Driver ID and Driver VIN must match what's in CSV file" do
+      # skip
+      drivers_array = RideShare::Driver.all
+
+      drivers_array[1].driver_id.must_equal("1")
+      drivers_array[1].vin.must_equal("WBWSS52P9NEYLVDE9")
+      drivers_array[100].driver_id.must_equal("100")
+      drivers_array[100].vin.must_equal("XF9Z0ST7X18WD41HT")
+    end
+
+    it "Array retrieved by self.all retrieves same number of drivers as is in CSV" do
+      # skip
+      drivers_array = RideShare::Driver.all
+
+      drivers_array.length.must_equal 101
     end
 
   end
