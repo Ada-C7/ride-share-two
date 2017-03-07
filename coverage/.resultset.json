@@ -1,0 +1,25 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/Neely/Desktop/Ada/week_five/ride-share-two/lib/drivers.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/Neely/Desktop/Ada/week_five/ride-share-two/lib/riders.rb": [
+
+      ],
+      "/Users/Neely/Desktop/Ada/week_five/ride-share-two/lib/trips.rb": [
+
+      ],
+      "/Users/Neely/Desktop/Ada/week_five/ride-share-two/specs/riders_spec.rb": [
+        1
+      ],
+      "/Users/Neely/Desktop/Ada/week_five/ride-share-two/specs/trips_spec.rb": [
+        1
+      ]
+    },
+    "timestamp": 1488846584
+  }
+}
