@@ -23,5 +23,11 @@ module RideShare
       riders.map! { |info| self.new(info) }
       return riders
     end
+
+    def self.find(rider_id, csv_file)
+      riders = all(csv_file)
+      riders.each { |info| return info if info.id == rider_id }
+      nil
+    end
   end
 end

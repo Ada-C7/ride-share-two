@@ -35,6 +35,7 @@ describe "Rider" do
   end
 
   describe "Rider#all" do
+
     let(:riders) { RideShare::Rider.all('./support/riders.csv') }
 
     it "requires one argument - a csv file" do
@@ -53,6 +54,41 @@ describe "Rider" do
 
     it "has the same number of riders instances as the CSV file" do
       riders.length.must_equal 300
+    end
+  end
+
+  describe "Rider#find" do
+
+    before do
+      @csv_file = './support/riders.csv'
+    end
+
+    it "requires arguments" do
+      proc {
+        RideShare::Rider.find()
+      }.must_raise ArgumentError
+    end
+
+    it "returns a rider instane when passed a valid id" do
+      RideShare::Rider.find(7, @csv_file).must_be_instance_of RideShare::Rider
+    end
+
+    it "returns nil when given a driver id that does no exist" do
+      RideShare::Rider.find(900, @csv_file).must_be_nil
+    end
+
+    it "can find the first rider from the CSV" do
+      first_rider = RideShare::Rider.find(1, @csv_file)
+      first_rider.name.must_equal "Nina Hintz Sr."
+      first_rider.id.must_equal 1
+      first_rider.phone_number.must_equal "560.815.3059"
+    end
+
+    it "can find the last rider from the CSV" do
+      last_rider = RideShare::Rider.find(300, @csv_file)
+      last_rider.name.must_equal "Miss Isom Gleason"
+      last_rider.id.must_equal 300
+      last_rider.phone_number.must_equal "791-114-8423 x70188"
     end
   end
 end
