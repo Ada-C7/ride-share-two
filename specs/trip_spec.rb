@@ -24,4 +24,20 @@ describe "Trip tests" do
     end
   end
 
+  describe "Trip.all" do
+    it "returns an array of all trips" do
+      Trip.all.class.must_equal Array
+
+    end
+
+    it "each element in array is a Trip" do
+
+      Trip.all do |element|
+        element.must_be_instance_of Trip
+      end
+
+    end
+
+  end
+
 end
