@@ -1,7 +1,7 @@
 require 'csv'
 
 class Driver
-  attr_reader :id
+  attr_reader :id, :name, :vin
 
   def initialize(id, name, vin)
     @id = id

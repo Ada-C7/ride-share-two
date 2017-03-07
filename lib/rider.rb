@@ -1,7 +1,7 @@
 require 'csv'
 
 class Rider
-  attr_reader :id
+  attr_reader :id, :name, :phone_num
 
   def initialize(id, name, phone_num)
     @id = id
@@ -19,12 +19,12 @@ class Rider
     # returns a driver instance
   end
 
-  def lists_trips
+  def list_trips
     # passes rider_id to find_trips_per_rider
     # returns a list of trip instances only this rider has taken
   end
 
-  def lists_drivers
+  def list_drivers
     # accesses list of trip instances from lists_trips
     # returns lists of all previous driver instances assoicated with this rider
   end
