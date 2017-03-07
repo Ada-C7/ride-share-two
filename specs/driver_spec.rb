@@ -69,12 +69,6 @@ describe "Driver Class" do
       driver.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
 
-    it "Finds the first driver in the CSV file" do
-    end
-
-    it "Finds the last driver in ther CSV file" do
-    end
-
   end
 
 end
