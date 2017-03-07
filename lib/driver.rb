@@ -1,3 +1,4 @@
+require 'pry'
 module RideShare
 
   class Driver
@@ -39,12 +40,18 @@ module RideShare
     def get_trips
       # passes driver id to Trip.find_by_driver
       # returns collection of trips taken by this driver
-      trips = Trip.find_by_driver(id)
+      Trip.find_by_driver(id)
     end
 
     def avg_rating
       # calls get_trips
       # calculates average rating across all trips
+      num_trips = get_trips.length.to_f
+      ratings = get_trips.map {|trip| trip.rating }
+
+      ratings.reduce(:+)/num_trips
+
+      # avoid dividing by zero
     end
 
   end

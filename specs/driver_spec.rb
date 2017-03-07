@@ -4,15 +4,15 @@ require_relative './spec_helper'
 describe "Driver" do
   before do
     @driver_hash = {
-      id: 88,
-      name: "Scylla Bankroll",
-      vin: "1G1H34JZ889X9LT46"
+      id: 99,
+      name: "Jayden Ledner",
+      vin: "RF4AT3WL6JJXPFUJL"
     }
 
     @bad_vin_hash = {
-      id: 88,
-      name: "Scylla Bankroll",
-      vin: "1G1H3"
+      id: 99,
+      name: "Jayden Ledner",
+      vin: "RF4AT3WL6"
     }
   end
 
@@ -20,9 +20,9 @@ describe "Driver" do
 
   describe "Driver initialize" do
     it "has required attributes" do
-      driver.name.must_equal "Scylla Bankroll"
-      driver.id.must_equal 88
-      driver.vin.must_equal "1G1H34JZ889X9LT46"
+      driver.name.must_equal "Jayden Ledner"
+      driver.id.must_equal 99
+      driver.vin.must_equal "RF4AT3WL6JJXPFUJL"
     end
 
     it "raises an error if VIN does not have seventeen digits" do
@@ -55,7 +55,6 @@ describe "Driver" do
   end
 
   describe "self.find" do
-
     it "returns a driver that exists" do
       RideShare::Driver.find(24).wont_be_nil
     end
@@ -68,7 +67,6 @@ describe "Driver" do
     it "raises an error for a driver ID that doesn't exist" do
       proc { RideShare::Driver.find(104)}.must_raise ArgumentError
     end
-
   end
 
 
@@ -79,7 +77,13 @@ describe "Driver" do
       sample_trip.must_be_instance_of RideShare::Trip
       sample_trip.driver_id.must_equal driver.id
     end
-
   end
+
+  describe "avg_rating" do
+    it "correctly calculates the average rating for a given driver's trips" do
+      driver.avg_rating.must_be_close_to (17.0/6), 0.01
+    end
+  end
+
 
 end
