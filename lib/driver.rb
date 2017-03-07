@@ -48,10 +48,10 @@ class Driver
 
      def self.find(file, id)
 
-          Driver.all(file).each do | account |
+          Driver.all(file).each do | driver |
 
-               if account.id == id
-                    return account
+               if driver.id == id
+                    return driver
                end
 
           end

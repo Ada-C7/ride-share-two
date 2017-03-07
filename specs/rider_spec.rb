@@ -62,4 +62,41 @@ describe Rider do
                end
           end
      end
+
+     describe "Self#find" do
+
+          before do
+               @file = "support/riders.csv"
+          end
+
+          it "Returns an account that exists:" do
+               id = 8
+               index = id - 1
+               one_rider = Rider.find(@file, id)
+               one_rider.must_be_kind_of Rider
+               one_rider.id.to_s.must_equal CSV.readlines(@file)[index][0]
+          end
+
+          it "Can find the first account from the CSV:" do
+               id = 1
+               index = id - 1
+               first_account = Rider.find(@file, id)
+               first_account.must_be_kind_of Rider
+               first_account.id.to_s.must_equal CSV.readlines(@file)[index][0]
+          end
+
+          it "Can find the last account from the CSV:" do
+               id = 100
+               index = id - 1
+               first_account = Rider.find(@file, id)
+               first_account.must_be_kind_of Rider
+               first_account.id.to_s.must_equal CSV.readlines(@file)[index][0]
+          end
+
+          it "Raises an error for an account that doesn't exist:" do
+               id = 9033
+               proc {Rider.find(@file, id)}.must_raise ArgumentError
+          end
+
+     end
 end
