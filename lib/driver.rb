@@ -1,12 +1,18 @@
 require_relative 'rideshare'
 
   class Driver
+    attr_reader :id, :name, :vin
 
-    # readers: ID, name, VIN
+    def initialize(id, name, vin)
+      raise ArgumentError.new("The ID is invalid.") if id.class != Integer
+      raise ArgumentError.new("The name is invalid.") if name.class != String
+      raise InvalidVinError.new("The VIN number is invalid.") if vin.length != 17 || !vin.upcase.match(/[0-9A-Z]/)
 
-    # initialize
-    # each driver has @id, @name, @VIN
-    # VIN must be correct length, else InvalidVinError
+      @id = id
+      @name = name
+      @vin_num = vin
+    end
+
 
     # self.all
     # returns array of all instances of driver
