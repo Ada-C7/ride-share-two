@@ -72,6 +72,12 @@ describe "Driver Class" do
       driver.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
 
+    it "Does not allow an invalid ID" do
+      proc {
+        RideShare::Driver.find("WBWSS52P9NEYLVDE9")
+      }.must_raise InvalidIdError
+    end
+
   end
 
   describe "Trips method" do

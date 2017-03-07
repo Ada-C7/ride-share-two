@@ -11,6 +11,7 @@
         null,
         1,
         1,
+        1,
         1
       ],
       "/Users/acgillette/Documents/dev_folder/ada_folder/ada_exercises/week_five/ride-share-two/lib/driver.rb": [
@@ -48,6 +49,7 @@
         null,
         null,
         1,
+        9,
         8,
         8,
         234,
@@ -148,6 +150,10 @@
         5,
         null,
         null,
+        null
+      ],
+      "/Users/acgillette/Documents/dev_folder/ada_folder/ada_exercises/week_five/ride-share-two/lib/error.rb": [
+        1,
         null
       ],
       "/Users/acgillette/Documents/dev_folder/ada_folder/ada_exercises/week_five/ride-share-two/specs/rider_spec.rb": [
@@ -398,6 +404,6 @@
         null
       ]
     },
-    "timestamp": 1488924665
+    "timestamp": 1488926895
   }
 }
