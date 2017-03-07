@@ -1,2 +1,4 @@
 #don't push coverage to github
 /coverage/
+coverage/.resultset.json
+coverage/index.html
