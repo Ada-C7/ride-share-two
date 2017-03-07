@@ -11,14 +11,18 @@ describe "RideShare::Rider" do
 
   end
 
+
   describe "RideShare::Rider#trips" do
   end
+
 
   describe "RideShare::Rider#drivers" do
   end
 
+
   describe "RideShare::Rider#self.all" do
   end
+
 
   describe "RideShare::Rider#self.find" do
   end

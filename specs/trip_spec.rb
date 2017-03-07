@@ -16,17 +16,22 @@ describe "RideShare::Trip" do
 
   end
 
+
   describe "RideShare::Trip#trip_driver" do
   end
+
 
   describe "RideShare::Trip#trip_rider" do
   end
 
+
   describe "RideShare::Trip#self.all_trips" do
   end
 
+
   describe "RideShare::Trip#self.drivers_trips" do
   end
+
 
   describe "RideShare::Trip#riders_trips" do
   end

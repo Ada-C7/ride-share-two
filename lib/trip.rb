@@ -1,6 +1,3 @@
-require_relative 'driver'
-require_relative 'rider'
-
 module RideShare
 
   class Trip
@@ -15,21 +12,26 @@ module RideShare
       @rating = (1..5).include?(rating) ? rating : 3
     end
 
+
     # retrieve the associated driver instance through the driver ID
     def trip_driver
     end
+
 
     # retrieve the associated rider instance through the rider ID
     def trip_rider
     end
 
+
     # retrieve all trips from the CSV file
-    def self.all_trips
+    def self.all
     end
+
 
     # find all trip instances for a given driver ID
     def self.drivers_trips(driver_id)
     end
+
 
     # find all trip instances for a given rider ID
     def self.riders_trips(rider_id)
