@@ -42,7 +42,7 @@ module RideShare
 
     def average_rating
       return nil if trips.empty?
-      trips.map { |trip| trip.rating }.reduce(:+).to_f/trips.length.round(1)
+      trips.map { |trip| trip.rating }.reduce(:+).to_f/(trips.length).round(1)
     end
 
   end
