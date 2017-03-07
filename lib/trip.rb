@@ -1,4 +1,3 @@
-
   class RideShare::Trip
     attr_reader :trip_id, :driver_id, :rider_id, :date,
     :rating
@@ -12,11 +11,11 @@
     end
 
     def driver
-      driver = RideShare::Driver.find(driver_id)
+      return RideShare::Driver.find(driver_id)
     end
 
     def rider
-      rider = RideShare::Rider.find(rider_id)
+      return RideShare::Rider.find(rider_id)
     end
 
     def self.all

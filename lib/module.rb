@@ -1,4 +1,6 @@
 require 'csv'
+require 'pry'
+
 
 
 module RideShare; end

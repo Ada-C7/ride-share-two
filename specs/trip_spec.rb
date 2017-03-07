@@ -19,10 +19,10 @@ describe "Trip Class" do
       trip.must_be_instance_of RideShare::Trip
     end
 
-    it "Initializes with an ID, name, and phone number" do
+    it "Initializes with IDs, date and rating" do
       trip.must_respond_to :trip_id
       trip.must_respond_to :driver_id
-      trip.must_respond_to :trip_id
+      trip.must_respond_to :rider_id
       trip.must_respond_to :date
       trip.must_respond_to :rating
     end
@@ -50,7 +50,7 @@ describe "Trip Class" do
       trips.each do |trip|
         trip.must_respond_to :trip_id
         trip.must_respond_to :driver_id
-        trip.must_respond_to :trip_id
+        trip.must_respond_to :rider_id
         trip.must_respond_to :date
         trip.must_respond_to :rating
       end

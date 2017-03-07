@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+require 'pry'
 
 describe "Driver Class" do
 
@@ -69,6 +70,40 @@ describe "Driver Class" do
     it "Returns the correct driver object" do
       driver.name.must_equal "Bernardo Prosacco"
       driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+    end
+
+  end
+
+  describe "Trips method" do
+
+    let(:driver) { RideShare::Driver.all.first }
+
+
+
+    it "Returns an Array" do
+      drives = driver.trips
+      drives.must_be_instance_of Array
+    end
+
+    it "Returns an Array of Objects" do
+      drives = driver.trips
+      drives.each { |d| d.must_be_instance_of RideShare::Trip }
+    end
+
+    it "Returns the correct information" do
+      drives = driver.trips
+      first = drives.first
+
+      first.date.must_equal "2016-04-05"
+    end
+  end
+
+  describe "Rating method" do
+    let(:driver) { RideShare::Driver.all.first }
+    let(:rating) { driver.rating }
+
+    it "Returns a float" do
+      rating.must_be_instance_of Float
     end
 
   end
