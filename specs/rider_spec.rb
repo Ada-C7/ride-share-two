@@ -63,7 +63,14 @@ describe "Rider" do
     end
 
     it "returns an empty array for a rider with no trips" do
-      # check rider 116, 300, 42
+      
+      rider_who_dont_ride = {
+        id: 116,
+        name: "Laurianne Larkin",
+        phone: "567.228.1637 x86366"
+      }
+      going_nowhere = RideShare::Rider.new(rider_who_dont_ride)
+      going_nowhere.get_trips.must_equal []
     end
 
   end
