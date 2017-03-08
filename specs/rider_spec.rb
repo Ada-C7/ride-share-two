@@ -97,6 +97,14 @@ describe "Rider class" do
         driver.vin.must_equal "4RACJHJL843CUJ46R"
       end
     end
+
+    it "Returned array contains unique driver instances" do
+      rider = RideShare::Rider.new({ id: 164, name: "Dominique Gleason PhD", phone_number:	"460.497.2371" })
+      drivers = rider.trips
+
+      rider.trips.length.must_equal 6
+      drivers.length.must_equal 5
+    end
   end
 
   let (:all_riders_array) { RideShare::Rider.all }
