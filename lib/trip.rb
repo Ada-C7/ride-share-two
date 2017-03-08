@@ -6,21 +6,13 @@ module RideShare
     attr_reader :id, :rider_id, :driver_id, :date, :rating
 
     def initialize(params)
-      validate_params(params)
-
       @id = params[:id]
       @rider_id = params[:rider_id]
       @driver_id = params[:driver_id]
       @date = params[:date]
       @rating = params[:rating]
-    end
 
-    def validate_params(params)
-      if [params[:id], params[:rider_id], params[:driver_id], params[:date], params[:rating]].include? nil
-        raise ArgumentError.new("Drivers must have an ID, rider ID, driver ID, date, and rating.")
-      elsif !params[:rating].between?(1,5)
-        raise ArgumentError.new("Rating must be between 1 and 5.")
-      end
+      validate_params(params)
     end
 
     def self.all
@@ -53,6 +45,16 @@ module RideShare
 
     def rider
       Rider.find(@rider_id)
+    end
+
+    private
+
+    def validate_params(params)
+      if [@id, @rider_id, @driver_id, @date, @rating].include? nil
+        raise ArgumentError.new("Drivers must have an ID, rider ID, driver ID, date, and rating.")
+      elsif !@rating.between?(1,5)
+        raise ArgumentError.new("Rating must be between 1 and 5.")
+      end
     end
 
   end

@@ -3,20 +3,13 @@ module RideShare
     attr_reader :id, :name, :trips
 
     def initialize(params)
-      validate_params(params)
-
       @id = params[:id]
       @name = params[:name]
       @phone_number = params[:phone_number]
       @trips = params[:trips]
-
       @trips ||= []
-    end
 
-    def validate_params(params)
-      if [params[:id], params[:name], params[:phone_number]].include? nil
-        raise ArgumentError.new("Riders must have an ID, name, and phone number.")
-      end
+      validate_params(params)
     end
 
     def self.all
@@ -39,6 +32,14 @@ module RideShare
 
     def drivers
       @trips.map { |trip| Driver.find(trip.driver_id) }
+    end
+
+    private
+
+    def validate_params(params)
+      if [@id, @name, @phone_number].include? nil
+        raise ArgumentError.new("Riders must have an ID, name, and phone number.")
+      end
     end
 
   end
