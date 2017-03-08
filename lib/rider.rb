@@ -1,9 +1,10 @@
+require 'csv'
 
 
 module Rideshare
 
   class Rider
-    attr_accessor :rider_id, :name, :phone_num
+    attr_reader :rider_id, :name, :phone_num
 
     def initialize rider_id, name, phone_num
       @rider_id = rider_id
@@ -39,7 +40,7 @@ module Rideshare
       rider_trips = []
 
       Rideshare::Trips.all_trips.each do |trip|
-        if @id == trip.rider_id.to_i
+        if @rider_id == trip.rider_id.to_i
           rider_trips << trip
         end
       end

@@ -1,3 +1,5 @@
+require 'csv'
+
 
 module Rideshare
 
@@ -34,26 +36,25 @@ module Rideshare
     end
 
 
-    def self.find_by_driver id
-      all_trips = []
-      Rideshare::Trips.all_trips.each do |trip|
-        if id == trip.driver_id
-          all_trips << trip
-        end
-      end
-      return all_trips
+    def self.all_by_driver id
+
+    Rideshare::Driver.find(id).trips
+      # driver.trips
+      # call find method from this class...some type of dependency injection
+
+      # trips = Rideshare::Trips.all_trips
+      # trips.delete_if { |trip| trip.driver_id != id}
+      # return trips
 
     end
 
-    def self.find_by_rider id
-      all_trips = []
-      Rideshare::Trips.all_trips.each do |trip|
-        if id == trip.rider_id
-          all_trips << trip
-        end
-      end
-      return all_trips
+    def self.all_by_rider id
+      Rideshare::Rider.find(id).trips
 
+
+      # trips = Rideshare::Trips.all_trips
+      # trips.delete_if { |trip| trip.rider_id != id }
+      # return trips
     end
 
   end

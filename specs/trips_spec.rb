@@ -45,16 +45,31 @@ describe "Rideshare::Trips" do
   describe "Trips#trips_rider" do
 
     it "returns rider objects" do
+      # Rideshare::Rider.all_riders
       Rideshare::Trips.all_trips.first.trip_rider.must_be_instance_of Rideshare::Rider
     end
 
   end
 
-  describe "Trips#find_by_driver" do
-    Rideshare::Trips.find_by_driver(2).must_be_instance_of Array
+  describe "Trips#all_by_driver" do
+
+    it "returns an array of the driver's trips" do
+      Rideshare::Trips.all_by_driver(5).must_be_instance_of Array
+      Rideshare::Trips.all_by_driver(5).first.must_be_instance_of Rideshare::Trips
+      Rideshare::Trips.all_by_driver(5).first.rider_id.must_equal 140
+
+    end
+
+  end
+
+  describe "Trips#all_by_rider" do
+
+    it "returns an array of the driver's trips" do
+      Rideshare::Trips.all_by_rider(5).must_be_instance_of Array
+      Rideshare::Trips.all_by_rider(5).first.must_be_instance_of Rideshare::Trips
+      Rideshare::Trips.all_by_rider(54).first.driver_id.must_equal 1
+    end
+
   end
 
 end
-# puts Rideshare::Trips.all
-# puts Rideshare::Trips.all_trips.first
-# puts Rideshare::Trips.all_trips.first.trips_driver

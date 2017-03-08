@@ -6,6 +6,8 @@ describe "Rideshare::Driver" do
   before do
     Rideshare::Driver.all
     Rideshare::Trips.all
+    Rideshare::Rider.all
+
   end
 
   describe "Driver#initialize" do

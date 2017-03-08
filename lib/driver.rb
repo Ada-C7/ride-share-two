@@ -1,3 +1,5 @@
+require 'csv'
+
 
 module Rideshare
 
@@ -8,6 +10,7 @@ module Rideshare
       @id = id
       @name = name
       @vin = vin
+
     end
 
     def self.all #method to create instances of Drivers
