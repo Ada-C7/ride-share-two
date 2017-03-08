@@ -112,4 +112,39 @@ describe "driver.trips" do
       trip.driver_id.must_equal @driver.id
     end
   end
+
+  it "returns and array with correct driver id" do
+    @driver.trips.each do |trip|
+      trip.driver_id.must_equal "1"
+    end
+  end
+
+  it "returns and array with correct driver id" do
+    @driver.trips.each do |trip|
+      trip.must_be_instance_of RideShare::Trip
+    end
+  end
+
+  it "returns and array with multiple trips" do
+    @driver.trips.length.must_be :>, 1
+  end
+end
+
+
+describe "driver.average_rating" do
+
+  before do
+    id = "1"
+    name = "Bernardo Prosacco"
+    vin = "WBWSS52P9NEYLVDE9"
+    @driver = RideShare::Driver.new(id, name, vin)
+  end
+
+  it "returns an integer" do
+    @driver.average_rating.must_be_instance_of Float
+  end
+
+  it "returns the correct number" do
+    @driver.average_rating.must_equal 2.33
+  end
 end

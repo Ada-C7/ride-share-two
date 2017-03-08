@@ -110,4 +110,23 @@ describe "rider.trips" do
     end
   end
 
+  describe "rider.drivers" do
+
+    before do
+      id = "1"
+      name = "Nina Hintz Sr."
+      phone_num = "560.815.3059"
+      @rider = RideShare::Rider.new(id, name, phone_num)
+    end
+
+    it "returns an Array" do
+      @rider.drivers.must_be_instance_of Array
+    end
+
+    it "returns an Array of driver instances" do
+      @rider.drivers.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
+      end
+    end
+  end
 end

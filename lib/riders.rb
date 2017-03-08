@@ -32,21 +32,20 @@ module RideShare
     def trips
       rider_id = id
       RideShare::Trip.find_by_rider(rider_id)
-      # array = find_by_rider(id)
       #retrieve the list of trip instances
       #that only this rider has taken
-
     end
 
-    # def drivers
-    #   trips
-    #   #retrieve the list of all
-    #   #previous driver instances
-    #   #(through the trips functionality built above)
-    # end
-
-
-
-
+    def drivers
+      rider_trips = trips
+      @drivers_array = []
+      rider_trips.each do |trip|
+        @drivers_array << trip.find_driver
+      end
+      return @drivers_array
+      #retrieve the list of all
+      #previous driver instances
+      #(through the trips functionality built above)
+    end
   end
 end
