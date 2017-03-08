@@ -1,3 +1,4 @@
+require 'csv'
 require_relative 'trip'
 
 class Rider
@@ -44,17 +45,3 @@ class Rider
 
      end
 end
-
-# file = "../support/riders.csv"
-# trip_file = "../support/trips.csv"
-#
-# id = 7
-# one_rider = Rider.find(file, id)
-#
-# one_rider_trips = one_rider.recall_trips(file, trip_file)
-#
-# puts one_rider_trips
-# puts one_rider_trips.class
-# puts one_rider_trips.inspect
-#
-# # @lines = File.foreach(@rider_file).count

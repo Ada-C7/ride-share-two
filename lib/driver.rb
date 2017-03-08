@@ -1,29 +1,24 @@
 require 'csv'
-#require 'pry'
-
+require_relative 'trip'
 
 class Driver
 
-     attr_reader :id, :name, :vin
-     attr_accessor :trips, :average_rating
+     attr_reader :id, :name, :vin, :trips, :average_rating
 
      def initialize(id, name, vin)
           raise ArgumentError if vin.class != String || vin.length > 17
           @id = id
           @name = name
           @vin = vin
-          #@trips = recall_trips
+          @trips = []
           #@average_rating = calculate_average_rating
      end
 
-     # #retrieve the list of trip instances that only this driver has taken
-     # def recall_trips(@id)
-     #      #TODO Build block after trip.rb has been completed.
-     #      #Calls Trip class method to retrieve list of trip instances according to @id.
-     #      #@trips = Trip.find(@id)
-     #      #return @trips
-     # end
-     #
+     def recall_trips(file, trip_file)
+          @trips = Trip.find_trips_for_driver(file, trip_file, @id)
+          return @trips
+     end
+
      # #retrieve an average rating for that driver based on all trips taken
      # def calculate_average_rating(@id)
      #      #TODO Build block after trip.rb has been completed.
@@ -60,3 +55,21 @@ class Driver
 
      end
 end
+
+# file = "../support/drivers.csv"
+# trip_file = "../support/trips.csv"
+#
+# id = 7
+# one_driver = Driver.find(file, id)
+#
+# # puts one_driver
+# # puts one_driver.class
+# # puts one_driver.inspect
+#
+#
+# one_driver_trips = one_driver.recall_trips(file, trip_file)
+#
+# puts one_driver_trips
+# puts one_driver_trips.class
+# puts one_driver_trips.inspect
+# puts one_driver_trips.length

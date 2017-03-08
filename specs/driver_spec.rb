@@ -113,7 +113,7 @@ describe Driver do
           before do
                @file = "support/drivers.csv"
                @trip_file = "support/trips.csv"
-               @id = 8
+               @id = 7
                @leia = Driver.find(@file, @id)
                @leia_trips = @leia.recall_trips(@file, @trip_file)
           end
@@ -127,16 +127,16 @@ describe Driver do
                     count = 0
 
                     CSV.foreach(@trip_file) do |row|
-                         if row[2].to_i == @id then count += 1; end
+                         if row[1].to_i == @id then count += 1; end
                     end
 
                     @leia_trips.length.must_equal count
                end
 
-               it "Returns an array of Trip objects with the same Rider ID:" do
+               it "Returns an array of Trip objects with the same Driver ID:" do
                    @leia_trips.each do | trip |
                        trip.must_be_kind_of Trip
-                       trip.rider_id.must_equal @id
+                       trip.driver_id.must_equal @id
                     end
                end
           end
