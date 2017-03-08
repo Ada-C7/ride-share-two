@@ -67,15 +67,13 @@ describe "Trip" do
       driver_trips.length.must_equal 6
       valid_trip_ids = [54, 86, 230, 420, 423, 531]
       driver_trips.each do |trip|
-        # verify_id = valid_trip_ids.include?(trip.id)
-        # verify_id.must_equal true
         valid_trip_ids.include?(trip.id).must_equal true
       end
     end
 
-    # it "raises an error for a driver ID that doesn't exist" do
-    #   proc { RideShare::Trip.find_by_driver(999)}.must_raise ArgumentError
-    # end
+    it "returns an empty array for a driver ID that doesn't exist" do
+      RideShare::Trip.find_by_driver(999).must_equal []
+    end
 
   end
 
@@ -102,9 +100,9 @@ describe "Trip" do
       end
     end
 
-    # it "raises an error for a rider ID that doesn't exist" do
-    #   proc { RideShare::Trip.find_by_rider(400)}.must_raise ArgumentError
-    # end
+    it "returns an empty array for a rider ID that doesn't exist" do
+      RideShare::Trip.find_by_rider(400).must_equal []
+    end
 
   end
 

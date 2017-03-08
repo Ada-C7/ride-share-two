@@ -50,9 +50,9 @@ describe "Rider" do
       RideShare::Rider.find(17).name.must_equal "Rebekah Hodkiewicz"
     end
 
-    # it "raises an error for a rider ID that doesn't exist" do
-    #   proc { RideShare::Rider.find(374)}.must_raise ArgumentError
-    # end
+    it "returns nil for a rider ID that doesn't exist" do
+      RideShare::Rider.find(374).must_be_nil
+    end
   end
 
 
