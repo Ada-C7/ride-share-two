@@ -3,6 +3,8 @@ require_relative 'spec_helper'
 describe "Driver" do
   let(:my_driver) {RideShare::Driver.new(77, "Mr. Shanie Gusikowski", "XF9HHMKS402GD41NF")}
   let(:trips_csv) {CSV.read("support/trips.csv")}
+  let(:all_drivers) {RideShare::Driver.find_all}
+  let(:drivers_csv) {CSV.read("support/drivers.csv")}
 
   describe "Diver#initialize" do
     it "takes an ID, Name, and VIN to initialize" do
@@ -55,9 +57,26 @@ describe "Driver" do
 
   describe "find_all Driver class method" do
     it "returns an array of Driver instances" do
-      RideShare::Driver.find_all.must_be_instance_of Array
+      all_drivers.must_be_instance_of Array
     end
 
-    #Definitely need more tests - look at trips spec
+    #Definitely need more tests - look at trips specit "each item is of class Trip" do
+    it "each item is of class Driver" do
+      all_drivers.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
+      end
+    end
+
+    it "number of drivers matches number of lines in CSV - 1 for headder line" do
+      csv_length = drivers_csv.length
+      all_drivers.length.must_equal(csv_length - 1)
+    end
+
+    it "id of first & last match id of first & last in CSV" do
+      all_drivers[0].id.must_equal(drivers_csv[1][0].to_i)
+      all_drivers[-1].id.must_equal(drivers_csv[-1][0].to_i)
+    end
   end
+
+
 end
