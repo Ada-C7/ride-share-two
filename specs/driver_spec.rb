@@ -47,49 +47,42 @@ describe "Driver class" do
     end
   end
 
-  xdescribe "#trips method" do
+  describe "#trips method" do
+    let (:trips_by_driver) { driver.trips }
+
     it "Retrieve the list of trip instances that only this driver has taken" do
-      trips_by_driver = driver.trips
-      trips_by_driver.must_equal Array
+      trips_by_driver.must_be_instance_of Array
       trips_by_driver.length.must_equal 3
-      trips_by_driver.must_equal [
-        RideShare::Trip.new(
-        {
-          id: 162,
-          driver_id: 6,
-          rider_id: 93,
-          date: "2015-03-09",
-          rating: 4
-          }
-        ),
-        RideShare::Trip.new(
-        {
-          id: 169,
-          driver_id: 6,
-          rider_id:	204,
-          date:	"2015-05-19",
-          rating:	4
-        }
-        ),
-        RideShare::Trip.new(
-        {
-          id: 295,
-          driver_id: 6,
-          rider_id: 87,
-          date: "2015-08-14",
-          rating: 1
-        }
-        )
-      ]
+    end
+
+    it "First element inside the returned array matches the CSV file" do
+        trip = trips_by_driver.first
+        trip.id.must_equal 162
+        trip.driver_id.must_equal 6
+        trip.rider_id.must_equal 93
+        trip.date.must_equal "2015-03-09"
+        trip.rating.must_equal 4
+    end
+
+    it "The last element inside the returned array matches the CSV file" do
+      trip = trips_by_driver.last
+      if trip != nil
+        trip.id.must_equal 295
+        trip.driver_id.must_equal 6
+        trip.rider_id.must_equal 87
+        trip.date.must_equal "2015-08-14"
+        trip.rating.must_equal 1
+      end
     end
   end
-  #
-  # describe "#avg_rating method" do
-  #   it "Retrieve an average rating for that driver based on all trips taken" do
-  #
-  #   end
-  #
-  # end
+
+  describe "#avg_rating method" do
+    it "Retrieve an average rating for that driver based on all trips taken" do
+      average = driver.avg_rating
+      average.must_be_instance_of Float
+      average.must_equal 3.0
+    end
+  end
   #
   # describe "#self.all method" do
   #   it "Retrieve all drivers from the CSV file" do

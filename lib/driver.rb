@@ -27,7 +27,7 @@ module RideShare
       all_trips_by_driver_array = trips
       sum_rate = 0.0
       all_trips_by_driver_array.each { |trip| sum_rate += trip.rating }
-      return (sum_rate / all_trips_by_driver_array.legnth).round(2)
+      return (sum_rate / all_trips_by_driver_array.length).round(2)
     end
 
     # Retrieve all drivers from the CSV file
@@ -41,10 +41,10 @@ module RideShare
 
     # Find a specific driver using their numeric ID
     def self.find(driver_id)
-      raise ArgumentError.new ("Driver id must be a positive integer value") if ( driver_id.class != Integer || driver_id < 1 )
+      raise ArgumentError.new ("Driver id must be a positive integer value") if ( driver_id.class != Integer || driver_id < 0 )
       all_drivers_array = RideShare::Driver.all
       raise ArgumentError.new ("That driver ID does not currently exist") if !all_drivers_array.any? { |driver| driver.id == driver_id }
-      return all_drivers_array.select { |driver| driver.id == driver_id}[0]
+      return all_drivers_array.select { |driver| driver.id == driver_id }[0]
     end
   end
 end
