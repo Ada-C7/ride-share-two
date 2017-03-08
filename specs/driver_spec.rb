@@ -86,6 +86,23 @@ describe "Driver" do
         Driver.find(101)
       }.must_raise ArgumentError
     end
-
   end
+
+  describe "Driver#list_trips" do
+    it "Returns a list of trips for a specific driver" do
+      driver = Driver.new(36, "Mr. Marcelina Jenkins", "WD3VLLK2X04HF50PL")
+      driver.list_trips.must_be_kind_of Array
+    end
+
+    it "Returns a correct number of trips for a specific driver" do
+      driver = Driver.new(1, "Bernardo Prosacco",	"WBWSS52P9NEYLVDE9")
+      driver.list_trips.length.must_equal 9
+    end
+
+    it "Returns an empty array if there are no trips for that driver" do
+      driver = Driver.new(100, "Minnie Dach",	"XF9Z0ST7X18WD41HT")
+      driver.list_trips.must_equal []
+    end
+  end
+
 end
