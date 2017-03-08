@@ -151,4 +151,14 @@ describe "Driver class" do
     end
   end # end of find method
 
+  describe "Driver.total_revenue" do
+    it "Returns Float number" do
+      driver.total_revenue.class.must_equal Float
+    end
+    it "Return actual total revenue of this driver:" do
+      dr = RideShare::Driver.all[3]
+      dr.total_revenue.must_equal 463.256
+    end
+  end
+
 end # end of class

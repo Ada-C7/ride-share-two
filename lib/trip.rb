@@ -55,7 +55,7 @@ module RideShare
         #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
         if driver_id == line[1].to_i
-          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6]}
+          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_f, duration: line[6]}
           all_driver_trips << Trip.new(hash)
         end
       end
@@ -74,7 +74,7 @@ module RideShare
         next if line[0] == "trip_id"
         if rider_id == line[2].to_i
           hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i,
-            date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6]}
+            date: line[3], rating: line[4].to_i, cost: line[5].to_f, duration: line[6]}
           all_rider_trips << Trip.new(hash)
         end
       end
@@ -96,6 +96,7 @@ module RideShare
       all_trips
     end
 
+# optional. Metjod adds two new column with randomly selected data to trips.csv
     def self.add_cost_duration_to_csv
       array_of_random_prices = ["trip_cost"] # column name
       600.times do
@@ -103,8 +104,6 @@ module RideShare
         array_of_random_prices << rand_num
       end
       array_of_random_durations = ["trip_duration(hours:minutes"]
-        # rand_num = rand(5...200)
-        # array_of_random_durations << rand_num
         t1 = Time.new(2017, 01, 02, 0, 0, 0)
         t2 = Time.new(2017, 01, 02, 3, 0, 0)
         600.times do
@@ -124,8 +123,5 @@ module RideShare
         end
       end
     end # end of method
-
-
-
   end # end of class
 end # end of method

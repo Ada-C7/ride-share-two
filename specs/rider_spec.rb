@@ -148,4 +148,23 @@ describe "Rider class" do
     end
 
   end # end of find method
+
+
+  describe "Rider#total_money_spent" do
+    it "Returns Float number" do
+      rider.total_money_spent.class.must_equal Float
+    end
+    it "Returns actual total amount for this rider" do
+      RideShare::Rider.all[73].total_money_spent.must_equal 314.72
+    end
+  end
+
+  describe "Rider#total_time_spent" do
+    it "Returns Float number" do
+      rider.total_time_spent.class.must_equal String
+    end
+    it "Returns actual total time for this rider" do
+      all_riders[73].total_time_spent.must_equal "3:19"
+    end
+  end
 end # end of class

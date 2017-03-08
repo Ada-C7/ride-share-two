@@ -19,7 +19,7 @@ module RideShare
       if (hash[:driver_id].class != Integer || hash[:driver_id] <= 0)
         raise ArgumentError.new("Driver id must be an positive integer")
       end
-       if  !(hash[:name][/['. a-zA-Z]+/] == hash[:name])
+      if !(hash[:name][/['. a-zA-Z]+/] == hash[:name])
         raise ArgumentError.new("Name must contain letters only")
       end
       raise ArgumentError.new("VIN must be a string") if hash[:vin].class != String
@@ -68,7 +68,7 @@ module RideShare
 
     # total revenue of a driver for all trips:
     def total_revenue
-      total = 0
+      total = 0.0
       fee = 1.65
       all_driver_trips.each do |trip|
         total += trip.cost
@@ -79,8 +79,3 @@ module RideShare
     end
   end # end of class
 end # end of module
-hash = {driver_id: 3, vin:"ASV48493029182345", name: "Nata ia"}
-RideShare::Driver.new(hash)
-
-dr = RideShare::Driver.all[3]
-dr.total_revenue
