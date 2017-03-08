@@ -60,11 +60,11 @@ describe "Trip class" do
       driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
     end
 
-    it "Raises an argument error if the driver id missing from the driver.csv" do
-      trip = RideShare::Trip.new({ id: 162, driver_id: 123456789, rider_id: 93, date: "2015-03-09", rating: 4 })
+    it "Outputs a message if the driver id does not have a match in the rider.csv" do
+      trip = RideShare::Trip.new({ id: 88, driver_id: 0, rider_id: 39, date: "2015-11-19", rating: 3 })
       proc {
         trip.find_driver
-      }.must_raise ArgumentError
+      }.must_output (/.+/)
     end
   end
 
@@ -77,11 +77,11 @@ describe "Trip class" do
       driver.phone_number.must_equal "(170) 751-2406"
     end
 
-    it "Raises an argument error if the rider id does not have a match in the rider.csv" do
-      trip = RideShare::Trip.new({ id: 162, driver_id: 93, rider_id: 123456789, date: "2015-03-09", rating: 4 })
+    it "Outputs a message if the rider id does not have a match in the rider.csv" do
+      trip = RideShare::Trip.new({ id: 267, driver_id: 14, rider_id: 0, date: "2015-04-23", rating: 4 })
       proc {
         trip.find_rider
-      }.must_raise ArgumentError
+      }.must_output (/.+/)
     end
   end
 
