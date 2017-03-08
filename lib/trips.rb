@@ -8,14 +8,19 @@ module RideShare
       @driver_id = driver_id
       @rider_id = rider_id
       @date = date
-      @rating = rating
+      @rating = error_checked_rating(rating)
     end
+
 
 
     def self.all
       trips_array = []
       CSV.read("support/trips.csv", {:headers => true}).each do |trip|
-        trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], trip[4])
+        begin
+          trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], trip[4])
+        rescue
+          trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], nil)
+        end
       end
       trips_array
     end
@@ -67,6 +72,16 @@ module RideShare
     end
 
 
+    #private
+    def error_checked_rating(rating)
+      if (1..5).include?(rating.to_i)
+        return rating
+      elsif !(1..5).include?(rating.to_i)
+        return nil
+      else
+        raise ArgumentError.new("Rating must be 1-5")
+      end
+    end
 
   end
 end

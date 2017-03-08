@@ -7,15 +7,20 @@ module RideShare
     def initialize(id, name, vin)
       @id = id
       @name = name
-      @vin = (vin.length == 17 ? vin : nil)
+      @vin = verified_vin(vin)
        #ensure correct length
     end
+
 
 
     def self.all
       drivers_array = []
       CSV.read("support/drivers.csv", {:headers => true}).each do |driver|
-        drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
+        begin
+          drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
+        rescue
+          drivers_array << (Driver.new(driver[0], driver[1], nil))
+        end
       end
       drivers_array
     end
@@ -54,6 +59,19 @@ module RideShare
       #instance method - retrieve an average rating for that driver based on all trips taken
       # call trips
     end
+
+
+#private
+    def verified_vin(vin)
+      if vin.length != 17
+        return nil
+      elsif vin.length == 17
+        return vin
+      else
+        raise ArgumentError.new("VIN must be 17 characters")
+      end
+    end
+
 
   end #class
 

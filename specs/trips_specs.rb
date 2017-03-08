@@ -54,17 +54,20 @@ describe "Trip.all" do
 
   #   - The info of the first and last
   #       trips match what's in the CSV file
-  it "trips match what's in the CSV file" do
-    index = 0
-    CSV.read("support/trips.csv", {:headers => true}).each do |line|
-      @trip_array[index].trip_id.must_equal line[0]
-      @trip_array[index].driver_id.must_equal line[1]
-      @trip_array[index].rider_id.must_equal line[2]
-      @trip_array[index].date.must_equal line[3]
-      @trip_array[index].rating.must_equal line[4]
-      index += 1
-    end
-  end
+  # it "trips match what's in the CSV file" do
+  #   index = 0
+  #   CSV.read("support/trips.csv", {:headers => true}).each do |line|
+  #     @trip_array[index].trip_id.must_equal line[0]
+  #     @trip_array[index].driver_id.must_equal line[1]
+  #     @trip_array[index].rider_id.must_equal line[2]
+  #     @trip_array[index].date.must_equal line[3]
+  #     @trip_array[index].rating.must_equal line[4]
+  #     index += 1
+  #   end
+  # end
+
+describe "Creates drivers with valid vins" do
+
 
   it "The info of the first and last match csv" do
     @trip_array.first.trip_id.must_equal "1"
@@ -189,4 +192,26 @@ describe "find_rider" do
     @trip.find_rider.id.must_equal "54"
     @trip.find_rider.name.must_equal "Gracie Emmerich"
   end
+end
+
+describe "Rescue bad ratings" do
+
+  before do
+    @trip_array = []
+    @trip_array << RideShare::Trip.new("1", "1", "54", "2016-04-05", "0")
+    @trip_array << RideShare::Trip.new("2", "67", "146", "2016-01-13", "6")
+  end
+
+  it "The info for invalid vins is correct with nil vin" do
+    @trip_array.first.trip_id.must_equal "1"
+    @trip_array.first.driver_id.must_equal "1"
+    @trip_array.first.rider_id.must_equal "54"
+    @trip_array.first.rating.must_be_nil
+    @trip_array.last.trip_id.must_equal "2"
+    @trip_array.last.driver_id.must_equal "67"
+    @trip_array.last.rider_id.must_equal "146"
+    @trip_array.last.rating.must_be_nil
+  end
+
+end
 end
