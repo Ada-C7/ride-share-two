@@ -6,12 +6,6 @@ describe "Rider class" do
     test_rider.must_be_kind_of Rider
   end
 
-  describe "Initialize method" do
-    it "" do
-      # what goes here? nothing?
-    end
-  end
-
   describe "get_trips method" do
     before do
       @rider = Rider.new(id: 9, name: "Merl Glover III", phone_number: "1-602-620-2330 x3723")

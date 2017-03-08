@@ -7,18 +7,11 @@ describe "Driver class" do
     test_driver.must_be_kind_of Driver
   end
 
-  describe "Initialize method" do
-    it "" do
-      # nada?
-    end
-  end
-
   describe "get_trips method" do
     before do
       @driver = Driver.new({id: 1, name: "Bernardo Prosacco", vehicle_id: "WBWSS52P9NEYLVDE9"})
       @trips = Trip.all_with_driver(@driver.id)
     end
-
     it "returns an array" do
       @trips.must_be_kind_of Array
     end

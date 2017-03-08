@@ -8,23 +8,13 @@ describe "Trip class" do
     test_trip.must_be_kind_of Trip
   end
 
-  describe "Initialize method" do
-    it "" do
-      # nada?
-    end
-  end
-
-
-
   describe "get_driver method" do
     before do
       @trip = Trip.new({id: 8, driver_id: 93, rider_id: 104, date: "2016-08-08", rating: 5})
     end
-
     it "returns an instance of Driver" do
       @trip.get_driver.must_be_kind_of Driver
     end
-
     it "Driver's id matches driver_id on instance of Trip" do
       @trip.get_driver.id.must_equal 93
     end
@@ -43,26 +33,39 @@ describe "Trip class" do
   end
 
   describe "self.all_with_driver(id) method" do
-    it "returns array" do
 
+    it "returns array" do
+      Trip.all_with_driver(2).must_be_kind_of Array
     end
     it "all items in array must be Trips" do
-
+      trips = Trip.all_with_driver(2)
+      trips.each do |trip|
+        trip.must_be_kind_of Trip
+      end
     end
     it "all driver_ids of Trips in array must match the id passed in" do
-
+      trips = Trip.all_with_driver(2)
+      trips.each do |trip|
+        trip.driver_id.must_equal 2
+      end
     end
   end
 
   describe "self.all_with_rider(id) method" do
     it "returns array" do
-
+      Trip.all_with_rider(2).must_be_kind_of Array
     end
     it "all items in array must be Trips" do
-
+      trips = Trip.all_with_rider(2)
+      trips.each do |trip|
+        trip.must_be_kind_of Trip
+      end
     end
     it "all rider_ids of Trips in array must match the id passed in" do
-
+      trips = Trip.all_with_rider(2)
+      trips.each do |trip|
+        trip.rider_id.must_equal 2
+      end
     end
   end
 
