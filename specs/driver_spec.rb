@@ -97,6 +97,15 @@ it "Can find the First driver in the CSV file" do
 
 end
 
+it "Only accepts integers in seatch criteria" do
+  skip
+end
+
+it "Outputs message if Driver could not be found"
+  skip
+end
+
+
 end #end of self.find
 
 
