@@ -9,6 +9,24 @@ module RideShare
       @phone = rider_hash[:phone]
     end
 
+    def self.find(requested_id)
+      # finds a specific instance of Rider based on rider ID
+      match = Rider.all.select {|rider| rider.id == requested_id}
+      return match[0]
+    end
+
+    def get_trips
+      Trip.find_by_rider(id)
+    end
+
+    def get_drivers
+      driver_ids = get_trips.map {|trip| trip.driver_id}
+      # call Driver.find; return array of Driver instances
+      driver_ids.map {|id| Driver.find(id)}
+    end
+
+    private
+
     def self.all
       all_riders = []
       rider_hash = {}
@@ -21,22 +39,6 @@ module RideShare
           all_riders << Rider.new(rider_hash)
       end
       return all_riders
-    end
-
-    def self.find(requested_id)
-      # finds a specific instance of Rider based on rider ID
-      match = Rider.all.select {|rider| rider.id == requested_id}
-      return match[0]
-    end
-
-    def get_trips
-      Trip.find_by_rider(id)
-    end
-
-    def get_drivers
-      driver_ids = get_trips.map {|trip| trip.driver_id }
-      # call Driver.find; return array of Driver instances
-      driver_ids.map {|id| Driver.find(id)}
     end
 
   end
