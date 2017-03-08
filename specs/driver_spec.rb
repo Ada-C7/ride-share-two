@@ -95,4 +95,23 @@ describe "Driver tests" do
       proc { RideShare::Driver.find(789078) }.must_raise NoDriverError
     end
   end
+
+  describe "Driver#trips" do
+    it "Returns an array" do
+      driver.trips.must_be_instance_of Array
+    end
+
+    it "First and last element of array are Trips" do
+      driver.trips[0].must_be_instance_of RideShare::Trip
+      driver.trips[-1].must_be_instance_of RideShare::Trip
+    end
+
+    it "The number of trips is correct" do
+      RideShare::Driver.find(64).trips.length.must_equal 7
+    end
+
+    it "Returns an empty array if no trips are found" do
+      RideShare::Driver.find(100).trips.length.must_equal 0
+    end
+  end
 end
