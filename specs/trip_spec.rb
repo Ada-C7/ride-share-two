@@ -7,7 +7,7 @@ describe "Trip" do
       @rider_id = 78
       @driver_id = 88
       @date = '2017-8-03' #can't be a future date
-      @rating = 5 # int, 1-5
+      @rating = 3 # int, 1-5
     end
 
     let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,
@@ -40,6 +40,32 @@ describe "Trip" do
       }.must_raise ArgumentError
     end
 
+    it "raises an invalid rating error if rating is not above 1" do
+      invalid_rating = 0
 
+      proc {
+        RideShare::Trip.new(rating: invalid_rating)
+      }.must_raise RideShare::InvalidRatingError
+    end
+
+    it "raises an invalid rating error if rating is not below 5" do
+      invalid_rating = 6
+
+      proc {
+        RideShare::Trip.new(rating: invalid_rating)
+      }.must_raise RideShare::InvalidRatingError
+    end
+
+    it "accepts a rating of 1" do
+      rating = 1
+      trip = RideShare::Trip.new(rating: rating)
+      trip.rating.must_equal rating
+    end
+
+    it "accepts a rating of 5" do
+      rating = 5
+      trip = RideShare::Trip.new(rating: rating)
+      trip.rating.must_equal rating
+    end
   end
 end

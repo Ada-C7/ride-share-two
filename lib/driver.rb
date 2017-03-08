@@ -1,11 +1,10 @@
-require 'csv'
-require_relative 'invalid_vin_error'
-
 module RideShare
   class Driver
     attr_reader :name, :id, :vin
 
     def initialize(args)
+      raise ArgumentError.new("VIN must be a string") unless args[:vin].is_a? String
+
       if args[:vin].length != 17 || !all_letters_and_numbers?(args[:vin])
         raise RideShare::InvalidVinError.new("VIN must be 17 characters long and
           only contain letters and numbers")

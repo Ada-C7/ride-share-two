@@ -26,19 +26,25 @@ describe "Driver" do
       driver.vin.must_equal @vin
     end
 
-    it "raises an error if the VIN is not 17 characters long" do
+    it "raises an argument error if the VIN is not a string" do
+      proc {
+        RideShare::Driver.new(vin: 23456789064234576)
+      }.must_raise ArgumentError
+    end
+
+    it "raises an invalid VIN error if the VIN is not 17 characters long" do
       invalid_vin = '123456dfsd'
 
       proc {
-        RideShare::Driver.new(name: @name, id: @id, vin: invalid_vin)
+        RideShare::Driver.new(vin: invalid_vin)
       }.must_raise RideShare::InvalidVinError
     end
 
-    it "raises an error if the VIN has a character other than a letter or number" do
+    it "raises an invalid VIN error if the VIN has a character other than a letter or number" do
       invalid_vin = '12345!!#2345ddegd'
 
       proc {
-        RideShare::Driver.new(name: @name, id: @id, vin: invalid_vin)
+        RideShare::Driver.new(vin: invalid_vin)
       }.must_raise RideShare::InvalidVinError
     end
   end
