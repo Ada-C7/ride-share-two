@@ -37,6 +37,8 @@
       riders.each do |rider|
         return rider if rider.id == id
       end
+        puts "A Rider Account could not be found with this ID. ID Given: #{id}"
+        return nil
     end
 
   end

@@ -71,6 +71,16 @@ describe "Rider Class" do
       rider.phone_num.must_equal "560.815.3059"
     end
 
+    it "Outputs a message if the ID was not found" do
+      proc {
+        RideShare::Rider.find("1000")
+      }.must_output(/.+/)
+    end
+
+    it "Returns nil if the ID was not found" do
+      RideShare::Rider.find("1000").must_equal nil
+    end
+
   end
 
   describe "Drivers method" do
@@ -84,7 +94,7 @@ describe "Rider Class" do
     it "Returns an array of driver objects" do
       drivers.each {|d| d.must_be_instance_of RideShare::Driver }
     end
-    
+
   end
 
 end
