@@ -54,5 +54,8 @@ module RideShare
       return trips
     end
 
+    def driver
+      Driver.find(@driver_id)
+    end
   end
 end
