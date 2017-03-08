@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe "Trip tests" do
   let(:trip) { RideShare::Trip.new({ id: 2, driver_id: 4, rider_id: 8, date: "2014-07-12", rating: 5 }) }
   let(:trips_array) { RideShare::Trip.all }
-  let(:csv_info) { CSV.read('support/trips.csv') }
+  let(:csv_info) { CSV.read('support/trips.csv')[1..-1] }
 
   describe "Trip#initialize" do
     it "Takes an ID, driver_id, rider_id, date, and rating" do
@@ -71,27 +71,46 @@ describe "Trip tests" do
       trips_array.must_be_instance_of Array
     end
 
-    # it "The first and last element of the array is a Trip" do
-    #   trips_array[0].must_be_instance_of RideShare::Trip
-    #   trips_array[-1].must_be_instance_of RideShare::Trip
-    # end
-    #
-    # it "The number of trips is correct" do
-    #   trips_array.length.must_equal csv_info.count - 1
-    # end
-    #
-    # it "The information for the first & last trip is correct" do
-    #   trips_array[0].id.must_equal csv_info[1][0].to_i
-    #   trips_array[0].driver_id.must_equal csv_info[1][1].to_i
-    #   trips_array[0].rider_id.must_equal csv_info[1][2].to_i
-    #   trips_array[0].date.must_equal Date.parse(csv_info[1][3])
-    #   trips_array[0].rating.must_equal csv_info[1][4].to_i
-    #
-    #   trips_array[-1].id.must_equal csv_info[-1][0].to_i
-    #   trips_array[-1].driver_id.must_equal csv_info[-1][1].to_i
-    #   trips_array[-1].rider_id.must_equal csv_info[-1][2].to_i
-    #   trips_array[-1].date.must_equal Date.parse(csv_info[-1][3])
-    #   trips_array[-1].rating.must_equal csv_info[-1][4].to_i
-    # end
+    it "The first and last element of the array is a Trip" do
+      trips_array[0].must_be_instance_of RideShare::Trip
+      trips_array[-1].must_be_instance_of RideShare::Trip
+    end
+
+    it "The number of trips is correct" do
+      trips_array.length.must_equal csv_info.count
+    end
+
+    it "The information for the first & last trip is correct" do
+      trips_array[0].id.must_equal csv_info[0][0].to_i
+      trips_array[0].driver_id.must_equal csv_info[0][1].to_i
+      trips_array[0].rider_id.must_equal csv_info[0][2].to_i
+      trips_array[0].date.must_equal Date.parse(csv_info[0][3])
+      trips_array[0].rating.must_equal csv_info[0][4].to_i
+
+      trips_array[-1].id.must_equal csv_info[-1][0].to_i
+      trips_array[-1].driver_id.must_equal csv_info[-1][1].to_i
+      trips_array[-1].rider_id.must_equal csv_info[-1][2].to_i
+      trips_array[-1].date.must_equal Date.parse(csv_info[-1][3])
+      trips_array[-1].rating.must_equal csv_info[-1][4].to_i
+    end
+  end
+
+  describe "Trip.find_driver_trips" do
+    it "Returns an Array" do
+      RideShare::Trip.find_driver_trips(2).must_be_instance_of Array
+    end
+
+    it "The first and last element of the array is a Trip" do
+      drivers_trips = RideShare::Trip.find_driver_trips(2)
+
+      drivers_trips[0].must_be_instance_of RideShare::Trip
+      drivers_trips[-1].must_be_instance_of RideShare::Trip
+    end
+
+    it "The number of trips is correct" do
+      RideShare::Trip.find_driver_trips(2).length.must_equal 8
+    end
+
+    #do a test for what to do if no trips were taken by a driver
   end
 end
