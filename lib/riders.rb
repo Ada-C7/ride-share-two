@@ -1,8 +1,4 @@
-require 'csv'
-require_relative 'loadable'
-require_relative 'trips'
-
-# think about using public vs private methods
+require_relative 'module'
 
 module RideShare
   class Rider < Loadable
@@ -12,7 +8,7 @@ module RideShare
       @name = params[:name]
       @phone_num = params[:phone_num]
     end
-    
+
     def self.all
       super("./support/riders.csv")
     end
@@ -29,11 +25,3 @@ module RideShare
 
   end
 end
-
-# initialization_hash = {
-#   name: "Ron Weasley",
-#   rider_id: 2,
-#   phone_num: "2062424564"
-# }
-# rider = RideShare::Rider.new(initialization_hash)
-# puts rider.all_drivers()

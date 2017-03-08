@@ -1,6 +1,4 @@
-require 'csv'
-require_relative 'loadable'
-require_relative 'trips'
+require_relative 'module'
 
 module RideShare
   class Driver < Loadable

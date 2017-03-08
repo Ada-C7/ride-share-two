@@ -1,4 +1,5 @@
-require_relative 'loadable'
+require_relative 'module'
+
 module RideShare
   class Trip < Loadable
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -23,9 +24,14 @@ module RideShare
     def self.driver_find(id)
       self.all.select { |trip| trip.driver_id == id}
     end
-    #write these tomorrow:
-    #retrieve the associated driver instance through the driver ID
-    #retrieve the associated rider instance through the rider ID
+
+    def driver_for_trip
+      RideShare::Driver.find(@driver_id)
+    end
+
+    def rider_for_trip
+      RideShare::Rider.find(@rider_id)
+    end
 
   end
 end
