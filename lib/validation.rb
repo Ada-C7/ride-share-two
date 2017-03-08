@@ -1,4 +1,5 @@
 module Validation
+  private
 
   def validate_int(field, field_name)
     if field.class != Integer || field < 0
