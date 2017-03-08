@@ -56,6 +56,10 @@ class RideShare::Trip
     return 0 if rider_trips.empty?
     rider_trips
   end
+
+  def self.find_driver(trip_id)
+
+  end
   # Retrieve associated driver instance through driver ID
   #   input: Driver ID
   #   output: Driver Object associated w/ trip
@@ -64,8 +68,5 @@ class RideShare::Trip
   #   input: Rider ID
   #   output: Rider object associated w/ trip
   #
-  # Find all trip instances (rider) CLASS METHOD
-  #   input: Rider ID
-  #   output: list (ARRAY) of all trip instances for that Rider
-  #
+
 end
