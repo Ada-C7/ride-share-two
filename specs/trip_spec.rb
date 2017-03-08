@@ -111,8 +111,6 @@ describe "Trip class" do
       trip.date.must_equal "2016-04-25"
       trip.rating.must_equal 3
     end
-
-    # Note: Add tests for the edge cases
   end
 
   describe "#self.trips_by_driver method" do
@@ -152,7 +150,6 @@ describe "Trip class" do
     end
 
   end
-
 
   describe "#self.trips_by_rider method" do
 

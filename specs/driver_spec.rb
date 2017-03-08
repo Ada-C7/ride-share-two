@@ -97,7 +97,7 @@ describe "Driver class" do
     it "Retrieve all drivers from the CSV file" do
       all_drivers_array.must_be_instance_of Array
       all_drivers_array.length.must_equal 100
-      all_drivers_array.each { |trip| trip.must_be_instance_of RideShare::Driver }
+      all_drivers_array.each { |driver| driver.must_be_instance_of RideShare::Driver }
     end
 
     it "First element inside the returned array matches the CSV file" do
