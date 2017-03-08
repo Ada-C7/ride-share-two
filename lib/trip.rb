@@ -57,8 +57,16 @@ class Trip
     return @this_drivers_trips
   end
 
-  def self.find_all_for_rider
+  def self.find_all_for_rider(rider_id)
+    # find all trip instances for a given rider ID
+    @this_riders_trips = []
 
+    Trip.all.each do |trip|
+      if trip.rider_id == rider_id
+        @this_riders_trips << trip
+      end
+    end
+    return @this_riders_trips
   end
 
 end

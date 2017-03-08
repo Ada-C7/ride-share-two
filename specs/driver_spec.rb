@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe "Driver" do
 
-  describe "initialize" do
+  describe "#initialize" do
     it "takes an id, name, and vin" do
       new_driver = Driver.new(1, "Santa Claus", 98109)
 
@@ -22,9 +22,8 @@ describe "Driver" do
     end
   end
 
-  describe "trips" do
+  describe "#trips" do
     it "returns the list of trip instances that only this driver has taken" do
-      skip
       first_driver = Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
       first_driver_trips = first_driver.trips(1)
       first_driver_trips.must_be_instance_of Array
@@ -36,7 +35,7 @@ describe "Driver" do
     end
   end
 
-  describe "Driver.all" do
+  describe "Driver#all" do
     before do
       @drivers = Driver.all
     end
@@ -50,7 +49,7 @@ describe "Driver" do
     end
   end
 
-  describe "Driver.find" do
+  describe "Driver#find" do
     before do
       @drivers = Driver.all
     end
@@ -70,17 +69,23 @@ describe "Driver" do
       driver.id.must_equal @drivers[-1].id
     end
 
-    it "Raises an error for a driver that doesn't exist" do
+    it "raises an error for a driver that doesn't exist" do
       proc {
         Driver.find(111111)
       }.must_raise ArgumentError
     end
   end
 
-
-  describe "rating" do
-    #calls trips(id)
-    #
+  describe "#rating" do
+    # pass in driver id
+    # gets an average rating for that driver
+    # calls Driver(class)'s trip(id) method, which will give all the trips (with ratings for each)
+    # sum all the ratings, divide by the number of trips/ratings
+    it "returns the average rating for a driver" do
+      new_driver = Driver.new(1, "Santa Claus", 98109)
+      new_driver.rating(1).must_be_instance_of Float
+      new_driver.rating(1).must_equal 2.3333333333333335
+    end
   end
 
 end

@@ -39,13 +39,19 @@ class Driver
     #pass in driver id
     #get back a collection of all the trip instances of that driver
     #calls trip(class)'s find_many_for_driver method
+    Trip.find_all_for_driver(id)
   end
 
-  def ratings(id)
+  def rating(id)
     #pass in driver id
     #gets an average rating for that driver
     #calls Driver(class)'s trip(id) method, which will give all the trips (with ratings for each)
     #sum all the ratings, divide by the number of trips/ratings
+    all_trips = Trip.find_all_for_driver(id)
+    all_ratings = []
+    all_trips.each { |trip| all_ratings << trip.rating }
+    average = (all_ratings.reduce(:+))/all_ratings.length.to_f
+    return average
   end
 
 end
