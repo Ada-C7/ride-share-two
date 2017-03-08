@@ -64,9 +64,10 @@ describe "Rider" do
     end
   end
 
-  describe "list_drivers" do
+  describe "get_drivers" do
     it "correctly generates a list of drivers associated with this rider's trips" do
-
+      # rider.get_drivers
+      # need to adjust sample rider to have more trips (try rider 45)
     end
   end
 

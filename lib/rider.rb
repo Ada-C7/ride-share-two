@@ -36,9 +36,13 @@ module RideShare
       Trip.find_by_rider(id)
     end
 
-    def list_drivers
+    def get_drivers
       # calls get_trips
-      # returns the list of all previous driver instances
+      trips = get_trips
+      # extract array of driver_ids
+      driver_ids = trips.map {|trip| trip.driver_id }
+      # call Driver.find to collect Driver instances
+      # return array of Driver instances
 
     end
 
