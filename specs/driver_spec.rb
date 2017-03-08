@@ -1,11 +1,11 @@
-require 'simplecov'
-SimpleCov.start
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
+# require 'simplecov'
+# SimpleCov.start
+# require 'minitest/autorun'
+# require 'minitest/reporters'
+# require 'minitest/skip_dsl'
+# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+require_relative './spec_helper.rb'
 require_relative '../lib/driver'
-
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe "Driver" do
 
@@ -136,6 +136,34 @@ describe "Driver" do
       last_driver.name.must_equal "Minnie Dach"
       last_driver.id.must_equal 100
       # last_driver.vin.must_equal
+    end
+  end
+
+  describe "Driver#get_trips" do
+
+    # randome driver to test with
+    # 15,Gayle Herzog,L1CDHZJ0567RJKCJ6
+    # or you should make up fake data so you know everything...
+    before do
+      csv_file_drivers = './support/drivers.csv'
+      driver_data = FileData.new(csv_file_drivers)
+      @driver_data = driver_data.read_csv_and_remove_headings
+      @driver_id = 15
+
+      csv_file_trips = './support/trips.csv'
+      trip_data = FileData.new(csv_file_trips)
+      @trips_data = trip_data.read_csv_and_remove_headings
+    end
+
+    let(:driver) { RideShare::Driver.find(@driver_id, @driver_data) }
+
+    it "returns an array of trip instances" do
+      driver.get_trips(@trips_data).must_be_instance_of Array
+      driver.get_trips(@trips_data).each { |trip| trip.must_be_instance_of RideShare::Trip }
+    end
+
+    it "each trip instance has the same driver id" do
+      driver.get_trips(@trips_data).each { |trip| trip.driver_id.must_equal @driver_id }
     end
   end
 end

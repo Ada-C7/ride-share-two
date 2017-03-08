@@ -1,7 +1,7 @@
 require 'date'
-require_relative './spec_helper.rb'
 require_relative '../lib/file'
 require_relative '../lib/trip'
+require_relative './spec_helper.rb'
 
 describe "Trip" do
   # trip_id,driver_id,rider_id,date,rating
@@ -149,7 +149,9 @@ describe "Trip" do
       csv_file = './support/trips.csv'
       # @trips_data = RideShare::FileData.read_csv(csv_file)
       data = FileData.new(csv_file)
+
       @trips_data = data.read_csv_and_remove_headings
+      # @trips_data = RideShare::Trip.all(@trips_data)
       @driver_id = 7
     end
 

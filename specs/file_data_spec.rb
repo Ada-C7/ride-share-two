@@ -1,12 +1,11 @@
-require 'simplecov'
-SimpleCov.start
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
+# require 'simplecov'
+# SimpleCov.start
+# require 'minitest/autorun'
+# require 'minitest/reporters'
+# require 'minitest/skip_dsl'
+# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+require_relative './spec_helper.rb'
 require_relative '../lib/file'
-# require_relative '../lib/'
-
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe "FileData" do
 

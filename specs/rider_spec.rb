@@ -1,11 +1,12 @@
-require 'simplecov'
-SimpleCov.start
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require_relative '../lib/rider'
+# require 'simplecov'
+# SimpleCov.start
+# require 'minitest/autorun'
+# require 'minitest/reporters'
+# require 'minitest/skip_dsl'
+# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+require_relative '../lib/rider'
+require_relative './spec_helper.rb'
 
 describe "Rider" do
   describe "Rider#Initialize" do

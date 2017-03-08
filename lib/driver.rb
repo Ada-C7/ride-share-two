@@ -8,10 +8,14 @@ module RideShare
       @vin = info[:vin]
     end
 
+    def get_trips(raw_trip_data)
+      trips = RideShare::Trip.find_by_driver(@id, raw_trip_data)
+    end
+
     def self.all(drivers_data)
       raise ArgumentError.new("data is empty array") if drivers_data.empty?
       drivers = drivers_data.map do |driver_info|
-        raise ArgumentError.new("driver info must have 3 parts") if driver_info.length != 3
+        raise ArgumentError.new("driver info must have 3 parts") unless driver_info.length == 3
         driver = Hash.new
         driver[:id] = test_for_integer(driver_info[0])
         driver[:name] = test_for_string(driver_info[1])
@@ -25,6 +29,7 @@ module RideShare
       Integer(num)
     end
 
+    # do you need to test this string? or is making sure it is included enough
     def self.test_for_string(name)
       name
     end
