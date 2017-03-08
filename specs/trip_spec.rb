@@ -103,4 +103,22 @@ describe "Trip" do
     end
   end
 
+  describe "trip#find_trips_rider" do
+
+    before do
+      @rider_trips = Rider.find_trips_rider(1)
+    end
+
+    it "Returns a list of trips" do
+      @rider_trips.must_be_kind_of Array
+      @rider_trips.each { |trip| trip.must_be_instance_of Trip }
+
+      @rider_trips.length.must_equal 2
+    end
+
+    it "Returns and empty array for a rider ID that doesn't exist" do
+      Trip.find_trips_rider(301).must_equal []
+    end
+  end
+
 end
