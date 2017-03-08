@@ -1,6 +1,4 @@
 require 'csv'
-# require_relative 'driver'
-# require_relative 'rider'
 
 module RideShare
     class Trip
@@ -9,7 +7,7 @@ module RideShare
         attr_reader :trip_id, :driver_id, :rider_id, :trip_date, :trip_rating
 
         def initialize(id)
-            raise ArgumentError, '#{id} is not a valid ID number' unless (1..600).cover? id
+            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
             TRIP_INFO.each do |line|
                 next unless line[0].to_i == id
                 @trip_id = id
@@ -21,27 +19,35 @@ module RideShare
         end
 
         def driver
-            Driver.find(@driver_id)
+            Driver.find(@driver_id.to_i)
         end
 
         def rider
-            Rider.find(@rider_id)
+            Rider.find(@rider_id.to_i)
         end
 
         def self.all
-            TRIP_INFO[1..600]
+            @all_trips = TRIP_INFO.drop(1).map { |line| Trip.new(line[0].to_i) }
         end
 
         def self.driver_trips(id)
-            @driver_trips = (TRIP_INFO.map { |line| line if line[1].to_i == id }).compact!
+            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
+            all
+            @driver_trips = (@all_trips.map { |trip| trip if trip.driver_id.to_i == id }).compact!
         end
 
         def self.rider_trips(id)
-            @rider_trips = (TRIP_INFO.map { |line| line if line[2].to_i == id }).compact!
+            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
+            all
+            @rider_trips = (@all_trips.map { |trip| trip if trip.rider_id.to_i == id }).compact!
         end
     end
 end
 
-# trip = RideShare::Trip.new(30)
-#
-# print trip.driver
+# print RideShare::Trip.rider_trips(5)
+# puts
+# puts
+# print RideShare::Trip.driver_trips(12)
+# puts
+# puts
+# print RideShare::Trip.rider_trips(76)
