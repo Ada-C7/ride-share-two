@@ -1,5 +1,33 @@
+require 'csv'
+
 module Rideshare
   class Driver
+    attr_reader  :driver_id, :name, :vin
+
+    def initialize(trip_hash)
+
+      @driver_id = trip_hash[:driver_id]
+      @vin = trip_hash[:vin]
+      @name = trip_hash[:name]
+
+    end
+
+    def self.create_drivers
+      hash = {}
+      CSV.foreach('support/drivers.csv', {:headers => true, :header_converters=> :symbol}) do |row|
+        hash[row[0]] = self.new({driver_id:row[0], name:row[1], vin:row[2]})
+      end
+      return hash
+    end
+
+
+    def self.find_driver(param)
+
+      CSV.foreach('support/drivers.csv', {:headers=> true, :header_converters => :symbol}) do |row|
+        return Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s
+      end
+    end
+
     # def initialize
     #   attributes are set to default values and ready to be assigned in class methods
     #   @id
@@ -47,3 +75,4 @@ module Rideshare
     #
   end
 end
+puts Rideshare::Driver.create_drivers
