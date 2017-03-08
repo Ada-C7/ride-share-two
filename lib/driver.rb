@@ -17,13 +17,23 @@ module RideShare
       return driver_trips
     end
 
-    retrieve an average rating for that driver based on all trips taken
+    # retrieve an average rating for that driver based on all trips taken
 
-    # def average_rating
-    #   #   #use find driver here
-    #   #   #use driver trip instances here
-    #   # average rating over trip instances
-    # end
+    def average_rating
+      # avg_rating = 0
+      rating_array = []
+      driver_avg_rating = RideShare::Trip.driver_trip_instances(@driver_id)
+      driver_avg_rating.each do |object|
+          rating_array << object.rating
+        end
+        rating_array_lenth = rating_array.length
+        rating_array_sum = rating_array.inject(:+)
+        avg_rating = rating_array_sum / rating_array_lenth
+        return avg_rating
+    end
+#can come back to this and make so that it's a float instead of an integer
+      #now that I have the driver trip instances, I need to sum the ratings
+      # driver_avg_rating.
 
 
     def self.all_driver_info
@@ -48,12 +58,12 @@ module RideShare
       raise ArgumentError.new("Driver #{driver_id} does not exist")
     end
 
-
   end
-
 end
 
-
+# RideShare::Driver.all_driver_info
+# trial_1 = RideShare::Driver.new(1,"Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+# trial_1.driver_trip_instances
 
 
 

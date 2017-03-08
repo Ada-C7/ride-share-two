@@ -19,7 +19,7 @@ module RideShare
     #
     def self.driver_trip_instances(driver_id)
       driver_trips = []
-      trips = RideShare::Trips.all_trip_info
+      trips = RideShare::Trip.all_trip_info
       trips.each do |object|
         if driver_id == object.driver_id
           driver_trips << object
@@ -50,7 +50,9 @@ module RideShare
   end
 end
 
-
+# RideShare::Trip.driver_trip_instances(1)
+# new_trip = RideShare::Trip.new( 1, 1, 54, "2016-04-05", 3)
+# new_trip
 # trip_id,driver_id,rider_id,date,rating
 # 1,1,54,2016-04-05,3
 # 2,67,146,2016-01-13,5

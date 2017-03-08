@@ -1,16 +1,8 @@
-# #require relative spec_helper
-# # require 'minitest'
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require 'minitest/skip_dsl'
-# require_relative '../lib/driver'
 require 'csv'
 require_relative 'spec_helper'
-# # add simplecov
-# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe "driver class" do
-
+#tests the initalize method
   it "requires 3 parameters for driver" do
     driver_id = 3099
     name = "Katie Nichols"
@@ -27,14 +19,6 @@ describe "driver class" do
     driver.must_respond_to :vin
     driver.vin.must_equal vin
   end
-#potentially need to test for name and vin being a
-# it "converts name to a string" do
-#   driver_id = 3099
-#   name = "Katie"
-#   vin = "BWSS52P9NEYLVDE90"
-#
-#   driver = RideShare::Driver.new(driver_id, name, vin)
-#   driver.name.must_be_instance_of String end
 
   it "raises an ArgumentError if vin is less than 17 characters" do
   proc {
@@ -48,6 +32,36 @@ describe "driver class" do
   }.must_raise ArgumentError
   end
 
+# #TODO test def driver_trip_instances
+it "returns an array of all driver info" do
+  driver_trips = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+  driver_trips.driver_trip_instances.must_be_instance_of Array
+end
+
+# it "returns the correct instance of driver_id"
+#   driver_trips = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+# end
+
+
+
+#tests def average_rating
+it "returns an integer" do
+  #do I have to test it here or in the trips
+  avg_driver_rating = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9" )
+  avg_driver_rating.average_rating.must_be_instance_of Integer
+end
+
+it "the integer is between 1 and 5" do
+  avg_driver_rating = avg_driver_rating = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9" )
+  avg_driver_rating.average_rating.must_equal 2
+end
+
+it "the integer is between 1 and 5" do
+  avg_driver_rating = RideShare::Driver.new(5, "hello", "WBWSS52P9NEYXVDE9" )
+  avg_driver_rating.average_rating.must_equal 3
+end
+
+#tests self.all_driver_info
   it "returns an array of all driver info" do
     info = RideShare::Driver.all_driver_info
     info.must_be_instance_of Array
@@ -73,7 +87,7 @@ describe "driver class" do
     CSV.read('support/drivers.csv') do |line|
     info[index].driver_id.must_equal line[0].to_i
     info[index].driver_id.must_equal line[1].to_i
-    info[index].driver_id.must_equal line[2]
+    info[index].driver_id.must_equal line[2].to_i
     index += 1
     end
   end
