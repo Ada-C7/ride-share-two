@@ -40,7 +40,6 @@ module RideShare
       all_riders = []
       csv = CSV.read("support/riders.csv", 'r')
       csv.each do |line|
-      #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "rider_id"
         hash = {rider_id: line[0].to_i, name: line[1], phone: line[2]}
         all_riders << Rider.new(hash)
