@@ -1,4 +1,5 @@
 require 'csv'
+# require_relative 'ride_share_trip'
 #Create Rideshare module
 module Rideshare
 #Create Rider class

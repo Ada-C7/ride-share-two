@@ -1,4 +1,5 @@
 require 'csv'
+# require_relative './ride_share_trip'
 #Create Rideshare module
 module Rideshare
 #Create Driver class
@@ -30,13 +31,21 @@ module Rideshare
     end
 #instance_method1 : retrieve the list of trip instances that only this drver has taken
     def all_trips
+      return Rideshare::Trip.find_trip_by_driver(@id)
     end
 #instance_method2 : retrieve an average rating for that driver based on all trips taken
     def average_rating
+      total = all_trips.map { |h| h[:rating] }.inject(:+)
+      average = total/all_trips.length.to_f
+      average = '%.2f' %average
+      return average.to_f
     end
 
   end
 end
 
 # puts Rideshare::Driver.all.last
-# Rideshare::Driver.new(id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9")
+# driver = Rideshare::Driver.new(id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9")
+# print driver.all_trips
+
+# puts Rideshare::Trip.find_trip_by_driver(1)

@@ -7,6 +7,9 @@ require 'minitest/skip_dsl'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/ride_share_trip.rb'
+require_relative '../lib/ride_share_driver.rb'
+require_relative '../lib/ride_share_rider.rb'
+
 
 describe "Trip" do
 

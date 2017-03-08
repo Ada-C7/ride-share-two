@@ -1,6 +1,6 @@
 require 'csv'
-require_relative 'ride_share_driver'
-require_relative 'ride_share_rider'
+# require_relative 'ride_share_driver'
+# require_relative 'ride_share_rider'
 #Create Rideshare module
 module Rideshare
 #Create Trip class
