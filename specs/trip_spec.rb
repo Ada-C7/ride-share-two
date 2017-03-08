@@ -55,18 +55,18 @@ describe "Trip" do
       data = FileData.new(csv_file)
       @trips_data = data.read_csv_and_remove_headings
 
-      # could have hash - key - descr of why bad - value is array- of arrays
-      @trips_bad_data_1 = [['three', '1', '54', "2016-04-05", '4']]
-      @trips_bad_data_2 = [['3', 'one', '54', "2016-04-05", '4']]
-      @trips_bad_data_3 = [['3', '1', 'fifity', "2016-04-05", '4']]
-      @trips_bad_data_4 = [['3', '1', '54', "hello", '4']]
-      # four will not pass the 1-5 test so that is the argument error raised
-      @trips_bad_data_5 = [['3', '1', '54', "2016-04-05", 'four']]
-      @trips_bad_data_6 = [['3', '1', '54', "2016-04-05", '7']]
-      @trips_bad_data_7 = []
-      @trips_bad_data_8 = [[]]
-      @trips_bad_data_9 = [['3', '1', '54', "2016-04-05"]]
-      # @trips_bad_data_10 = # give it two records or three
+      @bad_data = {
+                    bad_id: [['4', '2', '34', "2016-04-05", '5'], ['three', '1', '54', "2016-04-05", '4']],
+                    bad_driver_id: [['3', 'one', '54', "2016-04-05", '4']],
+                    bad_rider_id: [['3', '1', 'fifity', "2016-04-05", '4']],
+                    bad_date: [['3', '1', '54', "hello", '4']],
+                    bad_rating: [['3', '1', '54', "2016-04-05", 'four']],
+                    rating_out_of_range: [['3', '1', '54', "2016-04-05", '7']],
+                    missing_part: [['3', '1', '54', "2016-04-05"]],
+                    empty_array: [],
+                    empty_nested_arrays: [[]]
+
+                  }
     end
 
     # let does not run this block untill it is called - which is good you want
@@ -89,59 +89,59 @@ describe "Trip" do
     it "raises an argument error if not given integer for trip ID  " do
       # proc also equals ->
       proc {
-        RideShare::Trip.all(@trips_bad_data_1)
+        RideShare::Trip.all(@bad_data[:bad_id])
       }.must_raise ArgumentError
     end
 
     it "raises an argument error if not given intetger for driver_id" do
       proc {
-        RideShare::Trip.all(@trips_bad_data_2)
+        RideShare::Trip.all(@bad_data[:bad_driver_id])
       }.must_raise ArgumentError
     end
 
     it "raises an argument error if not given intetger for rider_id" do
       proc {
-        RideShare::Trip.all(@trips_bad_data_3)
+        RideShare::Trip.all(@bad_data[:bad_rider_id])
       }.must_raise ArgumentError
     end
 
     it "raises an argument error if not given proper date" do
       # at this point using Ruby's built in error for this
       proc {
-        RideShare::Trip.all(@trips_bad_data_4)
+        RideShare::Trip.all(@bad_data[:bad_date])
       }.must_raise ArgumentError
     end
 
     # if you send "four" as rating - it wont pass the test_rating method
     it "raises an argument error if not given integer for rating" do
       proc {
-        RideShare::Trip.all(@trips_bad_data_5)
+        RideShare::Trip.all(@bad_data[:bad_rating])
       }.must_raise ArgumentError
     end
 
     it "raises an argument error if not given 1-5 integer for rating" do
       err = proc {
-        RideShare::Trip.all(@trips_bad_data_6)
+        RideShare::Trip.all(@bad_data[:rating_out_of_range])
       }.must_raise ArgumentError
       err.message.must_equal "Rating must be 1-5"
     end
 
-    it "raises an arugment error if given empty arrays" do
+    it "raises an arugment error if given empty array" do
       proc {
-        RideShare::Trip.all(@trips_bad_data_7)
+        RideShare::Trip.all(@bad_data[:empty_array])
       }.must_raise ArgumentError
     end
 
     # good example of testing an error with the expected error message
     it "raises an error message when given [[]]" do
       proc {
-        RideShare::Trip.all(@trips_bad_data_8)
+        RideShare::Trip.all(@bad_data[:empty_nested_arrays])
       }.must_raise ArgumentError
     end
 
     it "riases an error if not given all info pieces" do
       proc {
-        RideShare::Trip.all(@trips_bad_data_9)
+        RideShare::Trip.all(@bad_data[:missing_part])
       }.must_raise ArgumentError
     end
   end

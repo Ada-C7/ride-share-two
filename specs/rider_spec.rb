@@ -34,12 +34,20 @@ describe "Rider" do
       csv_file = './support/riders.csv'
       data = FileData.new(csv_file)
       @riders_data = data.read_csv_and_remove_headings
-      @riders_bad_data_1 = [['two', 'name', '425-789-1234']]
-      @riders_bad_data_2 = [['10', 'name', 'phone_number']]
-      @riders_bad_data_3 = [['15', 'name', 425-678-1234]]
-      @riders_bad_data_4 = [['10', 'name']]
-      @riders_bad_data_5 = []
-      @riders_bad_data_6 = [[],[],[]]
+      @bad_data = {
+                    bad_id: [['two', 'name', '425-789-1234']],
+                    bad_phone: [['15', 'name', 425-678-1234]],
+                    missing_part: [['10', 'name']],
+                    empty_array: [],
+                    empty_nested_arrays: [[],[],[]]
+                  }
+
+      # @riders_bad_data_1 = [['two', 'name', '425-789-1234']]
+      # @riders_bad_data_2 = [['10', 'name', 'phone_number']]
+      # @riders_bad_data_3 = [['15', 'name', 425-678-1234]]
+      # @riders_bad_data_4 = [['10', 'name']]
+      # @riders_bad_data_5 = []
+      # @riders_bad_data_6 = [[],[],[]]
     end
 
     let(:riders) { RideShare::Rider.all(@riders_data) }
@@ -58,26 +66,30 @@ describe "Rider" do
 
     it "raises an error if given bad id data" do
       proc {
-         RideShare::Rider.all(@riders_bad_data_1)
+         RideShare::Rider.all(@bad_data[:bad_id])
       }.must_raise ArgumentError
     end
 
     it "raises an error if given an empty array" do
       proc {
-         RideShare::Rider.all(@riders_bad_data_5)
+         RideShare::Rider.all(@bad_data[:empty_array])
       }.must_raise ArgumentError
     end
 
     it "raises an error if given empty nested arrays" do
       proc {
-         RideShare::Rider.all(@riders_bad_data_6)
+         RideShare::Rider.all(@bad_data[:empty_nested_arrays])
       }.must_raise ArgumentError
     end
 
     it "raises an error if given arrays missing data" do
       proc {
-         RideShare::Rider.all(@riders_bad_data_4)
+         RideShare::Rider.all(@bad_data[:missing_part])
       }.must_raise ArgumentError
+    end
+
+    it "raises an error if given bad phone_number" do
+      skip
     end
 
   end
