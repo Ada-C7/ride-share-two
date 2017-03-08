@@ -6,7 +6,7 @@ module RideShare
 
     def initialize(params)
       validate_params(params)
-      
+
       @id = params[:id]
       @name = params[:name]
       @vin = params[:vin]
@@ -44,7 +44,7 @@ module RideShare
       required_attributes = [:id, :name, :vin]
 
       missing = required_attributes.select do |attribute|
-        !params.keys.include? attribute
+        !params.keys.include? attribute || params[attribute].nil? || params[attribute].empty?
       end
 
       if !missing.empty?

@@ -40,7 +40,7 @@ module RideShare
       required_attributes = [:id, :name, :phone_number]
 
       missing = required_attributes.select do |attribute|
-        !params.keys.include? attribute
+        !params.keys.include? attribute || params[attribute].nil? || params[attribute].empty?
       end
 
       unless missing.empty?
