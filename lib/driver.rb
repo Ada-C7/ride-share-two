@@ -20,7 +20,7 @@ class Ride_Share::Driver
       # id = line[0].to_i
       # name = line[1]
       # vin = line[2].to_i
-      all_drivers_array << Driver.new(line)
+      all_drivers_array << Ride_Share::Driver.new(line)
       #all_drivers_array << Driver.new(id: id, name: name, vin: vin)
     end
     return all_drivers_array

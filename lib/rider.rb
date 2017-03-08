@@ -47,7 +47,6 @@ class Ride_Share::Rider
   def retrieve_drivers
     #retrieve the list of all previous driver instances for a rider
     #returns list of driver instances
-
   end
 
 end
