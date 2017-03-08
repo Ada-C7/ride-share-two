@@ -139,4 +139,25 @@ describe "Trip" do
     end
   end
 
+  describe "trip#rider" do
+    it "Returns a rider that exists" do
+      trip = Trip.new(100, 29, 138, "2016-09-04", 2)
+      trip.rider.must_be_kind_of Rider
+    end
+
+    it "Returns the correct rider for a specific trip" do
+      trip = Trip.new(100, 29, 138, "2016-09-04", 2)
+      name = "Miss Frida Abshire"
+      trip.rider.name.must_equal name
+    end
+
+    # trip exists, but rider does not - improve!!!
+    it "Raises an error if rider doesn't exist" do
+      trip = Trip.new(267, 14, 0, "2015-04-23", 4)
+      proc {
+        trip.rider
+      }.must_raise ArgumentError
+    end
+  end
+
 end
