@@ -100,7 +100,7 @@ describe "Rider class" do
 
     it "Returned array contains unique driver instances" do
       rider = RideShare::Rider.new({ id: 164, name: "Dominique Gleason PhD", phone_number:	"460.497.2371" })
-      drivers = rider.trips
+      drivers = rider.drivers
 
       rider.trips.length.must_equal 6
       drivers.length.must_equal 5
