@@ -42,12 +42,17 @@ describe "rider_id" do
     end
   end
 
-  # Leaving this to continue to build out rest of driver and trips
-  # describe "Rider#drivers" do
-  #   it "Retrieve a list of all previous driver instances this rider has rode with" do
-  #     my_rider.drivers.must_be_instance_of Array
-  #   end
-  # end
+  describe "Rider#drivers" do
+    it "Retrieve an array of all previous driver instances this rider has rode with" do
+      my_rider.drivers.must_be_instance_of Array
+      my_rider.drivers[0].must_be_instance_of RideShare::Driver
+      my_rider.drivers[-1].must_be_instance_of RideShare::Driver
+    end
+
+    it "Returns accurate drivers associated with trips" do
+      #driverobject.id must equal trip.driver_id
+    end
+  end
 
   describe "find_all Rider class method" do
     it "returns an array of Rider instances" do
@@ -66,7 +71,6 @@ describe "rider_id" do
     end
 
     it "id of first & last match id of first & last in CSV" do
-      skip
       all_riders[0].id.must_equal(riders_csv[1][0].to_i)
       all_riders[-1].id.must_equal(riders_csv[-1][0].to_i)
     end
@@ -77,9 +81,6 @@ describe "rider_id" do
       my_rider = RideShare::Rider.find_rider(1)
       my_rider.must_be_instance_of RideShare::Rider
     end
-
-    #possibly want to return different cases if enter in
-    #a number that's not a driver ID vs a string
 
     it "should return 0 if no driver found by that ID" do
       bad_id = RideShare::Rider.find_rider("apple")

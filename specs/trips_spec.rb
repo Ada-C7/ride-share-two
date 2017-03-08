@@ -92,7 +92,6 @@ describe "Trip" do
 
   describe "Testing Trip#find_rider class method" do
     it "returns an a specific driver instance" do
-      skip
       my_trip.find_rider.must_be_instance_of RideShare::Rider
     end
   end

@@ -40,9 +40,9 @@ class RideShare::Driver
     return drivers
   end
 
-  def self.find_driver(id)
+  def self.find_driver(driver_id)
     all_drivers = RideShare::Driver.find_all
-    found_driver = all_drivers.find { |driver| driver.id == id }
+    found_driver = all_drivers.find { |driver| driver.id == driver_id }
     return 0 if found_driver == nil
     return found_driver
   end

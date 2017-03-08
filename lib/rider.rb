@@ -17,13 +17,15 @@ class RideShare::Rider
   end
 
   def drivers
-    #leaving this to come back
-    #send trips back to trips to find the driver instances!
-    # driver_ids = trips.map { |trip| trip.driver_id }
-    #
-    # Retrieve a list of all previous driver instances this rider has rode with.
-    #   input: Array of Trip instances (from above)
-    #   output: Array of the associated drivers.
+    rider_trips = trips
+    rider_drivers = []
+
+    rider_trips.each do |trip|
+      rider_drivers << RideShare::Driver.find_driver(trip.driver_id)
+    end
+
+    return rider_drivers
+
   end
 
   def self.find_all
@@ -39,14 +41,10 @@ class RideShare::Rider
     return riders
   end
 
-  def self.find_rider(id)
+  def self.find_rider(rider_id)
     all_riders = RideShare::Rider.find_all
-    found_rider = all_riders.find { |rider| rider.id == id }
+    found_rider = all_riders.find { |rider| rider.id == rider_id }
     return 0 if found_rider == nil
     return found_rider
-    # Retrieve specific rider using numeric ID
-    #   input: Rider ID
-    #   output: Specific rider (from list above)
-
   end
 end

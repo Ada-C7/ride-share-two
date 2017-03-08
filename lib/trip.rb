@@ -24,8 +24,6 @@ class RideShare::Trip
         puts "#{ e }"
       end
     end
-
-      # trips.shift => I guess I don't need this.
     return trips
   end
 
@@ -59,17 +57,10 @@ class RideShare::Trip
 
   def find_driver
     RideShare::Driver.find_driver(@driver_id)
-    # Retrieve associated driver instance through driver ID
-    #   input: Driver ID
-    #   output: Driver Object associated w/ trip
-    #
   end
 
   def find_rider
     RideShare::Rider.find_rider(@rider_id)
-  # Retrieve associated Rider instance through Rider ID
-  #   input: Rider ID
-  #   output: Rider object associated w/ trip
   end
 
 end
