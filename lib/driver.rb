@@ -23,6 +23,7 @@ module RideShare
     end
 
     def self.find(driver_ID)
+      raise ArgumentError.new("The driver ID is invalid.") if driver_ID.class != Integer
       self.all.find { |driver| driver.id == driver_ID }
     end
 

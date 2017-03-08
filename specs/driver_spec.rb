@@ -74,20 +74,24 @@ describe "Driver" do
   describe "Driver#find" do
 
     it "raises an error if a non-integer is provided" do
-
+      proc {
+        RideShare::Driver.find("first driver")
+      }.must_raise ArgumentError
     end
 
     it "returns an instance of Driver with matching driver ID" do
       RideShare::Driver.find(1).must_be_instance_of RideShare::Driver
     end
 
-    it "can find any Driver from driver.all based on a random number between 1 and 100" do
+    it "can find any driver based on a randomly generated " do
       test_id = rand(1..100)
-      RideShare::Driver.all.must_include RideShare::Driver.find(test_id)
+      driver_check = drivers[test_id - 1].id
+      driver = RideShare::Driver.find(test_id)
+      10.times { expect(driver.id).must_equal driver_check }
     end
 
     it "returns nil if account doesn't exist" do
-      RideShare::Driver.find(383).must_equal nil
+      RideShare::Driver.find(383).must_be_nil
     end
 
   end
@@ -95,6 +99,13 @@ describe "Driver" do
 
   describe "Driver#trips" do
     # retrieve the list of trip instances that only this driver has taken
+
+    # model for checking that all elements are trips
+    # it "Tiles array is filled with only letters" do
+    #   @player.tiles.all? do | letter |
+    #     letter.class.must_equal Symbol
+    #     @tile_bag.letter_quantity.must_include letter
+    #   end
 
   end
 
