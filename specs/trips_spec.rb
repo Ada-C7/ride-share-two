@@ -23,6 +23,23 @@ describe "Trip" do
     end
   end
 
+  describe "Testing #driver method" do
+    it "returns an a specific driver instance" do
+      my_trip.driver.must_be_instance_of RideShare::Driver
+    end
+
+    #Is this an appropriate edge case?  What if given empty string??
+    # it "should return 0 if no driver associated with this instance" do
+    #
+    # end
+  end
+
+  describe "Testing #rider method" do
+    it "returns an a specific driver instance" do
+      my_trip.rider.must_be_instance_of RideShare::Rider
+    end
+  end
+
   describe "Testing Trip#find_all class method" do
     it "returns an array of Trip instances" do
       all_trips.must_be_instance_of(Array)
@@ -76,23 +93,6 @@ describe "Trip" do
     it "Returns 0 if ID not found" do
       bad_id = RideShare::Trip.find_all_rider("bad rider ID")
         bad_id.must_equal 0
-    end
-  end
-
-  describe "Testing Trip#find_driver method" do
-    it "returns an a specific driver instance" do
-      my_trip.find_driver.must_be_instance_of RideShare::Driver
-    end
-
-    #Is this an appropriate edge case?  What if given empty string??
-    # it "should return 0 if no driver associated with this instance" do
-    #
-    # end
-  end
-
-  describe "Testing Trip#find_rider class method" do
-    it "returns an a specific driver instance" do
-      my_trip.find_rider.must_be_instance_of RideShare::Rider
     end
   end
 end

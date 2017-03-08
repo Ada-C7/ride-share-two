@@ -17,20 +17,13 @@ class RideShare::Rider
   end
 
   def drivers
-    #adjust to be unique list??
-    rider_trips = trips
-
-    rider_drivers = []
-    rider_trips.each do |trip|
-      rider_drivers << RideShare::Driver.find_driver(trip.driver_id)
+    trips.map do |trip|
+      trip.driver
     end
-
-    return rider_drivers
   end
 
   def self.find_all
     riders = []
-
     CSV.open("support/riders.csv").each do |rider|
       begin
         riders << RideShare::Rider.new(rider[0].to_i, rider[1], rider[2])
@@ -45,6 +38,6 @@ class RideShare::Rider
     all_riders = RideShare::Rider.find_all
     found_rider = all_riders.find { |rider| rider.id == rider_id }
     return 0 if found_rider == nil
-    return found_rider
+    found_rider
   end
 end
