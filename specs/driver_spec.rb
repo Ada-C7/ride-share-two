@@ -2,11 +2,6 @@ require_relative 'spec_helper'
 
 describe "RideShare::Driver" do
 
-  let(:new_driver) { RideShare::Driver.new(1234, "Kelsey", "23423523434500000") }
-  let(:new_driver2) { RideShare::Driver.new(1234, "Kelsey", "E98731") }
-  let(:valid_driver) { RideShare::Driver.find(17)}
-
-
   describe "RideShare::Driver#iniitalize" do
 
     let(:driver_init) { RideShare::Driver.new(253, "Harry Potter", "123EFC345EGB178EX")}
@@ -62,6 +57,7 @@ describe "RideShare::Driver" do
 
 
   describe "RideShare::Driver#avg_rating" do
+
     let(:driver_rating) { RideShare::Driver.find(55).avg_rating }
 
     it "Returns an Float" do

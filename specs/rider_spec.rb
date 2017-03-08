@@ -11,6 +11,10 @@ describe "RideShare::Rider" do
       new_rider.must_be_instance_of RideShare::Rider
     end
 
+    it "Checks for valid inputs" do
+      
+    end
+
   end
 
 

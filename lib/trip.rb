@@ -9,9 +9,12 @@ module RideShare
       @driver_id = driver_id.to_i
       @rider_id = rider_id.to_i
       @date = date
-      @rating = rating.to_i
+      @rating = (1..5).include?(rating.to_i) ? rating.to_i : invalid_rating
     end
 
+    def invalid_rating # should make this an exception 
+      raise ArgumentError.new("Invalid Rating")
+    end
 
     # retrieve the associated driver instance using the driver ID
     def trip_driver
