@@ -39,9 +39,10 @@ class Driver
 
   end
 
-  def lists_trips
+  def list_trips
     # passes driver ID to find_trips_per_driver
     # returns a list of trip instances only this driver has taken
+    Trip.find_trips_driver(@id)
   end
 
   def avg_rating
