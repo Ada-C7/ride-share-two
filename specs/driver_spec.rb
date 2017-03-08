@@ -3,34 +3,34 @@ require_relative "../ride_share"
 require "csv"
 
 
+describe "Driver class" do
+  describe "Driver#initialize" do
+    let(:jack) { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "12345338" )}
+    it "Takes an ID , name and vin" do
 
-describe "Driver#initialize" do
-  let(:jack) { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "12345338" )}
-  it "Takes an ID , name and vin" do
+      jack.must_respond_to :id
+      jack.id.must_equal "2"
 
-    jack.must_respond_to :id
-    jack.id.must_equal "2"
+      jack.must_respond_to :name
+      jack.name.must_equal "Jack"
 
-    jack.must_respond_to :name
-    jack.name.must_equal "Jack"
-
-    jack.must_respond_to :vin
-    jack.vin.must_equal "12345338"
-  end
-
-describe "Driver#all" do
-  let(:all_drivers) { Ride_Share::Driver.all}
-
-
-  it "Returns an array of all driver instances" do
-    all_drivers.must_be_kind_of Array
-  end
-
-  it 'Everything in the array is an instane of Ride_share::Driver class' do
-    all_drivers.each do |driver_instance|
-      driver_instance.must_be_instance_of Ride_Share::Driver
+      jack.must_respond_to :vin
+      jack.vin.must_equal "12345338"
     end
   end
+
+  describe "Driver#all" do
+    let(:all_drivers) { Ride_Share::Driver.all}
+
+    it "Returns an array of all driver instances" do
+      all_drivers.must_be_kind_of Array
+    end
+
+    it 'Everything in the array is an instane of Ride_share::Driver class' do
+      all_drivers.each do |driver_instance|
+        driver_instance.must_be_instance_of Ride_Share::Driver
+      end
+    end
 
     it "The number of driver records = 100, records in csv file" do
       all_drivers.length.must_equal 100
@@ -49,7 +49,6 @@ describe "Driver#all" do
 
     it "The ID and name and vihecle identification of the last driver match what's in the CSV file" do
       # 100,Minnie Dach,XF9Z0ST7X18WD41HT
-
       driver_id = "100"
       name = "Minnie Dach"
       vin = "XF9Z0ST7X18WD41HT"
@@ -58,33 +57,24 @@ describe "Driver#all" do
       all_drivers.last.name.must_equal name
       all_drivers.last.vin.must_equal vin
     end
-
-    describe "Driver#find" do
-
-      it "Check that class have a find method" do
-        Ride_Share::Driver.must_respond_to :find
-      end
-
-      it "Returns a driver instance with correct data " do
-        # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
-        driver_id = "57"
-        driver = Ride_Share::Driver.find(driver_id)
-        driver.must_be_instance_of Ride_Share::Driver
-        driver.name.must_equal 'Fermin Jakubowski'
-        driver.vin.must_equal '1C9YKRAL923SACAZM'
-      end
-      it "Raises an argument error with driver id not in the data base" do
-        # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
-        driver_id = "9999"
-        proc { Ride_Share::Driver.find(driver_id) }.must_raise ArgumentError
-      end
-
-
+  end
+  describe "Driver#find" do
+    it "Check that class have a find method" do
+      Ride_Share::Driver.must_respond_to :find
     end
 
-
-
+    it "Returns a driver instance with correct data " do
+      # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
+      driver_id = "57"
+      driver = Ride_Share::Driver.find(driver_id)
+      driver.must_be_instance_of Ride_Share::Driver
+      driver.name.must_equal 'Fermin Jakubowski'
+      driver.vin.must_equal '1C9YKRAL923SACAZM'
+    end
+    it "Raises an argument error with driver id not in the data base" do
+      # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
+      driver_id = "9999"
+      proc { Ride_Share::Driver.find(driver_id) }.must_raise ArgumentError
+    end
   end
-
-
 end

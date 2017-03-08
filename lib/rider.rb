@@ -1,7 +1,7 @@
 
 require "csv"
-
-class Ride_Share::Rider
+module Ride_Share
+class Rider
 
   attr_reader :id, :name, :phone_number
 
@@ -15,22 +15,15 @@ class Ride_Share::Rider
 
   def self.all
     all_riders_array = []
-    #CSV.read("support/riders.csv", {:headers => true}).each do |line|
     CSV.read("support/riders.csv", {:headers => true, :header_converters => :symbol}).each do |line|
-
-      # id = line[0].to_i
-      # name = line[1]
-      # num = line[2].to_i
-      all_riders_array << Rider.new(line)
-      # all_drivers_array << Rider.new(id: id, name: name, phone_num: num)
+      all_riders_array << Ride_Share::Rider.new(line)
     end
     return all_riders_array
   end
 
   def self.find(rider_id)
-    all.each do |rider|
-      return rider if rider.id == rider_id
-    end
+    rider = all.detect {|rider| (rider.id == rider_id) }
+    (rider != nil) ? (return rider) : (raise ArgumentError.new "invalid rider id")
   end
 
   def self.print_all
@@ -41,14 +34,16 @@ class Ride_Share::Rider
 
   def retrieve_trips
     #retrieve the list of trip instances for a rider
-
+    Ride_Share::Trip.find_rider_trips(@id)
   end
 
   def retrieve_drivers
     #retrieve the list of all previous driver instances for a rider
     #returns list of driver instances
+    retrieve_trips.map {|trip| Ride_Share::Driver.find(trip.driver_id)}.uniq
   end
 
-end
+end # class
+end # module
 
 # Rider.print_all
