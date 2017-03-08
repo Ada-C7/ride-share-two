@@ -82,17 +82,56 @@ describe "Driver class" do
       average.must_be_instance_of Float
       average.must_equal 3.0
     end
+
+    it "Returned value is in the range 1 - 5" do
+      average = RideShare::Driver.new({ id: 23,	name: "Bo Stroman DVM", vin: "1F8C93JX5D62SYRYY" }).avg_rating
+      average.must_be :>, 0
+      average.must_be :<, 5
+    end
   end
-  #
-  # describe "#self.all method" do
-  #   it "Retrieve all drivers from the CSV file" do
-  #
-  #   end
-  # end
-  #
-  # describe "#self.find method" do
-  #   it "Find a specific driver using their numeric ID" do
-  #
-  #   end
-  # end
+
+  let (:all_drivers_array) { RideShare::Driver.all }
+
+  describe "#self.all method" do
+    it "Retrieve all drivers from the CSV file" do
+      all_drivers_array.must_be_instance_of Array
+      all_drivers_array.length.must_equal 100
+      all_drivers_array.each { |trip| trip.must_be_instance_of RideShare::Driver }
+    end
+
+    it "First element inside the returned array matches the CSV file" do
+      driver = all_drivers_array.first
+      driver.id.must_equal 1
+      driver.name.must_equal "Bernardo Prosacco"
+      driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+    end
+
+    it "Last element inside the returned array matches the CSV file" do
+      driver = all_drivers_array.last
+      driver.id.must_equal 100
+      driver.name.must_equal "Minnie Dach"
+      driver.vin.must_equal "XF9Z0ST7X18WD41HT"
+    end
+  end
+
+  describe "#self.find method" do
+    it "Find a specific driver using their numeric ID" do
+      driver = RideShare::Driver.find(6)
+      driver.must_be_instance_of RideShare::Driver
+      driver.id.must_equal 6
+      driver.name.must_equal "Mr. Hyman Wolf"
+      driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
+    end
+    it "Raises an argument error when invalid driver id is passed" do
+      proc{
+        RideShare::Driver.find("six")
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an argument error if the driver id does not have a match in the driver.csv" do
+      proc{
+        RideShare::Driver.find(123456789)
+      }.must_raise ArgumentError
+    end
+  end
 end
