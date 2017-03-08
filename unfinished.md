@@ -4,29 +4,16 @@
 
 #### Driver
   - Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
-
-Given a driver object, you should be able to:
-- retrieve the list of trip instances that only this driver has taken
-- retrieve an average rating for that driver based on all trips taken
+  - retrieve an average rating for that driver based on all trips taken (format data input consistently)
 
 #### Rider
 
-Given a rider object, you should be able to:
-- retrieve the list of trip instances that only this rider has taken
-- retrieve the list of all previous driver instances (through the trips functionality built above)
-
 #### Trip
--   Each rating should be within an acceptable range (1-5)
+-   Each rating should be within an acceptable range (1-5) <--validate the ratings
 
 ## Getting Started
-You will run tests by executing the `rake` command, as configured in a Rakefile. You should have **95% code coverage** using simplecov.
+You should have **95% code coverage** using simplecov.
 
-### Process
-You should use the following process as much as possible:  
-
-1. Write pseudocode
-1. Write test(s)
-1. Write code
 
 ### Optional Requirements
 - The first optional should always be looking for improvements within the existing code you have already written. Are there any additional edge cases you might be missing in your tests? Any opportunity to use an enumerable method where you're using an each?
