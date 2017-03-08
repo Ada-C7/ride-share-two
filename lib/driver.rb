@@ -7,7 +7,8 @@ module RideShare
 
     def initialize(args)
       if args[:vin].length != 17 || !all_letters_and_numbers?(args[:vin])
-        raise RideShare::InvalidVinError.new("VIN must be 17 characters long and only contain letters and numbers")
+        raise RideShare::InvalidVinError.new("VIN must be 17 characters long and
+          only contain letters and numbers")
       end
 
       @name = args[:name]

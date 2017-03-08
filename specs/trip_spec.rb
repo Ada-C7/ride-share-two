@@ -33,5 +33,13 @@ describe "Trip" do
       trip.must_respond_to :rating
       trip.rating.must_equal @rating
     end
+
+    it "raises an argument error if rating is not initialized with an integer" do
+      proc {
+        RideShare::Trip.new(rating: '3')
+      }.must_raise ArgumentError
+    end
+
+
   end
 end
