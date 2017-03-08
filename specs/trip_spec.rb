@@ -52,7 +52,6 @@ describe "Trip" do
       all_trips.last.id.must_equal 600
       all_trips.last.driver_id.must_equal 61
     end
-
   end
 
   describe "self.find_by_driver" do
@@ -74,7 +73,6 @@ describe "Trip" do
     it "returns an empty array for a driver ID that doesn't exist" do
       RideShare::Trip.find_by_driver(999).must_equal []
     end
-
   end
 
   describe "self.find_by_rider" do
@@ -96,7 +94,6 @@ describe "Trip" do
     it "returns an empty array for a rider ID that doesn't exist" do
       RideShare::Trip.find_by_rider(400).must_equal []
     end
-
   end
 
   describe "get_driver" do
@@ -105,7 +102,7 @@ describe "Trip" do
     end
 
     it "raises an error when the trip has a driver_id that doesn't exist" do
-      @bad_driver_data_hash = {
+      bad_driver_data_hash = {
         id: 88,
         driver_id: 0,
         rider_id: 39,
@@ -113,7 +110,7 @@ describe "Trip" do
         rating: 3
       }
 
-      proc { RideShare::Trip.new(@bad_driver_data_hash).get_driver }.must_raise DataError
+      proc { RideShare::Trip.new(bad_driver_data_hash).get_driver }.must_raise DataError
     end
   end
 
@@ -124,7 +121,7 @@ describe "Trip" do
     end
 
     it "raises an error when the trip has a rider_id that doesn't exist" do
-      @bad_rider_data_hash = {
+      bad_rider_data_hash = {
         id: 267,
         driver_id: 14,
         rider_id: 0,
@@ -132,9 +129,8 @@ describe "Trip" do
         rating: 4
       }
 
-      proc { RideShare::Trip.new(@bad_rider_data_hash).get_rider }.must_raise DataError
+      proc { RideShare::Trip.new(bad_rider_data_hash).get_rider }.must_raise DataError
     end
-
   end
 
 end

@@ -17,7 +17,6 @@ describe "Rider" do
       rider.id.must_equal 45
       rider.phone.must_equal "1-213-163-6582"
     end
-
   end
 
   describe "self.all" do
@@ -35,7 +34,6 @@ describe "Rider" do
       all_riders.last.id.must_equal 300
       all_riders.last.name.must_equal "Miss Isom Gleason"
     end
-
   end
 
   describe "self.find" do
@@ -51,9 +49,7 @@ describe "Rider" do
     it "returns nil for a rider ID that doesn't exist" do
       RideShare::Rider.find(374).must_be_nil
     end
-
   end
-
 
   describe "get_trips" do
     it "retrieves a list of trip instances with this rider's id" do
@@ -63,7 +59,6 @@ describe "Rider" do
     end
 
     it "returns an empty array for a rider with no trips" do
-      
       rider_who_dont_ride = {
         id: 116,
         name: "Laurianne Larkin",
@@ -72,33 +67,30 @@ describe "Rider" do
       going_nowhere = RideShare::Rider.new(rider_who_dont_ride)
       going_nowhere.get_trips.must_equal []
     end
-
   end
 
   describe "get_drivers" do
     let(:drivers_by_rider) { rider.get_drivers }
 
     it "correctly generates a list of drivers associated with this rider's trips" do
-        drivers_by_rider.length.must_equal 4
-        valid_driver_ids = [31, 54, 65, 71]
-        drivers_by_rider.each do |driver|
-          valid_driver_ids.include?(driver.id).must_equal true
-        end
+      drivers_by_rider.length.must_equal 4
+      valid_driver_ids = [31, 54, 65, 71]
+      drivers_by_rider.each do |driver|
+        valid_driver_ids.include?(driver.id).must_equal true
+      end
     end
 
     it "returns a list without duplicates even if a driver was used more than once" do
 
-      @ride_with_driver_twice_hash = {
+      ride_with_driver_twice_hash = {
         id: 164,
         name: "Dominique Gleason PhD",
         phone: "460.497.2371"
       }
-      double_dipper = RideShare::Rider.new(@ride_with_driver_twice_hash)
+
+      double_dipper = RideShare::Rider.new(ride_with_driver_twice_hash)
       double_dipper.get_drivers.length.must_equal 5
-
-
     end
-
   end
 
 end

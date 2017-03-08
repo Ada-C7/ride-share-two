@@ -19,12 +19,12 @@ describe "Driver" do
     end
 
     it "raises an error if VIN does not have seventeen digits" do
-        @bad_vin_hash = {
+        bad_vin_hash = {
           id: 99,
           name: "Jayden Ledner",
           vin: "RF4AT3WL6"
         }
-        proc { RideShare::Driver.new(@bad_vin_hash) }.must_raise InvalidVINError
+        proc { RideShare::Driver.new(bad_vin_hash) }.must_raise InvalidVINError
     end
   end
 
@@ -80,12 +80,12 @@ describe "Driver" do
     end
 
     it "returns nil for a driver that has no trips" do
-      @no_trips_hash = {
+      no_trips_hash = {
         id: 100,
         name: "Minnie Dach",
         vin: "XF9Z0ST7X18WD41HT"
       }
-      lazy_driver = RideShare::Driver.new(@no_trips_hash)
+      lazy_driver = RideShare::Driver.new(no_trips_hash)
       lazy_driver.avg_rating.must_be_nil
     end
   end
