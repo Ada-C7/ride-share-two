@@ -21,4 +21,20 @@ class RideShare::Rider
   # Retrieve a list of all previous driver instances this rider has rode with.
   #   input: Array of Trip instances (from above)
   #   output: Array of the associated drivers.
+
+  def self.find_all
+    riders = []
+
+    CSV.open("support/riders.csv").each do |rider|
+      begin
+        riders << RideShare::Rider.new(rider[0].to_i, rider[1], rider[2])
+      rescue InvalidVinError => e
+        puts "#{ e }"
+      end
+    end
+    return riders
+  # Retrieve all riders from CSV file
+  #   input: calling CLASS METHOD
+  #   output: list of all RIDERS
+  end
 end

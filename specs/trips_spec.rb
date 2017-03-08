@@ -79,7 +79,7 @@ describe "Trip" do
     end
   end
 
-  describe "Testing self.find_driver class method" do
+  describe "Testing Trip#find_driver method" do
     it "returns an a specific driver instance" do
       my_trip.find_driver.must_be_instance_of RideShare::Driver
     end
@@ -88,6 +88,12 @@ describe "Trip" do
     # it "should return 0 if no driver associated with this instance" do
     #
     # end
+  end
 
+  describe "Testing Trip#find_rider class method" do
+    it "returns an a specific driver instance" do
+      skip
+      my_trip.find_rider.must_be_instance_of RideShare::Rider
+    end
   end
 end

@@ -60,7 +60,6 @@ describe "Driver" do
       all_drivers.must_be_instance_of Array
     end
 
-    #Definitely need more tests - look at trips specit "each item is of class Trip" do
     it "each item is of class Driver" do
       all_drivers.each do |driver|
         driver.must_be_instance_of RideShare::Driver

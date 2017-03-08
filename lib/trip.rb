@@ -65,10 +65,11 @@ class RideShare::Trip
     #
   end
 
-
+  def find_rider
+    RideShare::Rider.find_rider(@rider_id)
   # Retrieve associated Rider instance through Rider ID
   #   input: Rider ID
   #   output: Rider object associated w/ trip
-  #
+  end
 
 end
