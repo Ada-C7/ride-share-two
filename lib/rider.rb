@@ -26,7 +26,6 @@ module RideShare
     def self.find(requested_id)
       # finds a specific instance of Rider based on rider ID
       match = Rider.all.select {|rider| rider.id == requested_id}
-      raise ArgumentError.new ("No rider exists with that ID") if match.size == 0
       return match[0]
     end
 

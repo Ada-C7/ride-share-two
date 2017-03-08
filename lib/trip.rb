@@ -18,14 +18,12 @@ module RideShare
     def self.find_by_driver(driver_id)
       # returns all Trip instances with given driver ID
       match = Trip.all.select {|trip| trip.driver_id == driver_id}
-      raise ArgumentError.new ("No trips exist for that driver ID") if match.size == 0
       return match
     end
 
     def self.find_by_rider(rider_id)
       # returns all Trip instances with given rider ID
       match = Trip.all.select {|trip| trip.rider_id == rider_id}
-      raise ArgumentError.new ("No trips exist for that rider ID") if match.size == 0
       return match
     end
 

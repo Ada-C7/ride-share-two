@@ -70,9 +70,9 @@ describe "Driver" do
       RideShare::Driver.find(92).name.must_equal "Oceane O'Kon"
     end
 
-    it "raises an error for a driver ID that doesn't exist" do
-      proc { RideShare::Driver.find(104)}.must_raise ArgumentError
-    end
+    # it "raises an error for a driver ID that doesn't exist" do
+    #   proc { RideShare::Driver.find(104)}.must_raise ArgumentError
+    # end
   end
 
 

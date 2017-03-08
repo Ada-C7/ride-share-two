@@ -16,7 +16,6 @@ module RideShare
     def self.find(requested_id)
       # finds a specific instance of Driver based on driver ID
       match = Driver.all.select {|driver| driver.id == requested_id}
-      raise ArgumentError.new ("No driver exists with that ID") if match.size == 0
       return match[0]
     end
 
