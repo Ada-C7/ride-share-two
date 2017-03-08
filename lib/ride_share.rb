@@ -13,7 +13,6 @@ module RideShare
       @id_d = id_d
       @name_d = name_d
       @vin = vin
-      # @info = []
     end#end of initialize in driver class
 
     def self.all
@@ -62,7 +61,7 @@ module RideShare
     def self.all
       info = []
       # CSV.open("../support/rider.csv", :headers => true).each do |line|
-      CSV.open("support/rider.csv", :headers => true).each do |line|
+      CSV.open("support/riders.csv", :headers => true).each do |line|
         info << self.new(line[0].to_i, line[1].to_s, line[2].to_s)
       end
       info

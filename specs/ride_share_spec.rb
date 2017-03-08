@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
 
 describe "RideShare Module" do
-  describe "Driver class" do
 
+  describe "Driver class" do
     let(:first_driver) {RideShare::Driver.new(1, 'Bernardo Prosacco', 'WBWSS52P9NEYLVDE9')}
     let(:last_driver) {RideShare::Driver.new(100, 'Minnie Dach', 'XF9Z0ST7X18WD41HT')}
     let(:random_driver) {RideShare::Driver.new(56, 'Adriel Swift', 'RF5D1APK7B8SDK1HR')}
@@ -39,7 +39,6 @@ describe "RideShare Module" do
         proc {
           driver.new(43, 42, "RF5D1APK7B8SDK1HR")
         }.must_raise ArgumentError
-
       end
 
       it "Raises ArgumentError if vin does not have 17 characters" do
@@ -54,10 +53,13 @@ describe "RideShare Module" do
         driver.all.must_be_instance_of Array
       end
 
-      it "Contain the first driver nformation" do
+      it "Contain the first and last driver nformation" do
         driver.all[0].id_d.must_equal first_driver.id_d
         driver.all[0].name_d.must_equal first_driver.name_d
         driver.all[0].vin.must_equal first_driver.vin
+        driver.all[99].id_d.must_equal last_driver.id_d
+        driver.all[99].name_d.must_equal last_driver.name_d
+        driver.all[99].vin.must_equal last_driver.vin
       end
 
       it "Contain a random driver nformation" do
@@ -98,8 +100,71 @@ describe "RideShare Module" do
     end
   end#end of Driver class
 
-  describe "" do
+  describe "Rider class" do
+    let(:first_rider) {RideShare::Rider.new(1, 'Nina Hintz Sr.', '560.815.3059')}
+    let(:last_rider) {RideShare::Rider.new(300, 'Miss Isom Gleason', '791-114-8423 x70188')}
+    let(:random_rider) {RideShare::Rider.new(169, 'Jaclyn Upton', '458-797-3216')}
+    let(:rider) {RideShare::Rider}
 
-  end
+    describe "Rider#initialize" do
+      it "Takes an ID, name, and a phone_number" do
+        id_r = 17
+        name_r = "laura"
+        phone_number = '87913209234'
+        rider_ins = rider.new(id_r, name_r, phone_number)
 
+        rider_ins.must_respond_to :id_r
+        rider_ins.id_r.must_equal id_r
+
+        rider_ins.must_respond_to :name_r
+        rider_ins.name_r.must_equal name_r
+
+        rider_ins.must_respond_to :phone_number
+        rider_ins.phone_number.must_equal phone_number
+      end
+      it "Creater a new instance of Rider class" do
+        random_rider.class.must_equal RideShare::Rider
+      end
+
+      it "Raises ArgumentError if id is not an integer" do
+        proc {
+          rider.new("1", "Laura", "213981238jkds")
+        }.must_raise ArgumentError
+      end
+
+      it "Raises ArgumentError if name is not a string" do
+        proc {
+          rider.new(43, 42, "RF5D1APK7B8SDK1HR")
+        }.must_raise ArgumentError
+      end
+
+      it "Raises ArgumentError if phone_number is not a string" do
+        proc {
+          rider.new(68, "Laura", 20626599263)
+        }.must_raise ArgumentError
+      end
+    end#end of Rider#initialize
+
+    describe "Rider#self.all" do
+      it "returns an array" do
+        rider.all.must_be_instance_of Array
+      end
+
+      it "Contain the first and last rider nformation" do
+        rider.all[0].id_r.must_equal first_rider.id_r
+        rider.all[0].name_r.must_equal first_rider.name_r
+        rider.all[0].phone_number.must_equal first_rider.phone_number
+        rider.all[299].id_r.must_equal last_rider.id_r
+        rider.all[299].name_r.must_equal last_rider.name_r
+        rider.all[299].phone_number.must_equal last_rider.phone_number
+      end
+
+      it "Contain a random rider nformation" do
+        rider.all[168].id_r.must_equal random_rider.id_r
+        rider.all[168].name_r.must_equal random_rider.name_r
+        rider.all[168].phone_number.must_equal random_rider.phone_number
+      end
+    end#end of method all
+
+  end#end of the Rider class
 end#end of the Module RideShare
