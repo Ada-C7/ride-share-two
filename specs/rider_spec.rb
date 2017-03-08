@@ -95,4 +95,23 @@ describe "Rider tests" do
       proc { RideShare::Rider.find(0) }.must_raise NoRiderError
     end
   end
+
+  describe "Rider#trips" do
+    it "Returns an array" do
+      rider.trips.must_be_instance_of Array
+    end
+
+    it "First and last element of array are Trips" do
+      rider.trips[0].must_be_instance_of RideShare::Trip
+      rider.trips[-1].must_be_instance_of RideShare::Trip
+    end
+
+    it "The number of trips is correct for Rider 146" do
+      RideShare::Rider.find(146).trips.length.must_equal 4
+    end
+
+    it "Returns an empty array if no trips are found" do
+      RideShare::Rider.find(300).trips.must_equal []
+    end
+  end
 end

@@ -24,5 +24,9 @@ module RideShare
       raise NoRiderError.new("Rider with that ID does not exist") if found_rider == nil
       return found_rider
     end
+
+    def trips
+      return Trip.find_rider_trips(id)
+    end
   end
 end
