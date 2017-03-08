@@ -22,9 +22,7 @@ module RideShare
 
     # Retrieve the list of all previous driver instances
     def drivers
-      all_trips_by_rider = trips
-      all_trips_by_rider = trips
-      drivers = all_trips_by_rider.map { |trip| RideShare::Driver.find(trip.driver_id) }
+      drivers = trips.map { |trip| RideShare::Driver.find(trip.driver_id) }
       return drivers.uniq { |driver| driver.id }
     end
 
