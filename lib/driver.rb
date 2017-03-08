@@ -38,7 +38,6 @@ module RideShare
         return nil
       end
 
-      # TODO: avoid dividing by zero
     end
 
     private

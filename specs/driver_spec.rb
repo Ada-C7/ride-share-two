@@ -14,6 +14,12 @@ describe "Driver" do
       name: "Jayden Ledner",
       vin: "RF4AT3WL6"
     }
+
+    @no_trips_hash = {
+      id: 100,
+      name: "Minnie Dach",
+      vin: "XF9Z0ST7X18WD41HT"
+    }
   end
 
   let(:driver) { RideShare::Driver.new(@driver_hash) }
@@ -82,7 +88,11 @@ describe "Driver" do
     it "correctly calculates the average rating for a given driver's trips" do
       driver.avg_rating.must_be_close_to (17.0/6), 0.01
     end
-  end
 
+    it "successfully copes with a driver that has no trips" do
+      lazy_driver = RideShare::Driver.new(@no_trips_hash)
+      lazy_driver.avg_rating.must_be_nil
+    end
+  end
 
 end
