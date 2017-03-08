@@ -20,19 +20,19 @@ module Rideshare
       end
       return csv
     end
+
 #self.method2 : find a specific rider using their numeric ID
     def self.find(id_num)
       raise ArgumentError.new("Not a valid ID number") if id_num.class != Integer
-      result = nil
-      self.all.each do |rider|
-        result = rider if rider[:id] == id_num
-      end
+      result  = all.find {|rider| rider[:id] == id_num}
       result ||= "No match"
     end
+
 #instance_method1 : retrieve the list of trip instances that only this rider has taken
     def all_trips
       return Rideshare::Trip.find_trip_by_rider(@id)
     end
+    
 #instance_method2 : retrieve the list of all previous drvier instances
     def all_drivers
       if all_trips.class != String

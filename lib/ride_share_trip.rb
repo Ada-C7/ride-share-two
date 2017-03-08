@@ -7,6 +7,7 @@ module Rideshare
 #Create Trip class
   class Trip
     attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
+
 # trip_id,driver_id,rider_id,date,rating should be initialized
     def initialize(args)
       @trip_id = args[:trip_id]
@@ -14,6 +15,7 @@ module Rideshare
       @rider_id = args[:rider_id]
       @date = args[:date]
       @rating = args[:rating]
+
       # each rating should be within an acceptable range (1-5)
       raise ArgumentError.new("Not a valid id") if @trip_id.class != Integer
       raise ArgumentError.new("Not a valid rating") if @rating > 5 || @rating < 0
@@ -31,20 +33,14 @@ module Rideshare
     #self.method2 : find all trip instances for a given driver ID
     def self.find_trip_by_driver(driver_id)
       raise ArgumentError.new("Not a valid ID number") if driver_id.class != Integer
-      trips = []
-      self.all.each do |trip|
-        trips << trip if trip[:driver_id] == driver_id
-      end
+      trips = all.select {|trip| trip[:driver_id] == driver_id}
       trips.any? ? trips : "No history of trips"
     end
 
     #self.method3 : find all trip instances for a given rider ID
     def self.find_trip_by_rider(rider_id)
       raise ArgumentError.new("Not a valid ID number") if rider_id.class != Integer
-      trips = []
-      self.all.each do |trip|
-        trips << trip if trip[:rider_id] == rider_id
-      end
+      trips = all.select {|trip| trip[:rider_id] == rider_id}
       trips.any? ? trips : "No history of trips"
     end
 
@@ -59,7 +55,7 @@ module Rideshare
   end
 end
 
-# print Rideshare::Trip.find_trip_by_driver(1)
+# Rideshare::Trip.find_trip_by_driver(1)
 # print Rideshare::Trip.all
 # print Rideshare::Trip.find_trip_by_rider(1)
 # args = {trip_id: 60, driver_id: 61, rider_id: 168, date: "2016-04-25", rating: 3}
