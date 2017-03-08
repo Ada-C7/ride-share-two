@@ -13,13 +13,9 @@ class Rider
     # reads CSV
     # returns a list of all rider instances
     riders = CSV.read("support/riders.csv", { :headers => true })
-    riders_array = []
 
-    riders.each do |line|
-      riders_array << Rider.new(line[0].to_i, line[1], line[2])
-    end
+    riders.map { |line| Rider.new(line[0].to_i, line[1], line[2]) }
 
-    return riders_array
   end
 
   def self.find(rider_id)
