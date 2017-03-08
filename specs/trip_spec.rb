@@ -64,7 +64,7 @@ describe Trip do
                    @all_trips.length.must_equal lines
                end
 
-               it "Everything in the array is a Trip:" do
+               it "Returns an arry of Trip objects:" do
                    @all_trips.each do | trip |
                        trip.must_be_kind_of Trip
                     end
@@ -83,6 +83,44 @@ describe Trip do
                     @all_trips[-1].date.must_equal CSV.readlines(@file)[-1][3]
                     @all_trips[-1].rating.to_s.must_equal CSV.readlines(@file)[-1][4]
 
+               end
+          end
+     end
+
+     describe "Self#find_trips_for_driver" do
+
+          before do
+               @driver_file = "support/drivers.csv"
+               @file = "support/trips.csv"
+               @id = 3
+               @driver_trips = Trip.find_trips_for_driver(@driver_file, @file, @id)
+          end
+
+          describe "Trip.find_trips_for_driver:" do
+               it "Returns an array of all trips for driver:" do
+                   @driver_trips.must_be_kind_of Array
+               end
+
+               it "Returns the correct number of trips is reported" do
+                    count = 0
+
+                    CSV.foreach(@file) do |row|
+                         if row[1].to_i == @id then count += 1; end
+                    end
+
+                    @driver_trips.length.must_equal count
+               end
+
+               it "Returns an array of Trip objects with the same Driver ID:" do
+                   @driver_trips.each do | trip |
+                       trip.must_be_kind_of Trip
+                       trip.driver_id.must_equal @id
+                    end
+               end
+
+               it "Raises an error for an account that doesn't exist:" do
+                    id = 101
+                    proc {Trip.find_trips_for_driver(@driver_file, @file, id)}.must_raise ArgumentError
                end
           end
      end

@@ -52,13 +52,13 @@ describe Driver do
                    @all_drivers.length.must_equal lines
                end
 
-               it "Everything in the array is a Driver:" do
+               it "Returns an array of Driver objects:" do
                    @all_drivers.each do | driver |
                        driver.must_be_kind_of Driver
                     end
                end
 
-              it "The ID, name and VIN of the first and last drivers match the CSV file:" do
+              it "MAtches the ID, name and VIN of the first and last drivers with the CSV file:" do
                     @all_drivers[0].id.to_s.must_equal CSV.readlines(@file)[0][0]
                     @all_drivers[0].name.must_equal CSV.readlines(@file)[0][1]
                     @all_drivers[0].vin.must_equal CSV.readlines(@file)[0][2]

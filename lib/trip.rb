@@ -14,15 +14,13 @@ class Trip
           @rating = rating
      end
 
-     # find all trip instances for a given driver ID
-
      def self.all(file)
           all_trips = []
 
           CSV.open(file).each do | line |
                @id = line[0].to_i
-               @driver_id = line[1]
-               @rider_id = line[2]
+               @driver_id = line[1].to_i
+               @rider_id = line[2].to_i
                @date = line[3]
                @rating = line[4].to_i
                trip = Trip.new(@id, @driver_id, @rider_id, @date, @rating)
@@ -32,7 +30,26 @@ class Trip
           return all_trips
      end
 
+     def self.validate_driver(driver_file, id)
+          Driver.find(driver_file, id)
+     end
 
-     # find all trip instances for a given rider ID
+     def self.find_trips_for_driver(driver_file, file, id)
+          Trip.validate_driver(driver_file, id)
+
+          driver_trips = []
+          all_trips = Trip.all(file)
+
+          all_trips.each do | trip |
+               if trip.driver_id == id
+                    driver_trips << trip
+               end
+          end
+
+          return driver_trips
+     end
+
      # retrieve all trips from the CSV file
 end
+
+# space_travel = Trip.find_trips_for_driver("../support/trips.csv", 4)
