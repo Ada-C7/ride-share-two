@@ -159,6 +159,8 @@
         null
       ],
       "/Users/totoro/ride_share_two/ride-share-two/specs/rider_spec.rb": [
+        null,
+        null,
         1,
         null,
         null,
@@ -169,10 +171,23 @@
         null,
         1,
         0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
         null,
         null
       ],
       "/Users/totoro/ride_share_two/ride-share-two/specs/trip_spec.rb": [
+        null,
+        null,
         1,
         null,
         1,
@@ -182,10 +197,22 @@
         null,
         1,
         0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
         null,
         null
       ]
     },
-    "timestamp": 1489005808
+    "timestamp": 1489010050
   }
 }
