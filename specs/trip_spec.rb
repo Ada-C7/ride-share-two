@@ -24,99 +24,107 @@ describe "Trip Class" do
         trip_test.rating.must_equal 5
         trip_test.date.must_equal '03-08-17'
       end
-    end #end of initialze method
+    end #end of initialize method
 
 
   end #end of instance methods
 
 
-  xdescribe " Class Methods " do
+  describe " Class Methods " do
 
-    let(:my_riders) {Carmmunity::Trip::all}
+    let(:my_trips) {Carmmunity::Trip::all}
 
-    let(:rider_data) {CSV.read("support/riders.csv")}
+    let(:trip_data) {CSV.read("support/trips.csv")}
 
 
     describe " self.all method " do
 
-
       it " Trip.all returns array " do
 
-        my_riders.class.must_equal Array
+        my_trips.class.must_equal Array
       end
 
-      it " First and Last riders are instansces of Trip Class " do
+      it " First and Last trips are instansces of Trip Class " do
 
-        my_riders.first.must_be_instance_of Carmmunity::Trip
-        my_riders.last.must_be_instance_of Carmmunity::Trip
+        my_trips.first.must_be_instance_of Carmmunity::Trip
+        my_trips.last.must_be_instance_of Carmmunity::Trip
       end
 
-      it " The number of riders is correct " do
+      it " The number of trips is correct " do
 
-        my_riders.length.must_equal CSV.read("support/riders.csv").count
+        my_trips.length.must_equal CSV.read("support/trips.csv").count
       end
 
-      it " The Id, name and phone number matches the first account " do
+      it " The trip id, driver id, rider id, date, and rating matches the first trip " do
 
         index = 1
-        id = 1
-        name = "Nina Hintz Sr."
-        phone_num = "560.815.3059"
+        trip_id = 1
+        driver_id = 1
+        rider_id = 54
+        date = "2016-04-05"
+        rating = 3
 
         #add loop
-        my_riders[index].rider_id.must_equal id
-        my_riders[index].name.must_equal name
-        my_riders[index].phone_number.must_equal phone_num
+        my_trips[index].trip_id.must_equal trip_id
+        my_trips[index].rider_id.must_equal rider_id
+        my_trips[index].driver_id.must_equal driver_id
+        my_trips[index].date.must_equal date
+        my_trips[index].rating.must_equal rating
       end
 
-      it " The Id, name and phone_number number matches the last account " do
+      it " The trip id, driver id, rider id, date, and rating matches the last trip " do
 
-        id = 300
-        name = "Miss Isom Gleason"
-        phone_num = "791-114-8423 x70188"
+        trip_id = 0
+        driver_id = 1
+        rider_id = 2
+        date = 3
+        rating = 4
 
-        my_riders.last.rider_id.must_equal id
-        my_riders.last.name.must_equal name
-        my_riders.last.phone_number.must_equal phone_num
+        my_trips.last.trip_id.must_equal trip_data.last[trip_id].to_i
+        my_trips.last.driver_id.must_equal trip_data.last[driver_id].to_i
+        my_trips.last.rider_id.must_equal trip_data.last[rider_id].to_i
+        my_trips.last.date.must_equal trip_data.last[date]
+        my_trips.last.rating.must_equal trip_data.last[rating].to_i
+
       end
     end #end of self.all
 
 
-    describe " self.find_rider(id) " do
+    xdescribe " self.find_rider(id) " do
 
 
       it " Returns a rider that exists " do
         #trying to figure out which format is less dependent than that other
-        my_rider = Carmmunity::Trip::find(5)
+        my_trip = Carmmunity::Trip::find(5)
 
         id = 5
         #name = "Elmore Heller MD"
         phone_num = "1-297-522-2558 x431"
 
 
-        my_rider.name.must_equal my_riders[5].name
-        my_rider.rider_id.must_equal id
-        my_rider.phone_number.must_equal rider_data[5][2]
-        my_rider.phone_number.must_equal phone_num
+        my_trip.name.must_equal my_trips[5].name
+        my_trip.rider_id.must_equal id
+        my_trip.phone_number.must_equal trip_data[5][2]
+        my_trip.phone_number.must_equal phone_num
       end
 
 
       it " Can find the last driver in the CSV file " do
 
-        my_rider = Carmmunity::Trip::find(300)
+        my_trip = Carmmunity::Trip::find(300)
 
-        my_rider.name.must_equal my_riders.last.name
+        my_trip.name.must_equal my_trips.last.name
 
-        my_rider.rider_id.must_equal my_riders.last.rider_id
+        my_trip.rider_id.must_equal my_trips.last.rider_id
       end
 
       it " Can find the First driver in the CSV file " do
 
-        my_rider = Carmmunity::Trip::find(1)
+        my_trip = Carmmunity::Trip::find(1)
 
-        my_rider.name.must_equal my_riders[1].name
+        my_trip.name.must_equal my_trips[1].name
 
-        my_rider.rider_id.must_equal my_riders[1].rider_id
+        my_trip.rider_id.must_equal my_trips[1].rider_id
       end
 
       it " Only accepts integers in seatch criteria " do
@@ -128,41 +136,41 @@ describe "Trip Class" do
       end
     end #end of self.find_rider
 
-    describe " self.find_driver(id) " do
+    xdescribe " self.find_driver(id) " do
 
 
       it " Returns a rider that exists " do
         #trying to figure out which format is less dependent than that other
-        my_rider = Carmmunity::Trip::find(5)
+        my_trip = Carmmunity::Trip::find(5)
 
         id = 5
         #name = "Elmore Heller MD"
         phone_num = "1-297-522-2558 x431"
 
 
-        my_rider.name.must_equal my_riders[5].name
-        my_rider.rider_id.must_equal id
-        my_rider.phone_number.must_equal rider_data[5][2]
-        my_rider.phone_number.must_equal phone_num
+        my_trip.name.must_equal my_trips[5].name
+        my_trip.rider_id.must_equal id
+        my_trip.phone_number.must_equal trip_data[5][2]
+        my_trip.phone_number.must_equal phone_num
       end
 
 
       it " Can find the last driver in the CSV file " do
 
-        my_rider = Carmmunity::Trip::find(300)
+        my_trip = Carmmunity::Trip::find(300)
 
-        my_rider.name.must_equal my_riders.last.name
+        my_trip.name.must_equal my_trips.last.name
 
-        my_rider.rider_id.must_equal my_riders.last.rider_id
+        my_trip.rider_id.must_equal my_trips.last.rider_id
       end
 
       it " Can find the First driver in the CSV file " do
 
-        my_rider = Carmmunity::Trip::find(1)
+        my_trip = Carmmunity::Trip::find(1)
 
-        my_rider.name.must_equal my_riders[1].name
+        my_trip.name.must_equal my_trips[1].name
 
-        my_rider.rider_id.must_equal my_riders[1].rider_id
+        my_trip.rider_id.must_equal my_trips[1].rider_id
       end
 
       it " Only accepts integers in seatch criteria " do
