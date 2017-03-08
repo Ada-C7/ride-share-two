@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe "Rider tests" do
   let(:rider) { RideShare::Rider.new({ id: 8, name: "Galois", phone: "206-555-2468" }) }
   let(:riders_array) { RideShare::Rider.all }
-  let(:csv_info) { CSV.read('support/riders.csv') }
+  let(:csv_info) { CSV.read('support/riders.csv')[1..-1] }
 
   describe "Rider#initialize" do
     it "Takes an ID, name, and phone number" do
@@ -61,17 +61,38 @@ describe "Rider tests" do
     end
 
     it "The number of riders is correct" do
-      riders_array.length.must_equal csv_info.count - 1
+      riders_array.length.must_equal csv_info.count
     end
 
     it "The information for the first & last rider is correct" do
-      riders_array[0].id.must_equal csv_info[1][0].to_i
-      riders_array[0].name.must_equal csv_info[1][1]
-      riders_array[0].phone.must_equal csv_info[1][2]
+      riders_array[0].id.must_equal csv_info[0][0].to_i
+      riders_array[0].name.must_equal csv_info[0][1]
+      riders_array[0].phone.must_equal csv_info[0][2]
 
       riders_array[-1].id.must_equal csv_info[-1][0].to_i
       riders_array[-1].name.must_equal csv_info[-1][1]
       riders_array[-1].phone.must_equal csv_info[-1][2]
+    end
+  end
+
+  describe "Rider.find" do
+    it "Returns a rider that exists" do
+      RideShare::Rider.find(16).must_be_instance_of RideShare::Rider
+      RideShare::Rider.find(16).name.must_equal "Mr. Onie Spinka"
+    end
+
+    it "Can find the first rider from the CSV" do
+      RideShare::Rider.find(csv_info[0][0].to_i).must_be_instance_of RideShare::Rider
+      RideShare::Rider.find(csv_info[0][0].to_i).name.must_equal csv_info[0][1]
+    end
+
+    it "Can find the last rider from the CSV" do
+      RideShare::Rider.find(csv_info[-1][0].to_i).must_be_instance_of RideShare::Rider
+      RideShare::Rider.find(csv_info[-1][0].to_i).phone.must_equal csv_info[-1][2]
+    end
+
+    it "Raises an error for a rider that doesn't exist" do
+      proc { RideShare::Rider.find(0) }.must_raise NoRiderError
     end
   end
 end

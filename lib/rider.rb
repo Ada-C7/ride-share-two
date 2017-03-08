@@ -18,4 +18,12 @@ class RideShare::Rider
     end
     return riders
   end
+
+  def self.find(id)
+    riders = RideShare::Rider.all
+    riders.each do |rider|
+      return rider if id == rider.id
+    end
+    raise NoRiderError.new("Rider with that ID does not exist")
+  end
 end

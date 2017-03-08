@@ -18,6 +18,7 @@ module RideShare
   end
 end
 
+require_relative 'no_rider_error'
 require_relative 'no_driver_error'
 require_relative 'driver'
 require_relative 'rider'

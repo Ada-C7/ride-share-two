@@ -1,0 +1,2 @@
+class NoRiderError < StandardError
+end
