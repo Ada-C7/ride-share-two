@@ -57,13 +57,15 @@ class RideShare::Trip
     rider_trips
   end
 
-  def self.find_driver(trip_id)
-
+  def find_driver
+    RideShare::Driver.find_driver(@driver_id)
+    # Retrieve associated driver instance through driver ID
+    #   input: Driver ID
+    #   output: Driver Object associated w/ trip
+    #
   end
-  # Retrieve associated driver instance through driver ID
-  #   input: Driver ID
-  #   output: Driver Object associated w/ trip
-  #
+
+
   # Retrieve associated Rider instance through Rider ID
   #   input: Rider ID
   #   output: Rider object associated w/ trip

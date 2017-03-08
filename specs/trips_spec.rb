@@ -3,7 +3,7 @@ require 'pry'
 
 
 describe "Trip" do
-  let(:my_trip) {RideShare::Trip.new(1, 2, 3, 4, 5)}
+  let(:my_trip) {RideShare::Trip.new(1, 1, 54, 2016-04-05, 3)}
   let(:all_trips) {RideShare::Trip.find_all}
   let(:all_driver_trips) {RideShare::Trip.find_all_driver(39)}
   let(:all_rider_trips) {RideShare::Trip.find_all_rider(54)}
@@ -77,5 +77,17 @@ describe "Trip" do
       bad_id = RideShare::Trip.find_all_rider("bad rider ID")
         bad_id.must_equal 0
     end
+  end
+
+  describe "Testing self.find_driver class method" do
+    it "returns an a specific driver instance" do
+      my_trip.find_driver.must_be_instance_of RideShare::Driver
+    end
+
+    #Is this an appropriate edge case?  What if given empty string??
+    # it "should return 0 if no driver associated with this instance" do
+    #
+    # end
+
   end
 end

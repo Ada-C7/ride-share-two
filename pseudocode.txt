@@ -5,8 +5,8 @@ Trip CLASS
     output: new Trip object w/ applicable ratings
 
   Retrieve associated driver instance through driver ID
-    input: Driver ID
-    output: Driver Object associated w/ trip
+    input: Driver ID - send this information to Driver class
+    output: Driver Class returns Driver Object associated w/ trip
 
   Retrieve associated Rider instance through Rider ID
     input: Rider ID

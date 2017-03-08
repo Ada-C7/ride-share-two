@@ -11,7 +11,14 @@ class RideShare::Rider
   def trips
     RideShare::Trip.find_all_rider(@id)
   end
-  # Retrieve a list of trips only this rider has taken
-  #   input: Rider ID
-  #   output: Array of Trip instances
+
+  def drivers
+    #leaving this to come back
+    #send trips back to trips to find the driver instances!
+    # driver_ids = trips.map { |trip| trip.driver_id }
+  end
+  #
+  # Retrieve a list of all previous driver instances this rider has rode with.
+  #   input: Array of Trip instances (from above)
+  #   output: Array of the associated drivers.
 end

@@ -40,4 +40,11 @@ describe "rider_id" do
     end
   end
 
+  # Leaving this to continue to build out rest of driver and trips
+  # describe "Rider#drivers" do
+  #   it "Retrieve a list of all previous driver instances this rider has rode with" do
+  #     my_rider.drivers.must_be_instance_of Array
+  #   end
+  # end
+
 end
