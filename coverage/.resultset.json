@@ -49,7 +49,17 @@
         null
       ],
       "/Users/caraecomfort/ada/ruby/projects/ride-share-two/lib/rider.rb": [
-
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
       ],
       "/Users/caraecomfort/ada/ruby/projects/ride-share-two/lib/trip.rb": [
 
@@ -68,12 +78,10 @@
         1,
         null,
         1,
-        null,
         0,
         null,
         null,
         1,
-        null,
         0,
         0,
         null,
@@ -90,6 +98,6 @@
 
       ]
     },
-    "timestamp": 1488934573
+    "timestamp": 1488996631
   }
 }

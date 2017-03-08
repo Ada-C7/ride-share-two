@@ -22,7 +22,23 @@ describe "Rider" do
       rider.id.must_equal @id
 
       rider.must_respond_to :phone_num
-      rider.vin.must_equal @phone_num
+      rider.phone_num.must_equal @phone_num
     end
+  end
+
+  describe "trips" do
+
+  end
+
+  describe "drivers" do
+
+  end
+
+  describe "Rider.all" do
+
+  end
+
+  describe "Driver.find" do
+    
   end
 end

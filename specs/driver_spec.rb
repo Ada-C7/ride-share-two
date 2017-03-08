@@ -43,30 +43,30 @@ describe "Driver" do
     end
   end
 
-  describe "trips" do
-    it "returns an array" do
-      skip
-    end
-
-    it "returns an array with only Trip objects" do
-      skip
-    end
-
-    it "returns Trips that only THIS driver has taken" do
-      skip
-    end
-  end
-
-  describe "avg_rating" do
-    it "returns a float to 1 decimal point" do
-      skip
-    end
-
-    it "returns the overall avg_rating for a driver" do
-      #test decimal point
-      skip
-    end
-  end
+  # describe "trips" do
+  #   it "returns an array" do
+  #     skip
+  #   end
+  #
+  #   it "returns an array with only Trip objects" do
+  #     skip
+  #   end
+  #
+  #   it "returns Trips that only THIS driver has taken" do
+  #     skip
+  #   end
+  # end
+  #
+  # describe "avg_rating" do
+  #   it "returns a float to 1 decimal point" do
+  #     skip
+  #   end
+  #
+  #   it "returns the overall avg_rating for a driver" do
+  #     #test decimal point
+  #     skip
+  #   end
+  # end
 
   describe "Driver.all" do
     let (:drivers) {RideShare::Driver.all}
@@ -130,7 +130,7 @@ describe "Driver" do
 
     it "returns nil if no driver_id is found" do
       fake_driver_id = 108
-      RideShare::Driver.find(fake_driver_id).must_equal nil
+      RideShare::Driver.find(fake_driver_id).must_be_nil
     end
 
     private
