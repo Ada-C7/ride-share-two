@@ -1,8 +1,13 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/reporters'
-# Add simplecov
+require 'minitest/skip_dsl'
+require 'csv'
 
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 # Require_relative your lib files here!
+require_relative '../ride_share.rb'
