@@ -4,7 +4,7 @@
 # require 'minitest/reporters'
 # require 'minitest/skip_dsl'
 # Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-require_relative './spec_helper.rb'
+require_relative './spec_helper'
 require_relative '../lib/driver'
 
 describe "Driver" do
@@ -138,24 +138,26 @@ describe "Driver" do
       # last_driver.vin.must_equal
     end
   end
+#######################################################################
+# randome driver to test with
+# 15,Gayle Herzog,L1CDHZJ0567RJKCJ6
+# or you should make up fake data so you know everything...
+
+  before do
+    csv_file_drivers = './support/drivers.csv'
+    driver_data = FileData.new(csv_file_drivers)
+    @drivers_data = driver_data.read_csv_and_remove_headings
+    @driver_id = 15
+
+    csv_file_trips = './support/trips.csv'
+    trip_data = FileData.new(csv_file_trips)
+    # trips data is the array of arrays that csv.read returns
+    @trips_data = trip_data.read_csv_and_remove_headings
+  end
+
+  let(:driver) { RideShare::Driver.find(@driver_id, @drivers_data) }
 
   describe "Driver#get_trips" do
-
-    # randome driver to test with
-    # 15,Gayle Herzog,L1CDHZJ0567RJKCJ6
-    # or you should make up fake data so you know everything...
-    before do
-      csv_file_drivers = './support/drivers.csv'
-      driver_data = FileData.new(csv_file_drivers)
-      @driver_data = driver_data.read_csv_and_remove_headings
-      @driver_id = 15
-
-      csv_file_trips = './support/trips.csv'
-      trip_data = FileData.new(csv_file_trips)
-      @trips_data = trip_data.read_csv_and_remove_headings
-    end
-
-    let(:driver) { RideShare::Driver.find(@driver_id, @driver_data) }
 
     it "returns an array of trip instances" do
       driver.get_trips(@trips_data).must_be_instance_of Array
@@ -165,5 +167,15 @@ describe "Driver" do
     it "each trip instance has the same driver id" do
       driver.get_trips(@trips_data).each { |trip| trip.driver_id.must_equal @driver_id }
     end
+  end
+
+  describe "Driver#calculate_average_rating" do
+
+    it "returns an number between 1 and 5" do
+      trips = driver.get_trips(@trips_data)
+      driver.calculate_average_rating(trips).must_be :>=, 1
+      driver.calculate_average_rating(trips).must_be :<=, 5
+    end
+
   end
 end

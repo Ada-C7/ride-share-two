@@ -8,8 +8,29 @@ module RideShare
       @vin = info[:vin]
     end
 
-    def get_trips(raw_trip_data)
-      trips = RideShare::Trip.find_by_driver(@id, raw_trip_data)
+    def get_trips(trip_data)
+      RideShare::Trip.find_by_driver(@id, trip_data)
+    end
+
+    def calculate_average_rating(trips)
+      ratings = trips.map { |trip| trip.rating }
+      average = ratings.sum / ratings.length.to_f
+    end
+                ###################
+                ## Class methods ##
+                ###################
+    def self.test_for_integer(num)
+      Integer(num)
+    end
+
+    # do you need to test this string? or is making sure it is included enough
+    def self.test_for_string(name)
+      name
+    end
+
+    def self.test_for_vin(vin)
+      raise ArgumentError.new("vin must be 17 characters") unless vin.length == 17
+      vin
     end
 
     def self.all(drivers_data)
@@ -23,20 +44,6 @@ module RideShare
         self.new(driver)
       end
       return drivers
-    end
-
-    def self.test_for_integer(num)
-      Integer(num)
-    end
-
-    # do you need to test this string? or is making sure it is included enough
-    def self.test_for_string(name)
-      name
-    end
-
-    def self.test_for_vin(vin)
-      raise ArgumentError.new("vin must be 17 characters") unless vin.length == 17
-      vin
     end
 
     # return nil if the account does not exist
