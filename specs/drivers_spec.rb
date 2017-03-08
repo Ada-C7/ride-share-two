@@ -44,4 +44,11 @@ describe "Driver" do
     end
   end
 
+  describe "Driver#averate_rating" do
+    it "returns an average_rating based on all trips given" do
+      my_driver.average_rating.must_be_instance_of Integer
+      my_driver.average_rating.must_equal 4
+    end
+  end
+
 end

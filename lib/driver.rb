@@ -16,10 +16,18 @@ class RideShare::Driver
     RideShare::Trip.find_all_driver(@id)
   end
 
-  # def average_rating
-  #   retrieve an average rating for that driver based on all trips taken.
-  #     input: ARRAY of trips that this driver has taken
-  #     output: Average star rating FIXNUM
-  #
-  # end
+  def average_rating
+    trips
+    total = 0
+
+    trips.each do |trip|
+      total += trip.rating
+    end
+
+    return (total / trips.length)
+    # retrieve an average rating for that driver based on all trips taken.
+    #   input: ARRAY of trips that this driver has taken
+    #   output: Average star rating FIXNUM
+
+  end
 end
