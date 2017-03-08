@@ -18,10 +18,17 @@ module RideShare
 
     # retrieves all riders from the CSV file
     def self.all
+      riders = []
+      CSV.foreach('support/riders.csv', headers: true) do |row|
+        riders << self.new(id: row['rider_id'].to_i, name: row['name'],
+           phone_num: row['phone_num'])
+      end
+      return riders
     end
 
     # finds a specific rider using their numeric ID
     def self.find(rider_id)
+      
     end
   end
 end
