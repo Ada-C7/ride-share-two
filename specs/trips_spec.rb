@@ -9,6 +9,7 @@ describe "Rideshare::Trips" do
     Rideshare::Rider.all
   end
 
+
   describe "Trips#initialize" do
 
     it "initializes instances of the trips object through .all" do

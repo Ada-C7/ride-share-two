@@ -1,6 +1,3 @@
-require 'csv'
-
-
 module Rideshare
 
   class Trips
@@ -11,7 +8,11 @@ module Rideshare
       @driver_id = driver_id
       @rider_id = rider_id
       @date = date
-      @rating = rating
+      @rating = (1..5).include?(rating.to_i) ? rating : nil
+    end
+
+    def valid_rating?
+      @rating == nil ? false : true
     end
 
     def self.all
@@ -39,8 +40,6 @@ module Rideshare
     def self.all_by_driver id
 
     Rideshare::Driver.find(id).trips
-      # driver.trips
-      # call find method from this class...some type of dependency injection
 
       # trips = Rideshare::Trips.all_trips
       # trips.delete_if { |trip| trip.driver_id != id}
@@ -51,10 +50,6 @@ module Rideshare
     def self.all_by_rider id
       Rideshare::Rider.find(id).trips
 
-
-      # trips = Rideshare::Trips.all_trips
-      # trips.delete_if { |trip| trip.rider_id != id }
-      # return trips
     end
 
   end

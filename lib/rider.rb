@@ -1,6 +1,3 @@
-require 'csv'
-
-
 module Rideshare
 
   class Rider
@@ -44,10 +41,14 @@ module Rideshare
           rider_trips << trip
         end
       end
+
+      raise ArgumentError.new "This rider has no trips" if rider_trips.length == 0
+
       return rider_trips
     end
 
-    def drivers # should be an instance method
+    def drivers
+      # should be an instance method
       #should use the output of trips method, and return driver objects
       #how to call the method on an instance?
       # if the instance variable of @id matches the trip, run method
@@ -56,6 +57,9 @@ module Rideshare
       trips.each do |trip|
         drivers << Rideshare::Driver.find(trip.driver_id)
       end
+
+      raise ArgumentError.new "This rider had no drivers" if drivers.length == 0
+
 
       return drivers
 

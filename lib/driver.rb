@@ -1,6 +1,3 @@
-require 'csv'
-
-
 module Rideshare
 
   class Driver
@@ -9,8 +6,12 @@ module Rideshare
     def initialize id, name, vin #used by .all to create instances of Drivers
       @id = id
       @name = name
-      @vin = vin
+      @vin = vin.length == 17 ? vin : nil
 
+    end
+
+    def valid_vin?
+      @vin == nil ? false : true
     end
 
     def self.all #method to create instances of Drivers
@@ -33,7 +34,6 @@ module Rideshare
 
       Rideshare::Driver.all_drivers.each do |driver|
         if id == driver.id
-          puts driver.name
           return driver
         end
       end
