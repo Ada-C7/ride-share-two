@@ -106,7 +106,7 @@ describe "Trip" do
   describe "trip#find_trips_rider" do
 
     before do
-      @rider_trips = Rider.find_trips_rider(1)
+      @rider_trips = Trip.find_trips_rider(1)
     end
 
     it "Returns a list of trips" do
