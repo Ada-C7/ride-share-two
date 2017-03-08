@@ -19,6 +19,8 @@ module RideShareTwo
       return all_riders
     end
 
+
+
     def self.find_rider(rider_id)
       result = self.all_riders.select { |a| a.rider_id == rider_id }
       return result.first

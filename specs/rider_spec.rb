@@ -20,6 +20,13 @@ describe "Rider Initialize" do
 
 end
 
+# describe "list_rider_trips method" do
+#   it "retrieves the list of trip instances that a specific rider has taken" do
+#     RideShareTwo::Rider.list_driver_trips("88").must_be_kind_of RideShareTwo::Rider, "Oops that is not an array of trips"
+#   end
+# end
+
+
 describe "self.all_riders" do
   let(:rider_list) {RideShareTwo::Rider.all_riders}
 

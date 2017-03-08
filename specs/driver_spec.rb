@@ -31,6 +31,13 @@ describe "Driver Initialize" do
   end
 end
 
+# describe "list_driver_trips method" do
+#
+#   it "retrieves the list of trip instances that a specific driver has taken" do
+#     RideShareTwo::Driver.list_driver_trips("88").must_be_kind_of RideShareTwo::Driver, "Oops that is not an array of trips"
+#   end
+# end
+
 describe "self.all_drivers" do
   let(:driver_list) {RideShareTwo::Driver.all_drivers}
 
@@ -53,7 +60,7 @@ describe "self.all_drivers" do
 
   it "The ID of the first driver match what's in the CSV file" do
     driver_list
-    driver_list[0].driver_id.must_equal "1", "Oops the first id is not in the array"
+    driver_list[0].driver_id.must_equal 1, "Oops the first id is not in the array"
   end
 
   it "The vin of the first driver match what's in the CSV file" do
@@ -63,7 +70,7 @@ describe "self.all_drivers" do
 
   it "The ID of the last driver match what's in the CSV file" do
     driver_list
-    driver_list[99].driver_id.must_equal "100", "Oops the last id is not in the array"
+    driver_list[99].driver_id.must_equal 100, "Oops the last id is not in the array"
   end
 
   it "The vin of the last driver match what's in the CSV file" do
@@ -75,7 +82,20 @@ end
 
 describe "self.find_driver" do
   it "finds a specific driver using their numeric ID" do
-    RideShareTwo::Driver.find_driver("88").must_be_kind_of RideShareTwo::Driver, "Oops that ID does not match a driver"
+    RideShareTwo::Driver.find_driver(88).must_be_kind_of RideShareTwo::Driver, "Oops that ID does not match a driver"
   end
+
+  it "finds a specific driver using their numeric ID" do
+    RideShareTwo::Driver.find_driver(100).must_be_kind_of RideShareTwo::Driver, "Oops that ID does not match a driver"
+  end
+
+  it "finds a specific driver using their numeric ID" do
+    RideShareTwo::Driver.find_driver(101).must_equal "Not a driver", "Oops that ID does not match a driver"
+  end
+
+  it "finds a specific driver using their numeric ID" do
+    RideShareTwo::Driver.find_driver(-1).must_equal "Not a driver", "Oops that ID does not match a driver"
+  end
+
 
 end
