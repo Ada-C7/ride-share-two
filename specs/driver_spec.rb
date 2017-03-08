@@ -6,11 +6,11 @@ describe "Driver class" do
     it "Initializes a new driver instance from the parameter" do
       driver.must_be_instance_of RideShare::Driver
       driver.must_respond_to :id
-      driver.id.must_equal driver_hash[:id]
+      driver.id.must_equal driver[:id]
       driver.must_respond_to :name
-      driver.name.must_equal driver_hash[:name]
+      driver.name.must_equal driver[:name]
       driver.must_respond_to :vin
-      driver.vin.must_equal driver_hash[:vin]
+      driver.vin.must_equal driver[:vin]
     end
 
     it "raises an argument error if Driver's ID or name are invalid" do

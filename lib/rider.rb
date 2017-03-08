@@ -2,8 +2,9 @@ require_relative 'rideshare'
 
 module RideShare
   class Rider
+    attr_accessor :rider_id, :name, :phone
     def initialize#Instantiated Rider class with ID, name and phone number
-      @id = rider_id
+      @rider_id = rider_id
       @name = name
       @phone = phone_num
     end
