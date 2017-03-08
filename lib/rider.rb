@@ -2,23 +2,19 @@ require_relative 'trip'
 
 class Rider
 
-     attr_reader :id, :name, :phone
-     attr_accessor :trips
+     attr_reader :id, :name, :phone, :trips
 
      def initialize(id, name, phone)
           @id = id
           @name = name
           @phone = phone
-          #@trips = recall_trips
+          @trips = []
      end
 
-     # #retrieve the list of trip instances that only this rider has taken
-     # def recall_trips(@id)
-     #      #TODO Build block after trip.rb has been completed.
-     #      #Calls Trip class method to retrieve list of trip instances according to @id.
-     #      #@trips = Trip.find(@id)
-     #      #return @trips
-     # end
+     def recall_trips(file, trip_file)
+          @trips = Trip.find_trips_for_rider(file, trip_file, @id)
+          return @trips
+     end
 
      def self.all(file)
           all_riders = []
@@ -48,3 +44,17 @@ class Rider
 
      end
 end
+
+# file = "../support/riders.csv"
+# trip_file = "../support/trips.csv"
+#
+# id = 7
+# one_rider = Rider.find(file, id)
+#
+# one_rider_trips = one_rider.recall_trips(file, trip_file)
+#
+# puts one_rider_trips
+# puts one_rider_trips.class
+# puts one_rider_trips.inspect
+#
+# # @lines = File.foreach(@rider_file).count

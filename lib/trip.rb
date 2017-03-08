@@ -69,5 +69,3 @@ class Trip
      end
 
 end
-
-#puts Trip.self

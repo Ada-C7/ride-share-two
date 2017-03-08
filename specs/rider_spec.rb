@@ -98,6 +98,40 @@ describe Rider do
                id = @lines + 1
                proc {Rider.find(@file, id)}.must_raise ArgumentError
           end
+     end
 
+     describe "Rider#recall_trips" do
+
+          before do
+               @file = "support/riders.csv"
+               @trip_file = "support/trips.csv"
+
+               @id = 8
+               @han = Rider.find(@file, @id)
+               @han_trips = @han.recall_trips(@file, @trip_file)
+          end
+
+          describe "Rider.recall_trips:" do
+               it "Returns an array of all trips for rider:" do
+                   @han_trips.must_be_kind_of Array
+               end
+
+               it "Returns the correct number of trips:" do
+                    count = 0
+
+                    CSV.foreach(@trip_file) do |row|
+                         if row[2].to_i == @id then count += 1; end
+                    end
+
+                    @han_trips.length.must_equal count
+               end
+
+               it "Returns an array of Trip objects with the same Rider ID:" do
+                   @han_trips.each do | trip |
+                       trip.must_be_kind_of Trip
+                       trip.rider_id.must_equal @id
+                    end
+               end
+          end
      end
 end
