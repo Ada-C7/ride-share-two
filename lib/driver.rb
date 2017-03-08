@@ -10,12 +10,18 @@ module RideShare
       @id = driver_hash[:id]
       @name = driver_hash[:name]
 
-      @vin = driver_hash[:vin]    # Cannot be < or > 17
+      @vin = driver_hash[:vin]
+      # if @vin.length == 17
+      #   @vin = driver_hash[:vin]
+      # else  # Cannot be < or > 17
+      #   raise ArgumentError.new "The driver instance you chose does not have a valid vin number."
+      # end
 
     end
 
     def trips
-    
+
+
       # returns list of driver trips that only that driver has been on
       # returns average rating for the driver based on all the trips they have been on
 
@@ -39,7 +45,6 @@ module RideShare
     end
 
     def self.find(id)
-      # finds an instance of the drivers.csv file
       save_driver = nil
 
       find_drivers = RideShare::Driver.all
@@ -57,4 +62,5 @@ module RideShare
   end
 end
 
-#puts RideShare::Driver.all
+# find_id = RideShare::Driver.all
+# puts "#{find_id}"

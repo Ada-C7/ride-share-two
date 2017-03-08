@@ -17,11 +17,34 @@ module RideShare
     end
 
     def self.all
-      # reads drivers.csv file
+      trips = []
+
+      CSV.read("support/trips.csv").each do |trip_row|
+        all_trips = RideShare::Trip.new(
+        trip_id: trip_row[0].to_i,
+        driver_id: trip_row[1].to_i,
+        rider_id: trip_row[2].to_i,
+        date: trip_row[3],
+        rating: trip_row[4].to_i
+        )
+        trips << all_trips
+      end
+      trips
     end
 
-    def self.find
-      # finds an instance of the drivers.csv file
+    def self.find(trip_id)
+      save_trip = nil
+
+      find_trip = RideShare::Trip.all
+      find_trip.each do |trip|
+        if trip.trip_id == trip_id
+          save_trip = trip
+        end
+      end
+
+      raise ArgumentError.new "Warning: Trip #{trip_id} does not exist." if save_trip == nil
+
+      return save_trip
     end
 
     def self.find_many_driver(driver_id)

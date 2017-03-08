@@ -9,12 +9,18 @@ describe "Driver class" do
     it "It takes a driver_hash argument" do
       driving.must_be_instance_of RideShare::Driver
     end
-    
+
     it "Has the correct values that were passed" do
       driving.id.must_equal 1337
       driving.name.must_equal "ada"
       driving.vin.must_equal "L1CKRVH55W8S6S9T1"
     end
+
+    it "Checks if vin has 17 characters" do
+      skip
+      driving.vin.length.must_equal 17
+    end
+
 
   end
 
@@ -25,7 +31,7 @@ describe "Driver class" do
       drivers.class.must_equal Array
     end
 
-    it "Everything in the array is an Driver" do
+    it "Everything in the array is a Driver" do
       first_driver = drivers[0]
       first_driver.class.must_equal RideShare::Driver
     end
@@ -91,7 +97,7 @@ describe "Driver class" do
     end
 
     it "Raises an error for an account that doesn't exist" do
-      proc { driver.find(1337)}.must_raise ArgumentError
+      proc { driver.find(1337) }.must_raise ArgumentError
     end
   end
 
