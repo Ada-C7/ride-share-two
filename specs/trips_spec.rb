@@ -67,11 +67,17 @@ describe "Trips" do
 
         describe "Trips find by driver method" do
             before do
-                @trips = RideShare::Trips.all
+                new_trip = RideShare::Trips.new(25, 100, 90, "feb 29", 4)
+                @driver = new_trip.find_driver
             end
 
-            it "Properly calls all method and generates array of all trips" do
-                @trips.must_be_instance_of Array
+            it "Returns an instance of a RideShare::Driver" do
+                @driver.must_be_instance_of RideShare::Driver
+            end
+
+
+            it "Returns an instance of a RideShare::Driver" do
+                @driver.id.must_equal 90
             end
 
         end

@@ -31,6 +31,11 @@ module RideShare
             return trips
         end
 
+
+        def find_driver
+            RideShare::Driver.find(@driver_id)
+        end
+
     end
 
 end
