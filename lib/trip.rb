@@ -28,4 +28,21 @@ class Trip
     return trips
 
   end
+
+  def self.rider_find_all(search_id)
+    rider_trips = []
+    all_trips = self.all
+
+    all_trips.each do |trip|
+      if trip.rider == search_id
+        rider_trips << trip
+      end
+    end
+
+    raise ArgumentError.new("no matching trips for that rider") if rider_trips.length == 0
+
+    return rider_trips
+
+  end
+
 end

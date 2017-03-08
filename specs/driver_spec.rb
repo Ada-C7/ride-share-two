@@ -44,6 +44,7 @@ describe "Driver tests" do
 
   end
 
+
   describe "Driver#trips" do
     it "returns an array of trips taken" do
       new_driver = Driver.new(1, "Jan Brown", "HFG347DJ84HKX9872")
@@ -87,6 +88,10 @@ describe "Driver tests" do
 
     it "returns correct driver" do
       Driver.find(1).name.must_equal @csv_file[0][1]
+    end
+
+    it "raises an argument error if no matching drivers found" do
+      proc {Driver.find(@csv_file.length + 100)}.must_raise ArgumentError
     end
 
   end

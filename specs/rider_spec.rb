@@ -62,6 +62,11 @@ describe "Rider tests" do
     it "returns the correct rider based on id" do
       Rider.find(3).name.must_equal @csv_file[2][1]
     end
+
+    it "raises an ArgumentError if there are no matching riders" do
+      proc {Rider.find(@csv_file.length + 100)}.must_raise ArgumentError
+    end
+
   end
 
 
