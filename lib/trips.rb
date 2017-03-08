@@ -51,8 +51,23 @@ module RideShare
                 end
             end
             return rider_trips
-
         end
+
+        def self.calculate_average_rating(id)
+            all_trips = RideShare::Trip.all
+            ratings = []
+            all_trips.each do |trip|
+                if trip.driver_id == id
+                    ratings << trip.rating.to_f
+                end
+            end
+
+            average = ratings.reduce(:+)/ratings.length
+            return average
+        end
+
+
+
 
     end
 end

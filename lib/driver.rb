@@ -44,24 +44,22 @@ module RideShare
         end
 
 
-        #need to write tests for this
         def find_trips
             RideShare::Trip.find_all_drivers(@id)
         end
 
 
+        def average_rating
+            RideShare::Trip.calculate_average_rating(@id)
+
+        #start a ratings counter at 0
+        #loop through the array of all trips for this driver
+        #at each loop add the rating to the ratings counter
+        #divide total ratings by the length of the trips array
+
+        #method returns the average rating
+        end
+
+
     end
 end
-
-
-
-#average_rating(id)
-#call the find_trips(id) which will call the driver_find_all or just call driver find all
-
-#start a ratings counter at 0
-#loop through the array of all trips for this driver
-#at each loop add the rating to the ratings counter
-#divide total ratings by the length of the trips array
-
-#method returns the average rating
-# end

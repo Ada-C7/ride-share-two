@@ -121,7 +121,23 @@ describe "Trip" do
                 RideShare::Trip.find_all_drivers(16).length.must_equal 6
             end
 
+
+            # it "Raises an error if invalid driver is entered" do
+            #
+            # end
+
         end
+
+        describe "Average rating method" do
+            it "Returns a float" do
+                RideShare::Trip.calculate_average_rating(16).must_be_instance_of Float
+            end
+
+            it "Returns the correct average" do
+                RideShare::Trip.calculate_average_rating(16).must_equal 2.5
+            end
+        end
+
 
 
 

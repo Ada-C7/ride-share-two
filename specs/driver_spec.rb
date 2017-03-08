@@ -95,4 +95,17 @@ describe "Driver" do
 
     end
 
+    describe "Ratings Average" do
+        before do
+            @my_driver = RideShare::Driver.new(16, "Travis Bickle", 123456)
+        end
+
+        it "Returns a Float" do
+            @my_driver.average_rating.must_be_instance_of Float
+        end
+
+    end
+
+
+
 end
