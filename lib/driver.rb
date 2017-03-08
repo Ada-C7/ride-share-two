@@ -9,6 +9,7 @@ module RideShare
     end
 
     def trips
+      Trip.find_many(@driver_id)
     end
 
     def self.all
