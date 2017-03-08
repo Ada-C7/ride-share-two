@@ -35,13 +35,15 @@ class Driver
 
   def retrieve_trips
     Ride_Share::Trip.find_driver_trips(@id)
+
+
   end
 
-  def calculate_rating
+  def calculate_avg_rating
     #access rating from trips instances
     #calculate sum
     #returns avaerage rating
-    trips_rating = Ride_Share::Trip.find_driver_trips(@id).map {|trip| trip.rating}
+    trips_avg_rating = Ride_Share::Trip.find_driver_trips(@id).map {|trip| trip.rating}
     rating_sum = trips_rating.inject {|sum, num| sum + num }
     trips_rating.length == 0 ? 0 : rating_sum / trips_rating.length
   end

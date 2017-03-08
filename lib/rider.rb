@@ -1,5 +1,7 @@
 
 require "csv"
+require "pry"
+
 module Ride_Share
 class Rider
 

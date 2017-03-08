@@ -2,7 +2,6 @@ require_relative 'spec_helper'
 require_relative "../ride_share"
 require "csv"
 
-
 describe "Driver class" do
   describe "Driver#initialize" do
     let(:jack) { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "12345338" )}
@@ -74,7 +73,38 @@ describe "Driver class" do
     it "Raises an argument error with driver id not in the data base" do
       # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
       driver_id = "9999"
+      #binding.pry
       proc { Ride_Share::Driver.find(driver_id) }.must_raise ArgumentError
     end
   end
+
+  describe "Driver#retrieve_trips" do
+    # let(:driver) { Ride_Share::Driver.new(name: 'Mr. Delbert Gleason', driver_id: "13", vin: "XF9HBFH148FLD41K8" )}
+
+
+    it "The lenfth of trips list is the same count as in csv file" do
+      # driver: 13	Mr. Delbert Gleason	XF9HBFH148FLD41K8
+      # trip: 4	13	70	2016-05-14	4
+      specific_driver_id = "13"
+      trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
+      trips.length.must_equal 7
+    end
+
+    it "Returns the list of trip instances for a specific driver" do
+
+      specific_driver_id = "13"
+      trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
+      trips.first.must_be_instance_of Ride_Share::Trip
+    end
+
+
+  end
+  describe "Driver#calculate_rating" do
+
+  end
+
+
+
+
+
 end

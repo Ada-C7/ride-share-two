@@ -1,4 +1,5 @@
 require "csv"
+require "pry"
 
 module Ride_Share
 class Trip #Ride_Share::Trip
