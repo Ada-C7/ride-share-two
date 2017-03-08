@@ -4,16 +4,16 @@ require 'csv'
 
 module RideShare
   class Trip
-    attr_reader :id, :driver_id, :rider_id, :date, :rating
+    attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 
     #maybe make rider_id...etc into a hash
     def initialize(trip_hash)
-      @id = trip_hash[:id]
+      @trip_id = trip_hash[:trip_id]
       @driver_id = trip_hash[:driver_id]
       @rider_id = trip_hash[:rider_id]
       @date = trip_hash[:date]
       #must be within an acceptable range
-      @rating
+      @rating = trip_hash[:rating]
     end
 
     def self.all

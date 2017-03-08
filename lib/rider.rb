@@ -5,9 +5,9 @@ module RideShare
     attr_reader :id, :name, :phone_number
 
     def initialize(rider_hash)
-      @id = rider_hash(:id)
-      @name = rider_hash(:name)
-      @phone_number = rider_hash(:phone_number)
+      @id = rider_hash[:id]
+      @name = rider_hash[:name]
+      @phone_number = rider_hash[:phone_number]
     end
 
     def trip

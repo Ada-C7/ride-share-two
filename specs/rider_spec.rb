@@ -1,28 +1,35 @@
 require_relative 'spec_helper'
-require_relative '../lib/rider.rb'
 
 # Try to use let! :) instead of before
 describe "Rider class" do
-  before do
-  end
+  let(:riding) { RideShare::Rider.new(id: 1337, name: "bob", phone_number: "123.456.789") }
 
-  it "" do
-  end
+  describe "Rider#initialize" do
+    it "It takes a rider_hash argument" do
+      riding.must_be_instance_of RideShare::Rider
+    end
 
-  describe "Rider#trip" do
-    it "" do
+    it "Has the correct values that were passed" do
+      riding.id.must_equal 1337
+      riding.name.must_equal "bob"
+      riding.phone_number.must_equal "123.456.789"
     end
   end
 
-  describe "Rider.all" do
+  xdescribe "Rider.all" do
     it "" do
 
     end
   end
 
-  describe "Rider.find" do
+  xdescribe "Rider.find" do
     it "" do
 
+    end
+  end
+
+  xdescribe "Rider#trip" do
+    it "" do
     end
   end
 
