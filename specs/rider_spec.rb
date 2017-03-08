@@ -111,12 +111,14 @@ describe "Rider" do
       rider_trips.list_drivers.must_be_kind_of Array
     end
 
-    it "Returns a correct number of drivers for a specific driver" do
-      rider = Rider.new(1, "Bernardo Prosacco",	"WBWSS52P9NEYLVDE9")
-      rider.list_drivers.length.must_equal 9
+    it "Returns a correct number of drivers for a specific rider" do
+      rider = Rider.new(41, "Ms. Westley Pouros", "133.000.1809 x9028")
+      rider.list_drivers.length.must_equal 2
+      rider.list_drivers.length.wont_equal rider.list_trips.length
     end
 
-    it "Returns an empty array if there are no drivers for that driver" do
+    # Hipolito exists as a Rider, but didn't take any trips yet
+    it "Returns an empty array if there are no drivers for that rider" do
       rider = Rider.new(100, "Hipolito Rogahn",	"944.179.4883")
       rider.list_drivers.must_equal []
     end
