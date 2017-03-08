@@ -19,7 +19,7 @@ describe "Driver" do
     end
     it "all elements of array should be drivers" do
       all_drivers = Driver.all
-      all_drivers.each do |driver|
+      all_drivers.each do |line|
         driver.must_be_instance_of Driver
       end
     end
@@ -52,9 +52,8 @@ describe "Driver" do
     end
   end
 
-  it "Driver object returned has ID matching argument." do
-    find_driver = Driver.find(id)
-    proc { find_driver.find(jazzhands) }.must_raise ArgumentError
+  it "Raises ArgumentError if id is not found." do
+    proc { Driver.find(300) }.must_raise ArgumentError
   end
 end
 
