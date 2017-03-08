@@ -43,12 +43,12 @@ describe "Trip class" do
 
   it "can find the first trip from the csv" do
     # skip
-    RideShare::Trip.find(1).must_equal [1, 1, 54, "2016-04-05", 3]
+    RideShare::Trip.find(1).date.must_equal "2016-04-05"
   end
 
   it "can find the last trip from the csv" do
     # skip
-    RideShare::Trip.find(600).must_equal [600, 61, 168, "2016-04-25", 3]
+    RideShare::Trip.find(600).rating.must_equal 3
   end
 
   it "can find all trip instances for a given rider ID" do

@@ -7,11 +7,11 @@ describe "Loadable Class" do
   end
 
   it "can find the correct data when passed the driver CSV" do
-    RideShare::Driver.find(100).must_equal [100, "Minnie Dach"]
+    RideShare::Driver.find(100).name.must_equal "Minnie Dach"
   end
 
   it "can find the correct data when passed the rider CSV" do
-    RideShare::Rider.find(1).must_equal [1, "Nina Hintz Sr.", "560.815.3059"]
+    RideShare::Rider.find(1).phone_num.must_equal "560.815.3059"
   end
 
   it "can find the correct data when passed the trips CSV" do

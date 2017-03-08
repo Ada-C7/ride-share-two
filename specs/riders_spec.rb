@@ -21,12 +21,12 @@ describe "Rider class" do
 
   it "can find the first rider in the csv" do
     # skip
-    RideShare::Rider.find(1).must_equal [1, "Nina Hintz Sr.", "560.815.3059"]
+    RideShare::Rider.find(1).name.must_equal "Nina Hintz Sr."
   end
 
   it "can find the last rider in the csv" do
     # skip
-    RideShare::Rider.find(300).must_equal [300, "Miss Isom Gleason", "791-114-8423 x70188"]
+    RideShare::Rider.find(300).id.must_equal 300
   end
 
   it "can find the trips a rider has taken" do
@@ -53,6 +53,6 @@ describe "Rider class" do
   it "can find the drivers a rider has ridden with" do
     # skip
     rider.all_drivers(rider.id).must_be_kind_of Array
-    rider.all_drivers(rider.id  ).length.must_equal 1
+    rider.all_drivers(rider.id).length.must_equal 1
   end
 end

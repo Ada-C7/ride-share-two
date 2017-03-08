@@ -16,27 +16,14 @@ module RideShare
       super("./support/drivers.csv")
     end
 
-    def self.find(id)
-      account = super(id)
-      account = [account.id, account.name]
-    end
-
-    def return_all_trips(id)
+    def all_trips(id)
       driver_trips = RideShare::Trip.driver_find(id)
       raise ArgumentError.new "Sorry, this driver has no trips" if driver_trips.length < 1
       driver_trips
     end
 
-# refactor the tests associated with this to make it okay to return a trip object
-
-    def all_trips(id)
-      return_all_trips(id).map do |trip|
-         {trip_id: trip.id, date: trip.date, rating: trip.rating}
-      end
-    end
-
     def average_rating(id)
-      (return_all_trips(id).sum { |trip| trip.rating } / return_all_trips(id).length.to_f).round(2)
+      (all_trips(id).sum { |trip| trip.rating } / all_trips(id).length.to_f).round(2)
     end
   end
 end

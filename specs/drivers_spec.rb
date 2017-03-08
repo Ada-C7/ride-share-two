@@ -22,12 +22,12 @@ describe "Driver class" do
 
   it "can return the first driver from the CSV" do
     # skip
-    RideShare::Driver.find(1).must_equal [1, "Bernardo Prosacco"]
+    RideShare::Driver.find(1).name.must_equal "Bernardo Prosacco"
   end
 
   it " can return the last driver from the CSV" do
     # skip
-    RideShare::Driver.find(100).must_equal [100, "Minnie Dach"]
+    RideShare::Driver.find(100).id.must_equal 100
   end
 
   it "can find all a single driver's trips" do
