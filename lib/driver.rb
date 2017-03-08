@@ -23,7 +23,6 @@ class RideShare::Driver
     trips.each do |trip|
       total += trip.rating
     end
-
     return (total / trips.length)
     #returns an Integer.  Possible turn into a float?
   end
@@ -40,4 +39,16 @@ class RideShare::Driver
     end
     return drivers
   end
+
+  def self.find_driver(id)
+    all_drivers = RideShare::Driver.find_all
+    specific_driver = 0
+    all_drivers.each do |driver|
+      if driver.id == id
+        specific_driver = driver
+      end
+    end
+    return specific_driver
+  end
+
 end
