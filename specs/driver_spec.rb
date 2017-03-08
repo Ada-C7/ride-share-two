@@ -4,6 +4,8 @@ describe "Driver tests" do
   let(:driver) { RideShare::Driver.new({ id: 4, name: "Ada", vin: "1XKAD49X2DJ395724" }) }
   let(:drivers_array) { RideShare::Driver.all }
   let(:csv_info) { CSV.read('support/drivers.csv')[1..-1] }
+  let (:driver64) { RideShare::Driver.find(64) }
+  let (:driver100) { RideShare::Driver.find(100) }
 
   describe "Driver#initialize" do
     it "Takes an ID, name, and VIN" do
@@ -107,11 +109,25 @@ describe "Driver tests" do
     end
 
     it "The number of trips is correct" do
-      RideShare::Driver.find(64).trips.length.must_equal 7
+      driver64.trips.length.must_equal 7
     end
 
     it "Returns an empty array if no trips are found" do
-      RideShare::Driver.find(100).trips.length.must_equal 0
+      driver100.trips.length.must_equal 0
+    end
+  end
+
+  describe "Driver#avg_rating" do
+    it "Returns correct rating for a driver" do
+      driver64.avg_rating.must_be_within_epsilon (19/7.0), 0.01
+    end
+
+    it "Must return a Float" do
+      driver64.avg_rating.must_be_instance_of Float
+    end
+
+    it "Raises error when there's no rating for a driver" do
+      proc { driver100.avg_rating }.must_raise NoRatingError
     end
   end
 end

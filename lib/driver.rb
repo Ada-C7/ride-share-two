@@ -29,8 +29,11 @@ module RideShare
       return Trip.find_driver_trips(id)
     end
 
-    # def avg_rating
-    #
-    # end
+    def avg_rating
+      raise NoRatingError.new("This driver doesn't have any ratings yet") if trips.empty?
+      trip_ratings = trips.map { |trip| trip.rating }
+      average_rating = trip_ratings.reduce(:+) / trips.length.to_f
+      return average_rating.round(2)
+    end
   end
 end
