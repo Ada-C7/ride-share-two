@@ -1,3 +1,5 @@
+
+Heya!
 # Ride Share
 Remember the ride share exercise we did with designing and creating a system to track the ride share data from a CSV file? We did a lot of great work on this exercise in creating arrays and hashes of data, but we've learned a lot since we did that exercise!
 
