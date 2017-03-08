@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
 require_relative '../lib/rider.rb'
-require_relative '../specs/spec_helper.rb'
+require_relative 'spec_helper.rb'
 
 describe Rider do
   describe "initialize" do
@@ -10,7 +10,7 @@ describe Rider do
       name = "Marisol Bravo"
       id = "5"
       phone_number = "562-328-7865"
-      rider = Rider.new(name, id, phone_number)
+      rider = Rider.new(id, name, phone_number)
       rider.must_be_instance_of Rider
       rider.name.must_equal name
       rider.id.must_equal id
@@ -18,7 +18,6 @@ describe Rider do
     end
   end
   describe "self.all" do
-
     before do
       @csv_rider = Rider.all
     end
@@ -32,8 +31,16 @@ describe Rider do
       end
     end
     it "checks correct length of csv driver file" do
-      @csv_rider.length.must_equal 301
+      @csv_rider.length.must_equal 300
     end
-
+    describe "self.find" do
+      before do
+        id = 5
+        @sample_rider_id = Rider.find(id)
+      end
+      it "checks that @sample_rider_id is an instance of Rider class" do
+        @sample_rider_id.must_be_instance_of Rider
+      end
+    end
   end
 end
