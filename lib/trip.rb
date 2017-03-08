@@ -1,4 +1,5 @@
 require 'date'
+require_relative './file'
 module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -25,8 +26,15 @@ module RideShare
       Integer(rating)
     end
 
-    def self.all(trips_data)
+    def self.all(trips_data = nil)
+
+      if trips_data.nil?
+       trip_data = FileData.new("./support/trips.csv")
+       trips_data = trip_data.read_csv_and_remove_headings
+     end
+
       raise ArgumentError if trips_data.empty?
+
       trips = trips_data.map do |trip_info|
         raise ArgumentError unless trip_info.length == 5
         trip = Hash.new
@@ -40,33 +48,17 @@ module RideShare
       return trips
     end
 
-    # These two method are very similar - maybe should have a helper method
-    # doing this you get undefined method/variable rider_id cause you
-    # don't have access to reader methods unless you have an instance of this class
-    # Chris would figure out how to make this work
-    # could change these methods that the parameter
-    # passed is the array of instances from all - instead of calling all
-    def self.find_by_driver(id, trips_data)
+    def self.find_by_driver(id, trips_data = nil)
       trips = all(trips_data)
       trips_of_driver = trips.map { |trip| trip if trip.driver_id == id }.compact
       return trips_of_driver
     end
 
-    def self.find_by_rider(id, trips_data)
-      # puts "HELLO"
-      # puts trips_data.class
+    def self.find_by_rider(id, trips_data = nil)
       trips = all(trips_data)
       trips_of_rider = trips.map { |trip| trip if trip.rider_id == id }.compact
       return trips_of_rider
     end
-
-    # helper method to use in place of the two above methods - CHRIS WOULD FIGURE OUT HOW TO USE THIS
-    # def self.find(id, trips_data, driver_or_rider)
-    #   trips = all(trips_data)
-    #   search_by_id = driver_or_rider == driver_id ? driver_id : rider_id
-    #   trips.map! { |trip| trip if trip.search_by_id == id }.compact!
-    #   return trips
-    # end
   end
 end
 

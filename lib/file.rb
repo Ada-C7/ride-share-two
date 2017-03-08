@@ -14,13 +14,8 @@
 #   end
 # end
 
-# having a hard time figuring out how I want this class to look
-# initialize an instance everytime you want to read/open a new file?
-# could send any file - it tests for types - confirms it exists
-# a bunch of read methods could live here depending on the type of file that you pass?
 require 'csv'
 # require'file'
-
 class FileData
   attr_reader :csv_file
 

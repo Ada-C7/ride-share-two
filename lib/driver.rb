@@ -1,3 +1,5 @@
+require_relative './trip'
+
 module RideShare
   class Driver
     attr_reader :id, :name, :vin
@@ -8,17 +10,24 @@ module RideShare
       @vin = info[:vin]
     end
 
-    def get_trips(trip_data)
-      RideShare::Trip.find_by_driver(@id, trip_data)
+    # this is highly coupled - creating a very strong dependency
+    # between Driver and Trip - can we say intentially coupled?
+    # it is isolated
+    def get_trips()
+      # want object called trips and its an array of trips
+      RideShare::Trip.find_by_driver(@id)
     end
 
+    # argument trips is return of get_trips
     def calculate_average_rating(trips)
       ratings = trips.map { |trip| trip.rating }
       average = ratings.sum / ratings.length.to_f
     end
+
                 ###################
                 ## Class methods ##
                 ###################
+
     def self.test_for_integer(num)
       Integer(num)
     end
@@ -55,3 +64,22 @@ module RideShare
     end
   end
 end
+# 
+# driver_info = {
+#   id: 75,
+#   name: 'Cynthia',
+#   vin: 'WBWSS52P9NEYLVDE9'
+# }
+
+
+# testing average the old school way
+# trips_raw = [
+#   ['1', '75', '23', '1-2-17','3'],
+#   ['1', '75', '23', '1-2-17','4'],
+#   ['1', '75', '23', '1-2-17','5'],
+#   ['1', '75', '23', '1-2-17','3']
+# ]
+#
+# trips = RideShare::Trip.all(trips_raw)
+# driver = RideShare::Driver.new(driver_info)
+# p driver.calculate_average_rating(trips)

@@ -160,19 +160,19 @@ describe "Driver" do
   describe "Driver#get_trips" do
 
     it "returns an array of trip instances" do
-      driver.get_trips(@trips_data).must_be_instance_of Array
-      driver.get_trips(@trips_data).each { |trip| trip.must_be_instance_of RideShare::Trip }
+      driver.get_trips.must_be_instance_of Array
+      driver.get_trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "each trip instance has the same driver id" do
-      driver.get_trips(@trips_data).each { |trip| trip.driver_id.must_equal @driver_id }
+      driver.get_trips.each { |trip| trip.driver_id.must_equal @driver_id }
     end
   end
 
   describe "Driver#calculate_average_rating" do
 
     it "returns an number between 1 and 5" do
-      trips = driver.get_trips(@trips_data)
+      trips = driver.get_trips
       driver.calculate_average_rating(trips).must_be :>=, 1
       driver.calculate_average_rating(trips).must_be :<=, 5
     end

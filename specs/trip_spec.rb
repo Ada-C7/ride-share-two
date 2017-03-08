@@ -54,6 +54,8 @@ describe "Trip" do
       # @trips_data = RideShare::FileData.read_csv(csv_file)
       data = FileData.new(csv_file)
       @trips_data = data.read_csv_and_remove_headings
+
+      # could have hash - key - descr of why bad - value is array- of arrays
       @trips_bad_data_1 = [['three', '1', '54', "2016-04-05", '4']]
       @trips_bad_data_2 = [['3', 'one', '54', "2016-04-05", '4']]
       @trips_bad_data_3 = [['3', '1', 'fifity', "2016-04-05", '4']]
@@ -64,6 +66,7 @@ describe "Trip" do
       @trips_bad_data_7 = []
       @trips_bad_data_8 = [[]]
       @trips_bad_data_9 = [['3', '1', '54', "2016-04-05"]]
+      # @trips_bad_data_10 = # give it two records or three
     end
 
     # let does not run this block untill it is called - which is good you want
@@ -184,7 +187,7 @@ describe "Trip" do
       @rider_id = 120
     end
 
-    let(:trips) { RideShare::Trip.find_by_rider(@rider_id, @trips_data)}
+    let(:trips) { RideShare::Trip.find_by_rider(@rider_id, @trips_data) }
 
     it "returns an array" do
       trips.must_be_instance_of Array
@@ -198,4 +201,5 @@ describe "Trip" do
       trips.each { |trip| trip.rider_id.must_equal @rider_id }
     end
   end
+
 end
