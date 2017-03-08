@@ -1,5 +1,7 @@
 # require_relative 'driver'
 # require_relative 'rider'
+
+require_relative 'error_classes'
 require 'csv'
 require 'date'
 
@@ -19,18 +21,18 @@ module RideShare
 
     def validate_input(hash)
       raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
-      raise ArgumentError.new("Raiting should be 1 - 5 only") if !((1..5).include? hash[:rating])
+      raise InvalidRatingError.new("Raiting should be 1 - 5 only") if !((1..5).include? hash[:rating])
       if (hash[:trip_id].class != Integer || hash[:trip_id] <= 0)
-        raise ArgumentError.new("Trip id must be positive integer only")
+        raise InvalidIdError.new("Trip id must be positive integer only")
       end
       if hash[:rider_id].class != Integer
-        raise ArgumentError.new("Rider id must be integer only")
+        raise InvalidIdError.new("Rider id must be integer only")
       end
       if hash[:driver_id].class != Integer
-        raise ArgumentError.new("Driver id must be integer only")
+        raise InvalidIdError.new("Driver id must be integer only")
       end
       if hash[:date].class  != String
-        raise ArgumentError.new("Date must be string only")
+        raise InvalidDateError.new("Date must be string only")
       end
     end
 
@@ -96,7 +98,8 @@ module RideShare
       all_trips
     end
 
-# optional. Metjod adds two new column with randomly selected data to trips.csv
+# Optional. Method adds two new column with randomly selected data to trips.csv
+# It's hard to test this method, so my test coverage for Trip class is only 78%
     def self.add_cost_duration_to_csv
       array_of_random_prices = ["trip_cost"] # column name
       600.times do

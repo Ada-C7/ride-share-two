@@ -81,7 +81,7 @@ describe "Driver class" do
       driver = RideShare::Driver.new(driver_hash)
       driver.all_driver_trips.must_be_empty
     end
-  end # end of all_driver_trips ,ethod
+  end # end of all_driver_trips method
 
   describe "Driver#all" do
     it "Driver.all returns an array" do
