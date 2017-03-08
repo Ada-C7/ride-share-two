@@ -55,7 +55,7 @@ module RideShare
         #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
         if driver_id == line[1].to_i
-          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6].to_i}
+          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6]}
           all_driver_trips << Trip.new(hash)
         end
       end
@@ -74,7 +74,7 @@ module RideShare
         next if line[0] == "trip_id"
         if rider_id == line[2].to_i
           hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i,
-            date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6].to_i}
+            date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6]}
           all_rider_trips << Trip.new(hash)
         end
       end
@@ -90,7 +90,7 @@ module RideShare
       csv.each do |line|
         #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
-        hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6].to_i}
+        hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6]}
         all_trips << Trip.new(hash)
       end
       all_trips
@@ -102,12 +102,15 @@ module RideShare
         rand_num = rand(20.00...150.00).round(2)
         array_of_random_prices << rand_num
       end
-
       array_of_random_durations = ["trip_duration(minutes)"]
-      600.times do
-        rand_num = rand(5...200)
-        array_of_random_durations << rand_num
-      end
+        # rand_num = rand(5...200)
+        # array_of_random_durations << rand_num
+        t1 = Time.new(2017, 01, 02, 0, 0, 0)
+        t2 = Time.new(2017, 01, 02, 3, 0, 0)
+        600.times do
+            rand_time = Time.at(t1.to_f + rand * (t2.to_f - t1.to_f))
+            array_of_random_durations << "#{rand_time.hour}:#{rand_time.min}:#{rand_time.sec}"
+        end
 
       helpers_array = CSV.read("support/trips.csv")
       helpers_array.each do |c|

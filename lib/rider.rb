@@ -63,12 +63,26 @@ module RideShare
     # For a given rider, add the ability
     # to return the total amount of money they have spent on all trips
 
-    def total_amount_spent
+    def total_money_spent
+      total = 0
       all_rider_trips.each do |trip|
-        
+        total += trip.cost
       end
-
+      return total
     end
 
-  end
-end
+    def total_time_spent
+      total = 0
+      all_rider_trips.each do |trip|
+        total += trip.duration
+      end
+      return total
+    end
+
+
+
+  end #end of class
+end # end of method
+
+# r = RideShare::Rider.all[73]
+# puts r.total_amount_spent
