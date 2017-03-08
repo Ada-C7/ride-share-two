@@ -67,8 +67,9 @@ describe "Trip" do
       driver_trips.length.must_equal 6
       valid_trip_ids = [54, 86, 230, 420, 423, 531]
       driver_trips.each do |trip|
-        verify_id = valid_trip_ids.include?(trip.id)
-        verify_id.must_equal true
+        # verify_id = valid_trip_ids.include?(trip.id)
+        # verify_id.must_equal true
+        valid_trip_ids.include?(trip.id).must_equal true
       end
     end
 
@@ -86,12 +87,32 @@ describe "Trip" do
   end
 
   describe "self.find_by_rider" do
+    let(:rider_trips) {RideShare::Trip.find_by_rider(12)}
+
+    it "returns an array of Trip instances" do
+      rider_trips.must_be_instance_of Array
+      rider_trips[0].must_be_instance_of RideShare::Trip
+    end
+
+    it "correctly finds the trips for a given driver" do
+      rider_trips.length.must_equal 4
+      valid_trip_ids = [5, 427, 381, 204]
+      rider_trips.each do |trip|
+        valid_trip_ids.include?(trip.id).must_equal true
+      end
+    end
+
+    it "raises an error for a rider ID that doesn't exist" do
+      proc { RideShare::Trip.find_by_rider(400)}.must_raise ArgumentError
+    end
 
   end
 
 
 
   describe "get_rider" do
-
+    it "returns the correct Rider instance for this trip's rider ID" do
+      trip.get_rider.name.must_equal "Jean Donnelly"
+    end
   end
 end
