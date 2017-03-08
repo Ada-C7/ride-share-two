@@ -85,7 +85,19 @@
         null
       ],
       "/Users/caraecomfort/ada/ruby/projects/ride-share-two/lib/trip.rb": [
-
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
       ],
       "/Users/caraecomfort/ada/ruby/projects/ride-share-two/specs/rider_spec.rb": [
         1,
@@ -237,9 +249,45 @@
         null
       ],
       "/Users/caraecomfort/ada/ruby/projects/ride-share-two/specs/trip_spec.rb": [
-
+        1,
+        null,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null
       ]
     },
-    "timestamp": 1489002817
+    "timestamp": 1489003833
   }
 }
