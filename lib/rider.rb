@@ -4,27 +4,31 @@ module RideShare
 
   class Rider
 
-    # readers: ID, name, phone
+    attr_reader :id, :name, :phone
 
-    # initialize
+    def initialize
     # each rider must have @ID, @name, and @phone
+    end
 
-    # self.all
+    def self.all
     # returns array of all instances of rider
+    end
 
-    # self.find(rider_ID)
+    def self.find(rider_id)
     # given rider_ID, returns rider
+    end
 
-    # trips(rider_ID)
+    def trips
     # given rider ID
     # calls trips.find_riders(rider_ID)
     # returns array of rider's trips
+    end
 
-    # drivers(rider_ID)
+    def drivers
     # calls rider.trips
     # map rider.trips to rider's drivers array
     # returns array of rider's drivers
-
+    end
 
   end
 

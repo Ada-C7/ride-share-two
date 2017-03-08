@@ -2,6 +2,8 @@ require_relative 'spec_helper'
 
 describe "Trip" do
   let(:trips) { RideShare::Trip.all }
+  let(:shakira_trips) { RideShare::Trip.find_by_driver(16) }
+  let(:hipolito_trips) { RideShare::Trip.find_by_rider(100) }
 
   describe "Trip#initialize" do
     let(:joyride) { RideShare::Trip.new(9, 99, 999, "9999-99-99", 5) }
@@ -47,8 +49,8 @@ describe "Trip" do
   describe "Trip#all" do
 
     it "returns an array of Trip instances" do
-      drivers.must_be_kind_of Array
-      drivers.each { |trip| driver.must_be_instance_of RideShare::Trip }
+      trips.must_be_kind_of Array
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "returns array with the correct number of Trips from csv" do
@@ -71,72 +73,49 @@ describe "Trip" do
   end
 
 
-  describe "Trip#find" do
+  describe "Trip#find_by_driver and #find_by_rider" do
 
     it "raises an error if a non-integer is provided" do
       proc {
-        RideShare::Trip.find("that one trip")
+        RideShare::Trip.find_by_driver("Vin Diesel")
+      }.must_raise ArgumentError
+      proc {
+        RideShare::Trip.find_by_rider("Dwayne 'The Rock' Johnson")
       }.must_raise ArgumentError
     end
 
-    it "returns an instance of Trip with matching driver ID" do
-      RideShare::Trip.find(1).must_be_instance_of RideShare::Trip
-    end
+    it "returns an array of Trip instances" do
+      shakira_trips.must_be_kind_of Array
+      shakira_trips.all? do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
 
-    it "can find any driver based on a randomly generated " do
-      test_id = rand(1..100)
-      driver_check = drivers[test_id - 1].id
-      driver = RideShare::Trip.find(test_id)
-      10.times { expect(driver.id).must_equal driver_check }
-    end
-
-    it "returns nil if account doesn't exist" do
-      RideShare::Trip.find(383).must_be_nil
-    end
-
-  end
-
-
-  # retrieve the list of trip instances that only this driver has taken
-  describe "Trip#trips and #ratings" do
-    let(:shakira) { RideShare::Trip.new(16, "Shakira Stamm", "SALUVSAL3WA67SBPZ") }
-
-    it "returns an array whose length matches the number of Trip's trips" do
-      shakira.trips.must_be_kind_of Array
-      shakira.trips.length.must_equal RideShare::Trip.find_drivers(16).length
-    end
-
-    it "returns an array of all Trip instances" do
-      shakira.trips.all? do | trip |
+      hipolito_trips.must_be_kind_of Array
+      hipolito_trips.all? do |trip|
         trip.must_be_instance_of RideShare::Trip
       end
     end
 
+    it "can find any trip based on a randomly generated number" do
+      # come back to this - find_all returns array of trips! have to verify entire array, not just one trip instance in the array
 
-    it "returns correct average rating for a Trip" do
-      # (2 + 5 + 1 + 2 + 4 + 1) / 6
-      shakira.average_rating.must_equal 2.5
+      # random_driver_id = rand(1..100)
+      # driver_trip_check = trips[random_driver_id - 1].id
+      # driver_trips = RideShare::Trip.find_by_driver(random_driver_id)
+      # expect(driver_trip.id).must_equal driver_trip_check
+      #
+      # random_rider_id = rand(1..300)
+      # rider_trip_check = trips[random_rider_id - 1].id
+      # rider_trip = RideShare::Trip.find_by_rider(random_rider_id)
+      # expect(rider_trip.id).must_equal rider_trip_check
+
+    end
+
+    it "returns empty array if trip doesn't exist" do
+      RideShare::Trip.find_by_driver(700).must_equal []
+      RideShare::Trip.find_by_rider(700).must_equal []
     end
 
   end
 
 end
-
-
-# Each trip should:
-# have an ID
-# have a rider ID
-# have a driver ID
-# have a date
-# have a rating
-# Each rating should be within an acceptable range (1-5)
-# use InvalidRatingError
-
-# Given a trip object, you should be able to:
-# retrieve the associated driver instance through the driver ID
-# retrieve the associated rider instance through the rider ID
-
-# You should be able to:
-# find all trip instances for a given driver ID
-# find all trip instances for a given rider ID
-# retrieve all trips from the CSV file

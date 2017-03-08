@@ -73,15 +73,17 @@ describe "Driver" do
       }.must_raise ArgumentError
     end
 
-    it "returns an instance of Driver with matching driver ID" do
+    it "returns an instance of Driver" do
       RideShare::Driver.find(1).must_be_instance_of RideShare::Driver
     end
 
-    it "can find any driver based on a randomly generated " do
-      test_id = rand(1..100)
-      driver_check = drivers[test_id - 1].id
-      driver = RideShare::Driver.find(test_id)
-      10.times { expect(driver.id).must_equal driver_check }
+    it "can find any driver based on a randomly generated number" do
+      10.times do
+        random_id = rand(1..100)
+        driver_check = drivers[random_id - 1].id
+        driver = RideShare::Driver.find(random_id)
+        expect(driver.id).must_equal driver_check
+      end
     end
 
     it "returns nil if account doesn't exist" do

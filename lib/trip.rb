@@ -34,7 +34,7 @@ module RideShare
     end
 
     def self.find_by_rider(rider_id)
-      raise ArgumentError.new("The rider ID is invalid.") if driver_id.class != Integer
+      raise ArgumentError.new("The rider ID is invalid.") if rider_id.class != Integer
       self.all.find_all { |trip| trip.rider_id == rider_id }
     end
 
