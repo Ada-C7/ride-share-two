@@ -1,53 +1,52 @@
+require 'csv'
 module Rideshare
-  class Trips
-    # require '..support/drivers.csv'
-    # require '..support/riders.csv'
-    # require '..support/trips.csv'
+  class Trip
+    attr_reader  :driver_id, :rider_id, :rating, :trip_id
 
-    # def initialize
-    #   attributes are set to default values and ready to be assigned in class methods
-    #   @id
-    #   @rider_id
-    #   @driver_id
-    #   @alltrips = ""
-    #
+    def initialize(trip_hash)
+      @trip_id = trip_hash[:trip_id]
+      @driver_id = trip_hash[:driver_id]
+      @rider_id = trip_hash[:rider_id]
+      @date = trip_hash[:date]
+      @rating = trip_hash[:rating]
 
-    # def trips_created?
-    #   alltrips.length >0
-    # end
-    #
-    # def self.create_trips
-    #   alltrips << open csv and create instances of each trip
-    # end
-    #
-    # self.find_driver_trips(param)
-    #   raise error if no number given
-    #   raise catchable error if valid id type and driver does not exist
-    #
-    #   self.create_trips unless trips_created?
-    #   alltrips.collect(driver_id){|trip| trip[2] == driver_id}
-    # end
-    #
-    # self.find_rider_trips(param)
-    #   raise error if no number given
-    #   raise catchable error if valid id type and rider does not exist
-    #
-    #    self.create_trips unless trips_created?
-    #    alltrips.collect(rider_id){|trip| trip[2] == rider_id}
-    # end
+    end
 
-    # self.find_all
-    #    self.create_trips unless trips_created?
-    #    returns @alltrips
-    # end
-    #
+    def self.create_trips
+      hash = {}
+      CSV.foreach('support/trips.csv', {:headers => true, :header_converters=> :symbol}) do |row|
+       hash[row[0]] = Trip.new({trip_id:row[0], driver_id:row[1], rider_id:row[2],date:row[3], rating:row[4]})
+     end
+     return hash
+    end
 
-    # find_rider(param)
-    #    self.create_trips unless trips_created?
-    #   if @alltrips.each |array| do
-    #    array[2] == param
-    #    rider_id = csv.open rider_id
-    #   return rider_id
+
+    def self.find_by_driver(param)
+      array = []
+      CSV.foreach('support/trips.csv', {:headers=> true, :header_converters => :symbol}) do |row|
+      array = Trip.new({trip_id:row[0], driver_id:row[1], rider_id:row[2],date:row[3], rating:row[4]}) if row[1] == param.to_s
+      end
+      return array
+    end
+
+    def self.find_rider(param)
+      array =[]
+      CSV.foreach('support/trips.csv', {:headers=> true, :header_converters => :symbol}) do |row|
+      array << Trip.new({trip_id:row[0], driver_id:row[1], rider_id:row[2],date:row[3], rating:row[4]}) if row[2] == param.to_s
+      end
+      return array
+    end
+    def find_rider_id(param)
+    #helper method to extract rider_id from trip object
+      Rideshare::Trip.find_rider(param)[0].rider_id
+    end
+    #
+    # def find_driver_id(param)
+    # #helper method to extract driver_id from trip object
+    #   Rideshare::Trip.find_driver(param)[0].driver_id
+    # end
+    # def find_rider(param)
+    #   Rideshare::Rider.find_rider(self.find_rider(param)[rider_id])
     #   end
     # end
 
@@ -62,6 +61,8 @@ module Rideshare
   end
 end
 #
+driver = Rideshare::Trip.find_by_rider(147)[0]
+print driver
 
 #
 #
