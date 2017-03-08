@@ -1,6 +1,7 @@
 require 'csv'
 require 'pry'
-# require_relative 'driver'
+require_relative 'driver'
+require_relative 'rider'
 
 module Rideshare
 
@@ -28,11 +29,35 @@ module Rideshare
       return @all_trips #this is an array that contains trips objects
     end
 
-    def trips #instance variable
+    def trips_driver #instance variable, should return Driver instance
+      Rideshare::Driver.all_drivers do |driver|
+        if @driver_id == driver.id
+          return driver
+        end
+
+      end
+    end
+
+    def trips_rider
+      Rideshare::Rider.all_riders do |rider|
+        if @rider_id == rider.id
+          return rider
+        end
+      end
     end
 
 
+    def self.find_by_driver_id id
+      Ridershare::Driver.find(id)
+    end
+
+    def self.find_by_rider_id id
+      Ridershare::Rider.find(id)
+    end
+
   end
 end
+
+
 
 Rideshare::Trips.all

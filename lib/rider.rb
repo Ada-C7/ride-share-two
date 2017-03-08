@@ -1,1 +1,62 @@
 require 'csv'
+require 'pry'
+require_relative 'trips'
+
+module Rideshare
+
+  class Rider
+    attr_accessor :rider_id, :name, :phone_num
+
+    def initialize rider_id, name, phone_num
+      @rider_id = rider_id
+      @name = name
+      @phone_num = phone_num
+
+    end
+
+    def self.all
+      @riders = []
+
+      CSV.open("/Users/adai/Documents/ada/projects/ride-share-two/support/riders.csv", {:headers => true}).each do |line|
+        rider = Rideshare::Rider.new(line[0].to_i, line[1], line[2])
+        @riders << rider
+      end
+    end
+
+    def self.all_riders
+      return @riders
+    end
+
+    def self.find id
+      raise ArgumentError.new "Not a valid rider id" if id >= 300 || id <= 1
+      Rideshare::Rider.all_riders.each do |rider|
+        if id == rider.id
+          puts rider.name
+          return rider
+        end
+      end
+    end
+
+    def trips
+      rider_trips = []
+
+      Rideshare::Trips.all_trips.each do |trip|
+        if @id == trip.rider_id.to_i
+          rider_trips << trip
+        end
+      end
+      return rider_trips
+    end
+
+    def drivers
+      rider_drivers = []
+      Ridershare::Driver.all_drivers do |drivers|
+        if @id == drivers.id.to_i
+          rider_drivers << drivers
+        end
+      end
+      return rider_drivers
+
+    end
+  end
+end 

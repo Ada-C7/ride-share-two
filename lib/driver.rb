@@ -32,10 +32,10 @@ module Rideshare
     def self.find id #class method
       raise ArgumentError.new "Not a valid driver id" if id >= 100 || id <= 1
 
-      Rideshare::Driver.all_drivers.each do |drivers|
-        if id == drivers.id
-          puts drivers.name
-          return drivers
+      Rideshare::Driver.all_drivers.each do |driver|
+        if id == driver.id
+          puts driver.name
+          return driver
         end
       end
     end
@@ -61,7 +61,9 @@ module Rideshare
         end
       end
 
+
       raise ArgumentError.new "Driver has no ratings" if driver_rating.length == 0
+      # cannot divide by zero for drivers with no ratings
       total_rating = driver_rating.inject { |sum, n| sum + n }
       number_of_ratings = driver_rating.length
       average_rating = total_rating/number_of_ratings
@@ -71,12 +73,3 @@ module Rideshare
     end
   end
 end
-
-
-#
-# # puts Rideshare::Driver.find(2)
-#
-# # puts Rideshare::Trips.all
-# # puts Rideshare::Trips.all_trips
-# # puts Rideshare::Trips.all_trips.last
-# puts Rideshare::Trips.all_trips.last.rating
