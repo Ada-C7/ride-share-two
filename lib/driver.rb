@@ -25,7 +25,7 @@ module RideShare
     def avg_rating
       # calls get_trips; calculates average rating across all trips
       num_trips = get_trips.length.to_f
-      ratings = get_trips.map {|trip| trip.rating }
+      ratings = get_trips.map {|trip| trip.rating}
 
       begin
         ratings.reduce(:+)/num_trips

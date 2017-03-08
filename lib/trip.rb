@@ -61,8 +61,5 @@ module RideShare
       return all_trips
     end
 
-
-
-
   end
 end

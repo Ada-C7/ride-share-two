@@ -1,24 +1,11 @@
 require_relative './spec_helper'
 
-
 describe "Driver" do
   before do
     @driver_hash = {
       id: 99,
       name: "Jayden Ledner",
       vin: "RF4AT3WL6JJXPFUJL"
-    }
-
-    @bad_vin_hash = {
-      id: 99,
-      name: "Jayden Ledner",
-      vin: "RF4AT3WL6"
-    }
-
-    @no_trips_hash = {
-      id: 100,
-      name: "Minnie Dach",
-      vin: "XF9Z0ST7X18WD41HT"
     }
   end
 
@@ -32,9 +19,12 @@ describe "Driver" do
     end
 
     it "raises an error if VIN does not have seventeen digits" do
-      proc {
-        RideShare::Driver.new(@bad_vin_hash)
-      }.must_raise InvalidVINError
+        @bad_vin_hash = {
+          id: 99,
+          name: "Jayden Ledner",
+          vin: "RF4AT3WL6"
+        }
+        proc { RideShare::Driver.new(@bad_vin_hash) }.must_raise InvalidVINError
     end
   end
 
@@ -89,7 +79,12 @@ describe "Driver" do
       driver.avg_rating.must_be_close_to (17.0/6), 0.01
     end
 
-    it "successfully copes with a driver that has no trips" do
+    it "returns nil for a driver that has no trips" do
+      @no_trips_hash = {
+        id: 100,
+        name: "Minnie Dach",
+        vin: "XF9Z0ST7X18WD41HT"
+      }
       lazy_driver = RideShare::Driver.new(@no_trips_hash)
       lazy_driver.avg_rating.must_be_nil
     end

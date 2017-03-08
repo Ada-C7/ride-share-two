@@ -77,8 +77,6 @@ describe "Trip" do
 
   end
 
-
-
   describe "self.find_by_rider" do
     let(:rider_trips) {RideShare::Trip.find_by_rider(12)}
 
@@ -87,7 +85,7 @@ describe "Trip" do
       rider_trips[0].must_be_instance_of RideShare::Trip
     end
 
-    it "correctly finds the trips for a given driver" do
+    it "correctly finds the trips for a given rider" do
       rider_trips.length.must_equal 4
       valid_trip_ids = [5, 427, 381, 204]
       rider_trips.each do |trip|

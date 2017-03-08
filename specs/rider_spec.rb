@@ -36,7 +36,6 @@ describe "Rider" do
       all_riders.last.name.must_equal "Miss Isom Gleason"
     end
 
-
   end
 
   describe "self.find" do
@@ -52,6 +51,7 @@ describe "Rider" do
     it "returns nil for a rider ID that doesn't exist" do
       RideShare::Rider.find(374).must_be_nil
     end
+
   end
 
 
@@ -61,6 +61,7 @@ describe "Rider" do
       sample_trip.must_be_instance_of RideShare::Trip
       sample_trip.rider_id.must_equal rider.id
     end
+
   end
 
   describe "get_drivers" do
@@ -73,7 +74,7 @@ describe "Rider" do
           valid_driver_ids.include?(driver.id).must_equal true
         end
     end
-  end
 
+  end
 
 end
