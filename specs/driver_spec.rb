@@ -17,14 +17,12 @@ describe "Driver tests" do
       driver.vin.must_equal "1XKAD49X2DJ395724"
     end
 
-    it "Only accepts positive integer IDs" do
+    it "Only accepts non-negative integer IDs" do
       driver_hash1 = { id: "id", name: "Ada", vin: "1XKAD49X2DJ395724" }
-      driver_hash2 = { id: 0, name: "Ada", vin: "1XKAD49X2DJ395724" }
-      driver_hash3 = { id: -5, name: "Ada", vin: "1XKAD49X2DJ395724" }
+      driver_hash2 = { id: -5, name: "Ada", vin: "1XKAD49X2DJ395724" }
 
       proc { RideShare::Driver.new(driver_hash1) }.must_raise ArgumentError
       proc { RideShare::Driver.new(driver_hash2) }.must_raise ArgumentError
-      proc { RideShare::Driver.new(driver_hash3) }.must_raise ArgumentError
     end
 
     it "Only accepts non-empty strings for name and VIN" do

@@ -17,14 +17,12 @@ describe "Rider tests" do
       rider.phone.must_equal "206-555-2468"
     end
 
-    it "Only accepts positive integer IDs" do
+    it "Only accepts non-negative integer IDs" do
       rider_hash1 = { id: "id", name: "Ada", phone: "2065552468" }
-      rider_hash2 = { id: 0, name: "Ada", phone: "2065552468" }
-      rider_hash3 = { id: -4, name: "Ada", phone: "2065552468" }
+      rider_hash2 = { id: -4, name: "Ada", phone: "2065552468" }
 
       proc { RideShare::Rider.new(rider_hash1) }.must_raise ArgumentError
       proc { RideShare::Rider.new(rider_hash2) }.must_raise ArgumentError
-      proc { RideShare::Rider.new(rider_hash3) }.must_raise ArgumentError
     end
 
     it "Only accepts non-empty strings for Name and Phone Number" do
