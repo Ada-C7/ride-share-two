@@ -15,6 +15,7 @@ describe "RideShare::Driver" do
 
   let(:my_driver) { Driver.new(2,"name", "WBWSS52P9NEYLVDE9")}
   let(:driver_trips) { Driver.find_trips(1) }     # find trips for driver_id 1
+  let(:driver_ratings) { Driver.get_rating(1) }
 
   describe "initialize method" do
 
@@ -92,19 +93,13 @@ describe "RideShare::Driver" do
       # 122, 124, 216, 417, 434, 439, 530, 553)
   end
 
+
   describe "get rating" do
 
     # retrieve an average rating for that driver based on all trips taken
-    it "returns average rating for that driver based on all trips taken" do
-    driver_ratings = []
+    it "returns the avg rating for a driver based on all trips" do
 
-    driver_trips.each do |line|
-      driver_ratings << line.rating
-    end
-
-    avg_rating = (driver_ratings.inject{ |sum, n| sum + n }.to_f / driver_ratings.size).round(2)
-
-    avg_rating.must_equal 2.33
+    driver_ratings.must_equal 2.33
     end
 
   end

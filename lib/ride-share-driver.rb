@@ -1,4 +1,5 @@
 require 'csv'
+# require 'pry'
 
   class Driver
     attr_reader :id, :name, :vin
@@ -40,20 +41,20 @@ require 'csv'
       return driver_trips
     end
 
+    # this method should be dried up
     def self.get_rating(id)
-      find_trips
+      driver_trips = find_trips(id)
 
-      driver_ratings = []
+      # driver_ratings = []
+      trip_rating = []
 
-      driver_trips.each do |rating|
-        driver_ratings << rating
+      driver_trips.each do |trip|
+        trip_rating << trip.rating
+        # driver_ratings << trip_rating
       end
 
-      avg_rating = []
-
-      (avg_rating.inject{ |sum, n| sum + n }.to_f / avg_rating.size).round(2)
-
-      return avg_rating
+      avg = (trip_rating.inject{ |sum, n| sum + n }.to_f / trip_rating.size).round(2)
+      return avg
     end
 
 
