@@ -18,4 +18,12 @@ class RideShare::Driver
     end
     return drivers
   end
+
+  def self.find(id)
+    drivers = RideShare::Driver.all
+    drivers.each do |driver|
+      return driver if id == driver.id
+    end
+    raise NoDriverError.new("Driver with that ID does not exist")
+  end
 end
