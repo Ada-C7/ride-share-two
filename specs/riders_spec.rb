@@ -72,5 +72,20 @@ describe "rider_id" do
     end
   end
 
+  describe "find_rider Rider class method" do
+    it "should return one rider based on numeric ID" do
+      my_rider = RideShare::Rider.find_rider(1)
+      my_rider.must_be_instance_of RideShare::Rider
+    end
+
+    #possibly want to return different cases if enter in
+    #a number that's not a driver ID vs a string
+
+    it "should return 0 if no driver found by that ID" do
+      bad_id = RideShare::Rider.find_rider("apple")
+      bad_id.must_equal 0
+    end
+
+  end
 
 end

@@ -42,13 +42,9 @@ class RideShare::Driver
 
   def self.find_driver(id)
     all_drivers = RideShare::Driver.find_all
-    specific_driver = 0
-    all_drivers.each do |driver|
-      if driver.id == id
-        specific_driver = driver
-      end
-    end
-    return specific_driver
+    found_driver = all_drivers.find { |driver| driver.id == id }
+    return 0 if found_driver == nil
+    return found_driver
   end
 
 end
