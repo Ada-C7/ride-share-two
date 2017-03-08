@@ -105,4 +105,21 @@ describe "Rider" do
     end
   end
 
+  describe "Rider#list_drivers" do
+    it "Returns a list of drivers for a specific rider" do
+      rider_trips = Rider.new(93, "Mrs. Rickey Dickens", "5FS0Y47Z59YGGSXS0")
+      rider_trips.list_drivers.must_be_kind_of Array
+    end
+
+    it "Returns a correct number of drivers for a specific driver" do
+      rider = Rider.new(1, "Bernardo Prosacco",	"WBWSS52P9NEYLVDE9")
+      rider.list_drivers.length.must_equal 9
+    end
+
+    it "Returns an empty array if there are no drivers for that driver" do
+      rider = Rider.new(100, "Hipolito Rogahn",	"944.179.4883")
+      rider.list_drivers.must_equal []
+    end
+  end
+
 end
