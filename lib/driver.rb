@@ -30,11 +30,10 @@ class Driver
     drivers = []
     drivers_master = CSV.read("support/drivers.csv")
     drivers_master.delete_at(0)
-    # puts drivers_master[0]
     drivers_master.each do |line|
       driver_hash = {}
       driver_hash[:id] = line[0].to_i
-      driver_hash[:name] = line[1].upcase
+      driver_hash[:name] = line[1]
       driver_hash[:vehicle_id] = line[2]
       drivers << Driver.new(driver_hash)
     end
@@ -43,7 +42,7 @@ class Driver
 
 
   def driver_trips(trips)
-    # trips.trips_by_driver(id)
+     trips_by_driver = [] [trip.trips_by_driver(id)
     #retrieve a list of trip instances that only this driver has taken
   end
 
@@ -61,14 +60,12 @@ class Driver
     all_drivers.each do |driver|
       find_driver = driver if driver.id == driver_id
     end
+    raise ArgumentError.new("Drivers don't match") if find_driver == nil
+
     return find_driver
-    # raise ArgumentError.new("Drivers don't match")
 
-    # if ID matches passed in ID , return drivers_master =
+    #think of above loop as searching to reset from nil
 
-    # CSV.read("../support/drivers.csv")
-    # drivers_master.map { |driver| }
-    # Driver.find(id)
   end
 
 
