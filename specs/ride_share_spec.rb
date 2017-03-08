@@ -55,29 +55,51 @@ describe "RideShare Module" do
       end
 
       it "Contain the first driver nformation" do
-        RideShare::Driver.all[0].id_d.must_equal first_driver.id_d
-        RideShare::Driver.all[0].name_d.must_equal first_driver.name_d
-        RideShare::Driver.all[0].vin.must_equal first_driver.vin
+        driver.all[0].id_d.must_equal first_driver.id_d
+        driver.all[0].name_d.must_equal first_driver.name_d
+        driver.all[0].vin.must_equal first_driver.vin
       end
 
       it "Contain a random driver nformation" do
-        RideShare::Driver.all[55].id_d.must_equal random_driver.id_d
-        RideShare::Driver.all[55].name_d.must_equal random_driver.name_d
-        RideShare::Driver.all[55].vin.must_equal random_driver.vin
+        driver.all[55].id_d.must_equal random_driver.id_d
+        driver.all[55].name_d.must_equal random_driver.name_d
+        driver.all[55].vin.must_equal random_driver.vin
       end
     end#end of method all
 
-    describe "Driver#find_drivers_trips" do
+    describe "Driver#self.find_driver" do
       it "return an object of Driver class" do
-        driver.find_drivers_trips(1).must_be_instance_of RideShare::Driver
+        driver.find_driver(1).must_be_instance_of RideShare::Driver
       end
 
       it "Returns the correct driver's information" do
-        driver.find_drivers_trips(100).name_d.must_equal last_driver.name_d
-        driver.find_drivers_trips(1).id_d.must_equal first_driver.id_d
-        driver.find_drivers_trips(56).vin.must_equal random_driver.vin
+        driver.find_driver(100).name_d.must_equal last_driver.name_d
+        driver.find_driver(1).id_d.must_equal first_driver.id_d
+        driver.find_driver(56).vin.must_equal random_driver.vin
+      end
+    end#end of self.find_driver method
+
+    describe "Driver#self.find_drivers_trips" do
+      it "return an Array" do
+        driver.find_drivers_trips(1).must_be_instance_of Array
+      end
+
+      it "return an Array filled with objects from Trip class" do
+        driver.find_drivers_trips(1)[0].must_be_instance_of RideShare::Trip
+        driver.find_drivers_trips(1).last.must_be_instance_of RideShare::Trip
       end
     end#end of find_drivers_trips class method
 
+    describe "Driver#drivers_rating" do
+      it "Returns an float" do
+        first_driver.drivers_rating(1).must_be_instance_of Float
+        random_driver.drivers_rating(56).must_be_instance_of Float
+      end
+    end
   end#end of Driver class
+
+  describe "" do
+
+  end
+
 end#end of the Module RideShare
