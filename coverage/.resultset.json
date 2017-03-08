@@ -6,7 +6,6 @@
         1,
         null,
         null,
-        null,
         1,
         null,
         1,
@@ -55,13 +54,6 @@
         null,
         1,
         1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null
@@ -114,12 +106,6 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "/Users/Hyunji/Documents/Ada/Homework/ride-share-two/lib/ride_share_rider.rb": [
@@ -169,19 +155,12 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "/Users/Hyunji/Documents/Ada/Homework/ride-share-two/specs/ride_share_rider_spec.rb": [
         1,
         null,
         1,
-        null,
-        null,
-        1,
         1,
         1,
         1,
@@ -237,7 +216,6 @@
         1,
         1,
         1,
-        null,
         null,
         null
       ],
@@ -245,9 +223,6 @@
         1,
         null,
         1,
-        null,
-        null,
-        1,
         1,
         1,
         1,
@@ -326,13 +301,10 @@
         1,
         1,
         1,
-        null,
-        null,
-        null,
         null,
         null
       ]
     },
-    "timestamp": 1489015087
+    "timestamp": 1489016390
   }
 }

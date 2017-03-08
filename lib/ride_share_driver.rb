@@ -23,7 +23,7 @@ module Rideshare
       end
       return csv
     end
-    
+
 #self.method2 : find a specific driver using their numeric ID
     def self.find(id_num)
       raise ArgumentError.new("Not a valid ID number") if id_num.class != Integer
@@ -46,9 +46,3 @@ module Rideshare
 
   end
 end
-
-# puts Rideshare::Driver.all.last
-# driver = Rideshare::Driver.new(id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9")
-# print driver.all_trips
-
-# puts Rideshare::Trip.find_trip_by_driver(1)

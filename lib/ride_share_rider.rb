@@ -32,7 +32,7 @@ module Rideshare
     def all_trips
       return Rideshare::Trip.find_trip_by_rider(@id)
     end
-    
+
 #instance_method2 : retrieve the list of all previous drvier instances
     def all_drivers
       if all_trips.class != String
@@ -45,7 +45,3 @@ module Rideshare
 
   end
 end
-
-# puts Rideshare::Driver.all.last
-# rider = Rideshare::Rider.new(id: 1, name: "Nina Hintz Sr.", phone_num: "560.815.3059")
-# rider.all_drivers

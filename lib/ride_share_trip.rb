@@ -1,7 +1,6 @@
 require 'csv'
 require 'pry'
-# require_relative '../lib/ride_share_driver.rb'
-# require_relative '../lib/ride_share_rider.rb'
+
 #Create Rideshare module
 module Rideshare
 #Create Trip class
@@ -54,10 +53,3 @@ module Rideshare
     end
   end
 end
-
-# Rideshare::Trip.find_trip_by_driver(1)
-# print Rideshare::Trip.all
-# print Rideshare::Trip.find_trip_by_rider(1)
-# args = {trip_id: 60, driver_id: 61, rider_id: 168, date: "2016-04-25", rating: 3}
-# a = Rideshare::Trip.new(args)
-# print a.driver_info
