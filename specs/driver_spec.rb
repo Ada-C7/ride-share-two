@@ -4,7 +4,7 @@ describe "Driver" do
 
   describe "#initialize" do
     it "takes an id, name, and vin" do
-      new_driver = Driver.new(1, "Santa Claus", 98109)
+      new_driver = Driver.new(1, "Santa Claus", 98109999999999999)
 
       new_driver.must_respond_to :id
       new_driver.id.must_equal 1
@@ -13,15 +13,15 @@ describe "Driver" do
       new_driver.name.must_equal "Santa Claus"
 
       new_driver.must_respond_to :vin
-      new_driver.vin.must_equal 98109
+      new_driver.vin.must_equal 98109999999999999
     end
 
     it "must be an instance of the Driver class" do
-      kind_driver = Driver.new(1, "Santa Claus", 98109)
+      kind_driver = Driver.new(1, "Santa Claus", 98109999999999999)
       kind_driver.must_be_instance_of Driver
     end
 
-    it "must have a vin of 17" do
+    it "must have a VIN of 17" do
       proc {
         Driver.new(10000, "Ada Lovelace", 100)
       }.must_raise ArgumentError
@@ -96,7 +96,7 @@ describe "Driver" do
     # does it get the right count (with which to divide with?)
     # does it get the right average?
     it "returns the average rating for a driver" do
-      new_driver = Driver.new(1, "Santa Claus", 98109)
+      new_driver = Driver.new(1, "Santa Claus", 98109999999999999)
       new_driver.rating(1).must_be_instance_of Float
       new_driver.rating(1).must_equal 2.3333333333333335
 

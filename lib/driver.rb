@@ -5,9 +5,9 @@ class Driver
 
   def initialize(id, name, vin)
     @id = id.to_i
-    @name = name.to_s
+    @name = name
     raise ArgumentError.new("VIN must be 17 characters long") if vin.to_s.length != 17
-    @vin = vin.to_s
+    @vin = vin
   end
 
   def self.all
