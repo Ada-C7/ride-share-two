@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'trip'
+require_relative 'driver'
 
 
 class Rider
@@ -31,6 +33,25 @@ class Rider
       end
     end
     return rider_trips
+  end
+
+  def drivers
+    rider_driver_ids = []
+    trips.each do |trip|
+      rider_driver_ids << trip.driver
+    end
+
+    rider_driver_ids = rider_driver_ids.uniq
+
+    rider_drivers = []
+    Driver.all.each_with_index do |driver, index|
+      if driver.id == rider_driver_ids[index]
+        rider_drivers << driver
+      end
+
+    end
+    return rider_drivers
+
   end
 
 end

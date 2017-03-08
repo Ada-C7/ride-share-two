@@ -20,15 +20,32 @@ describe "Rider tests" do
 
 
   describe "Rider.all" do
+    before do
+      @all_riders = Rider.all
+      @csv_file = CSV.read("./support/riders.csv", {:headers => true})
+    end
+
     it "returns an array of all riders" do
-      Rider.all.class.must_equal Array
+      @all_riders.class.must_equal Array
     end
 
     it "each element in array is a Rider" do
 
-      Rider.all.each do |element|
+      @all_riders.each do |element|
         element.must_be_instance_of Rider
       end
+    end
+
+    it "first element matches piece of data in csv" do
+
+      @all_riders[0].name.must_equal @csv_file[0][1]
+
+    end
+
+    it "last element matches last piece of data in csv" do
+
+      @all_riders[-1].name.must_equal @csv_file[-1][1]
+
     end
 
   end
@@ -52,6 +69,27 @@ describe "Rider tests" do
 
   end
 
+  describe "Rider.drivers" do
+    it "returns array of past drivers used" do
+      new_rider = Rider.new(2, "Kaia Klocko", "(392) 217-0777")
 
+      new_rider.drivers.class.must_equal Array
+    end
+
+    it "everything in array is a driver" do
+      new_rider = Rider.new(2, "Kaia Klocko", "(392) 217-0777")
+
+      new_rider.drivers.each do |element|
+        element.must_be_instance_of Driver
+      end
+    end
+
+    it "there are the correct number of drivers in the array" do
+
+    end
+
+
+
+  end
 
 end
