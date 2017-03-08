@@ -48,6 +48,16 @@ describe "Driver" do
     it "Raises an error when the account does not exist" do
       proc { RideShare::Driver.find(101)}.must_raise(ArgumentError)
     end
-
   end
+
+  describe "#get_trips" do
+
+    let(:new_driver) {RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")}
+
+    it "Should return an instance of Rideshare::Trip" do
+      new_driver.get_trips.must_be_instance_of(RideShare::Trip)
+    end
+  end
+
+
 end

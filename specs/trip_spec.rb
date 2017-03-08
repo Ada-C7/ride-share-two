@@ -10,13 +10,13 @@ describe "Trip" do
     end
 
     it "Should be associated with :trip_id, :driver_id, :rider_id, :date, and :rating" do
-      my_trip.must_respond_to(:trip_id)
+      my_trip.must_respond_to :trip_id
       my_trip.must_respond_to :driver_id
       my_trip.must_respond_to :rider_id
       my_trip.must_respond_to :date
       my_trip.must_respond_to :rating
     end
-    end
+  end
 
   describe "Trip#all" do
     it "Should create instances of trips and their associated data" do
@@ -32,7 +32,7 @@ describe "Trip" do
       RideShare::Trip.find(1).date.must_equal("2016-04-05")
       RideShare::Trip.find(1).rating.must_equal(3)
     end
-# 30,28,230,2016-10-12,5
+
     it "Should return an existing account from the CSV file" do
       RideShare::Trip.find(30).trip_id.must_equal(30)
       RideShare::Trip.find(30).driver_id.must_equal(28)
@@ -52,5 +52,17 @@ describe "Trip" do
     it "Should Raise an error when the account does not exist" do
       proc { RideShare::Trip.find(700)}.must_raise ArgumentError
     end
-end
+  end
+
+  describe "self.by_trip(driver_id)" do
+    it "returns the trips of a given driver ID" do
+        # binding.pry
+      RideShare::Trip.by_driver(30).each do |x|
+        # binding.pry
+        x.trip_id.must_equal(79)
+        binding.pry
+      end
+
+    end
+  end
 end

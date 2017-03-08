@@ -35,6 +35,16 @@ module RideShare
     #Should be able to retrieve the average rating for that driver based on all trips taken
     #Have to use all method in find method
     #create method that uses method from trip object to retrieve list of trips
-    #create method that uses internal trips list to calculate average rating
+    def get_trips #from trip object
+      trips = RideShare::Trip.find(@id)
+      return trips
+    end
+
+
+    #create method that uses internal trips list to calculate average rating of driver
+    def avg_rating
+      #   ratings = []
+      #   get_trips.each do |x|
+    end
   end
 end
