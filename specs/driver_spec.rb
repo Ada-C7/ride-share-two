@@ -48,16 +48,14 @@ describe "Driver" do
       @drivers[-1].name.must_equal "Minnie Dach"
       @drivers.last.vin.must_equal "XF9Z0ST7X18WD41HT"
 
-      # not working, not reading the CSV
-      # index = 0
-      # CSV.read("support/drivers.csv") do |line|
-      #
-      #   @drivers[index].id.must_equal line[0].to_i
-      #   puts line
-      #   @drivers[index].name.must_equal line[1].to_s
-      #   @drivers[index].vin.must_equal line[2]
-      #   index += 1
-      # end
+      index = 0
+      CSV.read("support/drivers.csv", { :headers => true }).each do |line|
+
+        @drivers[index].id.must_equal line[0].to_i
+        @drivers[index].name.must_equal line[1].to_s
+        @drivers[index].vin.must_equal line[2]
+        index += 1
+      end
     end
 
   end

@@ -87,17 +87,15 @@ describe "Trip" do
       @driver_trips.must_be_kind_of Array
       @driver_trips.each { |trip| trip.must_be_instance_of Trip }
 
-      # not working, CSV file is not being read
       # trips = 0
-      # CSV.read("support/trips.csv", { :headers => true }) do |line|
-      #    puts line
+      # CSV.read("support/trips.csv", { :headers => true }).each do |line|
       #    trips += 1 if line[1].to_i == 1
       # end
 
       @driver_trips.length.must_equal 9
     end
 
-    it "Returns and empty array for a driver ID that doesn't exist" do
+    it "Returns an empty array for a driver ID that doesn't exist" do
       Trip.find_trips_driver(101).must_equal []
     end
   end
@@ -115,7 +113,7 @@ describe "Trip" do
       @rider_trips.length.must_equal 2
     end
 
-    it "Returns and empty array for a rider ID that doesn't exist" do
+    it "Returns an empty array for a rider ID that doesn't exist" do
       Trip.find_trips_rider(301).must_equal []
     end
   end
