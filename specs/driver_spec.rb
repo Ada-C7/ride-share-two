@@ -96,39 +96,29 @@ describe "Driver" do
 
   # retrieve the list of trip instances that only this driver has taken
   describe "Driver#trips" do
-    it "raises an error if invalid ID given" do
-
-    end
-
-    it "returns an array of Trip instances" do
-
-    end
-    # model for checking that all elements are trips
-    # it "Tiles array is filled with only letters" do
-    #   @player.tiles.all? do | letter |
-    #     letter.class.must_equal Symbol
-    #     @tile_bag.letter_quantity.must_include letter
+    let(:shakira) { RideShare::Driver.new(16, "Shakira Stamm", "SALUVSAL3WA67SBPZ") }
 
     it "returns an array whose length matches the number of Driver's trips" do
-
+      shakira.trips.must_be_kind_of Array
+      shakira.trips.length.must_equal 6
+      # or must_equal trip.find_drivers(16)
     end
 
+    it "returns an array of all Trip instances" do
+      shakira.trips.all? do | trip |
+        trip.class.must_be_instance_of RideShare::Trip
+      end
+    end
 
   end
 
 
   # retrieve an average rating for that driver based on all trips taken
   describe "Driver#average_rating" do
-    it "raises an error if invalid ID is given" do
-
-    end
 
     it "returns correct average rating for a Driver" do
-
-    end
-
-    it "returns the only rating if Driver only has one trip" do
-
+      # (2 + 5 + 1 + 2 + 4 + 1) / 6
+      shakira.average_rating.must_equal 2.5
     end
 
   end

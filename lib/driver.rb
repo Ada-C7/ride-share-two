@@ -27,20 +27,14 @@ module RideShare
       self.all.find { |driver| driver.id == driver_ID }
     end
 
+    def trips
+      trip.find_drivers(@driver_ID)
+    end
 
-    # trips(driver_ID)
-    # called on driver object
-    # given driver_ID
-    # call trip.find_drivers(driver_ID)
-    # returns all driver's trips
-
-    # average_rating
-    # called on driver object
-    # call driver's trips(driver_ID)
-    # returns all driver's trips
-    # map driver trips into driver ratings array
-    # find & return average
-
+    def average_rating
+      all_ratings = trips.map { |trip| trip.rating }
+      all_ratings.inject(:+) / all_ratings.length
+    end
 
   end
 
