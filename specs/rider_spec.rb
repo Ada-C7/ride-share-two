@@ -58,9 +58,9 @@ describe RideShare::Rider do
       name: "Hamlet Hamilton",
       phone_number: "123-4567",
       trips: [
-        RideShare::Trip.new(id: 1, rider_id: 3333, driver_id: 4),
-        RideShare::Trip.new(id: 2, rider_id: 3333, driver_id: 5),
-        RideShare::Trip.new(id: 3, rider_id: 3333, driver_id: 3)
+        RideShare::Trip.new(id: 1, rider_id: 3333, driver_id: 4, date: "1-2-2017", rating: 4),
+        RideShare::Trip.new(id: 2, rider_id: 3333, driver_id: 5, date: "1-2-2017", rating: 3),
+        RideShare::Trip.new(id: 3, rider_id: 3333, driver_id: 3, date: "1-2-2017", rating: 2)
       ])
     }
 

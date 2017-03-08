@@ -22,7 +22,7 @@ module RideShare
     def self.all
       @@all ||= CSV.read("support/riders.csv", headers:true).map do |line|
         Rider.new(
-          id: line[0].to_i,
+          id: Integer(line[0]),
           name: line[1],
           phone_number: line[2]
         )

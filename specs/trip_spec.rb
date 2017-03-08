@@ -2,6 +2,25 @@ require_relative 'spec_helper'
 require_relative '../lib/trip'
 
 describe RideShare::Trip do
+    describe "#initialize" do
+      it "Does not allow a trip without an ID" do
+        proc {
+          RideShare::Trip.new(driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 4)
+        }.must_raise ArgumentError
+      end
+
+      it "Does not allow a rating below 1" do
+        proc {
+          RideShare::Trip.new(id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 0)
+        }.must_raise ArgumentError
+      end
+
+      it "Does not allow a rating 5" do
+        proc {
+          RideShare::Trip.new(id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 6)
+        }.must_raise ArgumentError
+      end
+    end
 
     describe "self.all" do
       let(:all) { RideShare::Trip.all }
@@ -39,6 +58,24 @@ describe RideShare::Trip do
 
         trips.must_be_instance_of Array
         trips.first.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    describe "Instance Methods" do
+      let(:trip) { RideShare::Trip.new(id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 5) }
+
+      describe "#driver" do
+        it "Returns the driver object associated with the trip instance" do
+          trip.driver.must_be_instance_of RideShare::Driver
+          trip.driver.id.must_equal 8
+        end
+      end
+
+      describe "#rider" do
+        it "Returns the rider object associated with the trip instance" do
+          trip.rider.must_be_instance_of RideShare::Rider
+          trip.rider.id.must_equal 263
+        end
       end
     end
 

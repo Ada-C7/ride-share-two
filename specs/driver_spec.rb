@@ -64,9 +64,9 @@ describe RideShare::Driver do
       name: "Hamlet Hamilton",
       vin: "IAMACAT1233400349",
       trips: [
-        RideShare::Trip.new(id: 1, driver_id: 3333, rating: 4),
-        RideShare::Trip.new(id: 2, driver_id: 3333, rating: 5),
-        RideShare::Trip.new(id: 3, driver_id: 3333, rating: 3)
+        RideShare::Trip.new(id: 1, driver_id: 3333, rider_id: 1111, date: "1-2-2017", rating: 4),
+        RideShare::Trip.new(id: 2, driver_id: 3333, rider_id: 1111, date: "1-2-2017", rating: 5),
+        RideShare::Trip.new(id: 3, driver_id: 3333, rider_id: 1111, date: "1-2-2017", rating: 3)
       ])
     }
 

@@ -1,16 +1,3 @@
-# HAS
-# @id, @rider_id, @driver_id, @date, @rating
-# ID, rider ID, a driver ID, date, rating
-# Each rating should be within an acceptable range (1-5)
-#
-# INSTANCE METHODS
-# driver: retrieve the associated driver instance through the driver ID
-# rider: retrieve the associated rider instance through the rider ID
-#
-# CLASS METHODS
-# all_by_driver: find all trip instances for a given driver ID
-# all_by_rider: find all trip instances for a given rider ID
-# all: retrieve all trips from the CSV file
 require 'csv'
 require 'date'
 
@@ -19,6 +6,8 @@ module RideShare
     attr_reader :id, :rider_id, :driver_id, :date, :rating
 
     def initialize(params)
+      validate_params(params)
+
       @id = params[:id]
       @rider_id = params[:rider_id]
       @driver_id = params[:driver_id]
@@ -26,17 +15,24 @@ module RideShare
       @rating = params[:rating]
     end
 
+    def validate_params(params)
+      if [params[:id], params[:rider_id], params[:driver_id], params[:date], params[:rating]].include? nil
+        raise ArgumentError.new("Drivers must have an ID, rider ID, driver ID, date, and rating.")
+      elsif !params[:rating].between?(1,5)
+        raise ArgumentError.new("Rating must be between 1 and 5.")
+      end
+    end
+
     def self.all
       @@all ||= CSV.read("support/trips.csv", headers:true).map do |line|
         RideShare::Trip.new(
-          id: line[0].to_i,
-          driver_id: line[1].to_i,
-          rider_id: line[2].to_i,
+          id: Integer(line[0]),
+          driver_id: Integer(line[1]),
+          rider_id: Integer(line[2]),
           date: Date.parse(line[3]),
-          rating: line[4].to_i
+          rating: Integer(line[4])
         )
       end
-
     end
 
     def self.find(target_id)
@@ -49,6 +45,14 @@ module RideShare
 
     def self.by_rider(target_rider_id)
       all.select { |trip| trip.rider_id == target_rider_id }
+    end
+
+    def driver
+      Driver.find(@driver_id)
+    end
+
+    def rider
+      Rider.find(@rider_id)
     end
 
   end

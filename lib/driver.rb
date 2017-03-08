@@ -25,7 +25,7 @@ module RideShare
     def self.all
       @@all ||= CSV.read("support/drivers.csv", headers:true).map do |line|
         Driver.new(
-          id: line[0].to_i,
+          id: Integer(line[0]),
           name: line[1],
           vin: line[2]
         )
