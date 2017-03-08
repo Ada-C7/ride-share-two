@@ -55,11 +55,16 @@ class Trip
   end
 
   def driver
+    # looks for a specific driver of a specific trip
     # passes driver_id to find
     # returns a driver instance
+    Driver.find(@driver_id)
+    # if I look driver and cannot driver (driver 0)
+    # it should give me a driver back and I should do something
   end
 
   def rider
+    # looks for a specific rider of a specific trip
     # passes rider_id to find
     # returns a rider instance
   end
