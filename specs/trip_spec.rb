@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+# trip csv tests -> trip 300 has no rider
 
 describe "Trip" do
   describe "constructor" do
@@ -66,6 +67,21 @@ describe "Trip" do
       rating = 5
       trip = RideShare::Trip.new(rating: rating)
       trip.rating.must_equal rating
+    end
+  end
+
+  describe "driver" do
+    it "returns the Driver instance that matches the Trip's driver_id attribute" do
+      trip = RideShare::Trip.new(driver_id: 88)
+      driver = trip.driver
+
+      driver.must_be_instance_of RideShare::Driver
+      driver.id.must_equal trip.driver_id
+    end
+
+    it "returns nil if @driver_id is undefined" do
+      trip = RideShare::Trip.new(id: 88)
+      trip.driver.must_be_nil
     end
   end
 end
