@@ -12,6 +12,10 @@ module RideShare
       @rating = info[:rating]
     end
 
+                    ###################
+                    ## Class methods ##
+                    ###################
+
     def self.test_for_integer(num)
       Integer(num)
     end
@@ -26,6 +30,9 @@ module RideShare
       Integer(rating)
     end
 
+    # all takes in trips_data so you can test bad data
+    # but will default to nil which then gets set to the csv data if nothing is passed
+    # when the find methods call all - they will not send any data 
     def self.all(trips_data = nil)
 
       if trips_data.nil?
@@ -48,14 +55,14 @@ module RideShare
       return trips
     end
 
-    def self.find_by_driver(id, trips_data = nil)
-      trips = all(trips_data)
+    def self.find_by_driver(id)
+      trips = all
       trips_of_driver = trips.map { |trip| trip if trip.driver_id == id }.compact
       return trips_of_driver
     end
 
-    def self.find_by_rider(id, trips_data = nil)
-      trips = all(trips_data)
+    def self.find_by_rider(id)
+      trips = all
       trips_of_rider = trips.map { |trip| trip if trip.rider_id == id }.compact
       return trips_of_rider
     end

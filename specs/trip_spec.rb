@@ -149,16 +149,10 @@ describe "Trip" do
   describe "Trip#find_by_driver" do
 
     before do
-      csv_file = './support/trips.csv'
-      # @trips_data = RideShare::FileData.read_csv(csv_file)
-      data = FileData.new(csv_file)
-
-      @trips_data = data.read_csv_and_remove_headings
-      # @trips_data = RideShare::Trip.all(@trips_data)
       @driver_id = 7
     end
 
-    let(:trips) { RideShare::Trip.find_by_driver(@driver_id, @trips_data)}
+    let(:trips) { RideShare::Trip.find_by_driver(@driver_id)}
 
     it "requires two arguments" do
       skip
@@ -180,14 +174,10 @@ describe "Trip" do
   describe "Trip#find_by_rider" do
 
     before do
-      csv_file = './support/trips.csv'
-      # @trips_data = RideShare::FileData.read_csv(csv_file)
-      data = FileData.new(csv_file)
-      @trips_data = data.read_csv_and_remove_headings
       @rider_id = 120
     end
 
-    let(:trips) { RideShare::Trip.find_by_rider(@rider_id, @trips_data) }
+    let(:trips) { RideShare::Trip.find_by_rider(@rider_id) }
 
     it "returns an array" do
       trips.must_be_instance_of Array
