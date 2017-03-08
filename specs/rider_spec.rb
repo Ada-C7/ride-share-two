@@ -1,6 +1,5 @@
 require_relative './spec_helper'
 
-
 describe "Rider" do
   before do
     @rider_hash = {

@@ -9,14 +9,6 @@ describe "Trip" do
       date: "2015-12-14",
       rating: 2
     }
-
-    @bad_rating_hash = {
-      id: 5,
-      driver_id: 3,
-      rider_id: 12,
-      date: "2015-12-14",
-      rating: 6
-    }
   end
 
   let(:trip) { RideShare::Trip.new(@trip_hash) }
@@ -31,6 +23,14 @@ describe "Trip" do
     end
 
     it "raises an error if rating is not in the range 1-5" do
+      @bad_rating_hash = {
+        id: 5,
+        driver_id: 3,
+        rider_id: 12,
+        date: "2015-12-14",
+        rating: 6
+      }
+
       proc {
         RideShare::Trip.new(@bad_rating_hash)
       }.must_raise InvalidRatingError
@@ -77,12 +77,7 @@ describe "Trip" do
 
   end
 
-  describe "get_driver" do
-    it "returns the correct Driver instance for this trip's driver ID" do
-      trip.get_driver.name.must_equal "Daryl Nitzsche"
-    end
 
-  end
 
   describe "self.find_by_rider" do
     let(:rider_trips) {RideShare::Trip.find_by_rider(12)}
@@ -106,11 +101,42 @@ describe "Trip" do
 
   end
 
+  describe "get_driver" do
+    it "returns the correct Driver instance for a given trip's driver ID" do
+      trip.get_driver.name.must_equal "Daryl Nitzsche"
+    end
+
+    it "raises an error when the trip has a driver_id that doesn't exist" do
+      @bad_driver_data_hash = {
+        id: 88,
+        driver_id: 0,
+        rider_id: 39,
+        date: "2015-11-19",
+        rating: 3
+      }
+
+      proc { RideShare::Trip.new(@bad_driver_data_hash).get_driver }.must_raise DataError
+    end
+  end
 
 
   describe "get_rider" do
-    it "returns the correct Rider instance for this trip's rider ID" do
+    it "returns the correct Rider instance for a given trip's rider ID" do
       trip.get_rider.name.must_equal "Jean Donnelly"
     end
+
+    it "raises an error when the trip has a rider_id that doesn't exist" do
+      @bad_rider_data_hash = {
+        id: 267,
+        driver_id: 14,
+        rider_id: 0,
+        date: "2015-04-23",
+        rating: 4
+      }
+
+      proc { RideShare::Trip.new(@bad_rider_data_hash).get_rider }.must_raise DataError
+    end
+
   end
+
 end

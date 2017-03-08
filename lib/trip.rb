@@ -27,12 +27,16 @@ module RideShare
 
     def get_driver
       # retrieve Driver instance with this trip's driver_id
-      Driver.find(driver_id)
+      driver = Driver.find(driver_id)
+      raise DataError.new("This trip does not have a valid driver") if driver == nil
+      return driver
     end
 
     def get_rider
       # retrieve Rider instance with this trip's rider_id
-      Rider.find(rider_id)
+      rider = Rider.find(rider_id)
+      raise DataError.new("This trip does not have a valid rider") if rider == nil
+      return rider
     end
 
     private
