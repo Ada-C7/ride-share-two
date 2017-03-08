@@ -135,4 +135,12 @@ describe "Driver class" do
       }.must_raise ArgumentError
     end
   end
+
+  describe "#revenue method" do
+    it "Calculate the total revenue for all trips by the driver" do
+      driver.revenue.must_be_instance_of Integer
+      driver.revenue.must_be :>=, 0
+      driver.revenue.must_equal 666
+    end
+  end
 end

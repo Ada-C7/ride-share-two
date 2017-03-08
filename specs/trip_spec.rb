@@ -187,4 +187,20 @@ describe "Trip class" do
       }.must_raise ArgumentError
     end
   end
+  
+  describe "#total_cost method" do
+    it "Calculate the total amount of money spent on all trips taken by the rider" do
+      rider.total_cost.must_be_instance_of Integer
+      rider.total_cost.must_be :>=, 0
+      rider.total_cost.must_equal 666
+    end
+  end
+
+  describe "#total_durtion method" do
+    it "Calculate the total amount of money spent on all trips taken by the rider" do
+      rider.total_durtion.must_be_instance_of Integer
+      rider.total_durtion.must_be :>=, 0
+      rider.total_durtion.must_equal 666
+    end
+  end
 end
