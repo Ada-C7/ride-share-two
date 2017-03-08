@@ -11,8 +11,6 @@ module RideShare
       @vin = driver_hash[:vin]
     end
 
-
-
     def self.find(requested_id)
       # finds a specific instance of Driver based on driver ID
       match = Driver.all.select {|driver| driver.id == requested_id}
@@ -20,20 +18,18 @@ module RideShare
     end
 
     def get_trips
-      # passes driver id to Trip.find_by_driver
       # returns collection of trips taken by this driver
       Trip.find_by_driver(id)
     end
 
     def avg_rating
-      # calls get_trips
-      # calculates average rating across all trips
+      # calls get_trips; calculates average rating across all trips
       num_trips = get_trips.length.to_f
       ratings = get_trips.map {|trip| trip.rating }
 
       begin
         ratings.reduce(:+)/num_trips
-      rescue ZeroDivisionError
+      rescue NoMethodError
         return nil
       end
 

@@ -17,14 +17,12 @@ module RideShare
 
     def self.find_by_driver(driver_id)
       # returns all Trip instances with given driver ID
-      match = Trip.all.select {|trip| trip.driver_id == driver_id}
-      return match
+      Trip.all.select {|trip| trip.driver_id == driver_id}
     end
 
     def self.find_by_rider(rider_id)
       # returns all Trip instances with given rider ID
-      match = Trip.all.select {|trip| trip.rider_id == rider_id}
-      return match
+      Trip.all.select {|trip| trip.rider_id == rider_id}
     end
 
     def get_driver
@@ -40,8 +38,6 @@ module RideShare
     private
 
     def self.all
-      # creates instances of Trip from CSV
-      # include rescue for invalid rating
       all_trips = []
       trip_hash = {}
 
