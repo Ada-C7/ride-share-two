@@ -107,7 +107,7 @@ describe "driver.trips" do
     @driver.trips.must_be_instance_of Array
   end
 
-  it "returns and array with correct rider id" do
+  it "returns and array with correct driver id" do
     @driver.trips.each do |trip|
       trip.driver_id.must_equal @driver.id
     end

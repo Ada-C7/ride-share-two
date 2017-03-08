@@ -20,12 +20,15 @@ module RideShare
     end
 
     def self.find(id) #Should we rescue this??
-      drivers_array = RideShare::Driver.all
-      drivers_array.each do |driver|
-        if id == driver.id
-          return driver
-        end
-      end
+      driver_array = RideShare::Driver.all
+          driver_array.each do |driver|
+            if id == driver.id.to_s
+              return driver
+            end
+          end
+          # raise ArgumentError.new "Account #{id} does not exist"
+        # end
+
       # raise ArgumentError.new "Driver #{id} does not exist"
     end
 
@@ -39,18 +42,12 @@ module RideShare
     end
 
 
-    def average_rating
-
-      #instance method - retrieve an average rating for that driver based on all trips taken
-      # call trips
-    end
-
-
-
-
-
-
-
+    # def average_rating
+    #   driver_id = id
+    #   RideShare::Trip.find_by_driver(driver_id)
+    #   #instance method - retrieve an average rating for that driver based on all trips taken
+    #   # call trips
+    # end
 
   end #class
 

@@ -109,6 +109,7 @@ describe "find_by_rider" do
 
   it "returns an array" do
     @trip_array.must_be_instance_of Array
+    # binding.pry
   end
 
   it "returns an array of trip instances" do
@@ -118,7 +119,74 @@ describe "find_by_rider" do
   it "the trips in the array must belong to the rider" do
     @trip_array.each {|trip| trip.rider_id.must_equal "2"}
   end
+end
+
+describe "find_by_rider" do
+  before do
+    trip_id = 1
+    driver_id = 1
+    rider_id = 54
+    date = 2016-04-05
+    rating = 3
+    @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+  end
 
 
+  it "returns an instance of Driver" do
+    @trip.find_driver
+    @trip.find_driver.must_be_instance_of RideShare::Driver
 
+  end
+
+  it "returns a driver instance" do
+    @trip.find_driver.id.must_equal "1"
+    @trip.find_driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+  end
+end
+
+describe "find_rider" do
+  before do
+    trip_id = 1
+    driver_id = 1
+    rider_id = 54
+    date = 2016-04-05
+    rating = 3
+    @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+  end
+
+
+  it "returns an instance of Driver" do
+    @trip.find_driver
+    @trip.find_driver.must_be_instance_of RideShare::Driver
+
+  end
+
+  it "returns a driver instance" do
+    @trip.find_driver.id.must_equal "1"
+    @trip.find_driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+  end
+end
+
+
+describe "find_rider" do
+  before do
+    trip_id = 1
+    driver_id = 1
+    rider_id = 54
+    date = 2016-04-05
+    rating = 3
+    @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+  end
+
+
+  it "returns an instance of Rider" do
+    @trip.find_rider
+    @trip.find_rider.must_be_instance_of RideShare::Rider
+
+  end
+
+  it "returns a Rider instance" do
+    @trip.find_rider.id.must_equal "54"
+    @trip.find_rider.name.must_equal "Gracie Emmerich"
+  end
 end
