@@ -40,6 +40,8 @@ describe Driver do
           before do
                @file = "support/drivers.csv"
                @all_drivers = Driver.all(@file)
+               @lines = File.foreach(@file).count
+
           end
 
           describe "Driver.all" do
@@ -48,8 +50,7 @@ describe Driver do
                end
 
               it "Returns correct number of drivers:" do
-                   lines = File.foreach(@file).count
-                   @all_drivers.length.must_equal lines
+                   @all_drivers.length.must_equal @lines
                end
 
                it "Returns an array of Driver objects:" do
@@ -58,7 +59,7 @@ describe Driver do
                     end
                end
 
-              it "MAtches the ID, name and VIN of the first and last drivers with the CSV file:" do
+              it "Matches the ID, name and VIN of the first and last drivers with the CSV file:" do
                     @all_drivers[0].id.to_s.must_equal CSV.readlines(@file)[0][0]
                     @all_drivers[0].name.must_equal CSV.readlines(@file)[0][1]
                     @all_drivers[0].vin.must_equal CSV.readlines(@file)[0][2]
@@ -74,6 +75,7 @@ describe Driver do
 
           before do
                @file = "support/drivers.csv"
+               @lines = File.foreach(@file).count
           end
 
           it "Returns an account that exists:" do
@@ -93,7 +95,7 @@ describe Driver do
           end
 
           it "Can find the last account from the CSV:" do
-               id = 100
+               id = @lines
                index = id - 1
                first_account = Driver.find(@file, id)
                first_account.must_be_kind_of Driver
@@ -101,9 +103,8 @@ describe Driver do
           end
 
           it "Raises an error for an account that doesn't exist:" do
-               id = 9033
+               id = @lines + 1
                proc {Driver.find(@file, id)}.must_raise ArgumentError
           end
-
      end
 end

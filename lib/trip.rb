@@ -49,7 +49,25 @@ class Trip
           return driver_trips
      end
 
-     # retrieve all trips from the CSV file
+     def self.validate_rider(rider_file, id)
+          Rider.find(rider_file, id)
+     end
+
+     def self.find_trips_for_rider(rider_file, file, id)
+          Trip.validate_rider(rider_file, id)
+
+          rider_trips = []
+          all_trips = Trip.all(file)
+
+          all_trips.each do | trip |
+               if trip.rider_id == id
+                    rider_trips << trip
+               end
+          end
+
+          return rider_trips
+     end
+
 end
 
-# space_travel = Trip.find_trips_for_driver("../support/trips.csv", 4)
+#puts Trip.self

@@ -33,6 +33,7 @@ describe Rider do
           before do
                @file = "support/riders.csv"
                @all_riders = Rider.all(@file)
+               @lines = File.foreach(@file).count
           end
 
           describe "Rider.all" do
@@ -41,8 +42,7 @@ describe Rider do
                end
 
               it "Returns correct number of riders:" do
-                   lines = File.foreach(@file).count
-                   @all_riders.length.must_equal lines
+                   @all_riders.length.must_equal @lines
                end
 
                it "Everything in the array is a Rider:" do
@@ -67,6 +67,7 @@ describe Rider do
 
           before do
                @file = "support/riders.csv"
+               @lines = File.foreach(@file).count
           end
 
           it "Returns an account that exists:" do
@@ -86,7 +87,7 @@ describe Rider do
           end
 
           it "Can find the last account from the CSV:" do
-               id = 100
+               id = @lines
                index = id - 1
                first_account = Rider.find(@file, id)
                first_account.must_be_kind_of Rider
@@ -94,7 +95,7 @@ describe Rider do
           end
 
           it "Raises an error for an account that doesn't exist:" do
-               id = 9033
+               id = @lines + 1
                proc {Rider.find(@file, id)}.must_raise ArgumentError
           end
 

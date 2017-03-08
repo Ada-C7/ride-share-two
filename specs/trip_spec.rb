@@ -93,6 +93,7 @@ describe Trip do
                @driver_file = "support/drivers.csv"
                @file = "support/trips.csv"
                @id = 3
+               @lines = File.foreach(@driver_file).count
                @driver_trips = Trip.find_trips_for_driver(@driver_file, @file, @id)
           end
 
@@ -119,7 +120,7 @@ describe Trip do
                end
 
                it "Raises an error for an account that doesn't exist:" do
-                    id = 101
+                    id = @lines + 1
                     proc {Trip.find_trips_for_driver(@driver_file, @file, id)}.must_raise ArgumentError
                end
           end
@@ -130,7 +131,8 @@ describe Trip do
           before do
                @rider_file = "support/riders.csv"
                @file = "support/trips.csv"
-               @id = 3
+               @id = 7
+               @lines = File.foreach(@rider_file).count
                @rider_trips = Trip.find_trips_for_rider(@rider_file, @file, @id)
           end
 
@@ -143,7 +145,7 @@ describe Trip do
                     count = 0
 
                     CSV.foreach(@file) do |row|
-                         if row[1].to_i == @id then count += 1; end
+                         if row[2].to_i == @id then count += 1; end
                     end
 
                     @rider_trips.length.must_equal count
@@ -157,8 +159,8 @@ describe Trip do
                end
 
                it "Raises an error for an account that doesn't exist:" do
-                    id = 101
-                    proc {Trip.find_trips_for_rider(@drider_file, @file, id)}.must_raise ArgumentError
+                    id = @lines + 1
+                    proc {Trip.find_trips_for_rider(@rider_file, @file, id)}.must_raise ArgumentError
                end
           end
      end

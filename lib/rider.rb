@@ -37,7 +37,7 @@ class Rider
      def self.find(file, id)
 
           Rider.all(file).each do | rider |
-     
+
                if rider.id == id
                     return rider
                end
