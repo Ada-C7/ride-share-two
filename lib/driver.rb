@@ -5,13 +5,13 @@ module RideShare
     attr_reader :id, :name, :trips
 
     def initialize(params)
+      validate_params(params)
+      
       @id = params[:id]
       @name = params[:name]
       @vin = params[:vin]
       @trips = params[:trips]
       @trips ||= []
-
-      validate_params(params)
     end
 
     def self.all
@@ -41,9 +41,15 @@ module RideShare
     VIN_LENGTH = 17
 
     def validate_params(params)
-      if [@id, @name, @vin].include? nil
-        raise ArgumentError.new("Drivers must have an ID, name, and VIN.")
-      elsif @vin.length != VIN_LENGTH
+      required_attributes = [:id, :name, :vin]
+
+      missing = required_attributes.select do |attribute|
+        !params.keys.include? attribute
+      end
+
+      if !missing.empty?
+        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
+      elsif params[:vin].length != VIN_LENGTH
         raise ArgumentError.new("VIN must be #{VIN_LENGTH} characters.")
       end
     end

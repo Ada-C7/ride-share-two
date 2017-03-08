@@ -6,13 +6,13 @@ module RideShare
     attr_reader :id, :rider_id, :driver_id, :date, :rating
 
     def initialize(params)
+      validate_params(params)
+
       @id = params[:id]
       @rider_id = params[:rider_id]
       @driver_id = params[:driver_id]
       @date = params[:date]
       @rating = params[:rating]
-
-      validate_params(params)
     end
 
     def self.all
@@ -50,9 +50,15 @@ module RideShare
     private
 
     def validate_params(params)
-      if [@id, @rider_id, @driver_id, @date, @rating].include? nil
-        raise ArgumentError.new("Drivers must have an ID, rider ID, driver ID, date, and rating.")
-      elsif !@rating.between?(1,5)
+      required_attributes = [:id, :rider_id, :driver_id, :date, :rating]
+
+      missing = required_attributes.select do |attribute|
+        !params.keys.include? attribute
+      end
+
+      if !missing.empty?
+        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
+      elsif !params[:rating].between?(1,5)
         raise ArgumentError.new("Rating must be between 1 and 5.")
       end
     end

@@ -3,13 +3,13 @@ module RideShare
     attr_reader :id, :name, :trips
 
     def initialize(params)
+      validate_params(params)
+
       @id = params[:id]
       @name = params[:name]
       @phone_number = params[:phone_number]
       @trips = params[:trips]
       @trips ||= []
-
-      validate_params(params)
     end
 
     def self.all
@@ -37,8 +37,14 @@ module RideShare
     private
 
     def validate_params(params)
-      if [@id, @name, @phone_number].include? nil
-        raise ArgumentError.new("Riders must have an ID, name, and phone number.")
+      required_attributes = [:id, :name, :phone_number]
+
+      missing = required_attributes.select do |attribute|
+        !params.keys.include? attribute
+      end
+
+      unless missing.empty?
+        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
       end
     end
 
