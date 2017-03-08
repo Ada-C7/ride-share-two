@@ -69,6 +69,26 @@ describe "Driver tests" do
       new_driver.average.class.must_equal Float
     end
 
+    it "returns a correct average" do
+
+    end
+
+  end
+
+  describe "Driver.find(id)" do
+    before do
+      @all_drivers = Driver.all
+      @csv_file = CSV.read("./support/drivers.csv", {:headers => true})
+    end
+
+    it "returns a driver" do
+      Driver.find(1).must_be_instance_of Driver
+    end
+
+    it "returns correct driver" do
+      Driver.find(1).name.must_equal @csv_file[0][1]
+    end
+
   end
 
 end
