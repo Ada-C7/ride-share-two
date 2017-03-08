@@ -57,5 +57,7 @@ describe "Driver" do
     it "returns an array of Driver instances" do
       RideShare::Driver.find_all.must_be_instance_of Array
     end
+
+    #Definitely need more tests - look at trips spec
   end
 end
