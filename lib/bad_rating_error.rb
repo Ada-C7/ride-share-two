@@ -1,0 +1,2 @@
+class BadRatingError < StandardError
+end

@@ -4,6 +4,48 @@ describe "Trip" do
   let(:trips) {RideShare::Trip.all}
 
   describe "initialize" do
+    it "raises an Argument Error for invalid Trip ID" do
+      proc {
+        RideShare::Trip.new("7", 84, 236, "2015-05-20", 4)
+      }.must_raise ArgumentError
+    end
+
+    it "raises an Argument Error for invalid Driver ID" do
+      proc {
+        RideShare::Trip.new(7,"84",236,"2015-05-20",4)
+      }.must_raise ArgumentError
+    end
+
+    it "raises an Argument Error for invalid Rider ID" do
+      proc {
+        RideShare::Trip.new(7, 84, "236", "2015-05-20", 4)
+      }.must_raise ArgumentError
+    end
+
+
+    it "raises an Argument Error for invalid date" do
+
+      proc {
+        RideShare::Trip.new(7, 84, 236, "2025-05", 5)
+      }.must_raise ArgumentError
+
+
+      proc {
+        RideShare::Trip.new(7, 84, 236, "201805-33", 5)
+      }.must_raise ArgumentError
+
+      proc {
+        RideShare::Trip.new(7, 84, 236, "2017-31-12", 5)
+      }.must_raise ArgumentError
+
+    end
+
+    it "raises an Argument Error for invalid rating" do
+      proc {
+        RideShare::Trip.new(7, 84, 236, "2015-05-20", 0)
+      }.must_raise BadRatingError
+    end
+
 
   end
 
@@ -22,12 +64,10 @@ describe "Trip" do
       trips.length.must_equal 600
     end
 
-    describe "Error Checking reading the csv" do
-      it "needs integer values for trip_id, driver_id, rider_id" do
-      end
-
-      it "ratings need to be between 1 and 5" do
-      end
+    it "does not include trips with invalid ratings" do
+      proc {
+        RideShare::Trip.all
+      }.must_output /.+/
 
     end
 
@@ -101,7 +141,7 @@ describe "Trip" do
       rider_info.must_be_instance_of RideShare::Rider
       rider_info.id.must_equal trip.rider_id
       rider_info.id.must_equal 280
-    # CSV file: 24,75,280,2015-11-04,4
+      # CSV file: 24,75,280,2015-11-04,4
     end
 
     it "returns nil if the rider isn't found" do

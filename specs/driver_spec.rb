@@ -4,9 +4,23 @@ describe "Drivers" do
   let(:drivers) {RideShare::Driver.all }
 
   describe "initialize" do
+    it "raises an Argument Error if id is not an Integer" do
+      proc {
+        RideShare::Driver.new("65a", "sai", "SALUVSAL3WA67SBPZ")
+      }.must_raise ArgumentError
+    end
 
-    #responds to all the arguments
+    it "raises an Argument Error if name is not a string" do
+      proc {
+        RideShare::Driver.new(35, 874, "SALUVSAL3WA67SBPZ")
+      }.must_raise ArgumentError
+    end
 
+    it "raises a Bad Vin Error if vin is invalid" do
+      proc {
+        RideShare::Driver.new(35, "sai", "5674")
+      }.must_raise BadVinError
+    end
   end
 
   describe "all" do
@@ -35,6 +49,7 @@ describe "Drivers" do
 
     it "rescues an invalid vin and replaces with a bunch of 0000s" do
 
+      #also this happens every.single.time driver.all is called in the code yay
       proc {
         RideShare::Driver.all
       }.must_output /.+/
@@ -46,12 +61,6 @@ describe "Drivers" do
 
     end
 
-
-    describe "Error Checking" do
-      #name is a string
-      #rider_id is an integer
-      #phone_number is ??
-    end
   end
 
   describe "find" do

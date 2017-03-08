@@ -7,6 +7,8 @@ module RideShare
     attr_reader :id, :name, :vin
 
     def initialize driver_id, name, vin #order matches csv file
+      raise ArgumentError.new("Driver ID must be a number") if driver_id.class != Integer
+      raise ArgumentError.new("Name must be a string of characters") if name.class != String
       raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{vin})") if vin.length != 17 || vin !~ /^[0-9A-Z]+$/
 
       @id = driver_id
@@ -23,7 +25,7 @@ module RideShare
           drivers << Driver.new(driver[0].to_i, driver[1], driver[2])
         rescue
           drivers << Driver.new(driver[0].to_i, driver[1], "0"*17)
-          puts "invalid vin. dummy vin #{'0'*17} entered for driver #{driver} at line #{drivers.index(driver)} of CSV file"
+          puts "Invalid vin! Dummy vin {#{'0'*17}} used in entry #{driver} from CSV file"
         end
 
       end
