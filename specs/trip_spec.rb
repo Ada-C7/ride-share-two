@@ -101,7 +101,7 @@ describe Trip do
                    @driver_trips.must_be_kind_of Array
                end
 
-               it "Returns the correct number of trips is reported" do
+               it "Returns the correct number of trips:" do
                     count = 0
 
                     CSV.foreach(@file) do |row|
@@ -121,6 +121,44 @@ describe Trip do
                it "Raises an error for an account that doesn't exist:" do
                     id = 101
                     proc {Trip.find_trips_for_driver(@driver_file, @file, id)}.must_raise ArgumentError
+               end
+          end
+     end
+
+     describe "Self#find_trips_for_rider" do
+
+          before do
+               @rider_file = "support/riders.csv"
+               @file = "support/trips.csv"
+               @id = 3
+               @rider_trips = Trip.find_trips_for_rider(@rider_file, @file, @id)
+          end
+
+          describe "Trip.find_trips_for_rider:" do
+               it "Returns an array of all trips for rider:" do
+                   @rider_trips.must_be_kind_of Array
+               end
+
+               it "Returns the correct number of trips:" do
+                    count = 0
+
+                    CSV.foreach(@file) do |row|
+                         if row[1].to_i == @id then count += 1; end
+                    end
+
+                    @rider_trips.length.must_equal count
+               end
+
+               it "Returns an array of Trip objects with the same Rider ID:" do
+                   @rider_trips.each do | trip |
+                       trip.must_be_kind_of Trip
+                       trip.rider_id.must_equal @id
+                    end
+               end
+
+               it "Raises an error for an account that doesn't exist:" do
+                    id = 101
+                    proc {Trip.find_trips_for_rider(@drider_file, @file, id)}.must_raise ArgumentError
                end
           end
      end
