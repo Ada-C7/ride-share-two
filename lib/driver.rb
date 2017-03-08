@@ -68,11 +68,3 @@ module RideShare
 
   end # end of class
 end # end of module
-
-# driver_hash = {driver_id: 2, name: "Natalia", license: 3044043, vin: 12213449}
-dr =  RideShare::Driver.all[66]
-puts dr.driver_id
-puts dr.all_driver_trips.length
-puts dr.average_rating
-
-# puts RideShare::Driver.all
