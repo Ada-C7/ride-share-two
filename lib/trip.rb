@@ -24,12 +24,20 @@ class Trip
     return trips_array
   end
 
-  def self.find_trips_per_driver(driver_id)
+  def self.find_trips_driver(driver_id)
     # searches .all for trips matching the driver_id
     # returns a list of trip instances associated with one driver
+    trips = []
+    Trip.all.each do |trip|
+      if trip.driver_id == driver_id
+        trips << trip
+      end
+    end
+
+    return trips
   end
 
-  def self.find_trips_per_rider
+  def self.find_trips_rider(rider_id)
     # searches .all for trips matching the rider_id
     # returns a list of trip instances associated with one rider
   end
