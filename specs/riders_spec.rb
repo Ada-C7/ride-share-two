@@ -35,6 +35,13 @@ describe "Rider class" do
     rider.all_trips(rider.id).length.must_equal 1
   end
 
+  it "returns a message when a rider exists but has no trips" do
+    # skip
+    proc {
+      rider.all_trips(300)
+    }.must_raise ArgumentError
+  end
+
   it "raises an ArgumentError if id is not a rider number in CSV" do
     proc {
       rider.all_trips(301)

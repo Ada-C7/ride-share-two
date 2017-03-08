@@ -19,10 +19,9 @@ module RideShare
       self.all.find { |account| account.id == id }
     end
 
+    #refactor this
     def all_trips(id)
-      driver_trips = RideShare::Trip.driver_find(id)
-      raise ArgumentError.new "Sorry, this driver has no trips" if driver_trips.length < 1
-      driver_trips
+      RideShare::Trip.driver_find(id)
     end
 
     def average_rating(id)
@@ -30,3 +29,5 @@ module RideShare
     end
   end
 end
+
+ron = RideShare::Driver.new({name: "Ron Weasley", driver_id: 1})

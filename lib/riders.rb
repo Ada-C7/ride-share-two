@@ -15,9 +15,7 @@ module RideShare
     end
 
     def all_trips(id)
-      rider_trips = RideShare::Trip.rider_find(id)
-      raise ArgumentError.new "Sorry, this rider has no trips" if rider_trips.length < 1
-      rider_trips
+      RideShare::Trip.rider_find(id)
     end
 
     def self.find(id)

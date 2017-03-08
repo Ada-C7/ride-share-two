@@ -1,3 +1,4 @@
+require_relative 'module'
 module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -17,11 +18,15 @@ module RideShare
     end
 
     def self.rider_find(id)
-      self.all.select { |trip| trip.rider_id == id }
+      rider_trips = self.all.select { |trip| trip.rider_id == id }
+      raise ArgumentError.new "Sorry, this rider has no trips" if rider_trips.length < 1
+      rider_trips
     end
 
     def self.driver_find(id)
-      self.all.select { |trip| trip.driver_id == id}
+      driver_trips = self.all.select { |trip| trip.driver_id == id}
+      raise ArgumentError.new "Sorry, this driver has no trips" if driver_trips.length < 1
+      driver_trips
     end
 
     def self.find(id)
@@ -29,11 +34,15 @@ module RideShare
     end
 
     def driver_for_trip
-      RideShare::Driver.find(@driver_id)
+      driver = RideShare::Driver.find(@driver_id)
+      raise ArgumentError.new "This driver does not exist" if driver == nil
+      driver
     end
 
     def rider_for_trip
-      RideShare::Rider.find(@rider_id)
+      rider = RideShare::Rider.find(@rider_id)
+      raise ArgumentError.new "This rider does not exist" if rider == nil
+      rider
     end
 
   end
@@ -41,8 +50,8 @@ end
 
 # initialization_hash = {
 #   trip_id: 1,
-#   driver_id: 2,
-#   rider_id: 2,
+#   driver_id: 0,
+#   rider_id: 0,
 #   date: "4/26/2017",
 #   rating: 5
 #     }
