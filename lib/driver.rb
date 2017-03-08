@@ -21,7 +21,7 @@ module RideShare
       end
        if  !(hash[:name][/['. a-zA-Z]+/] == hash[:name])
         raise ArgumentError.new("Name must contain letters only")
-        end
+      end
       raise ArgumentError.new("VIN must be a string") if hash[:vin].class != String
     end
 

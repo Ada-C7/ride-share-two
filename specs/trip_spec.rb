@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Trip class" do
-  let(:trip_hash) {{trip_id: 123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4}}
+  let(:trip_hash) {{trip_id: 123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4, cost: 100, duration: 35}}
   let(:trip) {RideShare::Trip.new(trip_hash)}
   let(:all_trips) { RideShare::Trip.all_trips_by_driver(67) }
   let(:all_trips2) { RideShare::Trip.all_trips_by_rider(50) }
@@ -24,34 +24,34 @@ describe "Trip class" do
       trip.must_respond_to :rating
     end
     it "Raises error if rating is not betwee 1 to 5" do
-      proc{ hash = {trip_id: 123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 6}
+      proc{ hash = {trip_id: 123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 6, cost: 100, duration: 35}
       trip = RideShare::Trip.new(hash)
       }.must_raise ArgumentError
     end
     it "Raises error if rider id is not integer" do
-      proc{ hash = {trip_id: 123, rider_id: "23", driver_id: 34, date: "2016-05-02", rating: 4}
+      proc{ hash = {trip_id: 123, rider_id: "23", driver_id: 34, date: "2016-05-02", rating: 4, cost: 100, duration: 35}
       trip = RideShare::Trip.new(hash)
       }.must_raise ArgumentError
     end
     it "Raises error if trip id is not positive integer" do
       proc {
-        hash = {trip_id: -123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4}
+        hash = {trip_id: -123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4, cost: 100, duration: 35}
         trip = RideShare::Trip.new(hash)
         }.must_raise ArgumentError
       proc {
-        hash = {trip_id: "123", rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4}
+        hash = {trip_id: "123", rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4, cost: 100, duration: 35}
         trip = RideShare::Trip.new(hash)
         }.must_raise ArgumentError
     end
     it "Raises error if driver id is not integer" do
       proc{
-         hash = {trip_id: 123, rider_id: 23, driver_id: "34", date: "2016-05-02", rating: 4}
+         hash = {trip_id: 123, rider_id: 23, driver_id: "34", date: "2016-05-02", rating: 4, cost: 100, duration: 35}
           trip = RideShare::Trip.new(hash)
         }.must_raise ArgumentError
     end
     it "Raises error if date is not a string" do
       proc {
-        hash = {trip_id: 123, rider_id: 23, driver_id: 32, date: 20160412, rating: 4}
+        hash = {trip_id: 123, rider_id: 23, driver_id: 32, date: 20160412, rating: 4, cost: 100, duration: 35}
         trip = RideShare::Trip.new(hash)
       }.must_raise ArgumentError
     end
@@ -66,7 +66,7 @@ describe "Trip class" do
     end
     it "Raise ArgumentError if driver with id is not found" do
       proc {
-        trip_hash = {trip_id: 123, rider_id: 2, driver_id: 50000, date: "2016-05-02", rating: 4}
+        trip_hash = {trip_id: 123, rider_id: 2, driver_id: 50000, date: "2016-05-02", rating: 4, cost: 100, duration: 35}
         trip = RideShare::Trip.new(trip_hash)
         trip.driver
       }.must_raise ArgumentError
@@ -83,7 +83,7 @@ describe "Trip class" do
     end
     it "Raise ArgumentError if rider with id is not found" do
       proc{
-        trip_hash = {trip_id: 123, rider_id: 200000, driver_id: 50000, date: "2016-05-02", rating: 4}
+        trip_hash = {trip_id: 123, rider_id: 200000, driver_id: 50000, date: "2016-05-02", rating: 4, cost: 100, duration: 35}
         trip = RideShare::Trip.new(trip_hash)
         trip.rider
       }.must_raise ArgumentError

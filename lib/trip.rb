@@ -5,7 +5,7 @@ require 'date'
 
 module RideShare
   class Trip
-    attr_reader :trip_id, :rider_id, :driver_id, :date, :rating
+    attr_reader :trip_id, :rider_id, :driver_id, :date, :rating, :cost, :duration
     def initialize(hash)
       validate_input(hash)
       @trip_id = hash[:trip_id]
@@ -13,6 +13,8 @@ module RideShare
       @driver_id = hash[:driver_id]
       @date = Date.strptime(hash[:date], "%Y-%m-%d")
       @rating = hash[:rating]
+      @cost = hash[:cost]
+      @duration = hash[:duration]
     end
 
     def validate_input(hash)
@@ -53,7 +55,7 @@ module RideShare
         #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
         if driver_id == line[1].to_i
-          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i}
+          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6].to_i}
           all_driver_trips << Trip.new(hash)
         end
       end
@@ -72,7 +74,7 @@ module RideShare
         next if line[0] == "trip_id"
         if rider_id == line[2].to_i
           hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i,
-            date: line[3], rating: line[4].to_i}, 
+            date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6].to_i}
           all_rider_trips << Trip.new(hash)
         end
       end
@@ -88,7 +90,7 @@ module RideShare
       csv.each do |line|
         #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
-        hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i}
+        hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6].to_i}
         all_trips << Trip.new(hash)
       end
       all_trips
@@ -125,4 +127,4 @@ module RideShare
   end # end of class
 end # end of method
 
-RideShare::Trip.add_cost_duration_to_csv
+# RideShare::Trip.add_cost_duration_to_csv
