@@ -4,10 +4,11 @@ require_relative 'spec_helper'
 
 # Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
 # use InvalidVinError
-describe Driver do
+describe "Driver" do
+  let(:drivers) { RideShare::Driver.all }
 
   describe "Driver#initialize" do
-    let(:vindiesel) { Driver.new(777, "Vin Diesel", "FASTNFURIOUS00007") }
+    let(:vindiesel) { RideShare::Driver.new(777, "Vin Diesel", "FASTNFURIOUS00007") }
 
     it "Driver has a name, ID, and VIN" do
       vindiesel.id.must_equal 777
@@ -17,43 +18,77 @@ describe Driver do
 
     it "raises error if Driver's ID is not a number" do
       proc {
-        Driver.new("VD", "Vin Diesel", "fastnfurious00007")
+        RideShare::Driver.new("VD", "Vin Diesel", "fastnfurious00007")
       }.must_raise ArgumentError
     end
 
     it "raises error if Driver's name is not a String" do
       proc {
-        Driver.new(777, ["Vin Diesel"], "FASTNFURIOUS00007")
+        RideShare::Driver.new(777, ["Vin Diesel"], "FASTNFURIOUS00007")
       }.must_raise ArgumentError
     end
 
     it "raises error if VIN has invalid characters or wrong length" do
       proc {
-        Driver.new(777, "Vin Diesel", "FASTNFURIOUS@@!!7")
+        RideShare::Driver.new(777, "Vin Diesel", "FASTNFURIOUS@@!!7")
       }.must_raise InvalidVinError
 
       proc {
-        Driver.new(777, "Vin Diesel", "FASTNFURIOUS007")
+        RideShare::Driver.new(777, "Vin Diesel", "FASTNFURIOUS007")
       }.must_raise InvalidVinError
     end
 
-    let(:vindiesel) { Driver.new(777, "Vin Diesel", "fastnfurious00007") }
-
     it "accepts lowercase letters in VIN" do
+      vindiesel = RideShare::Driver.new(777, "Vin Diesel", "fastnfurious00007")
       vindiesel.vin.must_equal "FASTNFURIOUS00007"
     end
 
   end
 
 
+  # retrieve all drivers from the CSV file
   describe "Driver#all" do
-    # retrieve all drivers from the CSV file
+
+    it "returns an array of Driver instances" do
+      drivers.must_be_kind_of Array
+      drivers.each { |driver| driver.must_be_instance_of RideShare::Driver }
+    end
+
+    it "returns array with the correct number of Drivers from csv" do
+      drivers.length.must_equal 100
+    end
+
+    it "Driver instances match what's in the csv file" do
+      index = 0
+      CSV.read("support/drivers.csv", headers: true) do |line|
+        drivers[index].id.must_equal line[0].to_i
+        drivers[index].name.must_equal line[1]
+        drivers[index].vin.must_equal line[2]
+        index += 1
+      end
+    end
 
   end
 
 
   describe "Driver#find" do
-    # find a specific driver using their numeric ID
+
+    it "raises an error if a non-integer is provided" do
+
+    end
+
+    it "returns an instance of Driver with matching driver ID" do
+      RideShare::Driver.find(1).must_be_instance_of RideShare::Driver
+    end
+
+    it "can find any Driver from driver.all based on a random number between 1 and 100" do
+      test_id = rand(1..100)
+      RideShare::Driver.all.must_include RideShare::Driver.find(test_id)
+    end
+
+    it "returns nil if account doesn't exist" do
+      RideShare::Driver.find(383).must_equal nil
+    end
 
   end
 

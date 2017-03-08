@@ -1,5 +1,7 @@
 require_relative 'rideshare'
 
+module RideShare
+
   class Driver
     attr_reader :id, :name, :vin
 
@@ -14,11 +16,16 @@ require_relative 'rideshare'
     end
 
 
-    # self.all
-    # returns array of all instances of driver
+    def self.all
+      CSV.read("support/drivers.csv", headers: true).map do | line |
+        RideShare::Driver.new(line[0].to_i, line[1], line[2])
+      end
+    end
 
-    # self.find(driver_ID)
-    # given driver_ID, returns a driver
+    def self.find(driver_ID)
+      self.all.find { |driver| driver.id == driver_ID }
+    end
+
 
     # trips(driver_ID)
     # called on driver object
@@ -35,3 +42,5 @@ require_relative 'rideshare'
 
 
   end
+
+end

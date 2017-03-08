@@ -1,5 +1,7 @@
 require_relative 'rideshare'
 
+module RideShare
+
   class Trip
 
     # reader: ID, driver_ID, rider_ID, date, rating
@@ -18,3 +20,5 @@ require_relative 'rideshare'
     # returns array of all instances of trip with driver_ID
 
   end
+
+end

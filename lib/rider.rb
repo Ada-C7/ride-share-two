@@ -1,5 +1,7 @@
 require_relative 'rideshare'
 
+module RideShare
+
   class Rider
 
     # readers: ID, name, phone
@@ -25,3 +27,5 @@ require_relative 'rideshare'
 
 
   end
+
+end
