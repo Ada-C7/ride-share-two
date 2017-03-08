@@ -1,6 +1,7 @@
 require 'csv'
 require_relative 'trip'
 require_relative 'driver'
+require 'time'
 module RideShare
   class Rider
     attr_reader :rider_id, :name, :phone
@@ -70,19 +71,21 @@ module RideShare
       end
       return total
     end
-
+    # For a given rider, add the ability to return the total amount of time
+    # they have spent on their trip
     def total_time_spent
-      total = 0
+      total = Time.new(2017, 01, 02, 0,0,0)
       all_rider_trips.each do |trip|
-        total += trip.duration
+        total = total.hour * 3600 + total.min * 60
+        t1 = Time.parse("2017-01-02 #{trip.duration}")
+        total = t1 + total
       end
-      return total
+      puts "Total time spent is #{total.hour}:#{total.min}"
+      return "#{total.hour}:#{total.min}"
     end
-
-
 
   end #end of class
 end # end of method
-
-# r = RideShare::Rider.all[73]
-# puts r.total_amount_spent
+#
+r = RideShare::Rider.all[73]
+puts r.total_time_spent

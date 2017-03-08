@@ -66,7 +66,21 @@ module RideShare
       end
     end
 
+    # total revenue of a driver for all trips:
+    def total_revenue
+      total = 0
+      fee = 1.65
+      all_driver_trips.each do |trip|
+        total += trip.cost
+      end
+      total -= fee
+      total *= 0.8
+      return total
+    end
   end # end of class
 end # end of module
 hash = {driver_id: 3, vin:"ASV48493029182345", name: "Nata ia"}
 RideShare::Driver.new(hash)
+
+dr = RideShare::Driver.all[3]
+dr.total_revenue
