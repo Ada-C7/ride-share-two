@@ -52,10 +52,12 @@ describe "Trip class" do
   end
 
   it "can find all trip instances for a given rider ID" do
-    skip
+    # skip
+    RideShare::Trip.rider_find(1).length.must_equal 2
   end
 
   it "can find all trip instances for a given driver ID" do
-    skip
+    # skip
+    RideShare::Trip.driver_find(1).length.must_equal 9
   end
 end

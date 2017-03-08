@@ -15,6 +15,7 @@ describe "Loadable Class" do
   end
 
   it "can find the correct data when passed the trips CSV" do
-    skip
+    # skip
+    RideShare::Trip.find(1).rider_id.must_equal 54
   end
 end

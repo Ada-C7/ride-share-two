@@ -1,3 +1,4 @@
+require_relative 'loadable'
 module RideShare
   class Trip < Loadable
     attr_reader :id, :driver_id, :rider_id, :date, :rating
