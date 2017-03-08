@@ -49,6 +49,9 @@ module RideShare
     end
 
     def self.find(id)
+      if id.class != Integer || id <= 0
+        raise ArgumentError.new("Rider id must be non-negative integer")
+      end
       result = RideShare::Rider.all.select {|rider| rider.rider_id == id}
       if result[0].nil?
         raise ArgumentError.new("Cannot find this ID in riders")

@@ -1,7 +1,4 @@
-
 require_relative 'spec_helper'
-require 'date'
-
 
 describe "Trip class" do
   let(:trip_hash) {{trip_id: 123, rider_id: 2, driver_id: 34, date: "2016-05-02", rating: 4}}
@@ -101,6 +98,11 @@ describe "Trip class" do
       all_trips = RideShare::Trip.all_trips_by_driver(9000)
       all_trips.must_equal []
     end
+    it "Raises error if driver id is not an integer or if <= 0" do
+      proc {
+        RideShare::Trip.all_trips_by_driver("21")
+      }.must_raise ArgumentError
+    end
     it "Each element in returned array must be instance of Trip class" do
       all_trips.each do |trip|
         trip.class.must_equal RideShare::Trip
@@ -113,6 +115,11 @@ describe "Trip class" do
         trip.driver_id.must_equal driver_id
       end
     end
+    it "Finds trips of first and last driver from the list of drivers" do
+      # 99 because driver with id 100 doesn't have any trips
+      RideShare::Trip.all_trips_by_driver(99).length.must_be :>, 0
+      RideShare::Trip.all_trips_by_driver(1).length.must_be :>, 0
+    end
   end # end of all_trips_by_driver method
 
   describe "Trip#all_trips_by_rider" do
@@ -122,6 +129,11 @@ describe "Trip class" do
     it "Returns empty array if  driver(s) was not found" do
       all_trips = RideShare::Trip.all_trips_by_rider(9000)
       all_trips.must_equal []
+    end
+    it "Raises error if rider id is not an integer or if <= 0" do
+      proc {
+        RideShare::Trip.all_trips_by_rider("21")
+      }.must_raise ArgumentError
     end
     it "Each element in returned array must be instance of Trip class" do
       all_trips2.each do |trip|
@@ -134,6 +146,10 @@ describe "Trip class" do
       all_trips2.each do |trip|
         trip.rider_id.must_equal rider_id
       end
+    end
+    it "Finds trips of two random riders from the list of riders" do
+      RideShare::Trip.all_trips_by_rider(298).length.must_be :>, 0
+      RideShare::Trip.all_trips_by_rider(1).length.must_be :>, 0
     end
   end # end of all_trips_by_rider method
 

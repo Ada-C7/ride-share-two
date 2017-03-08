@@ -42,8 +42,11 @@ module RideShare
       return RideShare::Rider.find(@rider_id)
     end
 
-    # find all trip instances for a given driver ID
+    # find all trip instances for a given driver ID:
     def self.all_trips_by_driver(driver_id)
+      if driver_id.class != Integer || driver_id <= 0
+        raise ArgumentError.new("Driver id must be non-negative integer")
+      end
       all_driver_trips = []
       csv = CSV.read("support/trips.csv", 'r')
       csv.each do |line|
@@ -57,8 +60,11 @@ module RideShare
       all_driver_trips
     end
 
-    # find all trip instances for a given rider ID
+    # find all trip instances for a given rider ID:
     def self.all_trips_by_rider(rider_id)
+      if rider_id.class != Integer || rider_id <= 0
+        raise ArgumentError.new("Driver id must be non-negative integer")
+      end
       all_rider_trips = []
       csv = CSV.read("support/trips.csv", 'r')
       csv.each do |line|
@@ -75,7 +81,7 @@ module RideShare
       return all_rider_trips
     end
 
-    # retrieve all trips from the CSV file
+    # retrieve all trips from the CSV file:
     def self.all_trips
       all_trips = []
       csv = CSV.read("support/trips.csv", 'r')
@@ -90,14 +96,3 @@ module RideShare
 
   end # end of class
 end # end of method
-
-# trip_hash = {trip_id: 123, rider_id: 2, driver_id: 34, date: "03/06/2017", rating: 4}
-#
-# trip = RideShare::Trip.new(trip_hash)
-# # puts trip.driver.driver_id
-
-# all_trips =  RideShare::Trip.all_trips_by_rider(1)
-# puts all_trips
-
-
-# puts RideShare::Trip.all_trips.length

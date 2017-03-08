@@ -53,6 +53,19 @@ describe "Driver class" do
     end
   end # end of initialize method test
 
+  describe  "Driver#average_rating" do
+    it "Returns average rating (betwee 1 and 5) of a driver" do
+      dr = all_drivers[3]
+      dr.average_rating.class.must_equal Float
+      dr.average_rating.must_be :>=, 1
+      dr.average_rating.must_be :<=, 5
+    end
+    it "Returns nil if driver has no trips" do
+      puts all_drivers.length
+      dr = all_drivers[99]
+      dr.average_rating.must_equal nil
+    end
+  end
   describe "Driver#all_driver_trips" do
     it "Return an array"do
       driver1.all_driver_trips.class.must_equal Array
@@ -102,6 +115,17 @@ describe "Driver class" do
   end # end of all method
 
   describe "Driver.find" do
+    it "Raises error if passing parameter is not non-negative integer" do
+      proc {
+        RideShare::Driver.find(-16)
+      }.must_raise ArgumentError
+      proc {
+        RideShare::Driver.find(0)
+      }.must_raise ArgumentError
+      proc {
+        RideShare::Driver.find("3")
+      }.must_raise ArgumentError
+    end
     it "Returns an driver that exists" do
       result = RideShare::Driver.find(16)
       result.must_be_kind_of RideShare::Driver
@@ -120,13 +144,9 @@ describe "Driver class" do
       result.name.must_equal RideShare::Driver.all[99].name
       result.vin.must_equal RideShare::Driver.all[99].vin
     end
-    it "Raises an error for a driver that doesn't exist or
-      if passing parameter is not positive integer" do
+    it "Raises an error for a driver that doesn't exist" do
       proc {
         RideShare::Driver.find(3000)
-      }.must_raise ArgumentError
-      proc {
-        RideShare::Driver.find(-3)
       }.must_raise ArgumentError
     end
   end # end of find method

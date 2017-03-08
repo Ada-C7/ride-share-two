@@ -31,10 +31,15 @@ module RideShare
 
     def average_rating
       total_rating = 0
+      average_rating = 0
       all_driver_trips.each do |trip|
         total_rating += trip.rating
       end
-      (total_rating/all_driver_trips.length.to_f).round(2)
+      if total_rating != 0
+        average_rating = (total_rating/all_driver_trips.length.to_f).round(2)
+      else
+        return nil
+      end
     end
 
     def self.all  #retrieve all drivers from the CSV file
@@ -50,6 +55,9 @@ module RideShare
     end
 
     def self.find(id)
+      if id.class != Integer || id <= 0
+        raise ArgumentError.new("Driver id must be non-negative integer")
+      end
       result = RideShare::Driver.all.select {|driver| driver.driver_id == id}
       if result[0].nil?
         raise ArgumentError.new("Cannot find this ID in drivers")
