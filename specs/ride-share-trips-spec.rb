@@ -9,6 +9,7 @@ require 'csv'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/ride-share-trips'
+require_relative 'spec-helper'
 
 describe "RideShare::Trips" do
 

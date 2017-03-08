@@ -9,10 +9,12 @@ require 'csv'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/ride-share-driver'
+require_relative 'spec-helper'
 
 describe "RideShare::Driver" do
 
   let(:my_driver) { RideShare::Driver.new(2,"name", "WBWSS52P9NEYLVDE9")}
+
 
   describe "initialize method" do
 
@@ -75,6 +77,17 @@ describe "RideShare::Driver" do
     end
   end
 
+  describe "find trips" do
+
+    # retrieve the list of trip instances that only this driver has taken
+    it "returns trips that only this driver has taken" do
+      driver_trips = []
+      my_driver.find_trips(1)
+      driver_trips.must_include(1, 122, 124, 216, 417, 434, 439, 530, 553)
+    end
+
+  end
+
   describe "to_s method" do
 
     it "returns string" do
@@ -82,3 +95,8 @@ describe "RideShare::Driver" do
     end
   end
 end
+
+# Given a driver object, you should be able to:
+#
+# retrieve an average rating for that driver based on all trips taken
+# You should be able to:

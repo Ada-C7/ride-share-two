@@ -9,14 +9,11 @@ require 'csv'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/ride-share-rider'
+require_relative 'spec-helper'
 
 describe "RideShare::Rider" do
 
   let(:my_rider) { RideShare::Rider.new(2,"name", 395873456958409)}
-
-  # before do
-  #   @my_rider = RideShare::Rider.new(2, "name", 4567435534)
-  # end
 
   describe "initialize method" do
 
