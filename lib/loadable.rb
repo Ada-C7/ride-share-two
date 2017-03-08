@@ -11,6 +11,6 @@ module RideShare
     def self.find(id)
       self.all.find { |account| account.id == id }
     end
-    
+
   end
 end

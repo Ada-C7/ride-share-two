@@ -35,3 +35,16 @@ module RideShare
 
   end
 end
+
+initialization_hash = {
+  trip_id: 1,
+  driver_id: 2,
+  rider_id: 2,
+  date: "4/26/2017",
+  rating: 5
+    }
+trip = RideShare::Trip.new(initialization_hash)
+
+puts trip.rider_for_trip.name
+
+puts "hi"
