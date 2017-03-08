@@ -14,7 +14,6 @@ require 'csv'
 
     def self.all
       all_trips = []
-
       csv_data = CSV.read("support/trips.csv")
       csv_data.shift
 

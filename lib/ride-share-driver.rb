@@ -22,20 +22,24 @@ require 'csv'
       return all_drivers
     end
 
-    def self.find(id) # find a specific driver using their numeric ID
+    def self.find(id) # finds a specific driver using their numeric ID
       drivers = Driver.all
       return drivers.find {|driver| driver.id == id }
     end
 
     def self.find_trips(id)
-      # will need to search through all trip data and fill an empty array with the
-      # trip info for all the trips that one driver took
+      trips = Trips.all # csv of all trips
+
       driver_trips = []
-      # access self.all (Trips class) array to find the driver ids
-      csv_data.each do |line|
-        driver_trips << Driver.new(line[0].to_i, line[1].to_s, line[2].to_s)
+
+      # grab all elements that have driver_id of 1
+      trips.each do |trip|
+        if trip.driver_id == id
+          driver_trips << trip
+        end
       end
-      return all_drivers
+      # puts driver_trips
+      return driver_trips
     end
 
     def to_s

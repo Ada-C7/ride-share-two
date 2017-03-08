@@ -14,6 +14,7 @@ require_relative 'spec-helper'
 describe "RideShare::Driver" do
 
   let(:my_driver) { Driver.new(2,"name", "WBWSS52P9NEYLVDE9")}
+  let(:driver_trips) { Driver.find_trips(1) }     # find trips for driver_id 1
 
 
   describe "initialize method" do
@@ -76,17 +77,21 @@ describe "RideShare::Driver" do
       Driver.find(100).wont_be_nil
     end
   end
+  #
+  describe "find trips" do
 
-  # describe "find trips" do
-  #
-  #   # retrieve the list of trip instances that only this driver has taken
-  #   it "returns trips that only this driver has taken" do
-  #     driver_trips = []
-  #     my_driver.find_trips(1)
-  #     driver_trips.must_include(1, 122, 124, 216, 417, 434, 439, 530, 553)
-  #   end
-  #
-  # end
+    it "returns trips that only this driver has taken" do
+      driver_trips[0].trip_id.must_equal(1) # checking first element of array
+      # here are some trip_ids we should see for this driver: 1, 122, 124, 216, 417, 434, 439, 530, 553)
+    end
+
+    it "checks lengths of driver trip array" do
+      driver_trips.length.must_equal 9
+    end
+
+      # ideally we would spot check some more trip id's
+
+  end
 
   describe "to_s method" do
 
@@ -96,7 +101,5 @@ describe "RideShare::Driver" do
   end
 end
 
-# Given a driver object, you should be able to:
-#
+
 # retrieve an average rating for that driver based on all trips taken
-# You should be able to:
