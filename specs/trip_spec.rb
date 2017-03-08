@@ -85,7 +85,6 @@ describe "Trip Class" do
         my_trips.last.rider_id.must_equal      trip_data.last[rider_id].to_i
         my_trips.last.date.must_equal          trip_data.last[date]
         my_trips.last.rating.must_equal        trip_data.last[rating].to_i
-
       end
     end #end of self.all
 
@@ -129,41 +128,35 @@ describe "Trip Class" do
       end
     end #end of self.find_rider
 
-    xdescribe " self.find_driver(id) " do
+    describe " self.find_driver(id) " do
 
 
-      it " Returns a rider that exists " do
+      it " Returns a driver that exists " do
         #trying to figure out which format is less dependent than that other
-        my_trip = Carmmunity::Trip::find(5)
+        my_driver = Carmmunity::Trip::find_driver(5)
 
-        id = 5
-        #name = "Elmore Heller MD"
-        phone_num = "1-297-522-2558 x431"
-
-
-        my_trip.name.must_equal           my_trips[5].name
-        my_trip.rider_id.must_equal       id
-        my_trip.phone_number.must_equal   trip_data[5][2]
-        my_trip.phone_number.must_equal   phone_num
+        my_driver.driver_id.must_equal    5
+        my_driver.name.must_equal         "Verla Marquardt"
+        my_driver.vin.must_equal          "TAMLE35L3MAYRV1JD"
       end
 
 
-      it " Can find the last driver in the CSV file " do
+      it " Can find the driver of the last trip " do
 
-        my_trip = Carmmunity::Trip::find(300)
+        my_driver = Carmmunity::Trip::find_driver(61)
 
-        my_trip.name.must_equal       my_trips.last.name
-        my_trip.rider_id.must_equal   my_trips.last.rider_id
-
+        my_driver.driver_id.must_equal   61
+        my_driver.name.must_equal        "Mrs. Everardo Von"
+        my_driver.vin.must_equal         "WBTTYCCG00Y9K1VHZ"
       end
 
-      it " Can find the First driver in the CSV file " do
+      it " Can find the driver of the first trip " do
+        
+        my_driver = Carmmunity::Trip::find_driver(1)
 
-        my_trip = Carmmunity::Trip::find(1)
-
-        my_trip.name.must_equal       my_trips[1].name
-        my_trip.rider_id.must_equal   my_trips[1].rider_id
-
+        my_driver.name.must_equal        "Bernardo Prosacco"
+        my_driver.driver_id.must_equal   1
+        my_driver.vin.must_equal         "WBWSS52P9NEYLVDE9"
       end
 
       it " Only accepts integers in seatch criteria " do
