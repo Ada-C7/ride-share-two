@@ -23,7 +23,8 @@ class RideShare::Driver
     trips.each do |trip|
       total += trip.rating
     end
-    return (total / trips.length)
+    rating = (total.to_f / trips.length)
+    return rating.round(1)
     #returns an Integer.  Possible turn into a float?
   end
 

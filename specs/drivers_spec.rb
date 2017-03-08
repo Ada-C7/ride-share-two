@@ -48,8 +48,8 @@ describe "Driver" do
 
   describe "Driver#averate_rating" do
     it "returns an average_rating based on all trips given" do
-      my_driver.average_rating.must_be_instance_of Integer
-      my_driver.average_rating.must_equal 4
+      my_driver.average_rating.must_be_instance_of Float
+      my_driver.average_rating.must_equal 4.2
     end
 
     #PROBABLY SHOULD WRITE SOME MORE TESTS HERE!!
