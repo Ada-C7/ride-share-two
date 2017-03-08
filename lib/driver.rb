@@ -35,4 +35,14 @@ class Driver
     return driver_trips
   end
 
+  def average
+    rating = 0
+    trips.each do |trip|
+      rating += trip.rating
+    end
+
+    return rating = rating.to_f / trips.length
+
+  end
+
 end

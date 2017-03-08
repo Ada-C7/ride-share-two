@@ -60,6 +60,14 @@ describe "Driver tests" do
       end
 
     end
+  end
+
+  describe "Driver#average" do
+    it "returns a float of an average rating" do
+      new_driver = Driver.new(1, "Jan Brown", "HFG347DJ84HKX9872")
+
+      new_driver.average.class.must_equal Float
+    end
 
   end
 

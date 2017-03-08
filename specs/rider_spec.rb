@@ -39,7 +39,7 @@ describe "Rider tests" do
     it "first element matches piece of data in csv" do
 
       @all_riders[0].name.must_equal @csv_file[0][1]
-
+      
     end
 
     it "last element matches last piece of data in csv" do
