@@ -1,7 +1,7 @@
-module RideShare
+module Carmunity
   class Driver
 
-    @@drivers = nil
+    #@@drivers = []
 
     attr_reader :driver_id, :name, :vin
 
@@ -13,10 +13,10 @@ module RideShare
     end
 
 
-    def trips_taken
-      trips = RideShare::Trip.find(@driver_id)
-      return trips
-    end
+    # def trips_taken
+    #   trips = Carmunity::Trip.find(@driver_id)
+    #   return trips
+    # end
 
 
   #def average_rating
@@ -28,7 +28,10 @@ module RideShare
 
   def self.find(id)
 
-    @@drivers.find do |driver|
+    #@@drivers.find do |driver|
+    all_drivers = self.all
+
+    all_drivers.find do |driver|
 
       if driver.driver_id == id
         return driver
@@ -42,9 +45,8 @@ module RideShare
 
     def self.all
 
-      if @@drivers == nil
-
-        @@drivers = []
+      #if @@drivers.length == 0
+      drivers = []
 
         CSV.read("support/drivers.csv").each do |row|
           driver = {
@@ -53,11 +55,12 @@ module RideShare
             vin: row[2]
           }
 
-          @@drivers << RideShare::Driver.new(driver)
+          drivers << Carmunity::Driver.new(driver)
+          #@@drivers << Carmunity::Driver.new(driver)
 
         end
-      end
-      return @@drivers
+      #end
+      return drivers#@@drivers
     end #
 
   end #end of class
