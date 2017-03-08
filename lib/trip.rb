@@ -10,6 +10,14 @@ module RideShare
       @rating = rating
     end
 
+    def self.all
+      trips = []
+      CSV.open("./support/trips.csv", "r").each do |line|
+        trips << self.new(line[0], line[1], line[2], line[3], line[4])
+      end
+      return trips
+    end
+
     def find_many(id)
       # driver_trips = []
       # trips = self.all

@@ -24,10 +24,11 @@ describe "Trip class" do
   end
 
   describe "self.find_many class method" do
-
   end
 
   describe "self.all class method" do
-
+    it "Returns array of all trips from CSV" do
+      RideShare::Trip.all.must_be_instance_of Array, "Not an array"
+    end
   end
 end
