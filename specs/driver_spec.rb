@@ -78,6 +78,10 @@ describe "Driver Class" do
       }.must_raise InvalidIdError
     end
 
+    it "Returns nil if the ID is not found" do
+      RideShare::Driver.find("0").must_equal nil
+    end
+
   end
 
   describe "Trips method" do
@@ -102,6 +106,11 @@ describe "Driver Class" do
 
       first.date.must_equal "2016-04-05"
     end
+
+    it "Returns nil if a driver has no trips" do
+      driver = RideShare::Driver.find("100")
+      driver.trips.must_equal nil
+    end
   end
 
   describe "Rating method" do
@@ -110,6 +119,11 @@ describe "Driver Class" do
 
     it "Returns a float" do
       rating.must_be_instance_of Float
+    end
+
+    it "Returns nil if there is no trip instances" do
+      driver = RideShare::Driver.find("100")
+      driver.rating.must_equal nil
     end
 
   end

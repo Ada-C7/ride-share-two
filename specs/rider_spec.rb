@@ -81,6 +81,10 @@ describe "Rider Class" do
       RideShare::Rider.find("1000").must_equal nil
     end
 
+    it "Returns nil if the ID is not found" do
+      RideShare::Rider.find("0").must_equal nil
+    end
+
   end
 
   describe "Drivers method" do

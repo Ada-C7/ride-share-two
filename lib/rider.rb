@@ -9,7 +9,8 @@
     end
 
     def trips
-      return RideShare::Trip.all_riders(id)
+      trips =  RideShare::Trip.all_riders(id)
+      return ((trips.length > 0) ? trips : nil)
     end
 
     def drivers

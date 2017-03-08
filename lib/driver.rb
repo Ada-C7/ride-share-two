@@ -9,10 +9,12 @@
     end
 
     def trips
-      return RideShare::Trip.all_drivers(id)
+      trips =  RideShare::Trip.all_drivers(id)
+      return ((trips.length > 0) ? trips : nil)
     end
 
     def rating
+      return nil if !(trips)
       ratings = trips.map{ |t| t.rating.to_f }
       return (ratings.reduce(:+) / ratings.length).round(1)
     end
@@ -37,6 +39,8 @@
       drivers.each do |driver|
         return driver if driver.id == id
       end
+      puts "A Driver Account could not be found with this ID. ID Given: #{id}"
+      return nil
     end
 
   end
