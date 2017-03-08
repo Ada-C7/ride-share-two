@@ -5,6 +5,7 @@ module RideShare
     attr_accessor :trip_id, :rider_id, :driver_id, :date, :rating
 
     def initialize(trip_id, driver_id, rider_id, date, rating)
+      raise ArgumentError.new ("rating must be between 1-5") if rating > 5 || rating < 1
       @trip_id = trip_id
       @driver_id = driver_id
       @rider_id = rider_id
@@ -24,14 +25,28 @@ module RideShare
     #   use trip instances in rider (its a self method)
     # end
     #
-    def all_trips
-      return all the trip sin the trip csv
+    def self.all_trip_info
+      all_trips_array = []
+      CSV.read('support/trips.csv').each do |object|
+        trip_id = object[0].to_i
+        driver_id = object[1].to_i
+        rider_id = object[2].to_i
+        date = object[3].to_s
+        rating = object[4].to_i
+        a_trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+        all_trips_array << a_trip
+      end
+      return all_trips_array
+      # return all the trips in the trip csv
     end
 
   end
 end
 
 
+# trip_id,driver_id,rider_id,date,rating
+# 1,1,54,2016-04-05,3
+# 2,67,146,2016-01-13,5
 
 #
 # have an ID, rider ID, a driver ID, date, rating

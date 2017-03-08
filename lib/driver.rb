@@ -12,23 +12,25 @@ module RideShare
       @vin = vin
     end
 
-    # def self.driver_trip_instances(@driver_id) #make this a .self method to utilize in trip??
+    def self.driver_trip_instances(driver_id)
+    # make this a .self method to utilize in trip??
     #   #use find_driver here
     #   retrieves a list of all trips a particular driver has taken
     #   so something like matching the driver id that is in the driver csv to the driver id in the trip csv
     #
     #   since the csv outpus individual arrays of each trip with driver_id in [1] of each array,
     #   i will iterate over each array and find every matching id
-    # end
+    end
     #
     #
-    # def average_rating
+    def average_rating
     #   #use find driver here
     #   #use driver trip instances here
     # average rating over trip instances
-    # end
+    end
 
-    def self.all_driver_info #I believe this creates an array of hashes
+    #I believe this creates an array of hashes
+    def self.all_driver_info
       all_drivers_array = []
       CSV.read('support/drivers.csv').each do |object|
         driver_id = object[0].to_i
@@ -48,6 +50,9 @@ module RideShare
       #the driver id in the trip instances.
     end
 
+    #below this takes all of the driver info that was generated in the
+    #self.all_driver_info method, and then within that data it finds
+    #the driver id
     def self.find_driver(driver_id)
       drivers = RideShare::Driver.all_driver_info
       drivers.each do |object|
@@ -60,15 +65,6 @@ module RideShare
 
 
 
-    def self.find(id)
-      a_account = Bank::Account.all
-      a_account.each do |object|
-        if object.id == id
-        return object
-        end
-      end
-       raise ArgumentError.new "Account: #{id} does not exist"
-    end
 
   end
 
