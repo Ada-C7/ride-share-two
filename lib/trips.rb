@@ -1,7 +1,5 @@
-require_relative 'module'
-
 module RideShare
-  class Trip < Loadable
+  class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
 
     def initialize(params)
@@ -14,7 +12,8 @@ module RideShare
     end
 
     def self.all
-      super('./support/trips.csv')
+      csv = CSV.open('./support/trips.csv', :headers => true, :header_converters => :symbol)
+      csv.map { |row| self.new(row.to_hash) }
     end
 
     def self.rider_find(id)
@@ -23,6 +22,10 @@ module RideShare
 
     def self.driver_find(id)
       self.all.select { |trip| trip.driver_id == id}
+    end
+
+    def self.find(id)
+      self.all.find { |account| account.id == id }
     end
 
     def driver_for_trip
@@ -36,15 +39,15 @@ module RideShare
   end
 end
 
-initialization_hash = {
-  trip_id: 1,
-  driver_id: 2,
-  rider_id: 2,
-  date: "4/26/2017",
-  rating: 5
-    }
-trip = RideShare::Trip.new(initialization_hash)
-
-puts trip.rider_for_trip.name
-
-puts "hi"
+# initialization_hash = {
+#   trip_id: 1,
+#   driver_id: 2,
+#   rider_id: 2,
+#   date: "4/26/2017",
+#   rating: 5
+#     }
+# trip = RideShare::Trip.new(initialization_hash)
+#
+# puts trip.rider_for_trip.name
+#
+# puts "hi"

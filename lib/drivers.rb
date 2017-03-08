@@ -1,7 +1,7 @@
 require_relative 'module'
 
 module RideShare
-  class Driver < Loadable
+  class Driver
 
     attr_reader :name, :id
 
@@ -11,7 +11,12 @@ module RideShare
     end
 
     def self.all
-      super("./support/drivers.csv")
+      csv = CSV.open("./support/drivers.csv", :headers => true, :header_converters => :symbol)
+      csv.map { |row| self.new(row.to_hash) }
+    end
+
+    def self.find(id)
+      self.all.find { |account| account.id == id }
     end
 
     def all_trips(id)
