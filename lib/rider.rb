@@ -38,7 +38,7 @@ module RideShare
 
     # Find a specific rider using their numeric ID
     def self.find(rider_id)
-      raise ArgumentError.new ("Rider id must be a positive integer value") if ( rider_id.class != Integer || rider_id < 1 )
+      raise ArgumentError.new ("Rider id must be a positive integer value") if ( rider_id.class != Integer || rider_id < 0 )
       all_riders_array = RideShare::Rider.all
       raise ArgumentError.new ("That rider ID does not currently exist") if !all_riders_array.any? { |rider| rider.id == rider_id }
       return all_riders_array.select { |rider| rider.id == rider_id }[0]
