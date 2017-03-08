@@ -19,13 +19,15 @@ module RideShare
 
     # calculates an average rating of all trips for specific driver
     def avg_rating
-      # total = 0
-      #
-      # trips.each do | trip |
-      #   total += trip.rating
-      # end
-      #
-      # avg_rating / RideShare::Trip.drivers_trips.length
+      total = 0
+
+      drivers_trips = trips
+
+      drivers_trips.each do | trip |
+        total += trip.rating
+      end
+
+      total / trips.length
     end
 
 
@@ -33,7 +35,7 @@ module RideShare
     def self.all
       all_drivers = []
 
-      CSV.open("support/drivers.csv").each do | line |
+      CSV.foreach("support/drivers.csv", :headers => true) do | line |
         id = line[0]
         name = line[1]
         vin = line[2]

@@ -28,9 +28,9 @@ describe "RideShare::Rider" do
     let (:random_rider) { RideShare::Rider.all[115] }
 
     it "Initializes first line from riders.csv as a new RideShare::Rider instance" do
-      first_rider.id.must_equal 0
-      first_rider.name.must_equal "name"
-      first_rider.phone.must_equal "phone_num"
+      first_rider.id.must_equal 1
+      first_rider.name.must_equal "Nina Hintz Sr."
+      first_rider.phone.must_equal "560.815.3059"
     end
 
     it "Ititializes last line from riders.csv as a new RideShare::Rider instance" do
@@ -40,9 +40,9 @@ describe "RideShare::Rider" do
     end
 
     it "Ititializes random line from riders.csv as a new RideShare::Rider instance" do
-      random_rider.id.must_equal 115
-      random_rider.name.must_equal "Ms. Andreanne Littel"
-      random_rider.phone.must_equal "550-756-7630"
+      random_rider.id.must_equal 116
+      random_rider.name.must_equal "Laurianne Larkin"
+      random_rider.phone.must_equal "567.228.1637 x86366"
     end
 
   end
@@ -50,16 +50,16 @@ describe "RideShare::Rider" do
 
   describe "RideShare::Rider#self.find" do
 
-    let (:found_rider) { RideShare::Rider.find(99) }
+    let (:found_rider) { RideShare::Rider.find(100) }
 
     it "Returns a RideShare::Rider" do
       found_rider.must_be_instance_of RideShare::Rider
     end
 
     it "Is able to find random rider using the rider ID" do
-      found_rider.id.must_equal 99
-      found_rider.name.must_equal "Theresia Hessel"
-      found_rider.phone.must_equal "1-440-395-0568 x9245"
+      found_rider.id.must_equal 100
+      found_rider.name.must_equal "Hipolito Rogahn"
+      found_rider.phone.must_equal "944.179.4883"
     end
 
     it "Will raise an ArgumentError if Rider ID is not found" do

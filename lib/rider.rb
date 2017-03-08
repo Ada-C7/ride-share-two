@@ -25,7 +25,7 @@ module RideShare
     def self.all
       all_riders = []
 
-      CSV.open("support/riders.csv").each do | line |
+      CSV.foreach("support/riders.csv", :headers => true) do | line |
         id = line[0]
         name = line[1]
         phone = line[2]
