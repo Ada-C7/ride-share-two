@@ -150,12 +150,16 @@ describe "Rider" do
     end
 
     it "Returns the appropriate drivers" do
-
+      driver_ids = [98, 17]
+      @rider.drivers.each do |driver|
+        driver_ids.must_include driver.driver_id
+      end
     end
 
     it "Returns all the appropriate drivers" do
-
+      @rider.drivers.length.must_equal 2
     end
 
   end
+
 end

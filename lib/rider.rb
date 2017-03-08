@@ -36,8 +36,9 @@ module RideShare
     def drivers
       drivers = []
       trips.each do |trip|
-        drivers << Trip.find_for_driver(trip.driver_id)
+        drivers << trip.driver
       end
+      return drivers
     end
 
   end

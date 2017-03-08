@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-08T13:17:56-08:00">2017-03-08T13:17:56-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-08T14:00:37-08:00">2017-03-08T14:00:37-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         700.29
+         675.64
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>296</b> relevant lines. 
-    <span class="green"><b>296</b> lines covered</span> and
+    <b>301</b> relevant lines. 
+    <span class="green"><b>301</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -57,7 +57,7 @@
         <td>31</td>
         <td>31</td>
         <td>0</td>
-        <td>274.7</td>
+        <td>497.3</td>
       </tr>
       
       <tr>
@@ -73,11 +73,11 @@
       <tr>
         <td class="strong"><a href="#3c60da9af54d9e0de958b8d43f7740fb3b0c546c" class="src_link" title="lib/rider.rb">lib/rider.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>44</td>
-        <td>25</td>
-        <td>25</td>
+        <td>45</td>
+        <td>26</td>
+        <td>26</td>
         <td>0</td>
-        <td>631.0</td>
+        <td>607.3</td>
       </tr>
       
       <tr>
@@ -87,17 +87,17 @@
         <td>37</td>
         <td>37</td>
         <td>0</td>
-        <td>4912.9</td>
+        <td>4620.0</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#fbb0556ea757d9e4e57fc3d2b4f7e5e460754fc4" class="src_link" title="specs/rider_spec.rb">specs/rider_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>161</td>
-        <td>82</td>
-        <td>82</td>
+        <td>165</td>
+        <td>86</td>
+        <td>86</td>
         <td>0</td>
-        <td>5.3</td>
+        <td>5.1</td>
       </tr>
       
       <tr>
@@ -188,14 +188,14 @@
           <code class="ruby">    def initialize(args)</code>
         </li>
       
-        <li class="covered" data-hits="1028" data-linenumber="9">
-          <span class="hits">1028</span>
+        <li class="covered" data-hits="1828" data-linenumber="9">
+          <span class="hits">1828</span>
           
           <code class="ruby">      @driver_id = args[:driver_id]</code>
         </li>
       
-        <li class="covered" data-hits="1028" data-linenumber="10">
-          <span class="hits">1028</span>
+        <li class="covered" data-hits="1828" data-linenumber="10">
+          <span class="hits">1828</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;driver id must be an integer&quot;) unless @driver_id.class == Integer</code>
         </li>
@@ -206,14 +206,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1027" data-linenumber="12">
-          <span class="hits">1027</span>
+        <li class="covered" data-hits="1827" data-linenumber="12">
+          <span class="hits">1827</span>
           
           <code class="ruby">      @name = args[:name]</code>
         </li>
       
-        <li class="covered" data-hits="1027" data-linenumber="13">
-          <span class="hits">1027</span>
+        <li class="covered" data-hits="1827" data-linenumber="13">
+          <span class="hits">1827</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;driver name must be a string&quot;) unless @name.class == String</code>
         </li>
@@ -224,20 +224,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1026" data-linenumber="15">
-          <span class="hits">1026</span>
+        <li class="covered" data-hits="1826" data-linenumber="15">
+          <span class="hits">1826</span>
           
           <code class="ruby">      @vin = args[:vin]</code>
         </li>
       
-        <li class="covered" data-hits="1026" data-linenumber="16">
-          <span class="hits">1026</span>
+        <li class="covered" data-hits="1826" data-linenumber="16">
+          <span class="hits">1826</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;vehicle id must be a string&quot;) unless @vin.class == String</code>
         </li>
       
-        <li class="covered" data-hits="1025" data-linenumber="17">
-          <span class="hits">1025</span>
+        <li class="covered" data-hits="1825" data-linenumber="17">
+          <span class="hits">1825</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;vehicle id must be 17 characters long&quot;) unless @vin.length == 17</code>
         </li>
@@ -344,20 +344,20 @@
           <code class="ruby">    def self.all</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="35">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="18" data-linenumber="35">
+          <span class="hits">18</span>
           
           <code class="ruby">      drivers = []</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="36">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="18" data-linenumber="36">
+          <span class="hits">18</span>
           
           <code class="ruby">      CSV.foreach(&quot;support/drivers.csv&quot;, {:headers =&gt; true, header_converters: :symbol, converters: :all}) do |line|</code>
         </li>
       
-        <li class="covered" data-hits="1000" data-linenumber="37">
-          <span class="hits">1000</span>
+        <li class="covered" data-hits="1800" data-linenumber="37">
+          <span class="hits">1800</span>
           
           <code class="ruby">          drivers &lt;&lt; RideShare::Driver.new(line)</code>
         </li>
@@ -368,8 +368,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="39">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="18" data-linenumber="39">
+          <span class="hits">18</span>
           
           <code class="ruby">      return drivers</code>
         </li>
@@ -392,20 +392,20 @@
           <code class="ruby">    def self.find(driver_id)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="43">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="14" data-linenumber="43">
+          <span class="hits">14</span>
           
           <code class="ruby">      all.each do |driver|</code>
         </li>
       
-        <li class="covered" data-hits="244" data-linenumber="44">
-          <span class="hits">244</span>
+        <li class="covered" data-hits="704" data-linenumber="44">
+          <span class="hits">704</span>
           
           <code class="ruby">        if driver.driver_id == driver_id</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="45">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="13" data-linenumber="45">
+          <span class="hits">13</span>
           
           <code class="ruby">          return driver</code>
         </li>
@@ -533,8 +533,8 @@
     <h3>lib/rider.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>25</b> relevant lines. 
-      <span class="green"><b>25</b> lines covered</span> and
+      <b>26</b> relevant lines. 
+      <span class="green"><b>26</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -734,8 +734,8 @@
           <code class="ruby">    def trips</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="33">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="8" data-linenumber="33">
+          <span class="hits">8</span>
           
           <code class="ruby">      Trip.find_for_rider(@rider_id)</code>
         </li>
@@ -758,22 +758,22 @@
           <code class="ruby">    def drivers</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="37">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="37">
+          <span class="hits">4</span>
           
           <code class="ruby">      drivers = []</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="38">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="38">
+          <span class="hits">4</span>
           
           <code class="ruby">      trips.each do |trip|</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="39">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="8" data-linenumber="39">
+          <span class="hits">8</span>
           
-          <code class="ruby">        drivers &lt;&lt; Trip.find_for_driver(trip.driver_id)</code>
+          <code class="ruby">        drivers &lt;&lt; trip.driver</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -782,25 +782,31 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="41">
+        <li class="covered" data-hits="4" data-linenumber="41">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      return drivers</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="42">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
           
           
           <code class="ruby">end</code>
@@ -878,32 +884,32 @@
           <code class="ruby">    def initialize(args)</code>
         </li>
       
-        <li class="covered" data-hits="20424" data-linenumber="10">
-          <span class="hits">20424</span>
+        <li class="covered" data-hits="19224" data-linenumber="10">
+          <span class="hits">19224</span>
           
           <code class="ruby">      @trip_id = args[:trip_id]</code>
         </li>
       
-        <li class="covered" data-hits="20424" data-linenumber="11">
-          <span class="hits">20424</span>
+        <li class="covered" data-hits="19224" data-linenumber="11">
+          <span class="hits">19224</span>
           
           <code class="ruby">      @driver_id = args[:driver_id]</code>
         </li>
       
-        <li class="covered" data-hits="20424" data-linenumber="12">
-          <span class="hits">20424</span>
+        <li class="covered" data-hits="19224" data-linenumber="12">
+          <span class="hits">19224</span>
           
           <code class="ruby">      @rider_id = args[:rider_id]</code>
         </li>
       
-        <li class="covered" data-hits="20424" data-linenumber="13">
-          <span class="hits">20424</span>
+        <li class="covered" data-hits="19224" data-linenumber="13">
+          <span class="hits">19224</span>
           
           <code class="ruby">      @date = args[:date]</code>
         </li>
       
-        <li class="covered" data-hits="20424" data-linenumber="14">
-          <span class="hits">20424</span>
+        <li class="covered" data-hits="19224" data-linenumber="14">
+          <span class="hits">19224</span>
           
           <code class="ruby">      @rating = args[:rating]</code>
         </li>
@@ -914,8 +920,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="20424" data-linenumber="16">
-          <span class="hits">20424</span>
+        <li class="covered" data-hits="19224" data-linenumber="16">
+          <span class="hits">19224</span>
           
           <code class="ruby">      unless @trip_id.class == Integer &amp;&amp; @driver_id.class == Integer &amp;&amp; @rider_id.class == Integer &amp;&amp; @rating.class == Integer</code>
         </li>
@@ -938,8 +944,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="20420" data-linenumber="20">
-          <span class="hits">20420</span>
+        <li class="covered" data-hits="19220" data-linenumber="20">
+          <span class="hits">19220</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;inappropriate rating: rating must be between 1-5&quot;) unless @rating &gt;= 1 &amp;&amp; @rating &lt;= 5</code>
         </li>
@@ -962,20 +968,20 @@
           <code class="ruby">    def self.all</code>
         </li>
       
-        <li class="covered" data-hits="34" data-linenumber="24">
-          <span class="hits">34</span>
+        <li class="covered" data-hits="32" data-linenumber="24">
+          <span class="hits">32</span>
           
           <code class="ruby">      trips = []</code>
         </li>
       
-        <li class="covered" data-hits="34" data-linenumber="25">
-          <span class="hits">34</span>
+        <li class="covered" data-hits="32" data-linenumber="25">
+          <span class="hits">32</span>
           
           <code class="ruby">      CSV.foreach(&quot;support/trips.csv&quot;, {:headers =&gt; true, header_converters: :symbol, converters: :all}) do |line|</code>
         </li>
       
-        <li class="covered" data-hits="20400" data-linenumber="26">
-          <span class="hits">20400</span>
+        <li class="covered" data-hits="19200" data-linenumber="26">
+          <span class="hits">19200</span>
           
           <code class="ruby">        trips &lt;&lt; RideShare::Trip.new(line)</code>
         </li>
@@ -986,8 +992,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="34" data-linenumber="28">
-          <span class="hits">34</span>
+        <li class="covered" data-hits="32" data-linenumber="28">
+          <span class="hits">32</span>
           
           <code class="ruby">      return trips</code>
         </li>
@@ -1010,8 +1016,8 @@
           <code class="ruby">    def self.find_for_driver(id)</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="32">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="14" data-linenumber="32">
+          <span class="hits">14</span>
           
           <code class="ruby">      trips = []</code>
         </li>
@@ -1022,20 +1028,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="34">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="14" data-linenumber="34">
+          <span class="hits">14</span>
           
           <code class="ruby">      all.each do |trip|</code>
         </li>
       
-        <li class="covered" data-hits="10800" data-linenumber="35">
-          <span class="hits">10800</span>
+        <li class="covered" data-hits="8400" data-linenumber="35">
+          <span class="hits">8400</span>
           
           <code class="ruby">        if trip.driver_id == id</code>
         </li>
       
-        <li class="covered" data-hits="153" data-linenumber="36">
-          <span class="hits">153</span>
+        <li class="covered" data-hits="117" data-linenumber="36">
+          <span class="hits">117</span>
           
           <code class="ruby">          trips &lt;&lt; trip</code>
         </li>
@@ -1058,14 +1064,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="40">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="14" data-linenumber="40">
+          <span class="hits">14</span>
           
           <code class="ruby">      raise InvalidDriver.new(&quot;that driver does not exist&quot;) if trips.empty?</code>
         </li>
       
-        <li class="covered" data-hits="17" data-linenumber="41">
-          <span class="hits">17</span>
+        <li class="covered" data-hits="13" data-linenumber="41">
+          <span class="hits">13</span>
           
           <code class="ruby">      return trips</code>
         </li>
@@ -1088,8 +1094,8 @@
           <code class="ruby">    def self.find_for_rider(id)</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="45">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="45">
+          <span class="hits">14</span>
           
           <code class="ruby">      trips = []</code>
         </li>
@@ -1100,20 +1106,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="47">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="47">
+          <span class="hits">14</span>
           
           <code class="ruby">      all.each do |trip|</code>
         </li>
       
-        <li class="covered" data-hits="7200" data-linenumber="48">
-          <span class="hits">7200</span>
+        <li class="covered" data-hits="8400" data-linenumber="48">
+          <span class="hits">8400</span>
           
           <code class="ruby">        if trip.rider_id == id</code>
         </li>
       
-        <li class="covered" data-hits="22" data-linenumber="49">
-          <span class="hits">22</span>
+        <li class="covered" data-hits="26" data-linenumber="49">
+          <span class="hits">26</span>
           
           <code class="ruby">          trips &lt;&lt; trip</code>
         </li>
@@ -1136,14 +1142,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="53">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="53">
+          <span class="hits">14</span>
           
           <code class="ruby">      raise InvalidRider.new(&quot;that rider does not exist&quot;) if trips.empty?</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="54">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="13" data-linenumber="54">
+          <span class="hits">13</span>
           
           <code class="ruby">      return trips</code>
         </li>
@@ -1166,8 +1172,8 @@
           <code class="ruby">    def driver</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="58">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="10" data-linenumber="58">
+          <span class="hits">10</span>
           
           <code class="ruby">      Driver.find(@driver_id)</code>
         </li>
@@ -1229,8 +1235,8 @@
     <h3>specs/rider_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>82</b> relevant lines. 
-      <span class="green"><b>82</b> lines covered</span> and
+      <b>86</b> relevant lines. 
+      <span class="green"><b>86</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -2120,8 +2126,8 @@
           <code class="ruby">      @rider.drivers.each do |driver|</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="148">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="148">
+          <span class="hits">2</span>
           
           <code class="ruby">        driver.must_be_instance_of RideShare::Driver</code>
         </li>
@@ -2150,55 +2156,79 @@
           <code class="ruby">    it &quot;Returns the appropriate drivers&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="153">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="154">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="155">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="156">
+        <li class="covered" data-hits="1" data-linenumber="153">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;Returns all the appropriate drivers&quot; do</code>
+          <code class="ruby">      driver_ids = [98, 17]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="154">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @rider.drivers.each do |driver|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="155">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        driver_ids.must_include driver.driver_id</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="156">
+          
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="157">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="158">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="159">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;Returns all the appropriate drivers&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="160">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @rider.drivers.length.must_equal 2</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="161">
+          
+          
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="159">
+        <li class="never" data-hits="" data-linenumber="162">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="160">
+        <li class="never" data-hits="" data-linenumber="163">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="161">
+        <li class="never" data-hits="" data-linenumber="164">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="165">
           
           
           <code class="ruby">end</code>
