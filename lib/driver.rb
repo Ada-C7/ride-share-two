@@ -19,9 +19,8 @@ class Driver
           return @trips
      end
 
-     # #retrieve an average rating for that driver based on all trips taken
-     # def calculate_average_rating(@id)
-     #      #TODO Build block after trip.rb has been completed.
+     # def calculate_average_rating(file, trip_file)
+     #      recall_trips(file, trip_file)
      #      all_trips = recall_trips(@id)
      #      @average_rating = all_trips.rating.map { | sum, rating | sum + rating }/all_trips.length
      #      return @average_rating

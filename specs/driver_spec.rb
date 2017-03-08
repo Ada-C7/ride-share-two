@@ -142,37 +142,37 @@ describe Driver do
           end
      end
 
-     describe "Driver.calculate_average_rating" do
+     describe "Driver#calculate_average_rating" do
 
-     #      before do
-     #           @file = "support/drivers.csv"
-     #           @trip_file = "support/trips.csv"
-     #           @id = 7
-     #           @leia = Driver.find(@file, @id)
-     #           @leia_trips = @leia.recall_trips(@file, @trip_file)
-     #      end
-     #
-     #      describe "Driver.recall_trips:" do
-     #           it "Returns an array of all trips for driver:" do
-     #               @leia_trips.must_be_kind_of Array
-     #           end
-     #
-     #           it "Returns the correct number of trips:" do
-     #                count = 0
-     #
-     #                CSV.foreach(@trip_file) do |row|
-     #                     if row[1].to_i == @id then count += 1; end
-     #                end
-     #
-     #                @leia_trips.length.must_equal count
-     #           end
-     #
-     #           it "Returns an array of Trip objects with the same Driver ID:" do
-     #               @leia_trips.each do | trip |
-     #                   trip.must_be_kind_of Trip
-     #                   trip.driver_id.must_equal @id
-     #                end
-     #           end
-     #      end
+          before do
+               @file = "support/drivers.csv"
+               @trip_file = "support/trips.csv"
+               @id = 7
+               @leia = Driver.find(@file, @id)
+               @Leia_rating = leia.average_rating
+          end
+
+          describe "Driver.calculate_average_rating:" do
+               it "Returns an integer:" do
+                   @leia_rating.must_be_kind_of Integer
+               end
+
+               it "Returns the average:" do
+                    count = 0
+                    csv_ratings = []
+
+                    CSV.foreach(@trip_file) do |row|
+                         if row[1].to_i == @id then count += 1; end
+                    end
+
+                    CSV.foreach(@trip_file) do |row|
+                         if row[1].to_i == @id then ratings << row[4].to_i; end
+                    end
+
+                    csv_average_rating = csv_ratings.map { | sum, rating | sum + rating}
+
+                    @leia_trips.length.must_equal csv_average_rating
+               end
+          end
      end
 end
