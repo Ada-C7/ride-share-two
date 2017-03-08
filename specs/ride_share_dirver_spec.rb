@@ -34,6 +34,12 @@ describe "Driver" do
       expected = {id: 3, name: "Daryl Nitzsche", vin: "SAL6P2M2XNHC5Y656"}
       found.must_equal expected
     end
+
+    it "There's no driver info available, it tells so" do
+      found = Rideshare::Driver.find(200)
+      expected = "No match"
+      found.must_equal expected
+    end
   end
 
   describe "Driver#all_trips" do
@@ -67,6 +73,13 @@ describe "Driver" do
       args = {id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9"}
       driver = Rideshare::Driver.new(args)
       driver.average_rating.must_equal 2.33
+    end
+
+    it "In case there's no average rating for driver, it tells so." do
+      args = {id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT"}
+      driver = Rideshare::Driver.new(args)
+      expected = "Average rating doesn't exit for this driver"
+      driver.average_rating.must_equal expected
     end
   end
 end

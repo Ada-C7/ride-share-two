@@ -18,6 +18,10 @@ describe "Trip" do
 
 
   describe "Trip#find_trip_by_driver(driver_id)" do
+    it "Raises an ArgumentError when a wrong form of driver id is entered" do
+      proc {Rideshare::Trip.find_trip_by_driver("whatever")}.must_raise ArgumentError
+    end
+
     it "Find all trip instances for a given driver ID" do
       expected = [
         {:trip_id=>1, :driver_id=>1, :rider_id=>54, :date=>"2016-04-05", :rating=>3},
@@ -31,6 +35,11 @@ describe "Trip" do
         {:trip_id=>553, :driver_id=>1, :rider_id=>266, :date=>"2016-12-16", :rating=>3}
       ]
       Rideshare::Trip.find_trip_by_driver(1).must_equal expected
+    end
+
+    it "In case there's no info for the given driver id, it tell you so" do
+      expected = "No history of trips"
+      Rideshare::Trip.find_trip_by_driver(200).must_equal expected
     end
   end
 

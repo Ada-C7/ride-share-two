@@ -25,17 +25,20 @@ module Rideshare
     end
 #self.method2 : find a specific driver using their numeric ID
     def self.find(id_num)
+      raise ArgumentError.new("Not a valid ID number") if id_num.class != Integer
+      result = nil
       self.all.each do |driver|
-        return driver if driver[:id] == id_num
+        result = driver if driver[:id] == id_num
       end
+      result ||= "No match"
     end
 #instance_method1 : retrieve the list of trip instances that only this drver has taken
     def all_trips
-      result = Rideshare::Trip.find_trip_by_driver(@id)
-      result.any? ? result : "No history of trips"
+      Rideshare::Trip.find_trip_by_driver(@id)
     end
 #instance_method2 : retrieve an average rating for that driver based on all trips taken
     def average_rating
+      return "Average rating doesn't exit for this driver" if all_trips.class == String
       total = all_trips.map { |h| h[:rating] }.sum
       average = total/all_trips.length.to_f
       return average.round(2)

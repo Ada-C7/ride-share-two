@@ -30,11 +30,13 @@ module Rideshare
 
     #self.method2 : find all trip instances for a given driver ID
     def self.find_trip_by_driver(driver_id)
+      raise ArgumentError.new("Not a valid ID number") if driver_id.class != Integer
       trips = []
       self.all.each do |trip|
         trips << trip if trip[:driver_id] == driver_id
       end
-      return trips
+      # return trips
+      trips.any? ? trips : "No history of trips"
     end
 
     #self.method3 : find all trip instances for a given rider ID
