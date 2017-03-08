@@ -6,7 +6,7 @@ require_relative 'driver'
 class Rider
   attr_reader :id, :name, :phone
 
-  def initialize(rider_id,name,phone_num)
+  def initialize(rider_id, name, phone_num)
     @id = rider_id
     @name = name
     @phone = phone_num
@@ -15,7 +15,7 @@ class Rider
   def self.all
     riders = []
     CSV.foreach("./support/riders.csv", {:headers => true}) do |line|
-      id = line[0]
+      id = line[0].to_i
       name = line[1]
       phone = line[2]
 
@@ -24,6 +24,25 @@ class Rider
     end
     return riders
   end
+
+  def self.find(search_id)
+    match = nil
+    all_riders = self.all
+
+    all_riders.each do |rider|
+      if rider.id == search_id
+        match = rider
+        break
+      else
+        match = nil
+      end
+    end
+
+    raise ArgumentError.new("there were no riders with that ID") if match == nil
+    return match
+
+  end
+
 
   def trips
     rider_trips = []

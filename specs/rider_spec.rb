@@ -37,23 +37,33 @@ describe "Rider tests" do
     end
 
     it "first element matches piece of data in csv" do
-
       @all_riders[0].name.must_equal @csv_file[0][1]
-      
     end
 
     it "last element matches last piece of data in csv" do
-
       @all_riders[-1].name.must_equal @csv_file[-1][1]
-
     end
 
     it "number of elements matches number of elements in csv file" do
       @all_riders.length.must_equal @csv_file.length
-
     end
 
   end
+
+  describe "Rider.find(id)" do
+    before do
+      @csv_file = CSV.read("./support/riders.csv", {:headers => true})
+    end
+
+    it "returns a rider based on id" do
+      Rider.find(3).must_be_instance_of Rider
+    end
+
+    it "returns the correct rider based on id" do
+      Rider.find(3).name.must_equal @csv_file[2][1]
+    end
+  end
+
 
   describe "Rider#trips" do
     it "returns an array of trips taken" do
