@@ -5,16 +5,19 @@ module RideShare
 
     # creates trips that have an ID, rider ID, driver ID, date, and rating
     def initialize(trip_id, driver_id, rider_id, date, rating)
-      @trip_id = trip_id.to_i
-      @driver_id = driver_id.to_i
-      @rider_id = rider_id.to_i
+      raise ArgumentError.new("Trip ID must be integer") if trip_id.class != Integer
+      raise ArgumentError.new("Driver ID must be integer") if driver_id.class != Integer
+      raise ArgumentError.new("Rider ID must be integer") if rider_id.class != Integer
+      raise ArgumentError.new("Date must be string") if date.class != String # get more specific here
+      raise ArgumentError.new("Rating must be integer") if rating.class != Integer
+
+      @trip_id = trip_id
+      @driver_id = driver_id
+      @rider_id = rider_id
       @date = date
       @rating = (1..5).include?(rating.to_i) ? rating.to_i : invalid_rating
     end
 
-    def invalid_rating # should make this an exception 
-      raise ArgumentError.new("Invalid Rating")
-    end
 
     # retrieve the associated driver instance using the driver ID
     def trip_driver
@@ -33,11 +36,11 @@ module RideShare
       all_trips = []
 
       CSV.foreach("support/trips.csv", :headers => true).each do | line |
-        trip_id = line[0]
-        driver_id = line[1]
-        rider_id = line[2]
+        trip_id = line[0].to_i
+        driver_id = line[1].to_i
+        rider_id = line[2].to_i
         date = line[3]
-        rating = line[4]
+        rating = (1..5).include?(line[4].to_i) ? line[4].to_i : invalid_rating
 
         all_trips << RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
       end
@@ -67,6 +70,14 @@ module RideShare
       return all_trips if all_trips.length >= 1
 
       raise ArgumentError.new("Invalid Rider ID in RideShare::Trip #riders_trips") # consider making new exception
+    end
+
+
+    private
+
+
+    def invalid_rating # should make this an exception
+      raise ArgumentError.new("Invalid Rating")
     end
 
   end

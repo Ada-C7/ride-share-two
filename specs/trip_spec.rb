@@ -15,8 +15,24 @@ describe "RideShare::Trip" do
       trip_init.rating.must_equal 5
     end
 
-    it "Checks for valid inputs" do
-      
+    it "Will raise an argument error if trip id is not an integer`" do
+      proc { RideShare::Trip.new("1234", 2345, 3456, "2016-03-06", 5) }.must_raise ArgumentError
+    end
+
+    it "Will raise an arguement error if driver id is not an integer " do
+      proc { RideShare::Trip.new(1234, "2345", 3456, "2016-03-06", 5) }.must_raise ArgumentError
+    end
+
+    it "Will raise an argument error if rider id is not an integer" do
+      proc { RideShare::Trip.new(1234, 2345, "3456", "2016-03-06", 5) }.must_raise ArgumentError
+    end
+
+    it "Will raise an argument error if date is not a string" do
+      proc { RideShare::Trip.new(1234, 2345, 3456, 2016, 5) }.must_raise ArgumentError
+    end
+
+    it "Will raise an argument error if rating is not an integer" do
+      proc { RideShare::Trip.new(1234, 2345, 3456, "2016-03-06", "5") }.must_raise ArgumentError
     end
 
     it "Will raise an ArgumentError if an invalid rating given" do
