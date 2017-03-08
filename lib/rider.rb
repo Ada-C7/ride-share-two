@@ -9,24 +9,25 @@ module RideShare
       @phone_number = info[:phone_number]
     end
 
-    def self.all(csv_file)
-      riders = CSV.read(csv_file)
-      riders.shift
-
-      riders.map! do |rider_info|
+    def self.all(rides_data)
+      raise ArgumentError if rides_data.empty?
+      riders = rides_data.map do |rider_info|
+        raise ArgumentError unless rider_info.length == 3
         rider = Hash.new
-        rider[:id] = rider_info[0].to_i
+        rider[:id] = test_for_integer(rider_info[0])
         rider[:name] = rider_info[1]
         rider[:phone_number] = rider_info[2]
-        rider_info = rider
+        self.new(rider)
       end
-
-      riders.map! { |info| self.new(info) }
       return riders
     end
 
-    def self.find(rider_id, csv_file)
-      riders = all(csv_file)
+    def self.test_for_integer(num)
+      Integer(num)
+    end
+
+    def self.find(rider_id, rides_data)
+      riders = all(rides_data)
       riders.each { |info| return info if info.id == rider_id }
       nil
     end
