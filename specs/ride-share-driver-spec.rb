@@ -8,18 +8,18 @@ require 'csv'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-require_relative '../lib/ride-share-driver'
+require_relative '../ride-share'
 require_relative 'spec-helper'
 
 describe "RideShare::Driver" do
 
-  let(:my_driver) { RideShare::Driver.new(2,"name", "WBWSS52P9NEYLVDE9")}
+  let(:my_driver) { Driver.new(2,"name", "WBWSS52P9NEYLVDE9")}
 
 
   describe "initialize method" do
 
     it "must be an instance of Driver class" do
-      my_driver.must_be_instance_of RideShare::Driver
+      my_driver.must_be_instance_of Driver
     end
 
     it "name must be a string" do
@@ -44,11 +44,11 @@ describe "RideShare::Driver" do
 
     it "returns an array of all drivers" do
 
-      drivers_array = RideShare::Driver.all
+      drivers_array = Driver.all
       drivers_array.must_be_instance_of Array
 
       drivers_array.each do |driver|
-        driver.class.must_equal RideShare::Driver
+        driver.class.must_equal Driver
       end
 
       drivers_array.length.must_equal(100)
@@ -65,28 +65,28 @@ describe "RideShare::Driver" do
   describe "find method" do
 
     it "returns driver that exists" do
-      RideShare::Driver.find(3).wont_be_nil # non nil
+      Driver.find(3).wont_be_nil # non nil
     end
 
     it "can find the first driver from the CSV" do
-      RideShare::Driver.find(1).wont_be_nil
+      Driver.find(1).wont_be_nil
     end
 
     it "can find the last driver from the CSV" do
-      RideShare::Driver.find(100).wont_be_nil
+      Driver.find(100).wont_be_nil
     end
   end
 
-  describe "find trips" do
-
-    # retrieve the list of trip instances that only this driver has taken
-    it "returns trips that only this driver has taken" do
-      driver_trips = []
-      my_driver.find_trips(1)
-      driver_trips.must_include(1, 122, 124, 216, 417, 434, 439, 530, 553)
-    end
-
-  end
+  # describe "find trips" do
+  #
+  #   # retrieve the list of trip instances that only this driver has taken
+  #   it "returns trips that only this driver has taken" do
+  #     driver_trips = []
+  #     my_driver.find_trips(1)
+  #     driver_trips.must_include(1, 122, 124, 216, 417, 434, 439, 530, 553)
+  #   end
+  #
+  # end
 
   describe "to_s method" do
 

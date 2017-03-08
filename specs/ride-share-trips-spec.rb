@@ -8,17 +8,17 @@ require 'csv'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-require_relative '../lib/ride-share-trips'
+require_relative '../ride-share'
 require_relative 'spec-helper'
 
 describe "RideShare::Trips" do
 
-  let(:trips) { RideShare::Trips.new(2, 4, 6, 2016-12-19, 3)}
+  let(:trips) { Trips.new(2, 4, 6, 2016-12-19, 3)}
 
   describe "initialize method" do
 
     it "must be an instance of Trips class" do
-      trips.must_be_instance_of RideShare::Trips
+      trips.must_be_instance_of Trips
     end
 
     it "trip id must be a number" do
@@ -45,11 +45,11 @@ describe "RideShare::Trips" do
 
     it "returns an array of all trips" do
 
-      trips_array = RideShare::Trips.all
+      trips_array = Trips.all
       trips_array.must_be_instance_of Array
 
       trips_array.each do |trips|
-        trips.class.must_equal RideShare::Trips
+        trips.class.must_equal Trips
       end
 
       trips_array.length.must_equal(600)
@@ -72,15 +72,15 @@ describe "RideShare::Trips" do
   describe "find method" do
 
     it "returns trip that exists" do
-      RideShare::Trips.find(3).wont_be_nil # non nil
+      Trips.find(3).wont_be_nil # non nil
     end
 
     it "can find the first trip from the CSV" do
-      RideShare::Trips.find(1).wont_be_nil
+      Trips.find(1).wont_be_nil
     end
 
     it "can find the last trip from the CSV" do
-      RideShare::Trips.find(600).wont_be_nil
+      Trips.find(600).wont_be_nil
     end
   end
 

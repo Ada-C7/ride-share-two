@@ -1,7 +1,5 @@
 require 'csv'
 
-module RideShare
-
   class Rider
     attr_reader :id, :name, :phone
 
@@ -14,7 +12,7 @@ module RideShare
 
     def self.all
       all_riders = []
-
+#
       csv_data = CSV.read("support/riders.csv")
       csv_data.shift
 
@@ -25,7 +23,7 @@ module RideShare
     end
 
     def self.find(id)
-      riders = RideShare::Rider.all
+      riders = Rider.all
       return riders.find {|rider| rider.id == id }
     end
 
@@ -33,5 +31,3 @@ module RideShare
       "id: #{ @id }, name: #{ @name }, phone: #{ @phone }"
     end
   end
-
-end

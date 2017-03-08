@@ -8,17 +8,17 @@ require 'csv'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-require_relative '../lib/ride-share-rider'
+require_relative '../ride-share'
 require_relative 'spec-helper'
 
 describe "RideShare::Rider" do
 
-  let(:my_rider) { RideShare::Rider.new(2,"name", 395873456958409)}
+  let(:my_rider) { Rider.new(2,"name", 395873456958409)}
 
   describe "initialize method" do
 
     it "must be an instance of Rider class" do
-      my_rider.must_be_instance_of RideShare::Rider
+      my_rider.must_be_instance_of Rider
     end
 
     it "name must be a string" do
@@ -38,11 +38,11 @@ describe "RideShare::Rider" do
 
     it "returns an array of all riders" do
 
-      riders_array = RideShare::Rider.all
+      riders_array = Rider.all
       riders_array.must_be_instance_of Array
 
       riders_array.each do |rider|
-        rider.class.must_equal RideShare::Rider
+        rider.class.must_equal Rider
       end
 
       riders_array.length.must_equal(300)
@@ -59,15 +59,15 @@ describe "RideShare::Rider" do
   describe "find method" do
 
     it "returns rider that exists" do
-      RideShare::Rider.find(3).wont_be_nil # non nil
+      Rider.find(3).wont_be_nil # non nil
     end
 
     it "can find the first rider from the CSV" do
-      RideShare::Rider.find(1).wont_be_nil
+      Rider.find(1).wont_be_nil
     end
 
     it "can find the last rider from the CSV" do
-      RideShare::Rider.find(300).wont_be_nil
+      Rider.find(300).wont_be_nil
     end
   end
 

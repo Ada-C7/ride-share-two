@@ -1,8 +1,5 @@
 require 'csv'
 
-
-module RideShare
-
   class Trips
     attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 
@@ -28,7 +25,7 @@ module RideShare
     end
 
     def self.find(trip_id)
-      trips = RideShare::Trips.all
+      trips = Trips.all
       return trips.find {|trip| trip.trip_id == trip_id }
     end
 
@@ -37,5 +34,3 @@ module RideShare
       date: #{ @date }, rating: #{ @rating }."
     end
   end
-
-end
