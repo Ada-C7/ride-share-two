@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe "Driver" do
 
   before do
-    @args = {driver_id: 1, name: "Sahana", vin: "WBWSS52P9NEYLVDE9"}
+    @args = {driver_id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9"}
     @driver = RideShare::Driver.new(@args)
   end
 
@@ -72,7 +72,11 @@ describe "Driver" do
         trip.driver_id.must_equal @args[:driver_id]
       end
     end
-    
+
+    it "Returns all the appropriate trips" do
+      @driver.trips.length.must_equal 9
+    end
+
   end
 
   describe "Driver#rating" do
@@ -80,6 +84,15 @@ describe "Driver" do
     it "Can be called on an instance of the Driver class" do
       @driver.must_respond_to :rating
     end
+
+    it "Returns a float value for rating" do
+      @driver.rating.must_be_kind_of Float
+    end
+
+    it "Returns the appropriate rating average" do
+      @driver.rating.must_equal 2.3
+    end
+
   end
 
   describe "Driver.all" do

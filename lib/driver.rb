@@ -23,7 +23,12 @@ module RideShare
     end
 
     def rating
-
+      total_rating = 0.0
+      trips.each do |trip|
+        total_rating += trip.rating
+      end
+      average_rating = total_rating/trips.length
+      return average_rating.round(1)
     end
 
     def self.all
