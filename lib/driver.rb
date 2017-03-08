@@ -11,23 +11,7 @@ module RideShare
       @vin = driver_hash[:vin]
     end
 
-    def self.all
-      all_drivers = []
-      driver_hash = {}
 
-      CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
-          driver_hash[:id] = line[0].to_i
-          driver_hash[:name] = line[1]
-          driver_hash[:vin] = line[2]
-
-          begin
-            all_drivers << Driver.new(driver_hash)
-          rescue InvalidVINError => e
-            puts "Encountered an error: #{e.message}"
-          end
-      end
-      return all_drivers
-    end
 
     def self.find(requested_id)
       # finds a specific instance of Driver based on driver ID
@@ -48,9 +32,33 @@ module RideShare
       num_trips = get_trips.length.to_f
       ratings = get_trips.map {|trip| trip.rating }
 
-      ratings.reduce(:+)/num_trips
+      begin
+        ratings.reduce(:+)/num_trips
+      rescue ZeroDivisionError
+        return nil
+      end
 
       # TODO: avoid dividing by zero
+    end
+
+    private
+
+    def self.all
+      all_drivers = []
+      driver_hash = {}
+
+      CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
+          driver_hash[:id] = line[0].to_i
+          driver_hash[:name] = line[1]
+          driver_hash[:vin] = line[2]
+
+          begin
+            all_drivers << Driver.new(driver_hash)
+          rescue InvalidVINError => e
+            puts "Encountered an error: #{e.message}"
+          end
+      end
+      return all_drivers
     end
 
   end
