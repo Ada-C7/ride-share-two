@@ -1,9 +1,3 @@
-# require 'simplecov'
-# SimpleCov.start
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require 'minitest/skip_dsl'
-# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative './spec_helper'
 require_relative '../lib/driver'
 
@@ -47,6 +41,7 @@ describe "Driver" do
       # @trips_data = RideShare::FileData.read_csv(csv_file)
       data = FileData.new(csv_file)
       @drivers_data = data.read_csv_and_remove_headings
+
       @drivers_bad_data_1 = [['ten', 'name', 'WBWSS52P9NEYLVDE9']]
       @drivers_bad_data_2 = [['10', 'name', 'WBWSS52P9NE']]
       @drivers_bad_data_3 = [['15', 'name', 'WBWSS52P9NE']]
@@ -104,35 +99,29 @@ describe "Driver" do
 
   describe "Driver#find" do
 
-    before do
-      csv_file = './support/drivers.csv'
-      data = FileData.new(csv_file)
-      @driver_data = data.read_csv_and_remove_headings
-    end
-
-    it "requires argument(s)" do
+    it "requires one argument" do
       proc {
         RideShare::Driver.find()
       }.must_raise ArgumentError
     end
 
     it "returns a driver instance when passed a valid id" do
-      RideShare::Driver.find(7, @driver_data).must_be_instance_of RideShare::Driver
+      RideShare::Driver.find(7).must_be_instance_of RideShare::Driver
     end
 
     it "returns nil when given a driver id that does not exists" do
-      RideShare::Driver.find(900, @driver_data).must_be_nil
+      RideShare::Driver.find(900).must_be_nil
     end
 
     it "can find the first driver from the CSV" do
-      first_driver_in_array = RideShare::Driver.find(1, @driver_data)
+      first_driver_in_array = RideShare::Driver.find(1)
       first_driver_in_array.name.must_equal "Bernardo Prosacco"
       first_driver_in_array.id.must_equal 1
       # first_driver_in_array.vin.must_equal
     end
 
     it "cant find the last driver from the CSV" do
-      last_driver = RideShare::Driver.find(100, @driver_data)
+      last_driver = RideShare::Driver.find(100)
       last_driver.name.must_equal "Minnie Dach"
       last_driver.id.must_equal 100
       # last_driver.vin.must_equal
@@ -144,18 +133,10 @@ describe "Driver" do
 # or you should make up fake data so you know everything...
 
   before do
-    csv_file_drivers = './support/drivers.csv'
-    driver_data = FileData.new(csv_file_drivers)
-    @drivers_data = driver_data.read_csv_and_remove_headings
     @driver_id = 15
-
-    csv_file_trips = './support/trips.csv'
-    trip_data = FileData.new(csv_file_trips)
-    # trips data is the array of arrays that csv.read returns
-    @trips_data = trip_data.read_csv_and_remove_headings
   end
 
-  let(:driver) { RideShare::Driver.find(@driver_id, @drivers_data) }
+  let(:driver) { RideShare::Driver.find(@driver_id) }
 
   describe "Driver#get_trips" do
 
@@ -176,6 +157,5 @@ describe "Driver" do
       driver.calculate_average_rating(trips).must_be :>=, 1
       driver.calculate_average_rating(trips).must_be :<=, 5
     end
-
   end
 end

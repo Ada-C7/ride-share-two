@@ -12,13 +12,12 @@ module RideShare
 
     # this is highly coupled - creating a very strong dependency
     # between Driver and Trip - can we say intentially coupled?
-    # it is isolated
+    # also it is isolated
     def get_trips()
-      # want object called trips and its an array of trips
       RideShare::Trip.find_by_driver(@id)
     end
 
-    # argument trips is return of get_trips
+    # argument: trips is return of get_trips
     def calculate_average_rating(trips)
       ratings = trips.map { |trip| trip.rating }
       average = ratings.sum / ratings.length.to_f
@@ -42,7 +41,12 @@ module RideShare
       vin
     end
 
-    def self.all(drivers_data)
+    def self.all(drivers_data = nil)
+      if drivers_data == nil
+        data = FileData.new('./support/drivers.csv')
+        drivers_data = data.read_csv_and_remove_headings
+      end
+
       raise ArgumentError.new("data is empty array") if drivers_data.empty?
       drivers = drivers_data.map do |driver_info|
         raise ArgumentError.new("driver info must have 3 parts") unless driver_info.length == 3
@@ -55,16 +59,14 @@ module RideShare
       return drivers
     end
 
-    # return nil if the account does not exist
-    # this should also only return one account
-    def self.find(driver_id, drivers_data)
-      drivers = all(drivers_data)
+    def self.find(driver_id)
+      drivers = all
       driver = drivers.each { |info| return info if info.id == driver_id }
       nil
     end
   end
 end
-# 
+#
 # driver_info = {
 #   id: 75,
 #   name: 'Cynthia',
