@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe "Driver Class" do
+xdescribe "Driver Class" do
 
   let(:ada) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
 

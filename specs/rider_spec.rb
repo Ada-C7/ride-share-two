@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe "Rider Class" do
+xdescribe "Rider Class" do
 
   let(:ada) { Carmmunity::Rider.new(name: 'Ada', rider_id: 2, phone_number: "909-555-1234" )}
 
