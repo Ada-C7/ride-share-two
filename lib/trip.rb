@@ -8,7 +8,7 @@ class Trip
     @driver = driver_id
     @rider = rider_id
     @date = date
-    raise ArgumentError.new("rating must be an integer 1-5") if rating <= 0 || rating > 5 || rating.class != Integer
+    raise ArgumentError.new("Rating must be an integer 1-5") if rating <= 0 || rating > 5 || rating.class != Integer
     @rating = rating
 
   end
@@ -39,7 +39,7 @@ class Trip
       end
     end
 
-    raise ArgumentError.new("no matching trips for that rider") if rider_trips.length == 0
+    raise ArgumentError.new("No matching trips for that rider") if rider_trips.length == 0
 
     return rider_trips
 
@@ -56,7 +56,7 @@ class Trip
       end
     end
 
-    raise ArgumentError.new("no matching trips for that driver") if driver_trips.length == 0
+    raise ArgumentError.new("No matching trips for that driver") if driver_trips.length == 0
 
     return driver_trips
   end

@@ -38,7 +38,7 @@ class Rider
       end
     end
 
-    raise ArgumentError.new("there were no riders with that ID") if match == nil
+    raise ArgumentError.new("There were no riders with that ID") if match == nil
     return match
 
   end
