@@ -40,7 +40,11 @@ module RideShare
     def self.find(rider_id)
       raise ArgumentError.new ("Rider id must be a positive integer value") if ( rider_id.class != Integer || rider_id < 0 )
       all_riders_array = RideShare::Rider.all
-      raise ArgumentError.new ("That rider ID does not currently exist") if !all_riders_array.any? { |rider| rider.id == rider_id }
+      if rider_id == 0
+        puts "That rider ID does not currently exist in the rider.csv"
+      else
+      raise ArgumentError.new("Invalid rider id") if !all_riders_array.any? { |rider| rider.id == rider_id }
+      end
       return all_riders_array.select { |rider| rider.id == rider_id }[0]
     end
   end

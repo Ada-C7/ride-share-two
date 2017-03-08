@@ -43,7 +43,11 @@ module RideShare
     def self.find(driver_id)
       raise ArgumentError.new ("Driver id must be a positive integer value") if ( driver_id.class != Integer || driver_id < 0 )
       all_drivers_array = RideShare::Driver.all
-      raise ArgumentError.new ("That driver ID does not currently exist") if !all_drivers_array.any? { |driver| driver.id == driver_id }
+      if driver_id == 0
+        puts "That driver ID does not currently exist within the driver.csv"
+      else
+        raise ArgumentError.new("Invalid driver id") if !all_drivers_array.any? { |driver| driver.id == driver_id }
+      end
       return all_drivers_array.select { |driver| driver.id == driver_id }[0]
     end
   end
