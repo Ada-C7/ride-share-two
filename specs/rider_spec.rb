@@ -15,6 +15,21 @@ describe "Ride_share_two::Rider" do
     it "retrieves all riders from the CSV file" do
       Ride_share_two::Rider.all_riders.length.must_equal 300
     end
+  end
 
+  describe "#find_trips_for_rider" do
+    it "retrieve the list of trip instances that only this rider has taken" do
+      rider1 = Ride_share_two::Rider.new("1","Nina Hintz Sr.","560.815.3059")
+      rider1.find_trips_for_rider.must_be_instance_of Array
+      rider1.find_trips_for_rider.length.must_equal 2
+    end
+  end
+
+  describe "#find_drivers_by_find_trips_for_rider" do
+    it "find_drivers_by_find_trips_for_rider" do
+      rider1 = Ride_share_two::Rider.new("1","Nina Hintz Sr.","560.815.3059")
+      rider1.find_trips_for_rider
+      rider1.find_drivers_by_find_trips_for_rider.length.must_equal 2
+    end
   end
 end

@@ -70,9 +70,14 @@ module Ride_share_two
     end
 
     #find all trip instances for a given rider ID
-    def self.find_trips_for_riders(rider_id)
-
-
+    def self.find_trips_for_rider(rider_id)
+      trips_for_rider = []
+      self.all_trips.each do |trip|
+        if trip.rider_id == rider_id
+          trips_for_rider << trip
+        end
+      end
+      return trips_for_rider
     end
 
   end

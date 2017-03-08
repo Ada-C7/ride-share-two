@@ -52,6 +52,15 @@ module Ride_share_two
   end
 end
 
+# driver1 = Ride_share_two::Driver.new("1", "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+# p driver1.find_trips_for_driver.length
+#puts Ride_share_two::Driver.all_drivers[2]
+# puts Ride_share_two::Driver.driver[1].vin
+#puts Ride_share_two::Driver.
+# p Ride_share_two::Driver.new("1", "Bernardo Prosacco", "aaaaa")
+# driver1 = Ride_share_two::Driver.new("1", "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+# p Ride_share_two::Driver.all_drivers[0].driver_id
+
 #retrieve the list of trip instances that only this driver has taken
 # def find_trip (driver_id)
 #   TODO: add a storage variable
@@ -75,11 +84,3 @@ end
 #   add to storage
 # end
 # return storage_variable/collection.length
-
-# driver1 = Ride_share_two::Driver.new("driver_id", "driver_name", "vin")
-#puts Ride_share_two::Driver.all_drivers[2]
-# puts Ride_share_two::Driver.driver[1].vin
-#puts Ride_share_two::Driver.
-# p Ride_share_two::Driver.new("1", "Bernardo Prosacco", "aaaaa")
-# driver1 = Ride_share_two::Driver.new("1", "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
-# p Ride_share_two::Driver.all_drivers[0].driver_id

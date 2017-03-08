@@ -21,14 +21,13 @@ describe "Ride_share_two::Trip" do
 
   describe "#find_driver" do
     it "retrieves the associated driver instance through the driver ID" do
-      #Ride_share_two::Trip.new("1","1","54","2016-04-05",3)
       Ride_share_two::Trip.find_driver("1").driver_name.must_equal "Bernardo Prosacco"
     end
   end
 
-  describe "#find_rider" do
+  describe "#find_find_trips_for_riders" do
     it"retrieves the associated rider instance through the rider ID" do
-      skip
+      Ride_share_two::Trip.find_trips_for_rider("2").length.must_equal 1
     end
 
     describe "#self.find_trips_for_drivers" do
