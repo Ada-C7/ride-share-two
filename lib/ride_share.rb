@@ -67,6 +67,10 @@ module RideShare
       info
     end
 
+    def self.find_riders_trips(id_r)
+      RideShare::Trip.trips_taken_by_rider(id_r)
+    end
+
   end#end of Rider class
 
   class Trip
@@ -114,6 +118,12 @@ module RideShare
   end#end of Trip class
 end#end of RideShare Module
 
-# d = RideShare::Driver.new(1,'Bernardo Prosacco','WBWSS52P9NEYLVDE9')
+
+
+# d = RideShare::Rider.new(159,'Celestine Blanda PhD','1-343-220-7104 x266')
+
+# puts RideShare::Rider.find_riders_trips(111)
+
+
 # puts d.drivers_rating(1)
 # puts RideShare::Driver.find_drivers_trips(1)

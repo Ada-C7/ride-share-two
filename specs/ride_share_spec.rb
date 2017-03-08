@@ -166,5 +166,16 @@ describe "RideShare Module" do
       end
     end#end of method all
 
+    describe "Rider#self.find_riders_trips" do
+      it "return an Array" do
+        rider.find_riders_trips(5).must_be_instance_of Array
+      end
+
+      it "return an Array filled with objects from Trip class" do
+        rider.find_riders_trips(5)[0].must_be_instance_of RideShare::Trip
+        rider.find_riders_trips(5).last.must_be_instance_of RideShare::Trip
+      end
+    end#end of find_drivers_trips class method
+
   end#end of the Rider class
 end#end of the Module RideShare
