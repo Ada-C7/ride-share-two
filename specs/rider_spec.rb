@@ -29,8 +29,23 @@ describe "Rider" do
     it "Should return the first account from the CSV file" do
       RideShare::Rider.find(1).id.must_equal(1)
       RideShare::Rider.find(1).name.must_equal("Nina Hintz Sr.")
-      # binding.pry
       RideShare::Rider.find(1).phone_num.must_equal("560.815.3059")
     end
-end
+
+    it "Should return the last account from the CSV file" do
+      RideShare::Rider.find(300).id.must_equal(300)
+      RideShare::Rider.find(300).name.must_equal("Miss Isom Gleason")
+      RideShare::Rider.find(300).phone_num.must_equal("791-114-8423 x70188")
+    end
+
+    it "Returns an account that exists" do
+      RideShare::Rider.find(100).id.must_equal(100)
+      RideShare::Rider.find(100).name.must_equal("Hipolito Rogahn")
+      RideShare::Rider.find(100).phone_num.must_equal("944.179.4883")
+    end
+
+    it "Raises an error when the account does not exist" do
+      proc { RideShare::Rider.find(301)}.must_raise ArgumentError
+    end
+  end
 end
