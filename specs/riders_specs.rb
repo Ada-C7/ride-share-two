@@ -90,3 +90,24 @@ describe "Rider.find" do
     RideShare::Rider.find(@test_array[-1].id).id.must_equal "300"
   end
 end
+
+describe "rider.trips" do
+
+  before do
+    id = "1"
+    name = "Nina Hintz Sr."
+    phone_num = "560.815.3059"
+    @rider = RideShare::Rider.new(id, name, phone_num)
+  end
+
+  it "returns an Array" do
+    @rider.trips.must_be_instance_of Array
+  end
+
+  it "returns and array with correct rider id" do
+    @rider.trips.each do |trip|
+      trip.rider_id.must_equal @rider.id
+    end
+  end
+
+end

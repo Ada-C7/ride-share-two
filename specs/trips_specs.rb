@@ -107,8 +107,18 @@ describe "find_by_rider" do
     @trip_array = RideShare::Trip.find_by_rider("2")
   end
 
-
   it "returns an array" do
     @trip_array.must_be_instance_of Array
   end
+
+  it "returns an array of trip instances" do
+    @trip_array.each {|trip| trip.class.must_equal RideShare::Trip}
+  end
+
+  it "the trips in the array must belong to the rider" do
+    @trip_array.each {|trip| trip.rider_id.must_equal "2"}
+  end
+
+
+
 end

@@ -86,6 +86,7 @@ describe "Driver.find" do
     RideShare::Driver.find(@test_array[-1].id).id.must_equal "100"
   end
 
+
   # it "Raises an error for an account that doesn't exist" do
   #   proc {
   #     RideShare::Driver.find("0000")

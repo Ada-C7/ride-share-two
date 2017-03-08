@@ -32,14 +32,14 @@ module RideShare
 
     def self.find_by_rider(rider_id)
       #class method - find all trip instances for a given Rider ID
+      some_array = []
       trip_array = RideShare::Trip.all
-      riders_trips = []
       trip_array.each do |trip|
         if rider_id == trip.rider_id
-          riders_trips << trip
+          some_array << trip
         end
       end
-      return riders_trips
+      return some_array
     end
 
     def self.find_by_driver(driver_id)
