@@ -29,7 +29,7 @@ describe "Driver" do
     end
   end
 
-  describe "Driver#all" do
+  describe "Driver.all" do
 
     before do
       @drivers = Driver.all
@@ -60,7 +60,7 @@ describe "Driver" do
 
   end
 
-  describe "Driver#find" do
+  describe "Driver.find" do
 
     before do
       @drivers = Driver.all

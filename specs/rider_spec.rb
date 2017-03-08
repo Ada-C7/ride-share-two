@@ -20,7 +20,7 @@ describe "Rider" do
       rider.phone_num.must_equal phone_num
     end
 
-    it "Is a kind of Driver" do
+    it "Is a kind of Rider" do
       name = "Louise Belcher"
       id = 12345
       phone_num = "(206) 222 222"
@@ -30,7 +30,7 @@ describe "Rider" do
     end
   end
 
-  describe "Rider#all" do
+  describe "Rider.all" do
 
     before do
       @riders = Rider.all
@@ -60,7 +60,7 @@ describe "Rider" do
     end
   end
 
-  describe "Driver#find" do
+  describe "Rider.find" do
 
     before do
       @riders = Rider.all
