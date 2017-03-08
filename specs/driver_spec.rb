@@ -40,7 +40,7 @@ describe "Driver Class" do
     it "The Id, name and vin number matches the first account " do
 
       index = 1
-#add loop
+      #add loop
       my_drivers[index].driver_id.must_equal 1
       my_drivers[index].name.must_equal "Bernardo Prosacco"
       my_drivers[index].vin.must_equal "WBWSS52P9NEYLVDE9"
@@ -55,67 +55,74 @@ describe "Driver Class" do
 
   end #end of self.all
 
-describe "self.find(id)" do
+  describe "self.find(id)" do
 
-let(:my_drivers) { Carmunity::Driver::all }
+    let(:my_drivers) { Carmunity::Driver::all }
 
-let(:file_row) {CSV.read("support/drivers.csv")}
-
-
-it "Returns a driver that exists" do
-
-  my_driver = Carmunity::Driver::find(5)
-
-  my_driver.name.must_equal my_drivers[5].name
-
-  my_driver.driver_id.must_equal 5
-
-  my_driver.vin.must_equal file_row[5][2]
-
-  my_driver.vin.must_equal "TAMLE35L3MAYRV1JD"
-
-end
+    let(:file_row) {CSV.read("support/drivers.csv")}
 
 
-it "Can find the last driver in the CSV file" do
+    it "Returns a driver that exists" do
 
-  my_driver = Carmunity::Driver::find(100)
+      my_driver = Carmunity::Driver::find(5)
 
-  my_driver.name.must_equal my_drivers.last.name
+      my_driver.name.must_equal my_drivers[5].name
 
-  my_driver.driver_id.must_equal my_drivers.last.driver_id
+      my_driver.driver_id.must_equal 5
 
-end
+      my_driver.vin.must_equal file_row[5][2]
 
-it "Can find the First driver in the CSV file" do
-
-  my_driver = Carmunity::Driver::find(1)
-
-  my_driver.name.must_equal my_drivers[1].name
-
-  my_driver.driver_id.must_equal my_drivers[1].driver_id
-
-end
-
-it "Only accepts integers in seatch criteria" do
-  skip
-end
-
-it "Outputs message if Driver could not be found"
-  skip
-end
+      my_driver.vin.must_equal "TAMLE35L3MAYRV1JD"
+    end
 
 
-end #end of self.find
+    it "Can find the last driver in the CSV file" do
 
+      my_driver = Carmunity::Driver::find(100)
 
+      my_driver.name.must_equal my_drivers.last.name
 
+      my_driver.driver_id.must_equal my_drivers.last.driver_id
+    end
+
+    it "Can find the First driver in the CSV file" do
+
+      my_driver = Carmunity::Driver::find(1)
+
+      my_driver.name.must_equal my_drivers[1].name
+
+      my_driver.driver_id.must_equal my_drivers[1].driver_id
+    end
+
+    it "Only accepts integers in seatch criteria" do
+      skip
+    end
+
+    it "Outputs message if Driver could not be found" do
+      skip
+    end
+  end #end of self.find
 
   xdescribe "trips_taken" do
 
     it "Trips taken must be an array" do
+      skip
       ada.trips_taken.must_be_instance_of Array
     end
 
+    it "The driver id number matches the driver id in the trip information" do
+      skip
+    end
+
+    it "Returns the correct number of trips taken " do
+      skip
+    end
+
+    it "Returns the correct trip infromation" do
+      skip
+    end
+
+
   end #end of trips taken
+
 end
