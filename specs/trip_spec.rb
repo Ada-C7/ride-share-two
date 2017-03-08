@@ -204,5 +204,27 @@ describe "Trip" do
     it "Returns the appropriate instance of the Driver class" do
       @trip.driver.driver_id.must_equal @args[:driver_id]
     end
+
   end
+
+  # describe "Trip#rider" do
+  #
+  #   before do
+  #     @args = { trip_id: 25, driver_id: 18, rider_id: 2 , date: "2016-04-05" , rating: 5 }
+  #     @trip = RideShare::Trip.new(@args)
+  #   end
+  #
+  #   it "Can be called on an instance of the Trip class" do
+  #     @trip.must_respond_to :rider
+  #   end
+  #
+  #   it "Returns an instance of the Rider class" do
+  #     @trip.rider.must_be_instance_of RideShare::Rider
+  #   end
+  #
+  #   it "Returns the appropriate instance of the Rider class" do
+  #     @trip.rider.rider_id.must_equal @args[:rider_id]
+  #   end
+  #
+  # end
 end

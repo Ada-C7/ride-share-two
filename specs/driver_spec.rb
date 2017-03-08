@@ -57,6 +57,9 @@ describe "Driver" do
       @driver.must_respond_to :trips
     end
 
+    it "Returns an array" do
+      @driver.trips.must_be_kind_of Array
+    end 
   end
 
   describe "Driver#rating" do

@@ -57,5 +57,10 @@ module RideShare
     def driver
       Driver.find(@driver_id)
     end
+
+    def rider
+      Rider.find(@rider_id)
+    end
+    
   end
 end

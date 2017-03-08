@@ -19,7 +19,7 @@ module RideShare
 
 
     def trips
-
+      Trip.find_for_driver(@driver_id)
     end
 
     def rating
