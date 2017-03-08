@@ -134,4 +134,37 @@ describe Rider do
                end
           end
      end
+
+     describe "Rider#recall_drivers" do
+
+          before do
+               @file = "support/riders.csv"
+               @trip_file = "support/trips.csv"
+               @driver_file = "support/drivers.csv"
+
+               @id = 8
+               @han = Rider.find(@file, @id)
+               @han_drivers = @han.recall_drivers(@file, @trip_file, @driver_file)
+          end
+
+          describe "Rider.recall_drivers:" do
+               it "Returns an array of all trips for rider:" do
+                   @han_drivers.must_be_kind_of Array
+                   @han_drivers.map { | driver | driver.must_be_kind_of Driver}
+               end
+
+               it "Returns the correct number of drivers:" do
+                    drivers = []
+
+                    CSV.foreach(@trip_file) do |row|
+
+                         if row[2].to_i == @id && drivers.include?(row[1].to_i) != true
+                              drivers << row[2].to_i
+                         end
+                    end
+
+                    @han.drivers.length.must_equal drivers.length
+               end
+          end
+     end
 end

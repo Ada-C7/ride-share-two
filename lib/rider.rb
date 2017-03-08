@@ -1,20 +1,28 @@
 require 'csv'
 require_relative 'trip'
+require_relative 'driver'
 
 class Rider
 
-     attr_reader :id, :name, :phone, :trips
+     attr_reader :id, :name, :phone, :trips, :drivers
 
      def initialize(id, name, phone)
           @id = id
           @name = name
           @phone = phone
           @trips = []
+          @drivers = []
      end
 
      def recall_trips(file, trip_file)
           @trips = Trip.find_trips_for_rider(file, trip_file, @id)
           return @trips
+     end
+
+     def recall_drivers(file, trip_file, driver_file)
+               driver_ids = recall_trips(file, trip_file).map { | trip | trip.driver_id }
+               @drivers = driver_ids.map { | driver_id | Driver.find(driver_file, driver_id)}
+          return @drivers
      end
 
      def self.all(file)
