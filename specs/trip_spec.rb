@@ -7,6 +7,18 @@ describe "Trip class" do
 
   describe "initialization of Trip" do
     it "Initializes Trip with trip ID, rider ID, driver ID, date, and rating" do
+      trip_id = "4321"
+      driver_id = "987"
+      rider_id = "1234"
+      date = "2017-3-8"
+      rating = "5"
+
+      trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+      trip.must_respond_to :trip_id
+      trip.trip_id.must_equal trip_id
+
+      trip.must_respond_to :date
+      trip.date.must_equal date
 
     end
   end
