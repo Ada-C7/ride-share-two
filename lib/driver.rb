@@ -7,9 +7,9 @@ module RideShare
         attr_reader :id, :name, :vin
 
         def initialize (id, name, vin)
+            raise ArgumentError.new ("Invalid VIN number") if vin.length != 17
             @id = id
             @name = name
-            #vin should be of a certain length and needs to be checked
             @vin = vin
         end
 

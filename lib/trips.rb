@@ -43,6 +43,7 @@ module RideShare
 
         def self.find_all_drivers(driver_id)
             all_trips = RideShare::Trip.all
+            
             rider_trips = []
 
             all_trips.each do |trip|

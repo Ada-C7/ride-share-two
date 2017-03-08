@@ -5,14 +5,14 @@ require_relative '../lib/driver.rb'
 describe "Driver" do
     describe "initialize method" do
         it "Driver.new must be an instance of a driver" do
-            @my_driver = RideShare::Driver.new(16, "Travis Bickle", 123456)
+            @my_driver = RideShare::Driver.new(16, "Travis Bickle", "WBWSS52P9NEYLVDE9")
             @my_driver.must_be_instance_of RideShare::Driver
         end
 
         it "takes an id, name and vin " do
             id = 16
             name = "Travis Bickle"
-            vin = 123456
+            vin = "WBWSS52P9NEYLVDE9"
             driver = RideShare::Driver.new(id, name, vin)
             driver.must_respond_to :id
             driver.id.must_equal id
@@ -22,6 +22,11 @@ describe "Driver" do
 
             driver.must_respond_to :vin
             driver.vin.must_equal vin
+        end
+
+        it "Raises and error if the vin number is not the correct length" do
+
+
         end
     end
 
@@ -82,22 +87,32 @@ describe "Driver" do
 
     describe "find_trips method" do
         before do
-            @my_driver = RideShare::Driver.new(16, "Travis Bickle", 123456)
+            @my_driver = RideShare::Driver.new(16, "Travis Bickle", "WBWSS52P9NEYLVDE9")
+            @trips = @my_driver.find_trips
         end
 
         it "Returns an array of trips" do
-            @my_driver.find_trips.must_be_instance_of Array
+            @trips.must_be_instance_of Array
+        end
+
+
+        it "Every element in array is a rider object" do
+            @trips.each do |trip|
+                trip.must_be_instance_of RideShare::Trip
+            end
+
         end
 
         # it "Returns the correct number of trips" do
             #how to even test this?
         # end
 
+
     end
 
     describe "Ratings Average" do
         before do
-            @my_driver = RideShare::Driver.new(16, "Travis Bickle", 123456)
+            @my_driver = RideShare::Driver.new(16, "Travis Bickle", "WBWSS52P9NEYLVDE9")
         end
 
         it "Returns a Float" do
