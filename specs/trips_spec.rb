@@ -61,7 +61,17 @@ describe "Trips" do
                 @trips[399].driver_id.must_equal 132
                 @trips[399].date.must_equal "2016-10-19"
                 @trips[399].rating.must_equal 5
+            end
 
+        end
+
+        describe "Trips find by driver method" do
+            before do
+                @trips = RideShare::Trips.all
+            end
+
+            it "Properly calls all method and generates array of all trips" do
+                @trips.must_be_instance_of Array
             end
 
         end
