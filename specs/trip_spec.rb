@@ -61,6 +61,7 @@ describe "Trip" do
 
   describe "rider" do
     it "returns the rider instance that is associated with this rider id" do
+      skip
       first_trip = Trip.new(1, 1, 54, "2016-04-05", 3)
       first_trip.rider.must_be_instance_of Rider
       first_trip.rider.id.must_equal 54
@@ -70,32 +71,24 @@ describe "Trip" do
   end # end of describe rider method
 
   describe "Trip.find_all_for_driver" do
-    it "returns all trip instances for a given driver ID" do
-      before do
-        @trips = Trip.all
-      end
+    before do
+      @trips = Trip.all
+    end
 
-      it "returns a driver that exists" do
-        driver = Trip.find_all_for_driver(@drivers[0].id)
-        driver.must_be_instance_of Trip
-      end
+    it "returns a collection of trip instances" do
+      trips_for_a_driver = Trip.find_all_for_driver(@trips[0].driver_id)
+      trips_for_a_driver.must_be_instance_of Array
+    end
 
-      it "can find the first driver from the CSV" do
-        driver = Driver.find_all_for_driver(1)
-        driver.id.must_equal @drivers[0].id
-      end
+    it "returns a trip that exists" do
+      trips_for_a_driver = Trip.find_all_for_driver(@trips[10].driver_id)
+      trips_for_a_driver[0].must_be_instance_of Trip
+    end
 
-      it "can find the last driver from the CSV" do
-        driver = Driver.find_all_for_driver(100)
-        driver.id.must_equal @drivers[-1].id
-      end
-
-      it "Raises an error for a driver that doesn't exist" do
-        proc {
-          Driver.find_all_for_driver(111111)
-        }.must_raise ArgumentError
-      end
-
+    it "Raises an error for a driver that doesn't exist" do
+      proc {
+        Trip.find_all_for_driver(111111)
+      }.must_raise ArgumentError
     end
   end # end of describe find_all_for_driver method
 

@@ -17,13 +17,9 @@ class Driver
 
     driver_info = []
 
-    all_driver = CSV.open("/Users/jou-jousun/ada/projects/ride-share-two/support/drivers.csv")
-
-    all_driver.each do |driver|
+    CSV.foreach("/Users/jou-jousun/ada/projects/ride-share-two/support/drivers.csv", {:headers => true}) do |driver|
       driver_info << Driver.new(driver[0].to_i, driver[1].to_s, driver[2].to_s)
     end
-
-    driver_info.shift # the first element is the header of the CSV file
 
     return driver_info
   end
