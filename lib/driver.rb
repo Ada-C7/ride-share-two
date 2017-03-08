@@ -25,9 +25,19 @@ class RideShare::Driver
     end
 
     return (total / trips.length)
-    # retrieve an average rating for that driver based on all trips taken.
-    #   input: ARRAY of trips that this driver has taken
-    #   output: Average star rating FIXNUM
+    #returns an Integer.  Possible turn into a float?
+  end
 
+  def self.find_all
+    drivers = []
+
+    CSV.open("support/drivers.csv").each do |driver|
+      begin
+        drivers << RideShare::Driver.new(driver[0].to_i, driver[1], driver[2])
+      rescue InvalidVinError => e
+        puts "#{ e }"
+      end
+    end
+    return drivers
   end
 end

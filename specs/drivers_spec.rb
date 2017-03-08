@@ -49,6 +49,13 @@ describe "Driver" do
       my_driver.average_rating.must_be_instance_of Integer
       my_driver.average_rating.must_equal 4
     end
+
+    #PROBABLY SHOULD WRITE SOME MORE TESTS HERE!!
   end
 
+  describe "find_all Driver class method" do
+    it "returns an array of Driver instances" do
+      RideShare::Driver.find_all.must_be_instance_of Array
+    end
+  end
 end
