@@ -1,5 +1,6 @@
+
 require_relative 'spec_helper'
-require_relative '../lib/trip'
+
 
 describe "Trip" do
 
@@ -63,18 +64,43 @@ describe "Trip" do
       @trips.last.date.must_equal "2016-04-25"
       @trips.last.rating.must_equal 3
 
-      index = 0
-      CSV.read("support/trips.csv") do |line|
-
-        @trips[index].id.must_equal line[0].to_i
-        @trips[index].driver_id.must_equal line[1].to_i
-        @trips[index].rider_id.must_equal line[2].to_i
-        @trips[index].date.must_equal line[3]
-        @trips[index].rating.must_equal line[4].to_i
-        index += 1
-      end
+      # not working, CSV file is not being read
+      # index = 0
+      # CSV.read("support/trips.csv", { :headers => true }) do |line|
+      #   @trips[index].id.must_equal line[0].to_i
+      #   puts @trips
+      #   @trips[index].driver_id.must_equal line[1].to_i
+      #   @trips[index].rider_id.must_equal line[2].to_i
+      #   @trips[index].date.must_equal line[3]
+      #   @trips[index].rating.must_equal line[4].to_i
+      #   index += 1
+      # end
     end
   end
 
+  describe "trip#find_trips_driver" do
+
+    before do
+      @driver_trips = Trip.find_trips_driver(1)
+    end
+
+    it "Returns a list of trips" do
+      @driver_trips.must_be_kind_of Array
+      @driver_trips.each { |trip| trip.must_be_instance_of Trip }
+
+      # not working, CSV file is not being read
+      # trips = 0
+      # CSV.read("support/trips.csv", { :headers => true }) do |line|
+      #    puts line
+      #    trips += 1 if line[1].to_i == 1
+      # end
+
+      @driver_trips.length.must_equal 9
+    end
+
+    it "Returns and empty array for a driver ID that doesn't exist" do
+      Trip.find_trips_driver(101).must_equal []
+    end
+  end
 
 end
