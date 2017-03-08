@@ -31,17 +31,19 @@ module RideShare
 
 
 
-  def trips
-  #instance method - retrieve the list of trip instances that only this driver has taken
-#RETURN ARRAY OF TRIPS
-  end
+    def trips
+      driver_id = id
+      RideShare::Trip.find_by_driver(driver_id)
+      #instance method - retrieve the list of trip instances that only this driver has taken
+      #RETURN ARRAY OF TRIPS
+    end
 
 
-  def average_rating
+    def average_rating
 
-  #instance method - retrieve an average rating for that driver based on all trips taken
- # call trips
-  end
+      #instance method - retrieve an average rating for that driver based on all trips taken
+      # call trips
+    end
 
 
 

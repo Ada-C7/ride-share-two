@@ -94,13 +94,22 @@ describe "Driver.find" do
   # end
 end
 
-# describe "driver.trips" do
-#
-#   before do
-#     @test_driver = Driver.new("7", "Kelly", "WBWSS52P9NEYLVDE9")
-#   end
-#
-#   it "Returns an array of all drivers" do
-#     @driver_array.must_be_instance_of Array
-#   end
-# end
+describe "driver.trips" do
+
+  before do
+    id = "1"
+    name = "Bernardo Prosacco"
+    vin = "WBWSS52P9NEYLVDE9"
+    @driver = RideShare::Driver.new(id, name, vin)
+  end
+
+  it "returns an Array" do
+    @driver.trips.must_be_instance_of Array
+  end
+
+  it "returns and array with correct rider id" do
+    @driver.trips.each do |trip|
+      trip.driver_id.must_equal @driver.id
+    end
+  end
+end

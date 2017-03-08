@@ -44,6 +44,14 @@ module RideShare
 
     def self.find_by_driver(driver_id)
       #class method - find all trip instances for a given Driver ID
+      some_array = []
+      trip_array = RideShare::Trip.all
+      trip_array.each do |trip|
+        if driver_id == trip.driver_id
+          some_array << trip
+        end
+      end
+      return some_array
     end
 
     def find_driver
