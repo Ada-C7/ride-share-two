@@ -3,21 +3,40 @@ require_relative 'rideshare'
 module RideShare
 
   class Trip
+    attr_reader :id, :driver_id, :rider_id, :date, :rating
 
-    # reader: ID, driver_ID, rider_ID, date, rating
+    # could try to implement hash argument instead
+    def initialize(id, driver_id, rider_id, date, rating)
+      raise ArgumentError.new("The ID is invalid.") if id.class != Integer
+      raise ArgumentError.new("The driver ID is invalid.") if driver_id.class != Integer
+      raise ArgumentError.new("The rider ID is invalid.") if rider_id.class != Integer
+      raise ArgumentError.new("The date is invalid.") if date.class != String
+      raise InvalidRatingError.new("The rating is invalid.") if !(1..5).include?(rating)
 
-    # initialize
-    # each trip should have @ID, @rider_ID, @driver_ID, @date, @rating
-    # rating must be within 1-5, else InvalidRatingError
 
-    # self.all
-    # returns array of all instances of trip
+      @id = id.to_i
+      @driver_id = driver_id
+      @rider_id = rider_id
+      @date = date
+      @rating = rating.to_i
+    end
 
-    # self.find_drivers(rider_ID)
-    # returns array of all instances of trip with rider_ID
+    # could implement with hash
+    def self.all
+      CSV.read("support/trips.csv", headers: true).map do | line |
+        RideShare::Trip.new(line[0].to_i, line[1].to_i, line[2].to_i, line[3], line[4].to_i)
+      end
+    end
 
-    # self.find_riders(driver_ID)
-    # returns array of all instances of trip with driver_ID
+    def self.find_drivers(driver_id)
+      raise ArgumentError.new("The driver ID is invalid.") if driver_id.class != Integer
+      self.all.find_all { |trip| trip.driver_id == driver_id }
+    end
+
+    def self.find_riders(rider_id)
+      raise ArgumentError.new("The rider ID is invalid.") if driver_id.class != Integer
+      self.all.find_all { |trip| trip.rider_id == rider_id }
+    end
 
   end
 

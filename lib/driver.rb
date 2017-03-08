@@ -10,7 +10,7 @@ module RideShare
       raise ArgumentError.new("The name is invalid.") if name.class != String
       raise InvalidVinError.new("The VIN number is invalid.") if vin.length != 17 || !vin.upcase.match(/^[0-9A-Z]+$/)
 
-      @id = id
+      @id = id.to_i
       @name = name
       @vin = vin.upcase
     end
@@ -22,13 +22,13 @@ module RideShare
       end
     end
 
-    def self.find(driver_ID)
-      raise ArgumentError.new("The driver ID is invalid.") if driver_ID.class != Integer
-      self.all.find { |driver| driver.id == driver_ID }
+    def self.find(driver_id)
+      raise ArgumentError.new("The driver ID is invalid.") if driver_id.class != Integer
+      self.all.find { |driver| driver.id == driver_id }
     end
 
     def trips
-      trip.find_drivers(@driver_ID)
+      RideShare::Trip.find_drivers(@id)
     end
 
     def average_rating

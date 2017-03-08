@@ -95,7 +95,7 @@ describe "Driver" do
 
 
   # retrieve the list of trip instances that only this driver has taken
-  describe "Driver#trips" do
+  describe "Driver#trips and #ratings" do
     let(:shakira) { RideShare::Driver.new(16, "Shakira Stamm", "SALUVSAL3WA67SBPZ") }
 
     it "returns an array whose length matches the number of Driver's trips" do
@@ -110,11 +110,6 @@ describe "Driver" do
       end
     end
 
-  end
-
-
-  # retrieve an average rating for that driver based on all trips taken
-  describe "Driver#average_rating" do
 
     it "returns correct average rating for a Driver" do
       # (2 + 5 + 1 + 2 + 4 + 1) / 6
@@ -122,6 +117,5 @@ describe "Driver" do
     end
 
   end
-
 
 end
