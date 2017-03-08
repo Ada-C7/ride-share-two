@@ -40,6 +40,14 @@ class Trip
   def self.find_trips_rider(rider_id)
     # searches .all for trips matching the rider_id
     # returns a list of trip instances associated with one rider
+    trips = []
+    Trip.all.each do |trip|
+      if trip.rider_id == rider_id
+        trips << trip
+      end
+    end
+
+    return trips
   end
 
   def driver
