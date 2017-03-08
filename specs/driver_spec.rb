@@ -107,4 +107,38 @@ describe Driver do
                proc {Driver.find(@file, id)}.must_raise ArgumentError
           end
      end
+
+     describe "Driver#recall_trips" do
+
+          before do
+               @file = "support/drivers.csv"
+               @trip_file = "support/trips.csv"
+               @id = 8
+               @leia = Driver.find(@file, @id)
+               @leia_trips = @leia.recall_trips(@file, @trip_file)
+          end
+
+          describe "Driver.recall_trips:" do
+               it "Returns an array of all trips for driver:" do
+                   @leia_trips.must_be_kind_of Array
+               end
+
+               it "Returns the correct number of trips:" do
+                    count = 0
+
+                    CSV.foreach(@trip_file) do |row|
+                         if row[2].to_i == @id then count += 1; end
+                    end
+
+                    @leia_trips.length.must_equal count
+               end
+
+               it "Returns an array of Trip objects with the same Rider ID:" do
+                   @leia_trips.each do | trip |
+                       trip.must_be_kind_of Trip
+                       trip.rider_id.must_equal @id
+                    end
+               end
+          end
+     end
 end
