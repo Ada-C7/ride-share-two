@@ -59,7 +59,20 @@ describe "Driver" do
 
     it "Returns an array" do
       @driver.trips.must_be_kind_of Array
-    end 
+    end
+
+    it "Returns instances of the Trip class" do
+      @driver.trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "Returns the appropriate trips" do
+      @driver.trips.each do |trip|
+        trip.driver_id.must_equal @args[:driver_id]
+      end
+    end
+    
   end
 
   describe "Driver#rating" do
