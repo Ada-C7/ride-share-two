@@ -11,7 +11,15 @@ class RideShare::Driver
     end
     @vin = vin
   end
-  # Each driver should be INSTANTIATED (initialize) with an ID, name and VIN (VIN must bse specific length to make sure it is actually a vin)
-  #   input: Driver.new
-  #   output: new instance of Driver with associated ID, Name and VIN.  Each of those should be ACCESSIBLE (attr_reader)
+
+  def trips
+    RideShare::Trip.find_all_driver(@id)
+  end
+
+  # def average_rating
+  #   retrieve an average rating for that driver based on all trips taken.
+  #     input: ARRAY of trips that this driver has taken
+  #     output: Average star rating FIXNUM
+  #
+  # end
 end
