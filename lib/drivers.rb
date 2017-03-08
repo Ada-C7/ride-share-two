@@ -41,7 +41,6 @@ module RideShare
     def trips
       driver_id = id
       RideShare::Trip.find_by_driver(driver_id)
-
       #instance method - retrieve the list of trip instances that only this driver has taken
       #RETURN ARRAY OF TRIPS
     end
@@ -59,8 +58,6 @@ module RideShare
       #instance method - retrieve an average rating for that driver based on all trips taken
       # call trips
     end
-
-
 #private
     def verified_vin(vin)
       if vin.length != 17

@@ -3,7 +3,7 @@ module RideShare
 
   class Rider
     attr_reader :id, :name, :phone_num
-
+    
     def initialize(id, name, phone_num)
       @id = id
       @name = name

@@ -26,7 +26,7 @@ module RideShare
     end
 
     def self.find(id)  #Should we rescue this??
-      trip_array = RideShare::Trip.all
+      trip_array = self.all
       trip_array.each do |trip|
         if id == trip.trip_id
           return trip
@@ -38,7 +38,7 @@ module RideShare
     def self.find_by_rider(rider_id)
       #class method - find all trip instances for a given Rider ID
       some_array = []
-      trip_array = RideShare::Trip.all
+      trip_array = self.all
       trip_array.each do |trip|
         if rider_id == trip.rider_id
           some_array << trip
