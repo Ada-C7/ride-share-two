@@ -138,6 +138,11 @@ describe "Trip" do
             end
         end
 
+        describe "Find all trips for rider" do
+            it "returns correct number of trips" do
+                RideShare::Trip.find_all_trips_riders(45).length.must_equal 4   
+            end
+        end
 
 
 

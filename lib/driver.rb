@@ -51,13 +51,6 @@ module RideShare
 
         def average_rating
             RideShare::Trip.calculate_average_rating(@id)
-
-        #start a ratings counter at 0
-        #loop through the array of all trips for this driver
-        #at each loop add the rating to the ratings counter
-        #divide total ratings by the length of the trips array
-
-        #method returns the average rating
         end
 
 

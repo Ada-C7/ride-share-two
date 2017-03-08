@@ -1,5 +1,6 @@
-# For Tuesday:
-#
-# How is the driver_find_all(driver_id) checking the driver_id against the elements in the array?
-#     -is it looking at array[index][0]??
-#     -or should I try to set up a Struc??
+#For Weekend:
+
+#edge cases for average rating
+#edge cases for find all trips for driver
+
+#should there be more tests for the rider find_all?? the other tests for entering a specific driver in the CSV and seeing if they have the correct number of items and match the specifics is handled in the trips find all test

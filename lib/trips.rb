@@ -67,6 +67,30 @@ module RideShare
         end
 
 
+        def self.find_all_trips_riders(id)
+            all_trips = RideShare::Trip.all
+            trips = []
+
+            all_trips.each do |trip|
+                if trip.rider_id == id
+                    trips << trip
+                end
+            end
+
+            return trips
+        end
+
+        def self.find_previous_drivers(id)
+            all_trips = RideShare::Trip.all
+            previous_drivers = []
+
+            all_trips.each do |trip|
+                if trip.rider_id == id
+                    previous_drivers << trip.driver_id
+                end
+            end
+            return previous_drivers
+        end
 
 
     end

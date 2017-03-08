@@ -41,22 +41,14 @@ module RideShare
         end
 
 
+        def find_trips
+            RideShare::Trip.find_all_trips_riders(@id)
+        end
 
 
+        def previous_drivers
+            RideShare::Trip.find_previous_drivers(@id)
+        end
 
     end
 end
-
-
-# find_trips(id)
-#calls rider_find_all in trips
-#this will loop through the list of trips looking for matches with this id
-#and then return an array of all of the trips
-# end
-
-#previous_drivers(id)
-#rider_find_all to get the list of trips the rider with this id has taken
-#this method then takes that array and loops through looking for drivers
-#drivers are pushed to an array of drivers
-#somehow duplicates are then taken out of that array
-# end

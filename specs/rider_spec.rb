@@ -70,6 +70,36 @@ describe "Rider" do
             proc { RideShare::Driver.find(416) }.must_raise ArgumentError
 
         end
+    end
+
+
+    describe "Find all trips for rider method" do
+        before do
+            @my_rider = RideShare::Rider.new(116,"Miss Daisy","1231231234")
+        end
+
+        it "returns an array of trips" do
+            @my_rider.find_trips.must_be_instance_of Array
+        end
+    end
+
+    describe "Find all previous drivers for a rider" do
+        before do
+            @my_rider = RideShare::Rider.new(116,"Miss Daisy","1231231234")
+            @previous_drivers = @my_rider.previous_drivers
+
+        end
+
+        it "returns an array of previous drivers" do
+            @previous_drivers.must_be_instance_of Array
+        end
+
+        it "Every item in the array is an instance of driver" do
+            @previous_drivers.each do |rider|
+                rider.must_be_instance_of RideShare::Rider
+            end
+
+        end
 
     end
 
