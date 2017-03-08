@@ -88,4 +88,21 @@ describe "Rider" do
     end
   end
 
+  describe "Rider#list_trips" do
+    it "Returns a list of trips for a specific rider" do
+      rider = Rider.new(210, "Rhea Zieme", "940-838-2968 x4910")
+      rider.list_trips.must_be_kind_of Array
+    end
+
+    it "Returns a correct number of trips for a specific rider" do
+      rider = Rider.new(1, "Nina Hintz Sr.", "560.815.3059")
+      rider.list_trips.length.must_equal 9
+    end
+
+    it "Returns an empty array if there are no trips for that rider" do
+      rider = Rider.new(100, "Hipolito Rogahn",	"944.179.4883")
+      rider.list_trips.must_equal []
+    end
+  end
+
 end
