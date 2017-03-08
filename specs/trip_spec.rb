@@ -2,17 +2,28 @@ require_relative 'spec_helper'
 # trip csv tests -> trip 300 has no rider
 
 describe "Trip" do
-  describe "constructor" do
-    before do
-      @id = 68
-      @rider_id = 78
-      @driver_id = 88
-      @date = '2017-8-03' #can't be a future date
-      @rating = 3 # int, 1-5
-    end
+  before do
+    @id = 68
+    @rider_id = 78
+    @driver_id = 88
+    @date = '2017-8-03' #can't be a future date
+    @rating = 3 # int, 1-5
+  end
 
-    let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,
-      driver_id: @driver_id, date: @date, rating: @rating )}
+  let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,
+    driver_id: @driver_id, date: @date, rating: @rating )}
+
+  describe "constructor" do
+    # before do
+    #   @id = 68
+    #   @rider_id = 78
+    #   @driver_id = 88
+    #   @date = '2017-8-03' #can't be a future date
+    #   @rating = 3 # int, 1-5
+    # end
+    #
+    # let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,
+    #   driver_id: @driver_id, date: @date, rating: @rating )}
 
     it "can be instantiated" do
       trip.must_be_instance_of RideShare::Trip
@@ -35,6 +46,7 @@ describe "Trip" do
       trip.rating.must_equal @rating
     end
 
+    # Trip rating must equal 1, 2, 3. 4. or 5
     it "raises an argument error if rating is not initialized with an integer" do
       proc {
         RideShare::Trip.new(rating: '3')
@@ -72,7 +84,6 @@ describe "Trip" do
 
   describe "driver" do
     it "returns the Driver instance that matches the Trip's driver_id attribute" do
-      trip = RideShare::Trip.new(driver_id: 88)
       driver = trip.driver
 
       driver.must_be_instance_of RideShare::Driver
@@ -80,8 +91,22 @@ describe "Trip" do
     end
 
     it "returns nil if @driver_id is undefined" do
-      trip = RideShare::Trip.new(id: 88)
+      trip = RideShare::Trip.new(id: @id)
       trip.driver.must_be_nil
+    end
+  end
+
+  describe "rider" do
+    it "returns the Rider instance that matches the Trip's rider_id attribute" do
+      rider = trip.rider
+
+      rider.must_be_instance_of RideShare::Rider
+      rider.id.must_equal trip.rider_id
+    end
+
+    it "returns nil if @rider_id is undefined" do
+      trip = RideShare::Trip.new(id: @id)
+      trip.rider.must_be_nil
     end
   end
 end

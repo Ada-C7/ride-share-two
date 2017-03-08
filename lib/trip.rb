@@ -3,7 +3,7 @@ module RideShare
     attr_reader :id, :rider_id, :driver_id, :date, :rating
 
     def initialize(args)
-      valid_rating?(args[:rating]) if args[:rating] != nil
+      check_if_valid_rating(args[:rating]) if args[:rating] != nil
 
       @id = args[:id]
       @driver_id = args[:driver_id]
@@ -12,14 +12,20 @@ module RideShare
       @rating = args[:rating]
     end
 
-  # retrieves the associated driver instance through the driver ID
+    # retrieves the associated driver instance through the driver ID
     def driver
       Driver.find(@driver_id)
     end
 
+    # retrieves the associated rider instance through the rider ID
+    def rider
+      Rider.find(@rider_id)
+    end
+
     private
 
-    def valid_rating?(rating)
+    #or verify rating
+    def check_if_valid_rating(rating)
       unless (rating.is_a? Integer)
         raise ArgumentError.new("rating must be an int")
       end
