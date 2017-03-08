@@ -1,6 +1,7 @@
 require 'csv'
-# require_relative 'ride_share_driver'
-# require_relative 'ride_share_rider'
+require 'pry'
+# require_relative '../lib/ride_share_driver.rb'
+# require_relative '../lib/ride_share_rider.rb'
 #Create Rideshare module
 module Rideshare
 #Create Trip class
@@ -8,12 +9,13 @@ module Rideshare
     attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 # trip_id,driver_id,rider_id,date,rating should be initialized
     def initialize(args)
-      @trip_id = args[:tirp_id]
+      @trip_id = args[:trip_id]
       @driver_id = args[:driver_id]
       @rider_id = args[:rider_id]
       @date = args[:date]
       @rating = args[:rating]
       # each rating should be within an acceptable range (1-5)
+      raise ArgumentError.new("Not a valid id") if @trip_id.class != Integer
       raise ArgumentError.new("Not a valid rating") if @rating > 5 || @rating < 0
     end
 
@@ -58,6 +60,6 @@ end
 # print Rideshare::Trip.find_trip_by_driver(1)
 # print Rideshare::Trip.all
 # print Rideshare::Trip.find_trip_by_rider(1)
-# args = {trip_id: 600, driver_id: 61, rider_id: 168, date: "2016-04-25", rating: 3}
+# args = {trip_id: 60, driver_id: 61, rider_id: 168, date: "2016-04-25", rating: 3}
 # a = Rideshare::Trip.new(args)
 # print a.driver_info

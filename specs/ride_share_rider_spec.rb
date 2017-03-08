@@ -1,12 +1,4 @@
-require 'simplecov'
-SimpleCov.start
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
-require_relative '../lib/ride_share_rider.rb'
-require_relative '../lib/ride_share_trip.rb'
+require_relative './spec_helper'
 
 describe "Rider" do
   # let (:rider) {rider = Rideshare::Driver.new(args)}

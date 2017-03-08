@@ -1,6 +1,4 @@
 require 'csv'
-# require_relative 'ride_share_trip'
-# require_relative 'ride_share_driver'
 #Create Rideshare module
 module Rideshare
 #Create Rider class
@@ -23,6 +21,7 @@ module Rideshare
     end
 #self.method2 : find a specific rider using their numeric ID
     def self.find(id_num)
+
       self.all.each do |rider|
         return rider if rider[:id] == id_num
       end
@@ -34,11 +33,7 @@ module Rideshare
 #instance_method2 : retrieve the list of all previous drvier instances
     def all_drivers
       drivers = all_trips.map{|h| h[:driver_id]}
-      drivers_info = []
-      drivers.each do |driver|
-        drivers_info << Rideshare::Driver.find(driver)
-      end
-      return drivers_info
+      return drivers.map {|driver| Rideshare::Driver.find(driver)}
     end
 
   end

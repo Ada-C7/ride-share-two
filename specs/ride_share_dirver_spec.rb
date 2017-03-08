@@ -1,13 +1,4 @@
-require 'simplecov'
-SimpleCov.start
-require 'minitest/autorun'
-require 'minitest/reporters'
-# require 'minitest/pride'
-require 'minitest/skip_dsl'
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
-require_relative '../lib/ride_share_driver.rb'
-require_relative '../lib/ride_share_trip.rb'
+require_relative './spec_helper'
 
 describe "Driver" do
   # let (:driver) {driver = Rideshare::Driver.new(args)}
@@ -61,7 +52,13 @@ describe "Driver" do
         {:trip_id=>553, :driver_id=>1, :rider_id=>266, :date=>"2016-12-16", :rating=>3}
       ]
       driver.all_trips.must_equal expected
+    end
 
+    it "Retrieve the list of trip instances that only this driver has taken" do
+      args = {id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT"}
+      driver = Rideshare::Driver.new(args)
+      expected = "No history of trips"
+      driver.all_trips.must_equal expected
     end
   end
 

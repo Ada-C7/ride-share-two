@@ -1,5 +1,4 @@
 require 'csv'
-# require_relative './ride_share_trip'
 #Create Rideshare module
 module Rideshare
 #Create Driver class
@@ -12,7 +11,8 @@ module Rideshare
       @license_num = ""
       @vin = args[:vin]
       #(vehicle id # should be a specific length to ensure it's a valid vehicle)
-      raise ArgumentError.new("Not a valid vin number") if @vin.length > 17
+      raise ArgumentError.new("Not a valid ID number") if @id.class != Integer
+      raise ArgumentError.new("Not a valid vin number") if @vin.length != 17
     end
 
 #self.method1 : retrive all drivers from the CSV file
@@ -31,14 +31,14 @@ module Rideshare
     end
 #instance_method1 : retrieve the list of trip instances that only this drver has taken
     def all_trips
-      return Rideshare::Trip.find_trip_by_driver(@id)
+      result = Rideshare::Trip.find_trip_by_driver(@id)
+      result.any? ? result : "No history of trips"
     end
 #instance_method2 : retrieve an average rating for that driver based on all trips taken
     def average_rating
-      total = all_trips.map { |h| h[:rating] }.inject(:+)
+      total = all_trips.map { |h| h[:rating] }.sum
       average = total/all_trips.length.to_f
-      average = '%.2f' %average
-      return average.to_f
+      return average.round(2)
     end
 
   end
