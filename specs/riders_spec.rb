@@ -1,15 +1,9 @@
 require_relative 'spec_helper'
 
 describe "Rider class" do
+  let(:rider) {RideShare::Rider.new({name: "Ron Weasley", rider_id: 2, phone_num: "2062424564"})}
   it "initializes with id, name, and phone number" do
     # skip
-    initialization_hash = {
-      name: "Ron Weasley",
-      rider_id: 2,
-      phone_num: "2062424564"
-    }
-    rider = RideShare::Rider.new(initialization_hash)
-
     rider.must_respond_to :id
     rider.id.must_equal 2
 
@@ -36,10 +30,29 @@ describe "Rider class" do
   end
 
   it "can find the trips a rider has taken" do
-    skip
+    # skip
+    rider.all_trips(rider.id).must_be_kind_of Array
+    rider.all_trips(rider.id).length.must_equal 1
   end
 
+  it "raises an ArgumentError if id is not a rider number in CSV" do
+    proc {
+      rider.all_trips(301)
+    }.must_raise ArgumentError
+  end
+
+  it "rejects silly input" do
+    proc {
+      rider.all_trips("bad string of stuff")
+    }.must_raise ArgumentError
+
+    proc {
+      rider.all_trips("#s32l")
+    }.must_raise ArgumentError
+  end
   it "can find the drivers a rider has ridden with" do
-    skip
+    # skip
+    rider.all_drivers(rider.id).must_be_kind_of Array
+    rider.all_drivers(rider.id  ).length.must_equal 1
   end
 end
