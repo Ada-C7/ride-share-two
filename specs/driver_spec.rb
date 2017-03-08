@@ -53,7 +53,7 @@ describe "Driver class" do
     it "Retrieve the list of trip instances that only this driver has taken" do
       trips_by_driver.must_be_instance_of Array
       trips_by_driver.length.must_equal 3
-      trips_by_rider.each { |trip| trip.must_be_instance_of RideShare::Trip }
+      trips_by_driver.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "First element inside the returned array matches the CSV file" do
