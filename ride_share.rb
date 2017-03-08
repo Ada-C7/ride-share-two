@@ -11,3 +11,6 @@ end
 
 class InvalidVinError < StandardError
 end
+
+class InvalidIDError < StandardError
+end

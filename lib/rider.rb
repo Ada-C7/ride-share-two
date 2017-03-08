@@ -3,6 +3,10 @@ class RideShare::Rider
   attr_reader :id, :name, :phone
 
   def initialize(id, name, phone)
+    unless id > 0
+      raise InvalidIDError.new("Rider IDs must be an Integer grater than 0")
+    end
+
     @id = id
     @name = name
     @phone = phone
@@ -28,13 +32,11 @@ class RideShare::Rider
     CSV.open("support/riders.csv").each do |rider|
       begin
         riders << RideShare::Rider.new(rider[0].to_i, rider[1], rider[2])
-      rescue InvalidVinError => e
+      rescue InvalidIDError => e
         puts "#{ e }"
       end
     end
     return riders
-  # Retrieve all riders from CSV file
-  #   input: calling CLASS METHOD
-  #   output: list of all RIDERS
+
   end
 end
