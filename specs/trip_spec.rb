@@ -40,7 +40,7 @@ describe "Trip" do
     end
   end
 
-  describe "Trip#all" do
+  describe "Trip.all" do
 
     before do
       @trips = Trip.all
@@ -77,7 +77,7 @@ describe "Trip" do
     end
   end
 
-  describe "trip#find_trips_driver" do
+  describe "Trip.find_trips_driver" do
 
     before do
       @driver_trips = Trip.find_trips_driver(1)
@@ -100,7 +100,7 @@ describe "Trip" do
     end
   end
 
-  describe "trip#find_trips_rider" do
+  describe "Trip.find_trips_rider" do
 
     before do
       @rider_trips = Trip.find_trips_rider(1)
@@ -115,6 +115,27 @@ describe "Trip" do
 
     it "Returns an empty array for a rider ID that doesn't exist" do
       Trip.find_trips_rider(301).must_equal []
+    end
+  end
+
+  describe "trip#driver" do
+    it "Returns a driver that exists" do
+      trip = Trip.new(100, 29, 138, "2016-09-04", 2)
+      trip.driver.must_be_kind_of Driver
+    end
+
+    it "Returns the correct driver for a specific trip" do
+      trip = Trip.new(100, 29, 138, "2016-09-04", 2)
+      name = "Miss Gustave Erdman"
+      trip.driver.name.must_equal name
+    end
+
+    # trip exists, but driver does not - improve!!!
+    it "Raises an error if driver doesn't exist" do
+      trip = Trip.new(83, 0, 103, "2015-12-25", 2)
+      proc {
+        trip.driver
+      }.must_raise ArgumentError
     end
   end
 
