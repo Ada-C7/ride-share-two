@@ -81,10 +81,16 @@ describe "Trip" do
   end
 
   describe "driver" do
+
     it "returns a Driver instance" do
+      trip = trips[30]
+      trip.driver.must_be_instance_of RideShare::Driver
     end
 
     it "lets you know if it doesn't have the driver info" do
+      fake_trip = RideShare::Trip.new(450, 7676, 8734, "2016-06-01", 5)
+      fake_trip.driver.must_be_instance_of NilClass
+
     end
   end
 

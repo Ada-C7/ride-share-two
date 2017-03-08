@@ -1,7 +1,7 @@
 require_relative 'spec_helper.rb'
 
 describe "Drivers" do
-  let(:drivers) {RideShare::Driver.all}
+  let(:drivers) {RideShare::Driver.all ../support/drivers.csv}
 
   describe "initialize" do
 
@@ -31,6 +31,16 @@ describe "Drivers" do
     it "gets the last item"  do
         drivers.last.name.must_equal "Minnie Dach"
     end
+
+
+    it "rescues an invalid vin and replaces with a bunch of 0000s" do
+      skip
+      bad_vin = RideShare::Driver.all("../support/drivers_bad.csv")
+
+      #correct line 1: 1,Bernardo Prosacco,WBWSS52P9NEYLVDE9
+
+    end
+
 
     describe "Error Checking" do
       #name is a string
@@ -66,7 +76,7 @@ describe "Drivers" do
     end
 
     it "returns empty Array if no trips found" do
-      driver = RideShare::Driver.new(607, "Ada", "616-616-6161")
+      driver = RideShare::Driver.new(607, "Ada", "617546450KABGNF98")
       driver_trips = driver.trips
       driver_trips.must_be_instance_of Array
       driver_trips.length.must_equal 0

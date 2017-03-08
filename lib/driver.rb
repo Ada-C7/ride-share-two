@@ -1,14 +1,17 @@
 require 'csv'
+require 'bad_vin_error'
 
 module RideShare
   class Driver
 
-    attr_reader :id, :name, :phone
+    attr_reader :id, :name, :vin
 
     def initialize driver_id, name, vin #order matches csv file
+      raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{vin})") if vin.length != 17 || vin !~ /^[0-9A-Z]+$/
+
       @id = driver_id
       @name = name
-      @vin = vin #check that this is of valid length
+      @vin = vin
     end
 
     def self.all
@@ -16,7 +19,12 @@ module RideShare
       temp_csv = CSV.read("/Users/sai/Documents/ada/projects/ride-share-two/support/drivers.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |driver|
-        drivers << Driver.new(driver[0].to_i, driver[1], driver[2].to_i)
+        begin
+          drivers << Driver.new(driver[0].to_i, driver[1], driver[2])
+        rescue
+          puts "invalid vin. dummy vin (000000000000000000) entered for driver #{driver} at line #{drivers.index(driver)} of CSV file"
+        end
+
       end
 
       return drivers

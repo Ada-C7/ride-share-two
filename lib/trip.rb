@@ -38,7 +38,7 @@ module RideShare
     end
 
     def driver
-      driver_info = Diver.find @driver_id
+      driver_info = Driver.find @driver_id
       return driver_info
       #call Driver.find to return Driver instance associated with the driver_id of the trip instance
     end
