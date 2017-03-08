@@ -7,7 +7,8 @@ module RideShare
     def initialize(id, name, vin)
       @id = id
       @name = name
-      @vin = vin #ensure correct length
+      @vin = (vin.length == 17 ? vin : nil)
+       #ensure correct length
     end
 
 
