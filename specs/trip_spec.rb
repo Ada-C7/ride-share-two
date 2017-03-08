@@ -77,7 +77,7 @@ describe "Trip class" do
       driver.phone_number.must_equal "(170) 751-2406"
     end
 
-    it "Raises an argument error if the rider id missing from the rider.csv" do
+    it "Raises an argument error if the rider id does not have a match in the rider.csv" do
       trip = RideShare::Trip.new({ id: 162, driver_id: 93, rider_id: 123456789, date: "2015-03-09", rating: 4 })
       proc {
         trip.find_rider
@@ -85,23 +85,109 @@ describe "Trip class" do
     end
   end
 
+  let (:all_trips_array) { RideShare::Trip.all }
+
   describe "#self.all method" do
     it "Retrieve all trips from the CSV file" do
-      all_trips_array = RideShare::Trip.all
       all_trips_array.must_be_instance_of Array
       all_trips_array.length.must_equal 600
+      all_trips_array.each { |trip| trip.must_be_instance_of RideShare::Trip }
+    end
+
+    it "First element inside the returned array matches the CSV file" do
+      trip = all_trips_array.first
+      trip.id.must_equal 1
+      trip.driver_id.must_equal 1
+      trip.rider_id.must_equal 54
+      trip.date.must_equal "2016-04-05"
+      trip.rating.must_equal 3
+    end
+
+    it "Last element inside the returned array matches the CSV file" do
+      trip = all_trips_array.last
+      trip.id.must_equal 600
+      trip.driver_id.must_equal 61
+      trip.rider_id.must_equal 168
+      trip.date.must_equal "2016-04-25"
+      trip.rating.must_equal 3
+    end
+
+    # Note: Add tests for the edge cases
+  end
+
+  describe "#self.trips_by_driver method" do
+
+    let (:trips) { RideShare::Trip.trips_by_driver(6) }
+
+    it "Find all trip instances for a given driver ID" do
+      trips.must_be_instance_of Array
+      trips.length.must_equal 3
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
+    end
+
+    it "The first element inside the returned array matches the CSV file" do
+      trip = trips.first
+      trip.id.must_equal 162
+      trip.driver_id.must_equal 6
+      trip.rider_id.must_equal 93
+      trip.date.must_equal "2015-03-09"
+      trip.rating.must_equal 4
+    end
+
+    it "The last element inside the returned array matches the CSV file" do
+      trip = trips.last
+      if trip != nil
+        trip.id.must_equal 295
+        trip.driver_id.must_equal 6
+        trip.rider_id.must_equal 87
+        trip.date.must_equal "2015-08-14"
+        trip.rating.must_equal 1
+      end
+    end
+
+    it "Raises an ArgumentError if trip instances specified by the driver id does not exist" do
+      proc {
+        RideShare::Trip.trips_by_driver(123456789)
+      }.must_raise ArgumentError
+    end
+
+  end
+
+
+  describe "#self.trips_by_rider method" do
+
+    let (:trips) { RideShare::Trip.trips_by_rider(93) }
+
+    it "Find all trip instances for a given rider ID" do
+      trips.must_be_instance_of Array
+      trips.length.must_equal 3
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
+    end
+
+    it "The first element inside the returned array matches the CSV file" do
+      trip = trips.first
+      trip.id.must_equal 162
+      trip.driver_id.must_equal 6
+      trip.rider_id.must_equal 93
+      trip.date.must_equal "2015-03-09"
+      trip.rating.must_equal 4
+    end
+
+    it "The last element inside the returned array matches the CSV file" do
+      trip = trips.last
+      if trip != nil
+        trip.id.must_equal 184
+        trip.driver_id.must_equal 75
+        trip.rider_id.must_equal 93
+        trip.date.must_equal "2016-04-01"
+        trip.rating.must_equal 2
+      end
+    end
+
+    it "Raises an ArgumentError if trip instances specified by the driver id does not exist" do
+      proc {
+        RideShare::Trip.trips_by_rider(123456789)
+      }.must_raise ArgumentError
     end
   end
-  #
-  # describe "#self.trips_by_driver method" do
-  #   it "Find all trip instances for a given driver ID" do
-  #
-  #   end
-  # end
-  #
-  # describe "#self.trips_by_driver method" do
-  #   it "Find all trip instances for a given rider ID" do
-  #
-  #   end
-  # end
 end

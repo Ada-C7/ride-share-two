@@ -34,7 +34,7 @@ module RideShare
     def self.all
       all_trips_array= []
       CSV.foreach("support/trips.csv", {:headers => true}) do |line|
-          all_trips_array << Trip.new( id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_f )
+          all_trips_array << RideShare::Trip.new( id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i )
       end
       return all_trips_array
     end
@@ -42,13 +42,21 @@ module RideShare
     # Find all trip instances for a given rider ID
     def self.trips_by_driver(driver_id)
       all_trips_array = Trip.all
-      return all_trips_array.reject { |trip| trip.driver_id != driver_id }
+      if all_trips_array.any? { |trip| trip.driver_id == driver_id }
+        return all_trips_array.select { |trip| trip.driver_id == driver_id }
+      else
+        raise ArgumentError.new ("Trips for the specified driver ID does not currently exist")
+      end
     end
 
     # Retrieve all trips from the CSV file
     def self.trips_by_rider(rider_id)
       all_trips_array = Trip.all
-      return all_trips_array.reject { |trip| trip.rider_id != rider_id }
+      if all_trips_array.any? { |trip| trip.rider_id == rider_id }
+        return all_trips_array.select { |trip| trip.rider_id == rider_id }
+      else
+        raise ArgumentError.new ("Trips for the specified rider ID does not currently exist")
+      end
     end
   end
 end
