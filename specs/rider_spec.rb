@@ -96,7 +96,7 @@ describe "Rider" do
 
     it "Returns a correct number of trips for a specific rider" do
       rider = Rider.new(1, "Nina Hintz Sr.", "560.815.3059")
-      rider.list_trips.length.must_equal 9
+      rider.list_trips.length.must_equal 2
     end
 
     it "Returns an empty array if there are no trips for that rider" do
