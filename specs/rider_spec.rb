@@ -1,10 +1,10 @@
-require_relative 'spec_helper.rb'
+require_relative 'spec_helper'
 
 describe "RideShare::Rider" do
-  before do
-    # 13,Dr. Leilani Mertz,777.380.7540
-    @rider = RideShare::Rider.new({id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540"})
-  end
+
+  let(:rider) { RideShare::Rider.new({ id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540" }) }
+  let(:all_riders) { RideShare::Rider.all }
+  let(:driver_found) { RideShare::Driver.find("31") }
 
   describe "Rider#initialize" do
     it "creates a new instance of Rider" do

@@ -1,7 +1,6 @@
-require_relative 'spec_helper.rb'
+require_relative 'spec_helper'
 
 describe "RideShare::Trip" do
-
   before do
     @trip = RideShare::Trip.new({id: 13, driver_id: 83,rider_id: 298, date: "2015-05-27", rating: 5})
   end
