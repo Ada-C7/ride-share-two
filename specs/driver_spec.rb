@@ -42,12 +42,13 @@ describe "Driver" do
       data = FileData.new(csv_file)
       @drivers_data = data.read_csv_and_remove_headings
 
-      @drivers_bad_data_1 = [['ten', 'name', 'WBWSS52P9NEYLVDE9']]
-      @drivers_bad_data_2 = [['10', 'name', 'WBWSS52P9NE']]
-      @drivers_bad_data_3 = [['15', 'name', 'WBWSS52P9NE']]
-      @drivers_bad_data_4 = [['10', 'name']]
-      @drivers_bad_data_5 = []
-      @drivers_bad_data_6 = [[],[],[]]
+      @bad_data = {
+                    bad_id: [['2', 'Emory Rosenbaum', '1B9WEX2R92R12900E'], ['ten', 'name', 'WBWSS52P9NEYLVDE9']],
+                    bad_vin: [['10', 'name', 'WBWSS52P9NE']],
+                    empty_array: [],
+                    empty_nested_arrays: [[],[],[]],
+                    missing_part: [['10', 'name']]
+                   }
     end
 
     let(:drivers) { RideShare::Driver.all(@drivers_data) }
@@ -65,33 +66,33 @@ describe "Driver" do
     end
 
     it "raises an error if given bad data for driver_id" do
-      proc { RideShare::Driver.all(@drivers_bad_data_1) }.must_raise ArgumentError
+      proc { RideShare::Driver.all(@bad_data[:bad_id]) }.must_raise ArgumentError
     end
 
     it "raises an error if given bad data for vin " do
       err = proc {
-                   RideShare::Driver.all(@drivers_bad_data_2)
+                   RideShare::Driver.all(@bad_data[:bad_vin])
                  }.must_raise ArgumentError
       err.message.must_equal "vin must be 17 characters"
     end
 
     it "raises an error if given a info missing parts" do
       err = proc {
-                   RideShare::Driver.all(@drivers_bad_data_4)
+                   RideShare::Driver.all(@bad_data[:missing_part])
                  }.must_raise ArgumentError
       err.message.must_equal "driver info must have 3 parts"
     end
 
     it "raises an error if given an empty array" do
       err = proc {
-                   RideShare::Driver.all(@drivers_bad_data_5)
+                   RideShare::Driver.all(@bad_data[:empty_array])
                  }.must_raise ArgumentError
       err.message.must_equal "data is empty array"
     end
 
     it "raises an error if given empty nested arrays" do
       err = proc {
-                   RideShare::Driver.all(@drivers_bad_data_6)
+                   RideShare::Driver.all(@bad_data[:empty_nested_arrays])
                  }.must_raise ArgumentError
       err.message.must_equal "driver info must have 3 parts"
     end
