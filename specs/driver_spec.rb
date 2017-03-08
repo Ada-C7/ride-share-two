@@ -2,13 +2,13 @@ require_relative 'spec_helper'
 
 describe "Driver Class" do
 
-  let(:ada) { Carmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
+  let(:ada) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
 
   describe "Instance Methods" do
     describe "initialize method" do
 
       it "Instantiates a new instance of Driver class" do
-        ada.must_be_instance_of Carmunity::Driver
+        ada.must_be_instance_of Carmmunity::Driver
       end
 
       it "Stored data must match what was passed as an argument" do
@@ -45,9 +45,11 @@ describe "Driver Class" do
 
 
       it " Returns an integer " do
+        skip
       end
 
       it "returns the correct average_rating" do
+        skip
       end
 
     end #end of average_rating
@@ -56,7 +58,7 @@ describe "Driver Class" do
 
   describe " Class Methods " do
 
-    let(:my_drivers) {Carmunity::Driver::all}
+    let(:my_drivers) {Carmmunity::Driver::all}
 
     let(:file_row) {CSV.read("support/drivers.csv")}
 
@@ -71,8 +73,8 @@ describe "Driver Class" do
 
       it " First and Last drivers are instansces of Driver Class " do
 
-        my_drivers.first.must_be_instance_of Carmunity::Driver
-        my_drivers.last.must_be_instance_of Carmunity::Driver
+        my_drivers.first.must_be_instance_of Carmmunity::Driver
+        my_drivers.last.must_be_instance_of Carmmunity::Driver
       end
 
       it " The number of drivers is correct " do
@@ -102,7 +104,7 @@ describe "Driver Class" do
 
       it " Returns a driver that exists " do
 
-        my_driver = Carmunity::Driver::find(5)
+        my_driver = Carmmunity::Driver::find(5)
 
         my_driver.name.must_equal my_drivers[5].name
 
@@ -116,7 +118,7 @@ describe "Driver Class" do
 
       it " Can find the last driver in the CSV file " do
 
-        my_driver = Carmunity::Driver::find(100)
+        my_driver = Carmmunity::Driver::find(100)
 
         my_driver.name.must_equal my_drivers.last.name
 
@@ -125,7 +127,7 @@ describe "Driver Class" do
 
       it " Can find the First driver in the CSV file " do
 
-        my_driver = Carmunity::Driver::find(1)
+        my_driver = Carmmunity::Driver::find(1)
 
         my_driver.name.must_equal my_drivers[1].name
 
