@@ -56,6 +56,10 @@ describe "RideShare::Trip" do
       trip_driver.vin.must_equal "L1CN7SPD96M6SNFYU"
     end
 
+    it "Raises an ArgumentError if driver not found" do
+      proc { RideShare::Trip.new(1234, 300, 1, "2016-02-06", 5).trip_driver }.must_raise ArgumentError
+    end
+
   end
 
 
@@ -71,6 +75,10 @@ describe "RideShare::Trip" do
       trip_rider.id.must_equal 74
       trip_rider.name.must_equal "Felicity Cole"
       trip_rider.phone.must_equal "889-451-6215"
+    end
+
+    it "Raises an ArgumentError if rider not found" do
+      proc { RideShare::Trip.new(1234, 23, 500, "2015-04-03", 5).trip_rider }.must_raise ArgumentError
     end
 
   end
@@ -92,6 +100,9 @@ describe "RideShare::Trip" do
 
     it "Initializes first line from trips.csv as a new RideShare::Trip instance" do
       all_riders.first.must_be_instance_of RideShare::Trip
+    end
+
+    it "Correctly reades the first line of the CSV" do
       all_riders.first.trip_id.must_equal 1
       all_riders.first.driver_id.must_equal 1
       all_riders.first.rider_id.must_equal 54
@@ -101,6 +112,9 @@ describe "RideShare::Trip" do
 
     it "Ititializes last line from trips.csv as a new RideShare::Trip instance" do
       all_riders.last.must_be_instance_of RideShare::Trip
+    end
+
+    it "Correctly reads the last line from the CSV" do
       all_riders.last.trip_id.must_equal 600
       all_riders.last.driver_id.must_equal 61
       all_riders.last.rider_id.must_equal 168
@@ -110,6 +124,9 @@ describe "RideShare::Trip" do
 
     it "Ititializes random line from trips.csv as a new RideShare::Trip instance" do
       all_riders[249].must_be_instance_of RideShare::Trip
+    end
+
+    it "Correctly reads random line from the CSV" do
       all_riders[249].trip_id.must_equal 250
       all_riders[249].driver_id.must_equal 69
       all_riders[249].rider_id.must_equal 203
