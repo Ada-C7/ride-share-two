@@ -42,10 +42,9 @@ module RideSharing
       RideSharing::Driver.find(@driver_id)
     end
 
-#### MUST WRITE Rider first
-    # def find_rider
-    #   RideSharing::Rider.find(@rider_id)
-    # end
+    def find_rider
+      RideSharing::Rider.find(@rider_id)
+    end
 
   end # End of class Trip
 end # End of module RideSharing
