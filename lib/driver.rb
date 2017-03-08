@@ -14,15 +14,16 @@ module RideShare
       @vin = vin
     end
 
-    def self.all (csv)
+    def self.all
       drivers = []
-      temp_csv = CSV.read(csv)
+      temp_csv = CSV.read("support/drivers.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |driver|
         begin
           drivers << Driver.new(driver[0].to_i, driver[1], driver[2])
         rescue
-          puts "invalid vin. dummy vin (000000000000000000) entered for driver #{driver} at line #{drivers.index(driver)} of CSV file"
+          drivers << Driver.new(driver[0].to_i, driver[1], "0"*17)
+          puts "invalid vin. dummy vin #{'0'*17} entered for driver #{driver} at line #{drivers.index(driver)} of CSV file"
         end
 
       end

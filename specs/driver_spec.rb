@@ -1,7 +1,7 @@
 require_relative 'spec_helper.rb'
 
 describe "Drivers" do
-  let(:drivers) {RideShare::Driver.all ../support/drivers.csv}
+  let(:drivers) {RideShare::Driver.all }
 
   describe "initialize" do
 
@@ -21,7 +21,7 @@ describe "Drivers" do
     end
 
     it "gets everything in the csv" do
-       drivers.length.must_equal 100
+       drivers.length.must_equal 101
     end
 
     it "gets the first item" do
@@ -29,15 +29,20 @@ describe "Drivers" do
     end
 
     it "gets the last item"  do
-        drivers.last.name.must_equal "Minnie Dach"
+        drivers.last.name.must_equal "Ramona Quimby"
     end
 
 
     it "rescues an invalid vin and replaces with a bunch of 0000s" do
-      skip
-      bad_vin = RideShare::Driver.all("../support/drivers_bad.csv")
 
-      #correct line 1: 1,Bernardo Prosacco,WBWSS52P9NEYLVDE9
+      proc {
+        RideShare::Driver.all
+      }.must_output /.+/
+
+      ramona = drivers[100]
+      ramona.vin.must_equal "0"*17
+
+      #bad line is driver 101
 
     end
 
