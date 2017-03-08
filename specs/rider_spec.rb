@@ -4,9 +4,9 @@ require_relative './spec_helper'
 describe "Rider" do
   before do
     @rider_hash = {
-      id: 32,
-      name: "Melba Torphy",
-      phone: "246.356.5591 x70530"
+      id: 45,
+      name: "Lavina Friesen",
+      phone: "1-213-163-6582"
     }
   end
 
@@ -14,9 +14,9 @@ describe "Rider" do
 
   describe "Rider initialize" do
     it "has required attributes" do
-      rider.name.must_equal "Melba Torphy"
-      rider.id.must_equal 32
-      rider.phone.must_equal "246.356.5591 x70530"
+      rider.name.must_equal "Lavina Friesen"
+      rider.id.must_equal 45
+      rider.phone.must_equal "1-213-163-6582"
     end
 
   end
@@ -65,9 +65,14 @@ describe "Rider" do
   end
 
   describe "get_drivers" do
+    let(:drivers_by_rider) { rider.get_drivers }
+
     it "correctly generates a list of drivers associated with this rider's trips" do
-      # rider.get_drivers
-      # need to adjust sample rider to have more trips (try rider 45)
+        drivers_by_rider.length.must_equal 4
+        valid_driver_ids = [31, 54, 65, 71]
+        drivers_by_rider.each do |driver|
+          valid_driver_ids.include?(driver.id).must_equal true
+        end
     end
   end
 
