@@ -1,12 +1,8 @@
-require 'csv'
-require 'pry'
-require_relative 'trips'
-
 
 module Rideshare
 
   class Driver
-    attr_accessor :id, :name, :vin, :drivers
+    attr_accessor :id, :name, :vin
 
     def initialize id, name, vin #used by .all to create instances of Drivers
       @id = id
@@ -30,7 +26,7 @@ module Rideshare
 
 
     def self.find id #class method
-      raise ArgumentError.new "Not a valid driver id" if id >= 100 || id <= 1
+      raise ArgumentError.new "Not a valid driver id" if id > 100 || id < 1
 
       Rideshare::Driver.all_drivers.each do |driver|
         if id == driver.id
@@ -61,14 +57,10 @@ module Rideshare
         end
       end
 
-
       raise ArgumentError.new "Driver has no ratings" if driver_rating.length == 0
       # cannot divide by zero for drivers with no ratings
       total_rating = driver_rating.inject { |sum, n| sum + n }
-      number_of_ratings = driver_rating.length
-      average_rating = total_rating/number_of_ratings
-      return average_rating.round(2)
-
+      return (total_rating / driver_rating.length).round(2)
 
     end
   end

@@ -1,6 +1,4 @@
-require 'csv'
-require 'pry'
-require_relative 'trips'
+
 
 module Rideshare
 
@@ -13,7 +11,7 @@ module Rideshare
       @phone_num = phone_num
 
     end
-
+#
     def self.all
       @riders = []
 
@@ -28,10 +26,10 @@ module Rideshare
     end
 
     def self.find id
-      raise ArgumentError.new "Not a valid rider id" if id >= 300 || id <= 1
+      raise ArgumentError.new "Not a valid rider id" if id > 300 || id < 1
+
       Rideshare::Rider.all_riders.each do |rider|
-        if id == rider.id
-          puts rider.name
+        if id == rider.rider_id
           return rider
         end
       end
@@ -48,15 +46,18 @@ module Rideshare
       return rider_trips
     end
 
-    def drivers
-      rider_drivers = []
-      Ridershare::Driver.all_drivers do |drivers|
-        if @id == drivers.id.to_i
-          rider_drivers << drivers
-        end
+    def drivers # should be an instance method
+      #should use the output of trips method, and return driver objects
+      #how to call the method on an instance?
+      # if the instance variable of @id matches the trip, run method
+      drivers = []
+
+      trips.each do |trip|
+        drivers << Rideshare::Driver.find(trip.driver_id)
       end
-      return rider_drivers
+
+      return drivers
 
     end
   end
-end 
+end
