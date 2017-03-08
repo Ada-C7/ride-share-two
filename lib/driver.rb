@@ -38,24 +38,21 @@ module RideShare
                 if driver.id == id
                     return driver
                 end
-
             end
 
             raise ArgumentError.new("Invalid driver id")
         end
 
 
+        #need to write tests for this
+        def find_trips
+            RideShare::Trip.find_all_drivers(@id)
+        end
 
 
     end
 end
 
-#find_trips(id)
-#retrieve list of all trip instances based on the drivers id
-#do this by calling the driver_find_all in the Trips class
-
-#return the list of trips for this individual driver
-#end
 
 
 #average_rating(id)
@@ -67,13 +64,4 @@ end
 #divide total ratings by the length of the trips array
 
 #method returns the average rating
-# end
-
-
-
-
-#self.find(id)
-#calls self.all
-#uses the array of trips from all and checks the array.id to see if it matches the id argument passed in
-#if it does, then return this instance of driver
 # end

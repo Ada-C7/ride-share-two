@@ -60,7 +60,7 @@ describe "Driver" do
         it "All elements in the Driver instance match the data in the CSV file" do
             @drivers[11].id.must_equal 12
             @drivers[11].name.must_equal "Ms. Llewellyn Marquardt"
-            @drivers[11].vin.must_equal "TAMX2B609RPZY1XHT"    
+            @drivers[11].vin.must_equal "TAMX2B609RPZY1XHT"
         end
 
     end
@@ -78,4 +78,21 @@ describe "Driver" do
         end
 
     end
+
+
+    describe "find_trips method" do
+        before do
+            @my_driver = RideShare::Driver.new(16, "Travis Bickle", 123456)
+        end
+
+        it "Returns an array of trips" do
+            @my_driver.find_trips.must_be_instance_of Array
+        end
+
+        # it "Returns the correct number of trips" do
+            #how to even test this?
+        # end
+
+    end
+
 end

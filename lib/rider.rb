@@ -60,11 +60,3 @@ end
 #drivers are pushed to an array of drivers
 #somehow duplicates are then taken out of that array
 # end
-
-
-
-#self.find(id)
-#calls self.all
-#loops through the array returned by CSV file looking for array.id == id
-#if/when there is a match, return that rider object
-# end

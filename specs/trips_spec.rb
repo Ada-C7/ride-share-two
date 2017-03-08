@@ -1,11 +1,12 @@
 require_relative 'spec_helper'
 require_relative '../lib/trips.rb'
+require 'pry'
 
-describe "Trips" do
+describe "Trip" do
     describe "initialize method" do
-        it "Trips.new must be an instance of a trip" do
-            new_trip = RideShare::Trips.new(25, 100, 90, "feb 29", 4)
-            new_trip.must_be_instance_of RideShare::Trips
+        it "Trip.new must be an instance of a trip" do
+            new_trip = RideShare::Trip.new(25, 100, 90, "feb 29", 4)
+            new_trip.must_be_instance_of RideShare::Trip
         end
 
         it "Takes an id, rider_id, driver_id and rating" do
@@ -15,23 +16,23 @@ describe "Trips" do
             date = "feb 19"
             rating = 4
 
-            trip = RideShare::Trips.new(id, rider_id, driver_id, date, rating)
+            trip = RideShare::Trip.new(id, rider_id, driver_id, date, rating)
             trip.id.must_equal 190
-            trip.rider_id.must_equal 25
-            trip.driver_id.must_equal 90
+            trip.rider_id.must_equal 90
+            trip.driver_id.must_equal 25
             trip.rating.must_equal 4
         end
 
         it "Raises error for ratings below 1 and above 5" do
-            proc{ RideShare::Trips.new(25, 100, 90, "jan.12", -1) }.must_raise ArgumentError
-            proc{ RideShare::Trips.new(25, 100, 90, "march 3", 6) }.must_raise ArgumentError
+            proc{ RideShare::Trip.new(25, 100, 90, "jan.12", -1) }.must_raise ArgumentError
+            proc{ RideShare::Trip.new(25, 100, 90, "march 3", 6) }.must_raise ArgumentError
         end
     end
 
 
-        describe "Trips all method" do
+        describe "Trip all method" do
             before do
-                @trips = RideShare::Trips.all
+                @trips = RideShare::Trip.all
             end
             it "Reads a CSV and creates an array of trips" do
                 @trips.must_be_instance_of Array
@@ -39,7 +40,7 @@ describe "Trips" do
 
             it "Everything in the array must be a trip instance" do
                 @trips.each do |trip|
-                    trip.must_be_instance_of RideShare::Trips
+                    trip.must_be_instance_of RideShare::Trip
                 end
 
             end
@@ -57,8 +58,8 @@ describe "Trips" do
 
             it "Correctly assigns values from csv to Trips object" do
                 @trips[399].id.must_equal 400
-                @trips[399].rider_id.must_equal 9
-                @trips[399].driver_id.must_equal 132
+                @trips[399].rider_id.must_equal 132
+                @trips[399].driver_id.must_equal 9
                 @trips[399].date.must_equal "2016-10-19"
                 @trips[399].rating.must_equal 5
             end
@@ -67,7 +68,7 @@ describe "Trips" do
 
         describe "Trips find driver method" do
             before do
-                new_trip = RideShare::Trips.new(25, 100, 90, "feb 29", 4)
+                new_trip = RideShare::Trip.new(25, 90, 100, "feb 29", 4)
                 @driver = new_trip.find_driver
             end
 
@@ -92,7 +93,7 @@ describe "Trips" do
 
         describe "Trips find rider method" do
             before do
-                new_trip = RideShare::Trips.new(25, 100, 90, "feb 29", 4)
+                new_trip = RideShare::Trip.new(25, 100, 90, "feb 29", 4)
                 @rider = new_trip.find_rider
             end
 
@@ -102,10 +103,24 @@ describe "Trips" do
 
 
             it "Returns correct instance of RideShare::Driver" do
-            @rider.id.must_equal 100
-            @rider.name.must_equal "Hipolito Rogahn"
-            @rider.phone_number.must_equal "944.179.4883"
+            @rider.id.must_equal 90
+            @rider.name.must_equal "Zackary Willms I"
+            @rider.phone_number.must_equal "471-731-8253 x6048"
             end
+        end
+
+
+        describe "Find all trips for driver method" do
+
+            it "Returns an array" do
+                RideShare::Trip.find_all_drivers(16).must_be_instance_of Array
+
+            end
+
+            it "Returns correct number of trips" do
+                RideShare::Trip.find_all_drivers(16).length.must_equal 6
+            end
+
         end
 
 
