@@ -128,6 +128,9 @@ describe "Rider Class" do
     end
 
     it "Has no duplicates" do
+      duplicates = RideShare::Rider.find("41")
+      arr = duplicates.drivers
+      arr.length.must_equal 2
     end
 
     it "Returns nil if no trips are recorded" do
