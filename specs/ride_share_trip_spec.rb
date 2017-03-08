@@ -51,6 +51,12 @@ describe "Trip" do
       ]
       Rideshare::Trip.find_trip_by_rider(1).must_equal expected
     end
+
+    it "In case there's no info for the given rider id, it tell you so" do
+      expected = "No history of trips"
+      Rideshare::Trip.find_trip_by_rider(400).must_equal expected
+      Rideshare::Trip.find_trip_by_rider(100).must_equal expected
+    end
   end
 
   describe "Trip.all" do

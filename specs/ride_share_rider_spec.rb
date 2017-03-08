@@ -53,5 +53,12 @@ describe "Rider" do
       ]
       rider.all_drivers.must_equal expected
     end
+
+    it "In case there's no info to retrieve, it says so" do
+      args = {id: 100, name: "Hipolito Rogahn", phone_num: "944.179.4883"}
+      rider = Rideshare::Rider.new(args)
+      expected = "No Match"
+      rider.all_drivers.must_equal expected
+    end
   end
 end

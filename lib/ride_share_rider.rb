@@ -9,6 +9,7 @@ module Rideshare
       @id = args[:id]
       @name = args[:name]
       @phone_num = args[:phone_num]
+      raise ArgumentError.new("Not a valid ID") if @id.class != Integer
     end
 
 #self.method1 : retrive all riders from the CSV file
@@ -21,10 +22,12 @@ module Rideshare
     end
 #self.method2 : find a specific rider using their numeric ID
     def self.find(id_num)
-
+      raise ArgumentError.new("Not a valid ID number") if id_num.class != Integer
+      result = nil
       self.all.each do |rider|
-        return rider if rider[:id] == id_num
+        result = rider if rider[:id] == id_num
       end
+      result ||= "No match"
     end
 #instance_method1 : retrieve the list of trip instances that only this rider has taken
     def all_trips
@@ -32,8 +35,12 @@ module Rideshare
     end
 #instance_method2 : retrieve the list of all previous drvier instances
     def all_drivers
-      drivers = all_trips.map{|h| h[:driver_id]}
-      return drivers.map {|driver| Rideshare::Driver.find(driver)}
+      if all_trips.class != String
+        drivers = all_trips.map{|h| h[:driver_id]}
+        return drivers.map {|driver| Rideshare::Driver.find(driver)}
+      else
+        return "No Match"
+      end
     end
 
   end
