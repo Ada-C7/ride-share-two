@@ -111,7 +111,9 @@ describe "Trip tests" do
       RideShare::Trip.find_driver_trips(2).length.must_equal 8
     end
 
-    #do a test for what to do if no trips were taken by a driver
+    it "Returns empty array if no trips are found" do
+      RideShare::Trip.find_driver_trips(10000).length.must_equal 0
+    end
   end
 
   describe "Trip.find_rider_trips" do
@@ -130,6 +132,8 @@ describe "Trip tests" do
       RideShare::Trip.find_rider_trips(41).length.must_equal 3
     end
 
-    #do a test for what to do if no trips were taken by a rider
+    it "Returns empty array if no trips are found" do
+      RideShare::Trip.find_rider_trips(10000).length.must_equal 0
+    end
   end
 end

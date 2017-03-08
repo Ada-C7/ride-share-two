@@ -1,20 +1,20 @@
 class RideShare::Trip
+  include Validation
   attr_reader :id, :driver_id, :rider_id, :date, :rating
 
   def initialize(trip_hash)
     raise ArgumentError.new("Rating must be between 1-5") if !(trip_hash[:rating].between?(1,5))
 
-    @id = RideShare::validate_int(trip_hash[:id], "Trip ID")
-    @driver_id = RideShare::validate_int(trip_hash[:driver_id], "Driver ID")
-    @rider_id = RideShare::validate_int(trip_hash[:rider_id], "Rider ID")
-    @date = Date.parse(RideShare::validate_string(trip_hash[:date], "Date"))
-    @rating = RideShare::validate_int(trip_hash[:rating], "Rating")
+    @id = validate_int(trip_hash[:id], "Trip ID")
+    @driver_id = validate_int(trip_hash[:driver_id], "Driver ID")
+    @rider_id = validate_int(trip_hash[:rider_id], "Rider ID")
+    @date = Date.parse(validate_string(trip_hash[:date], "Date"))
+    @rating = validate_int(trip_hash[:rating], "Rating")
   end
 
   def self.all
-    trips = []
-    CSV.read("support/trips.csv")[1..-1].each do |line|
-      trips << RideShare::Trip.new( {
+    return CSV.read("support/trips.csv")[1..-1].map do |line|
+      new( {
         id: line[0].to_i,
         driver_id: line[1].to_i,
         rider_id: line[2].to_i,
@@ -22,32 +22,15 @@ class RideShare::Trip
         rating: line[4].to_i
       } )
     end
-    return trips
   end
 
   def self.find_driver_trips(driver_id)
-    trips = RideShare::Trip.all
-    drivers_trips = []
-
-    trips.each do |trip|
-      drivers_trips << trip if driver_id == trip.driver_id
-    end
-
-    #deal with if no trips with that driver
-
-    return drivers_trips
+    trips = all
+    return trips.select { |trip| driver_id == trip.driver_id }
   end
 
   def self.find_rider_trips(rider_id)
-    trips = RideShare::Trip.all
-    riders_trips = []
-
-    trips.each do |trip|
-      riders_trips << trip if rider_id == trip.rider_id
-    end
-
-    #deal with if no trips with that rider
-
-    return riders_trips
+    trips = all
+    return trips.select { |trip| rider_id == trip.rider_id }
   end
 end

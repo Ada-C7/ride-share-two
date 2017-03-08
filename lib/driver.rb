@@ -1,29 +1,26 @@
 class RideShare::Driver
+  include Validation
   attr_reader :id, :name, :vin
 
   def initialize(driver_hash)
-    @id = RideShare::validate_int(driver_hash[:id], "Driver ID")
-    @name = RideShare::validate_string(driver_hash[:name], "Name")
-    @vin = RideShare::validate_string(driver_hash[:vin], "VIN")
+    @id = validate_int(driver_hash[:id], "Driver ID")
+    @name = validate_string(driver_hash[:name], "Name")
+    @vin = validate_string(driver_hash[:vin], "VIN")
   end
 
   def self.all
-    drivers = []
-    CSV.read("support/drivers.csv")[1..-1].each do |line|
-      drivers << RideShare::Driver.new( {
+    return CSV.read("support/drivers.csv")[1..-1].map do |line|
+      new( {
         id: line[0].to_i,
         name: line[1],
         vin: line[2]
       } )
     end
-    return drivers
   end
 
   def self.find(id)
-    drivers = RideShare::Driver.all
-    drivers.each do |driver|
-      return driver if id == driver.id
-    end
-    raise NoDriverError.new("Driver with that ID does not exist")
+    found_driver = all.find { |driver| driver.id == id }
+    raise NoDriverError.new("Driver with that ID does not exist") if found_driver == nil
+    return found_driver
   end
 end
