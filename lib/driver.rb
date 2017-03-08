@@ -28,12 +28,12 @@ module RideShare
     end
 
     def trips
-      RideShare::Trip.find_drivers(@id)
+      RideShare::Trip.find_by_driver(@id)
     end
 
     def average_rating
       all_ratings = trips.map { |trip| trip.rating }
-      all_ratings.inject(:+) / all_ratings.length
+      all_ratings.inject(:+).to_f / all_ratings.length
     end
 
   end

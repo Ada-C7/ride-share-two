@@ -28,12 +28,12 @@ module RideShare
       end
     end
 
-    def self.find_drivers(driver_id)
+    def self.find_by_driver(driver_id)
       raise ArgumentError.new("The driver ID is invalid.") if driver_id.class != Integer
       self.all.find_all { |trip| trip.driver_id == driver_id }
     end
 
-    def self.find_riders(rider_id)
+    def self.find_by_rider(rider_id)
       raise ArgumentError.new("The rider ID is invalid.") if driver_id.class != Integer
       self.all.find_all { |trip| trip.rider_id == rider_id }
     end

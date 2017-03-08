@@ -1,9 +1,6 @@
 require_relative 'spec_helper'
 
-# Each driver should:
 
-# Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
-# use InvalidVinError
 describe "Driver" do
   let(:drivers) { RideShare::Driver.all }
 
@@ -29,7 +26,6 @@ describe "Driver" do
       proc {
         RideShare::Driver.new(777, "Vin Diesel", "FASTNFURIOUS@@!!7")
       }.must_raise InvalidVinError
-
       proc {
         RideShare::Driver.new(777, "Vin Diesel", "FASTNFURIOUS007")
       }.must_raise InvalidVinError
@@ -43,12 +39,13 @@ describe "Driver" do
   end
 
 
-  # retrieve all drivers from the CSV file
   describe "Driver#all" do
 
     it "returns an array of Driver instances" do
       drivers.must_be_kind_of Array
-      drivers.each { |driver| driver.must_be_instance_of RideShare::Driver }
+      drivers.all? do | driver |
+        driver.must_be_instance_of RideShare::Driver
+      end
     end
 
     it "returns array with the correct number of Drivers from csv" do
@@ -94,22 +91,19 @@ describe "Driver" do
   end
 
 
-  # retrieve the list of trip instances that only this driver has taken
   describe "Driver#trips and #ratings" do
     let(:shakira) { RideShare::Driver.new(16, "Shakira Stamm", "SALUVSAL3WA67SBPZ") }
 
     it "returns an array whose length matches the number of Driver's trips" do
       shakira.trips.must_be_kind_of Array
-      shakira.trips.length.must_equal 6
-      # or must_equal trip.find_drivers(16)
+      shakira.trips.length.must_equal RideShare::Trip.find_by_driver(16).length
     end
 
     it "returns an array of all Trip instances" do
       shakira.trips.all? do | trip |
-        trip.class.must_be_instance_of RideShare::Trip
+        trip.must_be_instance_of RideShare::Trip
       end
     end
-
 
     it "returns correct average rating for a Driver" do
       # (2 + 5 + 1 + 2 + 4 + 1) / 6
