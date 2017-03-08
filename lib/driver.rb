@@ -5,9 +5,13 @@ module RideShare
 
     # creates driver that has an ID, name, and vehicle identification number (vin)
     def initialize(id, name, vin)
-      @id = id.to_i
+      raise ArgumentError.new("ID must be integer") if id.class != Integer
+      raise ArgumentError.new("Name must be string") if name.class != String
+      raise ArgumentError.new("Vin must be 17 character string") if vin.class != String || vin.length != 17
+
+      @id = id
       @name = name
-      @vin = vin.length == 17 ? vin : "00000000000000000"
+      @vin = vin #.length == 17 ? vin : "00000000000000000"
     end
 
 
@@ -28,7 +32,7 @@ module RideShare
       all_drivers = []
 
       CSV.foreach("support/drivers.csv", :headers => true) do | line |
-        id = line[0]
+        id = line[0].to_i
         name = line[1]
         vin = line[2]
 

@@ -2,19 +2,33 @@ require_relative 'spec_helper'
 
 describe "RideShare::Driver" do
 
-  let(:new_driver) { RideShare::Driver.new("Kelsey", 1234, "234235234345") }
-  let(:new_driver2) { RideShare::Driver.new("Kelsey", 1234, "E98731") }
+  let(:new_driver) { RideShare::Driver.new(1234, "Kelsey", "23423523434500000") }
+  let(:new_driver2) { RideShare::Driver.new(1234, "Kelsey", "E98731") }
   let(:valid_driver) { RideShare::Driver.find(17)}
 
 
   describe "RideShare::Driver#iniitalize" do
 
-    it "A new driver can be initialized with a name, ID, and vin" do
-      new_driver.must_be_instance_of RideShare::Driver
+    let(:driver_init) { RideShare::Driver.new(253, "Harry Potter", "123EFC345EGB178EX")}
+
+    it "A new driver can be initialized with a ID, name, and vin" do
+      driver_init.must_be_instance_of RideShare::Driver
     end
 
-    it "If driver has invalid vin, will default to '00000000000000000'" do
-      new_driver2.vin.must_equal "00000000000000000"
+    it "Will raise an argument error if name is not a string" do
+      proc { RideShare::Driver.new(8026, 1234, "234235234345") }.must_raise ArgumentError
+    end
+
+    it "Will raise an argument error if ID is not an integer" do
+      proc { RideShare::Driver.new("8026", 1234, "234235234345") }.must_raise ArgumentError
+    end
+
+    it "Will raise an argument error if vin is not a string" do
+      proc { RideShare::Driver.new(8026, 1234, 89034) }.must_raise ArgumentError
+    end
+
+    it "Will raise an argument error if vin is not a string with 17 characters" do
+      proc { RideShare::Driver.new(8026, 1234, "23423234345") }.must_raise ArgumentError
     end
 
   end
@@ -22,20 +36,26 @@ describe "RideShare::Driver" do
 
   describe "RideShare::Driver#trips" do
 
+    let(:driver_trips) { RideShare::Driver.find(25).trips}
+
     it "Returns an array" do
-      valid_driver.trips.must_be_instance_of Array
+      driver_trips.must_be_instance_of Array
     end
 
     it "All objects in the array are RideShare::Trip instances" do
-      valid_driver.trips.each do | trip |
+      driver_trips.each do | trip |
         trip.must_be_instance_of RideShare::Trip
       end
     end
 
     it "The driver_id of each trip matches the given argument" do
-      valid_driver.trips.each do | trip |
-        trip.driver_id.must_equal 17
+      driver_trips.each do | trip |
+        trip.driver_id.must_equal 25
       end
+    end
+
+    it "Returns the correct number of trips" do
+      driver_trips.length.must_equal 6
     end
 
   end
