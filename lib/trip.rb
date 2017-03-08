@@ -38,5 +38,13 @@ module RideSharing
       return all_trips_for_rider
     end
 
+    def find_driver
+      RideSharing::Driver.find(@driver_id)
+    end
+
+    def find_rider
+      RideSharing::Rider.find(@rider_id)
+    end
+
   end # End of class Trip
 end # End of module RideSharing

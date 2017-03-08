@@ -55,11 +55,19 @@ describe "Driver" do
       returned_object.must_be_kind_of RideSharing::Driver
     end
 
+    it "returns right name" do
+      returned_object = RideSharing::Driver.find(1)
+      returned_object.name.must_equal "Bernardo Prosacco"
+      returned_object = RideSharing::Driver.find(10)
+      returned_object.name.must_equal "Dr. Kenton Berge"
+    end
+
     it "Throws an error if id is not found" do
       proc{
         RideSharing::Driver.find(101)
       }.must_raise ArgumentError
     end
+
   end # End of describe "Driver#self.find"
 
 

@@ -26,8 +26,8 @@ module RideSharing
       return all_drivers
     end
 
-    def self.find(id)
-      found_driver = self.all.select { |obj| obj.id == id}
+    def self.find(driver_id)
+      found_driver = self.all.select { |driver| driver.id == driver_id}
       raise ArgumentError.new("No such id number exist") if found_driver == []
       return found_driver.first
     end

@@ -100,7 +100,7 @@ describe "Trip" do
       end
     end
 
-    it "Must return an array of Trip objects only for driver with id 1" do
+    it "Must return an array of Trip objects only for rider with id 1" do
       trip_collection
       trip_collection.each do |obj|
         obj.rider_id.must_equal 104
@@ -108,6 +108,24 @@ describe "Trip" do
     end
 
   end # End of describe "#self.find_all_trips_for_rider"
+
+  describe "#find_driver" do
+    let(:trip1) { RideSharing::Trip.new(1, 1, 54, "2016-04-05", 3)}
+    it "Return must be an object of class RideSharing::Driver" do
+      trip1
+      trip1.find_driver.must_be_kind_of RideSharing::Driver
+    end
+
+  end # End of describe "#find_driver"
+
+  describe "#find_rider" do
+    let(:trip1) { RideSharing::Trip.new(1, 1, 54, "2016-04-05", 3)}
+    it "Return must be an object of class RideSharing::Driver" do
+      trip1
+      trip1.find_rider.must_be_kind_of RideSharing::Rider
+    end
+
+  end # End of describe "#find_driver"
 
 
 
