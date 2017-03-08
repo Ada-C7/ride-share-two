@@ -16,17 +16,19 @@ module RideShare
       super("./support/riders.csv")
     end
 
+#refactor the tests to accept an object, not this mess
     def self.find(id)
       account = super(id)
       account = [account.id, account.name, account.phone_num]
     end
 
     def return_all_trips(id)
-      rider_trips = RideShare::Trip.all.select { |trip| trip.rider_id == id}
+      rider_trips = RideShare::Trip.rider_find(id)
       raise ArgumentError.new "Sorry, this rider has no trips" if rider_trips.length < 1
       rider_trips
     end
 
+#refactor the tests to accept an object, not this mess
     def all_trips(id)
       return_all_trips(id).map do |trip|
         {trip_id: trip.id, driver_id: trip.driver_id, date: trip.date, rating: trip.rating}

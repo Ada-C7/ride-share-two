@@ -14,11 +14,23 @@ module RideShare
     def self.all
       super('./support/trips.csv')
     end
-
+    #refactor this stuff!
     def self.find(id)
       account = super(id)
       account = [account.id, account.driver_id, account.rider_id, account.date, account.rating]
     end
+
+    def self.rider_find(id)
+      self.all.select { |trip| trip.rider_id == id }
+    end
+
+    def self.driver_find(id)
+      self.all.select { |trip| trip.driver_id == id}
+    end
+    #write these tomorrow:
+    #retrieve the associated driver instance through the driver ID
+    #retrieve the associated rider instance through the rider ID
+
 
   end
 end

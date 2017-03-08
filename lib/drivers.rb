@@ -22,10 +22,12 @@ module RideShare
     end
 
     def return_all_trips(id)
-      driver_trips = RideShare::Trip.all.select { |trip| trip.driver_id == id }
+      driver_trips = RideShare::Trip.driver_find(id)
       raise ArgumentError.new "Sorry, this driver has no trips" if driver_trips.length < 1
       driver_trips
     end
+
+# refactor the tests associated with this to make it okay to return a trip object
 
     def all_trips(id)
       return_all_trips(id).map do |trip|
