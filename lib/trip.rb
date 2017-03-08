@@ -43,12 +43,13 @@ module RideShare
       return match
     end
 
-    def self.find_by_rider(rider_id)
-      # returns all Trip instances with given rider ID
-    end
-
     def get_driver
       # retrieve Driver instance with this trip's driver_id
+      Driver.find(driver_id)
+    end
+
+    def self.find_by_rider(rider_id)
+      # returns all Trip instances with given rider ID
     end
 
     def get_rider
