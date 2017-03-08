@@ -22,7 +22,6 @@ describe "Trip" do
       }.must_raise ArgumentError
     end
 
-
     it "raises an Argument Error for invalid date" do
 
       proc {
@@ -46,7 +45,6 @@ describe "Trip" do
       }.must_raise BadRatingError
     end
 
-
   end
 
   describe "all" do
@@ -60,7 +58,7 @@ describe "Trip" do
       end
     end
 
-    it "the Array length equals the number of lines in the csv file minus header row" do
+    it "Array length equals number of lines in csv file minus header row" do
       trips.length.must_equal 600
     end
 
@@ -68,15 +66,10 @@ describe "Trip" do
       proc {
         RideShare::Trip.all
       }.must_output /.+/
-
     end
-
   end
 
   describe "find_trips_by_rider" do
-    it "takes a rider_id" do
-      skip
-    end
 
     it "returns an array of trips" do
       rider_trips = RideShare::Trip.find_trips_by_rider 140
@@ -86,38 +79,39 @@ describe "Trip" do
       #everything in the array must be a trip instance
     end
 
-    it "must match the rider_id" do
+    it "trip rider id must match passed rider_id" do
       rider_trips = RideShare::Trip.find_trips_by_rider 63
       rider_trips.length.must_equal 3
-      rider_trips.each do |rider|
-        rider.rider_id.must_equal 63
-      end
+      rider_trips.all? { |rider| rider.rider_id.must_equal 63 }
     end
 
-    it "must return empty Array if that rider id can't be found" do
+    it "returns empty Array if rider id can't be found" do
       rider_trips = RideShare::Trip.find_trips_by_rider 777
       rider_trips.must_be_instance_of Array
       rider_trips.length.must_equal 0
     end
-    #all rider_ids must match the passed argument
   end
 
-  describe "find_trips_by_Driver" do
-    it "takes a driver_id" do
+  describe "find_trips_by_driver" do
+
+    it "returns empty array if no trips assoc. with driver" do
+      driver_trips = RideShare::Trip.find_trips_by_driver 777
+      driver_trips.must_be_instance_of Array
+      driver_trips.length.must_equal 0
     end
 
-    it "raises/does something if it can't find that driver_id" do
+    it "returns Array of trips" do
+      driver96_trips = RideShare::Trip.find_trips_by_driver 96
+      driver96_trips.must_be_instance_of Array
+      driver96_trips.length.must_equal 7
     end
 
-    it "returns an array of trips" do
-      #object must be an array
-      #everything in the array must be a trip instance
+    it "all trips match the driver_id" do
+      driver96_trips = RideShare::Trip.find_trips_by_driver 96
+      driver96_ids = driver96_trips.map {|trip| trip.driver_id}
+      driver96_ids.all? { |id| id.must_equal 96}
     end
 
-    it "must match the driver_id" do
-      #all rider_ids must match the passed argument
-      #all trips that match the driver_id must be included (How to test?)
-    end
   end
 
   describe "driver" do
@@ -127,12 +121,12 @@ describe "Trip" do
       trip.driver.must_be_instance_of RideShare::Driver
     end
 
-    it "lets you know if it doesn't have the driver info" do
+    it "returns nil if driver isn't found" do
       fake_trip = RideShare::Trip.new(450, 7676, 8734, "2016-06-01", 5)
       fake_trip.driver.must_be_instance_of NilClass
-
     end
   end
+
 
   describe "rider" do
     it "returns a Rider instance" do
@@ -144,7 +138,7 @@ describe "Trip" do
       # CSV file: 24,75,280,2015-11-04,4
     end
 
-    it "returns nil if the rider isn't found" do
+    it "returns nil if rider isn't found" do
       #don't think this is possible to test through current CSV files?
       trip =  RideShare::Trip.new(6500, 727272, 7845, "2016-12-29", 4)
       rider_info = trip.rider

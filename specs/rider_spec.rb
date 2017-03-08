@@ -73,7 +73,7 @@ describe "Rider" do
 
   describe "drivers" do
 
-    it "returns an Array of Trips" do
+    it "returns an Array of Drivers" do
       rider = riders[53]
       rider.id.must_equal 54
       rider.must_be_instance_of RideShare::Rider
@@ -86,8 +86,13 @@ describe "Rider" do
       all_drivers.length.must_equal 2
     end
 
-    it "finds all the trips in the given array that match the driver instance" do
-      #HOW TO DO THIS??
+    it "each Driver is only included once in Array" do
+      rider41 = riders[40]
+      rider41.drivers.length.must_equal 2
+
+      rider250 = riders[249]
+      rider250.drivers.length.must_equal 3
+
     end
 
   end

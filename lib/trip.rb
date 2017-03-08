@@ -25,7 +25,7 @@ module RideShare
 
     def self.all
       trips = []
-      temp_csv = CSV.read("/Users/sai/Documents/ada/projects/ride-share-two/support/trips.csv")
+      temp_csv = CSV.read("support/trips.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
 
 
@@ -33,7 +33,7 @@ module RideShare
         begin
           trips << Trip.new(trip[0].to_i, trip[1].to_i, trip[2].to_i, trip[3], trip[4].to_i)
         rescue
-          puts "Rating needs to be a number between 1 and 5. You entered: #{trip[4]}. Entry not included. Please update CSV file."
+          puts "Rating needs to be a number between 1 and 5. You entered: #{trip[4]}.\nEntry not included. Please update CSV file."
         end
       end
 
@@ -62,8 +62,7 @@ module RideShare
     end
 
     def rider
-      rider_info = Rider.find @rider_id
-      return rider_info
+      return Rider.find @rider_id
       #call Rider.find to return Rider instance associated with the rider_id of the trip instance
     end
 

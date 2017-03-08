@@ -25,7 +25,7 @@ module RideShare
           drivers << Driver.new(driver[0].to_i, driver[1], driver[2])
         rescue
           drivers << Driver.new(driver[0].to_i, driver[1], "0"*17)
-          puts "Invalid vin! Dummy vin {#{'0'*17}} used in entry #{driver} from CSV file"
+          puts "Invalid vin! Dummy vin {#{'0'*17}} used in\nentry #{driver} from CSV file"
         end
 
       end
@@ -47,7 +47,8 @@ module RideShare
       driver_trips = Trip.find_trips_by_driver @id
       ratings = driver_trips.map { |trip| trip.rating}
       total_rating = ratings.inject(:+).to_f
-      return total_rating/driver_trips.length
+      average_rating = total_rating/driver_trips.length
+      return average_rating.round(2)
       #returns average rating of those trips
     end
 

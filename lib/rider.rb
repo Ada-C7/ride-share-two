@@ -11,7 +11,7 @@ module RideShare
 
     def self.all
       riders = []
-      temp_csv = CSV.read("/Users/sai/Documents/ada/projects/ride-share-two/support/riders.csv")
+      temp_csv = CSV.read("support/riders.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |rider|
         riders << Rider.new(rider[0].to_i, rider[1], rider[2])
@@ -35,7 +35,9 @@ module RideShare
     def drivers
       all_trips = trips
       driver_ids = all_trips.map { |trip| trip.driver_id }
-      return driver_ids.map { |id| Driver.find(id) }
+      # unique_driver_ids = driver_ids.uniq
+      unique_driver_ids = driver_ids.uniq
+      return unique_driver_ids.map { |id| Driver.find(id) }
 
 
       #look through trips and for each trip instance, use the driver_id associated with the trip (trip.driver_id) to call Driver.find(driver_id)

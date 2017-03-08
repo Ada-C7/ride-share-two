@@ -4,7 +4,7 @@ describe "Drivers" do
   let(:drivers) {RideShare::Driver.all }
 
   describe "initialize" do
-    it "raises an Argument Error if id is not an Integer" do
+    it "raises an Argument Error if ID is not an Integer" do
       proc {
         RideShare::Driver.new("65a", "sai", "SALUVSAL3WA67SBPZ")
       }.must_raise ArgumentError
@@ -47,20 +47,18 @@ describe "Drivers" do
     end
 
 
-    it "rescues an invalid vin and replaces with a bunch of 0000s" do
+    it "rescues invalid vin & replaces with #{'0'*17}" do
 
-      #also this happens every.single.time driver.all is called in the code yay
+      #also this happens every.single.time driver.all is called in the tests, so yay for that
       proc {
         RideShare::Driver.all
       }.must_output /.+/
 
+      #bad vin is at driver 101
       ramona = drivers[100]
       ramona.vin.must_equal "0"*17
 
-      #bad line is driver 101
-
     end
-
   end
 
   describe "find" do
@@ -80,7 +78,7 @@ describe "Drivers" do
 
   describe "trips" do
 
-    it "returns an Array of trips" do
+    it "returns an Array of Trip objects" do
       driver = drivers[50]
       driver.trips.must_be_instance_of Array
       driver.trips.each do |trip|
@@ -107,6 +105,7 @@ describe "Drivers" do
 
     it "returns a float" do
       driver = drivers[34]
+      driver.trips.length.must_equal 2
       driver.rating.must_be_instance_of Float
       driver.rating.must_be :<=, 5
       driver.rating.must_be :>=, 1
