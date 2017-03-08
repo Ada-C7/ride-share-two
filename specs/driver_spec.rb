@@ -72,8 +72,7 @@ describe "Driver" do
 
   describe "get_trips" do
     it "retrieves a list of trip instances with this driver's id" do
-      trip_list = driver.get_trips
-      sample_trip = trip_list.first
+      sample_trip = driver.get_trips.first
       sample_trip.must_be_instance_of RideShare::Trip
       sample_trip.driver_id.must_equal driver.id
     end

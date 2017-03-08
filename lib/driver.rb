@@ -1,4 +1,3 @@
-require 'pry'
 module RideShare
 
   class Driver
@@ -51,7 +50,7 @@ module RideShare
 
       ratings.reduce(:+)/num_trips
 
-      # avoid dividing by zero
+      # TODO: avoid dividing by zero
     end
 
   end
