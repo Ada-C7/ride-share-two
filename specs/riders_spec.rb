@@ -5,7 +5,7 @@ describe "rider_id" do
 
   describe "Diver#initialize" do
     it "takes an ID, Name, and Phone Number to initialize" do
-      my_driver.must_respond_to :id
+      my_rider.must_respond_to :id
     end
   end
 
