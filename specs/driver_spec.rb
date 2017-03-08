@@ -1,6 +1,6 @@
 require_relative "spec_helper"
 
-describe "Driver" do
+xdescribe "Driver" do
   describe "#initialize" do
     it "Takes an id, name and vehicle number" do
       id = "007"

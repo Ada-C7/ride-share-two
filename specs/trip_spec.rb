@@ -100,7 +100,7 @@ describe "Trip" do
       end
     end
 
-    it "Must return an array of Trip objects only for rider with id 1" do
+    it "Must return an array of Trip objects only for rider with id 104" do
       trip_collection
       trip_collection.each do |obj|
         obj.rider_id.must_equal 104
