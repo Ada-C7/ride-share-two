@@ -26,12 +26,14 @@ module RideShare
 
     def self.find_driver(id_d)
       all.each do |line|
+        # return line.name_d if line.id_d == id_d
         return line if line.id_d == id_d
+
       end
     end
 
-    def self.find_drivers_trips(id_d)
-      RideShare::Trip.trips_made_by_driver(id_d)
+    def find_drivers_trips
+      RideShare::Trip.trips_made_by_driver(@id_d)
     end
 
     def drivers_rating(id_d)
@@ -67,10 +69,23 @@ module RideShare
       info
     end
 
-    def self.find_riders_trips(id_r)
-      RideShare::Trip.trips_taken_by_rider(id_r)
+    def self.find_rider(id_r)
+      all.each do |line|
+        return line.name_r if line.id_r == id_r
+      end
     end
 
+    def find_riders_trips
+      RideShare::Trip.trips_taken_by_rider(@id_r)
+    end
+
+    def rider_drivers
+      @rider_drivers = []
+      find_riders_trips.each do |trip|
+        @rider_drivers << RideShare::Driver.find_driver(trip.id_d)
+      end
+      @rider_drivers
+    end
   end#end of Rider class
 
   class Trip
@@ -125,5 +140,7 @@ end#end of RideShare Module
 # puts RideShare::Rider.find_riders_trips(111)
 
 
-# puts d.drivers_rating(1)
+# print d.rider_drivers
+# puts
+# print d.find_riders_trips
 # puts RideShare::Driver.find_drivers_trips(1)

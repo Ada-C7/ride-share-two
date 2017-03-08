@@ -70,9 +70,15 @@ describe "RideShare Module" do
     end#end of method all
 
     describe "Driver#self.find_driver" do
-      it "return an object of Driver class" do
-        driver.find_driver(1).must_be_instance_of RideShare::Driver
-      end
+      # it "return an object of String class" do
+      #   driver.find_driver(1).must_be_instance_of String
+      # end
+      #
+      # it "Returns driver's name" do
+      #   driver.find_driver(1).must_equal 'Bernardo Prosacco'
+      #   driver.find_driver(100).must_equal 'Minnie Dach'
+      #   driver.find_driver(56).must_equal 'Adriel Swift'
+      # end
 
       it "Returns the correct driver's information" do
         driver.find_driver(100).name_d.must_equal last_driver.name_d
@@ -81,14 +87,14 @@ describe "RideShare Module" do
       end
     end#end of self.find_driver method
 
-    describe "Driver#self.find_drivers_trips" do
+    describe "Driver#find_drivers_trips" do
       it "return an Array" do
-        driver.find_drivers_trips(1).must_be_instance_of Array
+        first_driver.find_drivers_trips.must_be_instance_of Array
       end
 
       it "return an Array filled with objects from Trip class" do
-        driver.find_drivers_trips(1)[0].must_be_instance_of RideShare::Trip
-        driver.find_drivers_trips(1).last.must_be_instance_of RideShare::Trip
+        first_driver.find_drivers_trips.first.must_be_instance_of RideShare::Trip
+        random_driver.find_drivers_trips.last.must_be_instance_of RideShare::Trip
       end
     end#end of find_drivers_trips class method
 
@@ -122,6 +128,7 @@ describe "RideShare Module" do
         rider_ins.must_respond_to :phone_number
         rider_ins.phone_number.must_equal phone_number
       end
+
       it "Creater a new instance of Rider class" do
         random_rider.class.must_equal RideShare::Rider
       end
@@ -166,16 +173,48 @@ describe "RideShare Module" do
       end
     end#end of method all
 
-    describe "Rider#self.find_riders_trips" do
+    describe "Rider#self.find_rider" do
+      it "return an object of String class" do
+        rider.find_rider(1).must_be_instance_of String
+      end
+
+      it "Returns rider's name" do
+        rider.find_rider(1).must_equal 'Nina Hintz Sr.'
+        rider.find_rider(300).must_equal 'Miss Isom Gleason'
+        rider.find_rider(169).must_equal 'Jaclyn Upton'
+      end
+    end#end of self.find_rider method
+
+    describe "Rider#find_riders_trips" do
       it "return an Array" do
-        rider.find_riders_trips(5).must_be_instance_of Array
+        first_rider.find_riders_trips.must_be_instance_of Array
       end
 
       it "return an Array filled with objects from Trip class" do
-        rider.find_riders_trips(5)[0].must_be_instance_of RideShare::Trip
-        rider.find_riders_trips(5).last.must_be_instance_of RideShare::Trip
+        first_rider.find_riders_trips.first.must_be_instance_of RideShare::Trip
+        random_rider.find_riders_trips.last.must_be_instance_of RideShare::Trip
       end
-    end#end of find_drivers_trips class method
+    end#end of find_riders_trips method
+
+    describe "Rider#riders_drivers" do
+      it "returns an Array filled with Driver instances" do
+        first_rider.rider_drivers.must_be_instance_of Array
+        first_rider.rider_drivers[0].must_be_instance_of RideShare::Driver
+        # random_rider.rider_drivers.last.must_be_instance_of String
+      end
+
+      it "In the returned array there is/are the names of the drivers" do
+        first_rider.rider_drivers[0].name_d.must_equal 'Ms. Winston Emard'
+        first_rider.rider_drivers[1].name_d.must_equal 'Federico Bins V'
+        random_rider.rider_drivers.first.name_d.must_equal 'Dr. Kenton Berge'
+      end
+    end
+
+    # let(:first_rider) {RideShare::Rider.new(1, 'Nina Hintz Sr.', '560.815.3059')}
+    # let(:last_rider) {RideShare::Rider.new(300, 'Miss Isom Gleason', '791-114-8423 x70188')}
+    # let(:random_rider) {RideShare::Rider.new(169, 'Jaclyn Upton', '458-797-3216')}
+    # let(:rider) {RideShare::Rider}
+
 
   end#end of the Rider class
 end#end of the Module RideShare
