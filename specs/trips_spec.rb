@@ -65,7 +65,7 @@ describe "Trips" do
 
         end
 
-        describe "Trips find by driver method" do
+        describe "Trips find driver method" do
             before do
                 new_trip = RideShare::Trips.new(25, 100, 90, "feb 29", 4)
                 @driver = new_trip.find_driver
@@ -78,11 +78,35 @@ describe "Trips" do
 
             it "Returns an instance of a RideShare::Driver" do
                 @driver.id.must_equal 90
+                @driver.name.must_equal "Kristy Cremin"
+                @driver.vin.must_equal "1F9FF7C27LJA041VR"
             end
+
+            #this isn't working for some reason
+            # it "Raises error if invalid driver entered" do
+            #     proc{ trip = RideShare::Trips.new(25, 100, 200, "feb 29", 4)}.must_raise ArgumentError
+            # end
 
         end
 
 
+        describe "Trips find rider method" do
+            before do
+                new_trip = RideShare::Trips.new(25, 100, 90, "feb 29", 4)
+                @rider = new_trip.find_rider
+            end
+
+            it "Returns and instance of RideShare::Rider" do
+                @rider.must_be_instance_of RideShare::Rider
+            end
+
+
+            it "Returns correct instance of RideShare::Driver" do
+            @rider.id.must_equal 100
+            @rider.name.must_equal "Hipolito Rogahn"
+            @rider.phone_number.must_equal "944.179.4883"
+            end
+        end
 
 
 

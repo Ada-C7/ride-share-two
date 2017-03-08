@@ -36,6 +36,11 @@ module RideShare
             RideShare::Driver.find(@driver_id)
         end
 
+        def find_rider
+            RideShare::Rider.find(@rider_id)
+            
+        end
+
     end
 
 end
