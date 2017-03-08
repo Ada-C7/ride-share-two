@@ -53,9 +53,10 @@ class Driver
   end
 
 
-  def driver_trips(trips)
-    trips_by_driver = []
-    trip.trips_by_driver(id)
+  def driver_trips
+    driver_trips = []
+    #local_var = class object.class_method(pass arg)
+    driver_trips = Trip.trips_by_driver(@driver_id)
     #retrieve a list of trip instances that only this driver has taken
   end
 

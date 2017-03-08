@@ -17,7 +17,7 @@
 
 class Trip
 
-attr_accessor :trip_id, :driver_id, :rider_id, :date, :rating
+  attr_accessor :trip_id, :driver_id, :rider_id, :date, :rating
 
   def initialize()
     @trip_id = hash[:trip_id]
@@ -51,26 +51,28 @@ attr_accessor :trip_id, :driver_id, :rider_id, :date, :rating
 
   end
 
-  def trip_driver(id)
-    #meth 2 instances by driver/unique to driver id
-    #trips.with_driver()
+  def self.trip_by_driver(id)
+    all_trips = Trip.all
+    find_trips = []
+    all_trips.each do |trip|
+      find_trips << trip if trip.driver_id == id
+      return find_trips
+      #given a driver id return all trips that have this driver id
+    end
+
   end
 
 
-  def trip_rider(id)
-    #meth 3 instances unique to rider
-    #trips
+  def self.trips_by_rider(id)
+    all_trips = Trip.all
+    find_trips = []
+    all_trips.each do |trip|
+      find_trips << trip if trip.rider_id == id
+      return find_trips
+      #return instances unique to rider
+      #trips
+    end
+    
+
   end
-
-
-  def trips_by_driver
-    #per rider object, return array of trip instances unique to driver
-  end
-
-
-  def trips_by_rider
-    #per rider object, return array of trip instances unique to rider
-  end
-
-end
- #class end
+end#class end
