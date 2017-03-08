@@ -2,8 +2,8 @@ require 'csv'
 
 module RideShare
   class Drivers
-    attr_reader :id, :name, :VIN
-    @@drivers
+    attr_reader :id, :name, :vin
+    # @@drivers
     # Initialize Drivers
     # set ID, Name, License and VIN as attr_reader
     # import csv file
@@ -16,6 +16,11 @@ module RideShare
     end
 
     def self.read_csv
+
+      @@drivers = CSV.read("support/riders.csv")[1..-1].map do |array_of_details|
+        Rider.new(array_of_details[0].to_i, array_of_details[1].to_s, array_of_details[2].to_s)
+      end
+
       @@drivers = CSV.read("support/drivers.csv")[1..-1].map! do |array_of_details|
         {
           id: array_of_details[0].to_i,
@@ -26,7 +31,7 @@ module RideShare
     end
 
     def self.all
-      @@drivers
+      read_csv
     end
 
     # def find_trips(id)
@@ -53,7 +58,7 @@ module RideShare
 
     # Find a specific driver(driver_id)
     # return the instance of that driver (hash of details)
-    
+
     def self.find(id)
       driver_details = nil
       @@drivers.each do |driver|

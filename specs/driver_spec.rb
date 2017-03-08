@@ -1,14 +1,15 @@
-require 'simplecov'
-SimpleCov.start
+require_relative 'spec_helper'
+# require 'simplecov'
+# SimpleCov.start
+#
+# require 'rake/testtask'
+# require 'minitest'
+# require 'minitest/autorun'
+# require 'minitest/reporters'
+# require_relative '../lib/drivers'
 
-require 'rake/testtask'
-require 'minitest'
-require 'minitest/autorun'
-require 'minitest/reporters'
-require_relative '../lib/drivers'
-
-Minitest::Reporters.use!
-Minitest::Reporters::SpecReporter.new
+# Minitest::Reporters.use!
+# Minitest::Reporters::SpecReporter.new
 
 describe "RideShare: Drivers" do
   let(:drivers) {RideShare::Drivers.read_csv}
