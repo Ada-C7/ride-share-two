@@ -45,4 +45,21 @@ class Trip
 
   end
 
+
+  def self.driver_find_all(search_id)
+    driver_trips = []
+    all_trips = self.all
+
+    all_trips.each do |trip|
+      if trip.driver == search_id
+        driver_trips << trip
+      end
+    end
+
+    raise ArgumentError.new("no matching trips for that driver") if driver_trips.length == 0
+
+    return driver_trips
+  end
+
+
 end

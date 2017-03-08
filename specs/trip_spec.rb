@@ -73,4 +73,24 @@ describe "Trip tests" do
 
   end
 
+  describe "Trip.driver_find_all(search_id)" do
+    before do
+      @csv_file = CSV.read("./support/trips.csv", {:headers => true})
+    end
+
+    it "returns an array of all trips for specific driver" do
+      Trip.driver_find_all(3).class.must_equal Array
+    end
+
+    it "each element in the array is a Trip" do
+      Trip.driver_find_all(3).each do |element|
+        element.class.must_equal Trip
+      end
+    end
+
+    it "raises an ArgumentError if there are no trips matching rider" do
+      proc {Trip.driver_find_all(@csv_file.length + 100)}.must_raise ArgumentError
+    end
+  end
+
 end
