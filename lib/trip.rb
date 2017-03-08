@@ -1,18 +1,35 @@
 # require_relative 'driver'
 # require_relative 'rider'
 require 'csv'
+require 'date'
 
 module RideShare
   class Trip
     attr_reader :trip_id, :rider_id, :driver_id, :date, :rating
     def initialize(hash)
-      raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
+      validate_input(hash)
       @trip_id = hash[:trip_id]
       @rider_id = hash[:rider_id]
       @driver_id = hash[:driver_id]
-      @date = hash[:date]
-      raise ArgumentError.new("Raiting should be 1 - 5 only") if !((1..5).include? hash[:rating])
+      @date = Date.strptime(hash[:date], "%Y-%m-%d")
       @rating = hash[:rating]
+    end
+
+    def validate_input(hash)
+      raise ArgumentError.new("Parameter must be hash only") if hash.class != Hash
+      raise ArgumentError.new("Raiting should be 1 - 5 only") if !((1..5).include? hash[:rating])
+      if (hash[:trip_id].class != Integer || hash[:trip_id] <= 0)
+        raise ArgumentError.new("Trip id must be positive integer only")
+      end
+      if hash[:rider_id].class != Integer
+        raise ArgumentError.new("Rider id must be integer only")
+      end
+      if hash[:driver_id].class != Integer
+        raise ArgumentError.new("Driver id must be integer only")
+      end
+      if hash[:date].class  != String
+        raise ArgumentError.new("Date must be string only")
+      end
     end
 
     def driver
@@ -63,7 +80,7 @@ module RideShare
       all_trips = []
       csv = CSV.read("support/trips.csv", 'r')
       csv.each do |line|
-      #to avoid putting first line from CSV file that contains column name:
+        #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
         hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i}
         all_trips << Trip.new(hash)
