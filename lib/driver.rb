@@ -1,4 +1,3 @@
-require 'csv'
 
 module Rideshare
   class Driver
@@ -15,7 +14,7 @@ module Rideshare
     def self.create_drivers
       hash = {}
       CSV.foreach('support/drivers.csv', {:headers => true, :header_converters=> :symbol}) do |row|
-        hash[row[0]] = self.new({driver_id:row[0], name:row[1], vin:row[2]})
+        hash[row[0]] = Driver.new({driver_id:row[0], name:row[1], vin:row[2]})
       end
       return hash
     end
@@ -75,4 +74,5 @@ module Rideshare
     #
   end
 end
-puts Rideshare::Driver.create_drivers
+
+# puts Rideshare::Driver.find_driver(17)

@@ -24,7 +24,7 @@ module Rideshare
     def self.find_rider(param)
 
       CSV.foreach('support/riders.csv', {:headers=> true, :header_converters => :symbol}) do |row|
-        return row[0] =  Rider.new({rider_id:row[0], name:row[1], phone_num:row[2]}) if row[0] == param.to_s
+        return  Rider.new({rider_id:row[0], name:row[1], phone_num:row[2]}) if row[0] == param.to_s
       end
     end
     # require '..support/riders.csv'
@@ -93,7 +93,7 @@ module Rideshare
     # end
     #
     #end
-end
+  end
 end
 #
 
