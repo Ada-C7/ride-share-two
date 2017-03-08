@@ -104,10 +104,15 @@ describe "Rider Class" do
       first.date.must_equal "2016-04-05"
     end
 
-    # it "Returns nil if a rider has no trips" do
-    #   rider = RideShare::Rider.find("100")
-    #   rider.trips.must_equal nil
-    # end
+    it "Returns nil if a rider has no trips" do
+      made_up_rider = RideShare::Rider.new({
+        :id => "0",
+        :name => "John Doe",
+        :phone_num => "560.815.3059"
+        })
+      made_up_rider.trips.must_be_nil
+    end
+    
   end
 
   describe "Drivers method" do

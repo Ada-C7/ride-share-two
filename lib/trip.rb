@@ -31,7 +31,9 @@
           trip_array << new_trip
       end
       trip_array.shift
-      trip_array.delete_if {|t| t.driver_id == "0" || t.rider_id == "0"}
+      trip_array.delete_if { |t|
+        !((1..100).include?(t.driver_id.to_i))  || !((1..300).include?(t.rider_id.to_i))
+      }
       return trip_array
     end
 

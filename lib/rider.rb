@@ -34,7 +34,7 @@
     end
 
     def self.find(id)
-      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/) || id = "0")
+      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/))
       riders = RideShare::Rider.all
       riders.each do |rider|
         return rider if rider.id == id
