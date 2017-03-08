@@ -69,12 +69,20 @@ describe "Driver.all" do
 end
 
 
-describe "Rescue bad vins" do
+describe "Exception for bad vins" do
 
+  it "" do
+    proc {
+      @driver_array << RideShare::Driver.new("100", "Minnie Dach", "1BADVIN11")
+    }.must_raise ArgumentError
+  end
+end
+
+describe "Allows for nil vins" do
   before do
     @driver_array = []
-    @driver_array << RideShare::Driver.new("1", "Bernardo Prosacco", "WBWSS52P9NEYLVD9")
-    @driver_array << RideShare::Driver.new("100", "Minnie Dach", "XF9Z0ST7X18WD41T")
+    @driver_array << RideShare::Driver.new("1", "Bernardo Prosacco", nil)
+    @driver_array << RideShare::Driver.new("100", "Minnie Dach", nil)
   end
 
   it "The info for invalid vins is correct with nil vin" do

@@ -147,7 +147,7 @@ describe "Trip.all" do
     end
   end
 
-  describe "find_rider" do
+  describe "find_driver" do
     before do
       trip_id = 1
       driver_id = 1
@@ -167,6 +167,21 @@ describe "Trip.all" do
     it "returns a driver instance" do
       @trip.find_driver.id.must_equal "1"
       @trip.find_driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+    end
+  end
+
+    describe "find_driver" do
+      before do
+        trip_id = 1
+        driver_id = 132
+        rider_id = 54
+        date = 2016-04-05
+        rating = 3
+        @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+      end
+
+    it "returns a nil if no driver found" do
+      @trip.find_driver.must_be_nil
     end
   end
 

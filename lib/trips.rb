@@ -61,7 +61,11 @@ module RideShare
 
     def find_driver
       id = driver_id.to_s
-      RideShare::Driver.find(id)
+      begin
+        RideShare::Driver.find(id)
+      rescue ArgumentError
+        return nil
+      end
       #instance method retrieve the associated driver instance through the driver ID
     end
 

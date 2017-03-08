@@ -18,12 +18,14 @@ module RideShare
       CSV.read("support/drivers.csv", {:headers => true}).each do |driver|
         begin
           drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
-        rescue
+        rescue ArgumentError
           drivers_array << (Driver.new(driver[0], driver[1], nil))
+          puts "not 17"
         end
       end
       drivers_array
     end
+
 
     def self.find(id) #Should we rescue this??
       driver_array = RideShare::Driver.all
@@ -32,7 +34,8 @@ module RideShare
               return driver
             end
           end
-          # raise ArgumentError.new "Account #{id} does not exist"
+          #
+          raise ArgumentError.new "Driver #{id} does not exist"
         # end
     end
 
@@ -59,15 +62,14 @@ module RideShare
       # call trips
     end
 #private
-    def verified_vin(vin)
-      if vin.length != 17
-        return nil
-      elsif vin.length == 17
-        return vin
-      else
-        raise ArgumentError.new("VIN must be 17 characters")
-      end
-    end
+
+def verified_vin(vin)
+  if vin == nil || vin.length == 17
+    return vin
+  else
+    raise ArgumentError.new("VIN must be 17 characters")
+  end
+end
 
 
   end #class
