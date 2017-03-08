@@ -67,8 +67,7 @@ describe "Rider" do
         end
 
         it "Raises and argument error for invalid ids" do
-            proc { RideShare::Driver.find(416) }.must_raise ArgumentError
-
+            proc { RideShare::Rider.find(416) }.must_raise ArgumentError
         end
     end
 
@@ -85,9 +84,8 @@ describe "Rider" do
 
     describe "Find all previous drivers for a rider" do
         before do
-            @my_rider = RideShare::Rider.new(116,"Miss Daisy","1231231234")
+            @my_rider = RideShare::Rider.new(54,"Miss Daisy","1231231234")
             @previous_drivers = @my_rider.previous_drivers
-
         end
 
         it "returns an array of previous drivers" do
@@ -95,8 +93,8 @@ describe "Rider" do
         end
 
         it "Every item in the array is an instance of driver" do
-            @previous_drivers.each do |rider|
-                rider.must_be_instance_of RideShare::Rider
+            @previous_drivers.each do |driver|
+                driver.must_be_instance_of RideShare::Driver
             end
 
         end

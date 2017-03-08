@@ -25,7 +25,9 @@ describe "Driver" do
         end
 
         it "Raises and error if the vin number is not the correct length" do
+            proc { @my_driver = RideShare::Driver.new(16, "Travis Bickle", "WBWSS52P9NEYLVD") }.must_raise ArgumentError
 
+            proc { @my_driver = RideShare::Driver.new(16, "Travis Bickle", "WBWSS52P9NEYLVDE")}.must_raise ArgumentError
 
         end
     end

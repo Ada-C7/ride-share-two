@@ -43,7 +43,7 @@ module RideShare
 
         def self.find_all_drivers(driver_id)
             all_trips = RideShare::Trip.all
-            
+
             rider_trips = []
 
             all_trips.each do |trip|
@@ -83,24 +83,24 @@ module RideShare
 
         def self.find_previous_drivers(id)
             all_trips = RideShare::Trip.all
-            previous_drivers = []
+
+            previous_drivers_id = []
+            previous_drivers_instances = []
 
             all_trips.each do |trip|
                 if trip.rider_id == id
-                    previous_drivers << trip.driver_id
+                    previous_drivers_id << trip.driver_id
                 end
             end
-            return previous_drivers
+
+            previous_drivers_id.each do |driver_id|
+                driver_instance = RideShare::Driver.find(driver_id)
+                previous_drivers_instances << driver_instance
+            end
+            return previous_drivers_instances
         end
-
-
     end
 end
 
 
-    #def rider_find_all(rider_find_all)
-    #self.all
-    #loops through the array returned by self.all and looks for rider_id matches
-    #each time there is a match, the instance is pushed to an array of trips for this rider
-    #return trips array
-    # end
+    
