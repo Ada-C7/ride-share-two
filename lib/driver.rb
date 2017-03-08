@@ -5,19 +5,17 @@ module RideShare
   class Driver
     attr_reader :id, :name, :vin
     # create new driver and take in id, name, vin
-    def initialize(driver_info) # ={}
+    def initialize(driver_info)
       @id = driver_info[:id]
       @name = driver_info[:name]
       @vin = driver_info[:vin]
     end
 
-    # instance method: trips
     def trips
-    # return collection of trip instances by this driver
     RideShare::Trip.by_driver(@id)
+    # return collection of trip instances by this driver
     end
 
-    # instance method: avg-rating
     def avg_rating
       ratings = trips.map {|trip| trip.rating.to_i }
       average = ratings.inject(:+)/ratings.length
@@ -25,7 +23,6 @@ module RideShare
       # return rounded average rating across all trips by this driver
     end
 
-    # class method: all
     def self.all
       @all_drivers = []
       # read in CSV file for all instances of drivers
@@ -40,11 +37,10 @@ module RideShare
       # return all instances of driver
     end
 
-    # class method: find(id)
     def self.find(driver_id)
-      # return specific instance of driver (previously instantiated)
       found_driver = @all_drivers.select { |instance| instance.id == driver_id }
       return found_driver[0]
+      # return specific instance of driver (previously instantiated)
     end
   end
 end

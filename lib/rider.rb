@@ -9,7 +9,6 @@ module RideShare
       @phone_number = rider_info[:phone_number]
     end
 
-    # class method: all
     def self.all
       @all_riders = []
       # read in CSV file for all instances of riders
@@ -24,28 +23,24 @@ module RideShare
       # return all instances of rider
     end
 
-    # class method: find(id)
     def self.find(rider_id)
-      # return specific instance of rider (previously instantiated)
       found_rider = @all_riders.select { |instance| instance.id == rider_id }
       return found_rider[0]
+      # return specific instance of rider (previously instantiated)
     end
 
-    # instance method: past_trips
     def past_trips
       RideShare::Trip.by_rider(@id)
+      # return collection of trip instances by this rider
     end
-    # return collection of trip instances by this rider
 
-    # instance method: past_drivers
     def past_drivers
       # instances of all Trips by the rider
       trips = RideShare::Trip.by_rider(@id)
-      driver_ids = trips.map { |trip| trip.driver_id }
       # find instances of Driver for unique ids
+      driver_ids = trips.map { |trip| trip.driver_id }
       driver_ids.uniq.map { |id| RideShare::Driver.find(id) }
+      # return collection of rider instances (through the trips functionality)
     end
-    # return collection of rider instances (through the trips functionality)
-
   end
 end

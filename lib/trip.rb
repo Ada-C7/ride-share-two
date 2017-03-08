@@ -3,12 +3,10 @@ require 'csv'
 # new Trip class, subclass of RideShare
 module RideShare
   class Trip
-    # capability to return driver_id or rider_id of trip instance (attr_readers)
     attr_reader :id, :driver_id, :rider_id, :date, :rating, :all
 
-    # initialize trip
     # take in id, driver_id, rider_id, date, rating as a hash
-    def initialize(trip_info) # ={}
+    def initialize(trip_info)
       @id = trip_info[:id]
       @driver_id = trip_info[:driver_id]
       @rider_id = trip_info[:rider_id]
@@ -37,6 +35,7 @@ module RideShare
       # find all instances of trips where rider_id matches
       @all.select { |trip| trip.rider_id == rider_id }
       # alert user if no trips with matching rider_id is found
+
       # return collection of trips by specific rider
     end
 
@@ -45,6 +44,7 @@ module RideShare
       # find all instances of trips where driver_id matches
         @all.select { |trip| trip.driver_id == driver_id }
       # alert user if no trips with matching driver_id is found
+
       # return collection of trips by specific driver
     end
 
