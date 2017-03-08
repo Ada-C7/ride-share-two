@@ -52,7 +52,6 @@ describe "Driver" do
       my_driver.average_rating.must_equal 4.2
     end
 
-    #PROBABLY SHOULD WRITE SOME MORE TESTS HERE!!
   end
 
   describe "find_all Driver class method" do

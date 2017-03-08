@@ -17,20 +17,15 @@ class RideShare::Driver
   end
 
   def average_rating
-    trips
     total = 0
+    trips.each { |trip| total += trip.rating }
 
-    trips.each do |trip|
-      total += trip.rating
-    end
     rating = (total.to_f / trips.length)
     return rating.round(1)
-    #returns an Integer.  Possible turn into a float?
   end
 
   def self.find_all
     drivers = []
-
     CSV.open("support/drivers.csv").each do |driver|
       begin
         drivers << RideShare::Driver.new(driver[0].to_i, driver[1], driver[2])
@@ -38,12 +33,14 @@ class RideShare::Driver
         puts "#{ e }"
       end
     end
+
     return drivers
   end
 
   def self.find_driver(driver_id)
     all_drivers = RideShare::Driver.find_all
     found_driver = all_drivers.find { |driver| driver.id == driver_id }
+
     return 0 if found_driver == nil
     return found_driver
   end

@@ -24,17 +24,15 @@ class RideShare::Trip
         puts "#{ e }"
       end
     end
+
     return trips
   end
 
   def self.find_all_driver(driver_id)
     all_trips = find_all
-    driver_trips = []
 
-    all_trips.each do |trip|
-      if trip.driver_id == driver_id
-        driver_trips << trip
-      end
+    driver_trips = all_trips.find_all do |trip|
+      trip.driver_id == driver_id
     end
 
     return 0 if driver_trips.empty?
@@ -43,12 +41,9 @@ class RideShare::Trip
 
   def self.find_all_rider(rider_id)
     all_trips = find_all
-    rider_trips = []
 
-    all_trips.each do |trip|
-      if trip.rider_id == rider_id
-        rider_trips << trip
-      end
+    rider_trips = all_trips.find_all do |trip|
+      trip.rider_id == rider_id
     end
 
     return 0 if rider_trips.empty?

@@ -17,15 +17,15 @@ class RideShare::Rider
   end
 
   def drivers
+    #adjust to be unique list??
     rider_trips = trips
-    rider_drivers = []
 
+    rider_drivers = []
     rider_trips.each do |trip|
       rider_drivers << RideShare::Driver.find_driver(trip.driver_id)
     end
 
     return rider_drivers
-
   end
 
   def self.find_all
