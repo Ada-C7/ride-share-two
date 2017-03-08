@@ -59,27 +59,16 @@ module RideShare
       end
     end
 
+    #optional
+    # For a given rider, add the ability
+    # to return the total amount of money they have spent on all trips
+
+    def total_amount_spent
+      all_rider_trips.each do |trip|
+        
+      end
+
+    end
+
   end
 end
-
-# rider_hash = {rider_id: 32, name: "Natalia", phone:  "1425394958"}
-# r = RideShare::Rider.new(rider_hash)
-# puts r.name
- #
-#  rider = RideShare::Rider.all[25]
-# rider.all_rider_drivers.each do  |driver|
-#   puts driver.name
-#   puts driver.driver_id
-# end
- # puts rider.rider_id
- # puts rider.all_rider_trips[0].trip_id
- #
- #
- #
-
-
-
- # puts rider
- # puts "a"
- # puts rider.rider_id
- # puts rider.all_rider_trips

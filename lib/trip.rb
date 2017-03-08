@@ -71,7 +71,8 @@ module RideShare
         #to avoid putting first line from CSV file that contains column name:
         next if line[0] == "trip_id"
         if rider_id == line[2].to_i
-          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i}
+          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i,
+            date: line[3], rating: line[4].to_i}, 
           all_rider_trips << Trip.new(hash)
         end
       end
@@ -81,7 +82,6 @@ module RideShare
       return all_rider_trips
     end
 
-    # retrieve all trips from the CSV file:
     def self.all_trips
       all_trips = []
       csv = CSV.read("support/trips.csv", 'r')
@@ -94,5 +94,35 @@ module RideShare
       all_trips
     end
 
+    def self.add_cost_duration_to_csv
+      array_of_random_prices = ["trip_cost"] # column name
+      600.times do
+        rand_num = rand(20.00...150.00).round(2)
+        array_of_random_prices << rand_num
+      end
+
+      array_of_random_durations = ["trip_duration(minutes)"]
+      600.times do
+        rand_num = rand(5...200)
+        array_of_random_durations << rand_num
+      end
+
+      helpers_array = CSV.read("support/trips.csv")
+      helpers_array.each do |c|
+        c << array_of_random_prices.shift
+        c << array_of_random_durations.shift
+      end
+      # rewrite csv file with new columns "trip_cost" and "duration"
+      CSV.open('support/trips.csv', 'w') do |csv_object|
+        helpers_array.each do |row_array|
+          csv_object << row_array
+        end
+      end
+    end # end of method
+
+
+
   end # end of class
 end # end of method
+
+RideShare::Trip.add_cost_duration_to_csv
