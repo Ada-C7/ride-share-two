@@ -24,7 +24,22 @@ require 'csv'
 
     def self.find(id)
       riders = Rider.all
+      
       return riders.find {|rider| rider.id == id }
+    end
+
+    def self.find_trips(id)
+
+      trips = Trips.all # csv of all trips
+
+      rider_trips = []
+
+      trips.each do |trip| # grab all elements that have rider_id of 54
+        if trip.rider_id == id
+          rider_trips << trip
+        end
+      end
+      return rider_trips
     end
 
     def to_s

@@ -14,6 +14,7 @@ require_relative 'spec-helper'
 describe "RideShare::Rider" do
 
   let(:my_rider) { Rider.new(2,"name", 395873456958409)}
+  let(:rider_trips) { Rider.find_trips(54) }
 
   describe "initialize method" do
 
@@ -70,6 +71,19 @@ describe "RideShare::Rider" do
       Rider.find(300).wont_be_nil
     end
   end
+
+# retrieve the list of trip instances that only this rider has taken
+  describe "find trips" do
+
+    it "returns trips that only this rider has taken" do
+      rider_trips[0].trip_id.must_equal(1)
+    end
+
+    it "checks lengths of rider trip array" do
+      rider_trips.length.must_equal 2
+    end
+  end
+
 
   describe "to_s method" do
 
