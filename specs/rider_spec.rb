@@ -62,6 +62,10 @@ describe "Rider" do
       sample_trip.rider_id.must_equal rider.id
     end
 
+    it "returns an empty array for a rider with no trips" do
+      # check rider 116, 300, 42
+    end
+
   end
 
   describe "get_drivers" do
@@ -73,6 +77,19 @@ describe "Rider" do
         drivers_by_rider.each do |driver|
           valid_driver_ids.include?(driver.id).must_equal true
         end
+    end
+
+    it "returns a list without duplicates even if a driver was used more than once" do
+
+      @ride_with_driver_twice_hash = {
+        id: 164,
+        name: "Dominique Gleason PhD",
+        phone: "460.497.2371"
+      }
+      double_dipper = RideShare::Rider.new(@ride_with_driver_twice_hash)
+      double_dipper.get_drivers.length.must_equal 5
+
+
     end
 
   end

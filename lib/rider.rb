@@ -21,8 +21,11 @@ module RideShare
 
     def get_drivers
       driver_ids = get_trips.map {|trip| trip.driver_id}
+      no_duplicates = driver_ids.uniq
       # call Driver.find; return array of Driver instances
-      driver_ids.map {|id| Driver.find(id)}
+      no_duplicates.map {|id| Driver.find(id)}
+      # driver_ids.map {|id| Driver.find(id)}
+      # return drivers.uniq
     end
 
     private
