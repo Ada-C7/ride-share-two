@@ -112,7 +112,7 @@ describe "Rider Class" do
         })
       made_up_rider.trips.must_be_nil
     end
-    
+
   end
 
   describe "Drivers method" do
@@ -125,6 +125,9 @@ describe "Rider Class" do
 
     it "Returns an array of driver objects" do
       drivers.each {|d| d.must_be_instance_of RideShare::Driver }
+    end
+
+    it "Has no duplicates" do
     end
 
     it "Returns nil if no trips are recorded" do

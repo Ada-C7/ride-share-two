@@ -16,7 +16,7 @@
     def drivers
       return nil if !(trips)
       drivers = trips.map{ |t| RideShare::Driver.find(t.driver_id) }
-      return drivers
+      return drivers.uniq { |d| d.id }
     end
 
     def self.all
