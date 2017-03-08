@@ -18,13 +18,15 @@ module RideShare
     def self.all
       drivers = []
       CSV.foreach('support/drivers.csv', headers: true) do |row|
-        drivers << self.new(id: row['driver_id'.to_i], name: row['name'], vin: row['vin'])
+        drivers << self.new(id: row['driver_id'].to_i, name: row['name'], vin: row['vin'])
       end
-
       return drivers
-
-        #return [Driver.new(name: 'Ada', id: 108, vin: 'sdfdsfdsfdssdfsds')]
         #CSV.foreach('support/drivers.csv', headers: true, header_converters: :symbol) do |row|
+    end
+
+    def self.find(driver_id)
+      self.all.find {|driver| driver.id == driver_id}
+      # If no driver is found, returns nil
     end
 
     private

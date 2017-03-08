@@ -69,9 +69,8 @@ describe "Driver" do
   end
 
   describe "Driver.all" do
-    # need to isolate opening CSV in own method/class variable?
-    # rescue CSV?
     let (:drivers) {RideShare::Driver.all}
+    let (:driver_csv_info) {CSV.read("support/drivers.csv")[1 .. -1]} # ignore headers
 
     it "returns an array" do
       drivers.must_be_instance_of Array
@@ -84,41 +83,62 @@ describe "Driver" do
     end
 
     it "returns the correct number of drivers" do
-      expected_num_of_drivers = CSV.read("support/drivers.csv").size - 1
+      expected_num_of_drivers = driver_csv_info.size
       num_of_drivers = drivers.length
 
       num_of_drivers.must_equal expected_num_of_drivers
     end
 
-    it "initializes a first Driver with the CSV's first listed name, id, and vin" do
-      
+    it "initializes a first Driver with the CSV's first listed id, name, and vin" do
+      first_driver_id = driver_csv_info.first[0].to_i
+      first_driver_name = driver_csv_info.first[1]
+      first_driver_vin = driver_csv_info.first[2]
+
+      drivers.first.id.must_equal first_driver_id
+      drivers.first.name.must_equal first_driver_name
+      drivers.first.vin.must_equal first_driver_vin
     end
 
     it "initializes a last Driver with the CSV's last listed name, id, and vin" do
+      last_driver_id = driver_csv_info.last[0].to_i
+      last_driver_name = driver_csv_info.last[1]
+      last_driver_vin = driver_csv_info.last[2]
 
+      drivers.last.id.must_equal last_driver_id
+      drivers.last.name.must_equal last_driver_name
+      drivers.last.vin.must_equal last_driver_vin
     end
   end
 
   describe "Driver.find" do
-    # return nil or raise error if search isnt found?
+    let (:driver_csv_info) {CSV.read("support/drivers.csv")[1 .. -1]} # ignore headers
 
-    # def find_and_verify private method
-
-    it "returns an account that exists" do
-      skip
+    it "returns a Driver that exists" do
+      third_driver_id = driver_csv_info[2][0].to_i
+      find_and_verify_driver(third_driver_id)
     end
 
     it "can find the first Driver from the CSV file" do
-      skip
+      first_driver_id = driver_csv_info.first[0].to_i
+      find_and_verify_driver(first_driver_id)
     end
 
     it "can find the last Driver from the CSV file" do
-      skip
+      last_driver_id = driver_csv_info.last[0].to_i
+      find_and_verify_driver(last_driver_id)
     end
 
-    it "returns nil if driver_id is not found" do
-      # or raises an error
-      skip
+    it "returns nil if no driver_id is found" do
+      fake_driver_id = 108
+      RideShare::Driver.find(fake_driver_id).must_equal nil
+    end
+
+    private
+
+    def find_and_verify_driver(driver_id)
+      driver = RideShare::Driver.find(driver_id)
+      driver.must_be_instance_of RideShare::Driver
+      driver.id.must_equal driver_id
     end
   end
 end
