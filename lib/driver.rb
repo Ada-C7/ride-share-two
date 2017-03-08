@@ -15,13 +15,8 @@ class Ride_Share::Driver
 
   def self.all
     all_drivers_array = []
-    #CSV.read("support/drivers.csv", {:headers => true}).each do |line|
     CSV.read("support/drivers.csv", {:headers => true, :header_converters => :symbol}).each do |line|
-      # id = line[0].to_i
-      # name = line[1]
-      # vin = line[2].to_i
       all_drivers_array << Ride_Share::Driver.new(line)
-      #all_drivers_array << Driver.new(id: id, name: name, vin: vin)
     end
     return all_drivers_array
   end
@@ -30,6 +25,7 @@ class Ride_Share::Driver
     all.each do |driver|
       return driver if driver.id == driver_id
     end
+    raise ArgumentError.new "invalid driver id"
   end
 
   def self.print_all
