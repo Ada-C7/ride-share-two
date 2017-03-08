@@ -8,6 +8,9 @@ module RideShare
       @vin = vin
     end
 
+    def trips
+    end
+
     def self.all
       drivers = []
       CSV.open("./support/drivers.csv", "r").each do |line|
