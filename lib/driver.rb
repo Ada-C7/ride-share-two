@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'invalid_driver'
+require_relative 'errors'
 
 module RideShare
   class Driver

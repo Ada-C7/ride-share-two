@@ -139,7 +139,7 @@ describe "Trip" do
 
     it "Returns the appropriate trips" do
       @driver_trips.each do |trip|
-        trip.driver_id.must_equal 1
+        trip.driver_id.must_equal @driver_id
       end
     end
 
@@ -148,7 +148,42 @@ describe "Trip" do
         RideShare::Trip.find_for_driver(968)
       }.must_raise RideShare::InvalidDriver
     end
-    
+
+  end
+
+  describe "Trip.find_for_rider" do
+
+    before do
+      @rider_id = 54
+      @rider_trips = RideShare::Trip.find_for_rider(@rider_id)
+    end
+
+    it "Can be called as class method for the Trip class" do
+      RideShare::Trip.must_respond_to :find_for_rider
+    end
+
+    it "Returns an array" do
+      @rider_trips.must_be_kind_of Array
+    end
+
+    it "Returns instances of the Trip class" do
+      @rider_trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "Returns the appropriate trips" do
+      @rider_trips.each do |trip|
+        trip.rider_id.must_equal @rider_id
+      end
+    end
+
+    it "Raises an error for a driver who doesn't exist" do
+      proc {
+        RideShare::Trip.find_for_rider(2367)
+      }.must_raise RideShare::InvalidRider
+    end
+
   end
 
 end

@@ -1,5 +1,6 @@
 require 'csv'
-require_relative 'invalid_driver'
+require_relative 'errors'
+
 
 module RideShare
   class Trip
@@ -36,7 +37,20 @@ module RideShare
         end
       end
 
-      raise InvalidDriver.new("that driver does not exist") if trips.empty? 
+      raise InvalidDriver.new("that driver does not exist") if trips.empty?
+      return trips
+    end
+
+    def self.find_for_rider(id)
+      trips = []
+
+      all.each do |trip|
+        if trip.rider_id == id
+          trips << trip
+        end
+      end
+
+      raise InvalidRider.new("that rider does not exist") if trips.empty?
       return trips
     end
 
