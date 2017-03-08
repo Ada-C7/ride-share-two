@@ -4,7 +4,7 @@ require_relative '../lib/rider.rb'
 describe "Rider" do
     describe "Initialize method" do
         it "Rider.new must be an instance of a rider" do
-            my_rider = RideShare::Rider.new(116,"Miss Daisy","1231231234")
+            my_rider = RideShare::Rider.new(116,"Sandi Metz","1231231234")
             my_rider.must_be_instance_of RideShare::Rider
         end
 
@@ -61,7 +61,7 @@ describe "Rider" do
 
     describe "Self.find method" do
         it "Takes an id and returns the correct rider" do
-            my_rider = RideShare::Rider.find(116)
+            my_rider = RideShare::Rider.find(116)   
             my_rider.name.must_equal "Laurianne Larkin"
             my_rider.phone_number.must_equal "567.228.1637 x86366"
         end
@@ -74,7 +74,7 @@ describe "Rider" do
 
     describe "Find all trips for rider method" do
         before do
-            @my_rider = RideShare::Rider.new(116,"Miss Daisy","1231231234")
+            @my_rider = RideShare::Rider.new(116,"Sandi Metz","1231231234")
         end
 
         it "returns an array of trips" do
@@ -84,7 +84,7 @@ describe "Rider" do
 
     describe "Find all previous drivers for a rider" do
         before do
-            @my_rider = RideShare::Rider.new(54,"Miss Daisy","1231231234")
+            @my_rider = RideShare::Rider.new(54,"Sandi Metz","1231231234")
             @previous_drivers = @my_rider.previous_drivers
         end
 
