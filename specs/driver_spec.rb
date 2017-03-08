@@ -11,9 +11,10 @@ describe "Driver" do
       new_driver.must_be_instance_of RideShare::Driver
     end
 
-    it "Should be associated with :id and :name" do
+    it "Should be associated with :id, ;name, and :vin" do
       new_driver.must_respond_to(:id)
       new_driver.must_respond_to(:name)
+      new_driver.must_respond_to(:vin)
     end
   end
 
