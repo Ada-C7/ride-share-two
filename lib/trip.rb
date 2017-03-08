@@ -4,9 +4,9 @@ class Trip
   attr_reader :id, :driver, :rider, :date, :rating
 
   def initialize(trip_id, driver_id, rider_id, date, rating)
-    @id = trip_id
-    @driver = driver_id
-    @rider = rider_id
+    @id = trip_id.to_i
+    @driver = driver_id.to_i
+    @rider = rider_id.to_i
     @date = date
     raise ArgumentError.new("Rating must be an integer 1-5") if rating <= 0 || rating > 5 || rating.class != Integer
     @rating = rating

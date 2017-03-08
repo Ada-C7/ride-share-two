@@ -7,6 +7,7 @@ class Rider
   attr_reader :id, :name, :phone
 
   def initialize(rider_id, name, phone_num)
+    raise ArgumentError.new("rider_id must be integer") if rider_id.class != Integer
     @id = rider_id
     @name = name
     @phone = phone_num

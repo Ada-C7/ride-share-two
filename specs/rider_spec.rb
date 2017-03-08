@@ -5,10 +5,10 @@ require_relative '../lib/rider'
 describe "Rider tests" do
   describe "Rider#initialize" do
     it "takes an id, name, and phone" do
-        new_rider = Rider.new("35", "Jane Doe", "702-464-3849")
+        new_rider = Rider.new(35, "Jane Doe", "702-464-3849")
 
         new_rider.must_respond_to :id
-        new_rider.id.must_equal "35"
+        new_rider.id.must_equal 35
 
         new_rider.must_respond_to :name
         new_rider.name.must_equal "Jane Doe"
@@ -97,7 +97,7 @@ describe "Rider tests" do
     end
 
     it "everything in array is a driver" do
-      new_rider = Rider.new(2, "Kaia Klocko", "(392) 217-0777")
+      new_rider = Rider.new(45, "Lavina Friesen", "1-213-163-6582")
 
       new_rider.drivers.each do |element|
         element.must_be_instance_of Driver
@@ -105,10 +105,11 @@ describe "Rider tests" do
     end
 
     it "there are the correct number of drivers in the array" do
+      new_rider = Rider.new(45, "Lavina Friesen", "1-213-163-6582")
+
+      new_rider.drivers.length must_equal 4
 
     end
-
-
 
   end
 
