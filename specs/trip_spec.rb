@@ -18,11 +18,11 @@ describe "Trip Class" do
 
       it "Stored data must match what was passed as an argument" do
 
-        trip_test.trip_id.must_equal 999
-        trip_test.rider_id.must_equal 2323
-        trip_test.driver_id.must_equal 55555
-        trip_test.rating.must_equal 5
-        trip_test.date.must_equal '03-08-17'
+        trip_test.trip_id.must_equal    999
+        trip_test.rider_id.must_equal   2323
+        trip_test.driver_id.must_equal  55555
+        trip_test.rating.must_equal     5
+        trip_test.date.must_equal       '03-08-17'
       end
     end #end of initialize method
 
@@ -41,18 +41,18 @@ describe "Trip Class" do
 
       it " Trip.all returns array " do
 
-        my_trips.class.must_equal Array
+        my_trips.class.must_equal  Array
       end
 
       it " First and Last trips are instansces of Trip Class " do
 
-        my_trips.first.must_be_instance_of Carmmunity::Trip
-        my_trips.last.must_be_instance_of Carmmunity::Trip
+        my_trips.first.must_be_instance_of    Carmmunity::Trip
+        my_trips.last.must_be_instance_of     Carmmunity::Trip
       end
 
       it " The number of trips is correct " do
 
-        my_trips.length.must_equal CSV.read("support/trips.csv").count
+        my_trips.length.must_equal    CSV.read("support/trips.csv").count
       end
 
       it " The trip id, driver id, rider id, date, and rating matches the first trip " do
@@ -65,11 +65,11 @@ describe "Trip Class" do
         rating = 3
 
         #add loop
-        my_trips[index].trip_id.must_equal trip_id
-        my_trips[index].rider_id.must_equal rider_id
-        my_trips[index].driver_id.must_equal driver_id
-        my_trips[index].date.must_equal date
-        my_trips[index].rating.must_equal rating
+        my_trips[index].trip_id.must_equal      trip_id
+        my_trips[index].rider_id.must_equal     rider_id
+        my_trips[index].driver_id.must_equal    driver_id
+        my_trips[index].date.must_equal         date
+        my_trips[index].rating.must_equal       rating
       end
 
       it " The trip id, driver id, rider id, date, and rating matches the last trip " do
@@ -80,51 +80,44 @@ describe "Trip Class" do
         date = 3
         rating = 4
 
-        my_trips.last.trip_id.must_equal trip_data.last[trip_id].to_i
-        my_trips.last.driver_id.must_equal trip_data.last[driver_id].to_i
-        my_trips.last.rider_id.must_equal trip_data.last[rider_id].to_i
-        my_trips.last.date.must_equal trip_data.last[date]
-        my_trips.last.rating.must_equal trip_data.last[rating].to_i
+        my_trips.last.trip_id.must_equal       trip_data.last[trip_id].to_i
+        my_trips.last.driver_id.must_equal     trip_data.last[driver_id].to_i
+        my_trips.last.rider_id.must_equal      trip_data.last[rider_id].to_i
+        my_trips.last.date.must_equal          trip_data.last[date]
+        my_trips.last.rating.must_equal        trip_data.last[rating].to_i
 
       end
     end #end of self.all
 
 
-    xdescribe " self.find_rider(id) " do
-
+    describe " self.find_rider(id) " do
 
       it " Returns a rider that exists " do
-        #trying to figure out which format is less dependent than that other
-        my_trip = Carmmunity::Trip::find(5)
 
-        id = 5
-        #name = "Elmore Heller MD"
-        phone_num = "1-297-522-2558 x431"
+        my_rider = Carmmunity::Trip::find_rider(54)
 
-
-        my_trip.name.must_equal my_trips[5].name
-        my_trip.rider_id.must_equal id
-        my_trip.phone_number.must_equal trip_data[5][2]
-        my_trip.phone_number.must_equal phone_num
+        my_rider.name.must_equal          "Gracie Emmerich"
+        my_rider.rider_id.must_equal      54
+        my_rider.phone_number.must_equal  "591-707-1595 x0908"
       end
 
 
-      it " Can find the last driver in the CSV file " do
+      it " Can find the rider of the last trip in csv file " do
 
-        my_trip = Carmmunity::Trip::find(300)
+        my_rider = Carmmunity::Trip::find_rider(168)
 
-        my_trip.name.must_equal my_trips.last.name
-
-        my_trip.rider_id.must_equal my_trips.last.rider_id
+        my_rider.rider_id.must_equal      168
+        my_rider.name.must_equal          "Hayden Wisozk"
+        my_rider.phone_number.must_equal  "(332) 422-8680 x79530"
       end
 
-      it " Can find the First driver in the CSV file " do
+      it " Can find the First rider in the CSV file " do
 
-        my_trip = Carmmunity::Trip::find(1)
+        my_rider = Carmmunity::Trip::find_rider(54)
 
-        my_trip.name.must_equal my_trips[1].name
-
-        my_trip.rider_id.must_equal my_trips[1].rider_id
+        my_rider.rider_id.must_equal      54
+        my_rider.name.must_equal          "Gracie Emmerich"
+        my_rider.phone_number.must_equal  "591-707-1595 x0908"
       end
 
       it " Only accepts integers in seatch criteria " do
@@ -148,10 +141,10 @@ describe "Trip Class" do
         phone_num = "1-297-522-2558 x431"
 
 
-        my_trip.name.must_equal my_trips[5].name
-        my_trip.rider_id.must_equal id
-        my_trip.phone_number.must_equal trip_data[5][2]
-        my_trip.phone_number.must_equal phone_num
+        my_trip.name.must_equal           my_trips[5].name
+        my_trip.rider_id.must_equal       id
+        my_trip.phone_number.must_equal   trip_data[5][2]
+        my_trip.phone_number.must_equal   phone_num
       end
 
 
@@ -159,18 +152,18 @@ describe "Trip Class" do
 
         my_trip = Carmmunity::Trip::find(300)
 
-        my_trip.name.must_equal my_trips.last.name
+        my_trip.name.must_equal       my_trips.last.name
+        my_trip.rider_id.must_equal   my_trips.last.rider_id
 
-        my_trip.rider_id.must_equal my_trips.last.rider_id
       end
 
       it " Can find the First driver in the CSV file " do
 
         my_trip = Carmmunity::Trip::find(1)
 
-        my_trip.name.must_equal my_trips[1].name
+        my_trip.name.must_equal       my_trips[1].name
+        my_trip.rider_id.must_equal   my_trips[1].rider_id
 
-        my_trip.rider_id.must_equal my_trips[1].rider_id
       end
 
       it " Only accepts integers in seatch criteria " do

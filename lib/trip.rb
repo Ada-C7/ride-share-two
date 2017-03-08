@@ -28,16 +28,8 @@ module Carmmunity
   #end
   def self.find_driver(id)
 
-    #@@trips.find do |trip|
-
-    all_trips = self.all
-
-    all_trips.find do |driver|
-
-      if driver.driver_id == id
-        return driver
-      end
-    end
+    driver = Carmmunity::Driver::find(id)
+      return driver
   end
 
   #self.find(rider)
@@ -46,6 +38,7 @@ module Carmmunity
   #end
 
   def self.find_rider(id)
+
     rider = Carmmunity::Rider::find(id)
     return rider
   end
