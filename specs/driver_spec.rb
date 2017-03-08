@@ -26,7 +26,7 @@ describe "RideShare::Driver" do
       valid_driver.trips.must_be_instance_of Array
     end
 
-    it "All objects in the array are RideShare::Trip" do
+    it "All objects in the array are RideShare::Trip instances" do
       valid_driver.trips.each do | trip |
         trip.must_be_instance_of RideShare::Trip
       end
@@ -44,7 +44,7 @@ describe "RideShare::Driver" do
   describe "RideShare::Driver#avg_rating" do
 
     it "Returns an integer" do
-       valid_driver.avg_rating.must_be_kind_of Integer
+       valid_driver.avg_rating.must_be_kind_of Float
     end
 
   end

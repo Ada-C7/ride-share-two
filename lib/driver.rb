@@ -13,25 +13,17 @@ module RideShare
 
     # retreives lists of all trips for specific driver
     def trips
-      RideShare::Trip.drivers_trips(@id)
+      return RideShare::Trip.drivers_trips(@id)
     end
 
 
     # calculates an average rating of all trips for specific driver
     def avg_rating
-      total = 0
-
-      drivers_trips = trips
-
-      drivers_trips.each do | trip |
-        total += trip.rating
-      end
-
-      total / trips.length
+      return ratings_sum / num_trips.to_f
     end
 
 
-    # retreives all drivers from CSV
+    # retreives all drivers from CSV and initializes new Driver from each line
     def self.all
       all_drivers = []
 
@@ -49,13 +41,32 @@ module RideShare
 
     # finds driver using the driver's id
     def self.find(driver_id)
-      all_drivers = RideShare::Driver.all
-
-      all_drivers.each do | driver |
+      RideShare::Driver.all.each do | driver |
         return driver if driver_id == driver.id
       end
 
-      raise ArgumentError.new("Invalid Driver ID")
+      raise ArgumentError.new("Invalid Driver ID in RideShare::Driver #find")
+    end
+
+
+    private
+
+
+    # calculates number of trips taken by instance of driver
+    def num_trips
+      return trips.length
+    end
+
+
+    # calculates sum of ratings for instance of driver
+    def ratings_sum
+      sum = 0
+
+      trips.each do | trip |
+        sum += trip.rating
+      end
+
+      return sum
     end
 
   end

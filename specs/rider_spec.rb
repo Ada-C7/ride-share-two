@@ -2,9 +2,10 @@ require_relative 'spec_helper'
 
 describe "RideShare::Rider" do
 
-  describe "RideShare::Rider#iniitalize" do
+  let (:new_rider) { RideShare::Rider.new(2345, "Some Dude", "800-000-000") }
+  let (:valid_rider) { RideShare::Rider.find(30) }
 
-    let (:new_rider) { RideShare::Rider.new(2345, "Some Dude", "800-000-000") }
+  describe "RideShare::Rider#iniitalize" do
 
     it "A new rider can be initialized with an id, name, and phone number" do
       new_rider.must_be_instance_of RideShare::Rider
@@ -14,10 +15,43 @@ describe "RideShare::Rider" do
 
 
   describe "RideShare::Rider#trips" do
+
+    it "Returns an array" do
+      valid_rider.trips.must_be_instance_of Array
+    end
+
+    it "All objects in the array are RideShare::Trip instances" do
+      valid_rider.trips.each do | trip |
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "The driver_id of each trip matches the given argument" do
+      valid_rider.trips.each do | trip |
+        trip.rider_id.must_equal 30
+      end
+    end
+
+    it "Returns the correct number of trips" do
+      valid_rider.trips.length.must_equal 2
+    end
+
   end
 
 
-  describe "RideShare::Rider#drivers" do
+  xdescribe "RideShare::Rider#drivers" do
+
+    let (:new_rider) { RideShare::Rider.new(30, "Kelsey", "800-000-000") }
+    it "Returns an array" do
+      new_rider.drivers.must_be_instance_of Array
+    end
+
+    it "All objects in the array are Drivers" do
+      new_rider.drivers.each do | driver |
+        driver.must_be_instance_of RideShare::Driver
+      end
+    end
+
   end
 
 

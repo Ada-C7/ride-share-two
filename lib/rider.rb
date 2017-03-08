@@ -13,13 +13,20 @@ module RideShare
 
     # retreives list of trips for specific rider
     def trips
+      return RideShare::Trip.riders_trips(@id)
     end
 
 
     # retreives list of all previous drivers for specific rider
     def drivers
-    end
+      drivers = []
 
+      trips.each do | trip |
+        drivers << RideShare::Driver.find(trip.driver_id)
+      end
+
+      return drivers
+    end
 
     # retreives all riders from the CSV
     def self.all
@@ -45,7 +52,7 @@ module RideShare
         return rider if rider_id == rider.id
       end
 
-      raise ArgumentError.new("Invalid Rider ID")
+      raise ArgumentError.new("Invalid Rider ID in RideShare:Rider #find")
     end
 
   end

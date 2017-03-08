@@ -1,42 +1,42 @@
 module RideShare
 
   class Trip
-  attr_reader :id, :rider_id, :driver_id, :date, :rating
+  attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 
     # creates trips that have an ID, rider ID, driver ID, date, and rating
-    def initialize(id, rider_id, driver_id, date, rating)
-      @id = id
-      @rider_id = rider_id
-      @driver_id = driver_id
+    def initialize(trip_id, driver_id, rider_id, date, rating)
+      @trip_id = trip_id.to_i
+      @driver_id = driver_id.to_i
+      @rider_id = rider_id.to_i
       @date = date
-      @rating = (1..5).include?(rating) ? rating : 3
+      @rating = rating.to_i
     end
 
 
     # retrieve the associated driver instance using the driver ID
     def trip_driver
-      RideShare::Driver.find(@driver_id)
+      return RideShare::Driver.find(@driver_id)
     end
 
 
     # retrieve the associated rider instance using the rider ID
     def trip_rider
-      RideShare::Rider.find(@rider_id)
+      return RideShare::Rider.find(@rider_id)
     end
 
 
-    # retrieve all trips from the CSV file
+    # retrieve all trips from the CSV file and initializes each line as a new trip
     def self.all
       all_trips = []
 
-      CSV.open("support/trips.csv").each do | line |
-        id = line[0].to_i
-        rider_id = line[1].to_i
-        driver_id = line[2].to_i
+      CSV.foreach("support/trips.csv", :headers => true).each do | line |
+        trip_id = line[0]
+        driver_id = line[1]
+        rider_id = line[2]
         date = line[3]
-        rating = line[4].to_i
+        rating = line[4]
 
-        all_trips << RideShare::Trip.new(id, rider_id, driver_id, date, rating)
+        all_trips << RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
       end
 
       return all_trips
@@ -49,11 +49,9 @@ module RideShare
 
       all_trips.reject! { | trip | driver_id != trip.driver_id }
 
-      if all_trips.length >= 1 # consider making new exception
-        return all_trips
-      else
-        raise ArgumentError.new("Invalid Driver ID")
-      end
+      return all_trips if all_trips.length >= 1 # consider making new exception
+
+      raise ArgumentError.new("Invalid Driver ID in RideShare::Trip #drivers_trips")
     end
 
 
@@ -63,11 +61,9 @@ module RideShare
 
       all_trips.reject! { | trip | rider_id != trip.rider_id }
 
-      if all_trips.length >= 1
-        return all_trips
-      else
-        raise ArgumentError.new("Invalid Rider ID") # consider making new exception
-      end
+      return all_trips if all_trips.length >= 1
+
+      raise ArgumentError.new("Invalid Rider ID in RideShare::Trip #riders_trips") # consider making new exception
     end
 
   end
