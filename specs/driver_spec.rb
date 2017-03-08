@@ -149,12 +149,12 @@ describe Driver do
                @trip_file = "support/trips.csv"
                @id = 7
                @leia = Driver.find(@file, @id)
-               @Leia_rating = leia.average_rating
+               @leia.calculate_average_rating(@file, @trip_file)
           end
 
           describe "Driver.calculate_average_rating:" do
                it "Returns an integer:" do
-                   @leia_rating.must_be_kind_of Integer
+                   @leia.average_rating.must_be_kind_of Integer
                end
 
                it "Returns the average:" do
@@ -166,12 +166,12 @@ describe Driver do
                     end
 
                     CSV.foreach(@trip_file) do |row|
-                         if row[1].to_i == @id then ratings << row[4].to_i; end
+                         if row[1].to_i == @id then csv_ratings << row[4].to_i; end
                     end
 
-                    csv_average_rating = csv_ratings.map { | sum, rating | sum + rating}
+                    csv_average_rating = csv_ratings.inject { | sum, rating | sum + rating}/count
 
-                    @leia_trips.length.must_equal csv_average_rating
+                    @leia.average_rating.must_equal csv_average_rating
                end
           end
      end
