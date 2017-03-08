@@ -32,15 +32,30 @@ require 'csv'
 
       driver_trips = []
 
-      # grab all elements that have driver_id of 1
-      trips.each do |trip|
+      trips.each do |trip| # grab all elements that have driver_id of 1
         if trip.driver_id == id
           driver_trips << trip
         end
       end
-      # puts driver_trips
       return driver_trips
     end
+
+    def self.get_rating(id)
+      find_trips
+
+      driver_ratings = []
+
+      driver_trips.each do |rating|
+        driver_ratings << rating
+      end
+
+      avg_rating = []
+
+      (avg_rating.inject{ |sum, n| sum + n }.to_f / avg_rating.size).round(2)
+
+      return avg_rating
+    end
+
 
     def to_s
       "id: #{ @id }, name: #{ @name }, VIN: #{ @vin }"
