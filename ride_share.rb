@@ -8,3 +8,6 @@ require_relative 'lib/rider.rb'
 
 class InvalidRatingError < StandardError
 end
+
+class InvalidVinError < StandardError
+end

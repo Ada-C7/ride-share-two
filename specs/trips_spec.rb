@@ -12,6 +12,10 @@ describe "Trip" do
   describe "Trip#initialize" do
     it "takes an ID, Driver ID, Rider ID, Date and Rating to initialize" do
       my_trip.must_respond_to :id
+      my_trip.must_respond_to :driver_id
+      my_trip.must_respond_to :rider_id
+      my_trip.must_respond_to :date
+      my_trip.must_respond_to :rating
     end
 
     it "rating must be between 1 - 5" do
