@@ -17,9 +17,16 @@ module RideShare
     #   between 1-5 avg find this in the trip csv
     # end
     #
-    # def driver_trips
-    #   use driver trip instances in driver (its a self method)
-    # end
+    def self.driver_trip_instances(driver_id)
+      driver_trips = []
+      trips = RideShare::Trips.all_trip_info
+      trips.each do |object|
+        if driver_id == object.driver_id
+          driver_trips << object
+        end
+      end
+      return driver_trips
+    end
     #
     # def rider_trips
     #   use trip instances in rider (its a self method)

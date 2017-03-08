@@ -73,7 +73,7 @@ describe "trip class" do
     CSV.read('support/trips.csv') do |line|
     info[index].trip_id.must_equal line[0].to_i
     info[index].trip_id.must_equal line[1].to_i
-    info[index].trip_id.must_equal line[2].to_i 
+    info[index].trip_id.must_equal line[2].to_i
     index += 1
     end
   end
