@@ -54,7 +54,7 @@ describe "Driver class" do
   end # end of initialize method test
 
   describe  "Driver#average_rating" do
-    it "Returns average rating (betwee 1 and 5) of a driver" do
+    it "Returns average rating (between 1 and 5) of a driver" do
       dr = all_drivers[3]
       dr.average_rating.class.must_equal Float
       dr.average_rating.must_be :>=, 1

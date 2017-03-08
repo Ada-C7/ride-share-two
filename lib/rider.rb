@@ -60,7 +60,7 @@ module RideShare
       end
     end
 
-    #optional
+    # Optional
     # For a given rider, add the ability
     # to return the total amount of money they have spent on all trips
     def total_money_spent
