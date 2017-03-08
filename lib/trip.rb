@@ -31,6 +31,7 @@
           trip_array << new_trip
       end
       trip_array.shift
+      trip_array.delete_if {|t| t.driver_id == "0" || t.rider_id == "0"}
       return trip_array
     end
 

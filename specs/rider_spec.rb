@@ -71,12 +71,6 @@ describe "Rider Class" do
       rider.phone_num.must_equal "560.815.3059"
     end
 
-    it "Outputs a message if the ID was not found" do
-      proc {
-        RideShare::Rider.find("1000")
-      }.must_output(/.+/)
-    end
-
     it "Returns nil if the ID was not found" do
       RideShare::Rider.find("1000").must_equal nil
     end
@@ -85,6 +79,35 @@ describe "Rider Class" do
       RideShare::Rider.find("0").must_equal nil
     end
 
+  end
+
+  describe "Trips method" do
+
+    let(:rider) { RideShare::Rider.all.first}
+
+
+
+    it "Returns an Array" do
+      rides = rider.trips
+      rides.must_be_instance_of Array
+    end
+
+    it "Returns an Array of Objects" do
+      rides = rider.trips
+      rides.each { |r| r.must_be_instance_of RideShare::Trip }
+    end
+
+    it "Returns the correct information" do
+      rider = RideShare::Rider.find("54")
+      rides = rider.trips
+      first = rides.first
+      first.date.must_equal "2016-04-05"
+    end
+
+    # it "Returns nil if a rider has no trips" do
+    #   rider = RideShare::Rider.find("100")
+    #   rider.trips.must_equal nil
+    # end
   end
 
   describe "Drivers method" do
@@ -97,6 +120,15 @@ describe "Rider Class" do
 
     it "Returns an array of driver objects" do
       drivers.each {|d| d.must_be_instance_of RideShare::Driver }
+    end
+
+    it "Returns nil if no trips are recorded" do
+      made_up_rider = RideShare::Rider.new({
+        :id => "0",
+        :name => "John Doe",
+        :phone_num => "560.815.3059"
+        })
+        made_up_rider.drivers.must_be_nil
     end
 
   end

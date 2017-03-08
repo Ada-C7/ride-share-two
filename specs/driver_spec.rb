@@ -89,7 +89,6 @@ describe "Driver Class" do
     let(:driver) { RideShare::Driver.all.first }
 
 
-
     it "Returns an Array" do
       drives = driver.trips
       drives.must_be_instance_of Array
@@ -103,7 +102,6 @@ describe "Driver Class" do
     it "Returns the correct information" do
       drives = driver.trips
       first = drives.first
-
       first.date.must_equal "2016-04-05"
     end
 
@@ -123,7 +121,7 @@ describe "Driver Class" do
 
     it "Returns nil if there is no trip instances" do
       driver = RideShare::Driver.find("100")
-      driver.rating.must_equal nil
+      driver.rating.must_be_nil
     end
 
   end

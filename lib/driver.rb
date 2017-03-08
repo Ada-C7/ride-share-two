@@ -34,12 +34,11 @@
     end
 
     def self.find(id)
-      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/))
+      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/) || id == "0")
       drivers = RideShare::Driver.all
       drivers.each do |driver|
         return driver if driver.id == id
       end
-      puts "A Driver Account could not be found with this ID. ID Given: #{id}"
       return nil
     end
 

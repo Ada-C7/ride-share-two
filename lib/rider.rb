@@ -14,6 +14,7 @@
     end
 
     def drivers
+      return nil if !(trips)
       drivers = trips.map{ |t| RideShare::Driver.find(t.driver_id) }
       return drivers
     end
@@ -33,12 +34,11 @@
     end
 
     def self.find(id)
-      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/))
+      raise InvalidIdError.new "This is not a valid ID. ID Given: #{id}" if !(id.match(/^\d+$/) || id = "0")
       riders = RideShare::Rider.all
       riders.each do |rider|
         return rider if rider.id == id
       end
-        puts "A Rider Account could not be found with this ID. ID Given: #{id}"
         return nil
     end
 
