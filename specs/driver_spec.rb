@@ -19,6 +19,14 @@ describe "RideShare::Driver" do
       driver9.vin.must_equal "4RA34A5K3YPN8H5P4"
     end
 
+    # expect that arg read in by the symbol
+
+    it "throws an ArgumentError if the vin is invalid" do
+      proc {
+        RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P40000000"})
+      }.must_raise ArgumentError
+    end
+
     it "can create a new driver with a missing vin" do
       no_vin.vin.must_equal nil
     end

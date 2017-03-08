@@ -71,7 +71,7 @@ describe "RideShare::Rider" do
   end
 
   describe "Rider#past_trips" do
-    before { RideShare::Rider.all }
+    before { RideShare::Trip.all }
 
     it "returns value an an Array" do
       rider.past_trips.must_be_kind_of Array
@@ -87,8 +87,10 @@ describe "RideShare::Rider" do
   end
 
   describe "Rider#past_drivers" do
-    before { RideShare::Driver.all }
-
+    before do
+      RideShare::Trip.all
+      RideShare::Driver.all
+    end
     it "returns value as an Array" do
       rider.past_drivers.must_be_kind_of Array
     end
