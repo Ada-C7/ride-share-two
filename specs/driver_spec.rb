@@ -16,13 +16,10 @@ describe "Driver" do
       vindiesel.vin.must_equal "FASTNFURIOUS00007"
     end
 
-    it "raises error if Driver's ID is not a number" do
+    it "raises error if Driver's ID or name are invalid input" do
       proc {
         RideShare::Driver.new("VD", "Vin Diesel", "fastnfurious00007")
       }.must_raise ArgumentError
-    end
-
-    it "raises error if Driver's name is not a String" do
       proc {
         RideShare::Driver.new(777, ["Vin Diesel"], "FASTNFURIOUS00007")
       }.must_raise ArgumentError
@@ -97,21 +94,42 @@ describe "Driver" do
   end
 
 
+  # retrieve the list of trip instances that only this driver has taken
   describe "Driver#trips" do
-    # retrieve the list of trip instances that only this driver has taken
+    it "raises an error if invalid ID given" do
 
+    end
+
+    it "returns an array of Trip instances" do
+
+    end
     # model for checking that all elements are trips
     # it "Tiles array is filled with only letters" do
     #   @player.tiles.all? do | letter |
     #     letter.class.must_equal Symbol
     #     @tile_bag.letter_quantity.must_include letter
-    #   end
+
+    it "returns an array whose length matches the number of Driver's trips" do
+
+    end
+
 
   end
 
 
+  # retrieve an average rating for that driver based on all trips taken
   describe "Driver#average_rating" do
-    # retrieve an average rating for that driver based on all trips taken
+    it "raises an error if invalid ID is given" do
+
+    end
+
+    it "returns correct average rating for a Driver" do
+
+    end
+
+    it "returns the only rating if Driver only has one trip" do
+
+    end
 
   end
 
