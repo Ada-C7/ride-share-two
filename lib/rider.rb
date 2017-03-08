@@ -1,4 +1,4 @@
-require 'csv'
+require_relative 'rideshare'
 
 module RideShare
   class Rider

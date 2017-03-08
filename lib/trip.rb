@@ -1,5 +1,4 @@
-require 'csv'
-require_relative 'invalid_rating_error'
+require_relative 'rideshare'
 
 module RideShare
   class Trip

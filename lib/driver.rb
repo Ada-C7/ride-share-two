@@ -1,10 +1,10 @@
-require 'csv'
-require_relative 'invalid_vin_error'
+require_relative 'rideshare'
 
 module RideShare
   class Driver
-    def initialize #Instantiated Driver class with ID, name and vehicle identification number
-      @id = driver_id
+    attr_accessor :driver_id, :name, :vin
+    def initialize(driver_id, name, vin) #Instantiated Driver class with ID, name and vehicle identification number
+      @driver_id = driver_id
       @name = name
       @vin = vin #check vehicle identification number should be a specific length else raise InvalidVinError
     end
