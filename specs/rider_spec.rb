@@ -18,6 +18,12 @@ describe "Rider" do
       @rider.rider_id.must_equal @args[:rider_id]
     end
 
+    it "Raises an ArgumentError if rider id is not an integer" do
+      proc {
+        RideShare::Rider.new(rider_id: "8", name: "Sahana", phone_num: "555-555-5555")
+      }.must_raise ArgumentError
+    end 
+
     it "Takes a rider name" do
       @rider.must_respond_to :name
       @rider.name.must_equal @args[:name]
