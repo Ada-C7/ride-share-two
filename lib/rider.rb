@@ -1,6 +1,9 @@
+require_relative 'data_import'
+
 module RideShare
   class Rider
     attr_reader :id, :name, :trips
+    SOURCE_FILE = "support/riders.csv"
 
     def initialize(params)
       validate_params(params)
@@ -13,12 +16,8 @@ module RideShare
     end
 
     def self.all
-      @@all ||= CSV.read("support/riders.csv", headers:true).map do |line|
-        Rider.new(
-          id: Integer(line[0]),
-          name: line[1],
-          phone_number: line[2]
-        )
+      @@all ||= DataImport.import_attributes(SOURCE_FILE).map do |rider|
+        Rider.new(rider)
       end
     end
 
