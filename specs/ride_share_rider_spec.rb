@@ -31,24 +31,35 @@ describe "Rider" do
     end
   end
   #
-  # describe "Rider.find" do
-  #   it "Find a specific rider using their numeric ID" do
-  #     found = Rideshare::Rider.find(3)
-  #     expected = {id: 3, name: "Daryl Nitzsche", vin: "SAL6P2M2XNHC5Y656"}
-  #     found.must_equal expected
-  #   end
-  # end
-  #
-  # describe "Rider#all_trips" do
-  #   it "Retrieve the list of trip instances that only this rider has taken" do
-  #
-  #
-  #   end
-  # end
-  #
-  # describe "Rider#average_rating" do
-  #   it do
-  #
-  #   end
-  # end
+  describe "Rider.find" do
+    it "Find a specific rider using their numeric ID" do
+      found = Rideshare::Rider.find(3)
+      expected = {id: 3, name: "Marcellus Hoeger", phone_num: "(222) 926-0138"}
+      found.must_equal expected
+    end
+  end
+
+  describe "Rider#all_trips" do
+    it "Retrieve the list of trip instances that only this rider has taken" do
+      args = {id: 1, name: "Nina Hintz Sr.", phone_num: "560.815.3059"}
+      expected = [
+        {:trip_id=>46, :driver_id=>98, :rider_id=>1, :date=>"2016-06-28", :rating=>2},
+        {:trip_id=>272, :driver_id=>17, :rider_id=>1, :date=>"2015-09-14", :rating=>4}
+      ]
+      rider = Rideshare::Rider.new(args)
+      rider.all_trips.must_equal expected
+    end
+  end
+
+  describe "Rider#all_drivers" do
+    it "Retrieve the list of all previous drvier instances" do
+      args = {id: 1, name: "Nina Hintz Sr.", phone_num: "560.815.3059"}
+      rider = Rideshare::Rider.new(args)
+      expected = [
+        {id: 98, name: "Ms. Winston Emard", vin: "1F9Z5CF13VV8041ND"},
+        {id: 17, name: "Federico Bins V", vin: "W092FDPH6FNNK102M"}
+      ]
+      rider.all_drivers.must_equal expected
+    end
+  end
 end
