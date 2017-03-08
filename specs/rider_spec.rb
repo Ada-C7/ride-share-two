@@ -26,19 +26,86 @@ describe "Rider" do
     end
   end
 
-  describe "trips" do
+  # describe "trips" do
+  #   # handle the case that @rider_id is nil?
+  #   it "returns an array" do
+  #     skip
+  #   end
+  #
+  #   it "returns only Trip objects in the array" do
+  #     skip
+  #   end
+  #
+  #   it "returns only Trip instances that this rider has taken" do
+  #     #must_include id
+  #     #must_not_include id
+  #     #length
+  #   end
+  #
+  #   it "returns nil if @rider_id is undefined" do
+  #
+  #   end
+  # end
+  #
+  # describe "drivers" do
+  #   # handle the case that @rider_id is nil?
+  #   it "returns an array" do
+  #
+  #   end
+  #
+  #   it "returns only Driver objects in the array" do
+  #
+  #   end
 
-  end
+      # it "returns the correct number of Drivers" do
+      #
+      # end
+  #
+  #   it "returns all previous driver instances" do
+  #     # posibly break into more tests
+  #     #array.length, check ids
+  #   end
+  #
+  #   it "retruns nil if @driver_id is undefined" do
+  #
+  #   end
+  # end
 
-  describe "drivers" do
-
-  end
-
+  # retrieves all riders from the CSV file
   describe "Rider.all" do
+    it "returns an array" do
 
+    end
+
+    it "returns only Rider instances in the array" do
+
+    end
+
+    it "returns the correct number of riders" do
+
+    end
+
+    it "initializes a 1st Rider with the CSV's first id, name, and phone number" do
+
+    end
+
+    it "initializes a last Rider with the CSV's last id, name, and phone number" do
+
+    end
   end
 
-  describe "Driver.find" do
-    
+  describe "Rider.find" do
+    it "returns a Rider that exists" do
+    end
+
+    it "can find the first Rider from the CSV file" do
+
+    end
+
+    it "can find the last Rider from the CSV file" do
+
+    end
+
+    it "returns nil if no rider_id is found"
   end
 end

@@ -48,7 +48,7 @@ describe "Driver" do
   #     skip
   #   end
   #
-  #   it "returns an array with only Trip objects" do
+  #   it "returns an array of Trip objects" do
   #     skip
   #   end
   #
