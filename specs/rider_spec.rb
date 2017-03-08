@@ -48,6 +48,11 @@ describe "Rider tests" do
 
     end
 
+    it "number of elements matches number of elements in csv file" do
+      @all_riders.length.must_equal @csv_file.length
+
+    end
+
   end
 
   describe "Rider#trips" do

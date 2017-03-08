@@ -14,26 +14,26 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-07T16:32:06-08:00">2017-03-07T16:32:06-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-07T16:37:56-08:00">2017-03-07T16:37:56-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">97.95%</span></span>
+    (<span class="covered_percent"><span class="green">97.97%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         503.79
+         511.23
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>146</b> relevant lines. 
-    <span class="green"><b>143</b> lines covered</span> and
+    <b>148</b> relevant lines. 
+    <span class="green"><b>145</b> lines covered</span> and
     <span class="red"><b>3</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -67,7 +67,7 @@
         <td>33</td>
         <td>32</td>
         <td>1</td>
-        <td>335.4</td>
+        <td>399.1</td>
       </tr>
       
       <tr>
@@ -82,12 +82,12 @@
       
       <tr>
         <td class="strong"><a href="#ad55ef1ba3a86588d5952e2f0c3d7026dc9a1f94" class="src_link" title="specs/rider_spec.rb">specs/rider_spec.rb</a></td>
-        <td class="green strong">97.62 %</td>
-        <td>95</td>
-        <td>42</td>
-        <td>41</td>
+        <td class="green strong">97.73 %</td>
+        <td>100</td>
+        <td>44</td>
+        <td>43</td>
         <td>1</td>
-        <td>8.2</td>
+        <td>8.0</td>
       </tr>
       
       <tr>
@@ -430,20 +430,20 @@
           <code class="ruby">  def initialize(rider_id,name,phone_num)</code>
         </li>
       
-        <li class="covered" data-hits="1205" data-linenumber="10">
-          <span class="hits">1205</span>
+        <li class="covered" data-hits="1505" data-linenumber="10">
+          <span class="hits">1505</span>
           
           <code class="ruby">    @id = rider_id</code>
         </li>
       
-        <li class="covered" data-hits="1205" data-linenumber="11">
-          <span class="hits">1205</span>
+        <li class="covered" data-hits="1505" data-linenumber="11">
+          <span class="hits">1505</span>
           
           <code class="ruby">    @name = name</code>
         </li>
       
-        <li class="covered" data-hits="1205" data-linenumber="12">
-          <span class="hits">1205</span>
+        <li class="covered" data-hits="1505" data-linenumber="12">
+          <span class="hits">1505</span>
           
           <code class="ruby">    @phone = phone_num</code>
         </li>
@@ -466,32 +466,32 @@
           <code class="ruby">  def self.all</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="16">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="16">
+          <span class="hits">5</span>
           
           <code class="ruby">    riders = []</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="17">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="17">
+          <span class="hits">5</span>
           
           <code class="ruby">    CSV.foreach(&quot;./support/riders.csv&quot;, {:headers =&gt; true}) do |line|</code>
         </li>
       
-        <li class="covered" data-hits="1200" data-linenumber="18">
-          <span class="hits">1200</span>
+        <li class="covered" data-hits="1500" data-linenumber="18">
+          <span class="hits">1500</span>
           
           <code class="ruby">      id = line[0]</code>
         </li>
       
-        <li class="covered" data-hits="1200" data-linenumber="19">
-          <span class="hits">1200</span>
+        <li class="covered" data-hits="1500" data-linenumber="19">
+          <span class="hits">1500</span>
           
           <code class="ruby">      name = line[1]</code>
         </li>
       
-        <li class="covered" data-hits="1200" data-linenumber="20">
-          <span class="hits">1200</span>
+        <li class="covered" data-hits="1500" data-linenumber="20">
+          <span class="hits">1500</span>
           
           <code class="ruby">      phone = line[2]</code>
         </li>
@@ -502,8 +502,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1200" data-linenumber="22">
-          <span class="hits">1200</span>
+        <li class="covered" data-hits="1500" data-linenumber="22">
+          <span class="hits">1500</span>
           
           <code class="ruby">      riders &lt;&lt; Rider.new(id, name, phone)</code>
         </li>
@@ -520,8 +520,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="25">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="25">
+          <span class="hits">5</span>
           
           <code class="ruby">    return riders</code>
         </li>
@@ -929,10 +929,10 @@
         <div class="source_table" id="ad55ef1ba3a86588d5952e2f0c3d7026dc9a1f94">
   <div class="header">
     <h3>specs/rider_spec.rb</h3>
-    <h4><span class="green">97.62 %</span> covered</h4>
+    <h4><span class="green">97.73 %</span> covered</h4>
     <div>
-      <b>42</b> relevant lines. 
-      <span class="green"><b>41</b> lines covered</span> and
+      <b>44</b> relevant lines. 
+      <span class="green"><b>43</b> lines covered</span> and
       <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
@@ -1078,14 +1078,14 @@
           <code class="ruby">    before do</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="24">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="24">
+          <span class="hits">5</span>
           
           <code class="ruby">      @all_riders = Rider.all</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="25">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="25">
+          <span class="hits">5</span>
           
           <code class="ruby">      @csv_file = CSV.read(&quot;./support/riders.csv&quot;, {:headers =&gt; true})</code>
         </li>
@@ -1240,76 +1240,76 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="51">
+        <li class="covered" data-hits="1" data-linenumber="51">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    it &quot;number of elements matches number of elements in csv file&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @all_riders.length.must_equal @csv_file.length</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="53">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;Rider#trips&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="54">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;returns an array of trips taken&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="55">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      new_rider = Rider.new(1, &quot;Jan Brown&quot;, &quot;702-123-4567&quot;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="56">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="57">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      new_rider.trips.class.must_equal Array</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="60">
+        <li class="never" data-hits="" data-linenumber="55">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="61">
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;each element in the array is a trip&quot; do</code>
+          <code class="ruby">  describe &quot;Rider#trips&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns an array of trips taken&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="60">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      new_rider = Rider.new(1, &quot;Jan Brown&quot;, &quot;702-123-4567&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="62">
           <span class="hits">1</span>
           
-          <code class="ruby">      new_rider = Rider.new(2, &quot;Kaia Klocko&quot;, &quot;(392) 217-0777&quot;)</code>
+          <code class="ruby">      new_rider.trips.class.must_equal Array</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="63">
@@ -1318,136 +1318,136 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="64">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="64">
           
-          <code class="ruby">      new_rider.trips.each do |element|</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="65">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        element.must_be_instance_of Trip</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="66">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="65">
           
           
           <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;each element in the array is a trip&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      new_rider = Rider.new(2, &quot;Kaia Klocko&quot;, &quot;(392) 217-0777&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="68">
           
           
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="69">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="70">
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
           
+          <code class="ruby">      new_rider.trips.each do |element|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
           
-          <code class="ruby">  end</code>
+          <code class="ruby">        element.must_be_instance_of Trip</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="71">
           
           
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="72">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="73">
           
-          <code class="ruby">  describe &quot;Rider.drivers&quot; do</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="73">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="74">
           
-          <code class="ruby">    it &quot;returns array of past drivers used&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="74">
-          <span class="hits">1</span>
           
-          <code class="ruby">      new_rider = Rider.new(2, &quot;Kaia Klocko&quot;, &quot;(392) 217-0777&quot;)</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="75">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
+        <li class="covered" data-hits="1" data-linenumber="77">
           <span class="hits">1</span>
           
-          <code class="ruby">      new_rider.drivers.class.must_equal Array</code>
+          <code class="ruby">  describe &quot;Rider.drivers&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="77">
+        <li class="covered" data-hits="1" data-linenumber="78">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="78">
-          
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &quot;returns array of past drivers used&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="79">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;everything in array is a driver&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="80">
-          <span class="hits">1</span>
-          
           <code class="ruby">      new_rider = Rider.new(2, &quot;Kaia Klocko&quot;, &quot;(392) 217-0777&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="81">
+        <li class="never" data-hits="" data-linenumber="80">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="82">
+        <li class="covered" data-hits="1" data-linenumber="81">
           <span class="hits">1</span>
           
-          <code class="ruby">      new_rider.drivers.each do |element|</code>
+          <code class="ruby">      new_rider.drivers.class.must_equal Array</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="83">
-          
-          
-          <code class="ruby">        element.must_be_instance_of Driver</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="84">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="85">
+        <li class="never" data-hits="" data-linenumber="82">
           
           
           <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="84">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;everything in array is a driver&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="85">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      new_rider = Rider.new(2, &quot;Kaia Klocko&quot;, &quot;(392) 217-0777&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="86">
@@ -1459,25 +1459,25 @@
         <li class="covered" data-hits="1" data-linenumber="87">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;there are the correct number of drivers in the array&quot; do</code>
+          <code class="ruby">      new_rider.drivers.each do |element|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
+        <li class="missed" data-hits="0" data-linenumber="88">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        element.must_be_instance_of Driver</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="89">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="90">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="91">
@@ -1486,25 +1486,55 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="92">
+        <li class="covered" data-hits="1" data-linenumber="92">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &quot;there are the correct number of drivers in the array&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="93">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="94">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="97">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="99">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby">end</code>
