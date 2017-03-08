@@ -28,7 +28,7 @@ module RideShare
 
     # finds a specific rider using their numeric ID
     def self.find(rider_id)
-      
+      self.all.find {|rider| rider.id == rider_id}
     end
   end
 end

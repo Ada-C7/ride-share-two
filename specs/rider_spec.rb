@@ -114,19 +114,34 @@ describe "Rider" do
   end
 
   describe "Rider.find" do
+    let (:rider_csv_info) {CSV.read("support/riders.csv")[1 .. -1]} # ignore headers
+
     it "returns a Rider that exists" do
+      third_rider_id = rider_csv_info[2][0].to_i
+      find_and_verify_rider(third_rider_id)
     end
 
     it "can find the first Rider from the CSV file" do
-
+      first_rider_id = rider_csv_info.first[0].to_i
+      find_and_verify_rider(first_rider_id)
     end
 
     it "can find the last Rider from the CSV file" do
-
+      last_rider_id = rider_csv_info.last[0].to_i
+      find_and_verify_rider(last_rider_id)
     end
 
     it "returns nil if no rider_id is found" do
-      
+      fake_rider_id = 108
+      RideShare::Driver.find(fake_rider_id).must_be_nil
+    end
+
+    private
+
+    def find_and_verify_rider(rider_id)
+      rider = RideShare::Rider.find(rider_id)
+      rider.must_be_instance_of RideShare::Rider
+      rider.id.must_equal rider_id
     end
   end
 end
