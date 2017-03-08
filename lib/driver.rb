@@ -24,19 +24,19 @@ module RideShare
   #return average_rating
   #end
 
-  #self.find(id)
-  #find id in @@drivers
-  #returns a single driver associated with that id
-  #end
 
 
-      # self.all
-      # # reads csv file
-      #
-      # # creates new dirvers instances
-      # # returns array/hash of all drivers
-      # # @@drivers <<
-      # end
+  def self.find(id)
+
+    @@drivers.find do |driver|
+
+      if driver.driver_id == id
+        return driver
+      end
+    end
+
+    raise ArgumentError.new "#{id} returned no results"
+  end #end self.find
 
 
 
