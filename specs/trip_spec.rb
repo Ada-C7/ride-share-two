@@ -113,4 +113,23 @@ describe "Trip tests" do
 
     #do a test for what to do if no trips were taken by a driver
   end
+
+  describe "Trip.find_rider_trips" do
+    it "Returns an Array" do
+      RideShare::Trip.find_rider_trips(2).must_be_instance_of Array
+    end
+
+    it "The first and last element of the array is a Trip" do
+      riders_trips = RideShare::Trip.find_rider_trips(2)
+
+      riders_trips[0].must_be_instance_of RideShare::Trip
+      riders_trips[-1].must_be_instance_of RideShare::Trip
+    end
+
+    it "The number of trips is correct" do
+      RideShare::Trip.find_rider_trips(41).length.must_equal 3
+    end
+
+    #do a test for what to do if no trips were taken by a rider
+  end
 end

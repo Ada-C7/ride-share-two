@@ -37,4 +37,17 @@ class RideShare::Trip
 
     return drivers_trips
   end
+
+  def self.find_rider_trips(rider_id)
+    trips = RideShare::Trip.all
+    riders_trips = []
+
+    trips.each do |trip|
+      riders_trips << trip if rider_id == trip.rider_id
+    end
+
+    #deal with if no trips with that rider
+
+    return riders_trips
+  end
 end
