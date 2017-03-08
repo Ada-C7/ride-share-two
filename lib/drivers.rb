@@ -8,10 +8,7 @@ module RideShare
       @id = id
       @name = name
       @vin = verified_vin(vin)
-       #ensure correct length
     end
-
-
 
     def self.all
       drivers_array = []
@@ -20,23 +17,21 @@ module RideShare
           drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
         rescue ArgumentError
           drivers_array << (Driver.new(driver[0], driver[1], nil))
-          puts "not 17"
+          puts "Vin is not 17 characters"
         end
       end
       drivers_array
     end
 
 
-    def self.find(id) #Should we rescue this??
-      driver_array = RideShare::Driver.all
-          driver_array.each do |driver|
-            if id == driver.id.to_s
-              return driver
-            end
-          end
-          #
-          raise ArgumentError.new "Driver #{id} does not exist"
-        # end
+    def self.find(id)
+      driver_array = self.all
+      driver_array.each do |driver|
+        if id == driver.id
+          return driver
+        end
+      end
+      raise ArgumentError.new "Driver #{id} does not exist"
     end
 
 
@@ -61,15 +56,15 @@ module RideShare
       #instance method - retrieve an average rating for that driver based on all trips taken
       # call trips
     end
-#private
+    #private
 
-def verified_vin(vin)
-  if vin == nil || vin.length == 17
-    return vin
-  else
-    raise ArgumentError.new("VIN must be 17 characters")
-  end
-end
+    def verified_vin(vin)
+      if vin == nil || vin.length == 17
+        return vin
+      else
+        raise ArgumentError.new("VIN must be 17 characters")
+      end
+    end
 
 
   end #class

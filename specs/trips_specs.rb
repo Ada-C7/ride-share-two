@@ -122,6 +122,12 @@ describe "Trip.all" do
     it "the trips in the array must belong to the rider" do
       @trip_array.each {|trip| trip.rider_id.must_equal "2"}
     end
+
+    it "Raises an error for a trip that doesn't exist" do
+      proc {
+        RideShare::Trip.find("0000")
+      }.must_raise ArgumentError
+    end
   end
 
   describe "find_by_driver" do
@@ -170,15 +176,15 @@ describe "Trip.all" do
     end
   end
 
-    describe "find_driver" do
-      before do
-        trip_id = 1
-        driver_id = 132
-        rider_id = 54
-        date = 2016-04-05
-        rating = 3
-        @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
-      end
+  describe "find_driver" do
+    before do
+      trip_id = 1
+      driver_id = 132
+      rider_id = 54
+      date = 2016-04-05
+      rating = 3
+      @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+    end
 
     it "returns a nil if no driver found" do
       @trip.find_driver.must_be_nil
@@ -209,23 +215,27 @@ describe "Trip.all" do
     end
   end
 
-  describe "Rescue bad ratings" do
-
+  describe "find_rider" do
     before do
-      @trip_array = []
-      @trip_array << RideShare::Trip.new("1", "1", "54", "2016-04-05", "0")
-      @trip_array << RideShare::Trip.new("2", "67", "146", "2016-01-13", "6")
+      trip_id = 1
+      driver_id = 132
+      rider_id = 2234345
+      date = 2016-04-05
+      rating = 3
+      @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
     end
 
-    it "The info for invalid vins is correct with nil vin" do
-      @trip_array.first.trip_id.must_equal "1"
-      @trip_array.first.driver_id.must_equal "1"
-      @trip_array.first.rider_id.must_equal "54"
-      @trip_array.first.rating.must_be_nil
-      @trip_array.last.trip_id.must_equal "2"
-      @trip_array.last.driver_id.must_equal "67"
-      @trip_array.last.rider_id.must_equal "146"
-      @trip_array.last.rating.must_be_nil
+    it "returns a nil if no rider found" do
+      @trip.find_rider.must_be_nil
+    end
+  end
+
+  describe "Error check ratings" do
+
+    it "raises error for invalid rating" do
+      proc {
+        RideShare::Trip.new("1", "1", "54", "2016-04-05", "0")
+      }.must_raise ArgumentError
     end
 
   end

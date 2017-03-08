@@ -119,11 +119,11 @@ describe "Driver.find" do
   end
 
 
-  # it "Raises an error for an account that doesn't exist" do
-  #   proc {
-  #     RideShare::Driver.find("0000")
-  #   }.must_raise ArgumentError
-  # end
+  it "Raises an error for a rider that doesn't exist" do
+    proc {
+      RideShare::Rider.find("0000")
+    }.must_raise ArgumentError
+  end
 end
 
 describe "driver.trips" do

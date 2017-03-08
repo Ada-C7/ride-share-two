@@ -3,7 +3,7 @@ module RideShare
 
   class Rider
     attr_reader :id, :name, :phone_num
-    
+
     def initialize(id, name, phone_num)
       @id = id
       @name = name
@@ -19,14 +19,14 @@ module RideShare
       riders_array
     end
 
-    def self.find(id)  #Should we rescue this??
-      rider_array = RideShare::Rider.all
+    def self.find(id)
+      rider_array = self.all
       rider_array.each do |rider|
         if id == rider.id
           return rider
         end
       end
-      #raise error??
+      raise ArgumentError.new "Rider #{id} does not exist"
     end
 
     def trips
