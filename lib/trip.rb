@@ -2,10 +2,15 @@ require 'csv'
 
 module RideShare
   class Trip
+    attr_accessor :trip_id, :rider_id, :driver_id, :date, :rating
 
-    # def initialize
-    #   id, rider_id, driver_id, date, rating
-    # end
+    def initialize(trip_id, driver_id, rider_id, date, rating)
+      @trip_id = trip_id
+      @driver_id = driver_id
+      @rider_id = rider_id
+      @date = date
+      @rating = rating
+    end
     #
     # def calculate_rating(rating)
     #   between 1-5 avg find this in the trip csv
@@ -19,16 +24,16 @@ module RideShare
     #   use trip instances in rider (its a self method)
     # end
     #
-    # def all_trips
-    #   return all the trip sin the trip csv
-    # end
+    def all_trips
+      return all the trip sin the trip csv
+    end
 
   end
 end
 
 
 
-# 
+#
 # have an ID, rider ID, a driver ID, date, rating
 # Each rating should be within an acceptable range (1-5)
 # Given a trip object, you should be able to:

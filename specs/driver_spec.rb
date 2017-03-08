@@ -76,6 +76,35 @@ describe "driver class" do
     info[index].driver_id.must_equal line[2]
     index += 1
     end
-  end 
+  end
+
+# self.find_drivers(driver_id) 7,Lizeth Dickens,W09XNTZR9KTFK10WW
+  it "returns an account that exists" do
+    search = RideShare::Driver.find_driver(7)
+    search.must_be_instance_of RideShare::Driver
+    search.driver_id.must_equal 7
+    search.name.must_equal "Lizeth Dickens"
+    search.vin.must_equal "W09XNTZR9KTFK10WW"
+  end
+
+  it "can find the first driver from the csv" do
+    search = RideShare::Driver.find_driver(1)
+    search.must_be_instance_of RideShare::Driver
+    search.driver_id.must_equal 1
+    search.name.must_equal "Bernardo Prosacco"
+    search.vin.must_equal "WBWSS52P9NEYLVDE9"
+  end
+
+  it "can find the last driver from the csv" do
+    search = RideShare::Driver.find_driver(100)
+    search.must_be_instance_of RideShare::Driver
+    search.driver_id.must_equal 100
+    search.name.must_equal "Minnie Dach"
+    search.vin.must_equal "XF9Z0ST7X18WD41HT"
+  end
+
+  it "raises an argument error if the driver doesn't exist" do
+    proc { RideShare::Driver.find_driver(32222221)  }.must_raise ArgumentError
+  end
 
 end
