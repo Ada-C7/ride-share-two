@@ -16,19 +16,19 @@ describe "RideShare::Driver" do
     end
 
     it "Will raise an argument error if name is not a string" do
-      proc { RideShare::Driver.new(8026, 1234, "234235234345") }.must_raise ArgumentError
+      proc { RideShare::Driver.new(8026, 1234, "123EFC345EGB178EX") }.must_raise ArgumentError
     end
 
     it "Will raise an argument error if ID is not an integer" do
-      proc { RideShare::Driver.new("8026", 1234, "234235234345") }.must_raise ArgumentError
+      proc { RideShare::Driver.new("8026", "Harry Potter", "123EFC345EGB178EX") }.must_raise ArgumentError
     end
 
     it "Will raise an argument error if vin is not a string" do
-      proc { RideShare::Driver.new(8026, 1234, 89034) }.must_raise ArgumentError
+      proc { RideShare::Driver.new(8026, "Harry Potter", 0) }.must_raise ArgumentError
     end
 
     it "Will raise an argument error if vin is not a string with 17 characters" do
-      proc { RideShare::Driver.new(8026, 1234, "23423234345") }.must_raise ArgumentError
+      proc { RideShare::Driver.new(8026, "Harry Potter", "123EFC345EGB178") }.must_raise ArgumentError
     end
 
   end
@@ -62,9 +62,19 @@ describe "RideShare::Driver" do
 
 
   describe "RideShare::Driver#avg_rating" do
+    let(:driver_rating) { RideShare::Driver.find(55).avg_rating }
 
-    it "Returns an integer" do
-       valid_driver.avg_rating.must_be_kind_of Float
+    it "Returns an Float" do
+      driver_rating.must_be_kind_of Float
+    end
+
+    it "Returns a number between 1 and 5" do
+      driver_rating.must_be :<=, 5
+      driver_rating.must_be :>=, 1
+    end
+
+    it "Raises an argument error if there are no ratings" do
+      proc { RideShare::Driver.find(100).avg_rating }.must_raise ArgumentError
     end
 
   end
@@ -72,26 +82,24 @@ describe "RideShare::Driver" do
 
   describe "RideShare::Driver#self.all" do
 
-    let (:first_driver) { RideShare::Driver.all.first }
-    let (:last_driver) { RideShare::Driver.all.last }
-    let (:random_driver) { RideShare::Driver.all[36] }
+    let (:all_drivers) { RideShare::Driver.all }
 
     it "Initializes first line from drivers.csv as a new RideShare::Driver instance" do
-      first_driver.id.must_equal 1
-      first_driver.name.must_equal "Bernardo Prosacco"
-      first_driver.vin.must_equal "WBWSS52P9NEYLVDE9"
+      all_drivers.first.id.must_equal 1
+      all_drivers.first.name.must_equal "Bernardo Prosacco"
+      all_drivers.first.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
 
     it "Ititializes last line from drivers.csv as a new RideShare::Driver instance" do
-      last_driver.id.must_equal 100
-      last_driver.name.must_equal "Minnie Dach"
-      last_driver.vin.must_equal "XF9Z0ST7X18WD41HT"
+      all_drivers.last.id.must_equal 100
+      all_drivers.last.name.must_equal "Minnie Dach"
+      all_drivers.last.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 
     it "Ititializes random line from drivers.csv as a new RideShare::Driver instance" do
-      random_driver.id.must_equal 37
-      random_driver.name.must_equal "Arnulfo Anderson"
-      random_driver.vin.must_equal "WBW8W7DC0FJLMYCCR"
+      all_drivers[36].id.must_equal 37
+      all_drivers[36].name.must_equal "Arnulfo Anderson"
+      all_drivers[36].vin.must_equal "WBW8W7DC0FJLMYCCR"
     end
 
   end
@@ -99,12 +107,14 @@ describe "RideShare::Driver" do
 
   describe "RideShare::Driver#self.find" do
 
+    let (:found_driver) { RideShare::Driver.find(17) }
+
     it "Returns a RideShare::Driver" do
-      valid_driver.must_be_instance_of RideShare::Driver
+      found_driver.must_be_instance_of RideShare::Driver
     end
 
     it "Is able to find random driver using the driver's ID" do
-      valid_driver.name.must_equal "Federico Bins V"
+      found_driver.name.must_equal "Federico Bins V"
     end
 
     it "Will raise an argument error if Driver ID is not found" do

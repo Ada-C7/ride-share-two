@@ -23,6 +23,7 @@ module RideShare
 
     # calculates an average rating of all trips for specific driver
     def avg_rating
+      raise ArgumentError.new("No ratings.") if num_trips == 0
       return ratings_sum / num_trips.to_f
     end
 
