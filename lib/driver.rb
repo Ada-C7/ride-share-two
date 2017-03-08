@@ -24,28 +24,27 @@ module RideShare
       @driver_id = driver_id
       @name = name
       @vin = vin
-      @drivers_array = []
+
     end
 
     def self.all
+      drivers_array = []
       read_file = CSV.read('support/drivers.csv')
 
-
       read_file.map do |line|
-        @driver_id = line[0].to_i
-        @name = line[1].to_s
-        @vin = line[2].to_s
-        new_driver = RideShare::Driver.new(@driver_id, @name, @vin)
+        driver_id = line[0].to_i
+        name = line[1].to_s
+        vin = line[2].to_s
+        new_driver = self.new(driver_id, name, vin)
         drivers_array << new_driver
       end
-      puts "#{drivers_array}"
+      return drivers_array
     end
   end
 end
 
 
-
-
-# test_1 = RideShare::Driver.new(213124, "jake", "jkdfr435")
 #
-# puts test_1
+# test_1 = RideShare::Driver.all
+#
+# puts test_1.is_a? Array
