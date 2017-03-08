@@ -11,7 +11,7 @@ class Driver
           @name = name
           @vin = vin
           @trips = []
-          #@average_rating = calculate_average_rating
+          @average_rating = []
      end
 
      def recall_trips(file, trip_file)
@@ -19,12 +19,14 @@ class Driver
           return @trips
      end
 
-     # def calculate_average_rating(file, trip_file)
-     #      recall_trips(file, trip_file)
-     #      all_trips = recall_trips(@id)
-     #      @average_rating = all_trips.rating.map { | sum, rating | sum + rating }/all_trips.length
-     #      return @average_rating
-     # end
+     def calculate_average_rating(file, trip_file)
+
+          all_trips = recall_trips(file, trip_file)
+
+          @average_rating = all_trips.inject(0) { | sum, trip | sum + trip.rating}/all_trips.length
+
+          return @average_rating
+     end
 
      def self.all(file)
           all_drivers = []
@@ -54,21 +56,3 @@ class Driver
 
      end
 end
-
-# file = "../support/drivers.csv"
-# trip_file = "../support/trips.csv"
-#
-# id = 7
-# one_driver = Driver.find(file, id)
-#
-# # puts one_driver
-# # puts one_driver.class
-# # puts one_driver.inspect
-#
-#
-# one_driver_trips = one_driver.recall_trips(file, trip_file)
-#
-# puts one_driver_trips
-# puts one_driver_trips.class
-# puts one_driver_trips.inspect
-# puts one_driver_trips.length
