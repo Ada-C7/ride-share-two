@@ -14,9 +14,9 @@ module RideShare
       @vin = vin
     end
 
-    def self.all
+    def self.all (csv)
       drivers = []
-      temp_csv = CSV.read("/Users/sai/Documents/ada/projects/ride-share-two/support/drivers.csv")
+      temp_csv = CSV.read(csv)
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |driver|
         begin
