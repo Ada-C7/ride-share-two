@@ -9,7 +9,12 @@ module RideShare
       @phone_number = info[:phone_number]
     end
 
-    def self.all(rides_data)
+    def self.all(rides_data = nil)
+      if rides_data.nil?
+        ride_data = FileData.new("./support/riders.csv")
+        rides_data = ride_data.read_csv_and_remove_headings
+      end
+
       raise ArgumentError if rides_data.empty?
       riders = rides_data.map do |rider_info|
         raise ArgumentError unless rider_info.length == 3
@@ -26,8 +31,8 @@ module RideShare
       Integer(num)
     end
 
-    def self.find(rider_id, rides_data)
-      riders = all(rides_data)
+    def self.find(rider_id)
+      riders = all
       riders.each { |info| return info if info.id == rider_id }
       nil
     end

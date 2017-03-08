@@ -1,9 +1,3 @@
-# require 'simplecov'
-# SimpleCov.start
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require 'minitest/skip_dsl'
-# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative '../lib/rider'
 require_relative './spec_helper.rb'
 
@@ -90,11 +84,11 @@ describe "Rider" do
 
   describe "Rider#find" do
 
-    before do
-      csv_file = './support/riders.csv'
-      data = FileData.new(csv_file)
-      @riders_data = data.read_csv_and_remove_headings
-    end
+    # before do
+    #   csv_file = './support/riders.csv'
+    #   data = FileData.new(csv_file)
+    #   @riders_data = data.read_csv_and_remove_headings
+    # end
 
     it "requires arguments" do
       proc {
@@ -103,22 +97,22 @@ describe "Rider" do
     end
 
     it "returns a rider instane when passed a valid id" do
-      RideShare::Rider.find(7, @riders_data).must_be_instance_of RideShare::Rider
+      RideShare::Rider.find(7).must_be_instance_of RideShare::Rider
     end
 
     it "returns nil when given a driver id that does no exist" do
-      RideShare::Rider.find(900, @riders_data).must_be_nil
+      RideShare::Rider.find(900).must_be_nil
     end
 
     it "can find the first rider from the CSV" do
-      first_rider = RideShare::Rider.find(1, @riders_data)
+      first_rider = RideShare::Rider.find(1)
       first_rider.name.must_equal "Nina Hintz Sr."
       first_rider.id.must_equal 1
       first_rider.phone_number.must_equal "560.815.3059"
     end
 
     it "can find the last rider from the CSV" do
-      last_rider = RideShare::Rider.find(300, @riders_data)
+      last_rider = RideShare::Rider.find(300)
       last_rider.name.must_equal "Miss Isom Gleason"
       last_rider.id.must_equal 300
       last_rider.phone_number.must_equal "791-114-8423 x70188"
