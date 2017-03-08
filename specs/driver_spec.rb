@@ -17,13 +17,6 @@ describe "Driver Class" do
     end
   end #end of initialze method
 
-  xdescribe "trips_taken" do
-
-    it "Trips taken must be an array" do
-      ada.trips_taken.must_be_instance_of Array
-    end
-
-  end #end of trips taken
 
   describe "self.all method" do
 
@@ -54,11 +47,41 @@ describe "Driver Class" do
     end
 
     it "The Id, name and vin number matched the last account" do
-    
+
       my_drivers.last.driver_id.must_equal 100
       my_drivers.last.name.must_equal "Minnie Dach"
       my_drivers.last.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 
   end #end of self.all
+
+describe "self.find(id)" do
+
+let(:my_drivers) {RideShare::Driver::all}
+
+it "Returns a driver that exists" do
+
+my_driver = RideShare::Driver::find(5)
+
+my_driver.driver_id.must_equal 5
+#my_driver.id.must_equal CSV.read("support/drivers.csv")[6][2]
+# my_driver.name.must_equal "Verla Marquardt"
+# my_driver.vin.must_equal "TAMLE35L3MAYRV1JD"
+
+
+end
+
+
+end #end of self.find
+
+
+
+
+  xdescribe "trips_taken" do
+
+    it "Trips taken must be an array" do
+      ada.trips_taken.must_be_instance_of Array
+    end
+
+  end #end of trips taken
 end
