@@ -16,12 +16,12 @@ require 'pry'
 
 class Driver
 
-  attr_accessor :name, :id, :vehicle_id
+  attr_accessor :driver_id, :name,  :vehicle_id
 
 
   def initialize(hash)
+    @driver_id = hash[:driver_id]
     @name = hash[:name]
-    @id = hash[:id]
     @vehicle_id = hash[:vehicle_id]
   end
 
@@ -32,7 +32,7 @@ class Driver
     drivers_master.delete_at(0)
     drivers_master.each do |line|
       driver_hash = {}
-      driver_hash[:id] = line[0].to_i
+      driver_hash[:driver_id] = line[0].to_i
       driver_hash[:name] = line[1]
       driver_hash[:vehicle_id] = line[2]
       drivers << Driver.new(driver_hash)
@@ -41,8 +41,21 @@ class Driver
   end
 
 
+  def self.find(driver_id)
+    all_drivers = Driver.all
+    find_driver = nil
+    all_drivers.each do |driver|
+      find_driver = driver if driver.id == driver_id
+    end
+    raise ArgumentError.new("Drivers don't match") if find_driver == nil
+    return find_driver
+    #think of above loop as searching to reset from nil
+  end
+
+
   def driver_trips(trips)
-     trips_by_driver = [] [trip.trips_by_driver(id)
+    trips_by_driver = []
+    trip.trips_by_driver(id)
     #retrieve a list of trip instances that only this driver has taken
   end
 
@@ -54,27 +67,10 @@ class Driver
   end
 
 
-  def self.find(driver_id)
-    all_drivers = Driver.all
-    find_driver = nil
-    all_drivers.each do |driver|
-      find_driver = driver if driver.id == driver_id
-    end
-    raise ArgumentError.new("Drivers don't match") if find_driver == nil
-
-    return find_driver
-
-    #think of above loop as searching to reset from nil
-
-  end
-
-
   def check_vin_length
     # valid_vehicle_id?(length)
     #valid_length = 17
     #drivers_master[2].length
   end
-
-
 
 end

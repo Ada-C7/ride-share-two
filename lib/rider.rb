@@ -19,22 +19,14 @@ require 'pry'
 
 class Rider
 
-attr_accessor :id, :name, :phone
+attr_accessor :rider_id, :name, :phone
 
 def initialize()
-  @id = hash[:id]
+  @rider_id = hash[:rider_id]
   @name = hash[:name]
   @phone = hash[:phone]
 end
 
-
-def riders_trips
-  #find previous driver instances for this rider instance
-end
-
-def rider_drivers(trips)
-  # retrieve the list of all previous driver instances (through the trips functionality built above) #DRIVERS(TRIPS)
-end
 
 def self.all #read in from csv
   riders = []
@@ -42,7 +34,7 @@ def self.all #read in from csv
   riders_master.delete_at(0)
   riders_master.each do |line|
     rider_hash = {}
-    rider_hash[:id] = line[0].to_i
+    rider_hash[:rider_id] = line[0].to_i
     rider_hash[:name] = line[1]
     rider_hash[:phone] = line[2]
     riders << Rider.new(riders_hash)
@@ -51,7 +43,18 @@ def self.all #read in from csv
 end
 
 
+def riders_trips
+  #find previous driver instances for this rider instance
+end
+
+
+def rider_drivers(trips)
+  # retrieve the list of all previous driver instances (through the trips functionality built above) #DRIVERS(TRIPS)
+end
+
+
 def drivers_past(id)
+  # retrieve the list of all previous driver instances (through the trips functionality built above) #DRIVERS(TRIPS)
 end
 
 
