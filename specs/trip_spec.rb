@@ -118,7 +118,7 @@ describe "Trip" do
 
   end # End of describe "#find_driver"
 
-  describe "#find_rider" do
+  xdescribe "#find_rider" do
     let(:trip1) { RideSharing::Trip.new(1, 1, 54, "2016-04-05", 3)}
     it "Return must be an object of class RideSharing::Driver" do
       trip1

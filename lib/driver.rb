@@ -5,7 +5,6 @@ module RideSharing
 
     attr_reader :id, :name, :vin
     def initialize(id, name, vin)
-
       @id = id
       @name = name
       @vin = vin
@@ -32,6 +31,9 @@ module RideSharing
       return found_driver.first
     end
 
+    def list_of_trips
+      RideSharing::Trip.find_all_trips_for_driver(@id)
+    end
 
   end # End of class Driver
 end # End of module RideSharing
