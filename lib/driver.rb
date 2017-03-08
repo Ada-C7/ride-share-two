@@ -1,4 +1,4 @@
-module Carmunity
+module Carmmunity
   class Driver
 
     #@@drivers = []
@@ -13,16 +13,25 @@ module Carmunity
     end
 
 
-    # def trips_taken
-    #   trips = Carmunity::Trip.find(@driver_id)
-    #   return trips
-    # end
+    def trips_taken
+      trips = Carmmunity::Trip.find(@driver_id)
+      return trips
+    end
 
 
-  #def average_rating
-  #average_rating = ratings.all / ratings.length
-  #return average_rating
-  #end
+  def average_rating
+
+    total = 0
+    trips = trips_taken
+
+    trips.rating.each do |rating|
+      total += rating
+    end
+
+    rating_average = total / trips.length
+
+    return rating_average
+  end
 
 
 
@@ -55,8 +64,8 @@ module Carmunity
             vin: row[2]
           }
 
-          drivers << Carmunity::Driver.new(driver)
-          #@@drivers << Carmunity::Driver.new(driver)
+          drivers << Carmmunity::Driver.new(driver)
+          #@@drivers << Carmmunity::Driver.new(driver)
 
         end
       #end
