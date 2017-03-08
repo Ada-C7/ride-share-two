@@ -35,38 +35,44 @@ class Trip
     # read in csv file for all trips
     # create an array of trip instances
 
-    @trip_info = []
+    trip_info = []
 
     CSV.foreach("/Users/jou-jousun/ada/projects/ride-share-two/support/trips.csv", {:headers => true}) do |trip|
-      @trip_info << Trip.new(trip[0].to_i, trip[1].to_i, trip[2].to_i, trip[3].to_s, trip[4].to_i)
+      trip_info << Trip.new(trip[0].to_i, trip[1].to_i, trip[2].to_i, trip[3].to_s, trip[4].to_i)
     end
 
-    return @trip_info
+    return trip_info
 
   end
 
   def self.find_all_for_driver(driver_id)
     # find all trip instances for a given driver ID
-    @this_drivers_trips = []
+    this_drivers_trips = []
 
     Trip.all.each do |trip|
       if trip.driver_id == driver_id
-        @this_drivers_trips << trip
+        this_drivers_trips << trip
       end
     end
-    return @this_drivers_trips
+
+    raise ArgumentError.new "Driver does not exist" if this_drivers_trips.length == 0
+
+    return this_drivers_trips
   end
 
   def self.find_all_for_rider(rider_id)
     # find all trip instances for a given rider ID
-    @this_riders_trips = []
+    this_riders_trips = []
 
     Trip.all.each do |trip|
       if trip.rider_id == rider_id
-        @this_riders_trips << trip
+        this_riders_trips << trip
       end
     end
-    return @this_riders_trips
+
+    raise ArgumentError.new "Rider does not exist" if this_riders_trips.length == 0
+
+    return this_riders_trips
   end
 
 end

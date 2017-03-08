@@ -4,9 +4,10 @@ class Driver
   attr_reader :id, :name, :vin
 
   def initialize(id, name, vin)
-    @id = id
-    @name = name
-    @vin = vin
+    @id = id.to_i
+    @name = name.to_s
+    raise ArgumentError.new("VIN must be 17 characters long") if vin.to_s.length != 17
+    @vin = vin.to_s
   end
 
   def self.all

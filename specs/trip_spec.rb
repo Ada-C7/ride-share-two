@@ -43,8 +43,14 @@ describe "Trip" do
     it "it returns all the trips from the CSV file" do
       @trips.must_be_instance_of Array
 
-      (@trips.each { |i| return i }).must_be_instance_of Trip
-
+      @trips.each { |i| i.must_be_instance_of Trip }
+      # the above code is the shorthand for the below code
+      # @trips.each do |i|
+      #   i.must_be_instance_of Trip
+      # end
+      # (@trips.each { |i| return i }).must_be_instance_of Trip
+      # the code on the line above makes it so the spec on the line below is never run - why?
+      # because it doesn't actually go through the loop; it does it once, and returns, and exit
       @trips.length.must_equal 600
     end
   end # end of describe Trip.all method
@@ -61,7 +67,6 @@ describe "Trip" do
 
   describe "#rider" do
     it "returns the rider instance that is associated with this rider id" do
-      skip
       first_trip = Trip.new(1, 1, 54, "2016-04-05", 3)
       first_trip.rider.must_be_instance_of Rider
       first_trip.rider.id.must_equal 54
@@ -86,7 +91,6 @@ describe "Trip" do
     end
 
     it "Raises an error for a driver that doesn't exist" do
-      skip
       proc {
         Trip.find_all_for_driver(111111)
       }.must_raise ArgumentError
@@ -105,11 +109,10 @@ describe "Trip" do
 
     it "returns a trip that exists" do
       trips_for_a_rider = Trip.find_all_for_rider(@trips[10].rider_id)
-      trips_for_a_rider[0].must_be_instance_of Ride
+      trips_for_a_rider[0].must_be_instance_of Trip
     end
 
-    it "Raises an error for a driver that doesn't exist" do
-      skip
+    it "Raises an error for a rider that doesn't exist" do
       proc {
         Trip.find_all_for_rider(111111)
       }.must_raise ArgumentError

@@ -20,6 +20,20 @@ describe "Driver" do
       kind_driver = Driver.new(1, "Santa Claus", 98109)
       kind_driver.must_be_instance_of Driver
     end
+
+    it "must have a vin of 17" do
+      proc {
+        Driver.new(10000, "Ada Lovelace", 100)
+      }.must_raise ArgumentError
+
+      proc {
+        Driver.new(10000, "Ada Lovelace", "9892F")
+      }.must_raise ArgumentError
+
+      proc {
+        Driver.new(10000, "Ada Lovelace", "120984EIF26384394DK28")
+      }.must_raise ArgumentError
+    end
   end
 
   describe "#trips" do
@@ -27,11 +41,8 @@ describe "Driver" do
       first_driver = Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
       first_driver_trips = first_driver.trips(1)
       first_driver_trips.must_be_instance_of Array
-      first_driver_trips.each { |trip| return trip }.must_be_instance_of Array
-
-      # takes in driver id
-      # returns a list of all this driver's trips
-      # each trip (element) must be an Array, as trips is an array of arrays
+      first_driver_trips.each { |trip| trip.must_be_instance_of Trip }
+      first_driver_trips.length.must_equal 9
     end
   end
 
@@ -43,7 +54,7 @@ describe "Driver" do
     it "returns all drivers from the CSV file" do
       @drivers.must_be_instance_of Array
 
-      (@drivers.each { |i| return i }).must_be_instance_of Driver
+      @drivers.each { |i| i.must_be_instance_of Driver }
 
       @drivers.length.must_equal 100
     end
@@ -81,10 +92,17 @@ describe "Driver" do
     # gets an average rating for that driver
     # calls Driver(class)'s trip(id) method, which will give all the trips (with ratings for each)
     # sum all the ratings, divide by the number of trips/ratings
+    # does it get the right sum?
+    # does it get the right count (with which to divide with?)
+    # does it get the right average?
     it "returns the average rating for a driver" do
       new_driver = Driver.new(1, "Santa Claus", 98109)
       new_driver.rating(1).must_be_instance_of Float
       new_driver.rating(1).must_equal 2.3333333333333335
+
+      shakira = Driver.new(16, "Shakira Stamm" , "SALUVSAL3WA67SBPZ")
+      shakira.rating(16).must_be_instance_of Float
+      shakira.rating(16).must_equal 2.5
     end
   end
 
