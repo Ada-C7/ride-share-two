@@ -2,12 +2,12 @@ require_relative 'spec_helper'
 
 describe "Driver Class" do
 
-  let(:ada) { RideShare::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
+  let(:ada) { Carmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
 
   describe "initialize method" do
 
     it "Instantiates a new instance of Driver class" do
-      ada.must_be_instance_of RideShare::Driver
+      ada.must_be_instance_of Carmunity::Driver
     end
 
     it "Stored data must match what was passed as an argument" do
@@ -20,7 +20,7 @@ describe "Driver Class" do
 
   describe "self.all method" do
 
-    let(:my_drivers) {RideShare::Driver::all}
+    let(:my_drivers) {Carmunity::Driver::all}
 
     it "Driver.all returns array" do
 
@@ -29,8 +29,8 @@ describe "Driver Class" do
 
     it "First and Last drivers are instansces of Driver Class" do
 
-      my_drivers.first.must_be_instance_of RideShare::Driver
-      my_drivers.last.must_be_instance_of RideShare::Driver
+      my_drivers.first.must_be_instance_of Carmunity::Driver
+      my_drivers.last.must_be_instance_of Carmunity::Driver
     end
 
     it "The number of drivers is correct" do
@@ -40,7 +40,7 @@ describe "Driver Class" do
     it "The Id, name and vin number matches the first account " do
 
       index = 1
-
+#add loop
       my_drivers[index].driver_id.must_equal 1
       my_drivers[index].name.must_equal "Bernardo Prosacco"
       my_drivers[index].vin.must_equal "WBWSS52P9NEYLVDE9"
@@ -57,20 +57,45 @@ describe "Driver Class" do
 
 describe "self.find(id)" do
 
-let(:my_drivers) {RideShare::Driver::all}
+let(:my_drivers) { Carmunity::Driver::all }
+
+let(:file_row) {CSV.read("support/drivers.csv")}
+
 
 it "Returns a driver that exists" do
 
-my_driver = RideShare::Driver::find(5)
+  my_driver = Carmunity::Driver::find(5)
 
-my_driver.driver_id.must_equal 5
-#my_driver.id.must_equal CSV.read("support/drivers.csv")[6][2]
-# my_driver.name.must_equal "Verla Marquardt"
-# my_driver.vin.must_equal "TAMLE35L3MAYRV1JD"
+  my_driver.name.must_equal my_drivers[5].name
 
+  my_driver.driver_id.must_equal 5
+
+  my_driver.vin.must_equal file_row[5][2]
+
+  my_driver.vin.must_equal "TAMLE35L3MAYRV1JD"
 
 end
 
+
+it "Can find the last driver in the CSV file" do
+
+  my_driver = Carmunity::Driver::find(100)
+
+  my_driver.name.must_equal my_drivers.last.name
+
+  my_driver.driver_id.must_equal my_drivers.last.driver_id
+
+end
+
+it "Can find the First driver in the CSV file" do
+
+  my_driver = Carmunity::Driver::find(1)
+
+  my_driver.name.must_equal my_drivers[1].name
+
+  my_driver.driver_id.must_equal my_drivers[1].driver_id
+
+end
 
 end #end of self.find
 
