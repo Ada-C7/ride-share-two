@@ -25,7 +25,7 @@ describe "rider_id" do
       end
     end
 
-    it "trips.length matches number of trips from CSV file for that rider" do
+    it "trips.length matches number of trips from CSV file" do
       trips_number = my_rider.trips.length
       lines_from_csv = []
       trips_csv.each do |line|
@@ -48,7 +48,7 @@ describe "rider_id" do
   end
 
   describe "Rider#drivers" do
-    it "Retrieve an array of all previous driver instances this rider has rode with" do
+    it "Retrieve an array of all previous driver instances for this rider" do
       my_rider.drivers.must_be_instance_of Array
       my_rider.drivers[0].must_be_instance_of RideShare::Driver
       my_rider.drivers[-1].must_be_instance_of RideShare::Driver
@@ -64,11 +64,11 @@ describe "rider_id" do
       first_driver_id.must_equal first_driver_id_trip
     end
 
-    it "Returns unique list of Drivers, even if Rider has driven with driver more than once" do
+    it "Returns unique list of Drivers" do
       rider = RideShare::Rider.new(250, "Kylie Cartwright", "734.297.0789 x3288")
       drivers = rider.drivers
       driver_ids = drivers.map { |driver| driver.id }
-      driver_ids.uniq!.must_equal nil
+      driver_ids.uniq!.must_be_nil
     end
   end
 
@@ -96,8 +96,8 @@ describe "rider_id" do
 
   describe "find_rider Rider class method" do
     it "should return one rider based on numeric ID" do
-      my_rider = RideShare::Rider.find_rider(1)
-      my_rider.must_be_instance_of RideShare::Rider
+      this_rider = RideShare::Rider.find_rider(1)
+      this_rider.must_be_instance_of RideShare::Rider
     end
 
     it "should return 0 if no driver found by that ID" do

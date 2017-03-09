@@ -9,7 +9,7 @@ class RideShare::Trip
     @date = date
 
     unless rating > 0 && rating < 6
-      raise InvalidRatingError.new("Ride rating must be 1-5, your rating was #{ rating }")
+      raise InvalidRatingError.new("Rating must be 1-5, your rating was #{ rating }")
     end
     @rating = rating
   end
