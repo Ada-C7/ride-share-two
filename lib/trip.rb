@@ -45,15 +45,6 @@ class Trip
 
   end
 
-  # def self.find
-  #   all_trips = Trip.all
-  #   find_trip = nil
-  #   all_trips.each do |trip|
-  #     find_trip = trip if trip.id == trip_id
-  #   end
-  #   raise ArgumentError.new("Trips don't match") if find_trip == nil
-  #   return find_trip
-  # end
 
   def self.trip_by_driver(id)
     all_trips = Trip.all
@@ -77,6 +68,16 @@ class Trip
       #trips
     end
 
+
+    # def self.find
+    #   all_trips = Trip.all
+    #   find_trip = nil
+    #   all_trips.each do |trip|
+    #     find_trip = trip if trip.id == trip_id
+    #   end
+    #   raise ArgumentError.new("Trips don't match") if find_trip == nil
+    #   return find_trip
+    # end
 
   end
 end#class end

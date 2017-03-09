@@ -21,8 +21,9 @@ class Driver
       driver_hash[:driver_id] = line[0].to_i
       driver_hash[:name] = line[1]
       driver_hash[:vehicle_id] = line[2]
-      #do some shit if line[2].length != 17
-      drivers << Driver.new(driver_hash)
+      # if line[2].length != 17
+      #   raise Invalid_ID.new("This is not a valid id.")
+        drivers << Driver.new(driver_hash)
     end
     return drivers
   end
@@ -44,23 +45,14 @@ class Driver
     driver_trips = []
     #local_var[] = class object.class_method(pass arg)
     driver_trips = Trip.trips_by_driver(@driver_id)
-    #retrieve a list of trip instances that only this driver has taken
   end
 
 
   def driver_rating
-      trips = driver_trips
-      ratings = []
-      ratings = trips.map { |trip| trip.rating.to_f }
-      #puts ratings
-      average_rating = ratings.inject(0.0) { |sum, el| sum + el } / ratings.size
-      return average_rating
-    #retrieve an average rating for that driver based on all trips taken# driver_trips(ratings)
-    # trips.all[4].map { |rating| ratings.sum ratings.average }
+    trips = driver_trips
+    ratings = []
+    ratings = trips.map { |trip| trip.rating.to_f }
+    average_rating = ratings.inject(0.0) { |sum, el| sum + el } / ratings.size
+    return average_rating
   end
 end
-
-
-# testing = Driver.new({driver_id: 4, name: "Jeromy O'Keefe", vehicle_id: "DVM,L1CKRVH55W8S6S9T1"} )
-#
-# raitings = Ratings.new
