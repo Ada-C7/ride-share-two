@@ -30,6 +30,13 @@ describe "Rider" do
       first_rider_trips.must_be_instance_of Array
       first_rider_trips.each { |trip| trip.must_be_instance_of Trip }
     end
+
+    it "returns no trips if the rider hasn't taken any trips" do
+      bad_rider = Rider.new(300, "Miss Isom Gleason", "791-114-8423 x70188")
+      bad_riders_trips = bad_rider.trips(300)
+      bad_riders_trips.must_be_instance_of Array
+      bad_riders_trips.length.must_equal 0
+    end
   end
 
   describe "#previous_drivers" do

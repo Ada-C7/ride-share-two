@@ -90,11 +90,6 @@ describe "Trip" do
       trips_for_a_driver[0].must_be_instance_of Trip
     end
 
-    it "Raises an error for a driver that doesn't exist" do
-      proc {
-        Trip.find_all_for_driver(111111)
-      }.must_raise ArgumentError
-    end
   end # end of describe find_all_for_driver method
 
   describe "Trip#find_all_for_rider" do
@@ -112,11 +107,6 @@ describe "Trip" do
       trips_for_a_rider[0].must_be_instance_of Trip
     end
 
-    it "Raises an error for a rider that doesn't exist" do
-      proc {
-        Trip.find_all_for_rider(111111)
-      }.must_raise ArgumentError
-    end
   end # end of describe find_all_for_rider method
 
 end # end of describe Trip

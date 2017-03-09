@@ -55,8 +55,6 @@ class Trip
       end
     end
 
-    raise ArgumentError.new "Driver does not exist" if this_drivers_trips.length == 0
-
     return this_drivers_trips
   end
 
@@ -69,8 +67,6 @@ class Trip
         this_riders_trips << trip
       end
     end
-
-    raise ArgumentError.new "Rider does not exist" if this_riders_trips.length == 0
 
     return this_riders_trips
   end
