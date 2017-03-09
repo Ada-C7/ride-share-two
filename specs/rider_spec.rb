@@ -3,6 +3,13 @@ require_relative '../lib/rider'
 
 describe RideShare::Rider do
   describe "#initialize" do
+    it "Initializes a rider when given valid parameters" do
+      alix = RideShare::Rider.new(id: 6, name: "Alix", phone_number: "123-4567")
+
+      alix.must_be_instance_of RideShare::Rider
+      alix.name.must_equal "Alix"
+    end
+
     it "Doesn't create a rider without an id" do
       proc {
         RideShare::Rider.new(name: "Alix", phone_number: "123-4567")
@@ -18,6 +25,18 @@ describe RideShare::Rider do
     it "Doesn't create a rider without a phone number" do
       proc {
         RideShare::Rider.new(id: 4, name: "Alix")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a rider when parameters are set to nil" do
+      proc {
+        RideShare::Rider.new(id: nil, name: "Alix", phone_number: "123-4567")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a rider when parameters are set to empty objects" do
+      proc {
+        RideShare::Rider.new(id: 5, name: "", phone_number: "123-4567")
       }.must_raise ArgumentError
     end
   end

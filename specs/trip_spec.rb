@@ -3,6 +3,13 @@ require_relative '../lib/trip'
 
 describe RideShare::Trip do
     describe "#initialize" do
+      it "Initializes a trip when given valid parameters" do
+        trip = RideShare::Trip.new(id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 4)
+
+        trip.must_be_instance_of RideShare::Trip
+        trip.id.must_equal 10
+      end
+
       it "Does not allow a trip without an ID" do
         proc {
           RideShare::Trip.new(driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 4)
@@ -18,6 +25,18 @@ describe RideShare::Trip do
       it "Does not allow a rating 5" do
         proc {
           RideShare::Trip.new(id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14", rating: 6)
+        }.must_raise ArgumentError
+      end
+
+      it "Doesn't create a trip when parameters are set to nil" do
+        proc {
+          RideShare::Trip.new(id: nil, driver_id: 5, rider_id: 263, date: "2015-12-14", rating: 4)
+        }.must_raise ArgumentError
+      end
+
+      it "Doesn't create a trip when parameters are set to empty objects" do
+        proc {
+          RideShare::Trip.new(id: 5, driver_id: 5, rider_id: 263, date: "", rating: 4)
         }.must_raise ArgumentError
       end
     end

@@ -41,7 +41,7 @@ module RideShare
       required_attributes = [:id, :name, :vin]
 
       missing = required_attributes.select do |attribute|
-        !params.keys.include? attribute || params[attribute].nil? || params[attribute].empty?
+        !params.keys.include?(attribute) || params[attribute].to_s.empty?
       end
 
       if !missing.empty?

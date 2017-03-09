@@ -3,6 +3,13 @@ require_relative '../lib/driver'
 
 describe RideShare::Driver do
   describe "#initialize" do
+    it "Initializes a driver when given valid parameters" do
+      alix = RideShare::Driver.new(id: 6, name: "Alix", vin: "12345678911234567")
+
+      alix.must_be_instance_of RideShare::Driver
+      alix.name.must_equal "Alix"
+    end
+
     it "Doesn't create a driver with a missing ID" do
       proc {
         RideShare::Driver.new(name: "Alix", vin: "12345678911234567")
@@ -24,6 +31,18 @@ describe RideShare::Driver do
     it "Doesn't allow a driver to be created with an invalid VIN" do
       proc {
         RideShare::Driver.new(id: 1234, name: "Bad Guy", vin: "NOTAVIN")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a driver when parameters are set to nil" do
+      proc {
+        RideShare::Driver.new(id: nil, name: "Alix", vin: "12345678911234567")
+      }.must_raise ArgumentError
+    end
+
+    it "Doesn't create a driver when parameters are set to empty objects" do
+      proc {
+        RideShare::Driver.new(id: 5, name: "", vin: "12345678911234567")
       }.must_raise ArgumentError
     end
   end
