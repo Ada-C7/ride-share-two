@@ -42,5 +42,13 @@ module RideShare
         puts "An error has occurred: #{e.message}"
       end
     end
+
+    def rider
+      begin
+        return Rider.find(rider_id)
+      rescue NoRiderError => e
+        puts "An error has occurred: #{e.message}"
+      end
+    end
   end
 end

@@ -142,9 +142,22 @@ describe "Trip tests" do
       trip.driver.must_be_instance_of RideShare::Driver
     end
 
-    it "outputs message if driver doesn't exist" do
+    it "outputs message and returns nil if driver doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 0, rider_id: 8, date: "2014-07-12", rating: 5 })
       proc { bad_trip.driver }.must_output (/.+/)
+      bad_trip.driver.must_equal nil
+    end
+  end
+
+  describe "Trip#rider" do
+    it "returns a Rider object if the driver exists" do
+      trip.rider.must_be_instance_of RideShare::Rider
+    end
+
+    it "outputs message and returns nil if rider doesn't exist" do
+      bad_trip = RideShare::Trip.new({ id: 2, driver_id: 4, rider_id: 0, date: "2014-07-12", rating: 5 })
+      proc { bad_trip.rider }.must_output (/.+/)
+      bad_trip.rider.must_equal nil
     end
   end
 end
