@@ -164,4 +164,32 @@ describe Trip do
                end
           end
      end
+
+     describe "Self#find_drivers" do
+
+          before do
+               @file = "support/trips.csv"
+               @driver_file = "support/drivers.csv"
+               @id = 8
+               @trip = Trip.find_trip(@id, @file)
+               @the_driver = Trip.find_driver(@id, @file, @driver_file)
+               @lines = File.foreach(@file).count
+
+          end
+
+          describe "Self#find_driver:" do
+               it "Returns an instance of the class Driver:" do
+                   @the_driver.must_be_kind_of Driver
+               end
+
+               it "Returns the correct Driver instance:" do
+                   @the_driver.id.must_equal @trip.driver_id
+               end
+
+               it "Raises an error for a trip account that doesn't exist:" do
+                    id = @lines + 1
+                    proc {Trip.find_driver(id, @file, @driver_file)}.must_raise ArgumentError
+               end
+          end
+     end
 end
