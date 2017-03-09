@@ -79,49 +79,58 @@ describe "Trip class" do
         all_trips.last.rating.must_equal rating
       end
     end
-    xdescribe "Trip#self.find_driver_trips" do
-      it "Check that class have a find method" do
-        Ride_Share::Trip.must_respond_to :find
+    describe "Trip#self.find_driver_trips" do
+
+      it "The lenfth of trips list is the same count as in csv file" do
+        specific_driver_id = "13"
+        trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
+        trips.length.must_equal 7
       end
 
-      it "Returns a driver instance with correct data " do
-        # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
-        trip_id = "57"
-        trip = Ride_Share::Trip.find(trip_id)
-        trip.must_be_instance_of Ride_Share::Trip
-        trip.name.must_equal 'Fermin Jakubowski'
-        trip.vin.must_equal '1C9YKRAL923SACAZM'
+      it "Returns the list of trip instances for a specific driver" do
+        specific_driver_id = "13"
+        trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
+        trips.first.must_be_instance_of Ride_Share::Trip
       end
-      it "Raises an argument error with trip id not in the data base" do
-        # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
-        trip_id = "9999"
-        #binding.pry
-        proc { Ride_Share::Trip.find(trip_id) }.must_raise ArgumentError
+
+      it "Returns an empty list for a driver is not included in the trip csv data" do
+        specific_driver_id = "9999"
+        trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
+        trips.must_equal []
       end
     end
 
     describe "Trip#self.find_rider_trips" do
 
+      it "Returns the list of trip instances for a specific rider" do
+        specific_rider_id = "54"
+        trips = Ride_Share::Trip.find_rider_trips(specific_rider_id)
+        trips.first.must_be_instance_of Ride_Share::Trip
+      end
 
+      it "Returns an empty list for a rider is not included in the trip csv data" do
+        specific_rider_id = "9999"
+        trips = Ride_Share::Trip.find_rider_trips(specific_rider_id)
+        trips.must_equal []
+      end
     end
 
     describe "Trip#retrieve_driver" do
+      it "Check the driver name for the first trip" do
+        # first_trip: 1,1,54,2016-04-05,3
+        trip = Ride_Share::Trip.all.first
 
+        trip.retrieve_driver.name.must_equal "Bernardo Prosacco"
+      end
     end
 
     describe "Trip#retrieve_rider" do
-
-
+      it "Check the rider name for the first trip" do
+        # first_trip: 1,1,54,2016-04-05,3
+        trip = Ride_Share::Trip.all.first
+        trip.retrieve_rider.name.must_equal "Gracie Emmerich"
+      end
     end
-
-
-
   end
-
-
-
-
-
-
 
 end

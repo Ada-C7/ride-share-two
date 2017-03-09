@@ -84,12 +84,8 @@ describe "Driver class" do
   end
 
   describe "Driver#retrieve_trips" do
-    # let(:driver) { Ride_Share::Driver.new(name: 'Mr. Delbert Gleason', driver_id: "13", vin: "XF9HBFH148FLD41K8" )}
-
 
     it "The lenfth of trips list is the same count as in csv file" do
-      # driver: 13	Mr. Delbert Gleason	XF9HBFH148FLD41K8
-      # trip: 4	13	70	2016-05-14	4
       specific_driver_id = "13"
       trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
       trips.length.must_equal 7
@@ -113,12 +109,10 @@ describe "Driver class" do
 
       specific_driver_id = "13"
       @driver_13.calculate_avg_rating.must_be_within_epsilon (29.0/7),0.01
-
     end
 
     it "The average trip rating is a float" do
     # driver: 13	Mr. Delbert Gleason	XF9HBFH148FLD41K8
-
       specific_driver_id = "13"
       @driver_13.calculate_avg_rating.must_be_instance_of Float
 

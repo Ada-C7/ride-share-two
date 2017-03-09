@@ -76,7 +76,21 @@ describe "Rider Class" do
       rider_id = "9999"
       proc { Ride_Share::Rider.find(rider_id) }.must_raise ArgumentError
     end
+  end
+  describe "Rider#retrieve_trips" do
 
+    it "The lenfth of trips list is the same count as in csv file" do
+      specific_rider_id = "54"
+      trips = Ride_Share::Trip.find_rider_trips(specific_rider_id)
+      trips.length.must_equal 2
+    end
+
+    it "Returns the list of trip instances for a specific rider" do
+
+      specific_rider_id = "54"
+      trips = Ride_Share::Trip.find_rider_trips(specific_rider_id)
+      trips.first.must_be_instance_of Ride_Share::Trip
+    end
   end
 
 end
