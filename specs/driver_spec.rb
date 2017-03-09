@@ -2,7 +2,7 @@
 
 require_relative 'spec_helper.rb'
 
-describe "retrieve an array from self.all" do
+describe "driver: self.all" do
   before do
     # TODO: update to let()
     @driver = RideShare::Driver.all
@@ -12,15 +12,28 @@ describe "retrieve an array from self.all" do
   end
 
   it "retrieves an id, name, and vin number" do
+    # TODO: Fix object calling issue. Test passing but not correct.
+
     CSV.read('support/drivers.csv') do |line|
       counter = 0
-      @driver[counter][0].driver_id.must_equal line[counter][0].to_i #equal to? @driver[counter].driver_id.must_equal line[counter][0].to_i
-      @driver[counter][1].name.must_equal line[counter][1].to_s #.name
-      @driver[counter][2].vin.must_equal vin[counter][2].to_s #.vin
+      @driver[counter].must_equal line[counter][0].to_i
+      @driver[counter].must_equal line[counter][1].to_s
+      @driver[counter].must_equal vin[counter][2].to_s
+
+      counter += 1
     end
   end
 
-  it "verifies vin length" do
+  it "retrieves the first and last driver_id" do
+    # skip
+    # TODO: Fix object calling issue.
+
+    @driver[0][0].must_equal "1"
+    @driver[99][0].must_equal "100"
+  end
+
+  it "verifies all vin length" do
+    # skip
     CSV.read('support/drivers.csv') do |line|
       counter = 0
       @driver[counter][2].length.must_equal 17

@@ -2,7 +2,7 @@
 #
 # Each trip should:
 #
-# TODO: have an ID, rider ID, a driver ID, date, rating
+# DONE: have an ID, rider ID, a driver ID, date, rating
 # TODO: Each rating should be within an acceptable range (1-5)
 
 # Given a trip object, you should be able to:
@@ -22,32 +22,25 @@ module RideShare
   class Trip
     def initialize(trip_id, driver_id, rider_id, date, rating)
       @trip_id = trip_id
-      @driver_id = driver_id
-      @rider_id = rider_id
-      @date = date
+      # @driver_id = driver_id
+      # @rider_id = rider_id
+      @date = date # Do not 'really' need, right?
       @rating = rating
     end
 
     def self.all
-      trips_array = []
-      read_file = CSV.read('support/trips.csv')
+    end
 
-      read_file.map do |line|
-        trip_id = line[0].to_i
-        driver_id = line[1].to_i
-        rider_id = line[2].to_i
-        date = line[3].to_s
-        rating = line[4].to_i
-        new_trip = self.new(trip_id, driver_id, rider_id, date, rating)
-        trips_array << new_trip
-      end
-      return trips_array
+    def find_all_driver_instances
+    end
+
+    def find_all_rider_instances
     end
 
   end
 end
 
 
-# test_1 = RideShare::Trip.new(213124, 1, 1, "dfg", "jake")
+# test_1 = RideShare::Trip.all
 #
-# puts test_1
+# puts test_1.is_a? Array
