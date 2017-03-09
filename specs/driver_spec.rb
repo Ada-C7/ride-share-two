@@ -129,5 +129,7 @@ describe "Driver tests" do
     it "Raises error when there's no rating for a driver" do
       proc { driver100.avg_rating }.must_raise NoRatingError
     end
+
+    #make test for formatting??
   end
 end
