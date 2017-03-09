@@ -8,7 +8,7 @@ class Rider
 
   def initialize(rider_id, name, phone_num)
     raise ArgumentError.new("rider_id must be integer") if rider_id.class != Integer
-    @id = rider_id
+    @id = rider_id.to_i
     @name = name
     @phone = phone_num
   end
@@ -46,13 +46,17 @@ class Rider
 
 
   def trips
-    rider_trips = []
-    Trip.all.each do |trip|
-      if trip.rider == @id
-        rider_trips << trip
-      end
-    end
-    return rider_trips
+    Trip.rider_find_all(@id)
+
+    # original code I wrote was below... before Jou-Jou helped me realize that I can just call a method from the Trip class..which was essentially the same exact code... which was the whole point of this project -_-
+
+    # rider_trips = []
+    # Trip.all.each do |trip|
+    #   if trip.rider == @id
+    #     rider_trips << trip
+    #   end
+    # end
+    # return rider_trips
   end
 
   def drivers
@@ -64,8 +68,8 @@ class Rider
     rider_driver_ids = rider_driver_ids.uniq
 
     rider_drivers = []
-    Driver.all.each_with_index do |driver, index|
-      if driver.id == rider_driver_ids[index]
+    Driver.all.each do |driver|
+      if rider_driver_ids.include?(driver.id)
         rider_drivers << driver
       end
 

@@ -45,7 +45,7 @@ describe "Trip tests" do
 
     it "each element in array is a Trip" do
 
-      Trip.all do |element|
+      Trip.all.each do |element|
         element.must_be_instance_of Trip
       end
 

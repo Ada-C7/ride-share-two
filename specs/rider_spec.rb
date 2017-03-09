@@ -107,7 +107,7 @@ describe "Rider tests" do
     it "there are the correct number of drivers in the array" do
       new_rider = Rider.new(45, "Lavina Friesen", "1-213-163-6582")
 
-      new_rider.drivers.length must_equal 4
+      new_rider.drivers.length.must_equal 4
 
     end
 

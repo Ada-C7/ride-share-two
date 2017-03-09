@@ -7,7 +7,7 @@ describe "Driver tests" do
         new_driver = Driver.new("3", "Bob Jones", "L1CXMYNZ3MMGTTYWU")
 
         new_driver.must_respond_to :id
-        new_driver.id.must_equal "3"
+        new_driver.id.must_equal 3
 
         new_driver.must_respond_to :name
         new_driver.name.must_equal "Bob Jones"
@@ -18,28 +18,46 @@ describe "Driver tests" do
 
     it "raises an error if vin is not 17 characters long" do
 
-      proc {Driver.new("3", "Bob Jones", "12345")
+      proc {Driver.new(3, "Bob Jones", "12345")
       }.must_raise ArgumentError
 
     end
+
+    ##maybe add test to make sure vin is letters and numbers??
 
   end
 
 
   describe "Driver.all" do
-    it "Returns an array of all drivers" do
-      drivers_array = Driver.all
+    before do
+      @drivers_array = Driver.all
+      @csv_file = CSV.read("./support/drivers.csv", {:headers => true})
 
-      drivers_array.class.must_equal Array
+    end
+
+    it "Returns an array of all drivers" do
+      @drivers_array.class.must_equal Array
 
     end
 
     it "Everything in array is a Driver" do
-      drivers_array = Driver.all
-
-      drivers_array.each do |element|
+      @drivers_array.each do |element|
         element.must_be_instance_of Driver
       end
+    end
+
+    it "First element in array is first line in csv" do
+      @drivers_array[0].name.must_equal @csv_file[0][1]
+
+    end
+
+    it "Last element in array is last line in csv" do
+      @drivers_array[-1].name.must_equal @csv_file[-1][1]
+
+    end
+
+    it "number of elements matches number of elements in csv file" do
+      @drivers_array.length.must_equal @csv_file.length
     end
 
   end
@@ -61,9 +79,27 @@ describe "Driver tests" do
       end
 
     end
+
+    it "number of elements is the same as number of matches in csv file" do
+      new_driver = Driver.new(78, "Casimir Vandervort", "SUA6WS160SW70DUP4")
+
+      new_driver.trips.length.must_equal 8
+
+      new_driver.trips.each do |trip|
+        trip.driver.must_equal 78
+      end
+
+
+    end
+
   end
 
   describe "Driver#average" do
+    before do
+      @all_drivers = Driver.all
+      @csv_file = CSV.read("./support/drivers.csv", {:headers => true})
+    end
+
     it "returns a float of an average rating" do
       new_driver = Driver.new(1, "Jan Brown", "HFG347DJ84HKX9872")
 
@@ -71,6 +107,17 @@ describe "Driver tests" do
     end
 
     it "returns a correct average" do
+      # @csv_file.each do |line|
+      #   line[-1]
+
+      new_driver = Driver.new(78, "Casimir Vandervort", "SUA6WS160SW70DUP4")
+
+      total = 0
+      new_driver.trips.each do |trip|
+        total += trip.rating
+      end
+
+      new_driver.average.must_equal (total / new_driver.trips.length)
 
     end
 
