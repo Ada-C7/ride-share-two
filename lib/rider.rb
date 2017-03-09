@@ -1,4 +1,5 @@
 require 'csv'
+require_relative 'trip'
 
 class Rider
   attr_reader :id, :name, :phone_num
@@ -38,7 +39,17 @@ class Rider
     # looks for all drivers associated with just one rider
     # accesses list of trip instances from lists_trips
     # returns lists of all previous driver instances assoicated with this rider
-    Trip.find_trips_driver(@id)
+    drivers = list_trips.map { |trip| Driver.find(trip.driver_id) }
+    # drivers = []
+    # list_trips.each do |trip|
+    #   drivers << Driver.find(trip.driver_id)
+    # end
+    drivers.uniq do |driver|
+      driver.id
+    end
   end
 
 end
+
+variable = Rider.new(93, "Mrs. Rickey Dickens", "5FS0Y47Z59YGGSXS0")
+puts variable.list_trips
