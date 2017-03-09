@@ -36,9 +36,14 @@ describe "rider_id" do
       lines_from_csv.length.must_equal trips_number
     end
 
-    it "Returns 0 if driver is not found" do
+    it "Returns 0 if rider is not found" do
       bad_id = RideShare::Rider.new(901291029102, "Nope", "Nope")
       bad_id.trips.must_equal 0
+    end
+
+    it "Returns 0 if rider has not had a trip" do
+      no_trips = RideShare::Rider.new(300, "Miss Isom Gleason", "791-114-8423 x70188")
+      no_trips.trips.must_equal 0
     end
   end
 
@@ -49,11 +54,21 @@ describe "rider_id" do
       my_rider.drivers[-1].must_be_instance_of RideShare::Driver
     end
 
-    #WIP FROM HERE!!
     it "Returns accurate drivers associated with trips" do
       drivers = my_rider.drivers
-      drivers[0].must_equal #find something this should equal?
-      #driver.id must equal trip.driver_id
+      first_driver_id = drivers[0].id
+
+      trips = my_rider.trips
+      first_driver_id_trip = trips[0].driver_id
+
+      first_driver_id.must_equal first_driver_id_trip
+    end
+
+    it "Returns unique list of Drivers, even if Rider has driven with driver more than once" do
+      rider = RideShare::Rider.new(250, "Kylie Cartwright", "734.297.0789 x3288")
+      drivers = rider.drivers
+      driver_ids = drivers.map { |driver| driver.id }
+      driver_ids.uniq!.must_equal nil
     end
   end
 
