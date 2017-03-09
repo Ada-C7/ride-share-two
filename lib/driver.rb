@@ -4,6 +4,10 @@ module RideShare
   class Driver
     attr_accessor :driver_id, :name, :vin
     def initialize(driver_id, name, vin) #Instantiated Driver class with ID, name and vehicle identification number
+      raise ArgumentError.new("The Driver ID is Invalid") if driver_id.class != Fixnum
+      raise ArgumentError.new("The name is Invalid") if name.class != String
+      raise InvalidVinError.new("The VIN number is invalid") if vin.class != String || vin.length != 17 || !vin.upcase.match(/^[0-9A-Z]+$/)
+
       @driver_id = driver_id
       @name = name
       @vin = vin #check vehicle identification number should be a specific length else raise InvalidVinError
@@ -20,10 +24,14 @@ module RideShare
 
     def self.all
       #Use CSV.read method passing file name as argument to retrieve all drivers
+      CSV.read("support/drivers.csv", headers:true).map do |line|
+        RideShare::Driver.new(line[0].to_i, line[1], line[2])
+      end
     end
 
-    def self.find
+    def self.find(driver_id)
       #check if driver_id is included in the list of drivers found in all method above
+      self.all.find{ |driver|driver.driver_id == driver_id }
     end
   end
 end
