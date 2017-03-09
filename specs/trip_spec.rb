@@ -26,7 +26,13 @@ describe "Trip class" do
       trip_2.rating.must_equal "3"
     end
 
-    describe "Trip#all" do
+    it "Raises RatingError if rating < 1 or rating > 5" do
+
+      proc { Ride_Share::Trip.new(trip_id: '2', driver_id: "1", rider_id: "54", date: "2016-04-05", rating: "10" )}.must_raise RatingError
+    end
+
+
+    describe "Trip#self.all" do
       let(:all_trips) { Ride_Share::Trip.all}
 
       it "Returns an array of all trip instances" do
@@ -73,7 +79,7 @@ describe "Trip class" do
         all_trips.last.rating.must_equal rating
       end
     end
-    xdescribe "Trip#find" do
+    xdescribe "Trip#self.find_driver_trips" do
       it "Check that class have a find method" do
         Ride_Share::Trip.must_respond_to :find
       end
@@ -92,6 +98,20 @@ describe "Trip class" do
         #binding.pry
         proc { Ride_Share::Trip.find(trip_id) }.must_raise ArgumentError
       end
+    end
+
+    describe "Trip#self.find_rider_trips" do
+
+
+    end
+
+    describe "Trip#retrieve_driver" do
+
+    end
+
+    describe "Trip#retrieve_rider" do
+
+
     end
 
 

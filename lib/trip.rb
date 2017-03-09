@@ -1,5 +1,5 @@
 require "csv"
-require "pry"
+require_relative "rating_error"
 
 module Ride_Share
 class Trip #Ride_Share::Trip
@@ -12,6 +12,8 @@ class Trip #Ride_Share::Trip
     @rider_id = args_hash[:rider_id]
     @date = args_hash[:date]
     @rating = args_hash[:rating]
+
+    raise RatingError.new "Rating range should be between (1-5)" if @rating.to_i < 1 || @rating.to_i > 5
   end
 
   def self.all
