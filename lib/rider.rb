@@ -60,8 +60,8 @@ module Rideshare
 
       raise ArgumentError.new "This rider had no drivers" if drivers.length == 0
 
-
-      return drivers
+      return drivers.uniq { |d| d.id }
+      #removes duplicate driver/rider pairs
 
     end
   end

@@ -53,8 +53,10 @@ describe "Rideshare::Rider" do
 
     it "raises an error when the rider has no drivers" do
       proc { Rideshare::Rider.find(300).drivers }.must_raise ArgumentError
+    end
 
-
+    it "returns unique trip instances for driver/riders with more than 1 trip" do
+      Rideshare::Rider.find(164).drivers.length.must_equal 5
     end
 
   end
