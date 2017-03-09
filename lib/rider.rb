@@ -9,6 +9,17 @@ module RideShare
       @phone_number = info[:phone_number]
     end
 
+    def get_trips
+      RideShare::Trip.find_by_rider(@id)
+    end
+
+    def get_drivers
+    end
+
+                    ###################
+                    ## Class methods ##
+                    ###################
+
     def self.all(rides_data = nil)
       if rides_data.nil?
         ride_data = FileData.new("./support/riders.csv")

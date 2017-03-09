@@ -41,13 +41,6 @@ describe "Rider" do
                     empty_array: [],
                     empty_nested_arrays: [[],[],[]]
                   }
-
-      # @riders_bad_data_1 = [['two', 'name', '425-789-1234']]
-      # @riders_bad_data_2 = [['10', 'name', 'phone_number']]
-      # @riders_bad_data_3 = [['15', 'name', 425-678-1234]]
-      # @riders_bad_data_4 = [['10', 'name']]
-      # @riders_bad_data_5 = []
-      # @riders_bad_data_6 = [[],[],[]]
     end
 
     let(:riders) { RideShare::Rider.all(@riders_data) }
@@ -129,5 +122,24 @@ describe "Rider" do
       last_rider.id.must_equal 300
       last_rider.phone_number.must_equal "791-114-8423 x70188"
     end
+  end
+
+  before do
+    @rider_id = 12
+  end
+
+  let(:rider) { RideShare::Rider.find(@rider_id) }
+
+  describe "Rider#get_trips" do
+
+    it "returns an array of trip instances" do
+      rider.get_trips.must_be_instance_of Array
+      rider.get_trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
+    end
+
+    it "each trip instance has the same rider id" do
+      rider.get_trips.each { |trip| trip.rider_id.must_equal @rider_id }
+    end
+
   end
 end
