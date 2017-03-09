@@ -12,7 +12,7 @@ module RideShare
     def self.all
       @all_riders = []
       # read in CSV file for all instances of riders
-      CSV.foreach("support/riders.csv", {:headers => true}) do |row| # file directory for rake
+      CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/riders.csv", {:headers => true}) do |row| # file directory for rake
         @all_riders << RideShare::Rider.new(
           id: row[0],
           name: row[1],

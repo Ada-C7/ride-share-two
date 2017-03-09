@@ -29,7 +29,7 @@ module RideShare
     def self.all
       @all_drivers = []
       # read in CSV file for all instances of drivers
-      CSV.foreach("support/drivers.csv", {:headers => true}) do |row| # file directory for rake
+      CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/drivers.csv", {:headers => true}) do |row| # file directory for rake
         @all_drivers << RideShare::Driver.new(
           id: row[0],
           name: row[1],

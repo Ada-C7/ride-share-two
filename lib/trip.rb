@@ -18,7 +18,7 @@ module RideShare
     def self.all
       @all = []
       # for each row in CSV file read in and create an instance of trip
-      CSV.foreach("support/trips.csv", {:headers => true}) do |row| # file directory for rake
+      CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/trips.csv", {:headers => true}) do |row| # file directory for rake
         @all << RideShare::Trip.new(
           id: row[0],
           driver_id: row[1],
