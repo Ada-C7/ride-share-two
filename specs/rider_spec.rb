@@ -10,7 +10,7 @@ describe "Rider" do
     let(:the_rock) { RideShare::Rider.new(333, "Dwayne 'The Rock' Johnson", "999.999.9999") }
 
     it "Rider has a name, ID, and VIN" do
-      the_rock.id.must_equal 777
+      the_rock.id.must_equal 333
       the_rock.name.must_equal "Dwayne 'The Rock' Johnson"
       the_rock.phone.must_equal "999.999.9999"
     end
@@ -120,7 +120,7 @@ describe "Rider" do
       rider_drivers = RideShare::Trip.find_by_rider(92).map! do |trip|
         trip.driver_id
       end
-      hipolito.drivers.length.must_equal rider_drivers.uniq.length
+      riders[92].drivers.length.must_equal rider_drivers.uniq.length
       end
   end
 
