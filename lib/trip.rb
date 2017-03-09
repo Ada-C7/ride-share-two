@@ -107,12 +107,12 @@ module RideShare
         array_of_random_prices << rand_num
       end
       array_of_random_durations = ["trip_duration(hours:minutes"]
-        t1 = Time.new(2017, 01, 02, 0, 0, 0)
-        t2 = Time.new(2017, 01, 02, 3, 0, 0)
-        600.times do
-            rand_time = Time.at(t1.to_f + rand * (t2.to_f - t1.to_f))
-            array_of_random_durations << "#{rand_time.hour}:#{rand_time.min}"
-        end
+      t1 = Time.new(2017, 01, 02, 0, 0, 0)
+      t2 = Time.new(2017, 01, 02, 3, 0, 0)
+      600.times do
+          rand_time = Time.at(t1.to_f + rand * (t2.to_f - t1.to_f))
+          array_of_random_durations << "#{rand_time.hour}:#{rand_time.min}"
+      end
 
       helpers_array = CSV.read("support/trips.csv")
       helpers_array.each do |c|
