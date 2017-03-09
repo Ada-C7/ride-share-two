@@ -76,6 +76,10 @@ describe "RideShare::Driver" do
     it "can find the last driver from the CSV" do
       Driver.find(100).wont_be_nil
     end
+
+    it "nonexistent driver must be nil" do
+      Driver.find(999).must_be_nil
+    end
   end
   #
   describe "find trips" do
@@ -88,6 +92,9 @@ describe "RideShare::Driver" do
       driver_trips.length.must_equal 9
     end
 
+    it "returns correct trip id for driver" do
+      driver_trips[4].trip_id.must_equal(417) # spot checking array
+    end
       # ideally we would spot check some more trip id's
       # here are some trip_ids we should see for this driver: 1,
       # 122, 124, 216, 417, 434, 439, 530, 553)

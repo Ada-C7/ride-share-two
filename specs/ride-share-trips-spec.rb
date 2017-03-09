@@ -57,13 +57,13 @@ describe "RideShare::Trips" do
       trips_array[0].trip_id.must_equal(1) # checking first element of array
       trips_array[0].driver_id.must_equal(1)
       trips_array[0].rider_id.must_equal(54)
-      # trips_array[0].date.must_equal(2016-04-05) # how can I check date??
+      trips_array[0].date.must_equal("2016-04-05")
       trips_array[0].rating.must_equal(3)
 
       trips_array[599].trip_id.must_equal(600) # checking last element of array
       trips_array[599].driver_id.must_equal(61)
       trips_array[599].rider_id.must_equal(168)
-      # trips_array[599].date.must_equal(2016-04-25) # how can I check date??
+      trips_array[599].date.must_equal("2016-04-25")
       trips_array[599].rating.must_equal(3)
 
     end
@@ -82,6 +82,11 @@ describe "RideShare::Trips" do
     it "can find the last trip from the CSV" do
       Trips.find(600).wont_be_nil
     end
+
+    it "nonexistent trip must be nil" do
+      Trips.find(800).must_be_nil
+    end
+
   end
 
   describe "to_s method" do

@@ -70,6 +70,11 @@ describe "RideShare::Rider" do
     it "can find the last rider from the CSV" do
       Rider.find(300).wont_be_nil
     end
+
+    it "nonexistent rider must be nil" do
+      Rider.find(888).must_be_nil
+    end
+
   end
 
 # retrieve the list of trip instances that only this rider has taken
