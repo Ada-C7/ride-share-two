@@ -2,8 +2,9 @@ require_relative 'rideshare'
 
 module RideShare
   class Trip
-    def initialize#Instantiated Trip class with ID, rider ID, a driver ID, date, rating
-      @id = trip_id
+    attr_accessor :id, :driver_id, :rider_id, :date, :rating
+    def initialize(id, driver_id, rider_id, date, rating)#Instantiated Trip class with ID, rider ID, a driver ID, date, rating
+      @id = id
       @driver_id = driver_id
       @rider_id = rider_id
       @date = date
