@@ -205,12 +205,12 @@ describe Trip do
 
           end
 
-          describe "Self#find_driver:" do
+          describe "Self#find_rider:" do
                it "Returns an instance of the class Rider:" do
                    @the_rider.must_be_kind_of Rider
                end
 
-               it "Returns the correct Driver instance:" do
+               it "Returns the correct Rider instance:" do
                    @the_rider.id.must_equal @trip.rider_id
                end
 
