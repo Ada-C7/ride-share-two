@@ -152,7 +152,7 @@ describe Driver do
                @leia.calculate_average_rating(@file, @trip_file)
           end
 
-          describe "Driver.calculate_average_rating:" do
+          describe "Driver#calculate_average_rating:" do
                it "Returns an integer:" do
                    @leia.average_rating.must_be_kind_of Integer
                end

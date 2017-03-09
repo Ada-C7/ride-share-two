@@ -165,7 +165,7 @@ describe Trip do
           end
      end
 
-     describe "Self#find_drivers" do
+     describe "Self#find_driver" do
 
           before do
                @file = "support/trips.csv"
@@ -193,7 +193,7 @@ describe Trip do
           end
      end
 
-     describe "Self#find_riders" do
+     describe "Self#find_rider" do
 
           before do
                @file = "support/trips.csv"
