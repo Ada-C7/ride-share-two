@@ -6,10 +6,9 @@ module RideShare
     attr_reader :id, :driver_id, :rider_id, :date, :rating
 
     def initialize (trip_hash)
-      #move these into a method
+      #check if inputs are valid
       validate_input(trip_hash)
 
-      #turn these into a hash
       @id = trip_hash[:trip_id]
       @driver_id = trip_hash[:driver_id]
       @rider_id = trip_hash[:rider_id]
@@ -43,7 +42,7 @@ module RideShare
           trip_hash[:date] = trip[3]
           trip_hash[:rating] = trip[4].to_i
           trips << Trip.new(trip_hash)
-        rescue BadRatingError
+        rescue BadRatingError #specify which error to rescue otherwise will rescue all raised Errors
           puts "Rating needs to be a number between 1 and 5. You entered: #{trip[4]}.\nEntry not included. Please update CSV file."
         end
       end
