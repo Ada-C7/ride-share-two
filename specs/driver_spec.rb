@@ -4,7 +4,7 @@ require "csv"
 
 describe "Driver class" do
   describe "Driver#initialize" do
-    let(:jack) { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "12345338" )}
+    let(:jack) { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYLVDE9" )}
     it "Takes an ID , name and vin" do
 
       jack.must_respond_to :id
@@ -14,7 +14,13 @@ describe "Driver class" do
       jack.name.must_equal "Jack"
 
       jack.must_respond_to :vin
-      jack.vin.must_equal "12345338"
+      jack.vin.must_equal "WBWSS52P9NEYLVDE9"
+    end
+
+    it "Raises InvalidVehicleNumber if vin != 17" do
+      driver = Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")
+
+      proc { Ride_Share::Driver.find(driver_id) }.must_raise InvalidVehicleNumber
     end
   end
 
@@ -96,15 +102,29 @@ describe "Driver class" do
       trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
       trips.first.must_be_instance_of Ride_Share::Trip
     end
-
-
   end
+
   describe "Driver#calculate_rating" do
+    before do
+      @driver_13 =  Ride_Share::Driver.find("13")
+    end
+
+    it "Calculates the average trips rating for a specific driver" do
+    # driver: 13	Mr. Delbert Gleason	XF9HBFH148FLD41K8
+
+      specific_driver_id = "13"
+      @driver_13.calculate_avg_rating.must_be_within_epsilon (29.0/7),0.01
+
+    end
+
+    it "The average trip rating is a float" do
+    # driver: 13	Mr. Delbert Gleason	XF9HBFH148FLD41K8
+
+      specific_driver_id = "13"
+      @driver_13.calculate_avg_rating.must_be_instance_of Float
+
+    end
 
   end
-
-
-
-
 
 end

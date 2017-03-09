@@ -1,5 +1,6 @@
 
 require "csv"
+require_relative "vin_error"
 
 module Ride_Share
 class Driver
@@ -11,6 +12,7 @@ class Driver
     @id = args_hash[:driver_id]
     @name = args_hash[:name]
     @vin = args_hash[:vin]
+    raise InvalidVehicleNumber.new "invalid Vehilcle Number" if @vin.length !=17
 
   end
 
@@ -43,9 +45,9 @@ class Driver
     #access rating from trips instances
     #calculate sum
     #returns avaerage rating
-    trips_avg_rating = Ride_Share::Trip.find_driver_trips(@id).map {|trip| trip.rating}
+    trips_rating = Ride_Share::Trip.find_driver_trips(@id).map {|trip| trip.rating.to_f}
     rating_sum = trips_rating.inject {|sum, num| sum + num }
-    trips_rating.length == 0 ? 0 : rating_sum / trips_rating.length
+    trips_rating.length == 0 ? 0 : ((rating_sum / trips_rating.length)).round(2)
   end
 
 
