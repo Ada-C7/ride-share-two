@@ -1,6 +1,6 @@
 require 'csv'
 require 'ap'
-require_relative 'trip.rb'
+require_relative 'trip'
 
 class Driver
   attr_reader :id, :name, :vin
@@ -11,6 +11,7 @@ class Driver
     raise ArgumentError.new("vin number should be exactly 17") unless @vin.length == 17
   end
 
+#retrieve all drivers from the CSV file
   def self.all
     @drivers = []
     CSV.foreach("./support/drivers.csv", {:headers => true}).each do |line|
@@ -19,6 +20,7 @@ class Driver
     return @drivers
   end
 
+#find a specific driver using their numeric ID
   def self.find(id)
     driver_find = Driver.all
     driver_find.each do |driver|
@@ -29,15 +31,46 @@ class Driver
     raise ArgumentError.new "Sorry, a driver with ID:#{id} doesn't exist."
   end
 
+# retrieve the list of trip instances that only this driver has taken
   def trip_instances_for_driver
-    Trip.find_driver(id)
-    #write test for this
+    list_instances_of_trips = Trip.find_trips_of_driver(id)
+    if list_instances_of_trips.length == 0
+      raise ArgumentError.new "Sorry, there is no driver with an ID:#{id}."
+    else
+      return list_instances_of_trips
+    end
   end
 
+#retrieve an average rating for that driver based on all trips taken
+  def rating
+    trips = Trip.find_trips_of_driver(id)
+    total = 0
+    array = trips.map{|item_in_object| item_in_object.rating }
+    array.each {|x| total += x.to_f}
+    average = (total/array.length)
+    return average.round
+
+    #need to write test
+  end
+
+#end of class
 end
 
-# ap Driver.find(9)
-# ap Trip.find_driver(9)
+
+###ALLWORKING AS OF 1448#####
+
+# puts "creates instance for non-self methods"
+# instance_of_driver = Driver.find(9)
+
+# puts "retrieve the list of trip instances that only this driver has taken"
+# ap instance_of_driver.trip_instances_for_driver
+
+# puts "retrieve an average rating for that driver based on all trips taken"
+# ap instance_of_driver.rating
+
+# puts "retrieve all drivers from the CSV file"
+
 # ap Driver.all
-one_driver = Driver.find(1)
-ap one_driver.trip_instances_for_driver
+
+# puts "find a specific driver using their numeric ID"
+# ap Driver.find(9)

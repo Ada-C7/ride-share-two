@@ -1,7 +1,3 @@
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require_relative '../lib/rider.rb'
 require_relative 'spec_helper.rb'
 
 describe Rider do

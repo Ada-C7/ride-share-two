@@ -1,7 +1,3 @@
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require_relative '../lib/driver.rb'
 require_relative 'spec_helper.rb'
 
 describe Driver do
@@ -53,5 +49,25 @@ describe Driver do
     it "check id is 5" do
       @sample_driver_5.id.must_equal 5
     end
+    it "checks that argument error is being raised if an invalid driver id is given" do
+      proc { Driver.find(900)
+      }.must_raise ArgumentError
+    end
   end
+
+  # describe "trip_instances_for_driver" do
+  #   before do
+  #     driver_id = 5
+  #     @list_of_trips_for_driver = Trip.find_trips_of_driver(driver_id)
+  #   end
+  #   it "check that Array is being returned" do
+  #     @list_of_trips_for_driver.must_be_instance_of Array
+  #   end
+  #   it "tests to make sure the only output matches id given" do
+  #     proc {
+  #       Trip.find_trips_of_driver(999)
+  #           }.must_raise ArgumentError
+  #   end
+  # end
+
 end

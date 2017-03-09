@@ -11,14 +11,26 @@ class Trip
     @rating = rating
   end
   def self.all
+    #retrieve all trips from the CSV file
     @trips = []
     CSV.foreach("./support/trips.csv", {:headers => true}).each do |line|
       @trips << self.new(line[0].to_i, line[1].to_i, line[2].to_i, line[3].to_s, line[4].to_i)
     end
-    return @trips #this is returning the trips
+    return @trips
   end
 
-  def self.find_driver(id)
+  # def self.find(id)
+  #   find_trip_instance = Trip.all
+  #   find_trip_instance.each do |trip|
+  #     if trip.trip_id == id
+  #       return trip
+  #     end
+  #   end
+  # end
+
+  # find_driver
+  def self.find_trips_of_driver(id)
+    #find all trip instances for a given driver ID
     trip_find = Trip.all
     array_of_trips = []
     trip_find.each do |trip|
@@ -26,13 +38,43 @@ class Trip
         array_of_trips << trip
       end
     end
+    #checking to see if array is empty, meaning the id given did not match any of the drivers
     if array_of_trips.length == 0
-    raise ArgumentError.new "Sorry, there is no trip with an ID:#{id}."
+      raise ArgumentError.new "Sorry, there is no trip with an ID:#{id}."
     else
       return array_of_trips
     end
   end
+
+  def self.find_trips_of_rider(id)
+    #find all trip instances for a given rider ID
+    rider_find = Trip.all
+    array_of_riders = []
+    rider_find.each do |rider|
+      if rider.rider_id == id
+        array_of_riders << rider
+      end
+    end
+    #checking to see if array is empty, meaning the id given did not match any of the riders
+    if array_of_riders.length == 0
+      raise ArgumentError.new "Sorry, there is no rider with an ID:#{id}."
+    end
+    return array_of_riders
+  end
 end
 
+###ALL WORKING AS OF 1451####
+# puts "retrieve all trips from the CSV file"
 # ap Trip.all
-# ap Trip.find_driver(9)
+
+# puts "find all trip instances for a given driver ID"
+# ap Trip.find_trips_of_driver(2)
+
+# puts "checking to see if array is empty, meaning the id given did not match any of the drivers"
+# ap Trip.find_trips_of_driver(998)
+
+# puts "find all trip instances for a given rider ID"
+# ap Trip.find_trips_of_rider(12)
+
+# puts "checking to see if array is empty, meaning the id given did not match any of the riders"
+# ap Trip.find_trips_of_rider(999)
