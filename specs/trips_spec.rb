@@ -28,6 +28,20 @@ describe "Trip class" do
       }.must_raise ArgumentError
   end
 
+  it "can't accept a negatiive number as a rating" do
+    # skip
+    initialization_hash = {
+      id: 1,
+      driver_id: 2,
+      rider_id: 2,
+      date: "4/26/2017",
+      rating: -3
+        }
+      proc {
+        trip = RideShare::Trip.new(initialization_hash)
+      }.must_raise ArgumentError
+  end
+
   it "returns a list of trips when you call .all" do
     # skip
       RideShare::Trip.all.must_be_kind_of Array
