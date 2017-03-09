@@ -192,4 +192,15 @@ describe "Trip" do
     end
   end
 
+#######################################################
+
+##### NEED TO WRITE THESE SPECS #########
+  describe "Trip#get_driver" do
+
+  end
+
+  describe "Trip#get_rider" do
+
+  end
+
 end

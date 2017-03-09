@@ -13,12 +13,15 @@ module RideShare
       RideShare::Trip.find_by_rider(@id)
     end
 
-    def get_drivers
+    def get_drivers()
+      trips = get_trips
+      # this is an array of driver instances
+      trips.map { |trip| trip.get_driver}.uniq {|driver| driver.id}
     end
 
-                    ###################
+  ######################################################
                     ## Class methods ##
-                    ###################
+  ######################################################
 
     def self.all(rides_data = nil)
       if rides_data.nil?

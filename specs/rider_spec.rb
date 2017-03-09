@@ -124,8 +124,11 @@ describe "Rider" do
     end
   end
 
+#############################################################
+
   before do
     @rider_id = 12
+
   end
 
   let(:rider) { RideShare::Rider.find(@rider_id) }
@@ -140,6 +143,24 @@ describe "Rider" do
     it "each trip instance has the same rider id" do
       rider.get_trips.each { |trip| trip.rider_id.must_equal @rider_id }
     end
+  end
 
+  describe "Rider#get_drivers" do
+
+    it "returns an array" do
+      rider.get_drivers.must_be_instance_of Array
+    end
+
+    it "returns an array of driver instances" do
+      rider.get_drivers.each { |driver| driver.must_be_instance_of RideShare::Driver  }
+    end
+
+    it "doesn't have duplicate drivers" do
+      # riders with more than one trip with same drivers - 41, 164, 92, 74, 63, 250
+      rider_with_duplicates =  RideShare::Rider.find(41)
+      num_of_drivers = rider_with_duplicates.get_drivers.length
+      num_after_uniq = rider_with_duplicates.get_drivers.uniq.length
+      num_of_drivers.must_equal num_after_uniq
+    end
   end
 end

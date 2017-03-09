@@ -12,6 +12,15 @@ module RideShare
       @rating = info[:rating]
     end
 
+    def get_driver
+      RideShare::Driver.find(driver_id)
+    end
+
+    # there is no other class calling this method
+    def get_rider
+      RideShare::Rider.find(rider_id)
+    end
+
                     ###################
                     ## Class methods ##
                     ###################
@@ -32,7 +41,7 @@ module RideShare
 
     # all takes in trips_data so you can test bad data
     # but will default to nil which then gets set to the csv data if nothing is passed
-    # when the find methods call all - they will not send any data 
+    # when the find methods call all - they will not send any data
     def self.all(trips_data = nil)
 
       if trips_data.nil?
