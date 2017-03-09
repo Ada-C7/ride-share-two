@@ -118,4 +118,15 @@ describe "Trip" do
 
   end
 
+  describe "Trip#find_driver and #find_rider" do
+
+    it "find_driver returns the right Driver" do
+    my_trip = trips[3]
+    my_trip.find_driver.must_be_instance_of RideShare::Driver
+
+    my_trip.find_driver.id.must_equal drivers[12].id
+  end
+
+  end
+
 end
