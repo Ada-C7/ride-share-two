@@ -1,6 +1,5 @@
 require_relative 'spec_helper'
 
-
 # Try to use let! :) instead of before
 describe "Driver class" do
   let(:driving) { RideShare::Driver.new(id: 1337, name: "ada", vin: "L1CKRVH55W8S6S9T1") }

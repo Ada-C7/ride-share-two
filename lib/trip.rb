@@ -63,7 +63,6 @@ module RideShare
 
     def driver
       # Given a trip instance, you can find the correct driver info from the Driver class
-
       RideShare::Driver.find(@driver_id)
     end
 

@@ -3,7 +3,10 @@ require_relative 'spec_helper'
 # Try to use let! :) instead of before
 
 describe "Trip class" do
-  let(:tripin) { RideShare::Trip.new(trip_id: 1337, driver_id: 1234, rider_id: 4321, date: "2017-07-17", rating: 5) }
+  let(:tripin) { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 2) }
+
+  let(:trips) { RideShare::Trip.all }
+
 
   describe "Trip#initialize" do
     it "It takes a trip_hash argument" do
@@ -11,16 +14,15 @@ describe "Trip class" do
     end
 
     it "Has the correct values that were passed" do
-      tripin.trip_id.must_equal 1337
-      tripin.driver_id.must_equal 1234
-      tripin.rider_id.must_equal 4321
-      tripin.date.must_equal "2017-07-17"
-      tripin.rating.must_equal 5
+      tripin.trip_id.must_equal 5
+      tripin.driver_id.must_equal 3
+      tripin.rider_id.must_equal 12
+      tripin.date.must_equal "2015-12-14"
+      tripin.rating.must_equal 2
     end
   end
 
   describe "Trip.all" do
-    let(:trips) { RideShare::Trip.all }
 
     it "Returns an array with all the trip info" do
       trips.class.must_equal Array
@@ -87,12 +89,13 @@ describe "Trip class" do
 
 
   describe "Trip#driver" do
-    let(:trip) { RideShare::Trip.all }
+
 
     it "Checking that Trip is talking to Driver " do
-      my_trip = trip[3]
-      my_trip.drive.must_be_instance_of RideShare::Driver
-      #....check if it is an instance of RideShare::Driver...
+      my_trip = trips[3]
+      tripin.driver.must_be_instance_of RideShare::Driver
+
+      my_trip.driver_id.must_equal RideShare::Driver.find(50).id
       #then check that the driver_id that was pulled from my_trip matches up with the id from RideShare::Driver :)
     end
   end
