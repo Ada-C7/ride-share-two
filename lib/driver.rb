@@ -1,6 +1,8 @@
 
 require "csv"
 require_relative "vin_error"
+require_relative "invalid_data"
+
 
 module Ride_Share
 class Driver
@@ -26,7 +28,7 @@ class Driver
 
   def self.find(driver_id)
     driver = all.detect {|driver| (driver.id == driver_id) }
-    (driver != nil) ? (return driver) : (raise ArgumentError.new "invalid driver id")
+    (driver != nil) ? (return driver) : (raise InvalidData.new "invalid driver id")
   end
 
   def self.print_all

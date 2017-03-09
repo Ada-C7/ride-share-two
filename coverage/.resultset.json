@@ -17,6 +17,8 @@
         null,
         1,
         1,
+        1,
+        null,
         null,
         1,
         1,
@@ -73,6 +75,10 @@
         null
       ],
       "/Users/Rana/Desktop/ADA/ruby/projects/ride-share-two/lib/vin_error.rb": [
+        1,
+        null
+      ],
+      "/Users/Rana/Desktop/ADA/ruby/projects/ride-share-two/lib/invalid_data.rb": [
         1,
         null
       ],
@@ -431,6 +437,6 @@
         null
       ]
     },
-    "timestamp": 1489042177
+    "timestamp": 1489080052
   }
 }

@@ -79,7 +79,7 @@ describe "Driver class" do
       # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
       driver_id = "9999"
       #binding.pry
-      proc { Ride_Share::Driver.find(driver_id) }.must_raise ArgumentError
+      proc { Ride_Share::Driver.find(driver_id) }.must_raise InvalidData
     end
   end
 
