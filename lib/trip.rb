@@ -30,6 +30,7 @@ class Trip
   end
 
   def self.rider_find_all(search_id)
+    raise ArgumentError.new("The ID you want to search for must be an integer") if search_id.class != Integer
     rider_trips = []
     all_trips = self.all
 
@@ -47,6 +48,7 @@ class Trip
 
 
   def self.driver_find_all(search_id)
+    raise ArgumentError.new("The ID you want to search for must be an integer") if search_id.class != Integer
     driver_trips = []
     all_trips = self.all
 

@@ -100,11 +100,18 @@ describe "Trip tests" do
       proc {Trip.rider_find_all(@csv_file.length + 100)}.must_raise ArgumentError
     end
 
+    it "raises an ArgumentError if argument passed is not an integer" do
+      proc {Trip.rider_find_all("346")}.must_raise ArgumentError
+    end
+
   end
 
   describe "Trip.driver_find_all(search_id)" do
     before do
       @csv_file = CSV.read("./support/trips.csv", {:headers => true})
+    end
+    it "raises an ArgumentError if argument passed is not an integer" do
+      proc {Trip.driver_find_all("346")}.must_raise ArgumentError
     end
 
     it "returns an array of all trips for specific driver" do
