@@ -20,8 +20,6 @@ describe "Driver class" do
       skip
       driving.vin.length.must_equal 17
     end
-
-
   end
 
   describe "Driver.all" do

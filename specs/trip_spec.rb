@@ -45,51 +45,60 @@ describe "Trip class" do
     end
   end
 
-  describe "Trip.find" do
-    let(:trip) { RideShare::Trip }
+  describe "Trip.find_many_drivers" do
+    let(:driver_on_trips) { RideShare::Trip.find_many_drivers(5) }
 
-    it "Retruns an account that exists" do
-      trip_exists = trip.find(77)
-      trip_exists.must_be_instance_of RideShare::Trip
-
-      trip_exists.trip_id.must_equal 77
-      trip_exists.driver_id.must_equal 40
-      trip_exists.rider_id.must_equal 205
-      trip_exists.date.must_equal "2016-05-18"
-      trip_exists.rating.must_equal 2
+    it "Returns an array of trips based on driver_id" do
+      driver_on_trips.class.must_equal Array
     end
 
-    it "Can find the last account from the CSV" do
-      trip_exists = trip.find(600)
-      trip_exists.trip_id.must_equal 600
-      trip_exists.driver_id.must_equal 61
-      trip_exists.rider_id.must_equal 168
-      trip_exists.date.must_equal "2016-04-25"
-      trip_exists.rating.must_equal 3
-
+    it "Returns the right lenght of an array based on spacific driver trips" do
+      driver_on_trips.length.must_equal 8
     end
 
-    it "Raises an error for an account that doesn't exist" do
-      proc { trip.find(1337) }.must_raise ArgumentError
+    it "Includes the first one found" do
+      driver_on_trips.first.trip_id.must_equal 19
+      driver_on_trips.first.driver_id.must_equal 5
+      driver_on_trips.first.rider_id.must_equal 140
+      driver_on_trips.first.date.must_equal "2016-02-16"
+      driver_on_trips.first.rating.must_equal 5
     end
   end
 
-  xdescribe "Trip.find_many_rider" do
-    it "" do
+  describe "Trip.find_many_riders" do
+    let(:rider_on_trips) { RideShare::Trip.find_many_riders(5) }
+
+    it "Returns an array of trips based on driver_id" do
+      rider_on_trips.class.must_equal Array
+    end
+
+    it "Returns the right lenght of an array based on spacific driver trips" do
+      rider_on_trips.length.must_equal 1
+    end
+
+    it "Includes the first one found" do
+      rider_on_trips.first.trip_id.must_equal 551
+      rider_on_trips.first.driver_id.must_equal 12
+      rider_on_trips.first.rider_id.must_equal 5
+      rider_on_trips.first.date.must_equal "2016-12-09"
+      rider_on_trips.first.rating.must_equal 1
     end
   end
 
-  xdescribe "Trip.find_many_driver" do
-    it "" do
+
+  describe "Trip#driver" do
+    let(:trip) { RideShare::Trip.all }
+
+    it "Checking that Trip is talking to Driver " do
+      my_trip = trip[3]
+      my_trip.drive.must_be_instance_of RideShare::Driver
+      #....check if it is an instance of RideShare::Driver...
+      #then check that the driver_id that was pulled from my_trip matches up with the id from RideShare::Driver :)
     end
   end
 
-  describe "Trip.rider" do
-    it "" do
-    end
-  end
 
-  describe "Trip.driver" do
+  xdescribe "Trip#rider" do
     it "" do
     end
   end

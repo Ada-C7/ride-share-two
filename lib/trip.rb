@@ -32,31 +32,49 @@ module RideShare
       trips
     end
 
-    def self.find(trip_id)
-      save_trip = nil
-
-      find_trip = RideShare::Trip.all
-      find_trip.each do |trip|
-        if trip.trip_id == trip_id
-          save_trip = trip
+    def self.find_many_drivers(driver_id)
+      #makes a list of trips based on driver_id
+      driver_trips = []
+      find_trips = RideShare::Trip.all
+      find_trips.each do |trips|
+        if trips.driver_id == driver_id
+          driver_trips << trips
         end
       end
 
-      raise ArgumentError.new "Warning: Trip #{trip_id} does not exist." if save_trip == nil
+      raise ArgumentError.new "Warning: Rider #{driver_id} does not exist" if driver_trips.empty? == true
 
-      return save_trip
+      return driver_trips
     end
 
-    def self.find_many_driver(driver_id)
-    end
+    def self.find_many_riders(rider_id)
+      #make a list of trips based on a rider-id
+      rider_trips = []
+      find_trips = RideShare::Trip.all
+      find_trips.each do |trips|
+        if trips.rider_id == rider_id
+          rider_trips << trips
+        end
+      end
+      raise ArgumentError.new "Warning: Rider #{rider_id} does not exist" if rider_trips.empty? == true
 
-    def self.find_many_rider(rider_id)
+      return rider_trips
     end
 
     def driver
+      # Given a trip instance, you can find the correct driver info from the Driver class
+
+      RideShare::Driver.find(@driver_id)
     end
 
     def rider
+      # Given a trip instance, you can find the correct rider info from the Rider class
+      RideShare::Rider.find(@rider_id)
     end
+
   end
 end
+
+# puts "#{RideShare::Trip.find_many_drivers(5).length}"
+# puts "#{RideShare::Trip.find_many_drivers(1337)}"
+#puts "#{RideShare::Trip.find_many_riders(5).length}"
