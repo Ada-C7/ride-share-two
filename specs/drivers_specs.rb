@@ -3,7 +3,6 @@ require_relative 'spec_helper'
 
 describe "Driver initialize" do
   it "Takes a hash as an argument with :id, name, and vin" do
-
     args = {
     :id => "1",
     :name => "Bernardo Prosacco",
@@ -15,7 +14,6 @@ describe "Driver initialize" do
     driver.id.must_equal args[:id]
 
     driver.must_respond_to :name
-
     driver.name.must_equal args[:name]
 
     driver.must_respond_to :vin

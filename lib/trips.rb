@@ -3,19 +3,27 @@ module RideShare
   class Trip
     attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 
-    def initialize(trip_id, driver_id, rider_id, date, rating)
-      @trip_id = trip_id
-      @driver_id = driver_id
-      @rider_id = rider_id
-      @date = date
-      @rating = error_checked_rating(rating)
+    def initialize(args)
+      @trip_id = args[:trip_id]
+      @driver_id = args[:driver_id]
+      @rider_id = args[:rider_id]
+      @date = args[:date]
+      @rating = error_checked_rating(args[:rating])
+
     end
 
     def self.all
       trips_array = []
       CSV.read("support/trips.csv", {:headers => true}).each do |trip|
         begin
-          trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], trip[4])
+          args = {
+            :trip_id => trip[0],
+            :driver_id => trip[1],
+            :rider_id => trip[2],
+            :date => trip[3],
+            :rating => trip[4]
+          }
+          trips_array << Trip.new(args)
         rescue
           #this will only apply if csv has errors
           puts "#Trip # #{trip[0]} has an invalid rating"
@@ -32,7 +40,7 @@ module RideShare
           return trip
         end
       end
-     raise ArgumentError.new "Trip #{id} does not exist"
+      raise ArgumentError.new "Trip #{id} does not exist"
     end
 
     #class method - find all trip instances for a given Rider ID

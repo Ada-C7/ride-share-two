@@ -1,29 +1,30 @@
 require_relative 'spec_helper'
 
 describe "Trip initialize" do
-  it "Takes trip_id, driver_id, rider_id, date, rating" do
-
-    trip_id = 1
-    driver_id = 1
-    rider_id = 54
-    date = 2016-04-05
-    rating = 3
-    trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+  it "Takes hash as argument" do
+    args = {
+      :trip_id => 1,
+      :driver_id => 1,
+      :rider_id => 54,
+      :date => 2016-04-05,
+      :rating => 3
+    }
+    trip = RideShare::Trip.new(args)
 
     trip.must_respond_to :trip_id
-    trip.trip_id.must_equal trip_id
+    trip.trip_id.must_equal args[:trip_id]
 
     trip.must_respond_to :driver_id
-    trip.driver_id.must_equal driver_id
+    trip.driver_id.must_equal args[:driver_id]
 
     trip.must_respond_to :rider_id
-    trip.rider_id.must_equal rider_id
+    trip.rider_id.must_equal args[:rider_id]
 
     trip.must_respond_to :date
-    trip.date.must_equal date
+    trip.date.must_equal args[:date]
 
     trip.must_respond_to :rating
-    trip.rating.must_equal rating
+    trip.rating.must_equal args[:rating]
   end
 end
 
@@ -155,12 +156,14 @@ describe "Trip.all" do
 
   describe "find_driver" do
     before do
-      trip_id = 1
-      driver_id = 1
-      rider_id = 54
-      date = 2016-04-05
-      rating = 3
-      @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+      args = {
+        :trip_id => 1,
+        :driver_id => 1,
+        :rider_id => 54,
+        :date => 2016-04-05,
+        :rating => 3
+      }
+      @trip = RideShare::Trip.new(args)
     end
 
 
@@ -178,12 +181,14 @@ describe "Trip.all" do
 
   describe "find_driver" do
     before do
-      trip_id = 1
-      driver_id = 132
-      rider_id = 54
-      date = 2016-04-05
-      rating = 3
-      @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+      args = {
+        :trip_id => "1",
+        :driver_id => "111",
+        :rider_id => "54",
+        :date => "2016-04-05",
+        :rating => "3"
+      }
+      @trip = RideShare::Trip.new(args)
     end
 
     it "returns a nil if no driver found" do
@@ -194,12 +199,14 @@ describe "Trip.all" do
 
   describe "find_rider" do
     before do
-      trip_id = 1
-      driver_id = 1
-      rider_id = 54
-      date = 2016-04-05
-      rating = 3
-      @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+      args = {
+        :trip_id => "1",
+        :driver_id => "1",
+        :rider_id => "54",
+        :date => "2016-04-05",
+        :rating => "3"
+      }
+      @trip = RideShare::Trip.new(args)
     end
 
 
@@ -217,12 +224,14 @@ describe "Trip.all" do
 
   describe "find_rider" do
     before do
-      trip_id = 1
-      driver_id = 132
-      rider_id = 2234345
-      date = 2016-04-05
-      rating = 3
-      @trip = RideShare::Trip.new(trip_id, driver_id, rider_id, date, rating)
+      args = {
+        :trip_id => 1,
+        :driver_id => 1,
+        :rider_id => 333,
+        :date => 2016-04-05,
+        :rating => 3
+      }
+      @trip = RideShare::Trip.new(args)
     end
 
     it "returns a nil if no rider found" do
