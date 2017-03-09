@@ -37,7 +37,7 @@ def self.all #read in from csv
     rider_hash[:rider_id] = line[0].to_i
     rider_hash[:name] = line[1]
     rider_hash[:phone] = line[2]
-    riders << Rider.new(riders_hash)
+    riders << Rider.new(rider_hash)
   end
   return riders
 end

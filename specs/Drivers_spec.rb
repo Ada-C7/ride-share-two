@@ -5,9 +5,10 @@ require_relative 'spec_helper'
 describe "Driver" do
 
   # before do
-  #   @name
-  #   @id
-  #   @vehichle_id
+  # #   @name
+  # #   @id
+  # #   @vehichle_id
+  #     @driver_id = driver_id
   # end
 
   describe "self.all" do
@@ -15,11 +16,11 @@ describe "Driver" do
     it "returns an array" do
       all_drivers = Driver.all
       all_drivers.must_be_instance_of Array
-
     end
+
     it "all elements of array should be drivers" do
       all_drivers = Driver.all
-      all_drivers.each do |line|
+      all_drivers.each do |driver|
         driver.must_be_instance_of Driver
       end
     end
@@ -38,9 +39,9 @@ describe "Driver" do
     end
     it "includes line 50 of array" do
       all_drivers = Driver.all
-      fifty_driver = all_drivers[49]
-      fifty_driver.name.must_equal "Maye Bauch"
-      fifty_driver.id.must_equal 50
+      mid_driver = all_drivers[49]
+      mid_driver.name.must_equal "Maye Bauch"
+      mid_driver.driver_id.must_equal 50
     end
   end
 
@@ -52,33 +53,41 @@ describe "Driver" do
     end
   end
 
-  it "Raises ArgumentError if id is not found." do
-    proc { Driver.find(300) }.must_raise ArgumentError
+  it "Should raise ArgumentError if id is not found." do
+    proc { my_driver = Driver.find(300) }.must_raise ArgumentError
   end
 end
 
-  describe "driver_trips(trips)" do
+describe "driver_trips" do
 
-  it "returns an array" do
-  end
   it "all elements of array should be trip instances" do
+    all_drivers = Driver.all
+    driver_trips = Trip.all
+    driver_trips.must_be_instance_of Array
   end
-  it "each trip should have an driver_ID that matches the driver_ID that i'm in. " do
+  it  do
   end
-end
-
-
-describe "driver_rating" do
-
-  it "Should return an integer" do
-
+    it "each trip should have an driver_ID that matches the driver_ID that i'm in. " do
+    end
+  end
+  #
+  #
+  describe "driver_rating_test" do
+    it "AVG Should return an float" do
+      #all_drivers = Driver.all
+      driver_trips = Trip.all
+      trips = driver_trips
+      ratings = []
+      ratings = trips.map { |trip| trip.rating.to_f }
+      #(@driver_id)
+      average_rating = ratings.inject(0.0) { |sum, el| sum + el } / ratings.size
+      average_rating.must_be_instance_of Float
+    end
   end
 
-  it "Driver ratings should correspond to trips taken by that driver" do
-    #driver ID should match trip/riderID, see driver trips
-  end
-
-
+  #   it "Driver ratings should correspond to trips taken by that driver" do
+  #     #driver ID should match trip/riderID, see driver trips
+  #   end
 end
 
 

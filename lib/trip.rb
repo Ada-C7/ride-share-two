@@ -19,7 +19,7 @@ class Trip
 
   attr_accessor :trip_id, :driver_id, :rider_id, :date, :rating
 
-  def initialize()
+  def initialize(hash)
     @trip_id = hash[:trip_id]
     @driver_id = hash[:driver_id]
     @rider_id = hash[:rider_id]
@@ -45,11 +45,15 @@ class Trip
 
   end
 
-
-  def self.find
-    #meth 1
-
-  end
+  # def self.find
+  #   all_trips = Trip.all
+  #   find_trip = nil
+  #   all_trips.each do |trip|
+  #     find_trip = trip if trip.id == trip_id
+  #   end
+  #   raise ArgumentError.new("Trips don't match") if find_trip == nil
+  #   return find_trip
+  # end
 
   def self.trip_by_driver(id)
     all_trips = Trip.all
@@ -72,7 +76,7 @@ class Trip
       #return instances unique to rider
       #trips
     end
-    
+
 
   end
 end#class end
