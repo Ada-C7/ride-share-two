@@ -112,12 +112,12 @@ describe "Driver tests" do
 
       new_driver = Driver.new(78, "Casimir Vandervort", "SUA6WS160SW70DUP4")
 
-      total = 0
-      new_driver.trips.each do |trip|
-        total += trip.rating
-      end
+      # total = 0
+      # new_driver.trips.each do |trip|
+      #   total += trip.rating
+      # end
 
-      new_driver.average.must_equal (total / new_driver.trips.length)
+      new_driver.average.must_equal 3.0
 
     end
 
