@@ -5,20 +5,23 @@ describe "Drivers" do
 
   describe "initialize" do
     it "raises an Argument Error if ID is not an Integer" do
+      bad_id_hash = { id: "65a", name: "sai", vin: "SALUVSAL3WA67SBPZ"}
       proc {
-        RideShare::Driver.new("65a", "sai", "SALUVSAL3WA67SBPZ")
+        RideShare::Driver.new(bad_id_hash)
       }.must_raise ArgumentError
     end
 
     it "raises an Argument Error if name is not a string" do
+      bad_name_hash = { id: 35, name: 874, vin: "SALUVSAL3WA67SBPZ"}
       proc {
-        RideShare::Driver.new(35, 874, "SALUVSAL3WA67SBPZ")
+        RideShare::Driver.new(bad_name_hash)
       }.must_raise ArgumentError
     end
 
     it "raises a Bad Vin Error if vin is invalid" do
+      bad_vin_hash = { id: 35, name: "sai", vin: "567G"}
       proc {
-        RideShare::Driver.new(35, "sai", "5674")
+        RideShare::Driver.new(bad_vin_hash)
       }.must_raise BadVinError
     end
   end
@@ -88,7 +91,8 @@ describe "Drivers" do
     end
 
     it "returns empty Array if no trips found" do
-      driver = RideShare::Driver.new(607, "Ada", "617546450KABGNF98")
+      no_driver_hash = { id: 607, name: "Ada", vin: "617546450KABGNF98"}
+      driver = RideShare::Driver.new(no_driver_hash)
       driver_trips = driver.trips
       driver_trips.must_be_instance_of Array
       driver_trips.length.must_equal 0

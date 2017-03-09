@@ -6,14 +6,18 @@ module RideShare
 
     attr_reader :id, :name, :vin
 
-    def initialize driver_id, name, vin #order matches csv file
-      raise ArgumentError.new("Driver ID must be a number") if driver_id.class != Integer
-      raise ArgumentError.new("Name must be a string of characters") if name.class != String
-      raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{vin})") if vin.length != 17 || vin !~ /^[0-9A-Z]+$/
+    def initialize driver_hash #order matches csv file
+      validate_input driver_hash
 
-      @id = driver_id
-      @name = name
-      @vin = vin
+      @id = driver_hash[:id]
+      @name = driver_hash[:name]
+      @vin = driver_hash[:vin]
+    end
+
+    def validate_input driver_hash
+      raise ArgumentError.new("Driver ID must be a number") if driver_hash[:id].class != Integer
+      raise ArgumentError.new("Name must be a string of characters") if driver_hash[:name].class != String
+      raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{driver_hash[:vin]})") if driver_hash[:vin].length != 17 || driver_hash[:vin] !~ /^[0-9A-Z]+$/
     end
 
     def self.all
@@ -22,9 +26,17 @@ module RideShare
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |driver|
         begin
-          drivers << Driver.new(driver[0].to_i, driver[1], driver[2])
-        rescue
-          drivers << Driver.new(driver[0].to_i, driver[1], "0"*17)
+          driver_hash = Hash.new
+          driver_hash[:id] = driver[0].to_i
+          driver_hash[:name]= driver[1]
+          driver_hash[:vin] = driver[2]
+          drivers << Driver.new(driver_hash)
+        rescue BadVinError
+          driver_hash = Hash.new
+          driver_hash[:id] = driver[0].to_i
+          driver_hash[:name]= driver[1]
+          driver_hash[:vin] = "0"*17
+          drivers << Driver.new(driver_hash)
           puts "Invalid vin! Dummy vin {#{'0'*17}} used in\nentry #{driver} from CSV file"
         end
 
