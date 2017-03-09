@@ -34,5 +34,13 @@ module RideShare
       trips = all
       return trips.select { |trip| rider_id == trip.rider_id }
     end
+
+    def driver
+      begin
+        return Driver.find(driver_id)
+      rescue NoDriverError => e
+        puts "An error has occurred: #{e.message}"
+      end
+    end
   end
 end

@@ -136,4 +136,15 @@ describe "Trip tests" do
       RideShare::Trip.find_rider_trips(10000).length.must_equal 0
     end
   end
+
+  describe "Trip#driver" do
+    it "returns a Driver object if the driver exists" do
+      trip.driver.must_be_instance_of RideShare::Driver
+    end
+
+    it "outputs message if driver doesn't exist" do
+      bad_trip = RideShare::Trip.new({ id: 2, driver_id: 0, rider_id: 8, date: "2014-07-12", rating: 5 })
+      proc { bad_trip.driver }.must_output (/.+/)
+    end
+  end
 end
