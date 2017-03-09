@@ -34,7 +34,11 @@ module RideShare
       all_rider_trips.each do |trip|
         all_rider_drivers << RideShare::Driver.find(trip.driver_id)
       end
-      return all_rider_drivers
+      if !all_rider_drivers.empty?
+        return all_rider_drivers.uniq{|d| d.driver_id}
+      else
+        return all_rider_drivers
+      end
     end
 
     def self.all
@@ -86,8 +90,5 @@ module RideShare
   end #end of class
 end # end of method
 #
-r = RideShare::Rider.all[73]
-puts r.total_time_spent
-
-r = RideShare::Rider.all[73]
-puts r.total_money_spent
+r = RideShare::Rider.find(41)
+puts r.all_rider_drivers

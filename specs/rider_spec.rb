@@ -82,6 +82,10 @@ describe "Rider class" do
       expected_driver_id = csv[103][1].to_i
       actual_driver_id.must_equal expected_driver_id
     end
+    it "Returns unique drivers if rider has same driver more than once" do
+      r = RideShare::Rider.find(41) # rider with id 41 has same driver more than once
+      r.all_rider_drivers.length.must_equal r.all_rider_drivers.uniq.length
+    end
   end # end of all_rider_drivers test
 
   describe "Rider#all" do
