@@ -3,10 +3,20 @@ module RideShare
   class Rider
     attr_reader :id, :name, :phone
 
-    def initialize rider_id, name, phone_num
-      @id = rider_id
-      @name = name
-      @phone = phone_num
+    def initialize rider_hash
+      validate_input rider_hash
+      @id = rider_hash[:id]
+      @name = rider_hash[:name]
+      @phone = rider_hash[:phone]
+    end
+
+    def validate_input rider_hash
+      raise ArgumentError.new("Rider ID needs to be an integer; entry is #{rider_hash[:id]}") if rider_hash[:id].class != Integer
+
+      raise ArgumentError.new("Name needs to be a String; entry is #{rider_hash[:name]}") if rider_hash[:name].class != String
+
+      raise ArgumentError.new("Phone number needs to be a String; entry is #{rider_hash[:phone]}") if rider_hash[:phone].class != String
+
     end
 
     def self.all
@@ -14,11 +24,13 @@ module RideShare
       temp_csv = CSV.read("support/riders.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |rider|
-        riders << Rider.new(rider[0].to_i, rider[1], rider[2])
+          rider_hash = Hash.new
+          rider_hash[:id] = rider[0].to_i
+          rider_hash[:name] = rider[1]
+          rider_hash[:phone] = rider[2]
+          riders << Rider.new(rider_hash)
       end
-
       return riders
-      #check to make sure that phone numbers are of valid format/length?
     end
 
     def self.find rider_id

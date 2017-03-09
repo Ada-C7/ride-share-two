@@ -5,7 +5,7 @@ describe "Rider" do
 
   describe "initialize" do
 
-    #responds to all the arguments
+    # 3 tests to check Argument Errors
 
   end
 
@@ -92,9 +92,7 @@ describe "Rider" do
 
       rider250 = riders[249]
       rider250.drivers.length.must_equal 3
-
     end
 
   end
-
 end
