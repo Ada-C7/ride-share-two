@@ -28,10 +28,6 @@ describe "Trip" do
       my_trip.driver.must_be_instance_of RideShare::Driver
     end
 
-    #Is this an appropriate edge case?  What if given empty string??
-    # it "should return 0 if no driver associated with this instance" do
-    #
-    # end
   end
 
   describe "Testing #rider method" do

@@ -82,14 +82,10 @@ describe "Driver" do
       my_driver.must_be_instance_of RideShare::Driver
     end
 
-    #possibly want to return different cases if enter in
-    #a number that's not a driver ID vs a string
-
     it "should return 0 if no driver found by that ID" do
       bad_id = RideShare::Driver.find_driver("apple")
       bad_id.must_equal 0
     end
-
   end
 
 end

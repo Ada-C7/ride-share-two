@@ -49,8 +49,11 @@ describe "rider_id" do
       my_rider.drivers[-1].must_be_instance_of RideShare::Driver
     end
 
+    #WIP FROM HERE!!
     it "Returns accurate drivers associated with trips" do
-      #driverobject.id must equal trip.driver_id
+      drivers = my_rider.drivers
+      drivers[0].must_equal #find something this should equal?
+      #driver.id must equal trip.driver_id
     end
   end
 
