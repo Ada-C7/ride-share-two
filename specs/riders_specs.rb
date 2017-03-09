@@ -3,19 +3,26 @@ require 'pry'
 
 describe "Rider initialize" do
   it "Takes an ID, name, and phone number" do
-    id = 1
-    name = "Nina Hintz Sr."
-    phone_num = "560.815.3059"
-    rider = RideShare::Rider.new(id, name, phone_num)
+    args = {
+    :id => 1,
+    :name => "Nina Hintz Sr.",
+    :phone_num => "560.815.3059"
+    }
+
+
+    # id = 1
+    # name = "Nina Hintz Sr."
+    # phone_num = "560.815.3059"
+    rider = RideShare::Rider.new(args)
 
     rider.must_respond_to :id
-    rider.id.must_equal id
+    rider.id.must_equal args[:id]
 
     rider.must_respond_to :name
-    rider.name.must_equal name
+    rider.name.must_equal args[:name]
 
     rider.must_respond_to :phone_num
-    rider.phone_num.must_equal phone_num
+    rider.phone_num.must_equal args[:phone_num]
   end
 end
 
@@ -94,10 +101,12 @@ end
 describe "rider.trips" do
 
   before do
-    id = "1"
-    name = "Nina Hintz Sr."
-    phone_num = "560.815.3059"
-    @rider = RideShare::Rider.new(id, name, phone_num)
+    args = {
+    :id => 1,
+    :name => "Nina Hintz Sr.",
+    :phone_num => "560.815.3059"
+    }
+    @rider = RideShare::Rider.new(args)
   end
 
   it "returns an Array" do
@@ -113,10 +122,12 @@ describe "rider.trips" do
   describe "rider.drivers" do
 
     before do
-      id = "1"
-      name = "Nina Hintz Sr."
-      phone_num = "560.815.3059"
-      @rider = RideShare::Rider.new(id, name, phone_num)
+      args = {
+      :id => 1,
+      :name => "Nina Hintz Sr.",
+      :phone_num => "560.815.3059"
+      }
+      @rider = RideShare::Rider.new(args)
     end
 
     it "returns an Array" do

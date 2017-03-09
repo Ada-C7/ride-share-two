@@ -17,6 +17,7 @@ module RideShare
         begin
           trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], trip[4])
         rescue
+          #this will only apply if csv has errors
           puts "#Trip # #{trip[0]} has an invalid rating"
           trips_array << Trip.new(trip[0], trip[1], trip[2], trip[3], nil)
         end
@@ -24,7 +25,7 @@ module RideShare
       trips_array
     end
 
-    def self.find(id)  
+    def self.find(id)
       trip_array = self.all
       trip_array.each do |trip|
         if id == trip.trip_id

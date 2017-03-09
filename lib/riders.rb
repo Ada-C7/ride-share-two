@@ -4,10 +4,10 @@ module RideShare
   class Rider
     attr_reader :id, :name, :phone_num
 
-    def initialize(id, name, phone_num)
-      @id = id
-      @name = name
-      @phone_num = phone_num
+    def initialize(args)
+      @id = args[:id]
+      @name = args[:name]
+      @phone_num = (args[:phone_num])
     end
 
 
@@ -15,8 +15,14 @@ module RideShare
       riders_array = []
       CSV.read("support/riders.csv", {:headers => true}).each do |rider|
         begin
-          riders_array << (Rider.new(rider[0], rider[1], rider[2]))
+          args = {
+          :id => rider[0],
+          :name => rider[1],
+          :phone_num => rider[2]
+          }
+          riders_array << (Rider.new(args))
         rescue ArgumentError
+          #this will only apply if csv has errors
           riders_array << (Rider.new(rider[0], rider[1], nil))
           puts "Invalid phone number for rider #{id}"
         end

@@ -4,17 +4,22 @@ module RideShare
   class Driver
     attr_reader :id, :name, :vin
 
-    def initialize(id, name, vin)
-      @id = id
-      @name = name
-      @vin = verified_vin(vin)
+    def initialize(args)
+      @id = args[:id]
+      @name = args[:name]
+      @vin = verified_vin(args[:vin])
     end
 
     def self.all
       drivers_array = []
       CSV.read("support/drivers.csv", {:headers => true}).each do |driver|
         begin
-          drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
+          args = {
+          :id => driver[0],
+          :name => driver[1],
+          :vin => driver[2]
+          }
+          drivers_array << (Driver.new(args))
         rescue ArgumentError
           #this will only apply if csv has errors
           drivers_array << (Driver.new(driver[0], driver[1], nil))

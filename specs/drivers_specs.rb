@@ -2,20 +2,24 @@ require_relative 'spec_helper'
 
 
 describe "Driver initialize" do
-  it "Takes an ID, name, and vin" do
-    id = "1"
-    name = "Bernardo Prosacco"
-    vin = "WBWSS52P9NEYLVDE9"
-    driver = RideShare::Driver.new(id, name, vin)
+  it "Takes a hash as an argument with :id, name, and vin" do
+
+    args = {
+    :id => "1",
+    :name => "Bernardo Prosacco",
+    :vin => "WBWSS52P9NEYLVDE9"
+    }
+    driver = RideShare::Driver.new(args)
 
     driver.must_respond_to :id
-    driver.id.must_equal id
+    driver.id.must_equal args[:id]
 
     driver.must_respond_to :name
-    driver.name.must_equal name
+
+    driver.name.must_equal args[:name]
 
     driver.must_respond_to :vin
-    driver.vin.must_equal vin
+    driver.vin.must_equal args[:vin]
   end
 end
 
@@ -72,17 +76,32 @@ end
 describe "Exception for bad vins" do
 
   it "" do
+    args = {
+    :id => "100",
+    :name => "Minnie Dach",
+    :vin => "1BADVIN11"
+    }
     proc {
-      @driver_array << RideShare::Driver.new("100", "Minnie Dach", "1BADVIN11")
+      @driver_array << RideShare::Driver.new(args)
     }.must_raise ArgumentError
   end
 end
 
 describe "Allows for nil vins" do
   before do
+    arg1 = {
+    :id => "100",
+    :name => "Minnie Dach",
+    :vin => nil
+    }
+    arg2 = {
+    :id => "1",
+    :name => "Bernardo Prosacco",
+    :vin => nil
+    }
     @driver_array = []
-    @driver_array << RideShare::Driver.new("1", "Bernardo Prosacco", nil)
-    @driver_array << RideShare::Driver.new("100", "Minnie Dach", nil)
+    @driver_array << RideShare::Driver.new(arg2)
+    @driver_array << RideShare::Driver.new(arg1)
   end
 
   it "The info for invalid vins is correct with nil vin" do
@@ -129,10 +148,12 @@ end
 describe "driver.trips" do
 
   before do
-    id = "1"
-    name = "Bernardo Prosacco"
-    vin = "WBWSS52P9NEYLVDE9"
-    @driver = RideShare::Driver.new(id, name, vin)
+    args = {
+    :id => "1",
+    :name => "Bernardo Prosacco",
+    :vin => "WBWSS52P9NEYLVDE9"
+    }
+    @driver = RideShare::Driver.new(args)
   end
 
   it "returns an Array" do
@@ -166,10 +187,12 @@ end
 describe "driver.average_rating" do
 
   before do
-    id = "1"
-    name = "Bernardo Prosacco"
-    vin = "WBWSS52P9NEYLVDE9"
-    @driver = RideShare::Driver.new(id, name, vin)
+    args = {
+    :id => "1",
+    :name => "Bernardo Prosacco",
+    :vin => "WBWSS52P9NEYLVDE9"
+    }
+    @driver = RideShare::Driver.new(args)
   end
 
   it "returns an integer" do
