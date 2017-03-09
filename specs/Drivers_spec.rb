@@ -28,13 +28,12 @@ describe "Driver" do
       all_drivers = Driver.all
       first_driver = all_drivers.first
       first_driver.name.must_equal "Bernardo Prosacco"
-
     end
+
     it "includes last data line" do
       all_drivers = Driver.all
       last_driver = all_drivers.last
       last_driver.name.must_equal "Minnie Dach"
-
 
     end
     it "includes line 50 of array" do
@@ -65,14 +64,9 @@ describe "driver_trips" do
     driver_trips = Trip.all
     driver_trips.must_be_instance_of Array
   end
-  it  do
-  end
-    it "each trip should have an driver_ID that matches the driver_ID that i'm in. " do
-    end
-  end
-  #
-  #
+
   describe "driver_rating_test" do
+
     it "AVG Should return an float" do
       #all_drivers = Driver.all
       driver_trips = Trip.all
@@ -82,16 +76,13 @@ describe "driver_trips" do
       #(@driver_id)
       average_rating = ratings.inject(0.0) { |sum, el| sum + el } / ratings.size
       average_rating.must_be_instance_of Float
+      end
     end
   end
 
-  #   it "Driver ratings should correspond to trips taken by that driver" do
-  #     #driver ID should match trip/riderID, see driver trips
-  #   end
-end
 
 
 
 
 
-# my_driver = Driver.new( {name: "Olivia", id: 1, vehicle_id: "7GD5"} )
+  # my_driver = Driver.new( {name: "Olivia", id: 1, vehicle_id: "7GD5"} )
