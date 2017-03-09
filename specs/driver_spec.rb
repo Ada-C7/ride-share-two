@@ -19,10 +19,10 @@ describe "Driver" do
     it "The driver_id and vin of the first and last" do
 
       @drivers.first.driver_id.must_equal 1
-      @accounts.first.vin.must_equal "WBWSS52P9NEYLVDE9"
+      @drivers.first.vin.must_equal "WBWSS52P9NEYLVDE9"
 
-      @accounts.last.driver_id.must_equal 100
-      @accounts.last.vin.must_equal "XF9Z0ST7X18WD41HT"
+      @drivers.last.driver_id.must_equal 100
+      @drivers.last.vin.must_equal "XF9Z0ST7X18WD41HT"
 
     end
 
