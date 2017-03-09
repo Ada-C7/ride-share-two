@@ -26,6 +26,21 @@ end
 #   end
 # end
 
+describe "list_drivers_for_rider method" do
+  let(:rider_object) {RideShareTwo::Rider.all_riders[5]}
+
+  it "retrieves the list of all previous driver instances & returns as an array" do
+    rider_trips = rider_object.list_drivers_for_rider
+    rider_trips.must_be_kind_of Array
+  end
+
+#write this test
+  it "retrieves the list of all previous driver instances & returns as an array" do
+    rider_trips = rider_object.list_drivers_for_rider
+    rider_trips.must_be_kind_of Array
+  end
+end
+
 
 describe "self.all_riders" do
   let(:rider_list) {RideShareTwo::Rider.all_riders}
@@ -49,7 +64,7 @@ describe "self.all_riders" do
 
   it "The ID of the first rider match what's in the CSV file" do
     rider_list
-    rider_list[0].rider_id.must_equal "1", "Oops the first id is not in the array"
+    rider_list[0].rider_id.must_equal 1, "Oops the first id is not in the array"
   end
 
   it "The phone number of the first rider match what's in the CSV file" do
@@ -59,7 +74,7 @@ describe "self.all_riders" do
 
   it "The ID of the last rider match what's in the CSV file" do
     rider_list
-    rider_list[299].rider_id.must_equal "300", "Oops the last id is not in the array"
+    rider_list[299].rider_id.must_equal 300, "Oops the last id is not in the array"
   end
 
   it "The phone number of the last rider match what's in the CSV file" do
@@ -72,7 +87,7 @@ end
 #I think I need more tests for this
 describe "self.find_rider" do
   it "finds a specific rider using their numeric ID" do
-    RideShareTwo::Rider.find_rider("88").must_be_kind_of RideShareTwo::Rider, "Oops that ID does not match a rider"
+    RideShareTwo::Rider.find_rider(88).must_be_kind_of RideShareTwo::Rider, "Oops that ID does not match a rider"
   end
 
 end

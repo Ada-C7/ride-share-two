@@ -1,5 +1,6 @@
 require "csv"
 require_relative 'trip'
+
 module RideShareTwo
   class Driver
 

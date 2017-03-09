@@ -1,4 +1,6 @@
 require "csv"
+# require_relative 'rider'
+# require_relative 'driver'
 
 module RideShareTwo
   class Trip
@@ -14,10 +16,19 @@ module RideShareTwo
         raise ArgumentError.new("rating must be 1-5") if rating >= 6 || rating <= 0
     end
 
+#need tests
+    def trip_driver_instance
+      RideShareTwo::Driver.find_driver(@driver_id)
+    end
+
+#need tests
+    def trip_rider_instance
+      RideShareTwo::Rider.find_rider(@rider_id)
+    end
+
 # find all trip instances for a given driver ID
     def self.driver_trips(driver_id)
       drivers_trips = []
-      # trip_array = self.all_trips
       all_trips.each do |trip|
         if trip.driver_id.to_i == driver_id
           drivers_trips << trip
@@ -27,23 +38,18 @@ module RideShareTwo
       return drivers_trips
     end
 
-      # driver_trip_count = 0
-      # self.all_trips.each do |index|
-      #   if index.driver_id == driver_id
-      #     driver_trip_count += 1
-      #   end
-      # end
-      # return driver_trip_count
-      # drivers_trips = []
-      # return driver_id #fix - must return instance, use find_driver in driver
-    # end
+    def self.rider_trips(rider_id)
+      riders_trips = []
+      # trip_array = self.all_trips
+      all_trips.each do |trip|
+        if trip.rider_id.to_i == rider_id
+          riders_trips << trip
+        end
+      end
+      # puts riders_trips
+      return riders_trips
+    end
 
-
-
-    #
-    # def trip_rider
-    #   return rider_id #fix - must return instance, use
-    # end
 
     def self.all_trips
       all_trips = []

@@ -1,8 +1,7 @@
 require_relative 'spec_helper'
-# require 'pry'
+
 
 describe "Trip Initialize" do
-# skip
     it "Takes an ID, Driver ID, Rider ID, date, and a rating" do
 
       trip_id = 1337
@@ -48,18 +47,27 @@ describe "Trip Initialize" do
 
 end
 
+describe "trip_driver_instance method" do
+  let(:trip_object) {RideShareTwo::Trip.all_trips[4]}
+
+  it "returns an instance of the driver class" do
+    driver_object = trip_object.trip_driver_instance
+    driver_object.must_be_instance_of RideShareTwo::Driver
+  end
+end
+
+
+describe "trip_rider_instance method" do
+  let(:trip_object) {RideShareTwo::Trip.all_trips[4]}
+
+  it "returns an instance of the driver class" do
+    rider_object = trip_object.trip_rider_instance
+    rider_object.must_be_instance_of RideShareTwo::Rider
+  end
+end
+
 describe "self.driver_trips" do
   let(:driver_trips_list) {RideShareTwo::Trip.driver_trips(13)}
-  #
-  # it "Returns an array (of all trips instances for a given driver ID)" do
-  #   @trip.self.driver_trips
-  #   @trip.self.driver_trips.must_be_kind_of Array, "Oops - the result is not an array"
-  # end
-  #
-  # it "Returns an array of all trips instances" do
-  #   @trip.driver_trips
-  #   @trip.driver_trips[0].must_be_instance_of RideShareTwo::Trip, "Oops - the item in the array is not a trip instance."
-  # end
 
   it "Returns an array (of all trips instances for a given driver ID)" do
     driver_trips_list
@@ -72,23 +80,22 @@ describe "self.driver_trips" do
   end
 end
 
+describe "self.rider_trips" do
+  let(:rider_trips_list) {RideShareTwo::Trip.rider_trips(137)}
 
-#
-# describe "Trip_Rider" do
-#     it "Retrieves the associated trip rider instance through the rider ID" do
-#       trip_id = 1337
-#       rider_id = 318
-#       driver_id = 54
-#       date = "date"
-#       rating = 4
-#       trip = RideShareTwo::Trip.new(trip_id, rider_id, driver_id, date, rating)
-#
-#       trip.rider_id.must_equal 318
-#     end
-# end
+  it "Returns an array (of all rider instances for a given rider ID)" do
+    rider_trips_list
+    rider_trips_list.must_be_kind_of Array, "Oops - the result is not an array"
+  end
+
+  it "Returns an array of all trips instances" do
+    rider_trips_list
+    rider_trips_list[0].must_be_instance_of RideShareTwo::Trip, "Oops - the item in the array is not a trip instance."
+  end
+end
+
 
 describe "self.all_trips" do
-  # skip
   let(:trip_list) {RideShareTwo::Trip.all_trips}
 
   it "Returns an array of all trips" do
