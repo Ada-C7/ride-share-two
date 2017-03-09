@@ -16,7 +16,7 @@ module Carmmunity
 
 
     def trips_taken
-      trips = Carmmunity::Trip.find(@driver_id)
+      trips = Carmmunity::Trip.driver_trips(@driver_id)
       return trips
     end
 

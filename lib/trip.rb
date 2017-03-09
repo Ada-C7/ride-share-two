@@ -13,34 +13,45 @@ module Carmmunity
   end
 
 
-  #def find_driver
-  #driver = Driver::find(@driver_id) #using the self.find method from driver class
-  #return driver
-  #end
+  def find_driver
 
-  #def find_rider
-  #rider = Rider::find(@rider_id)
-  #return rider
+  driver = Carmmunity::Driver::find(@driver_id)
 
-  #self.find(driver_id)
-  #from @@trips find all trips with associated driver
-  #return trips
-  #end
-  def self.find_driver(id)
-
-    driver = Carmmunity::Driver::find(id)
-      return driver
+  return driver
   end
 
-  #self.find(rider)
-  #from @@trips find all trips with associated rider
-  #return trips
-  #end
+  def find_rider
 
-  def self.find_rider(id)
+    rider = Carmmunity::Rider::find(@rider_id)
 
-    rider = Carmmunity::Rider::find(id)
     return rider
+  end
+
+
+  def self.driver_trips(id)
+
+    all_trips = self.all
+
+    driver_trips = all_trips.map do |trip|
+      trip if trip.driver_id == id
+    end
+
+    return driver_trips
+  end
+
+
+  def self.rider_trips(id)
+
+    all_trips = self.all
+
+    rider_trips = []
+
+    all_trips.each do |trip|
+
+      rider_trips << trip if trip.rider_id == id
+    end
+
+    return rider_trips
   end
 
 
