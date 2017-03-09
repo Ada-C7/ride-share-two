@@ -18,9 +18,9 @@ describe "Driver class" do
     end
 
     it "Raises InvalidVehicleNumber if vin != 17" do
-      driver = Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")
+      #driver = Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")
 
-      proc { Ride_Share::Driver.find(driver_id) }.must_raise InvalidVehicleNumber
+      proc { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")}.must_raise InvalidVehicleNumber
     end
   end
 
