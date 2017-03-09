@@ -3,10 +3,10 @@ require_relative 'rideshare'
 module RideShare
   class Rider
     attr_accessor :rider_id, :name, :phone
-    def initialize#Instantiated Rider class with ID, name and phone number
+    def initialize(rider_id, name, phone)#Instantiated Rider class with ID, name and phone number
       @rider_id = rider_id
       @name = name
-      @phone = phone_num
+      @phone = phone
     end
 
     def trips
