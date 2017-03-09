@@ -147,7 +147,7 @@ describe Rider do
                @han_drivers = @han.recall_drivers(@file, @trip_file, @driver_file)
           end
 
-          describe "Rider.recall_drivers:" do
+          describe "Rider#recall_drivers:" do
                it "Returns an array of all trips for rider:" do
                    @han_drivers.must_be_kind_of Array
                    @han_drivers.map { | driver | driver.must_be_kind_of Driver}

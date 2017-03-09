@@ -76,6 +76,14 @@ class Trip
           return driver
      end
 
+     def self.find_rider(id, file, rider_file)
+
+          trip = find_trip(id, file)
+          rider = Rider.find(rider_file, trip.rider_id)
+
+          return rider
+     end
+
      private
 
      def self.find_trip(id, file)
@@ -93,33 +101,4 @@ class Trip
 
      end
 
-
-
 end
-
-# all_trips = Trip.all("../support/trips.csv")
-#
-# driver_file = "../support/driver.csv"
-#
-# id = 33
-#
-# puts all_trips.length
-#
-# driver_id = 1
-#
-#
-# all_trips.each do | trip |
-#
-#
-#      if trip.id == id
-#           puts trip
-#           driver_id = trip.driver_id
-#      end
-#
-# end
-#
-# puts driver_id
-#
-# driver = all_trips.validate_driver(driver_file, driver_id)
-#
-# puts driver
