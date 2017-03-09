@@ -1,6 +1,5 @@
 require 'csv'
 
-# DAN_CONSTANT = 106
 module RideShare
   class Driver
     attr_reader :driver_id, :name, :vin
@@ -8,6 +7,7 @@ module RideShare
     def initialize(driver_info)
       @driver_id = driver_info[:driver_id]
       @name = driver_info[:name]
+      raise ArgumentError.new("A valid vin is 17 characters long") if driver_info[:vin].length < 17
       @vin = driver_info[:vin]
     end
 

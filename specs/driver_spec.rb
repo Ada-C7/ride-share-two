@@ -29,16 +29,11 @@ describe "Driver" do
   end
 
   it "Raises an ArgumentError/Says something when VIN is not 17 characters" do
-    skip
-    # proc {
-    #   Bank::Account.new(1337, -100.0)
-    # }.must_raise ArgumentError
-    # proc {
-    #       account.withdraw(withdrawal_amount)
-    #     }.must_output(/.+/)
+
+    proc {
+      RideShare::Driver.new(driver_id: 150, name: "Kaitlin Ramirez", vin: "W09XNTZR9KT")
+    }.must_raise ArgumentError
+
   end
 
-  # it "has access to that constant" do
-  #   DAN_CONSTANT.must_equal 106
-  # end
 end
