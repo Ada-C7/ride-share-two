@@ -1,7 +1,5 @@
-require_relative 'data_import'
-
 module RideShare
-  class Rider
+  class Rider < Uber
     attr_reader :id, :name, :trips
     SOURCE_FILE = "support/riders.csv"
 
@@ -16,13 +14,7 @@ module RideShare
     end
 
     def self.all
-      @@all ||= DataImport.import_attributes(SOURCE_FILE).map do |rider|
-        Rider.new(rider)
-      end
-    end
-
-    def self.find(target_id)
-      all.find { |rider| rider.id == target_id }
+      @@all ||= super(SOURCE_FILE)
     end
 
     def import_trips

@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-require_relative '../lib/rider'
 
 describe RideShare::Rider do
   describe "#initialize" do
