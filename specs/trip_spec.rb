@@ -8,7 +8,7 @@ describe "Trip class" do
 
   describe "Trip#initialize" do
     let(:trip_2) { Ride_Share::Trip.new(trip_id: '2', driver_id: "1", rider_id: "54", date: "2016-04-05", rating: "3" )}
-    it "Takes an ID,  driver_id, rider_id, date and rating" do
+    it "Takes an ID, driver_id, rider_id, date and rating" do
 
       trip_2.must_respond_to :id
       trip_2.id.must_equal "2"
@@ -26,45 +26,76 @@ describe "Trip class" do
       trip_2.rating.must_equal "3"
     end
 
-    describe "Driver#all" do
-      let(:all_drivers) { Ride_Share::Driver.all}
+    describe "Trip#all" do
+      let(:all_trips) { Ride_Share::Trip.all}
 
-      it "Returns an array of all driver instances" do
-        all_drivers.must_be_kind_of Array
+      it "Returns an array of all trip instances" do
+        all_trips.must_be_kind_of Array
       end
 
-      it 'Everything in the array is an instane of Ride_share::Driver class' do
-        all_drivers.each do |driver_instance|
-          driver_instance.must_be_instance_of Ride_Share::Driver
+      it 'Everything in the array is an instane of Ride_share::Trip class' do
+        all_trips.each do |trip_instance|
+          trip_instance.must_be_instance_of Ride_Share::Trip
         end
       end
 
-      it "The number of driver records = 100, records in csv file" do
-        all_drivers.length.must_equal 100
+      it "The number of trip records = 600, records in csv file" do
+        all_trips.length.must_equal 600
       end
 
-      it "The ID and name and vihecle identification of the first driver match what's in the CSV file" do
-        #1 Bernardo Prosacco	WBWSS52P9NEYLVDE9
+      it "The ID, driver_id, rider_id, date and rating of the first trip match what's in the CSV file" do
+        # first_trip: 1,1,54,2016-04-05,3
+        trip_id = "1"
         driver_id = "1"
-        name = "Bernardo Prosacco"
-        vin = "WBWSS52P9NEYLVDE9"
+        rider_id = "54"
+        date = "2016-04-05"
+        rating = "3"
 
-        all_drivers.first.id.must_equal driver_id
-        all_drivers.first.name.must_equal name
-        all_drivers.first.vin.must_equal vin
+        all_trips.first.id.must_equal trip_id
+        all_trips.first.driver_id.must_equal driver_id
+        all_trips.first.rider_id.must_equal rider_id
+        all_trips.first.date.must_equal date
+        all_trips.first.rating.must_equal rating
       end
 
-      it "The ID and name and vihecle identification of the last driver match what's in the CSV file" do
-        # 100,Minnie Dach,XF9Z0ST7X18WD41HT
-        driver_id = "100"
-        name = "Minnie Dach"
-        vin = "XF9Z0ST7X18WD41HT"
+      it "The ID, driver_id, rider_id, date and rating of the first trip match what's in the CSV file" do
+        # last_trip:600,61,168,2016-04-25,3
+        trip_id = "600"
+        driver_id = "61"
+        rider_id = "168"
+        date = "2016-04-25"
+        rating = "3"
 
-        all_drivers.last.id.must_equal driver_id
-        all_drivers.last.name.must_equal name
-        all_drivers.last.vin.must_equal vin
+        all_trips.last.id.must_equal trip_id
+        all_trips.last.driver_id.must_equal driver_id
+        all_trips.last.rider_id.must_equal rider_id
+        all_trips.last.date.must_equal date
+        all_trips.last.rating.must_equal rating
       end
     end
+    xdescribe "Trip#find" do
+      it "Check that class have a find method" do
+        Ride_Share::Trip.must_respond_to :find
+      end
+
+      it "Returns a driver instance with correct data " do
+        # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
+        trip_id = "57"
+        trip = Ride_Share::Trip.find(trip_id)
+        trip.must_be_instance_of Ride_Share::Trip
+        trip.name.must_equal 'Fermin Jakubowski'
+        trip.vin.must_equal '1C9YKRAL923SACAZM'
+      end
+      it "Raises an argument error with trip id not in the data base" do
+        # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
+        trip_id = "9999"
+        #binding.pry
+        proc { Ride_Share::Trip.find(trip_id) }.must_raise ArgumentError
+      end
+    end
+
+
+
   end
 
 
