@@ -192,4 +192,32 @@ describe Trip do
                end
           end
      end
+
+     describe "Self#find_riders" do
+
+          before do
+               @file = "support/trips.csv"
+               @rider_file = "support/riders.csv"
+               @id = 9
+               @trip = Trip.find_trip(@id, @file)
+               @the_rider = Trip.find_rider(@id, @file, @rider_file)
+               @lines = File.foreach(@file).count
+
+          end
+
+          describe "Self#find_driver:" do
+               it "Returns an instance of the class Rider:" do
+                   @the_rider.must_be_kind_of Rider
+               end
+
+               it "Returns the correct Driver instance:" do
+                   @the_rider.id.must_equal @trip.rider_id
+               end
+
+               it "Raises an error for a trip account that doesn't exist:" do
+                    id = @lines + 1
+                    proc {Trip.find_rider(id, @file, @rider_file)}.must_raise ArgumentError
+               end
+          end
+     end
 end
