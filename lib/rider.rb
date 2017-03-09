@@ -28,5 +28,17 @@ module RideShare
     def trips
       return Trip.find_rider_trips(id)
     end
+
+    def drivers
+      drivers = trips.map do |trip|
+        begin
+          Driver.find(trip.driver_id)
+        rescue NoDriverError => e
+          puts "An error has occurred: #{e.message}"
+        end
+      end
+      drivers.delete(nil)
+      return drivers.uniq { |driver| driver.id }
+    end
   end
 end

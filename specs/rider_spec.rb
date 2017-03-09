@@ -4,6 +4,9 @@ describe "Rider tests" do
   let(:rider) { RideShare::Rider.new({ id: 8, name: "Galois", phone: "206-555-2468" }) }
   let(:riders_array) { RideShare::Rider.all }
   let(:csv_info) { CSV.read('support/riders.csv')[1..-1] }
+  let(:rider146) { RideShare::Rider.find(146) }
+  let(:rider300) { RideShare::Rider.find(300) }
+  let(:rider103) { RideShare::Rider.find(103) }
 
   describe "Rider#initialize" do
     it "Takes an ID, name, and phone number" do
@@ -111,7 +114,41 @@ describe "Rider tests" do
     end
 
     it "Returns an empty array if no trips are found" do
-      RideShare::Rider.find(300).trips.must_equal []
+      rider300.trips.must_equal []
+    end
+  end
+
+  describe "Rider#drivers" do
+    it "Returns an array" do
+      rider.drivers.must_be_instance_of Array
+    end
+
+    it "First and last element of array are Drivers" do
+      rider.drivers[0].must_be_instance_of RideShare::Driver
+      rider.drivers[-1].must_be_instance_of RideShare::Driver
+    end
+
+    it "The number of drivers is correct for Rider 146" do
+      rider146.drivers.length.must_equal 4
+    end
+
+    it "Drivers are not duplicated for a rider that's had a driver > 1 time" do
+      rider164_drivers = RideShare::Rider.find(164).drivers
+
+      rider164_drivers.length.must_equal 5
+      rider164_drivers.each { |driver| rider164_drivers.count(driver).must_equal 1 }
+    end
+
+    it "Returns an empty array if no trips were taken" do
+      rider300.drivers.must_equal []
+    end
+
+    it "Outputs a message if it tries to find a driver with an ID that doesn't exist" do
+      proc { rider103.drivers }.must_output (/.+/)
+    end
+
+    it "Doesn't include drivers with invalid driver ids for driver ID that doesn't exist" do
+      rider103.drivers.length.must_equal 1
     end
   end
 end
