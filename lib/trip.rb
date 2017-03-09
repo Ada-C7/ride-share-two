@@ -6,7 +6,7 @@ module RideShare
     attr_reader :id, :driver_id, :rider_id, :date, :rating, :all
 
     # take in id, driver_id, rider_id, date, rating as a hash
-    def initialize(trip_info)
+    def initialize(trip_info={})
       @id = trip_info[:id]
       @driver_id = trip_info[:driver_id]
       @rider_id = trip_info[:rider_id]
@@ -19,13 +19,13 @@ module RideShare
       @all = []
       # for each row in CSV file read in and create an instance of trip
       CSV.foreach("support/trips.csv", {:headers => true}) do |row| # file directory for rake
-        @all << RideShare::Trip.new({
+        @all << RideShare::Trip.new(
           id: row[0],
           driver_id: row[1],
           rider_id: row[2],
           date: row[3],
           rating: row[4]
-        })
+        )
       end
       return @all # return all instances of trips
     end

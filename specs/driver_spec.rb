@@ -5,8 +5,8 @@ describe "RideShare::Driver" do
   let(:all_trips) { RideShare::Trip.all }
 
   describe "Driver#initialize" do
-    let(:driver9) { RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"}) }
-    let(:no_vin) { RideShare::Driver.new({ id: "87", name: "Tamiko Terada" }) }
+    let(:driver9) { RideShare::Driver.new(id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4") }
+    let(:no_vin) { RideShare::Driver.new(id: "87", name: "Tamiko Terada") }
 
     it "creates a new instance of trip" do
       driver9.must_be_instance_of RideShare::Driver
@@ -23,7 +23,7 @@ describe "RideShare::Driver" do
 
     it "throws an ArgumentError if the vin is invalid" do
       proc {
-        RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P40000000"})
+        RideShare::Driver.new(id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P40000000")
       }.must_raise ArgumentError
     end
 
@@ -100,7 +100,7 @@ describe "RideShare::Driver" do
 
   describe "Driver#avg_rating" do
     before { all_trips }
-    let (:driver9_avg) { RideShare::Driver.new({id: "9"}).avg_rating }
+    let (:driver9_avg) { RideShare::Driver.new(id: "9").avg_rating }
 
     it "returns value as a Float" do
       driver9_avg.must_be_kind_of Float

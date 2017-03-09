@@ -3,7 +3,7 @@ module RideShare
   class Rider
     attr_reader :id, :name, :phone_number
     # create new rider and take in id, name, and phone
-    def initialize(rider_info) # ={}
+    def initialize(rider_info={})
       @id = rider_info[:id]
       @name = rider_info[:name]
       @phone_number = rider_info[:phone_number]
@@ -13,11 +13,11 @@ module RideShare
       @all_riders = []
       # read in CSV file for all instances of riders
       CSV.foreach("support/riders.csv", {:headers => true}) do |row| # file directory for rake
-        @all_riders << RideShare::Rider.new({
+        @all_riders << RideShare::Rider.new(
           id: row[0],
           name: row[1],
           phone_number: row[2]
-        })
+        )
       end
       return @all_riders
       # return all instances of rider
