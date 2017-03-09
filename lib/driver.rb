@@ -1,6 +1,6 @@
 module RideShare
   class Driver < Uber
-    attr_reader :id, :name, :trips
+    attr_reader :id, :name
     SOURCE_FILE = "support/drivers.csv"
 
     def initialize(params)
@@ -10,15 +10,14 @@ module RideShare
       @name = params[:name]
       @vin = params[:vin]
       @trips = params[:trips]
-      @trips ||= []
     end
 
     def self.all
       @@all ||= super(SOURCE_FILE)
     end
 
-    def import_trips
-      @trips = Trip.by_driver(@id)
+    def trips
+      @trips ||= Trip.by_driver(@id)
     end
 
     def average_rating

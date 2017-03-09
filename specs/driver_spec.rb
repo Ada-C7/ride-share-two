@@ -92,16 +92,13 @@ describe RideShare::Driver do
     let(:real_driver) { RideShare::Driver.new(id: 3, name: "Daryl Nitzsche", vin: "SAL6P2M2XNHC5Y656") }
     let(:inexperienced_driver) { RideShare::Driver.new(id: 4444, name: "Alix Hamilton", vin: "SALMON12345678901") }
 
-    describe "#import_trips" do
+    describe "#trips" do
       it "Returns an array of trips for a given driver" do
-        trips = real_driver.import_trips
-
-        trips.must_be_instance_of Array
-        trips.first.must_be_instance_of RideShare::Trip
+        real_driver.trips.must_be_instance_of Array
+        real_driver.trips.first.must_be_instance_of RideShare::Trip
       end
 
       it "Sets trips to empty array for a driver w/o trips" do
-        inexperienced_driver.import_trips
         inexperienced_driver.trips.must_equal []
       end
     end
@@ -116,8 +113,6 @@ describe RideShare::Driver do
       end
 
       it "Returns an average rating within the expected range" do
-        real_driver.import_trips
-
         real_driver.average_rating.must_be :<=, 5
         real_driver.average_rating.must_be :>=, 1
       end
