@@ -13,20 +13,22 @@ require 'csv'
 def all
   trips = []
   CSV.foreach("support/trips.csv", {:headers => true, header_converters: :symbol, converters: :all}) do |line|
-    trips << RideShare::Trip.new(line)
+    trips << line
   end
   return trips
 end
 
-def self.find_for_driver(id)
-  trips = []
-
-  all.each do |trip|
-    if trip.driver_id == id
-      trips << trip
-    end
-  end
-
-  raise InvalidDriver.new("that driver does not exist") if trips.empty?
-  return trips
-end
+print all
+#
+# def self.find_for_driver(id)
+#   trips = []
+#
+#   all.each do |trip|
+#     if trip.driver_id == id
+#       trips << trip
+#     end
+#   end
+#
+#   raise InvalidDriver.new("that driver does not exist") if trips.empty?
+#   return trips
+# end
