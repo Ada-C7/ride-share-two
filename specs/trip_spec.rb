@@ -39,6 +39,11 @@ describe "Trip tests" do
   end
 
   describe "Trip.all" do
+    before do
+      @all_trips = Trip.all
+      @csv_file = CSV.read("./support/trips.csv", {:headers => true})
+    end
+
     it "returns an array of all trips" do
       Trip.all.class.must_equal Array
     end
@@ -48,8 +53,32 @@ describe "Trip tests" do
       Trip.all.each do |element|
         element.must_be_instance_of Trip
       end
+    end
+
+    it "First element in array is first line in csv" do
+      @all_trips[0].id.must_equal @csv_file[0][0].to_i
+
+      @all_trips[0].driver.must_equal @csv_file[0][1].to_i
+
+      @all_trips[0].rider.must_equal @csv_file[0][2].to_i
+
+      @all_trips[0].date.must_equal @csv_file[0][3]
+
 
     end
+
+    it "Last element in array is last line in csv" do
+      @all_trips[-1].id.must_equal @csv_file[-1][0].to_i
+
+      @all_trips[-1].driver.must_equal @csv_file[-1][1].to_i
+
+      @all_trips[-1].rider.must_equal @csv_file[-1][2].to_i
+
+      @all_trips[-1].date.must_equal @csv_file[-1][3]
+
+    end
+
+
   end
 
   describe "Trip.rider_find_all(search_id)" do
