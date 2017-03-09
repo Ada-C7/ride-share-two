@@ -1,4 +1,5 @@
 require 'csv'
+
 #Create Rideshare module
 module Rideshare
 #Create Rider class
@@ -37,7 +38,7 @@ module Rideshare
     def all_drivers
       if all_trips.class != String
         drivers = all_trips.map{|h| h[:driver_id]}
-        return drivers.map {|driver| Rideshare::Driver.find(driver)}
+        return drivers.map {|driver| Rideshare::Driver.find(driver)}.uniq
       else
         return "No Match"
       end

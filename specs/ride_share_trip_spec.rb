@@ -60,7 +60,7 @@ describe "Trip.all" do
   it "Retrieve all trips from the CSV file" do
     all = Rideshare::Trip.all
     expected = {trip_id: 600, driver_id: 61, rider_id: 168, date: "2016-04-25", rating: 3}
-    all.last.must_equal expected
+    all[-3].must_equal expected
   end
 end
 

@@ -78,4 +78,22 @@ describe "Driver#average_rating" do
     expected = "Average rating doesn't exit for this driver"
     driver.average_rating.must_equal expected
   end
+
+  it "If there's invalid ratings(smaller than 0 or bigger than 5), remove those ratings before calculating them" do
+    args = {id: 2, name: "Emory Rosenbaum", vin: "1B9WEX2R92R12900E"}
+    driver = Rideshare::Driver.new(args)
+    all_trips = [
+      {:trip_id=>114, :driver_id=>2, :rider_id=>87, :date=>"2015-08-29", :rating=>3},
+      {:trip_id=>118, :driver_id=>2, :rider_id=>234, :date=>"2016-01-07", :rating=>5},
+      {:trip_id=>140, :driver_id=>2, :rider_id=>206, :date=>"2015-07-21", :rating=>2},
+      {:trip_id=>236, :driver_id=>2, :rider_id=>263, :date=>"2015-12-08", :rating=>2},
+      {:trip_id=>451, :driver_id=>2, :rider_id=>233, :date=>"2015-08-17", :rating=>5},
+      {:trip_id=>472, :driver_id=>2, :rider_id=>191, :date=>"2016-09-07", :rating=>3},
+      {:trip_id=>533, :driver_id=>2, :rider_id=>200, :date=>"2015-09-20", :rating=>3},
+      {:trip_id=>559, :driver_id=>2, :rider_id=>58, :date=>"2016-07-19", :rating=>2},
+      {:trip_id=>601, :driver_id=>2, :rider_id=>222, :date=>"2016-12-20", :rating=>-3}, # <== smaller than 0
+      {:trip_id=>602, :driver_id=>2, :rider_id=>110, :date=>"2016-04-02", :rating=>7}  # <== greater than 5
+    ]
+    driver.average_rating.must_equal 3.13 # (3+5+2+2+5+3+3+2)/8
+  end
 end

@@ -1,4 +1,6 @@
 require 'csv'
+require 'pry'
+
 #Create Rideshare module
 module Rideshare
 #Create Driver class
@@ -39,9 +41,16 @@ module Rideshare
 #instance_method2 : retrieve an average rating for that driver based on all trips taken
     def average_rating
       return "Average rating doesn't exit for this driver" if all_trips.class == String
-      total = all_trips.map { |h| h[:rating] }.sum
-      average = total/all_trips.length.to_f
+      average = valid_ratings.sum/valid_ratings.length.to_f
       return average.round(2)
+    end
+
+    private
+#removes invalid ratings for getting an accurate average rating
+    def valid_ratings
+      ratings = all_trips.map { |h| h[:rating] }
+      ratings.delete_if {|n| n < 0 || n > 5}
+      return ratings
     end
 
   end

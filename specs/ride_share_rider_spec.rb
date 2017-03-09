@@ -38,6 +38,13 @@ describe "Rider#all_trips" do
     rider = Rideshare::Rider.new(args)
     rider.all_trips.must_equal expected
   end
+
+  it "If the rider has no trip records, then it tells you so." do
+    args = {id: 300, name: "Miss Isom Gleason", phone_num: "791-114-8423 x70188"}
+    rider = Rideshare::Rider.new(args)
+    expected = "No history of trips"
+    rider.all_trips.must_equal expected
+  end
 end
 
 describe "Rider#all_drivers" do
@@ -51,10 +58,20 @@ describe "Rider#all_drivers" do
     rider.all_drivers.must_equal expected
   end
 
-  it "In case there's no info to retrieve, it says so" do
+  it "In case there's no driver info to retrieve(no trips made), it says so" do
     args = {id: 100, name: "Hipolito Rogahn", phone_num: "944.179.4883"}
     rider = Rideshare::Rider.new(args)
     expected = "No Match"
+    rider.all_drivers.must_equal expected
+  end
+
+  it "In case there are multiple trips driven by the same driver, retrieve driver's info once" do
+    args = {id: 41, name: "Ms. Westley Pouros", phone_num: "133.000.1809 x9028"}
+    rider = Rideshare::Rider.new(args)
+    expected = [
+      {:id=>94, :name=>"Arlo Douglas", :vin=>"SUA0RTWT48E144Z4U"},
+      {:id=>91, :name=>"Miss Colt Runolfsson", :vin=>"1A9XL31P6FD5396CN"}
+    ]
     rider.all_drivers.must_equal expected
   end
 end
