@@ -11,8 +11,6 @@ module RideShare
       @rating = error_checked_rating(rating)
     end
 
-
-
     def self.all
       trips_array = []
       CSV.read("support/trips.csv", {:headers => true}).each do |trip|
@@ -26,7 +24,7 @@ module RideShare
       trips_array
     end
 
-    def self.find(id)  #Should we rescue this??
+    def self.find(id)  
       trip_array = self.all
       trip_array.each do |trip|
         if id == trip.trip_id
@@ -36,8 +34,8 @@ module RideShare
      raise ArgumentError.new "Trip #{id} does not exist"
     end
 
+    #class method - find all trip instances for a given Rider ID
     def self.find_by_rider(rider_id)
-      #class method - find all trip instances for a given Rider ID
       some_array = []
       trip_array = self.all
       trip_array.each do |trip|
@@ -48,8 +46,8 @@ module RideShare
       return some_array
     end
 
+    #class method - find all trip instances for a given Driver ID
     def self.find_by_driver(driver_id)
-      #class method - find all trip instances for a given Driver ID
       some_array = []
       trip_array = self.all
       trip_array.each do |trip|
@@ -60,6 +58,7 @@ module RideShare
       return some_array
     end
 
+    #instance method retrieve the associated driver instance through the driver ID
     def find_driver
       id = driver_id.to_s
       begin
@@ -67,7 +66,6 @@ module RideShare
       rescue ArgumentError
         return nil
       end
-      #instance method retrieve the associated driver instance through the driver ID
     end
 
     def find_rider
@@ -79,7 +77,6 @@ module RideShare
       end
       #instance method retrieve the associated rider instance through the rider ID
     end
-
 
     #private
     def error_checked_rating(rating)

@@ -14,7 +14,12 @@ module RideShare
     def self.all
       riders_array = []
       CSV.read("support/riders.csv", {:headers => true}).each do |rider|
-        riders_array << (Rider.new(rider[0], rider[1], rider[2]))
+        begin
+          riders_array << (Rider.new(rider[0], rider[1], rider[2]))
+        rescue ArgumentError
+          riders_array << (Rider.new(rider[0], rider[1], nil))
+          puts "Invalid phone number for rider #{id}"
+        end
       end
       riders_array
     end
@@ -38,11 +43,12 @@ module RideShare
 
     def drivers
       rider_trips = trips
-      @drivers_array = []
+      drivers_array = []
       rider_trips.each do |trip|
-        @drivers_array << trip.find_driver
+        drivers_array << trip.find_driver
       end
-      return @drivers_array
+      # return @drivers_array
+      return drivers_array.uniq { |driver| driver.id }
       #retrieve the list of all
       #previous driver instances
       #(through the trips functionality built above)

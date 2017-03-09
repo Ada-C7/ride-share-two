@@ -16,6 +16,7 @@ module RideShare
         begin
           drivers_array << (Driver.new(driver[0], driver[1], driver[2]))
         rescue ArgumentError
+          #this will only apply if csv has errors
           drivers_array << (Driver.new(driver[0], driver[1], nil))
           puts "Vin is not 17 characters"
         end
