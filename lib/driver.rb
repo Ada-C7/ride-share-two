@@ -4,7 +4,7 @@ module RideShare
     SOURCE_FILE = "support/drivers.csv"
 
     def initialize(params)
-      validate_params(params)
+      validate_params(params, [:id, :name, :vin])
 
       @id = params[:id]
       @name = params[:name]
@@ -29,16 +29,9 @@ module RideShare
     private
     VIN_LENGTH = 17
 
-    def validate_params(params)
-      required_attributes = [:id, :name, :vin]
-
-      missing = required_attributes.select do |attribute|
-        !params.keys.include?(attribute) || params[attribute].to_s.empty?
-      end
-
-      if !missing.empty?
-        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
-      elsif params[:vin].length != VIN_LENGTH
+    def validate_params(params, required_attributes)
+      super
+      if params[:vin].length != VIN_LENGTH
         raise ArgumentError.new("VIN must be #{VIN_LENGTH} characters.")
       end
     end

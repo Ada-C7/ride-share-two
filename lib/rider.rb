@@ -4,7 +4,7 @@ module RideShare
     SOURCE_FILE = "support/riders.csv"
 
     def initialize(params)
-      validate_params(params)
+      validate_params(params, [:id, :name, :phone_number])
 
       @id = params[:id]
       @name = params[:name]
@@ -23,20 +23,6 @@ module RideShare
 
     def drivers
       @trips.map { |trip| Driver.find(trip.driver_id) }
-    end
-
-    private
-
-    def validate_params(params)
-      required_attributes = [:id, :name, :phone_number]
-
-      missing = required_attributes.select do |attribute|
-        !params.keys.include?(attribute) || params[attribute].to_s.empty?
-      end
-
-      unless missing.empty?
-        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
-      end
     end
 
   end

@@ -4,7 +4,7 @@ module RideShare
     SOURCE_FILE = "support/trips.csv"
 
     def initialize(params)
-      validate_params(params)
+      validate_params(params, [:id, :rider_id, :driver_id, :date, :rating])
 
       @id = params[:id]
       @rider_id = params[:rider_id]
@@ -35,16 +35,9 @@ module RideShare
 
     private
 
-    def validate_params(params)
-      required_attributes = [:id, :rider_id, :driver_id, :date, :rating]
-
-      missing = required_attributes.select do |attribute|
-        !params.keys.include?(attribute) || params[attribute].to_s.empty?
-      end
-
-      if !missing.empty?
-        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
-      elsif !params[:rating].between?(1,5)
+    def validate_params(params, required_attributes)
+      super
+      if !params[:rating].between?(1,5)
         raise ArgumentError.new("Rating must be between 1 and 5.")
       end
     end

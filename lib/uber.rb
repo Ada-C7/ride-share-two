@@ -13,5 +13,17 @@ module RideShare
       all.find { |object| object.id == target_id }
     end
 
+    private
+     
+    def validate_params(params, required_attributes)
+      missing = required_attributes.select do |attribute|
+        !params.keys.include?(attribute) || params[attribute].to_s.empty?
+      end
+
+      unless missing.empty?
+        raise ArgumentError.new("Missing parameter(s): #{missing.join(", ")}")
+      end
+    end
+
   end
 end
