@@ -119,6 +119,16 @@ describe "Rider tests" do
 
     end
 
+    it "each driver is unique" do
+      new_rider = Rider.new(164, "Dominique Gleason PhD", "460.497.2371")
+      new_rider.drivers.length.must_equal 5
+      new_rider.trips.length.must_equal 6
+
+      drivers = new_rider.drivers
+
+      drivers.uniq!.must_equal nil
+    end
+
   end
 
 end
