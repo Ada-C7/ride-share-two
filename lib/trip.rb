@@ -45,25 +45,29 @@ module RideShare
     #Reads CSV file in all method
 
     #create method that uses method from driver to retrieve the associated driver instance
-    def get_driver
-
+    def trip_get_driver(driver_id)
+      driver = RideShare::Driver.find(driver_id)
+      return driver
     end
 
     #create method that uses method from rider to retrieve the associated rider instance
     def get_rider
-
+      rider = RideShare::Rider.find(@rider_id)
+      return rider
     end
+
     #create a method to retrieve all trips by driver_id
     def self.by_driver(driver_id)
       trip_search = self.all
       trip_search.find_all do |num|
         num.driver_id == driver_id
       end
+
     end
     #create a method to retrieve all trips by rider_id
     def self.by_rider(rider_id)
-      trip_search = self.all
-      trip_search.find_all do |num|
+      new_search = self.all
+      new_search.find_all do |num|
         num.rider_id == rider_id
       end
     end

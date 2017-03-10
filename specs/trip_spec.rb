@@ -54,15 +54,37 @@ describe "Trip" do
     end
   end
 
-  describe "self.by_trip(driver_id)" do
+  describe "self.by_driver(driver_id)" do
     it "returns the trips of a given driver ID" do
-        # binding.pry
-      RideShare::Trip.by_driver(30).each do |x|
-        # binding.pry
-        x.trip_id.must_equal(79)
-        binding.pry
+      # binding.pry
+      new_driver = RideShare::Trip.by_driver(30).each do |x|
+        return x.trip_id
       end
+      # binding.pry
+      new_driver.must_include(263)
+    end
+  end
+
+  describe "self.by_rider(rider_id)" do
+    it "returns the trips of a given rider ID" do
+      # binding.pry
+      new_rider = RideShare::Trip.by_rider(54).each do |x|
+        # binding.pry
+        return x.trip_id
+      end
+      new_rider.must_include(1)
+    end
+  end
+
+  describe "#trip_get_driver" do
+    let(:my_trip) {RideShare::Trip.new(1, 1, 54, "2016-04-05", 3)}
+
+    it "Should return an instance of Rideshare::Trip" do
+      # my_trip.trip_get_driver(1).must_be_kind_of(Array)
+      # binding.pry
+      my_trip.must_be_instance_of(RideShare::Trip)
+      # binding.pry
 
     end
   end
-end
+  end

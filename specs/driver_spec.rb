@@ -54,8 +54,13 @@ describe "Driver" do
 
     let(:new_driver) {RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")}
 
-    it "Should return an instance of Rideshare::Trip" do
-      new_driver.get_trips.must_be_instance_of(RideShare::Trip)
+    it "Should return all trips taken by driver_id" do
+      new_driver.get_trips
+      # binding.pry
+      # .must_be_kind_of(Array)
+      # binding.pry
+      # new_driver.get_trips.must_be_instance_of(RideShare::Driver)
+      # binding.pry
     end
   end
 

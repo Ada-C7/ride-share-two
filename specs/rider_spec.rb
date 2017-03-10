@@ -48,4 +48,31 @@ describe "Rider" do
       proc { RideShare::Rider.find(301)}.must_raise ArgumentError
     end
   end
+
+  describe "Rider#retrieve_trips" do
+
+  let(:new_rider) {RideShare::Rider.new(1, "Nina Hintz Sr.", "560.815.3059")}
+
+    it "Should return a list of trips taken by rider_id" do
+      # binding.pry
+      new_rider.retrieve_trips.length.must_equal 2
+      # binding.pry
+    end
+  end
+
+describe "Rider#find_drivers" do
+
+  let(:new_rider) {RideShare::Rider.new(2, "Kaia Klocko", "(392) 217-0777")}
+  # 2,Kaia Klocko,(392) 217-0777
+    it "Should retrieve trip's drivers" do
+      driver = new_rider.find_drivers.each do |x|
+         return x.id
+       end
+    end
+   id.must_equal(11)
+           # .must_equal 10
+      # new_rider.must_equal 1
+
+    # binding.pry
+  end
 end

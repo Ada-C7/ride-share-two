@@ -30,9 +30,10 @@ module RideShare
       raise ArgumentError.new("This account does not exist")
     end
 
-  #Creates method that uses a method from trip object to retrieve list of trips
+    #Creates method that uses a method from trip object to retrieve list of trips
     def retrieve_trips
-
+      rider = RideShare::Trip.by_rider(id)
+      return rider
     end
     #Each rider should have an ID, name, and phone number
     #Should be able to retrieve the list of trip instances that only this specific rider has taken
@@ -41,8 +42,18 @@ module RideShare
 
     #Create method that uses internal trips method to retrieve associated
     # drivers
-
     def find_drivers
-    end 
+
+      drivers = {}
+
+      retrieve_trips.map! do |trip|
+        drivers[trip.driver_id] = 1
+        drivers.each do |id, value|
+          drivers[id] = RideShare::Driver.find(id)
+        end
+      end
+      return drivers.values
+    end
+
   end
 end
