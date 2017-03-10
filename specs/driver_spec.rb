@@ -2,6 +2,16 @@ require_relative 'spec_helper'
 
 describe "Driver" do
 
+  describe "initialize" do
+
+    it "Raises an ArgumentError when VIN is not 17 characters" do
+      proc {
+        RideShare::Driver.new(driver_id: 150, name: "Kaitlin Ramirez", vin: "W09XNTZR9KT")
+      }.must_raise ArgumentError
+    end
+
+  end
+
   describe "Driver.create_all_drivers" do
 
     before do
@@ -28,12 +38,32 @@ describe "Driver" do
 
   end
 
-  it "Raises an ArgumentError/Says something when VIN is not 17 characters" do
+  describe "Driver.find(driver_id)" do
 
-    proc {
-      RideShare::Driver.new(driver_id: 150, name: "Kaitlin Ramirez", vin: "W09XNTZR9KT")
-    }.must_raise ArgumentError
+    it "returns a Driver that exists" do
+      driver = RideShare::Driver.find(5)
 
+      driver.must_be_instance_of RideShare::Driver
+      driver.driver_id.must_equal 5
+      driver.name.must_equal "Verla Marquardt"
+      driver.vin.must_equal "TAMLE35L3MAYRV1JD"
+    end
+
+    it "returns the first driver" do
+      skip
+    end
+
+    it "returns the last driver" do
+      skip
+    end
+
+  end
+
+  describe "Driver trips" do
+    # driver with id 100 does not have any trip. look out for your tests.
+    it "text" do
+      skip
+    end
   end
 
 end
