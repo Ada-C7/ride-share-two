@@ -54,15 +54,16 @@ describe "Driver Class" do
       end
     end #end of trips taken
 
-    xdescribe "average_rating method" do
+    describe "average_rating method" do
 
+      let(:driver) {Carmmunity::Driver::find(12)}
 
       it " Returns an integer " do
-        skip
+        driver.average_rating.must_be_instance_of Integer
       end
 
       it "returns the correct average_rating" do
-        skip
+        driver.average_rating.must_equal 2
       end
 
     end #end of average_rating
