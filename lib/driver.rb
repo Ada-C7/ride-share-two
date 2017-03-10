@@ -20,7 +20,7 @@ module RideShare
     # argument: trips is return of get_trips
     def calculate_average_rating(trips)
       ratings = trips.map { |trip| trip.rating }
-      average = ratings.sum / ratings.length.to_f
+      average = (ratings.sum.to_f) / (ratings.length.to_f)
     end
 
                 ###################
@@ -68,21 +68,22 @@ module RideShare
   end
 end
 #
-# driver_info = {
-#   id: 75,
-#   name: 'Cynthia',
-#   vin: 'WBWSS52P9NEYLVDE9'
-# }
-
+driver_info = {
+  id: 75,
+  name: 'Cynthia',
+  vin: 'WBWSS52P9NEYLVDE9'
+}
 
 # testing average the old school way
-# trips_raw = [
-#   ['1', '75', '23', '1-2-17','3'],
-#   ['1', '75', '23', '1-2-17','4'],
-#   ['1', '75', '23', '1-2-17','5'],
-#   ['1', '75', '23', '1-2-17','3']
-# ]
-#
-# trips = RideShare::Trip.all(trips_raw)
-# driver = RideShare::Driver.new(driver_info)
-# p driver.calculate_average_rating(trips)
+trips_raw = [
+  ['1', '175', '20', '1-2-17','3'],
+  ['2', '175', '21', '1-3-17','4'],
+  ['3', '175', '22', '1-4-17','5'],
+  ['4', '175', '23', '1-5-17','3'],
+  ['5', '175', '24', '1-6-17','3'],
+  ['6', '175', '25', '1-7-17','4']
+]
+
+trips = RideShare::Trip.all(trips_raw)
+driver = RideShare::Driver.new(driver_info)
+p driver.calculate_average_rating(trips)
