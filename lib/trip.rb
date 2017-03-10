@@ -22,20 +22,10 @@ module RideShare
     def self.all
       trips = []
 
-      CSV.read("support/trips.csv").each do |trip_row|
-
-        all_trips = RideShare::Trip.new(
-        trip_id: trip_row[0].to_i,
-        driver_id: trip_row[1].to_i,
-        rider_id: trip_row[2].to_i,
-        date: trip_row[3],
-        rating: trip_row[4].to_i
-        )
-
-        trips << all_trips
+      CSV.read("support/trips.csv", {:headers => true, :header_converters => :symbol, :converters => :all}).each do |line|
+        trips << RideShare::Trip.new(line)
       end
-
-      trips
+      return trips
     end
 
     def self.find_many_drivers(driver_id)

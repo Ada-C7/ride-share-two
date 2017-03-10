@@ -2,39 +2,35 @@ require 'csv'
 
 module RideShare
   class Rider
-    attr_reader :id, :name, :phone_number
+    attr_reader :rider_id, :name, :phone_num
 
     def initialize(rider_hash)
-      @id = rider_hash[:id]
+      @rider_id = rider_hash[:rider_id]
       @name = rider_hash[:name]
-      @phone_number = rider_hash[:phone_number]
+      @phone_num = rider_hash[:phone_num]
     end
 
     def self.all
       riders = []
 
-      CSV.read("support/riders.csv").each do |rider_row|
-        all_riders = RideShare::Rider.new(
-        id: rider_row[0].to_i,
-        name: rider_row[1],
-        phone_number: rider_row[2]
-        )
-        riders << all_riders
+      CSV.read("support/riders.csv", {:headers => true, :header_converters => :symbol, :converters => :all}).each do |line|
+        riders << RideShare::Rider.new(line)
       end
-      riders
+
+      return riders
     end
 
-    def self.find(id)
+    def self.find(rider_id)
       save_rider = nil
 
       find_riders = RideShare::Rider.all
       find_riders.each do |rider|
-        if rider.id == id
+        if rider.rider_id == rider_id
           save_rider = rider
         end
       end
 
-      raise ArgumentError.new "Warning: Rider #{id} does not exist." if save_rider == nil
+      raise ArgumentError.new "Warning: Rider #{rider_id} does not exist." if save_rider == nil
 
       return save_rider
     end
@@ -42,7 +38,7 @@ module RideShare
     def trip
 
       # gets the list of trip instances that only this rider has taken
-      RideShare::Trip.find_many_riders(@id)
+      RideShare::Trip.find_many_riders(@rider_id)
 
       #get the list of all previous driver instances (through the trips functionality built above)
 

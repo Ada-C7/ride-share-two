@@ -41,7 +41,7 @@ describe "Trip class" do
     end
 
     it "Trip info matches what is in the CSV file" do
-      index = 1
+      #index = 1
       CSV.read("support/trips.csv") do
         trips[index].trip_id.must_equal line[0].to_i
         trips[index].driver_id.must_equal line[1].to_i
@@ -49,7 +49,7 @@ describe "Trip class" do
         trips[index].date.must_equal line[3]
         trips[index].rating.must_equal line[4].to_i
 
-        index += 1
+        #index += 1
       end
     end
   end
@@ -109,7 +109,7 @@ describe "Trip class" do
       my_trip = trips[3]
       tripin.driver.must_be_instance_of RideShare::Driver
 
-      my_trip.driver_id.must_equal RideShare::Driver.find(50).id
+      my_trip.driver_id.must_equal RideShare::Driver.find(50).driver_id
       #then check that the driver_id that was pulled from my_trip matches up with the id from RideShare::Driver :)
     end
   end
@@ -120,7 +120,7 @@ describe "Trip class" do
       my_trip = trips[3]
       tripin.rider.must_be_instance_of RideShare::Rider
 
-      my_trip.rider_id.must_equal RideShare::Rider.find(87).id
+      my_trip.rider_id.must_equal RideShare::Rider.find(87).rider_id
     end
   end
 end
