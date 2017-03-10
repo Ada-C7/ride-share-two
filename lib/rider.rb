@@ -32,20 +32,25 @@ module RideShare
 
       raise ArgumentError.new "Warning: Rider #{rider_id} does not exist." if save_rider == nil
 
-      return save_rider
+      save_rider
     end
 
     def trip
-      # gets the list of trip instances that only this rider has taken
+      # gets the list of trip instances for this rider
       RideShare::Trip.find_many_riders(@rider_id)
     end
 
     def drivers
-      #get the list of all previous driver instances (through the trips functionality built above)
 
       # array of drivers for trips that rider has taken
       drivers_ids_for_rider_trips = trip.map { |trips| trips.driver_id }
 
+      #find driver info for each trip
+      driver_info = drivers_ids_for_rider_trips.map do |driver_ids|
+        RideShare::Trip.find_many_drivers(driver_ids)
+      end
+      # no repeat drivers
+      driver_info.uniq
     end
 
   end

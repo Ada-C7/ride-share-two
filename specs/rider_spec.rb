@@ -87,4 +87,15 @@ describe "Rider class" do
     end
   end
 
+  describe "Rider#drivers" do
+    #rider without trips
+    let(:miss) { RideShare::Rider.new(rider_id: 300, name: "Miss Isom Gleason", phone_num: "791-114-8423 x70188") }
+    #rider with multiple trips with same driver_id
+    let(:dominique) { RideShare::Rider.new(rider_id: 164, name: "Dominique Gleason PhD", phone_num: "460.497.2371") }
+
+    it "Is an instance of RideShare::Driver" do
+      dominique.drivers.class.must_equal Array
+    end
+  end
+
 end
