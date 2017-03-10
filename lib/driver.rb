@@ -32,7 +32,8 @@ module RideShare
     end
 
     # do you need to test this string? or is making sure it is included enough
-    def self.test_for_string(name)
+    def self.test_name(name)
+      raise ArgumentError.new "Name length is under 3" if name.length < 3
       name
     end
 
@@ -52,7 +53,7 @@ module RideShare
         raise ArgumentError.new("driver info must have 3 parts") unless driver_info.length == 3
         driver = Hash.new
         driver[:id] = test_for_integer(driver_info[0])
-        driver[:name] = test_for_string(driver_info[1])
+        driver[:name] = test_name(driver_info[1])
         driver[:vin] = test_for_vin(driver_info[2])
         self.new(driver)
       end

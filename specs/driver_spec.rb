@@ -47,7 +47,8 @@ describe "Driver" do
                     bad_vin: [['10', 'name', 'WBWSS52P9NE']],
                     empty_array: [],
                     empty_nested_arrays: [[],[],[]],
-                    missing_part: [['10', 'name']]
+                    missing_part: [['10', 'name']],
+                    bad_name: [['3', 'a', 'WBWSS52P9NEYLVDE9']]
                    }
     end
 
@@ -95,6 +96,13 @@ describe "Driver" do
                    RideShare::Driver.all(@bad_data[:empty_nested_arrays])
                  }.must_raise ArgumentError
       err.message.must_equal "driver info must have 3 parts"
+    end
+
+    it "raises an error if given improper name" do
+      err = proc {
+                   RideShare::Driver.all(@bad_data[:bad_name])
+                 }.must_raise ArgumentError
+      err.message.must_equal "Name length is under 3"
     end
   end
 
