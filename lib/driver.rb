@@ -7,39 +7,16 @@ module RideShare
 
     # vin cannot be longer or shorter than 17 characters
     def initialize(driver_hash)
-      #put argument errors to check edge cases here
-
+      raise ArgumentError.new "Vin must be 17 characters" if driver_hash[:vin].length != 17
 
       @driver_id = driver_hash[:driver_id]
       @name = driver_hash[:name]
       @vin = driver_hash[:vin]
-
-      raise ArgumentError.new "Vin must be 17 characters" if driver_hash[:vin].length != 17
-
-
     end
 
     def self.all
       drivers_array = []
       # # reads drivers.csv file
-      # index = 1
-      # CSV.read("support/drivers.csv").each do |driver_row|
-      #   drivers = {
-      #     id: driver_row[0].to_i,
-      #     name: driver_row[1],
-      #     vin: driver_row[2]
-      #   }
-      #
-      #   drivers_array << RideShare::Driver.new(drivers)
-      #   index += 1
-      # end
-      # #binding.pry
-      # drivers_array
-
-      ##########
-      #1. Change all your tests so the id numbers are strings
-      #2. Fix Rider class to match whats going on below
-
       CSV.read("support/drivers.csv", {:headers => true, :header_converters => :symbol, :converters => :all}).each do |line|
         drivers_array << RideShare::Driver.new(line)
       end
@@ -71,7 +48,13 @@ module RideShare
     end
 
     def average_rating
-      #will talk to trips and will use ratting divided my the amount of drivers returned to find the average rating amount
+      # Get ratings from trip instance
+      driver_ratings = trips.map { |trips| trips.rating.to_f  }
+      avg_rating = driver_ratings.inject(:+) / driver_ratings.length
+
+      avg_rating
+      # add all ratings together
+      # divide by number of trip instances
     end
 
   end

@@ -21,12 +21,12 @@ describe "Trip class" do
       tripin.rating.must_equal 2
     end
 
-    # it "Raises ArgumentError if the rating is not within an acceptable range" do
-    #
-    #   proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 0) }.must_raise ArgumentError
-    #
-    #   proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 34) }.must_raise ArgumentError
-    # end
+    it "Raises ArgumentError if the rating is not within an acceptable range" do
+
+      proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 0) }.must_raise ArgumentError
+    
+      proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 34) }.must_raise ArgumentError
+    end
   end
 
   describe "Trip.all" do
@@ -109,7 +109,7 @@ describe "Trip class" do
       my_trip = trips[3]
       tripin.driver.must_be_instance_of RideShare::Driver
 
-      my_trip.driver_id.must_equal RideShare::Driver.find(50).driver_id
+      my_trip.driver_id.must_equal RideShare::Driver.find(13).driver_id
       #then check that the driver_id that was pulled from my_trip matches up with the id from RideShare::Driver :)
     end
   end
@@ -120,7 +120,7 @@ describe "Trip class" do
       my_trip = trips[3]
       tripin.rider.must_be_instance_of RideShare::Rider
 
-      my_trip.rider_id.must_equal RideShare::Rider.find(87).rider_id
+      my_trip.rider_id.must_equal RideShare::Rider.find(70).rider_id
     end
   end
 end

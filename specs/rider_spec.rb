@@ -78,8 +78,12 @@ describe "Rider class" do
     end
   end
 
-  xdescribe "Rider#trip" do
-    it "" do
+  describe "Rider#trip" do
+    let(:dortha) { RideShare::Rider.new(rider_id: 14, name: "Dortha Wiegand", phone_num: "989.272.6045") }
+
+    it "Returns an array of rider trips" do
+      dortha.trip.class.must_equal Array
+
     end
   end
 

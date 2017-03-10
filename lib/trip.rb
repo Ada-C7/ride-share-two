@@ -6,16 +6,14 @@ module RideShare
   class Trip
     attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 
-    #maybe make rider_id...etc into a hash
     def initialize(trip_hash)
 
-      # raise ArgumentError.new "Rating is not between 1-5 for this trip" if trip_hash[:rating] < 1
+      raise ArgumentError.new "Rating is not between 1-5 for this trip" if trip_hash[:rating] < 1 || trip_hash[:rating] > 5
 
       @trip_id = trip_hash[:trip_id]
       @driver_id = trip_hash[:driver_id]
       @rider_id = trip_hash[:rider_id]
       @date = trip_hash[:date]
-      #must be within an acceptable range
       @rating = trip_hash[:rating]
     end
 
@@ -52,6 +50,7 @@ module RideShare
           rider_trips << trips
         end
       end
+
       raise ArgumentError.new "Warning: Rider #{rider_id} does not exist" if rider_trips.empty?
 
       return rider_trips
@@ -70,6 +69,6 @@ module RideShare
   end
 end
 
-# puts "#{RideShare::Trip.find_many_drivers(5).length}"
+puts "#{RideShare::Trip.find_many_drivers(30)}"
 # puts "#{RideShare::Trip.find_many_drivers(1337)}"
 #puts "#{RideShare::Trip.find_many_riders(5).length}"

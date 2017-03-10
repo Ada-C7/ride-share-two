@@ -101,14 +101,20 @@ describe "Driver class" do
 
   describe "Driver#trips" do
     # Driver can talk to trips and this class will return a list of its trips based on the drivers id
-    it "Checking that Driver is talking to Trip" do
+    let(:casper) { RideShare::Driver.new(driver_id: 30, name: "Casper Flatley", vin: "L1CN7SPD96M6SNFYU") }
 
-      driving.trips.class.must_equal Array
+    it "Checking that Driver#trips returns an array with correct length" do
 
-      #my_trip.driver_id.must_equal RideShare::Driver.find(50).id
+      casper.trips.class.must_equal Array
+      
+      casper.trips.length.must_equal RideShare::Trip.find_many_drivers(30).length
+    end
+
+    it "Returns the correct average trip ratings for a spacific driver" do
+      # (5 + 3 + 3 + 4 + 2 + 2 + 2) / 7 =
+      casper.average_rating.must_equal 3.0
+
     end
   end
 
 end
-
-#include exception handling for all specs...
