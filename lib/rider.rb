@@ -28,19 +28,19 @@ class Rider
     raise ArgumentError.new "Rider doesn't exist"
   end
 
-  def trips(id)
-    Trip.find_all_for_rider(id)
+  def trips
+    Trip.find_all_for_rider(self.id)
   end
 
-  def previous_drivers(id)
+  def previous_drivers
     # all_trips = Trip.find_all_for_rider(id)
-    all_trips = trips(id)
+    all_trips = self.trips
     previous_drivers_by_id = []
     all_trips.each { |trip| previous_drivers_by_id << trip.driver_id }
     # now, an array of driver_ids
     rider_previous_drivers = []
     previous_drivers_by_id.each { |driver_id| rider_previous_drivers << Driver.find(driver_id) }
-    rider_previous_uniq_drivers = rider_previous_drivers.uniq { |driver| driver.id }
+    rider_previous_uniq_drivers = rider_previous_drivers.uniq { |driver| driver.id } # gets only unique drivers, no repeats for same driver different trips
     return rider_previous_uniq_drivers
   end
 end

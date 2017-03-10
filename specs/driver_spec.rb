@@ -47,43 +47,52 @@ describe "Driver" do
   end
 
   describe "Driver#all" do
-    before do
-      @drivers = Driver.all
-    end
+    let (:drivers)  {
+      Driver.all
+    }
 
     it "returns all drivers from the CSV file" do
-      @drivers.must_be_instance_of Array
+      drivers.must_be_instance_of Array
 
-      @drivers.each { |i| i.must_be_instance_of Driver }
+      drivers.each { |i| i.must_be_instance_of Driver }
 
-      @drivers.length.must_equal 100
+      drivers.length.must_equal 100
+    end
+
+    it "only returns drivers listed in the CSV file" do
+      # created new driver
+      # .all should not include this driver
     end
   end
 
   describe "Driver#find" do
-    before do
-      @drivers = Driver.all
-    end
+    let (:drivers)  {
+      Driver.all
+    }
 
     it "returns a driver that exists" do
-      driver = Driver.find(@drivers[0].id)
+      driver = Driver.find(drivers[0].id)
       driver.must_be_instance_of Driver
     end
 
     it "can find the first driver from the CSV" do
       driver = Driver.find(1)
-      driver.id.must_equal @drivers[0].id
+      driver.id.must_equal drivers[0].id
     end
 
     it "can find the last driver from the CSV" do
       driver = Driver.find(100)
-      driver.id.must_equal @drivers[-1].id
+      driver.id.must_equal drivers[-1].id
     end
 
     it "raises an error for a driver that doesn't exist" do
       proc {
         Driver.find(111111)
       }.must_raise ArgumentError
+    end
+
+    it "will only find drivers in the CSV file" do
+      #will ignore driver objects not in CSV file
     end
   end
 

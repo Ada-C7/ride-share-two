@@ -25,7 +25,7 @@ class Driver
     return driver_info
   end
 
-  def self.find(id) #could use Class variable here instead of loading driver array each time
+  def self.find(id) # could use Class variable here instead of loading driver array each time
     #.find(id) when you input id, it will return the driver (instance) with that id
 
     Driver.all.each do |driver|

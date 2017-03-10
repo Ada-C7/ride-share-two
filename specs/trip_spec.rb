@@ -1,30 +1,30 @@
 require_relative 'spec_helper'
 
 describe "Trip" do
-  before do
-    @great_trip = Trip.new(1234, 1, 56, "2016-04-05", 5)
-  end
+  let (:great_trip)  {
+    Trip.new(1234, 1, 56, "2016-04-05", 5)
+  }
 
   describe "#initialize" do
     it "takes an id, driver_id, rider_id, date, and rating" do
-      @great_trip.must_respond_to :id
-      @great_trip.id.must_equal 1234
+      great_trip.must_respond_to :id
+      great_trip.id.must_equal 1234
 
-      @great_trip.must_respond_to :driver
-      @great_trip.driver_id.must_equal 1
+      great_trip.must_respond_to :driver
+      great_trip.driver_id.must_equal 1
 
-      @great_trip.must_respond_to :rider
-      @great_trip.rider_id.must_equal 56
+      great_trip.must_respond_to :rider
+      great_trip.rider_id.must_equal 56
 
-      @great_trip.must_respond_to :date
-      @great_trip.date.must_equal "2016-04-05"
+      great_trip.must_respond_to :date
+      great_trip.date.must_equal "2016-04-05"
 
-      @great_trip.must_respond_to :rating
-      @great_trip.rating.must_equal 5
+      great_trip.must_respond_to :rating
+      great_trip.rating.must_equal 5
     end
 
     it "must be an instance of the Trip class" do
-      @great_trip.must_be_instance_of Trip
+      great_trip.must_be_instance_of Trip
     end
 
     it "must have a rating between 1 - 5" do
@@ -36,14 +36,14 @@ describe "Trip" do
   end # end of describe initialize
 
   describe "Trip#all" do
-    before do
-      @trips = Trip.all
-    end
+    let (:trips)  {
+      Trip.all
+    }
 
     it "it returns all the trips from the CSV file" do
-      @trips.must_be_instance_of Array
+      trips.must_be_instance_of Array
 
-      @trips.each { |i| i.must_be_instance_of Trip }
+      trips.each { |i| i.must_be_instance_of Trip }
       # the above code is the shorthand for the below code
       # @trips.each do |i|
       #   i.must_be_instance_of Trip
@@ -51,7 +51,7 @@ describe "Trip" do
       # (@trips.each { |i| return i }).must_be_instance_of Trip
       # the code on the line above makes it so the spec on the line below is never run - why?
       # because it doesn't actually go through the loop; it does it once, and returns, and exit
-      @trips.length.must_equal 600
+      trips.length.must_equal 600
     end
   end # end of describe Trip.all method
 
@@ -76,34 +76,34 @@ describe "Trip" do
   end # end of describe rider method
 
   describe "Trip#find_all_for_driver" do
-    before do
-      @trips = Trip.all
-    end
+    let (:trips)  {
+      Trip.all
+    }
 
     it "returns a collection of trip instances" do
-      trips_for_a_driver = Trip.find_all_for_driver(@trips[0].driver_id)
+      trips_for_a_driver = Trip.find_all_for_driver(trips[0].driver_id)
       trips_for_a_driver.must_be_instance_of Array
     end
 
     it "returns a trip that exists" do
-      trips_for_a_driver = Trip.find_all_for_driver(@trips[10].driver_id)
+      trips_for_a_driver = Trip.find_all_for_driver(trips[10].driver_id)
       trips_for_a_driver[0].must_be_instance_of Trip
     end
 
   end # end of describe find_all_for_driver method
 
   describe "Trip#find_all_for_rider" do
-    before do
-      @trips = Trip.all
-    end
+    let (:trips)  {
+      Trip.all
+    }
 
     it "returns a collection of trip instances" do
-      trips_for_a_rider = Trip.find_all_for_rider(@trips[0].rider_id)
+      trips_for_a_rider = Trip.find_all_for_rider(trips[0].rider_id)
       trips_for_a_rider.must_be_instance_of Array
     end
 
     it "returns a trip that exists" do
-      trips_for_a_rider = Trip.find_all_for_rider(@trips[10].rider_id)
+      trips_for_a_rider = Trip.find_all_for_rider(trips[10].rider_id)
       trips_for_a_rider[0].must_be_instance_of Trip
     end
 
