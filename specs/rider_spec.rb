@@ -1,10 +1,10 @@
 require_relative 'spec_helper'
 
-xdescribe "Rider Class" do
+describe "Rider Class" do
 
   describe "Instance Methods" do
 
-    describe "initialize method" do
+    xdescribe "initialize method" do
 
       let(:driver_test) { Carmmunity::Rider.new(
                 name:   'Ada',
@@ -41,6 +41,7 @@ xdescribe "Rider Class" do
 
       it "Returns the correct number of trips taken " do
         skip
+        trips.length.must_equal 1
       end
 
       it "Returns correct trip infromation" do
@@ -54,21 +55,39 @@ xdescribe "Rider Class" do
       trip.date.must_equal          "2016-12-09"
       end
 
+      it "returns more than one trip" do
+        rider_test = Carmmunity::Rider.find(41)
+
+        rider_test.trips_taken.length.must_be :>, 1
+      end
+
+      it "returns message if no trips can be found" do
+        skip
+      end 
+
+
     end #end of trips taken
 
-    xdescribe "previous_riders method" do
-
+    xdescribe "previous_drivers method" do
+      let(:rider) {Carmmunity::Rider::find(41)}
 
       it " Returns an array " do
-        skip
+        rider.previous_drivers.must_be_instance_of Array
       end
 
-      it "returns a previous_rider" do
-        skip
+      it "returns a previous_driver" do
+
+        driver = rider.previous_drivers.first
+        driver.driver_id.must_equal 94
       end
 
-      it "returns a the correct number of riders" do
-        skip
+      it "returns more than one driver" do
+        rider.previous_drivers.length.must_be :>, 1
+      end
+
+      it "returns a the correct number of drivers" do
+
+        rider.previous_drivers.length.must_equal 3
       end
 
       it "returns message if no trips have been taken" do
@@ -79,7 +98,7 @@ xdescribe "Rider Class" do
   end #end of instance methods
 
 
-  describe " Class Methods " do
+  xdescribe " Class Methods " do
 
     let(:my_riders) {Carmmunity::Rider::all}
 
