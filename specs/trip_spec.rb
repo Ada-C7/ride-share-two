@@ -186,20 +186,23 @@ describe "Trip Class" do
         Carmmunity::Trip::rider_trips(5).must_be_instance_of Array
       end
 
-      it " Returns a trip that exists " do
-        skip
-        rider_trips = Carmmunity::Trip::rider_trips(54)
+      # Is ther a situation where would find your selfing building a method to test your code. For example, checking to see if rider_trips(5) returns a trip that exists. We don't have a specific 'find trip' functionality. Would it be best practices to build this in the spec, or is this a red flag that something is missing in the program?
 
-        rider_trips.must_include      "2016-04-05"
-        rider_trips.must_include      1
-        rider_trips.must_include      3
-      end
+      #   it " Returns a trip that exists " do
+      #   skip
+      #   rider_trips = Carmmunity::Trip::rider_trips(54)
+      #
+      #
+      #   rider_trips.must_include      "2016-04-05"
+      #   rider_trips.must_include      1
+      #   rider_trips.must_include      3
+      # end
 
       it " Returns more than one trip " do
 
         rider_trips = Carmmunity::Trip::rider_trips(54)
 
-        rider_trips.length.must_be :>, 1
+        rider_trips.length.must_be    :>, 1
 
       end
 
