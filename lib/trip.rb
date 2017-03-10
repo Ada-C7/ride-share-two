@@ -1,7 +1,7 @@
 require 'date'
 require_relative 'file'
-# require_relative 'rider'
 # require_relative 'driver'
+# require_relative 'rider'
 
 module RideShare
   class Trip

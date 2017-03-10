@@ -1,6 +1,6 @@
 # require 'csv'
 require_relative 'file'
-# require_relative 'trip'
+require_relative 'trip'
 
 module RideShare
   class Driver
@@ -19,10 +19,10 @@ module RideShare
       RideShare::Trip.find_by_driver(@id)
     end
 
-    # should I give this method an argument of trips
-    # argument: trips is return of get_trips
+    # need to figure out what to return if trips is nil
     def calculate_average_rating()
       trips = get_trips
+      return nil if trips.nil?
       ratings = trips.map { |trip| trip.rating }
       (ratings.sum.to_f) / (ratings.length)
     end
@@ -75,23 +75,3 @@ module RideShare
     end
   end
 end
-#
-# driver_info = {
-#   id: 75,
-#   name: 'Cynthia',
-#   vin: 'WBWSS52P9NEYLVDE9'
-# }
-#
-# # testing average the old school way
-# trips_raw = [
-#   ['1', '175', '20', '1-2-17','3'],
-#   ['2', '175', '21', '1-3-17','4'],
-#   ['3', '175', '22', '1-4-17','5'],
-#   ['4', '175', '23', '1-5-17','3'],
-#   ['5', '175', '24', '1-6-17','3'],
-#   ['6', '175', '25', '1-7-17','4']
-# ]
-#
-# trips = RideShare::Trip.all(trips_raw)
-# driver = RideShare::Driver.new(driver_info)
-# p driver.calculate_average_rating(trips)
