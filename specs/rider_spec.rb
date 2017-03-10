@@ -92,14 +92,14 @@ describe "Rider" do
       err = proc {
                   RideShare::Rider.all(@bad_data[:bad_phone_number])
                   }.must_raise ArgumentError
-      err.message.must_equal "Phone number's length under 7"
+      err.message.must_equal "Phone num less than 7"
     end
 
     it "raises an error if given bad name" do
       err = proc {
                   RideShare::Rider.all(@bad_data[:bad_name])
                  }.must_raise ArgumentError
-      err.message.must_equal "Name length is under 3"
+      err.message.must_equal "Name length is under 1"
     end
 
   end
@@ -164,7 +164,7 @@ describe "Rider" do
       rider.get_trips.each { |trip| trip.rider_id.must_equal @rider_id }
     end
 
-    # with out adding an expression to return nil - you get an empty array
+    # is this an edge case?
     it "returns nil if rider has no trips" do
       rider_no_trips.get_trips.must_be_nil
     end
@@ -180,6 +180,7 @@ describe "Rider" do
       rider.get_drivers.each { |driver| driver.must_be_instance_of RideShare::Driver  }
     end
 
+    # are you testing this right?
     it "doesn't return array with duplicate drivers" do
       drivers = rider_with_same_driver.get_drivers
       num_of_drivers = drivers.length

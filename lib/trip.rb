@@ -44,9 +44,11 @@ module RideShare
       return trip_data.read_csv_and_remove_headings
     end
 
-    # all takes in trips_data so you can test bad data
-    # but will default to nil which then gets set to the csv data if nothing is passed
-    # when the find methods call all - they will not send any data
+    # all takes in trips_data because it is better to inject the file data object
+    # this also lets you test the data more easily (you can more easily pass in bad data)
+    # but there is a default of trips data
+    # this project needs the default because lots of methods call each other and
+    # expect that all is reading the csv data 
     def self.all(trips_data = nil)
       trips_data = get_data if trips_data.nil?
       raise ArgumentError if trips_data.empty?

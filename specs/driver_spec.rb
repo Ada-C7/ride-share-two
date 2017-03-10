@@ -98,7 +98,7 @@ describe "Driver" do
       err = proc {
                    RideShare::Driver.all(@bad_data[:bad_name])
                  }.must_raise ArgumentError
-      err.message.must_equal "Name length is under 3"
+      err.message.must_equal "Name length is under 1"
     end
   end
 

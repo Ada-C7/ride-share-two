@@ -9,9 +9,8 @@ module RideShare
       @phone_number = info[:phone_number]
     end
 
-    # what should be returned if there are no trips?
-    # calling find_by_rider will auto return an empty arrays
-    # change the Trip.find_by_rider
+    # what should be returned if there are no trips? Thinking Nil
+    # changed the Trip.find_by_rider to return nil if no trips
     def get_trips
       RideShare::Trip.find_by_rider(@id)
     end
@@ -20,24 +19,25 @@ module RideShare
       trips = get_trips
       return nil if trips.nil?
       # map returns array of driver instances - you don't need uniq
-      # you wont get duplicate driver instances
+      # you wont get duplicate driver instances -
       trips.map { |trip| trip.get_driver }
     end
 
-  ######################################################
-                    ## Class methods ##
-  ######################################################
+                      ###################
+                      ## Class methods ##
+                      ###################
+
     def self.test_for_integer(num)
       Integer(num)
     end
 
     def self.test_name(name)
-      raise ArgumentError.new "Name length is under 3" if name.length < 3
+      raise ArgumentError.new "Name length is under 1" if name.length <= 1
       name
     end
 
     def self.test_phone_number(phone_number)
-      raise ArgumentError.new "Phone number's length under 7" if phone_number.length < 7
+      raise ArgumentError.new "Phone num less than 7" if phone_number.length < 7
       phone_number
     end
 

@@ -86,26 +86,26 @@ describe "Trip" do
       trips.length.must_equal 600
     end
 
-    it "raises an argument error if not given integer for trip ID  " do
+    it "raises an error if not given integer for trip ID  " do
       # proc also equals ->
       proc {
         RideShare::Trip.all(@bad_data[:bad_id])
       }.must_raise ArgumentError
     end
 
-    it "raises an argument error if not given intetger for driver_id" do
+    it "raises an error if not given intetger for driver_id" do
       proc {
         RideShare::Trip.all(@bad_data[:bad_driver_id])
       }.must_raise ArgumentError
     end
 
-    it "raises an argument error if not given intetger for rider_id" do
+    it "raises an error if not given intetger for rider_id" do
       proc {
         RideShare::Trip.all(@bad_data[:bad_rider_id])
       }.must_raise ArgumentError
     end
 
-    it "raises an argument error if not given proper date" do
+    it "raises an error if not given proper date" do
       # at this point using Ruby's built in error for this
       proc {
         RideShare::Trip.all(@bad_data[:bad_date])
@@ -113,20 +113,20 @@ describe "Trip" do
     end
 
     # if you send "four" as rating - it wont pass the test_rating method
-    it "raises an argument error if not given integer for rating" do
+    it "raises an error if not given integer for rating" do
       proc {
         RideShare::Trip.all(@bad_data[:bad_rating])
       }.must_raise ArgumentError
     end
 
-    it "raises an argument error if not given 1-5 integer for rating" do
+    it "raises an error if not given 1-5 integer for rating" do
       err = proc {
         RideShare::Trip.all(@bad_data[:rating_out_of_range])
       }.must_raise ArgumentError
       err.message.must_equal "Rating must be 1-5"
     end
 
-    it "raises an arugment error if given empty array" do
+    it "raises an error if given empty array" do
       proc {
         RideShare::Trip.all(@bad_data[:empty_array])
       }.must_raise ArgumentError

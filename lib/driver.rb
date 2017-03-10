@@ -35,7 +35,7 @@ module RideShare
 
     # do you need to test this string? or is making sure it is included enough
     def self.test_name(name)
-      raise ArgumentError.new "Name length is under 3" if name.length < 3
+      raise ArgumentError.new "Name length is under 1" if name.length <= 1
       name
     end
 
