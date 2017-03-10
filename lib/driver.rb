@@ -12,6 +12,7 @@ module RideShare
       @id = driver_hash[:id]
       @name = driver_hash[:name]
       @vin = driver_hash[:vin]
+
     end
 
     def validate_input driver_hash
@@ -19,6 +20,7 @@ module RideShare
       raise ArgumentError.new("Name must be a string of characters") if driver_hash[:name].class != String
       raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{driver_hash[:vin]})") if driver_hash[:vin].length != 17 || driver_hash[:vin] !~ /^[0-9A-Z]+$/
     end
+
 
     def self.all
       drivers = []
@@ -46,9 +48,18 @@ module RideShare
       #check to make sure the entries are valid, if they are not make decisions about how to handle them
     end
 
-    def self.find driver_id
+    def self.find driver_id #assumes all drivers have unique ids
       all_drivers = Driver.all
       return all_drivers.find { |driver| driver_id == driver.id}
+    end
+
+    def self.add_driver driver_hash
+      unless Driver.find driver_hash[:id]
+        new_driver = Driver.new(driver_hash)
+        CSV.open("support/drivers.csv", "a") do |line|
+          line << [ driver_hash[:id], driver_hash[:name], driver_hash[:vin] ]
+        end
+      end
     end
 
     def trips

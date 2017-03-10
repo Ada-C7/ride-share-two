@@ -38,7 +38,9 @@ describe "Drivers" do
     end
 
     it "gets everything in the csv" do
-       drivers.length.must_equal 101
+      length_check = CSV.readlines("support/drivers.csv").size
+       drivers.length.must_equal length_check-1 #to account for header row
+
     end
 
     it "gets the first item" do
@@ -46,7 +48,9 @@ describe "Drivers" do
     end
 
     it "gets the last item"  do
-        drivers.last.name.must_equal "Ramona Quimby"
+        last_name = drivers.last.name
+        check_csv = CSV.readlines("support/drivers.csv")
+        check_csv.last[1].must_equal last_name
     end
 
 
@@ -63,6 +67,24 @@ describe "Drivers" do
 
     end
   end
+
+  describe "add_driver" do
+    it "doesn't add a driver who is already in the file" do
+      driver1 = {id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9" }
+      RideShare::Driver.add_driver driver1
+      drivers.last.name.wont_equal "Bernardo Prosacco"
+    end
+  end
+
+    it "adds a new driver" do
+      driver_new = {id: 102, name: "Ada Lovelace", vin: "XF9Z0ST7X18WD41SS" }
+      RideShare::Driver.add_driver driver_new
+      drivers.last.name.must_equal "Ada Lovelace"
+    end
+
+    it "raises error if you try to add bad data" do
+      
+    end
 
   describe "find" do
 
