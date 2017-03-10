@@ -1,12 +1,13 @@
-# require 'csv'
-# require 'pry'
-#
-#
-#
-# module Rideshare; end
-#
-# require_relative 'driver'
-# require_relative 'rider'
-# require_relative 'trip'
-# # require_relative 'scratch'
-# require_relative 'missingiderror'
+require 'csv'
+require 'pry'
+
+
+
+
+module Rideshare; end
+require_relative './missingiderror'
+require_relative './driver'
+require_relative './trip'
+require_relative './rider'
+
+# require_relative 'scratch'
