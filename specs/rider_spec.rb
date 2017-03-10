@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe "Rider Class" do
+xdescribe "Rider Class" do
 
   describe "Instance Methods" do
 
@@ -63,7 +63,7 @@ describe "Rider Class" do
 
       it "returns message if no trips can be found" do
         skip
-      end 
+      end
 
 
     end #end of trips taken

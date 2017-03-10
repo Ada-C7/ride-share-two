@@ -2,10 +2,10 @@ require_relative 'spec_helper'
 
 describe "Trip Class" do
 
-  describe "Instance Methods" do
+  xdescribe "Instance Methods" do
 
 
-    describe "initialize method" do
+    xdescribe "initialize method" do
 
       let(:trip) { Carmmunity::Trip.new(
         trip_id: 1,
@@ -29,7 +29,7 @@ describe "Trip Class" do
       end
     end #end of initialize method
 
-    describe " find_rider method " do
+    xdescribe " find_rider method " do
 
       it " Returns a rider that exists " do
         trip = Carmmunity::Trip::all[342]
@@ -73,7 +73,7 @@ describe "Trip Class" do
 
 
 
-    describe " find_driver method " do
+    xdescribe " find_driver method " do
 
       it " Returns a driver that exists " do
 
@@ -130,7 +130,7 @@ describe "Trip Class" do
     let(:trip_data) {CSV.read("support/trips.csv")}
 
 
-    describe " self.all method " do
+    xdescribe " self.all method " do
 
       it " Trip.all returns array " do
 
@@ -182,62 +182,82 @@ describe "Trip Class" do
     end #end of self.all
 
 
-    describe " self.rider_trips(id) " do
+    xdescribe " self.rider_trips(id) " do
 
-      it "returns an array " do
-        Carmmunity::Trip::rider_trips(5).must_be_instance_of Array
-      end
-
-      # Is ther a situation where would find your selfing building a method to test your code. For example, checking to see if rider_trips(5) returns a trip that exists. We don't have a specific 'find trip' functionality. Would it be best practices to build this in the spec, or is this a red flag that something is missing in the program?
-
-      #   it " Returns a trip that exists " do
-      #   skip
-      #   rider_trips = Carmmunity::Trip::rider_trips(54)
-      #
-      #
-      #   rider_trips.must_include      "2016-04-05"
-      #   rider_trips.must_include      1
-      #   rider_trips.must_include      3
-      # end
-
-      it " Returns more than one trip " do
-
-        rider_trips = Carmmunity::Trip::rider_trips(54)
-
-        rider_trips.length.must_be    :>, 1
-
-      end
+      let(:rider_trips) {Carmmunity::Trip::rider_trips(54)}
 
 
-      it " Only accepts integers in seatch criteria " do
-        skip
-      end
+        it "returns an array " do
+          rider_trips.must_be_instance_of Array
+        end
 
-      it " Outputs message if Trip could not be found " do
-        skip
-      end
-    end #end of self.rider_trips
+        #Is ther a situation where would find your selfing building a method to test your code. For example, checking to see if rider_trips(5) returns a trip that exists. We don't have a specific 'find trip' functionality. Would it be best practices to build this in the spec, or is this a red flag that something is missing in the program?
+
+        it " Returns a trip that exists " do
+
+          trip = rider_trips.first
+
+          trip.rider_id.must_equal      54
+          trip.date.must_equal          "2016-04-05"
+          trip.rating.must_equal        3
+          trip.driver_id.must_equal     1
+          trip.trip_id.must_equal       1
+        end
+
+        it " Returns more than one trip " do
+
+          rider_trips.length.must_be    :>, 1
+        end
+
+        it "Returns the correct number of trips " do
+          rider_trips.length.must_equal 2
+        end
+
+
+        it " Only accepts integers in seatch criteria " do
+          skip
+        end
+
+        it " Outputs message if Trip could not be found " do
+          skip
+        end
+
+      end#end of self.rider_trips
 
 
     describe " self.driver_trips(id) " do
+      trips = Carmmunity::Trip::driver_trips(5)
 
       it "Returns an Array" do
-
-        trips = Carmmunity::Trip::driver_trips(5)
 
         trips.must_be_instance_of Array
 
       end
 
 
-      # it " Returns a driver that exists " do
-      #
-      #   trips = Carmmunity::Trip::driver_trips(5)
-      #   binding.pry
-      #   my_driver.driver_id.must_equal    5
-      #   my_driver.name.must_equal         "Verla Marquardt"
-      #   my_driver.vin.must_equal          "TAMLE35L3MAYRV1JD"
-      # end
+      it " Returns a trip that exists " do
+
+        trip = trips.first
+
+        trip.rider_id.must_equal      140
+        trip.date.must_equal          "2016-02-16"
+        trip.rating.must_equal        5
+        trip.driver_id.must_equal     5
+        trip.trip_id.must_equal       19
+
+      end
+
+      it " Returns more than one trip " do
+
+        trips.length.must_be    :>, 1
+      end
+
+      it "Returns the correct number of trips " do
+        
+        trips.length.must_equal 8
+      end
+
+
 
 
       it " Only accepts integers in seatch criteria " do
@@ -248,6 +268,5 @@ describe "Trip Class" do
         skip
       end
     end #end self.driver_trips
-
   end #end of class methods
 end
