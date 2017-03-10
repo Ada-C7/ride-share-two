@@ -253,11 +253,9 @@ describe "Trip Class" do
       end
 
       it "Returns the correct number of trips " do
-        
+
         trips.length.must_equal 8
       end
-
-
 
 
       it " Only accepts integers in seatch criteria " do
