@@ -2,7 +2,8 @@ require_relative '../lib/rider'
 require_relative './spec_helper.rb'
 
 describe "Rider" do
-  describe "Rider#Initialize" do
+
+  describe "Rider#initialize" do
 
     before do
       rider_info = {

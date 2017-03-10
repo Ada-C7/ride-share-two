@@ -7,7 +7,7 @@ describe "Trip" do
   # trip_id,driver_id,rider_id,date,rating
   # 12,12,237,2016-08-21,1
 
-  describe "Trip#Initialize" do
+  describe "Trip#initialize" do
     before do
       trip_info = {
         id: 12,
@@ -196,17 +196,28 @@ describe "Trip" do
 
 ##### NEED TO WRITE THESE SPECS #########
 # these methods are really hard to test because you need
-# call a bunch of methods before hand ... 
+# call a bunch of methods before you can call this one
+# this is because this program's classes are extermely highly depend on each other
+# it would be easier to test these methods in the other classes...
+  let(:trips) { RideShare::Trip.all }
+
   describe "Trip#get_driver" do
 
     it "returns a driver instance" do
-
+      trips.each do |trip|
+        driver = trip.get_driver
+        driver.must_be_instance_of RideShare::Driver unless driver.nil?
+      end
     end
-
   end
 
   describe "Trip#get_rider" do
 
+    it "returns a rider instance" do
+      trips.each do |trip|
+        rider = trip.get_rider
+        rider.must_be_instance_of RideShare::Rider unless rider.nil?
+      end
+    end
   end
-
 end
