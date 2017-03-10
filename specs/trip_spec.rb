@@ -30,22 +30,24 @@ describe "Class Methods for Trip " do
      Rideshare::Trip.create_trips["1"].class.must_equal Rideshare::Trip
      Rideshare::Trip.create_trips.length.must_equal 600
    end
-   #tests that you can generate all of a given driver's trips
+   #tests that you can generate all osf a given driver's trips
    it "can generate all trips for a specific driver_id" do
-     array = Rideshare::Trip.find_driver(1).keys
+     array = Rideshare::Trip.find_by_driver(1).keys
      Rideshare::Trip.find_driver(1)[array[0]].class.must_equal Rideshare::Trip
 
    end
    #tests that you can generate all of a given rider's trips
    it "can generate all trips for a specific driver_id" do
-     array = Rideshare::Trip.find_rider(1).keys
-     Rideshare::Trip.find_rider(1)[array[0]].class.must_equal Rideshare::Trip
+     array = Rideshare::Trip.find_by_rider(1).keys
+     Rideshare::Trip.find_by_rider(1)[array[0]].class.must_equal Rideshare::Trip
+   end
+   it "returns a message if the rider has not used the service" do
+     proc {
+       Rideshare::Trip.find_by_rider(340).must_equal}.must_output (/.+/)
+       puts Rideshare::Trip.find_by_rider(340)
 
    end
  end
-#
-# describe "Tests instance methods for Driver " do
-#   let(:my_driver) {Rideshare::Driver.new}
-#    #tests that you can call the associated driver from a trip object
-#    #tests that you can call the associated driver from a trip object
-#  end
+
+ describe "Instance Methods for Trip" do
+ end
