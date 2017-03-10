@@ -43,7 +43,7 @@ describe "Class Methods for Trip " do
    end
    it "returns a message if the rider has not used the service" do
      proc {
-       Rideshare::Trip.find_by_rider(340).must_equal}.must_output (/.+/)
+       Rideshare::Trip.find_by_rider(340).must_equal}.raise StandardError
        puts Rideshare::Trip.find_by_rider(340)
 
    end

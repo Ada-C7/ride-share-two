@@ -1,9 +1,9 @@
 require 'csv'
 require 'pry'
 
-require_relative 'trip'
-
-require_relative 'rider'
+# require_relative 'trip'
+# require_relative 'missingiderror'
+# require_relative 'rider'
 #
 module Rideshare
   class Driver
@@ -29,6 +29,7 @@ module Rideshare
       CSV.foreach('support/drivers.csv', {:headers=> true}) do |row|
         array <<  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s
       end
+      raise MissingIdError.new("That driver does not exist in our service") if array.length < 1
       return array
     end
 
@@ -43,8 +44,3 @@ module Rideshare
     end
   end
 end
-#
-trip =  Rideshare::Driver.find_driver(1)
-# puts trip.inspect
-
-puts trip[0].driver_rating

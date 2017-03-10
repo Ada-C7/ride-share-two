@@ -2,7 +2,7 @@ require 'csv'
 require 'pry'
 
 # require_relative 'driver'
-require_relative 'trip'
+# require_relative 'trip'
 module Rideshare
   #
   class Rider
@@ -31,7 +31,7 @@ module Rideshare
         return  Rider.new({rider_id:row[0], name:row[1], phone_num:row[2]}) if row[0] == param.to_s
       end
     end
-    
+
   end
 end
 #

@@ -1,5 +1,5 @@
 require 'csv'
-require 'pry'
+# require 'pry'
 
 
 
@@ -13,6 +13,10 @@ module Rideshare
       @rider_id = trip_hash[:rider_id]
       @date = trip_hash[:date]
       @rating = trip_hash[:rating]
+      raise StandardError.new("That is an invalid driver id") if @driver_id.to_i > 100 || @driver_id.to_i < 0
+      raise StandardError.new("That is an invalid rating") if @rating.to_i > 5 || @rating.to_i < 1
+      raise StandardError.new("That is an invalid rider id") if @rider_id.to_i > 300 || @rider_id.to_i < 0
+
     end
 
     def self.create_trips
@@ -32,26 +36,27 @@ module Rideshare
 
     def self.find_by_rider(param)
       array = Trip.create_trips.select{| value| value.rider_id== param.to_s}
+    raise StandardError.new("That is an invalid rating") if array.length < 1
 
-      value = "That Rider has not used the service" if array.length < 0
-      value = array if array.length > 0
       # array =[]
       # CSV.foreach('support/trips.csv', {:headers=> true, :header_converters => :symbol}) do |row|
       # array << Trip.new({trip_id:row[0], driver_id:row[1], rider_id:row[2],date:row[3], rating:row[4]}) if row[2] == param.to_s
       # end
       return array
+
     end
 
 
 
     def make_driver
     #helper method to extract driver_id from trip object
-      Rideshare::Driver.find_driver(Trip.driver_id)
+      Driver.find_driver(Trip.driver_id)
     end
 
     def make_rider
     #helper method to extract driver_id from trip object
-      Rideshare::Rider.find_rider(Trip.rider_id)
+      Rider.find_rider(Trip.rider_id)
+
     end
   end
 end
@@ -61,7 +66,8 @@ end
 # puts Rideshare::Trip.create_trips[0].make_rider
 # puts Rideshare::Trip.create_trips[0].make_driver
 # puts Rideshare::Trip.find_by_driver(17)
-# puts Rideshare::Trip.find_by_rider(300)
+puts Rideshare::Trip.find_by_driver(102)
+# puts Rideshare::Trip.find_by_rider(290)
 #
 # #
 #
