@@ -7,18 +7,18 @@ describe "RideShare::Trip" do
 
   describe "Trip#initialize" do
     let(:trip13) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5" }) }
-    let(:trip_no_date) { RideShare::Trip.new({ id: 13, driver_id: 83,rider_id: 298, rating: 5 }) }
+    let(:trip_no_date) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", rating: "5" }) }
 
     it "creates a new instance of trip" do
       trip13.must_be_instance_of RideShare::Trip
     end
 
     it "passes in values correctly" do
-      trip13.id.must_equal "13"
-      trip13.driver_id.must_equal "83"
-      trip13.rider_id.must_equal "298"
+      trip13.id.must_equal 13
+      trip13.driver_id.must_equal 83
+      trip13.rider_id.must_equal 298
       trip13.date.must_equal "2015-05-27"
-      trip13.rating.must_equal "5"
+      trip13.rating.must_equal 5
     end
 
     it "can create a new trip with a missing date" do
@@ -43,20 +43,20 @@ describe "RideShare::Trip" do
 
     it "correctly reads in the first row of the CSV file" do
       # last row of data: 1,1,54,2016-04-05,3
-      all_trips[0].id.must_equal "1"
-      all_trips[0].driver_id.must_equal "1"
-      all_trips[0].rider_id.must_equal "54"
+      all_trips[0].id.must_equal 1
+      all_trips[0].driver_id.must_equal 1
+      all_trips[0].rider_id.must_equal 54
       all_trips[0].date.must_equal "2016-04-05"
-      all_trips[0].rating.must_equal "3"
+      all_trips[0].rating.must_equal 3
     end
 
     it "correctly reads in the last row of the CSV file" do
       # last row of data: (600,61,168,2016-04-25,3)
-      all_trips[-1].id.must_equal "600"
-      all_trips[-1].driver_id.must_equal "61"
-      all_trips[-1].rider_id.must_equal "168"
+      all_trips[-1].id.must_equal 600
+      all_trips[-1].driver_id.must_equal 61
+      all_trips[-1].rider_id.must_equal 168
       all_trips[-1].date.must_equal "2016-04-25"
-      all_trips[-1].rating.must_equal "3"
+      all_trips[-1].rating.must_equal 3
     end
   end
 
@@ -71,14 +71,6 @@ describe "RideShare::Trip" do
     it "each returned element is a trip instances" do
       by_rider54.each { |element| element.must_be_instance_of RideShare::Trip }
     end
-
-    # it "each returned trip has the expected associated Rider" do
-    # skip
-    #   RideShare::Trip.all
-    #   rider_id = 54
-    #   rider_trips = RideShare::Trip.by_rider(rider_id)
-    #   rider_trips.each { |element| element.rider_id.must_equal rider_id }
-    # end
   end
 
   describe "Trip#by_driver(driver_id)" do
@@ -113,7 +105,7 @@ describe "RideShare::Trip" do
     end
 
     it "returns correct instance of driver by driver_id" do
-      find_driver83.must_equal RideShare::Driver.find("83")
+      find_driver83.must_equal RideShare::Driver.find(83)
     end
   end
 
@@ -126,7 +118,7 @@ describe "RideShare::Trip" do
     end
 
     it "returns correct instance of Rider by Rider_id" do
-      find_rider298.must_equal RideShare::Rider.find("298")
+      find_rider298.must_equal RideShare::Rider.find(298)
     end
   end
 end

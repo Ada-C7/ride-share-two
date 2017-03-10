@@ -7,11 +7,11 @@ module RideShare
 
     # take in id, driver_id, rider_id, date, rating as a hash
     def initialize(trip_info={})
-      @id = trip_info[:id]
-      @driver_id = trip_info[:driver_id]
-      @rider_id = trip_info[:rider_id]
+      @id = trip_info[:id].to_i
+      @driver_id = trip_info[:driver_id].to_i
+      @rider_id = trip_info[:rider_id].to_i
       @date = trip_info[:date]
-      @rating = trip_info[:rating]
+      @rating = trip_info[:rating].to_f
     end
 
     # class method: all

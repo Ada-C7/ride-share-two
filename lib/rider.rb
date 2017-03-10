@@ -4,7 +4,7 @@ module RideShare
     attr_reader :id, :name, :phone_number
     # create new rider and take in id, name, and phone
     def initialize(rider_info={})
-      @id = rider_info[:id]
+      @id = rider_info[:id].to_i
       @name = rider_info[:name]
       @phone_number = rider_info[:phone_number]
     end

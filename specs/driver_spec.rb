@@ -14,12 +14,10 @@ describe "RideShare::Driver" do
 
     it "passes in driver data correctly" do
       #9,Simone Hackett,4RA34A5K3YPN8H5P4
-      driver9.id.must_equal "9"
+      driver9.id.must_equal 9
       driver9.name.must_equal "Simone Hackett"
       driver9.vin.must_equal "4RA34A5K3YPN8H5P4"
     end
-
-    # expect that arg read in by the symbol
 
     it "throws an ArgumentError if the vin is invalid" do
       proc {
@@ -49,14 +47,14 @@ describe "RideShare::Driver" do
 
     it "correctly reads in the first row of the CSV file" do
       # last row of data: 1,Bernardo Prosacco,WBWSS52P9NEYLVDE9
-      all_drivers[0].id.must_equal "1"
+      all_drivers[0].id.must_equal 1
       all_drivers[0].name.must_equal "Bernardo Prosacco"
       all_drivers[0].vin.must_equal "WBWSS52P9NEYLVDE9"
     end
 
     it "correctly reads in the last row of the CSV file" do
       # last row of data: 100,Minnie Dach,XF9Z0ST7X18WD41HT
-      all_drivers[-1].id.must_equal "100"
+      all_drivers[-1].id.must_equal 100
       all_drivers[-1].name.must_equal "Minnie Dach"
       all_drivers[-1].vin.must_equal "XF9Z0ST7X18WD41HT"
     end
@@ -64,18 +62,14 @@ describe "RideShare::Driver" do
 
   describe "Driver#find" do
     before { all_drivers }
-    let(:driver_found) { RideShare::Driver.find("31") }
+    let(:driver_found) { RideShare::Driver.find(31) }
 
     it "return value is a Driver instance" do
       driver_found.must_be_instance_of RideShare::Driver
     end
 
-    # it "displays a message if the Driver is not found" do
-    #   @no_driver = RideShare::Driver.find("9999")
-    # end
-
     it "finds the correct instance of Driver" do
-      driver_found.id.must_equal "31"
+      driver_found.id.must_equal 31
       driver_found.name.must_equal "Sheila VonRueden"
       driver_found.vin.must_equal "KPH9RLSZ9YKNVMGH2"
     end
@@ -94,7 +88,7 @@ describe "RideShare::Driver" do
     end
 
     it "last element is a Trip associated with the expected driver" do
-      driver9_trips[-1].driver_id.must_equal "9"
+      driver9_trips[-1].driver_id.must_equal 9
     end
   end
 
@@ -110,12 +104,5 @@ describe "RideShare::Driver" do
       driver9_avg.must_be :<=, 5
       driver9_avg.must_be :>=, 0
     end
-
-    # it "last Driver is associated with the Rider through a Trip" do
-    # skip
-    #   RideShare::Trip.all
-    #   driver = RideShare::Driver.new({id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4"})
-    #   # find out how to test this
-    # end
   end
 end

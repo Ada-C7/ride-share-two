@@ -6,7 +6,7 @@ module RideShare
     attr_reader :id, :name, :vin
     # create new driver and take in id, name, vin
     def initialize(driver_info={})
-      @id = driver_info[:id]
+      @id = driver_info[:id].to_i
       @name = driver_info[:name]
       unless (driver_info[:vin] == nil || driver_info[:vin].length == 17)
         raise ArgumentError.new("vin is invalid")
@@ -20,7 +20,7 @@ module RideShare
     end
 
     def avg_rating
-      ratings = trips.map {|trip| trip.rating.to_i }
+      ratings = trips.map {|trip| trip.rating }
       average = ratings.inject(:+)/ratings.length
       return average.round(2)
       # return rounded average rating across all trips by this driver
@@ -42,7 +42,10 @@ module RideShare
 
     def self.find(driver_id)
       found_driver = @all_drivers.select { |instance| instance.id == driver_id }
-      puts "driver not found" if found_driver == []
+      # if found_driver == []
+      #   raise NoDriverError.new("No driver with matching ID exists!")
+      # rescue NoDriverError
+      # end
       return found_driver[0]
       # return specific instance of driver (previously instantiated)
     end
