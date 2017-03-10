@@ -2,6 +2,8 @@ require_relative 'spec_helper.rb'
 
 describe 'Trip Class Properties' do
   let(:my_trip){Rideshare::Trip.new({trip_id:"5", driver_id:"32", rider_id:"34",date:"05-29-2017", rating:"5"})}
+
+
 #tests that driver class initalizes
   it 'will find trip class' do
     my_trip.class.must_equal Rideshare::Trip
@@ -14,9 +16,21 @@ describe 'Trip Class Properties' do
   it "user can call Trip.rider_id" do
     my_trip.rider_id.must_equal "34"
   end
+
+  it "returns an error if the rider has not used the service" do
+    proc {
+      Rideshare::Trip.new({trip_id:"5", driver_id:"98", rider_id:"304",date:"05-29-2017", rating:"5"}).must_raise StandardError
+    }
+  end
   #tests that the driver id instance variable is exposed
   it "user can call Trip.driver_id" do
     my_trip.driver_id.must_equal "32"
+  end
+
+  it "returns an error if the driver has not used the service" do
+    proc {
+      Rideshare::Trip.new({trip_id:"5", driver_id:"198", rider_id:"298",date:"05-29-2017", rating:"5"}).must_raise StandardError
+    }
   end
   #tests that the rating instance variable is exposed
   it "user can call Trip.rating" do
@@ -41,11 +55,10 @@ describe "Class Methods for Trip " do
      array = Rideshare::Trip.find_by_rider(1).keys
      Rideshare::Trip.find_by_rider(1)[array[0]].class.must_equal Rideshare::Trip
    end
-   it "returns a message if the rider has not used the service" do
+   it "returns an error if the rider has not used the service" do
      proc {
        Rideshare::Trip.find_by_rider(340).must_equal}.raise StandardError
        puts Rideshare::Trip.find_by_rider(340)
-
    end
  end
 
