@@ -241,7 +241,7 @@ describe "Trip.all" do
 
     it "raises error for invalid rating" do
       proc {
-        RideShare::Trip.new("1", "1", "54", "2016-04-05", "0")
+        RideShare::Trip.new("1", "1", "54", "2016-04-05", "55")
       }.must_raise ArgumentError
     end
 

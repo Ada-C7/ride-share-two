@@ -23,7 +23,7 @@ module RideShare
         rescue ArgumentError
           #this will only apply if csv has errors
           drivers_array << (Driver.new(driver[0], driver[1], nil))
-          puts "Vin is not 17 characters"
+          puts "Vin for driver #{id} is not valid"
         end
       end
       drivers_array
@@ -41,14 +41,13 @@ module RideShare
       #RETURN ARRAY OF TRIPS
     end
 
+    #instance method - retrieve an average rating for that driver based on all trips taken
     def average_rating
       driver_id = id
       trips_array = RideShare::Trip.find_by_driver(driver_id)
       trips_array.collect! { |trip| trip.rating.to_f }
       total = trips_array.reduce(:+)/trips_array.length
       total.round(2)
-      #instance method - retrieve an average rating for that driver based on all trips taken
-      # call trips
     end
 
     #private
@@ -57,7 +56,7 @@ module RideShare
       if vin == nil || vin.length == 17
         return vin
       else
-        raise ArgumentError.new("VIN must be 17 characters")
+        raise InvalidVinError.new("VIN must be 17 characters")
       end
     end
 

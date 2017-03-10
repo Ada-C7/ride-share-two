@@ -80,8 +80,8 @@ describe "Exception for bad vins" do
     :vin => "1BADVIN11"
     }
     proc {
-      @driver_array << RideShare::Driver.new(args)
-    }.must_raise ArgumentError
+      RideShare::Driver.new(args)
+    }.must_raise InvalidVinError
   end
 end
 

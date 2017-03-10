@@ -102,7 +102,7 @@ describe "rider.trips" do
 
   before do
     args = {
-    :id => 1,
+    :id => "1",
     :name => "Nina Hintz Sr.",
     :phone_num => "560.815.3059"
     }
@@ -114,16 +114,15 @@ describe "rider.trips" do
   end
 
   it "returns and array with correct rider id" do
-    @rider.trips.each do |trip|
-      trip.rider_id.must_equal @rider.id
-    end
+    array = @rider.trips
+    array[0].rider_id.must_equal "1"
   end
 
   describe "rider.drivers" do
 
     before do
       args = {
-      :id => 1,
+      :id => "1",
       :name => "Nina Hintz Sr.",
       :phone_num => "560.815.3059"
       }
@@ -135,9 +134,10 @@ describe "rider.trips" do
     end
 
     it "returns an Array of driver instances" do
-      @rider.drivers.each do |driver|
+      array = @rider.drivers
+      array.each do |driver|
         driver.must_be_instance_of RideShare::Driver
       end
-    end
+     end
   end
 end

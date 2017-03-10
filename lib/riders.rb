@@ -34,11 +34,10 @@ module RideShare
       riders_array.find { |rider| id == rider.id }
     end
 
+    #retrieve the list of trip instances
+    #that only this rider has taken
     def trips
-      rider_id = id
-      RideShare::Trip.find_by_rider(rider_id)
-      #retrieve the list of trip instances
-      #that only this rider has taken
+      RideShare::Trip.find_by_rider(id)
     end
 
     #retrieve the list of all
@@ -47,7 +46,7 @@ module RideShare
     def drivers
       rider_trips = trips
       rider_trips.collect! { |trip| trip.find_driver }
-      return rider_trips.uniq { |driver| driver.id }
+      rider_trips.uniq { |driver| driver.id }
     end
   end
 end
