@@ -1,7 +1,7 @@
 
 require_relative 'spec_helper'
 
-# describe "Trip" do
+describe "Trip" do
 
   # before do
   #   @name
@@ -14,7 +14,6 @@ require_relative 'spec_helper'
     it "returns an array" do
       all_trips = Trip.all
       all_trips.must_be_instance_of Array
-
     end
 
     it "all elements of array should be trips" do
@@ -41,8 +40,7 @@ require_relative 'spec_helper'
       mid_trip = all_trips[299]
       mid_trip.driver_id.must_equal "90"
     end
-end
-
+  end
 
   describe "self.find" do
     it "Should return an instance of trip" do
@@ -50,8 +48,8 @@ end
       my_trip.must_be_instance_of Trip
     end
   end
-#
-# #   it "Raises ArgumentError if id is not found." do
-# #     proc { Trip.find(602) }.must_raise ArgumentError
-# #   end
-# end
+  #
+  #  it "Raises ArgumentError if id is not found." do
+  #    proc { find_trip = Trip.find(602) }.must_raise ArgumentError
+  #   end
+   end
