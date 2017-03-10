@@ -32,7 +32,7 @@ module RideShare
 
     def self.find(driver_id)
       # find a specific driver using their numeric ID
-      self.create_all_drivers[driver_id]
+      self.create_all_drivers[driver_id-1]
     end
 
     def trips

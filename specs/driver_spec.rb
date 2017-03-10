@@ -50,11 +50,21 @@ describe "Driver" do
     end
 
     it "returns the first driver" do
-      skip
+      driver = RideShare::Driver.find(1)
+
+      driver.must_be_instance_of RideShare::Driver
+      driver.driver_id.must_equal 1
+      driver.name.must_equal "Bernardo Prosacco"
+      driver.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
 
     it "returns the last driver" do
-      skip
+      driver = RideShare::Driver.find(100)
+
+      driver.must_be_instance_of RideShare::Driver
+      driver.driver_id.must_equal 100
+      driver.name.must_equal "Minnie Dach"
+      driver.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 
   end
