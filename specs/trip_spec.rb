@@ -52,8 +52,8 @@ describe "Class Methods for Trip " do
    end
    #tests that you can generate all of a given rider's trips
    it "can generate all trips for a specific driver_id" do
-     array = Rideshare::Trip.find_by_rider(1).keys
-     Rideshare::Trip.find_by_rider(1)[array[0]].class.must_equal Rideshare::Trip
+     array = Rideshare::Trip.find_by_rider(1)
+     array[0].class.must_equal Rideshare::Trip
    end
    it "returns an error if the rider has not used the service" do
      proc {
@@ -63,4 +63,9 @@ describe "Class Methods for Trip " do
  end
 
  describe "Instance Methods for Trip" do
+   let(:driver12) {Rideshare::Trip.find_by_driver(12)}
+   it "retrives driver object from driver id on trip file" do
+     driver = driver12[0].make_driver
+     driver(@driver_id).must_equal "12"
+   end
  end

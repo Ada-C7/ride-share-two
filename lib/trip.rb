@@ -36,7 +36,7 @@ module Rideshare
 
     def self.find_by_rider(param)
       array = Trip.create_trips.select{| value| value.rider_id== param.to_s}
-    raise StandardError.new("That is an invalid rating") if array.length < 1
+      raise StandardError.new("That is an invalid rating") if array.length < 1
 
       # array =[]
       # CSV.foreach('support/trips.csv', {:headers=> true, :header_converters => :symbol}) do |row|
