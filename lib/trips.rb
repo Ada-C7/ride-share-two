@@ -48,26 +48,39 @@ module RideShare
       trip_array.find { |trip| id == trip.trip_id }
     end
 
-    #class method - find all trip instances for a given Rider ID
+    # #class method - find all trip instances for a given Rider ID
+    # def self.find_by_rider(rider_id)
+    #   some_array = []
+    #   trip_array = self.all
+    #   trip_array.each do |trip|
+    #     if rider_id == trip.rider_id
+    #       some_array << trip
+    #     end
+    #   end
+    #   return some_array
+    # end
+
+
     def self.find_by_rider(rider_id)
-      some_array = []
       trip_array = self.all
-      trip_array.find_all {|trip| rider_id == trip.rider_id }
-        end
-      end
-      return some_array
+      trip_array.find_all { |trip| rider_id == trip.rider_id }
     end
 
     #class method - find all trip instances for a given Driver ID
+    # def self.find_by_driver(driver_id)
+    #   some_array = []
+    #   trip_array = self.all
+    #   trip_array.each do |trip|
+    #     if driver_id == trip.driver_id
+    #       some_array << trip
+    #     end
+    #   end
+    #   return some_array
+    # end
+
     def self.find_by_driver(driver_id)
-      some_array = []
       trip_array = self.all
-      trip_array.each do |trip|
-        if driver_id == trip.driver_id
-          some_array << trip
-        end
-      end
-      return some_array
+      trip_array.find_all { |trip| driver_id == trip.driver_id }
     end
 
     #instance method retrieve the associated driver instance through the driver ID
