@@ -2,58 +2,72 @@ require_relative 'spec_helper'
 
 xdescribe "Rider Class" do
 
-  let(:ada) { Carmmunity::Rider.new(name: 'Ada', rider_id: 2, phone_number: "909-555-1234" )}
-
   describe "Instance Methods" do
+
     describe "initialize method" do
 
+      let(:driver_test) { Carmmunity::Rider.new(
+                name:   'Ada',
+            rider_id:   22,
+        phone_number:   '909-555-1234' )}
+
       it "Instantiates a new instance of Rider class" do
-        ada.must_be_instance_of Carmmunity::Rider
+        driver_test.must_be_instance_of     Carmmunity::Rider
       end
 
-      it "Stored data must match what was passed as an argument" do
+      it "Rider data matches " do
 
-        ada.name.must_equal "Ada"
-        ada.rider_id.must_equal 2
-        ada.phone_number.must_equal '909-555-1234'
+        driver_test.name.must_equal             "Ada"
+        driver_test.rider_id.must_equal         22
+        driver_test.phone_number.must_equal     '909-555-1234'
       end
     end #end of initialze method
 
 
-    xdescribe "trips_taken" do
+    describe "trips_taken" do
+
+      let(:rider) {Carmmunity::Rider::find(5)}
+      let(:trips) {rider.trips_taken}
 
       it "Trips taken must be an array" do
-        skip
-        ada.trips_taken.must_be_instance_of Array
+        rider.trips_taken.must_be_instance_of Array
       end
 
-      it "The driver id number matches the driver id in the trip information" do
-        skip
+      it "The rider id number matches the rider id in the trip information" do
+
+        trips.map{|trip| trip.rider_id}.must_include  rider.rider_id
+
       end
 
       it "Returns the correct number of trips taken " do
         skip
       end
 
-      it "Returns the correct trip infromation" do
-        skip
-      end
+      it "Returns correct trip infromation" do
 
+      trip = trips.first
+
+      trip.driver_id.must_equal     12
+      trip.rating.must_equal        1
+      trip.rider_id.must_equal      5
+      trip.trip_id.must_equal       551
+      trip.date.must_equal          "2016-12-09"
+      end
 
     end #end of trips taken
 
-    xdescribe "previous_drivers method" do
+    xdescribe "previous_riders method" do
 
 
       it " Returns an array " do
         skip
       end
 
-      it "returns a previous_driver" do
+      it "returns a previous_rider" do
         skip
       end
 
-      it "returns a the correct number of drivers" do
+      it "returns a the correct number of riders" do
         skip
       end
 
@@ -61,7 +75,7 @@ xdescribe "Rider Class" do
         skip
       end
 
-    end #end of previous_drivers
+    end #end of previous_riders
   end #end of instance methods
 
 
@@ -136,7 +150,7 @@ xdescribe "Rider Class" do
       end
 
 
-      it " Can find the last driver in the CSV file " do
+      it " Can find the last rider in the CSV file " do
 
         my_rider = Carmmunity::Rider::find(300)
 
@@ -145,7 +159,7 @@ xdescribe "Rider Class" do
         my_rider.rider_id.must_equal my_riders.last.rider_id
       end
 
-      it " Can find the First driver in the CSV file " do
+      it " Can find the First rider in the CSV file " do
 
         my_rider = Carmmunity::Rider::find(1)
 

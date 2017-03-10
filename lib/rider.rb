@@ -13,44 +13,34 @@ module Carmmunity
     end
 
     def trips_taken
-      trips = Carmmunity::Trip.find(@rider_id)
+      trips = Trip.rider_trips(@rider_id)
       return trips
     end
 
 
     def previous_drivers
-
-      my_trips = trips_taken
-
-      my_drivers_ids = my_trips.driver_id.map
-
-      drivers = my_drivers_ids.map { |id| Carmmunity::Trip.find(id) }
-
+      drivers = trips_taken.driver_ids.map { |id| Trip.find(id) }
       return drivers
     end
 
 
-  def self.find(id)
+    def self.find(id)
 
-    #@@riders.find do |rider|
-    all_riders = self.all
+      self.all.select do |rider|
 
-    all_riders.find do |rider|
-
-      if rider.rider_id == id
-        return rider
+        return rider if rider.rider_id == id
       end
-    end
-
-    raise ArgumentError.new "#{id} returned no results"
-  end #end self.find
+      raise ArgumentError.new "#{id} returned no results"
+    end #end self.find
 
 
 
     def self.all
 
-      #if @@riders.length == 0
-      riders = []
+      @@riders = []
+
+      if @@riders.length == 0
+
 
         CSV.read("support/riders.csv").each do |row|
           rider = {
@@ -59,13 +49,12 @@ module Carmmunity
             phone_number: row[2]
           }
 
-          riders << Carmmunity::Rider.new(rider)
-          #@@riders << Carmmunity::Rider.new(rider)
-
+          @@riders << Carmmunity::Rider.new(rider)
         end
-      #end
-      return riders#@@riders
-    end #
+      end
+
+      return @@riders
+    end #end of self.all
 
   end #end of class
 end #end of module
