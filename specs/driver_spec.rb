@@ -7,6 +7,7 @@ describe "driver: self.all" do
     # TODO: update to let()
     @driver = RideShare::Driver.all
   end
+
   it "retrieves an array" do
     @driver.must_be_instance_of Array
   end
@@ -26,11 +27,14 @@ describe "driver: self.all" do
 
   it "retrieves the first and last driver_id" do
     # skip
-    # TODO: Fix object calling issue.
-
-    @driver[0][0].must_equal "1"
-    @driver[99][0].must_equal "100"
+    # FIXME: Fix object calling issue.
+    
+    @driver[0].driver_id.must_equal "1"
+    @driver[99].driver_id.must_equal "100"
   end
+
+  # TODO: Edgecase and 'middle' case test
+
 
   it "verifies all vin length" do
     # skip
@@ -40,6 +44,9 @@ describe "driver: self.all" do
       counter += 1
     end
   end
-
   # TODO: Edgecase and 'middle' case test
+end
+
+describe "driver: self.find" do
+
 end
