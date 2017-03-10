@@ -41,11 +41,8 @@ class Driver
 
   def trips
     driver_trips = []
-    Trip.all.each do |trip|
-      if trip.driver == @id
-        driver_trips << trip
-      end
-    end
+    Trip.all.map { |trip| driver_trips << trip if trip.driver == @id }
+        
     return driver_trips
   end
 

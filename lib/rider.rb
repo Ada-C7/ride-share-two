@@ -60,21 +60,31 @@ class Rider
   end
 
   def drivers
-    rider_driver_ids = []
-    trips.each do |trip|
-      rider_driver_ids << trip.driver
-    end
+    drivers = {}
 
-    rider_driver_ids = rider_driver_ids.uniq
+    trips.map { |trip| drivers[trip.driver] = 1 }
 
-    rider_drivers = []
-    Driver.all.each do |driver|
-      if rider_driver_ids.include?(driver.id)
-        rider_drivers << driver
-      end
+    drivers.each { |id, value| drivers[id] = Driver.find(id) }
 
-    end
-    return rider_drivers
+    return drivers.values
+
+    #original code I wrote before... Haley the tutor helped me refactor code using a hash
+
+    # rider_driver_ids = []
+    # trips.each do |trip|
+    #   rider_driver_ids << trip.driver
+    # end
+    #
+    # rider_driver_ids = rider_driver_ids.uniq
+    #
+    # rider_drivers = []
+    # Driver.all.each do |driver|
+    #   if rider_driver_ids.include?(driver.id)
+    #     rider_drivers << driver
+    #   end
+    #
+    # end
+    # return rider_drivers
 
   end
 
