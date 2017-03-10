@@ -12,13 +12,15 @@ module RideShare
 
     # this is highly coupled - creating a very strong dependency
     # between Driver and Trip - can we say intentially coupled?
-    # also it is isolated
+    # only plus about this is it is isolated
     def get_trips()
       RideShare::Trip.find_by_driver(@id)
     end
 
+    # should I give this method an argument of trips
     # argument: trips is return of get_trips
-    def calculate_average_rating(trips)
+    def calculate_average_rating()
+      trips = get_trips
       ratings = trips.map { |trip| trip.rating }
       average = (ratings.sum.to_f) / (ratings.length.to_f)
     end
@@ -68,22 +70,22 @@ module RideShare
   end
 end
 #
-driver_info = {
-  id: 75,
-  name: 'Cynthia',
-  vin: 'WBWSS52P9NEYLVDE9'
-}
-
-# testing average the old school way
-trips_raw = [
-  ['1', '175', '20', '1-2-17','3'],
-  ['2', '175', '21', '1-3-17','4'],
-  ['3', '175', '22', '1-4-17','5'],
-  ['4', '175', '23', '1-5-17','3'],
-  ['5', '175', '24', '1-6-17','3'],
-  ['6', '175', '25', '1-7-17','4']
-]
-
-trips = RideShare::Trip.all(trips_raw)
-driver = RideShare::Driver.new(driver_info)
-p driver.calculate_average_rating(trips)
+# driver_info = {
+#   id: 75,
+#   name: 'Cynthia',
+#   vin: 'WBWSS52P9NEYLVDE9'
+# }
+#
+# # testing average the old school way
+# trips_raw = [
+#   ['1', '175', '20', '1-2-17','3'],
+#   ['2', '175', '21', '1-3-17','4'],
+#   ['3', '175', '22', '1-4-17','5'],
+#   ['4', '175', '23', '1-5-17','3'],
+#   ['5', '175', '24', '1-6-17','3'],
+#   ['6', '175', '25', '1-7-17','4']
+# ]
+#
+# trips = RideShare::Trip.all(trips_raw)
+# driver = RideShare::Driver.new(driver_info)
+# p driver.calculate_average_rating(trips)

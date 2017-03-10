@@ -45,9 +45,9 @@ module RideShare
     def self.all(trips_data = nil)
 
       if trips_data.nil?
-       trip_data = FileData.new("./support/trips.csv")
-       trips_data = trip_data.read_csv_and_remove_headings
-     end
+        trip_data = FileData.new("./support/trips.csv")
+        trips_data = trip_data.read_csv_and_remove_headings
+      end
 
       raise ArgumentError if trips_data.empty?
 

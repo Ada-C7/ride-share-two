@@ -138,7 +138,7 @@ describe "Driver" do
 # or you should make up fake data so you know everything...
 
   before do
-    @driver_id = 15
+    @driver_id = 21
   end
 
   let(:driver) { RideShare::Driver.find(@driver_id) }
@@ -157,37 +157,43 @@ describe "Driver" do
 
   describe "Driver#calculate_average_rating" do
 
-    before do
-      trips_data = [
-                    ['900', '175', '920', '1-2-17','3'],
-                    ['902', '175', '921', '1-3-17','4'],
-                    ['903', '175', '922', '1-4-17','5'],
-                    ['904', '175', '923', '1-5-17','3'],
-                    ['905', '175', '924', '1-6-17','3'],
-                    ['906', '175', '925', '1-7-17','4']
-                   ]
-      @trips = RideShare::Trip.all(trips_data)
-
-      @driver_info = {
-        id: 175,
-        name: 'Cynthia',
-        vin: 'WBWSS52P9NEYLVDE9'
-      }
-    end
-
-    let(:driver2) {RideShare::Driver.new(@driver_info)}
+    # before do
+    #   trips_data = [
+    #                 ['900', '175', '920', '1-2-17','3'],
+    #                 ['902', '175', '921', '1-3-17','4'],
+    #                 ['903', '175', '922', '1-4-17','5'],
+    #                 ['904', '175', '923', '1-5-17','3'],
+    #                 ['905', '175', '924', '1-6-17','3'],
+    #                 ['906', '175', '925', '1-7-17','4']
+    #                ]
+    #   @trips = RideShare::Trip.all(trips_data)
+    #
+    #   @driver_info = {
+    #     id: 175,
+    #     name: 'Cynthia',
+    #     vin: 'WBWSS52P9NEYLVDE9'
+    #   }
+    # end
+    #
+    # let(:driver2) {RideShare::Driver.new(@driver_info)}
 
     it "returns an number between 1 and 5" do
-      trips = driver.get_trips
-      driver.calculate_average_rating(trips).must_be :>=, 1
-      driver.calculate_average_rating(trips).must_be :<=, 5
-      driver.calculate_average_rating(trips).must_be_instance_of Float
+      # trips = driver.get_trips
+      # driver.calculate_average_rating(trips).must_be :>=, 1
+      # driver.calculate_average_rating(trips).must_be :<=, 5
+      # driver.calculate_average_rating(trips).must_be_instance_of Float
+
+      # trips = driver.get_trips
+      driver.calculate_average_rating.must_be :>=, 1
+      driver.calculate_average_rating.must_be :<=, 5
+      driver.calculate_average_rating.must_be_instance_of Float
     end
 
     # This spec is by passing the get_trips method
-    # and is providing the trip instances array to calculate the average from ... 
+    # and is providing the trip instances array to calculate the average from ...
     it "calculates the correct average" do
-      driver2.calculate_average_rating(@trips).must_equal ((3 + 4 + 5 + 3 + 3 + 4) / 6.0)
+      driver.calculate_average_rating.must_equal 30.0 / 11
+      # driver2.calculate_average_rating(@trips).must_equal ((3 + 4 + 5 + 3 + 3 + 4) / 6.0)
     end
   end
 end
