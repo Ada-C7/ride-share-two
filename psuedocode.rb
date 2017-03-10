@@ -1,3 +1,24 @@
+
+
+#class Driver
+# def all_trips(param)
+#   if my_trips.length == 0
+#     Open drivers.csv and instantiates all trips for which drivers == self.driver_id
+#   else
+#     my trips = collect all instances of trip for which driver == self.driver_id
+#   end
+# end
+#
+# def avg_rating
+#   if my_trips.length == 0
+#     Open drivers.csv and instantiates the line for which drivers == self.driver_id
+#   else
+#     my trips =  collect all instances of trip for which driver == self.driver_id
+#   end
+#   my_trips.each
+#   use inject enumberable to average ratings and
+#   return average
+#
 # Rideshare Module --Namespace to hold all the classes
 #
 # class Riders

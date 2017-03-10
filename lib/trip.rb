@@ -1,7 +1,7 @@
-require 'pry'
 require 'csv'
-require_relative 'driver'
-require_relative 'rider'
+require 'pry'
+
+
 
 module Rideshare
   class Trip
@@ -46,22 +46,22 @@ module Rideshare
 
     def make_driver
     #helper method to extract driver_id from trip object
-      Rideshare::Driver.find_driver(self.driver_id)
+      Rideshare::Driver.find_driver(Trip.driver_id)
     end
 
     def make_rider
     #helper method to extract driver_id from trip object
-      Rideshare::Rider.find_rider(self.rider_id)
+      Rideshare::Rider.find_rider(Trip.rider_id)
     end
   end
 end
 
-
-
-puts Rideshare::Trip.create_trips[0].make_rider
-puts Rideshare::Trip.create_trips[0].make_driver
-puts Rideshare::Trip.find_by_driver(17)
-puts Rideshare::Trip.find_by_rider(300)
-
 #
+#
+# puts Rideshare::Trip.create_trips[0].make_rider
+# puts Rideshare::Trip.create_trips[0].make_driver
+# puts Rideshare::Trip.find_by_driver(17)
+# puts Rideshare::Trip.find_by_rider(300)
+#
+# #
 #

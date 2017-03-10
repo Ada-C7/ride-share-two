@@ -1,7 +1,7 @@
-require 'pry'
-require 'csv'
-require_relative 'lib/driver'
-require_relative 'lib/rider'
+# require 'pry'
+# require 'csv'
+# require_relative 'driver'
+# require_relative 'lib/rider'
 module Rideshare
   class Scratch
     attr_reader  :driver_id, :rider_id, :rating, :trip_id
