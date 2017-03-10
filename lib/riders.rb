@@ -22,6 +22,16 @@ module RideShare
       RideShare::Trip.rider_find(@id)
     end
 
+# this method uses all_trips to return a total cost for all trips a rider has taken
+    def total_cost
+      all_trips.sum {|trip| trip.cost}
+    end
+
+# this method uses all_trips to return the total time for all trips a rider has taken
+    def total_time
+      all_trips.sum { |trip| trip.duration }
+    end
+
 #this method sorts through the CSV data from .all and returns the object with the id equal to what was passed in
     def self.find(id)
       self.all.find { |account| account.id == id }

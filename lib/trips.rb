@@ -4,7 +4,7 @@ require 'csv'
 
 module RideShare
   class Trip
-    attr_reader :id, :driver_id, :rider_id, :date, :rating
+    attr_reader :id, :driver_id, :rider_id, :date, :rating, :duration, :cost
 
     def initialize(params)
       @id = params[:trip_id].to_i
@@ -12,10 +12,12 @@ module RideShare
       @rider_id = params[:rider_id].to_i
       @date = params[:date]
       @rating = params[:rating].to_i
+      @cost = params[:cost].to_i
+      @duration = params[:duration].to_i
       raise ArgumentError.new "The rating must be between 1 and 5" if @rating > 5 || @rating < 0
     end
 
-# this reads the CSV into the class
+# this reads the CSV into the class but does not validate it!
     def self.all
       csv = CSV.open('./support/trips.csv', :headers => true, :header_converters => :symbol)
       csv.map { |row| self.new(row.to_hash) }

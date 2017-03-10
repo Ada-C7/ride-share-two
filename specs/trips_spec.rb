@@ -50,7 +50,7 @@ describe "Trip class" do
 
   it "can find the first trip from the csv" do
     # skip
-    RideShare::Trip.find(1).date.must_equal "2016-04-05"
+    RideShare::Trip.find(1).date.must_equal "4/5/16"
   end
 
   it "can find the last trip from the csv" do

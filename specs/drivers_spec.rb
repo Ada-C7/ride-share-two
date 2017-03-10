@@ -55,4 +55,14 @@ describe "Driver class" do
     ron.must_equal 2.33
   end
 
+  it "can find the total time a driver has spent driving" do
+    driver.total_time.must_be_kind_of Integer
+    driver.total_time.must_equal 342
+  end
+
+  it "can calculate the total revenue a driver has received" do
+    driver.total_revenue.must_be_kind_of Float
+    driver.total_revenue.must_equal 223.32
+  end
+
 end

@@ -55,4 +55,23 @@ describe "Rider class" do
     rider.all_drivers.must_be_kind_of Array
     rider.all_drivers.length.must_equal 1
   end
+
+  it "can return the total money a rider has paid for any trip" do
+    rider.total_cost.must_be_kind_of Integer
+    rider.total_cost.must_equal 18
+  end
+
+  it "will raise an error for a rider that doesn't exist" do
+    rider = RideShare::Rider.new({name: "Ron Weasley", rider_id: 30000, phone_num: "2062424564"})
+    proc {
+      rider.total_cost
+    }.must_raise ArgumentError
+  end
+
+  it "can return the total amount of time a rider has spent on their trips" do
+    rider.total_time.must_be_kind_of Integer
+    rider.total_time.must_equal 56
+  end
+
+  
 end

@@ -25,10 +25,18 @@ module RideShare
       RideShare::Trip.driver_find(@id)
     end
 
+    def total_time
+      all_trips.sum { |trip| trip.duration}
+    end
+
+    def total_revenue
+      total = all_trips.sum { |trip| trip.cost }
+      total -= (all_trips.length * 1.65)
+      total *= 0.8
+    end
+
     def average_rating
       (all_trips.sum { |trip| trip.rating } / all_trips.length.to_f).round(2)
     end
   end
 end
-
-# ron = RideShare::Driver.new({name: "Ron Weasley", driver_id: 1})
