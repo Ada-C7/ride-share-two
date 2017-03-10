@@ -47,6 +47,10 @@ describe "Rider" do
       ninas_previous_drivers.length.must_equal 2
       ninas_previous_drivers.each { |driver| driver.must_be_instance_of Driver }
     end
+
+    it "must return only unique previous drivers" do
+      # If anyone wants an edge test for the Rider#drivers method to see if the list of drivers it returns is unique, riders 41, 164, 92, 74, 63, and 250 have all had more than one ride with the same driver.
+    end
   end
 
   describe "Rider#all" do

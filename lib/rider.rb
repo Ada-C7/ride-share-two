@@ -40,6 +40,7 @@ class Rider
     # now, an array of driver_ids
     rider_previous_drivers = []
     previous_drivers_by_id.each { |driver_id| rider_previous_drivers << Driver.find(driver_id) }
-    return rider_previous_drivers
+    rider_previous_uniq_drivers = rider_previous_drivers.uniq { |driver| driver.id }
+    return rider_previous_uniq_drivers
   end
 end
