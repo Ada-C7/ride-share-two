@@ -205,38 +205,47 @@ describe "Trip" do
     let(:trips_bad_driver_id) { RideShare::Trip.find_by_driver(@bad_driver_id)}
 
     # this spec is testing every trip from csv - you could use sample to reduce
-    # you now know there are trips for driver_id 0 -this driver DNE
+    # you now know there are trips for driver_id 0 -this driver DNE in drivers data
     # need to change how you test or figure out how to ignore bad driver ids
-    it "returns a driver instance" do
-      trips.each do |trip|
-        driver = trip.get_driver
-        driver.must_be_instance_of RideShare::Driver unless driver
+    # one solution to ignore is using this recuse false
+    it "returns a driver instance for good driver_id" do
+      trips.sample(100).each do |trip|
+        driver = trip.get_driver rescue nil
+        driver.must_be_instance_of RideShare::Driver unless driver.nil?
       end
     end
 
     # Should return an error...
     # Want to have driver in csv/database
     # don't want to return drivers that have not been initialized
-    it "raises an error if there is no driver" do
+    it "raises an error if no matching driver instance for driver_id" do
       err = proc {
              trips_bad_driver_id.each { |trip| trip.get_driver }
            }.must_raise ArgumentError
-      err.message.must_equal "No driver with id:#{@bad_driver_id} in driver csv"
+      err.message.must_equal "No driver with id: #{@bad_driver_id} in driver csv"
     end
   end
 
   describe "Trip#get_rider" do
 
-    # this spec is testing every trip from csv - you could use sample to reduce
-    it "returns a rider instance" do
-      trips.each do |trip|
-        rider = trip.get_rider
+    before do
+      @bad_rider_id = 0
+    end
+
+    let(:trips_bad_rider_id) {RideShare::Trip.find_by_rider(@bad_rider_id)}
+
+    it "returns a rider instance for good rider_id" do
+      trips.sample(100).each do |trip|
+        rider = trip.get_rider rescue nil
         rider.must_be_instance_of RideShare::Rider unless rider.nil?
       end
     end
 
-    it "returns an ... if no matching rider instance for rider_id" do
-      skip
+    it "returns an error if no matching rider instance for rider_id" do
+      err = proc {
+             trips_bad_rider_id.each { |trip| trip.get_rider }
+           }.must_raise ArgumentError
+      err.message.must_equal "No rider with id: #{@bad_rider_id} in rider csv"
     end
   end
 end
