@@ -1,21 +1,16 @@
-#
-# Each rider should:
-#
-# TODO: have an ID, name and phone number
+#Rider
 
 # Given a rider object, you should be able to:
 #
 # TODO: retrieve the list of trip instances that only this rider has taken
 # TODO: retrieve the list of all previous driver instances (through the trips functionality built above)
 
-# You should be able to:
-#
-# TODO: retrieve all riders from the CSV file
-# TODO: find a specific rider using their numeric ID
 
 require 'csv'
 
 module RideShare
+
+  # DONE: have an ID, name and phone number
   class Rider
     attr_reader :rider_id, :name, :phone_num
     def initialize (rider_id, name, phone_num)
@@ -24,8 +19,9 @@ module RideShare
       @phone_num = phone_num
     end
 
+    # DONE: retrieve all riders from the CSV file
     def self.all
-      # TODO: Clean up variable names.
+      # TODO: Clean up variable names. PARAMS
       read_file = CSV.readlines('support/riders.csv')
 
       cleaned_array = read_file.delete_if do |row|
@@ -41,6 +37,7 @@ module RideShare
       return riders_array
     end
 
+    # DONE: find a specific rider using their numeric ID
     def self.find(rider_id)
       riders = RideShare::Rider.all
       counter = 0

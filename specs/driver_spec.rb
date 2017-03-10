@@ -17,9 +17,9 @@ describe "driver: self.all" do
 
     CSV.read('support/drivers.csv') do |line|
       counter = 0
-      @driver[counter].must_equal line[counter][0].to_i
-      @driver[counter].must_equal line[counter][1].to_s
-      @driver[counter].must_equal vin[counter][2].to_s
+      @driver[counter].driver_id.must_equal line[counter][0].to_i
+      @driver[counter].name.must_equal line[counter][1].to_s
+      @driver[counter].vin.must_equal vin[counter][2].to_s
 
       counter += 1
     end
@@ -28,7 +28,7 @@ describe "driver: self.all" do
   it "retrieves the first and last driver_id" do
     # skip
     # FIXME: Fix object calling issue.
-    
+
     @driver[0].driver_id.must_equal "1"
     @driver[99].driver_id.must_equal "100"
   end
