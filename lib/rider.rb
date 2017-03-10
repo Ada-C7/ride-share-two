@@ -13,7 +13,7 @@ module RideShare
     # calling find_by_rider will auto return an empty arrays
     # change the Trip.find_by_rider
     def get_trips
-      trips = RideShare::Trip.find_by_rider(@id)
+      RideShare::Trip.find_by_rider(@id)
     end
 
     def get_drivers()
@@ -43,7 +43,7 @@ module RideShare
 
     def self.get_data
       ride_data = FileData.new("./support/riders.csv")
-      rides_data = ride_data.read_csv_and_remove_headings
+      ride_data.read_csv_and_remove_headings
     end
 
     def self.all(rides_data = nil)

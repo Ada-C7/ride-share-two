@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-09T21:58:26-08:00">2017-03-09T21:58:26-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-09T22:10:34-08:00">2017-03-09T22:10:34-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -297,7 +297,7 @@
         <li class="covered" data-hits="4" data-linenumber="25">
           <span class="hits">4</span>
           
-          <code class="ruby">      average = (ratings.sum.to_f) / (ratings.length.to_f)</code>
+          <code class="ruby">      (ratings.sum.to_f) / (ratings.length)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
@@ -405,7 +405,7 @@
         <li class="covered" data-hits="62202" data-linenumber="43">
           <span class="hits">62202</span>
           
-          <code class="ruby">      raise ArgumentError.new(&quot;vin must be 17 characters&quot;) unless vin.length == 17</code>
+          <code class="ruby">      raise ArgumentError.new(&quot;Vin must be 17 characters&quot;) unless vin.length == 17</code>
         </li>
       
         <li class="covered" data-hits="62201" data-linenumber="44">
@@ -441,7 +441,7 @@
         <li class="covered" data-hits="619" data-linenumber="49">
           <span class="hits">619</span>
           
-          <code class="ruby">      drivers_data = data.read_csv_and_remove_headings</code>
+          <code class="ruby">      data.read_csv_and_remove_headings</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="50">
@@ -471,7 +471,7 @@
         <li class="covered" data-hits="628" data-linenumber="54">
           <span class="hits">628</span>
           
-          <code class="ruby">      raise ArgumentError.new(&quot;data is empty array&quot;) if drivers_data.empty?</code>
+          <code class="ruby">      raise ArgumentError.new(&quot;Data is empty array&quot;) if drivers_data.empty?</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="55">
@@ -489,7 +489,7 @@
         <li class="covered" data-hits="62206" data-linenumber="57">
           <span class="hits">62206</span>
           
-          <code class="ruby">        raise ArgumentError.new(&quot;driver info must have 3 parts&quot;) unless driver_info.length == 3</code>
+          <code class="ruby">        raise ArgumentError.new(&quot;Driver info must have 3 parts&quot;) unless driver_info.length == 3</code>
         </li>
       
         <li class="covered" data-hits="62204" data-linenumber="58">
@@ -531,7 +531,7 @@
         <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">      </code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="622" data-linenumber="65">
@@ -567,7 +567,7 @@
         <li class="covered" data-hits="31660" data-linenumber="70">
           <span class="hits">31660</span>
           
-          <code class="ruby">      driver = drivers.each { |info| return info if info.id == driver_id }</code>
+          <code class="ruby">      drivers.each { |driver| return driver if driver.id == driver_id }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="71">
@@ -903,7 +903,7 @@
         <li class="never" data-hits="" data-linenumber="29">
           
           
-          <code class="ruby">    # this line removes headings</code>
+          <code class="ruby">    # this line removes the headings</code>
         </li>
       
         <li class="covered" data-hits="1285" data-linenumber="30">
@@ -1083,7 +1083,7 @@
         <li class="covered" data-hits="8" data-linenumber="16">
           <span class="hits">8</span>
           
-          <code class="ruby">      trips = RideShare::Trip.find_by_rider(@id)</code>
+          <code class="ruby">      RideShare::Trip.find_by_rider(@id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="17">
@@ -1263,7 +1263,7 @@
         <li class="covered" data-hits="611" data-linenumber="46">
           <span class="hits">611</span>
           
-          <code class="ruby">      rides_data = ride_data.read_csv_and_remove_headings</code>
+          <code class="ruby">      ride_data.read_csv_and_remove_headings</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">

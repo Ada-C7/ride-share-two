@@ -22,7 +22,7 @@ module RideShare
     def calculate_average_rating()
       trips = get_trips
       ratings = trips.map { |trip| trip.rating }
-      average = (ratings.sum.to_f) / (ratings.length.to_f)
+      (ratings.sum.to_f) / (ratings.length)
     end
 
                 ###################
@@ -40,34 +40,34 @@ module RideShare
     end
 
     def self.test_for_vin(vin)
-      raise ArgumentError.new("vin must be 17 characters") unless vin.length == 17
+      raise ArgumentError.new("Vin must be 17 characters") unless vin.length == 17
       vin
     end
 
     def self.get_data
       data = FileData.new('./support/drivers.csv')
-      drivers_data = data.read_csv_and_remove_headings
+      data.read_csv_and_remove_headings
     end
 
     def self.all(drivers_data = nil)
       drivers_data = get_data if drivers_data.nil?
-      raise ArgumentError.new("data is empty array") if drivers_data.empty?
+      raise ArgumentError.new("Data is empty array") if drivers_data.empty?
 
       drivers = drivers_data.map do |driver_info|
-        raise ArgumentError.new("driver info must have 3 parts") unless driver_info.length == 3
+        raise ArgumentError.new("Driver info must have 3 parts") unless driver_info.length == 3
         driver = Hash.new
         driver[:id] = test_for_integer(driver_info[0])
         driver[:name] = test_name(driver_info[1])
         driver[:vin] = test_for_vin(driver_info[2])
         self.new(driver)
       end
-      
+
       return drivers
     end
 
     def self.find(driver_id)
       drivers = all
-      driver = drivers.each { |info| return info if info.id == driver_id }
+      drivers.each { |driver| return driver if driver.id == driver_id }
       nil
     end
   end

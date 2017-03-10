@@ -26,7 +26,7 @@ class FileData
 
   def read_csv_and_remove_headings
     data = CSV.read(@csv_file)
-    # this line removes headings
+    # this line removes the headings
     data.shift
     return data
   end

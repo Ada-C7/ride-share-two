@@ -70,28 +70,28 @@ describe "Driver" do
       err = proc {
                    RideShare::Driver.all(@bad_data[:bad_vin])
                  }.must_raise ArgumentError
-      err.message.must_equal "vin must be 17 characters"
+      err.message.must_equal "Vin must be 17 characters"
     end
 
     it "raises an error if given a info missing parts" do
       err = proc {
                    RideShare::Driver.all(@bad_data[:missing_part])
                  }.must_raise ArgumentError
-      err.message.must_equal "driver info must have 3 parts"
+      err.message.must_equal "Driver info must have 3 parts"
     end
 
     it "raises an error if given an empty array" do
       err = proc {
                    RideShare::Driver.all(@bad_data[:empty_array])
                  }.must_raise ArgumentError
-      err.message.must_equal "data is empty array"
+      err.message.must_equal "Data is empty array"
     end
 
     it "raises an error if given empty nested arrays" do
       err = proc {
                    RideShare::Driver.all(@bad_data[:empty_nested_arrays])
                  }.must_raise ArgumentError
-      err.message.must_equal "driver info must have 3 parts"
+      err.message.must_equal "Driver info must have 3 parts"
     end
 
     it "raises an error if given improper name" do
