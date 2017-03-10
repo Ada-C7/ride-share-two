@@ -1,4 +1,6 @@
-require_relative 'module'
+require_relative 'riders'
+require_relative 'trips'
+require 'csv'
 
 module RideShare
   class Driver
@@ -19,15 +21,14 @@ module RideShare
       self.all.find { |account| account.id == id }
     end
 
-    #refactor this
-    def all_trips(id)
-      RideShare::Trip.driver_find(id)
+    def all_trips
+      RideShare::Trip.driver_find(@id)
     end
 
-    def average_rating(id)
-      (all_trips(id).sum { |trip| trip.rating } / all_trips(id).length.to_f).round(2)
+    def average_rating
+      (all_trips.sum { |trip| trip.rating } / all_trips.length.to_f).round(2)
     end
   end
 end
 
-ron = RideShare::Driver.new({name: "Ron Weasley", driver_id: 1})
+# ron = RideShare::Driver.new({name: "Ron Weasley", driver_id: 1})

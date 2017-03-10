@@ -57,6 +57,12 @@ describe "Trip class" do
     RideShare::Trip.find(600).rating.must_equal 3
   end
 
+  it "won't return a trip that doesn't exist" do
+    proc {
+      RideShare::Trip.find(800000).id
+    }.must_raise NoMethodError
+  end
+
   it "can find all trip instances for a given rider ID" do
     # skip
     RideShare::Trip.rider_find(1).length.must_equal 2

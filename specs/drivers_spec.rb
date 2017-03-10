@@ -30,29 +30,35 @@ describe "Driver class" do
     RideShare::Driver.find(100).id.must_equal 100
   end
 
+  it "won't return a driver that doesn't exist" do
+    proc {
+      RideShare::Driver.find(1000).id
+    }.must_raise NoMethodError
+  end
+
   it "can find all a single driver's trips" do
-    driver.all_trips(driver.id).must_be_kind_of Array
-    driver.all_trips(driver.id).length.must_equal 9
+    driver.all_trips.must_be_kind_of Array
+    driver.all_trips.length.must_equal 9
   end
 
-  it "raises an ArgumentError if id is not a driver number in CSV" do
-      proc {
-        driver.all_trips(101)
-      }.must_raise ArgumentError
-  end
-
-  it "rejects completely invalid input" do
-    proc {
-      driver.all_trips("bad string of input")
-    }.must_raise ArgumentError
-
-    proc {
-      driver.all_trips("#{$12}")
-    }.must_raise ArgumentError
-  end
+  # it "raises an ArgumentError if id is not a driver number in CSV" do
+  #     proc {
+  #       driver.all_trips(101)
+  #     }.must_raise ArgumentError
+  # end
+  #
+  # it "rejects completely invalid input" do
+  #   proc {
+  #     driver.all_trips("bad string of input")
+  #   }.must_raise ArgumentError
+  #
+  #   proc {
+  #     driver.all_trips("#{$12}")
+  #   }.must_raise ArgumentError
+  # end
 
   it "can find  a single driver's average rating" do
-    ron = driver.average_rating(driver.id)
+    ron = driver.average_rating
     ron.must_be_kind_of Float
     ron.must_equal 2.33
 

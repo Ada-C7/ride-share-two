@@ -1,4 +1,7 @@
-require_relative 'module'
+require_relative 'drivers'
+require_relative 'riders'
+require 'csv'
+
 module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -35,7 +38,6 @@ module RideShare
     end
 
 #this method calls on the .all CSV-read method to find a trip by id
-# it could use a validation method
     def self.find(id)
       self.all.find { |account| account.id == id }
     end
@@ -56,16 +58,3 @@ module RideShare
 
   end
 end
-
-# initialization_hash = {
-#   trip_id: 1,
-#   driver_id: 0,
-#   rider_id: 0,
-#   date: "4/26/2017",
-#   rating: 5
-#     }
-# trip = RideShare::Trip.new(initialization_hash)
-#
-# puts trip.rider_for_trip.name
-#
-# puts "hi"
