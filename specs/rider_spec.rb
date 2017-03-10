@@ -4,7 +4,7 @@ require "csv"
 
 describe "Rider Class" do
   describe "Rider#initialize" do
-    let(:rana) { Ride_Share::Rider.new(name: 'Rana', rider_id: "2", phone_num: "4255667897" )}
+    let(:rana) { RideShare::Rider.new(name: 'Rana', rider_id: "2", phone_num: "4255667897" )}
     it "Takes an ID , name and phone number" do
 
       rana.must_respond_to :id
@@ -19,7 +19,11 @@ describe "Rider Class" do
   end
 
   describe "Rider#all" do
-    let(:all_riders) { Ride_Share::Rider.all}
+    let(:all_riders) { RideShare::Rider.all}
+
+    it "Check that class have an all method" do
+      RideShare::Rider.must_respond_to :all
+    end
 
     it "Returns an array of all rider instances" do
       all_riders.must_be_kind_of Array
@@ -27,7 +31,7 @@ describe "Rider Class" do
 
     it 'Everything in the array is an instane of Ride_share::Rider class' do
       all_riders.each do |rider_instance|
-        rider_instance.must_be_instance_of Ride_Share::Rider
+        rider_instance.must_be_instance_of RideShare::Rider
       end
     end
 
@@ -61,37 +65,48 @@ describe "Rider Class" do
   describe "Rider#find" do
 
     it "Check that class have a find method" do
-      Ride_Share::Rider.must_respond_to :find
+      RideShare::Rider.must_respond_to :find
     end
 
     it "Returns a rider instance with correct data " do
       # 28,Earlene Bogan,1-295-646-5152
       rider_id = "28"
-      rider = Ride_Share::Rider.find(rider_id)
-      #rider.must_be_instance_of Ride_Share::Rider
+      rider = RideShare::Rider.find(rider_id)
+      #rider.must_be_instance_of RideShare::Rider
+      rider.id.must_equal '28'
       rider.name.must_equal 'Earlene Bogan'
       rider.phone_number.must_equal '1-295-646-5152'
     end
 
-    it "Raises an argument error with rider id not in the data base" do
+    it "Returns nil when rider id not in the database" do
       rider_id = "9999"
-      proc { Ride_Share::Rider.find(rider_id) }.must_raise ArgumentError
+      RideShare::Rider.find(rider_id).must_equal nil
+    end
+
+    it "Returns nil when rider id is not string type" do
+      rider_id = 99292
+      RideShare::Rider.find(rider_id).must_equal nil
     end
   end
   describe "Rider#retrieve_trips" do
 
-    it "The lenfth of trips list is the same count as in csv file" do
+    it "Check that class have a retrieve_trips method" do
+      rider = RideShare::Rider.new(name: 'Rana', rider_id: "2", phone_num: "425343" )
+      rider.must_respond_to :retrieve_trips
+    end
+
+    it "The length of trips list is the same count as in csv file" do
       specific_rider_id = "54"
-      trips = Ride_Share::Trip.find_rider_trips(specific_rider_id)
+      trips = RideShare::Trip.find_rider_trips(specific_rider_id)
       trips.length.must_equal 2
     end
 
     it "Returns the list of trip instances for a specific rider" do
-
       specific_rider_id = "54"
-      trips = Ride_Share::Trip.find_rider_trips(specific_rider_id)
-      trips.first.must_be_instance_of Ride_Share::Trip
+      trips = RideShare::Trip.find_rider_trips(specific_rider_id)
+      trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
     end
   end
-
 end

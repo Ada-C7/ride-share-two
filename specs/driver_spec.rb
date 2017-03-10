@@ -4,7 +4,7 @@ require "csv"
 
 describe "Driver class" do
   describe "Driver#initialize" do
-    let(:jack) { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYLVDE9" )}
+    let(:jack) { RideShare::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYLVDE9" )}
     it "Takes an ID , name and vin" do
 
       jack.must_respond_to :id
@@ -19,12 +19,12 @@ describe "Driver class" do
 
     it "Raises InvalidVehicleNumber if vin != 17" do
 
-      proc { Ride_Share::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")}.must_raise InvalidVehicleNumber
+      proc { RideShare::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")}.must_raise InvalidVehicleNumber
     end
   end
 
   describe "Driver#all" do
-    let(:all_drivers) { Ride_Share::Driver.all}
+    let(:all_drivers) { RideShare::Driver.all}
 
     it "Returns an array of all driver instances" do
       all_drivers.must_be_kind_of Array
@@ -32,7 +32,7 @@ describe "Driver class" do
 
     it 'Everything in the array is an instane of Ride_share::Driver class' do
       all_drivers.each do |driver_instance|
-        driver_instance.must_be_instance_of Ride_Share::Driver
+        driver_instance.must_be_instance_of RideShare::Driver
       end
     end
 
@@ -64,22 +64,25 @@ describe "Driver class" do
   end
   describe "Driver#find" do
     it "Check that class have a find method" do
-      Ride_Share::Driver.must_respond_to :find
+      RideShare::Driver.must_respond_to :find
     end
 
     it "Returns a driver instance with correct data " do
       # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
       driver_id = "57"
-      driver = Ride_Share::Driver.find(driver_id)
-      driver.must_be_instance_of Ride_Share::Driver
+      driver = RideShare::Driver.find(driver_id)
+      driver.must_be_instance_of RideShare::Driver
       driver.name.must_equal 'Fermin Jakubowski'
       driver.vin.must_equal '1C9YKRAL923SACAZM'
     end
-    it "Raises an exception with driver id not in the data base" do
-      # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
+    it "Returns nil when driver id not in the database" do
       driver_id = "9999"
-      #binding.pry
-      proc { Ride_Share::Driver.find(driver_id) }.must_raise InvalidData
+      RideShare::Driver.find(driver_id).must_equal nil
+    end
+
+    it "Returns nil when driver id is not string type" do
+      driver_id = 99292
+      RideShare::Driver.find(driver_id).must_equal nil
     end
   end
 
@@ -87,21 +90,21 @@ describe "Driver class" do
 
     it "The lenfth of trips list is the same count as in csv file" do
       specific_driver_id = "13"
-      trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
+      trips = RideShare::Trip.find_driver_trips(specific_driver_id)
       trips.length.must_equal 7
     end
 
     it "Returns the list of trip instances for a specific driver" do
 
       specific_driver_id = "13"
-      trips = Ride_Share::Trip.find_driver_trips(specific_driver_id)
-      trips.first.must_be_instance_of Ride_Share::Trip
+      trips = RideShare::Trip.find_driver_trips(specific_driver_id)
+      trips.first.must_be_instance_of RideShare::Trip
     end
   end
 
   describe "Driver#calculate_rating" do
     before do
-      @driver_13 =  Ride_Share::Driver.find("13")
+      @driver_13 =  RideShare::Driver.find("13")
     end
 
     it "Calculates the average trips rating for a specific driver" do
@@ -115,9 +118,6 @@ describe "Driver class" do
     # driver: 13	Mr. Delbert Gleason	XF9HBFH148FLD41K8
       specific_driver_id = "13"
       @driver_13.calculate_avg_rating.must_be_instance_of Float
-
     end
-
   end
-
 end
