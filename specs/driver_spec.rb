@@ -75,7 +75,7 @@ describe "Driver class" do
       driver.name.must_equal 'Fermin Jakubowski'
       driver.vin.must_equal '1C9YKRAL923SACAZM'
     end
-    it "Raises an argument error with driver id not in the data base" do
+    it "Raises an exception with driver id not in the data base" do
       # 57,Fermin Jakubowski,1C9YKRAL923SACAZM
       driver_id = "9999"
       #binding.pry

@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 require_relative "../ride_share"
 require "csv"
+
 describe "Rider Class" do
   describe "Rider#initialize" do
     let(:rana) { Ride_Share::Rider.new(name: 'Rana', rider_id: "2", phone_num: "4255667897" )}

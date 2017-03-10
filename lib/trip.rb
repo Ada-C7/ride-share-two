@@ -1,5 +1,8 @@
 require "csv"
 require_relative "rating_error"
+require_relative "invalid_data"
+
+
 
 module Ride_Share
 class Trip #Ride_Share::Trip
@@ -46,7 +49,15 @@ class Trip #Ride_Share::Trip
 
   def retrieve_driver
     #retrieve the associated driver instance through driver ID for a specific trip
-    Ride_Share::Driver.find(@driver_id)
+    begin
+      Ride_Share::Driver.find(@driver_id)
+       raise InvalidData.new if Ride_Share::Driver.find(@driver_id).class != Array
+
+    rescue InvalidData => exception
+      puts "driver id is not in the database: #{exception.message}"
+    end
+    return Ride_Share::Driver.find(@driver_id)
+
   end
 
   def retrieve_rider

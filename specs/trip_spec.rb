@@ -1,6 +1,8 @@
 require_relative 'spec_helper'
 require_relative '../lib/trip'
 require 'csv'
+require "pry"
+
 describe "Trip class" do
   # first_trip: 1,1,54,2016-04-05,3
   # second_trip: 2,67,146,2016-01-13,5
@@ -122,6 +124,14 @@ describe "Trip class" do
 
         trip.retrieve_driver.name.must_equal "Bernardo Prosacco"
       end
+
+      it "Rescues and print a message when driver id is not included in the trip csv data" do
+        # first_trip: 1,1,54,2016-04-05,3
+        trip = Ride_Share::Trip.new(trip_id: '2', driver_id: "9999", rider_id: "54", date: "2016-04-05", rating: "4" )
+        proc { trip.retrieve_driver }.must_raise InvalidData
+        #binding.pry
+      end
+
     end
 
     describe "Trip#retrieve_rider" do
