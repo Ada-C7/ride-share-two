@@ -204,7 +204,8 @@ describe "Trip" do
     end
     let(:trips_bad_driver_id) { RideShare::Trip.find_by_driver(@bad_driver_id)}
 
-    # this spec is testing every trip from csv - you could use sample to reduce
+    # had spec interating through every trip (from csv)
+    # but if csv gets way larger you wouldn't want this - so using sample
     # you now know there are trips for driver_id 0 -this driver DNE in drivers data
     # need to change how you test or figure out how to ignore bad driver ids
     # one solution to ignore is using this recuse false
@@ -215,9 +216,9 @@ describe "Trip" do
       end
     end
 
-    # Should return an error...
-    # Want to have driver in csv/database
+    # Should return an error
     # don't want to return drivers that have not been initialized
+    #- that aren't in csv/database
     it "raises an error if no matching driver instance for driver_id" do
       err = proc {
              trips_bad_driver_id.each { |trip| trip.get_driver }
@@ -247,5 +248,7 @@ describe "Trip" do
            }.must_raise ArgumentError
       err.message.must_equal "No rider with id: #{@bad_rider_id} in rider csv"
     end
+
+    # edge cases - find first and last in database? 
   end
 end

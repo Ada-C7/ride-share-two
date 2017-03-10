@@ -16,6 +16,9 @@ module RideShare
       RideShare::Trip.find_by_driver(@id)
     end
 
+    # dont need to worry about calling this method on a driver that doesn't exsits
+    # because you have to call this method on a driver instance
+    # IE driver must exists cause you have a driver istance you are calling this method from...
     def calculate_average_rating()
       trips = get_trips
       return nil if trips.nil?

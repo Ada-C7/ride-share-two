@@ -27,7 +27,7 @@ describe "Rider" do
 
   # AHHH - what about duplicate riders ... duplicate ids...
   # - people could have same name but not phone numbers
-   
+
 
   describe "Rider#all" do
 
@@ -52,7 +52,7 @@ describe "Rider" do
     #   @riders_data.each { |rider_data| RideShare::Rider.all([riders_data])
     # end
 
-    it " accepts csv data - doesn't raise any errors & returns an array" do
+    it "doesn't raise any errors & returns an array when given rider.csv data" do
       riders.must_be_instance_of Array
     end
 
@@ -145,7 +145,6 @@ describe "Rider" do
 
   before do
     @rider_id = 12
-
   end
 
   let(:rider) { RideShare::Rider.find(@rider_id) }

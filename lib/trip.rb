@@ -29,15 +29,15 @@ module RideShare
       raise ArgumentError.new("No rider with id: #{rider_id} in rider csv")
     end
 
-                    ###################
-                    ## Class methods ##
-                    ###################
+                            ###################
+                            ## Class methods ##
+                            ###################
 
     def self.test_for_integer(num)
       Integer(num)
     end
 
-    # this will throw an arugment error if not given proper format
+    # this will auto throw an arugment error if not given proper format
     def self.test_for_date(date)
       Date.parse(date)
     end
@@ -53,9 +53,9 @@ module RideShare
       return trip_data.read_csv_and_remove_headings
     end
 
-    # all takes in trips_data because it is better to inject the file data object
+    # all takes in trips_data because it is better to inject data as an object
     # this also lets you test the data more easily (you can more easily pass in bad data)
-    # but there is a default of trips data
+    # but there is a default for trips_data
     # this project needs the default because lots of methods call each other and
     # expect that all is reading the csv data
     def self.all(trips_data = nil)

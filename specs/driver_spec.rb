@@ -142,7 +142,11 @@ describe "Driver" do
   let(:drivers) {RideShare::Driver.all}
   let(:driver_know_avg) { RideShare::Driver.find(@driver_id) }
   # driver_id 100 has no trips
-  let(:driver_no_trips) {RideShare::Driver.find(100)}
+  let(:driver_no_trips) { RideShare::Driver.find(100) }
+  # driver_id has one trip & rating is
+  # so csvs are small and easy to find this instance
+  # but since you are injecting data to all you should be able to mock this 
+  let(:drive_1_trip) { RideShare::Driver.find() }
 
   describe "Driver#get_trips" do
 
@@ -158,10 +162,8 @@ describe "Driver" do
 
   describe "Driver#calculate_average_rating" do
 
-    # this is a test for every driver...
-    # maybe better to use sample - imagine if you had thousand drivers
-    # question of time and quantity of data - do you have time for super long tests
-    # what should happen if driver doesn't have any trips? - returns nil
+    # could test all drivers - but if drivers got lot larger
+    # you wouldn't want to test all so can use a sample
     it "returns nil if no trips or float between 1 and 5" do
       drivers.sample(25).each do |driver|
         return nil if driver.calculate_average_rating.nil?
@@ -178,6 +180,10 @@ describe "Driver" do
 
     it "returns nil if there are no trips for driver" do
       driver_no_trips.calculate_average_rating.must_be_nil
+    end
+
+    it "returns correct average for driver with 1 trip" do
+
     end
   end
 end
