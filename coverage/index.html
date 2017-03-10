@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-09T19:34:38-08:00">2017-03-09T19:34:38-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-09T19:36:42-08:00">2017-03-09T19:36:42-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1196.25
+         1206.86
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>226</b> relevant lines. 
-    <span class="green"><b>226</b> lines covered</span> and
+    <b>224</b> relevant lines. 
+    <span class="green"><b>224</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -73,11 +73,11 @@
       <tr>
         <td class="strong"><a href="#966d6291d9c6cff4dbdb477e38135306c259d901" class="src_link" title="lib/trip.rb">lib/trip.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>64</td>
-        <td>36</td>
-        <td>36</td>
+        <td>60</td>
+        <td>34</td>
+        <td>34</td>
         <td>0</td>
-        <td>6056.3</td>
+        <td>6412.1</td>
       </tr>
       
       <tr>
@@ -1003,8 +1003,8 @@
     <h3>lib/trip.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>36</b> relevant lines. 
-      <span class="green"><b>36</b> lines covered</span> and
+      <b>34</b> relevant lines. 
+      <span class="green"><b>34</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -1318,46 +1318,46 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="52">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1803" data-linenumber="52">
+          <span class="hits">1803</span>
           
-          <code class="ruby">    all_trips.each do |trip|</code>
+          <code class="ruby">    all_trips.each {|trip| driver_trips &lt;&lt; trip if trip.driver == search_id }</code>
         </li>
       
-        <li class="covered" data-hits="1800" data-linenumber="53">
-          <span class="hits">1800</span>
-          
-          <code class="ruby">      if trip.driver == search_id</code>
-        </li>
-      
-        <li class="covered" data-hits="18" data-linenumber="54">
-          <span class="hits">18</span>
-          
-          <code class="ruby">        driver_trips &lt;&lt; trip</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="55">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="56">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="57">
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="58">
+        <li class="covered" data-hits="3" data-linenumber="54">
           <span class="hits">3</span>
           
           <code class="ruby">    raise ArgumentError.new(&quot;No matching trips for that driver&quot;) if driver_trips.length == 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="56">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    return driver_trips</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
@@ -1366,31 +1366,7 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="60">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    return driver_trips</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="61">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="62">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="63">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby">end</code>

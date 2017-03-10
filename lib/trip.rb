@@ -49,11 +49,7 @@ class Trip
     driver_trips = []
     all_trips = self.all
 
-    all_trips.each do |trip|
-      if trip.driver == search_id
-        driver_trips << trip
-      end
-    end
+    all_trips.each {|trip| driver_trips << trip if trip.driver == search_id }
 
     raise ArgumentError.new("No matching trips for that driver") if driver_trips.length == 0
 
