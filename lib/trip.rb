@@ -69,7 +69,7 @@ module RideShare
   #end of module
 end
 
-###ALL WORKING AS OF 1451####
+
 # puts "retrieve all trips from the CSV file"
 # ap Trip.all
 

@@ -1,7 +1,5 @@
 require 'csv'
 require 'ap'
-require_relative 'trip.rb'
-require_relative 'driver.rb'
 
 module RideShare
   class Rider
@@ -54,17 +52,17 @@ module RideShare
   #end of module
 end
 
-  # puts "creates instance for non-self methods\n\n"
-  # instance_of_rider = Rider.find(12)
+# puts "creates instance for non-self methods\n\n"
+# instance_of_rider = Rider.find(12)
 
-  # puts "retrieve the list of trip instances that only this rider has taken"
-  # ap instance_of_rider.trip_instances_for_rider
+# puts "retrieve the list of trip instances that only this rider has taken"
+# ap instance_of_rider.trip_instances_for_rider
 
-  # puts "retrieve all riders from the CSV file"
-  # ap Rider.all
+# puts "retrieve all riders from the CSV file"
+# ap Rider.all
 
-  # puts "find a specific rider using their numeric ID"
-  # ap Rider.find(9)
+# puts "find a specific rider using their numeric ID"
+# ap Rider.find(9)
 
-  # puts "retrieve the list of all previous driver instances (through the trips functionality built above)"
-  # ap instance_of_rider.retrieve_list_of_previous_drivers
+# puts "retrieve the list of all previous driver instances (through the trips functionality built above)"
+# ap instance_of_rider.retrieve_list_of_previous_drivers

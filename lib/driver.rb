@@ -1,6 +1,6 @@
 require 'csv'
 require 'ap'
-require_relative 'trip'
+
 
 module RideShare
   class Driver
@@ -60,20 +60,20 @@ module RideShare
 end
 
 
-  ###ALLWORKING AS OF 1448#####
 
-  # puts "creates instance for non-self methods"
-  # instance_of_driver = Driver.find(9)
 
-  # puts "retrieve the list of trip instances that only this driver has taken"
-  # ap instance_of_driver.trip_instances_for_driver
+# puts "creates instance for non-self methods"
+# instance_of_driver = Driver.find(9)
 
-  # puts "retrieve an average rating for that driver based on all trips taken"
-  # ap instance_of_driver.rating
+# puts "retrieve the list of trip instances that only this driver has taken"
+# ap instance_of_driver.trip_instances_for_driver
 
-  # puts "retrieve all drivers from the CSV file"
+# puts "retrieve an average rating for that driver based on all trips taken"
+# ap instance_of_driver.rating
 
-  # ap Driver.all
+# puts "retrieve all drivers from the CSV file"
 
-  # puts "find a specific driver using their numeric ID"
-  # ap Driver.find(9)
+# ap Driver.all
+
+# puts "find a specific driver using their numeric ID"
+# ap Driver.find(9)
