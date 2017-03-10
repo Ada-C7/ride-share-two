@@ -2,7 +2,7 @@
 require_relative 'spec_helper'
 
 describe "Ride_share_two::Driver" do
-  let(:drivers){Ride_share_two::Driver.all_drivers}
+  let(:drivers){Ride_share_two::Driver.all_drivers} #drivers = Ride_share_two::Driver.all_drivers
   describe "Driver#initialize" do
     it "Takes driver_id, driver_name, vin" do
       driver_id = "1"
@@ -30,7 +30,6 @@ describe "Ride_share_two::Driver" do
   describe "#self.all_drivers" do
     it "retrieve driver information from CSV file" do
       drivers.length.must_equal 100
-
     end
   end
   describe "#self.find_driver" do
