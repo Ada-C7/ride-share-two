@@ -29,22 +29,10 @@ module RideShare
       drivers_array
     end
 
-
-    # def self.find(id)
-    #   driver_array = self.all
-    #   driver_array.each do |driver|
-    #     if id == driver.id
-    #       return driver
-    #     end
-    #   end
-    #   raise ArgumentError.new "Driver #{id} does not exist"
-    # end
-
     def self.find(id)
       driver_array = self.all
       driver_array.find { |driver| id == driver.id }
     end
-
 
     def trips
       driver_id = id
@@ -53,37 +41,15 @@ module RideShare
       #RETURN ARRAY OF TRIPS
     end
 
-
-    # def average_rating
-    #   driver_id = id
-    #   rating_array = []
-    #   trips_array = RideShare::Trip.find_by_driver(driver_id)
-    #   trips_array.each do |trip|
-    #     rating_array << trip.rating.to_f
-    #   end
-    #   total  = rating_array.reduce(:+)/rating_array.length
-    #   total.round(2)
-    #   #instance method - retrieve an average rating for that driver based on all trips taken
-    #   # call trips
-    # end
-
     def average_rating
       driver_id = id
-      rating_array = []
       trips_array = RideShare::Trip.find_by_driver(driver_id)
       trips_array.collect! { |trip| trip.rating.to_f }
-      total  = trips_array.reduce(:+)/trips_array.length
+      total = trips_array.reduce(:+)/trips_array.length
       total.round(2)
       #instance method - retrieve an average rating for that driver based on all trips taken
       # call trips
     end
-
-
-
-
-
-
-
 
     #private
 
@@ -94,7 +60,6 @@ module RideShare
         raise ArgumentError.new("VIN must be 17 characters")
       end
     end
-
 
   end #class
 

@@ -10,7 +10,6 @@ module RideShare
       @phone_num = (args[:phone_num])
     end
 
-
     def self.all
       riders_array = []
       CSV.read("support/riders.csv", {:headers => true}).each do |rider|
@@ -29,16 +28,6 @@ module RideShare
       end
       riders_array
     end
-    #
-    # def self.find(id)
-    #   rider_array = self.all
-    #   rider_array.each do |rider|
-    #     if id == rider.id
-    #       return rider
-    #     end
-    #   end
-    #   raise ArgumentError.new "Rider #{id} does not exist"
-    # end
 
     def self.find(id)
       riders_array = self.all
@@ -52,17 +41,13 @@ module RideShare
       #that only this rider has taken
     end
 
+    #retrieve the list of all
+    #previous driver instances
+    #(through the trips functionality built above)
     def drivers
       rider_trips = trips
-      drivers_array = []
-      rider_trips.each do |trip|
-        drivers_array << trip.find_driver
-      end
-      # return @drivers_array
-      return drivers_array.uniq { |driver| driver.id }
-      #retrieve the list of all
-      #previous driver instances
-      #(through the trips functionality built above)
+      rider_trips.collect! { |trip| trip.find_driver }
+      return rider_trips.uniq { |driver| driver.id }
     end
   end
 end
