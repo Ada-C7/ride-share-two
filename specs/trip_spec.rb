@@ -20,6 +20,13 @@ describe "Trip class" do
       tripin.date.must_equal "2015-12-14"
       tripin.rating.must_equal 2
     end
+
+    # it "Raises ArgumentError if the rating is not within an acceptable range" do
+    #
+    #   proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 0) }.must_raise ArgumentError
+    #
+    #   proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 34) }.must_raise ArgumentError
+    # end
   end
 
   describe "Trip.all" do
@@ -65,6 +72,10 @@ describe "Trip class" do
       driver_on_trips.first.date.must_equal "2016-02-16"
       driver_on_trips.first.rating.must_equal 5
     end
+
+    it "Raises ArgumentError if the array is empty" do
+      proc { RideShare::Trip.find_many_drivers(1337) }.must_raise ArgumentError
+    end
   end
 
   describe "Trip.find_many_riders" do
@@ -85,11 +96,14 @@ describe "Trip class" do
       rider_on_trips.first.date.must_equal "2016-12-09"
       rider_on_trips.first.rating.must_equal 1
     end
+
+    it "Raises ArgumentError if the array is empty" do
+      proc { RideShare::Trip.find_many_riders(1337) }.must_raise ArgumentError
+    end
   end
 
 
   describe "Trip#driver" do
-
 
     it "Checking that Trip is talking to Driver " do
       my_trip = trips[3]
@@ -101,8 +115,12 @@ describe "Trip class" do
   end
 
 
-  xdescribe "Trip#rider" do
-    it "" do
+  describe "Trip#rider" do
+    it "Checking that Trip is talking to Driver " do
+      my_trip = trips[3]
+      tripin.rider.must_be_instance_of RideShare::Rider
+
+      my_trip.rider_id.must_equal RideShare::Rider.find(87).id
     end
   end
 end

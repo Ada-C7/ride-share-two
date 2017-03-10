@@ -8,6 +8,9 @@ module RideShare
 
     #maybe make rider_id...etc into a hash
     def initialize(trip_hash)
+
+      # raise ArgumentError.new "Rating is not between 1-5 for this trip" if trip_hash[:rating] < 1
+
       @trip_id = trip_hash[:trip_id]
       @driver_id = trip_hash[:driver_id]
       @rider_id = trip_hash[:rider_id]
@@ -20,6 +23,7 @@ module RideShare
       trips = []
 
       CSV.read("support/trips.csv").each do |trip_row|
+
         all_trips = RideShare::Trip.new(
         trip_id: trip_row[0].to_i,
         driver_id: trip_row[1].to_i,
@@ -27,8 +31,10 @@ module RideShare
         date: trip_row[3],
         rating: trip_row[4].to_i
         )
+
         trips << all_trips
       end
+
       trips
     end
 
@@ -42,7 +48,7 @@ module RideShare
         end
       end
 
-      raise ArgumentError.new "Warning: Rider #{driver_id} does not exist" if driver_trips.empty? == true
+      raise ArgumentError.new "Warning: Rider #{driver_id} does not exist" if driver_trips.empty?
 
       return driver_trips
     end
@@ -56,7 +62,7 @@ module RideShare
           rider_trips << trips
         end
       end
-      raise ArgumentError.new "Warning: Rider #{rider_id} does not exist" if rider_trips.empty? == true
+      raise ArgumentError.new "Warning: Rider #{rider_id} does not exist" if rider_trips.empty?
 
       return rider_trips
     end

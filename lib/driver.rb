@@ -8,25 +8,12 @@ module RideShare
     # vin cannot be longer or shorter than 17 characters
     def initialize(driver_hash)
       #put argument errors to check edge cases here
+
+      raise ArgumentError.new "Vin must be 17 characters" if driver_hash[:vin].length != 17
+
       @id = driver_hash[:id]
       @name = driver_hash[:name]
-
       @vin = driver_hash[:vin]
-      # if @vin.length == 17
-      #   @vin = driver_hash[:vin]
-      # else  # Cannot be < or > 17
-      #   raise ArgumentError.new "The driver instance you chose does not have a valid vin number."
-      # end
-
-    end
-
-    def trips
-
-      # returns list of driver trips that only that driver has been on
-      RideShare::Trip.find_many_drivers(@id)
-
-      # returns average rating for the driver based on all the trips they have been on
-
 
     end
 
@@ -61,10 +48,22 @@ module RideShare
       return save_driver
 
     end
+
+    def trips
+      # returns list of driver trips that only that driver has been on
+      RideShare::Trip.find_many_drivers(@id)
+
+      # returns average rating for the driver based on all the trips they have been on
+    end
+
+    def average_rating
+      #will talk to trips and will use ratting divided my the amount of drivers returned to find the average rating amount
+    end
+
   end
 end
 
 # find_id = RideShare::Driver.all
 # puts "#{find_id}"
-# driver_trip = RideShare::Driver.new()
-# puts "#{driver_trip.trips}"
+driver_trip = RideShare::Driver.find(4)
+puts "#{driver_trip}"

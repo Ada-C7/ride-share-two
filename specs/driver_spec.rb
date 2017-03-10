@@ -2,27 +2,28 @@ require_relative 'spec_helper'
 
 # Try to use let! :) instead of before
 describe "Driver class" do
-  let(:driving) { RideShare::Driver.new(id: 1337, name: "ada", vin: "L1CKRVH55W8S6S9T1") }
+  let(:drivers) { RideShare::Driver.all }
+  let(:driving) { RideShare::Driver.new(id: 7, name: "Lizeth Dickens", vin: "W09XNTZR9KTFK10WW") }
 
   describe "Driver#initialize" do
+
+    it "Raises ArgumentError if vin is not 17 characters long" do
+      proc { RideShare::Driver.new(id: 7, name: "Ada", vin: "W09XNTZR9KTFK10WWW") }.must_raise ArgumentError
+    end
+
     it "It takes a driver_hash argument" do
       driving.must_be_instance_of RideShare::Driver
     end
 
     it "Has the correct values that were passed" do
-      driving.id.must_equal 1337
-      driving.name.must_equal "ada"
-      driving.vin.must_equal "L1CKRVH55W8S6S9T1"
+      driving.id.must_equal 7
+      driving.name.must_equal "Lizeth Dickens"
+      driving.vin.must_equal "W09XNTZR9KTFK10WW"
     end
 
-    it "Checks if vin has 17 characters" do
-      skip
-      driving.vin.length.must_equal 17
-    end
   end
 
   describe "Driver.all" do
-    let(:drivers) { RideShare::Driver.all }
 
     it "Returns an array with all the drivers info" do
       drivers.class.must_equal Array
@@ -98,14 +99,13 @@ describe "Driver class" do
     end
   end
 
-  xdescribe "Driver#trips" do
+  describe "Driver#trips" do
     # Driver can talk to trips and this class will return a list of its trips based on the drivers id
-    it "" do
+    it "Checking that Driver is talking to Trip" do
 
-    end
+      driving.trips.class.must_equal Array
 
-    it "" do
-
+      #my_trip.driver_id.must_equal RideShare::Driver.find(50).id
     end
   end
 
