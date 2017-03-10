@@ -25,8 +25,8 @@ module RideSharing
       return all_drivers
     end
 
-    def self.find(driver_id)
-      found_driver = self.all.select { |driver| driver.id == driver_id}
+    def self.find(driver_id, path = "./support/drivers.csv")
+      found_driver = self.all(path).select { |driver| driver.id == driver_id}
       raise ArgumentError.new("No such id number exist") if found_driver == []
       return found_driver.first
     end
@@ -34,6 +34,23 @@ module RideSharing
     def list_of_trips
       RideSharing::Trip.find_all_trips_for_driver(@id)
     end
+
+    def average_rating
+      # begin
+      #   list_of_trips.map { |trip| trip.rating}.sum.to_f/ list_of_trips.length
+      # rescue
+      #   puts "#{@name} with id##{@id} has not yet taken any trips.\nHence the average rating cannot be calcualted"
+      #   Float::NAN
+      # end
+      if list_of_trips != []
+        return list_of_trips.map { |trip| trip.rating}.sum.to_f/ list_of_trips.length
+      else
+        puts "#{@name} with id##{@id} has not yet taken any trips.\nHence the average rating cannot be calcualted"
+        return Float::NAN
+      end
+    end
+
+
 
   end # End of class Driver
 end # End of module RideSharing

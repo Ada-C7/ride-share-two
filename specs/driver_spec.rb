@@ -1,6 +1,6 @@
 require_relative "spec_helper"
 
-xdescribe "Driver" do
+describe "Driver" do
   describe "#initialize" do
     it "Takes an id, name and vehicle number" do
       id = "007"
@@ -67,8 +67,33 @@ xdescribe "Driver" do
         RideSharing::Driver.find(101)
       }.must_raise ArgumentError
     end
-
   end # End of describe "Driver#self.find"
+
+
+  describe "#average_rating" do
+    # let(:driver1) {RideSharing::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")}
+    let(:driver1) {RideSharing::Driver.find(1)}
+    let(:driver100) {RideSharing::Driver.find(100)}
+
+    it "Return value should be a float" do
+      driver1.average_rating.must_be_kind_of Float
+    end
+
+    it "Test of calculation of the average of the rating with number of rides > 0  " do
+      sum_of_ratings = driver1.list_of_trips.map { |trip| trip.rating}.sum.to_f
+      driver1.average_rating.must_equal sum_of_ratings/9
+    end
+
+    it "Test of calculation of the average of the rating with number of rides == 0  " do
+      # driver_trips_hash = {}
+      # RideSharing::Driver.all.each do |driver|
+      #   puts "#{driver.id}: #{driver.list_of_trips.length}"
+      # end
+      driver100 = RideSharing::Driver.find(100)
+      driver100.average_rating.must_be_kind_of Float
+    end
+
+  end # End of describe "#average_rating"
 
 
 end # End of describe "class Driver"
