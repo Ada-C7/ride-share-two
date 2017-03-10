@@ -28,8 +28,7 @@ module RideSharing
     end
 
     def previous_drivers
-      drivers = list_of_trips.map { |trip| trip.find_driver}
-      drivers = drivers.uniq
+      drivers = list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}.uniq
       return drivers
     end
 

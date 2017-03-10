@@ -15,7 +15,7 @@ module RideSharing
       CSV.foreach(path, {:headers => true}) do |line_array|
       # CSV.open(path).each do |line_array|
         begin
-          raise ArgumentError.new("Vehicle number (vin) not valid for driver \"#{line_array[1]}\" with id# #{line_array[0]}" ) if line_array[2].length != 17
+          raise ArgumentError.new("Vehicle number (vin) not valid for\ndriver \"#{line_array[1]}\" with id# #{line_array[0]}.\nHence this driver will not be recorded." ) if line_array[2].length != 17
         rescue ArgumentError => exception
           puts "#{exception.message}"
           next
@@ -27,7 +27,11 @@ module RideSharing
 
     def self.find(driver_id)
       found_driver = self.all.select { |driver| driver.id == driver_id}
-      raise ArgumentError.new("No such id number exist") if found_driver == []
+      begin
+        raise ArgumentError.new("Id number #{driver_id} does not exist") if found_driver == []
+      rescue ArgumentError => exception
+        puts "#{exception.message}"
+      end
       return found_driver.first
     end
 

@@ -64,10 +64,13 @@ describe "Driver" do
       returned_object.name.must_equal "Dr. Kenton Berge"
     end
 
-    it "Throws an error if id is not found" do
-      proc{
-        RideSharing::Driver.find(101)
-      }.must_raise ArgumentError
+    # it "Throws an error if id is not found" do
+    #   proc{
+    #     RideSharing::Driver.find(101)
+    #   }.must_raise ArgumentError
+    # end
+    it "Returns nil if id is not found" do
+      RideSharing::Driver.find(101).must_be_nil
     end
   end # End of describe "Driver#self.find"
 
@@ -87,14 +90,27 @@ describe "Driver" do
     end
 
     it "Test of calculation of the average of the rating with number of rides == 0  " do
-      # driver_trips_hash = {}
-      # RideSharing::Driver.all.each do |driver|
-      #   puts "#{driver.id}: #{driver.list_of_trips.length}"
-      # end
       driver100 = RideSharing::Driver.find(100)
       driver100.average_rating.must_be_kind_of Float
     end
   end # End of describe "#average_rating"
 
 
+################################################################################
+  # describe "EXPLORING DATA" do
+  #   it "Listning of ratings giving by a specific driver" do
+  #     driver21 = RideSharing::Driver.find(21)
+  #     driver21.list_of_trips.each do |trip|
+  #       puts trip.rating
+  #     end
+  #   end
+  #
+  #   it "List of number of trips for all drivers" do
+  #     RideSharing::Driver.all.each do |driver|
+  #       puts "#{driver.id}: #{driver.list_of_trips.length}"
+  #     end
+  #   end
+  #
+  # end # End of describe "EXPLORING DATA"
+################################################################################
 end # End of describe "class Driver"

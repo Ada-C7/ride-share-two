@@ -2,7 +2,7 @@ require_relative "spec_helper"
 
 
 describe "Rider" do
-  xdescribe "#initialize" do
+  describe "#initialize" do
     it "Takes an id, name and phone number" do
       id = "007"
       name = "James Bond"
@@ -21,7 +21,7 @@ describe "Rider" do
   end # End of describe "#initialize"
 
 
-  xdescribe "#self.all" do
+  describe "#self.all" do
     it "Returns an array." do
       RideSharing::Rider.all.must_be_kind_of Array
     end
@@ -45,7 +45,7 @@ describe "Rider" do
   end # End of describe "Driver#self.all"
 
 
-  xdescribe "#self.find" do
+  describe "#self.find" do
     it "returns an object of class RideSharing::Rider" do
       returned_object = RideSharing::Rider.find(1)
       returned_object.must_be_kind_of RideSharing::Rider
@@ -79,19 +79,61 @@ describe "Rider" do
       end
     end
 
-    it "" do
-      rider1.previous_drivers.each do |obj|
-        obj.must_be_kind_of RideSharing::Driver
-      end
+    it "Find previous drivers for rider with id#85" do
+      rider85 = RideSharing::Rider.find(85)
+      rider85.previous_drivers.length.must_equal 7
     end
 
-    it "Find out how many trips and drivers each rider have utilized" do
-      RideSharing::Rider.all.each do |rider|
-        # drivers = rider.list_of_trips.map { |trip| trip.find_driver}
-        # puts "#{rider.id}: #{rider.list_of_trips.length} trips with #{drivers.length} drivers"
-      end
+    it "Find previous drivers for rider with id#103" do
+      rider103 = RideSharing::Rider.find(103)
+      rider103.previous_drivers.length.must_equal 1
     end
   end # End describe "#previous_drivers"
 
+
+################################################################################
+  # describe "EXPLORING DATA" do
+  #   it "Printout of number of trips and drivers for each rider." do
+  #     RideSharing::Rider.all.each do |rider|
+  #       drivers = rider.list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}
+  #       drivers = drivers.uniq { |driver| driver.id}
+  #       puts "Rider ##{rider.id}: #{rider.list_of_trips.length} trips with #{drivers.length} drivers"
+  #     end
+  #   end
+  #
+  #   it "Find all driver-ids for rider 85, should be 7 of them" do
+  #     rider85 = RideSharing::Rider.find(85)
+  #     drivers_of_85 = rider85.list_of_trips.map { |trip| trip.find_driver.id}
+  #     puts drivers_of_85
+  #   end
+  #
+  #   it "Find all driver-ids for rider 41, should be 2 of them, not 3" do
+  #     rider41 = RideSharing::Rider.find(41)
+  #     drivers_of_41 = rider41.list_of_trips.map { |trip| trip.find_driver.id}.uniq
+  #     puts drivers_of_41
+  #   end
+  #
+  #   it "Find all riders with no trips" do
+  #     RideSharing::Rider.all.each do |rider|
+  #       # rider_with_0_trips = []
+  #       if rider.list_of_trips == []
+  #         print "#{rider.id} "
+  #       end
+  #     end
+  #     puts ""
+  #   end
+  #
+  #   it "Find all riders with trips having an unidentified driver" do
+  #     RideSharing::Rider.all.each do |rider|
+  #       drivers = rider.list_of_trips.map { |trip| trip.find_driver}
+  #       unidentified_drivers = drivers.select {|driver| driver == nil}
+  #       if unidentified_drivers != []
+  #         puts rider.id
+  #         rider.list_of_trips.map { |trip| puts "Trip ##{trip.id}"}
+  #       end
+  #     end
+  #   end
+  # end # End of describe "EXPLORING CODE:
+################################################################################
 
 end # End of describe "Rider"
