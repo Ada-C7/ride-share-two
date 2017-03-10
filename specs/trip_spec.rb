@@ -163,4 +163,25 @@ describe "Trip" do
     trips.last.rating.must_equal last_trip_rating
     end
   end
+
+  # find all trip instances for a given driver ID
+  # args = driver_id
+  # returns array of drivers
+  describe "Trip.find_all_for_driver" do
+    it "returns an array" do
+      RideShare::Trip.find_all_for_driver(88).must_be_instance_of Array
+    end
+
+    it "contains only Trip instances in the returned array" do
+      RideShare::Trip.find_all_for_driver(88).each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+    # returns an array
+    # returns an array of driver obejcts
+    # finds all trip instances for a given driver ID -> length, first, last
+      # includes, does not include
+    # driver id not found -> returns nil or empty array
+    # all trip instances have matching driver id
+  end
 end
