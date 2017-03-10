@@ -1,5 +1,3 @@
-require_relative 'data_import'
-
 module RideShare
   class Uber
 
@@ -14,7 +12,7 @@ module RideShare
     end
 
     private
-     
+
     def validate_params(params, required_attributes)
       missing = required_attributes.select do |attribute|
         !params.keys.include?(attribute) || params[attribute].to_s.empty?

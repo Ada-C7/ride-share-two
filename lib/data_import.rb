@@ -1,5 +1,3 @@
-require 'csv'
-
 module DataImport
 
   def self.import_attributes(filename)
