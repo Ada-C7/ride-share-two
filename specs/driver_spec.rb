@@ -52,7 +52,7 @@ describe "Driver" do
 
 
   describe "#self.find" do
-    it "returns an object of class RideSharing::Driver" do
+    it "returns an object of class RideSharing::Driver if the id exists" do
       returned_object = RideSharing::Driver.find(1)
       returned_object.must_be_kind_of RideSharing::Driver
     end
@@ -70,8 +70,10 @@ describe "Driver" do
     #   }.must_raise ArgumentError
     # end
     it "Returns nil if id is not found" do
+      RideSharing::Driver.find(0).must_be_nil
       RideSharing::Driver.find(101).must_be_nil
     end
+
   end # End of describe "Driver#self.find"
 
 

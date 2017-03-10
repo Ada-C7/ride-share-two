@@ -18,8 +18,16 @@ module RideSharing
     end
 
     def self.find(rider_id)
+      # found_rider = self.all.select { |rider| rider.id == rider_id}
+      # raise ArgumentError.new("No such id number exist") if found_rider == []
+      # return found_rider.first
+
       found_rider = self.all.select { |rider| rider.id == rider_id}
-      raise ArgumentError.new("No such id number exist") if found_rider == []
+      begin
+        raise ArgumentError.new("Id number #{rider_id} does not exist") if found_rider == []
+      rescue ArgumentError => exception
+        puts "#{exception.message}"
+      end
       return found_rider.first
     end
 
@@ -28,7 +36,7 @@ module RideSharing
     end
 
     def previous_drivers
-      drivers = list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}.uniq
+      drivers = list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}.uniq { |driver| driver.id}
       return drivers
     end
 
