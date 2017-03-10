@@ -1,13 +1,14 @@
 require 'csv'
-# require 'pry'
+# require_relative 'module.rb'
 
 
 
 module Rideshare
   class Trip
-    attr_reader  :driver_id, :rider_id, :rating, :trip_id
+    attr_accessor :driver_id, :rider_id, :rating, :trip_id
 
     def initialize(trip_hash)
+
       @trip_id = trip_hash[:trip_id]
       @driver_id = trip_hash[:driver_id]
       @rider_id = trip_hash[:rider_id]
@@ -50,7 +51,7 @@ module Rideshare
 
     def make_driver
     #helper method to extract driver_id from trip object
-      Driver.find_driver(Trip.driver_id)
+      Driver.find_driver(self.driver_id)
     end
 
     def make_rider
@@ -64,9 +65,9 @@ end
 #
 #
 # puts Rideshare::Trip.create_trips[0].make_rider
-# puts Rideshare::Trip.create_trips[0].make_driver
+# puts  Rideshare::Trip.create_trips[1].driver_id
 # puts Rideshare::Trip.find_by_driver(17)
-puts Rideshare::Trip.find_by_driver(102)
+# puts Rideshare::Trip.find_by_driver(102)
 # puts Rideshare::Trip.find_by_rider(290)
 #
 # #

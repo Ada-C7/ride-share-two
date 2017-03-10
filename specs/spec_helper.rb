@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/pride'
+# require 'minitest/skip_dsl'
 require 'simplecov'
 SimpleCov.start
 # Add simplecov
