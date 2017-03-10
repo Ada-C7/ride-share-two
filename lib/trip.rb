@@ -10,6 +10,8 @@ module RideShare
       @rider_id = rider_id
       @date = date
       @rating = rating
+
+      raise ArgumentError.new("Rating must be between 1 and 5") unless @rating >= 1 && @rating <= 5
     end
 
     #retrieve all trips from the CSV file
