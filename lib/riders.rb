@@ -20,7 +20,7 @@ module RideShare
           :phone_num => rider[2]
           }
           riders_array << (Rider.new(args))
-        rescue ArgumentError
+        rescue InvalidPhoneError
           #this will only apply if csv has errors
           riders_array << (Rider.new(rider[0], rider[1], nil))
           puts "Invalid phone number for rider #{id}"

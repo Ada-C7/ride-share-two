@@ -240,9 +240,16 @@ describe "Trip.all" do
   describe "Error check ratings" do
 
     it "raises error for invalid rating" do
+      args = {
+        :trip_id => "1",
+        :driver_id => "111",
+        :rider_id => "54",
+        :date => "2016-04-05",
+        :rating => "33"
+      }
       proc {
-        RideShare::Trip.new("1", "1", "54", "2016-04-05", "55")
-      }.must_raise ArgumentError
+        RideShare::Trip.new(args)
+      }.must_raise InvalidRatingError
     end
 
   end

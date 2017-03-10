@@ -24,7 +24,7 @@ module RideShare
             :rating => trip[4]
           }
           trips_array << Trip.new(args)
-        rescue ArgumentError
+        rescue InvalidRatingError
           #this will only apply if csv has errors
           args = {
             :trip_id => trip[0],
@@ -72,7 +72,7 @@ module RideShare
       if rating == nil || (1..5).include?(rating.to_i)
         return rating
       else
-        raise ArgumentError.new("Rating must be 1-5")
+        raise InvalidRatingError.new("Rating must be 1-5")
       end
     end
   end

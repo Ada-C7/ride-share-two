@@ -20,7 +20,7 @@ module RideShare
           :vin => driver[2]
           }
           drivers_array << (Driver.new(args))
-        rescue ArgumentError
+        rescue InvalidVinError
           #this will only apply if csv has errors
           drivers_array << (Driver.new(driver[0], driver[1], nil))
           puts "Vin for driver #{id} is not valid"
