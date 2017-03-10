@@ -28,11 +28,8 @@ class Driver
   def self.find(search_id)
     # drivers = self.all
     # match = false
-    self.all.each do |driver|
-      if driver.id == search_id
-          return driver
-      end
-    end
+    self.all.each {|driver| return driver if driver.id == search_id}
+  
     raise ArgumentError.new("There are no drivers with that match")
 
     # binding.pry
@@ -42,15 +39,13 @@ class Driver
   def trips
     driver_trips = []
     Trip.all.map { |trip| driver_trips << trip if trip.driver == @id }
-        
+
     return driver_trips
   end
 
   def average
     rating = 0
-    trips.each do |trip|
-      rating += trip.rating
-    end
+    trips.each {|trip| rating += trip.rating }
 
     return rating = rating.to_f / trips.length
 
