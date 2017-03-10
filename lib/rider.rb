@@ -19,7 +19,7 @@ module Carmmunity
 
 
     def previous_drivers
-      drivers = trips_taken.map { |trip| Trip.driver_trips(trip.driver_id) }
+      drivers = trips_taken.map { |trip| Driver.find(trip.driver_id) }
       return drivers
     end
 
