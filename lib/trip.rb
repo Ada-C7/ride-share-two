@@ -22,9 +22,23 @@ module RideShare
       Rider.find(@rider_id)
     end
 
+    # retrieve all trips from the CSV file
+    def self.all
+      trips = []
+      CSV.foreach('support/trips.csv', headers: true) do |row|
+        trips << self.new(id: row['trip_id'].to_i, driver_id: row['driver_id'].to_i,
+          rider_id: row['rider_id'].to_i, date: row['date'],
+          rating: row['rating'].to_i)
+      end
+      return trips
+    end
+
+    # find all trip instances for a given driver ID
+    
+
+
     private
 
-    #or verify rating
     def check_if_valid_rating(rating)
       unless (rating.is_a? Integer)
         raise ArgumentError.new("rating must be an int")

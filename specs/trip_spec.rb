@@ -82,6 +82,7 @@ describe "Trip" do
     end
   end
 
+  # As this method calls the Driver.find method, extensive testing was not done.
   describe "driver" do
     it "returns the Driver instance that matches the Trip's driver_id attribute" do
       driver = trip.driver
@@ -96,6 +97,7 @@ describe "Trip" do
     end
   end
 
+  # As this method calls the Rider.find method, extensive testing was not done.
   describe "rider" do
     it "returns the Rider instance that matches the Trip's rider_id attribute" do
       rider = trip.rider
@@ -107,6 +109,58 @@ describe "Trip" do
     it "returns nil if @rider_id is undefined" do
       trip = RideShare::Trip.new(id: @id)
       trip.rider.must_be_nil
+    end
+  end
+
+  describe "Trip.all" do
+    let (:trips) {RideShare::Trip.all}
+    let (:trip_csv_info) {CSV.read("support/trips.csv")[1 .. -1]} # ignore headers
+
+    it "returns an array" do
+      trips.must_be_instance_of Array
+    end
+
+    it "contains only Trip elements in the returned array" do
+      trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "returns the correct number of trips" do
+      expected_num_of_trips = trip_csv_info.size
+      num_of_trips = trips.size
+
+      num_of_trips.must_equal expected_num_of_trips
+    end
+
+    it "initializes a first Trip with the CSV's first listed trip id, rider id,
+    driver id, date, and rating" do
+      first_trip_id = trip_csv_info.first[0].to_i
+      first_trip_driver_id = trip_csv_info.first[1].to_i
+      first_trip_rider_id = trip_csv_info.first[2].to_i
+      first_trip_date = trip_csv_info.first[3]
+      first_trip_rating = trip_csv_info.first[4].to_i
+
+      trips.first.id.must_equal first_trip_id
+      trips.first.driver_id.must_equal first_trip_driver_id
+      trips.first.rider_id.must_equal first_trip_rider_id
+      trips.first.date.must_equal first_trip_date
+      trips.first.rating.must_equal first_trip_rating
+    end
+
+    it "initializes a last Trip with the CSV's last listed trip id, rider id,
+    driver id, date, and rating" do
+    last_trip_id = trip_csv_info.last[0].to_i
+    last_trip_driver_id = trip_csv_info.last[1].to_i
+    last_trip_rider_id = trip_csv_info.last[2].to_i
+    last_trip_date = trip_csv_info.last[3]
+    last_trip_rating = trip_csv_info.last[4].to_i
+
+    trips.last.id.must_equal last_trip_id
+    trips.last.driver_id.must_equal last_trip_driver_id
+    trips.last.rider_id.must_equal last_trip_rider_id
+    trips.last.date.must_equal last_trip_date
+    trips.last.rating.must_equal last_trip_rating
     end
   end
 end
