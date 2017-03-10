@@ -26,6 +26,7 @@ module RideShare
           trips_array << Trip.new(args)
         rescue InvalidRatingError
           #this will only apply if csv has errors
+          puts "#Trip # #{trip[0]} has an invalid rating"
           args = {
             :trip_id => trip[0],
             :driver_id => trip[1],
@@ -33,7 +34,6 @@ module RideShare
             :date => trip[3],
             :rating => nil
           }
-          puts "#Trip # #{trip[0]} has an invalid rating"
           trips_array << Trip.new(args)
         end
       end

@@ -73,7 +73,7 @@ end
 
 describe "Exception for bad vins" do
 
-  it "" do
+  it "Raises error for invalid vin" do
     args = {
     :id => "100",
     :name => "Minnie Dach",

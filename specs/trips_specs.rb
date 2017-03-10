@@ -211,7 +211,6 @@ describe "Trip.all" do
     it "returns an instance of Rider" do
       @trip.find_rider
       @trip.find_rider.must_be_instance_of RideShare::Rider
-
     end
 
     it "returns a Rider instance" do
@@ -251,6 +250,40 @@ describe "Trip.all" do
         RideShare::Trip.new(args)
       }.must_raise InvalidRatingError
     end
+  end
 
+  describe "Allows for nil ratings" do
+    before do
+      arg1 = {
+        :trip_id => "1",
+        :driver_id => "1",
+        :rider_id => "333",
+        :date => "2016-04-25",
+        :rating => nil
+      }
+      arg2 = {
+        :trip_id => "2",
+        :driver_id => "3",
+        :rider_id => "4",
+        :date => "2016-04-05",
+        :rating => nil
+      }
+      @trip_array = []
+      @trip_array << RideShare::Trip.new(arg2)
+      @trip_array << RideShare::Trip.new(arg1)
+    end
+
+    it "The info for invalid vins is correct with nil vin" do
+      @trip_array.first.trip_id.must_equal "2"
+      @trip_array.first.driver_id.must_equal "3"
+      @trip_array.first.rider_id.must_equal "4"
+      @trip_array.first.date.must_equal "2016-04-05"
+      @trip_array.first.rating.must_be_nil
+      @trip_array.last.trip_id.must_equal "1"
+      @trip_array.last.driver_id.must_equal "1"
+      @trip_array.last.rider_id.must_equal "333"
+      @trip_array.last.date.must_equal "2016-04-25"
+      @trip_array.last.rating.must_be_nil
+    end
   end
 end
