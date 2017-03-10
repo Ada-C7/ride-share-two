@@ -16,7 +16,9 @@ module RideShare
     end
 
     def get_driver
-      RideShare::Driver.find(driver_id)
+      driver = RideShare::Driver.find(driver_id)
+      return driver unless driver.nil?
+      raise ArgumentError.new("No driver with id:#{driver_id} in driver csv")
     end
 
     # there is no other class calling this method

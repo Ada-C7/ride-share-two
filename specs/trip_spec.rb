@@ -194,30 +194,49 @@ describe "Trip" do
 
 #######################################################
 
-##### NEED TO WRITE THESE SPECS #########
-# these methods are really hard to test because you need
-# call a bunch of methods before you can call this one
-# this is because this program's classes are extermely highly depend on each other
-# it would be easier to test these methods in the other classes...
   let(:trips) { RideShare::Trip.all }
 
   describe "Trip#get_driver" do
 
+    before do
+      # there is not driver_id 0 in drivers.csv but trips.csv has trips for driver_id 0
+      @bad_driver_id = 0
+    end
+    let(:trips_bad_driver_id) { RideShare::Trip.find_by_driver(@bad_driver_id)}
+
+    # this spec is testing every trip from csv - you could use sample to reduce
+    # you now know there are trips for driver_id 0 -this driver DNE
+    # need to change how you test or figure out how to ignore bad driver ids
     it "returns a driver instance" do
       trips.each do |trip|
         driver = trip.get_driver
-        driver.must_be_instance_of RideShare::Driver unless driver.nil?
+        driver.must_be_instance_of RideShare::Driver unless driver
       end
+    end
+
+    # Should return an error...
+    # Want to have driver in csv/database
+    # don't want to return drivers that have not been initialized
+    it "raises an error if there is no driver" do
+      err = proc {
+             trips_bad_driver_id.each { |trip| trip.get_driver }
+           }.must_raise ArgumentError
+      err.message.must_equal "No driver with id:#{@bad_driver_id} in driver csv"
     end
   end
 
   describe "Trip#get_rider" do
 
+    # this spec is testing every trip from csv - you could use sample to reduce
     it "returns a rider instance" do
       trips.each do |trip|
         rider = trip.get_rider
         rider.must_be_instance_of RideShare::Rider unless rider.nil?
       end
+    end
+
+    it "returns an ... if no matching rider instance for rider_id" do
+      skip
     end
   end
 end

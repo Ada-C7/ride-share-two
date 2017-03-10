@@ -25,6 +25,10 @@ describe "Rider" do
     end
   end
 
+  # AHHH - what about duplicate riders ... duplicate ids...
+  # - people could have same name but not phone numbers
+   
+
   describe "Rider#all" do
 
     before do
@@ -32,8 +36,8 @@ describe "Rider" do
       data = FileData.new(csv_file)
       @riders_data = data.read_csv_and_remove_headings
       @bad_data = {
-                    bad_id: [['two', 'name', '425-789-1234']],
-                    bad_phone: [['15', 'name', 425-678-1234]],
+                    bad_id: [['190', 'john smith', '123-456-7890'], ['two', 'name', '425-789-1234']],
+                    bad_phone: [['190', 'john smith','123-456-7890'],['15', 'name', '425-678']],
                     missing_part: [['10', 'name']],
                     empty_array: [],
                     empty_nested_arrays: [[],[],[]],

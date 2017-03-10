@@ -159,9 +159,11 @@ describe "Driver" do
   describe "Driver#calculate_average_rating" do
 
     # this is a test for every driver...
+    # maybe better to use sample - imagine if you had thousand drivers
+    # question of time and quantity of data - do you have time for super long tests
     # what should happen if driver doesn't have any trips? - returns nil
     it "returns nil if no trips or float between 1 and 5" do
-      drivers.each do |driver|
+      drivers.sample(25).each do |driver|
         return nil if driver.calculate_average_rating.nil?
         driver.calculate_average_rating.must_be :>=, 1
         driver.calculate_average_rating.must_be :<=, 5
@@ -169,20 +171,12 @@ describe "Driver" do
       end
     end
 
-
-    ## this is a test for just one driver - the driver we know avearge for
-    # it "returns a float between 1 and 5" do
-    #   driver.calculate_average_rating.must_be :>=, 1
-    #   driver.calculate_average_rating.must_be :<=, 5
-    #   driver.calculate_average_rating.must_be_instance_of Float
-    # end
-
     it "calculates the correct average" do
       # this is the average for driver_id 21
       driver_know_avg.calculate_average_rating.must_equal 30.0 / 11
     end
 
-    it "returns nil if there are no trips" do
+    it "returns nil if there are no trips for driver" do
       driver_no_trips.calculate_average_rating.must_be_nil
     end
   end

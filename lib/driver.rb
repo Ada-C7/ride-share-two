@@ -12,14 +12,10 @@ module RideShare
       @vin = info[:vin]
     end
 
-    # this is highly coupled - creating a very strong dependency
-    # between Driver and Trip - can we say intentially coupled?
-    # only plus about this is it is isolated
     def get_trips()
       RideShare::Trip.find_by_driver(@id)
     end
 
-    # need to figure out what to return if trips is nil
     def calculate_average_rating()
       trips = get_trips
       return nil if trips.nil?
