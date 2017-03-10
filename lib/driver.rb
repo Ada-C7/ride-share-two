@@ -42,6 +42,7 @@ module RideShare
 
     def self.find(driver_id)
       found_driver = @all_drivers.select { |instance| instance.id == driver_id }
+      puts "driver not found" if found_driver == []
       return found_driver[0]
       # return specific instance of driver (previously instantiated)
     end

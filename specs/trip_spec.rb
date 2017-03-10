@@ -84,6 +84,8 @@ describe "RideShare::Trip" do
   describe "Trip#by_driver(driver_id)" do
     before { all_trips }
     let(:by_driver61) { RideShare::Trip.by_driver("61") }
+    let(:by_driver100) { RideShare::Trip.by_driver("100") } # no trips
+    let(:by_driver999) { RideShare::Trip.by_driver("999") } # no driver_id
 
     it "returns an array" do
       by_driver61.must_be_kind_of Array
@@ -93,13 +95,13 @@ describe "RideShare::Trip" do
       by_driver61.each { |element| element.must_be_instance_of RideShare::Trip }
     end
 
-    # it "each returned trip has the expected associated Driver" do
-    # skip
-    #   RideShare::Trip.all
-    #   driver_id = 61
-    #   driver_trips = RideShare::Trip.by_driver(driver_id)
-    #   driver_id_trips.each { |element| element.driver_id.must_equal driver_id }
-    # end
+    it "returns empty array if no trips are found for driver" do
+      by_driver100.must_equal []
+    end
+
+    it "returns nil if the driver_id is not a valid one" do
+      by_driver999.must_equal []
+    end
   end
 
   describe "Trip#find_driver" do

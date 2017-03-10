@@ -33,9 +33,7 @@ module RideShare
     # class method: by_ridertr(rider_id)
     def self.by_rider(rider_id)
       # find all instances of trips where rider_id matches
-      @all.select { |trip| trip.rider_id == rider_id }
-      # alert user if no trips with matching rider_id is found
-
+      all.select { |trip| trip.rider_id == rider_id }
       # return collection of trips by specific rider
     end
 
@@ -43,8 +41,6 @@ module RideShare
     def self.by_driver(driver_id)
       # find all instances of trips where driver_id matches
         @all.select { |trip| trip.driver_id == driver_id }
-      # alert user if no trips with matching driver_id is found
-
       # return collection of trips by specific driver
     end
 
