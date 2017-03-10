@@ -103,6 +103,18 @@ describe RideShare::Rider do
         drivers.all? { |driver| driver.class == RideShare::Driver }.must_equal true
         drivers.map { |driver| driver.id }.must_equal [4, 5, 3]
       end
+
+      it "Returns a unique array of drivers" do
+        rider_with_duplicate_drivers = RideShare::Rider.find(41)
+        number_of_drivers = rider_with_duplicate_drivers.drivers.length
+        number_of_unique_drivers = rider_with_duplicate_drivers.drivers.uniq.length
+
+        number_of_drivers.must_equal number_of_unique_drivers
+      end
+
+      it "Returns empty array if a rider has no trips" do
+        inexperienced_rider.drivers.must_be :empty?
+      end
     end
 
   end

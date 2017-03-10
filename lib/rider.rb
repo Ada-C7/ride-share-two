@@ -21,7 +21,7 @@ module RideShare
     end
 
     def drivers
-      @trips.map { |trip| Driver.find(trip.driver_id) }
+      trips.map { |trip| Driver.find(trip.driver_id) }.uniq
     end
 
   end
