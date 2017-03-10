@@ -27,20 +27,15 @@ class Rider
   end
 
   def self.find(search_id)
-    match = nil
     all_riders = self.all
 
     all_riders.each do |rider|
       if rider.id == search_id
-        match = rider
-        break
-      else
-        match = nil
+        return rider
       end
     end
 
-    raise ArgumentError.new("There were no riders with that ID") if match == nil
-    return match
+    raise ArgumentError.new("There were no riders with that ID") 
 
   end
 
