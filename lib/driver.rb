@@ -29,11 +29,10 @@ class Driver
     # drivers = self.all
     # match = false
     self.all.each {|driver| return driver if driver.id == search_id}
-  
+
     raise ArgumentError.new("There are no drivers with that match")
 
     # binding.pry
-
   end
 
   def trips
@@ -48,7 +47,6 @@ class Driver
     trips.each {|trip| rating += trip.rating }
 
     return rating = rating.to_f / trips.length
-
   end
 
 end
