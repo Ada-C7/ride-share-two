@@ -132,6 +132,9 @@ describe "Rider" do
   end
 
   let(:rider) { RideShare::Rider.find(@rider_id) }
+  let(:rider_no_trips) { RideShare::Rider.find(300) }
+   # riders with more than one trip with same drivers - 41, 164, 92, 74, 63, 250
+  let(:rider_with_same_driver) { RideShare::Rider.find(41) }
 
   describe "Rider#get_trips" do
 
@@ -142,6 +145,11 @@ describe "Rider" do
 
     it "each trip instance has the same rider id" do
       rider.get_trips.each { |trip| trip.rider_id.must_equal @rider_id }
+    end
+
+    # with out adding an expression to return nil - you get an empty array
+    it "returns nil if rider has no trips" do
+      rider_no_trips.get_trips.must_be_nil
     end
   end
 
@@ -155,12 +163,15 @@ describe "Rider" do
       rider.get_drivers.each { |driver| driver.must_be_instance_of RideShare::Driver  }
     end
 
-    it "doesn't have duplicate drivers" do
-      # riders with more than one trip with same drivers - 41, 164, 92, 74, 63, 250
-      rider_with_duplicates =  RideShare::Rider.find(41)
-      num_of_drivers = rider_with_duplicates.get_drivers.length
-      num_after_uniq = rider_with_duplicates.get_drivers.uniq.length
+    it "doesn't return array with duplicate drivers" do
+      drivers = rider_with_same_driver.get_drivers
+      num_of_drivers = drivers.length
+      num_after_uniq = drivers.uniq.length
       num_of_drivers.must_equal num_after_uniq
+    end
+
+    it "returns nil if no drivers for rider" do
+      rider_no_trips.get_drivers.must_be_nil
     end
   end
 end

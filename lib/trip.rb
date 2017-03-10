@@ -67,13 +67,13 @@ module RideShare
     def self.find_by_driver(id)
       trips = all
       trips_of_driver = trips.map { |trip| trip if trip.driver_id == id }.compact
-      return trips_of_driver
+      trips_of_driver.empty? ? nil : trips_of_driver
     end
 
     def self.find_by_rider(id)
       trips = all
       trips_of_rider = trips.map { |trip| trip if trip.rider_id == id }.compact
-      return trips_of_rider
+      trips_of_rider.empty? ? nil : trips_of_rider
     end
   end
 end

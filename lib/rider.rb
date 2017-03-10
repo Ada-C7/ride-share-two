@@ -9,14 +9,19 @@ module RideShare
       @phone_number = info[:phone_number]
     end
 
+    # what should be returned if there are no trips?
+    # calling find_by_rider will auto return an empty arrays
+    # change the Trip.find_by_rider
     def get_trips
-      RideShare::Trip.find_by_rider(@id)
+      trips = RideShare::Trip.find_by_rider(@id)
     end
 
     def get_drivers()
       trips = get_trips
-      # this is an array of driver instances
-      trips.map { |trip| trip.get_driver}.uniq {|driver| driver.id}
+      return nil if trips.nil?
+      # map returns array of driver instances - you don't need uniq
+      # you wont get duplicate driver instances
+      trips.map { |trip| trip.get_driver }
     end
 
   ######################################################
