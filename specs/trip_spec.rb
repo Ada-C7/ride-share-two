@@ -96,7 +96,6 @@ describe "Trip" do
       RideSharing::Trip.find_all_trips_for_driver(101).must_be_kind_of Array
       RideSharing::Trip.find_all_trips_for_driver(101).must_be_empty
     end
-
   end # End of describe "#self.find_all_trips_for_driver"
 
 
@@ -126,20 +125,53 @@ describe "Trip" do
 
 
   describe "#find_driver" do
-    let(:trip1) { RideSharing::Trip.new(1, 1, 54, "2016-04-05", 3)}
-    it "Return must be an object of class RideSharing::Driver" do
+    let(:trip1) { RideSharing::Trip.find(1)}
+    let(:trip154) { RideSharing::Trip.find(154)} #This trip has driver_id: 0
+    it "Return must be an object of class RideSharing::Driver when driver id is valid" do
       trip1.find_driver.must_be_kind_of RideSharing::Driver
+    end
+
+    it "Return must be an object of class NilClass when driver id is NOT valid" do
+      trip154.find_driver.must_be_kind_of NilClass
+      trip154.find_driver.must_be_nil
     end
   end # End of describe "#find_driver"
 
 
   describe "#find_rider" do
-    let(:trip1) { RideSharing::Trip.new(1, 1, 54, "2016-04-05", 3)}
+    let(:trip1) { RideSharing::Trip.find(1)}
+    let(:trip267) { RideSharing::Trip.find(267)} # This trip has rider_id: 0
     it "Return must be an object of class RideSharing::Rider" do
       trip1.find_rider.must_be_kind_of RideSharing::Rider
+    end
+    it "Return must be an object of class NilClass when driver id is NOT valid" do
+      trip267.find_rider.must_be_kind_of NilClass
+      trip267.find_rider.must_be_nil
     end
   end # End of describe "#find_driver"
 
 
+  ################################################################################
+    # describe "EXPLORING DATA" do
+    #   it "Find trips with unvalid riders" do
+    #     RideSharing::Trip.all.each do |trip|
+    #       if trip.find_rider == nil
+    #         puts trip.id
+    #       end
+    #     end
+    #   end
+
+    # it "Find trips with unvalid score" do
+    #   RideSharing::Trip.all.each do |trip|
+    #     if !(1..5).include? trip.rating
+    #       puts trip.id
+    #     end
+    #   end
+    # end
+    #
+
+
+    # end # End of describe "EXPLORING CODE:
+  ################################################################################
 
 end # End of describe "class Trip"

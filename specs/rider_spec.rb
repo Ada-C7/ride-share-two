@@ -110,7 +110,7 @@ describe "Rider" do
 
 
 ################################################################################
-  describe "EXPLORING DATA" do
+  # describe "EXPLORING DATA" do
     # it "Printout of number of trips and drivers for each rider." do
     #   RideSharing::Rider.all.each do |rider|
     #     drivers = rider.list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}
@@ -157,7 +157,7 @@ describe "Rider" do
     #     end
     #   end
     # end
-  end # End of describe "EXPLORING CODE:
+  # end # End of describe "EXPLORING CODE:
 ################################################################################
 
 end # End of describe "Rider"
