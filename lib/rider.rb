@@ -15,7 +15,7 @@ class Rider
 
   def self.all
     riders = []
-    CSV.foreach("./support/riders.csv", {:headers => true}) do |line|
+   CSV.foreach("./support/riders.csv", {:headers => true}) do |line|
       id = line[0].to_i
       name = line[1]
       phone = line[2]
@@ -30,7 +30,7 @@ class Rider
     all_riders = self.all
 
     all_riders.each {|rider| return rider if rider.id == search_id }
-  
+
     raise ArgumentError.new("There were no riders with that ID")
 
   end

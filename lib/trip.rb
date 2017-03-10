@@ -34,11 +34,8 @@ class Trip
     rider_trips = []
     all_trips = self.all
 
-    all_trips.each do |trip|
-      if trip.rider == search_id
-        rider_trips << trip
-      end
-    end
+    all_trips.each {|trip| rider_trips << trip if trip.rider == search_id }
+
 
     raise ArgumentError.new("No matching trips for that rider") if rider_trips.length == 0
 
