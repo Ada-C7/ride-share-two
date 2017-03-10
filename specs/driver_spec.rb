@@ -1,11 +1,11 @@
 require_relative 'spec_helper'
 
-xdescribe "Driver Class" do
+describe "Driver Class" do
 
   let(:ada) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
 
   describe "Instance Methods" do
-    describe "initialize method" do
+    xdescribe "initialize method" do
 
       it "Instantiates a new instance of Driver class" do
         ada.must_be_instance_of Carmmunity::Driver
@@ -19,26 +19,39 @@ xdescribe "Driver Class" do
     end #end of initialze method
 
 
-    xdescribe "trips_taken" do
+    describe "trips_taken" do
+
+      let(:driver) {Carmmunity::Driver::find(12)}
+      let(:trips) {driver.trips_taken}
 
       it "Trips taken must be an array" do
-        skip
-        ada.trips_taken.must_be_instance_of Array
+
+        driver.trips_taken.must_be_instance_of Array
       end
 
-      it "The driver id number matches the driver id in the trip information" do
-        skip
+      it "returns more than one trip instance" do
+        trips.length.must_be :>, 1
+      end
+
+      it "The driver id number matches the trip's driver id " do
+
+        trips.map{|trip| trip.driver_id}.must_include  driver.driver_id
+
       end
 
       it "Returns the correct number of trips taken " do
         skip
+        trips.length.must_equal 8
       end
 
       it "Returns the correct trip infromation" do
-        skip
+        trip = trips.first
+        trip.driver_id.must_equal     12
+        trip.rating.must_equal        1
+        trip.rider_id.must_equal      237
+        trip.trip_id.must_equal       12
+        trip.date.must_equal          "2016-08-21"
       end
-
-
     end #end of trips taken
 
     xdescribe "average_rating method" do
@@ -56,7 +69,7 @@ xdescribe "Driver Class" do
   end #end of instance methods
 
 
-  describe " Class Methods " do
+  xdescribe " Class Methods " do
 
     let(:my_drivers) {Carmmunity::Driver::all}
 
