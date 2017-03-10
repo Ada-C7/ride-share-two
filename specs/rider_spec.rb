@@ -14,11 +14,7 @@ describe "Rider" do
       @new_rider = RideShare::Rider.new(rider_info)
     end
 
-    it "raises an argumen error if ..." do
-      skip
-    end
-
-    it "initializes with 1 argument: a rider info hash" do
+    it "returns an instance of rider" do
       @new_rider.must_be_instance_of RideShare::Rider
     end
 
@@ -52,7 +48,7 @@ describe "Rider" do
     #   @riders_data.each { |rider_data| RideShare::Rider.all([riders_data])
     # end
 
-    it " accepts csv_file data - doesn't raise any errors & returns an array" do
+    it " accepts csv data - doesn't raise any errors & returns an array" do
       riders.must_be_instance_of Array
     end
 
@@ -112,7 +108,7 @@ describe "Rider" do
     #   @riders_data = data.read_csv_and_remove_headings
     # end
 
-    it "requires arguments" do
+    it "requires an id argument" do
       proc {
         RideShare::Rider.find()
       }.must_raise ArgumentError
@@ -181,10 +177,6 @@ describe "Rider" do
       rider.get_drivers.each { |driver| driver.must_be_instance_of RideShare::Driver  }
     end
 
-    # are you testing this right?
-    # shouldn't be testing with same exact code ...
-    # you know the exact number for rider 164 - there is one duplicate
-    # so length 6 to 5
     it "doesn't return array with duplicate drivers" do
       drivers = rider_with_same_driver.get_drivers
       drivers_ids = drivers.map { |driver| driver.id }

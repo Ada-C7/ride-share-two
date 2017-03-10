@@ -19,13 +19,7 @@ describe "Trip" do
       @new_trip = RideShare::Trip.new(trip_info)
     end
 
-    # you only need to check the input if it's coming from a untrusted source (like a user)
-    # test it when you import (when you read the CSV file) (note anything outside your code is untrustful)
-    it "raises an argument error if..." do
-      skip
-    end
-
-    it "initializes with 1 argument" do
+    it "returns an instance of Trip" do
       @new_trip.must_be_instance_of RideShare::Trip
     end
 
@@ -77,7 +71,7 @@ describe "Trip" do
       trips.must_be_instance_of Array
     end
 
-    it "has instances of trips in the array" do
+    it "each item in array is a Trip object" do
       trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
@@ -153,10 +147,7 @@ describe "Trip" do
     end
 
     let(:trips) { RideShare::Trip.find_by_driver(@driver_id)}
-
-    it "requires two arguments" do
-      skip
-    end
+    let(:no_trips) { RideShare::Trip.find_by_driver(100) }
 
     it "returns an array" do
       trips.must_be_instance_of Array
@@ -169,6 +160,10 @@ describe "Trip" do
     it "has same driver id for all trip instances" do
       trips.each { |trip| trip.driver_id.must_equal @driver_id }
     end
+
+    it "returns nil if there are no trips for a driver" do
+      no_trips.must_be_nil
+    end
   end
 
   describe "Trip#find_by_rider" do
@@ -178,6 +173,7 @@ describe "Trip" do
     end
 
     let(:trips) { RideShare::Trip.find_by_rider(@rider_id) }
+    let(:no_trips) { RideShare::Trip.find_by_rider(500)}
 
     it "returns an array" do
       trips.must_be_instance_of Array
@@ -189,6 +185,10 @@ describe "Trip" do
 
     it "has same rider id for all trip instances" do
       trips.each { |trip| trip.rider_id.must_equal @rider_id }
+    end
+
+    it "returns nil if there are no trips for rider" do
+      no_trips.must_be_nil
     end
   end
 

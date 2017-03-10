@@ -13,7 +13,7 @@ describe "Driver" do
       @new_driver = RideShare::Driver.new(driver_info)
     end
 
-    it "takes 1 argument: a driver info hash" do
+    it "returns a driver instance" do
       @new_driver.must_be_instance_of RideShare::Driver
     end
 
@@ -122,54 +122,64 @@ describe "Driver" do
       first_driver_in_array = RideShare::Driver.find(1)
       first_driver_in_array.name.must_equal "Bernardo Prosacco"
       first_driver_in_array.id.must_equal 1
-      # first_driver_in_array.vin.must_equal
+      first_driver_in_array.vin.must_equal 'WBWSS52P9NEYLVDE9'
     end
 
     it "cant find the last driver from the CSV" do
       last_driver = RideShare::Driver.find(100)
       last_driver.name.must_equal "Minnie Dach"
       last_driver.id.must_equal 100
-      # last_driver.vin.must_equal
+      last_driver.vin.must_equal 'XF9Z0ST7X18WD41HT'
     end
   end
 #######################################################################
-# randome driver to test with
-# 15,Gayle Herzog,L1CDHZJ0567RJKCJ6
-# or you should make up fake data so you know everything...
 
   before do
+    # manually calculated driver_id's average as 30.0/11
     @driver_id = 21
   end
 
-  let(:driver) { RideShare::Driver.find(@driver_id) }
+  let(:drivers) {RideShare::Driver.all}
+  let(:driver_know_avg) { RideShare::Driver.find(@driver_id) }
   # driver_id 100 has no trips
   let(:driver_no_trips) {RideShare::Driver.find(100)}
 
   describe "Driver#get_trips" do
 
     it "returns an array of trip instances" do
-      driver.get_trips.must_be_instance_of Array
-      driver.get_trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
+      driver_know_avg.get_trips.must_be_instance_of Array
+      driver_know_avg.get_trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "each trip instance has the same driver id" do
-      driver.get_trips.each { |trip| trip.driver_id.must_equal @driver_id }
+      driver_know_avg.get_trips.each { |trip| trip.driver_id.must_equal @driver_id }
     end
   end
 
   describe "Driver#calculate_average_rating" do
 
-    it "returns a float between 1 and 5" do
-      driver.calculate_average_rating.must_be :>=, 1
-      driver.calculate_average_rating.must_be :<=, 5
-      driver.calculate_average_rating.must_be_instance_of Float
+    # this is a test for every driver...
+    # what should happen if driver doesn't have any trips? - returns nil
+    it "returns nil if no trips or float between 1 and 5" do
+      drivers.each do |driver|
+        return nil if driver.calculate_average_rating.nil?
+        driver.calculate_average_rating.must_be :>=, 1
+        driver.calculate_average_rating.must_be :<=, 5
+        driver.calculate_average_rating.must_be_instance_of Float
+      end
     end
 
-    # This spec is by passing the get_trips method
-    # and is providing the trip instances array to calculate the average from ...
+
+    ## this is a test for just one driver - the driver we know avearge for
+    # it "returns a float between 1 and 5" do
+    #   driver.calculate_average_rating.must_be :>=, 1
+    #   driver.calculate_average_rating.must_be :<=, 5
+    #   driver.calculate_average_rating.must_be_instance_of Float
+    # end
+
     it "calculates the correct average" do
       # this is the average for driver_id 21
-      driver.calculate_average_rating.must_equal 30.0 / 11
+      driver_know_avg.calculate_average_rating.must_equal 30.0 / 11
     end
 
     it "returns nil if there are no trips" do
