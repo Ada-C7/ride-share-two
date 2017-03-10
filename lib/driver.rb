@@ -22,13 +22,12 @@ module Carmmunity
   def average_rating
 
     rating_sum = 0
-    trips = trips_taken
 
-    trips.rating.each do |rating|
-      total += rating
+    trips_taken.map do |trip|
+      rating_sum += trip.rating
     end
 
-    rating_average = rating_sum / trips.length
+    rating_average = rating_sum / trips_taken.length
 
     return rating_average
   end
