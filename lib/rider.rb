@@ -27,5 +27,12 @@ module RideSharing
       RideSharing::Trip.find_all_trips_for_rider(@id)
     end
 
+    def previous_drivers
+      drivers = list_of_trips.map { |trip| trip.find_driver}
+      drivers = drivers.uniq
+      return drivers
+    end
+
+
   end # End of class Rider
 end # End of module RideSharing

@@ -10,8 +10,8 @@ module RideSharing
       @rider_id = rider_id
       @date = date
       @rating = rating
-
     end
+
 
     def self.all(path = "./support/trips.csv")
       all_trips =[]

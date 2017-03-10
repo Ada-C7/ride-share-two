@@ -2,7 +2,7 @@ require_relative "spec_helper"
 
 
 describe "Rider" do
-  describe "#initialize" do
+  xdescribe "#initialize" do
     it "Takes an id, name and phone number" do
       id = "007"
       name = "James Bond"
@@ -20,7 +20,8 @@ describe "Rider" do
     end
   end # End of describe "#initialize"
 
-  describe "#self.all" do
+
+  xdescribe "#self.all" do
     it "Returns an array." do
       RideSharing::Rider.all.must_be_kind_of Array
     end
@@ -43,7 +44,8 @@ describe "Rider" do
     end
   end # End of describe "Driver#self.all"
 
-  describe "#self.find" do
+
+  xdescribe "#self.find" do
     it "returns an object of class RideSharing::Rider" do
       returned_object = RideSharing::Rider.find(1)
       returned_object.must_be_kind_of RideSharing::Rider
@@ -62,6 +64,34 @@ describe "Rider" do
       }.must_raise ArgumentError
     end
   end # End of describe "Rider#self.find"
+
+
+  describe "#previous_drivers" do
+    let(:rider1) {RideSharing::Rider.find(1)}
+
+    it "The method must return an array" do
+      rider1.previous_drivers.must_be_kind_of Array
+    end
+
+    it "The elements of the array must be of kind RideSharing::Rider" do
+      rider1.previous_drivers.each do |obj|
+        obj.must_be_kind_of RideSharing::Driver
+      end
+    end
+
+    it "" do
+      rider1.previous_drivers.each do |obj|
+        obj.must_be_kind_of RideSharing::Driver
+      end
+    end
+
+    it "Find out how many trips and drivers each rider have utilized" do
+      RideSharing::Rider.all.each do |rider|
+        # drivers = rider.list_of_trips.map { |trip| trip.find_driver}
+        # puts "#{rider.id}: #{rider.list_of_trips.length} trips with #{drivers.length} drivers"
+      end
+    end
+  end # End describe "#previous_drivers"
 
 
 end # End of describe "Rider"

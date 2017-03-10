@@ -19,6 +19,7 @@ describe "Driver" do
     end
   end # End of describe "Driver#initialize"
 
+
   describe "#self.all" do
     it "Returns an array." do
       path = "./support/drivers_spec1.csv"
@@ -48,6 +49,7 @@ describe "Driver" do
       all_drivers.length.must_equal 100
     end
   end # End of describe "Driver#self.all"
+
 
   describe "#self.find" do
     it "returns an object of class RideSharing::Driver" do
@@ -92,7 +94,6 @@ describe "Driver" do
       driver100 = RideSharing::Driver.find(100)
       driver100.average_rating.must_be_kind_of Float
     end
-
   end # End of describe "#average_rating"
 
 

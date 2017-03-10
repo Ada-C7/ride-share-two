@@ -25,8 +25,8 @@ module RideSharing
       return all_drivers
     end
 
-    def self.find(driver_id, path = "./support/drivers.csv")
-      found_driver = self.all(path).select { |driver| driver.id == driver_id}
+    def self.find(driver_id)
+      found_driver = self.all.select { |driver| driver.id == driver_id}
       raise ArgumentError.new("No such id number exist") if found_driver == []
       return found_driver.first
     end
