@@ -1,3 +1,7 @@
+# require 'pry'
+# require 'csv'
+# require 'pp'
+
 module RideShare
   class Rider
     attr_reader :name, :id, :phone_num
@@ -20,8 +24,7 @@ module RideShare
     def self.all
       riders = []
       CSV.foreach('support/riders.csv', headers: true) do |row|
-        riders << self.new(id: row['rider_id'].to_i, name: row['name'],
-           phone_num: row['phone_num'])
+        riders << self.new(id: row['rider_id'].to_i, name: row['name'], phone_num: row['phone_num'])
       end
       return riders
     end
@@ -29,6 +32,7 @@ module RideShare
     # finds a specific rider using their numeric ID
     def self.find(rider_id)
       self.all.find {|rider| rider.id == rider_id}
+      #binding.pry
       # if no rider is found, returns nil
     end
   end

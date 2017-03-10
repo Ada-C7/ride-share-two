@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-# trip csv tests -> trip 300 has no rider
 
 describe "Trip" do
   before do
@@ -14,17 +13,6 @@ describe "Trip" do
     driver_id: @driver_id, date: @date, rating: @rating )}
 
   describe "constructor" do
-    # before do
-    #   @id = 68
-    #   @rider_id = 78
-    #   @driver_id = 88
-    #   @date = '2017-8-03' #can't be a future date
-    #   @rating = 3 # int, 1-5
-    # end
-    #
-    # let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,
-    #   driver_id: @driver_id, date: @date, rating: @rating )}
-
     it "can be instantiated" do
       trip.must_be_instance_of RideShare::Trip
     end
@@ -167,6 +155,7 @@ describe "Trip" do
   # seems excessive. What tests are necessary?
   describe "Trip.find_all_for_driver" do
     let (:trips_for_driver_88) {RideShare::Trip.find_all_for_driver(88)}
+    # Driver 88 -> Trip [47, 80, 174, 271, 548]
 
     it "returns an array" do
       trips_for_driver_88.must_be_instance_of Array
@@ -200,6 +189,45 @@ describe "Trip" do
       fake_driver_id = 108
       trips_for_fake_driver = RideShare::Trip.find_all_for_driver(fake_driver_id)
       trips_for_fake_driver.must_be_empty
+    end
+  end
+
+  describe "Trip.find_all_for_rider" do
+    let (:trips_for_rider_88) {RideShare::Trip.find_all_for_rider(88)}
+    # Rider 88 -> Trip [139, 273, 285, 310, 352, 490]
+
+    it "returns an array" do
+      trips_for_rider_88.must_be_instance_of Array
+    end
+
+    it "contains only Trip instances in the returned array" do
+      trips_for_rider_88.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
+    end
+
+    it "returns the correct number of Trips" do
+      trips_for_rider_88.length.must_equal 6
+    end
+
+    it "returns Trip instances that have a rider_id matching the one given" do
+      trips_for_rider_88.each do |trip|
+        trip.rider_id.must_equal 88
+      end
+    end
+
+    it "finds the first Trip associated with a given rider_id from the csv file" do
+      trips_for_rider_88.first.id.must_equal 139
+    end
+
+    it "finds the last Trip associated with a given rider_id from the csv file" do
+      trips_for_rider_88.last.id.must_equal 490
+    end
+
+    it "returns an empty array if the rider_id is not found" do
+      fake_rider_id = 308
+      trips_for_fake_rider = RideShare::Trip.find_all_for_rider(fake_rider_id)
+      trips_for_fake_rider.must_be_empty
     end
   end
 end

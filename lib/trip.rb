@@ -35,10 +35,13 @@ module RideShare
 
     # find all trip instances for a given driver ID
     def self.find_all_for_driver(driver_id)
-      #list_of_trips = self.all
       self.all.find_all {|trip| trip.driver_id == driver_id}
     end
 
+    # find all trip instances for a given rider ID
+    def self.find_all_for_rider(rider_id)
+      self.all.find_all {|trip| trip.rider_id == rider_id}
+    end
 
     private
 

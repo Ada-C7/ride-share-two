@@ -132,8 +132,8 @@ describe "Rider" do
     end
 
     it "returns nil if no rider_id is found" do
-      fake_rider_id = 108
-      RideShare::Driver.find(fake_rider_id).must_be_nil
+      fake_rider_id = 308
+      RideShare::Rider.find(fake_rider_id).must_be_nil
     end
 
     private
