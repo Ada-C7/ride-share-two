@@ -29,13 +29,9 @@ class Rider
   def self.find(search_id)
     all_riders = self.all
 
-    all_riders.each do |rider|
-      if rider.id == search_id
-        return rider
-      end
-    end
-
-    raise ArgumentError.new("There were no riders with that ID") 
+    all_riders.each {|rider| return rider if rider.id == search_id }
+  
+    raise ArgumentError.new("There were no riders with that ID")
 
   end
 
