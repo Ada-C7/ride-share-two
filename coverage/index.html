@@ -14,14 +14,14 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-10T14:26:12-08:00">2017-03-10T14:26:12-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-10T14:39:19-08:00">2017-03-10T14:39:19-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">46.91%</span></span>
+    (<span class="covered_percent"><span class="red">46.34%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -32,9 +32,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>81</b> relevant lines. 
+    <b>82</b> relevant lines. 
     <span class="green"><b>38</b> lines covered</span> and
-    <span class="red"><b>43</b> lines missed </span>
+    <span class="red"><b>44</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,11 +52,11 @@
       
       <tr>
         <td class="strong"><a href="#42dcf740bc6f73093af702f2487d0d29146132aa" class="src_link" title="lib/driver.rb">lib/driver.rb</a></td>
-        <td class="red strong">40.0 %</td>
+        <td class="red strong">38.46 %</td>
         <td>47</td>
-        <td>25</td>
+        <td>26</td>
         <td>10</td>
-        <td>15</td>
+        <td>16</td>
         <td>0.4</td>
       </tr>
       
@@ -119,11 +119,11 @@
         <div class="source_table" id="42dcf740bc6f73093af702f2487d0d29146132aa">
   <div class="header">
     <h3>lib/driver.rb</h3>
-    <h4><span class="red">40.0 %</span> covered</h4>
+    <h4><span class="red">38.46 %</span> covered</h4>
     <div>
-      <b>25</b> relevant lines. 
+      <b>26</b> relevant lines. 
       <span class="green"><b>10</b> lines covered</span> and
-      <span class="red"><b>15</b> lines missed.</span>
+      <span class="red"><b>16</b> lines missed.</span>
     </div>
   </div>
   
@@ -301,7 +301,7 @@
         <li class="missed" data-hits="0" data-linenumber="29">
           
           
-          <code class="ruby">      array = []</code>
+          <code class="ruby">      trip_array = []</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="30">
@@ -313,7 +313,7 @@
         <li class="missed" data-hits="0" data-linenumber="31">
           
           
-          <code class="ruby">        array &lt;&lt;  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s</code>
+          <code class="ruby">        trip_array &lt;&lt;  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="32">
@@ -322,16 +322,16 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="33">
+        <li class="missed" data-hits="0" data-linenumber="33">
           
           
-          <code class="ruby">      # array.length &lt; 0 ? (raise StandardError.new(&quot;That driver does not exist in our service&quot;)) :(array = value)</code>
+          <code class="ruby">        raise MissingIDError.new(&quot;That driver does not exist in our service&quot;) unless trip_array.length &gt; 0</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="34">
           
           
-          <code class="ruby">      return array</code>
+          <code class="ruby">      return trip_array</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">

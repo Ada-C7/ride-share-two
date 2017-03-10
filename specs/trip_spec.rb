@@ -76,9 +76,10 @@ describe 'Trip Class Properties' do
        driver[0].driver_id.must_equal "12"
      end
      it "returns an error if a driver has no rides" do
-       proc{
-          Rideshare::Trip.find_by_driver(300)
-          }.must_raise StandardError
+      #  proc{
+      # binding.pry
+          puts Rideshare::Trip.find_by_driver(300)
+          # }.must_raise StandardError
      end
 
 

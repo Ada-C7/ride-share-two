@@ -26,12 +26,12 @@ module Rideshare
 
 
     def self.find_driver(param)
-      array = []
+      trip_array = []
       CSV.foreach('support/drivers.csv', {:headers=> true}) do |row|
-        array <<  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s
+        trip_array <<  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s
       end
-      # array.length < 0 ? (raise StandardError.new("That driver does not exist in our service")) :(array = value)
-      return array
+        raise MissingIDError.new("That driver does not exist in our service") unless trip_array.length > 0
+      return trip_array
     end
 
     def all_my_trips
