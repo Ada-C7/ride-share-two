@@ -164,24 +164,42 @@ describe "Trip" do
     end
   end
 
-  # find all trip instances for a given driver ID
-  # args = driver_id
-  # returns array of drivers
+  # seems excessive. What tests are necessary?
   describe "Trip.find_all_for_driver" do
+    let (:trips_for_driver_88) {RideShare::Trip.find_all_for_driver(88)}
+
     it "returns an array" do
-      RideShare::Trip.find_all_for_driver(88).must_be_instance_of Array
+      trips_for_driver_88.must_be_instance_of Array
     end
 
     it "contains only Trip instances in the returned array" do
-      RideShare::Trip.find_all_for_driver(88).each do |trip|
+      trips_for_driver_88.each do |trip|
         trip.must_be_instance_of RideShare::Trip
       end
     end
-    # returns an array
-    # returns an array of driver obejcts
-    # finds all trip instances for a given driver ID -> length, first, last
-      # includes, does not include
-    # driver id not found -> returns nil or empty array
-    # all trip instances have matching driver id
+
+    it "returns the correct number of Trips" do
+      trips_for_driver_88.length.must_equal 5
+    end
+
+    it "returns Trip instances that have a driver_id matching the one given" do
+      trips_for_driver_88.each do |trip|
+        trip.driver_id.must_equal 88
+      end
+    end
+
+    it "finds the first Trip associated with a given driver_id from the csv file" do
+      trips_for_driver_88.first.id.must_equal 47
+    end
+
+    it "finds the last Trip associated with a given driver_id from the csv file" do
+      trips_for_driver_88.last.id.must_equal 548
+    end
+
+    it "returns an empty array if the driver_id is not found" do
+      fake_driver_id = 108
+      trips_for_fake_driver = RideShare::Trip.find_all_for_driver(fake_driver_id)
+      trips_for_fake_driver.must_be_empty
+    end
   end
 end
