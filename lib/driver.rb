@@ -3,8 +3,6 @@
 module Carmmunity
   class Driver
 
-    #@@drivers = []
-
     attr_reader :driver_id, :name, :vin
 
     def initialize(driver_hash)
@@ -16,33 +14,29 @@ module Carmmunity
 
 
     def trips_taken
-      trips = Carmmunity::Trip.driver_trips(@driver_id)
+      trips = Trip.driver_trips(@driver_id)
       return trips
     end
 
 
   def average_rating
 
-    total = 0
+    rating_sum = 0
     trips = trips_taken
 
     trips.rating.each do |rating|
       total += rating
     end
 
-    rating_average = total / trips.length
+    rating_average = rating_sum / trips.length
 
     return rating_average
   end
 
 
-
   def self.find(id)
 
-    #@@drivers.find do |driver|
-    all_drivers = self.all
-
-    all_drivers.find do |driver|
+    self.all.select do |driver|
 
       if driver.driver_id == id
         return driver
@@ -54,25 +48,27 @@ module Carmmunity
 
 
 
-    def self.all
+  def self.all
 
-      #if @@drivers.length == 0
-      drivers = []
+    @@drivers = []
 
-        CSV.read("support/drivers.csv").each do |row|
-          driver = {
-            driver_id: row[0].to_i,
-            name: row[1],
-            vin: row[2]
-          }
+    if @@drivers.length < 1
 
-          drivers << Carmmunity::Driver.new(driver)
-          #@@drivers << Carmmunity::Driver.new(driver)
 
-        end
-      #end
-      return drivers#@@drivers
-    end #
+      CSV.read("support/drivers.csv").each do |row|
+        driver = {
+          driver_id: row[0].to_i,
+          name: row[1],
+          vin: row[2]
+        }
+
+        @@drivers << Driver.new(driver)
+      end
+      return @@drivers
+    else
+    end
+    return @@drivers
+  end #
 
   end #end of class
 end #end of module

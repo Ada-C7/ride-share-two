@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-xdescribe "Driver Class" do
+describe "Driver Class" do
 
   let(:ada) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
 
@@ -78,6 +78,7 @@ xdescribe "Driver Class" do
       end
 
       it " The number of drivers is correct " do
+
         my_drivers.length.must_equal CSV.read("support/drivers.csv").count
       end
 
@@ -126,7 +127,7 @@ xdescribe "Driver Class" do
       end
 
       it " Can find the First driver in the CSV file " do
-
+        
         my_driver = Carmmunity::Driver::find(1)
 
         my_driver.name.must_equal my_drivers[1].name
