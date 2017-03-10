@@ -1,4 +1,7 @@
-require 'csv'
+# require 'csv'
+require_relative 'file'
+require_relative 'trip'
+
 module RideShare
   class Rider
     attr_reader :id, :name, :phone_number
@@ -18,9 +21,7 @@ module RideShare
     def get_drivers()
       trips = get_trips
       return nil if trips.nil?
-      # map returns array of driver instances - you don't need uniq
-      # you wont get duplicate driver instances -
-      trips.map { |trip| trip.get_driver }
+      trips.map { |trip| trip.get_driver }.uniq { |driver| driver.id }
     end
 
                       ###################
@@ -41,8 +42,11 @@ module RideShare
       phone_number
     end
 
+    # If I use the full path path, it will work no matter if I run program
+    # can run from spec file, rakefile, or lib file
     def self.get_data
-      ride_data = FileData.new("./support/riders.csv")
+      file_path = '/Users/Cynthia/Documents/Ada/queues/ruby_exercises/ruby_week5/ride-share-two/support/riders.csv'
+      ride_data = FileData.new(file_path)
       ride_data.read_csv_and_remove_headings
     end
 
@@ -69,3 +73,6 @@ module RideShare
     end
   end
 end
+
+# rider = RideShare::Rider.find(164)
+# p rider.get_drivers

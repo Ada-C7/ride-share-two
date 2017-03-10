@@ -149,9 +149,10 @@ describe "Rider" do
   end
 
   let(:rider) { RideShare::Rider.find(@rider_id) }
+  # rider 42 also doesn't have any trips
   let(:rider_no_trips) { RideShare::Rider.find(300) }
    # riders with more than one trip with same drivers - 41, 164, 92, 74, 63, 250
-  let(:rider_with_same_driver) { RideShare::Rider.find(41) }
+  let(:rider_with_same_driver) { RideShare::Rider.find(164) }
 
   describe "Rider#get_trips" do
 
@@ -181,11 +182,13 @@ describe "Rider" do
     end
 
     # are you testing this right?
+    # shouldn't be testing with same exact code ...
+    # you know the exact number for rider 164 - there is one duplicate
+    # so length 6 to 5
     it "doesn't return array with duplicate drivers" do
       drivers = rider_with_same_driver.get_drivers
-      num_of_drivers = drivers.length
-      num_after_uniq = drivers.uniq.length
-      num_of_drivers.must_equal num_after_uniq
+      drivers_ids = drivers.map { |driver| driver.id }
+      drivers_ids.must_equal drivers_ids.uniq
     end
 
     it "returns nil if no drivers for rider" do

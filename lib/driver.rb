@@ -1,4 +1,6 @@
-require_relative './trip'
+# require 'csv'
+require_relative 'file'
+# require_relative 'trip'
 
 module RideShare
   class Driver
@@ -45,7 +47,8 @@ module RideShare
     end
 
     def self.get_data
-      data = FileData.new('./support/drivers.csv')
+      file_path = '/Users/Cynthia/Documents/Ada/queues/ruby_exercises/ruby_week5/ride-share-two/support/drivers.csv'
+      data = FileData.new(file_path)
       data.read_csv_and_remove_headings
     end
 

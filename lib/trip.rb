@@ -1,5 +1,8 @@
 require 'date'
-require_relative './file'
+require_relative 'file'
+# require_relative 'rider'
+# require_relative 'driver'
+
 module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -40,7 +43,8 @@ module RideShare
     end
 
     def self.get_data
-      trip_data = FileData.new("./support/trips.csv")
+      file_path = '/Users/Cynthia/Documents/Ada/queues/ruby_exercises/ruby_week5/ride-share-two/support/trips.csv'
+      trip_data = FileData.new(file_path)
       return trip_data.read_csv_and_remove_headings
     end
 
@@ -48,7 +52,7 @@ module RideShare
     # this also lets you test the data more easily (you can more easily pass in bad data)
     # but there is a default of trips data
     # this project needs the default because lots of methods call each other and
-    # expect that all is reading the csv data 
+    # expect that all is reading the csv data
     def self.all(trips_data = nil)
       trips_data = get_data if trips_data.nil?
       raise ArgumentError if trips_data.empty?
