@@ -1,5 +1,4 @@
 require 'csv'
-#require_relative 'driver'
 
 module Ride_share_two
   class Trip
@@ -11,9 +10,7 @@ module Ride_share_two
       @rider_id = rider_id
       @date = date
       @rating = rating
-      #@trips = []
     end
-
     # retrieve all riders from the CSV file
     def self.all_trips
       @trips = []
@@ -24,18 +21,6 @@ module Ride_share_two
       return @trips
     end
 
-    #select
-    def find_trips_for_driver(driver_id)
-      #instance of a driver don't need an argument
-      trips_for_driver =[]
-      self.all_trips.each do |trip|
-        if trip.driver_id == driver_id
-          trips_for_driver <<  trip
-        end
-      end
-      return trips_for_driver
-    end
-
     def self.find_trip(trip_id)
       self.all_trips.each do |trip|
         if trip.trip_id == trip_id.to_s
@@ -43,9 +28,8 @@ module Ride_share_two
         end
       end
     end
-
     # retrieve the associated driver instance through the driver ID
-    def self.find_driver(driver_id)
+    def find_driver
       Ride_share_two::Driver.all_drivers.each do |driver|
         if driver.driver_id == driver_id
           return driver
@@ -53,10 +37,13 @@ module Ride_share_two
       end
     end
     #retrieve the associated rider instance through the rider ID
-    def find_rider(rider_id)
-
+    def find_rider
+      Ride_share_two::Rider.all_riders.each do |rider|
+        if rider.rider_id == rider_id
+          return rider
+        end
+      end
     end
-
     #find all trip instances for a given driver ID
     def self.find_trips_for_drivers(driver_id)
       trips_for_driver =[]
@@ -66,9 +53,7 @@ module Ride_share_two
         end
       end
       return trips_for_driver
-
     end
-
     #find all trip instances for a given rider ID
     def self.find_trips_for_rider(rider_id)
       trips_for_rider = []
@@ -82,7 +67,3 @@ module Ride_share_two
 
   end
 end
-# trip1 = Ride_share_two::Trip.new("1","1","54","2016-04-05",3)
-# p Ride_share_two::Trip.find_driver("1").driver_name
-#puts Ride_share_two::Trip.all_trips.length
-# p Ride_share_two::Trip.find_trips_for_drivers("1").length

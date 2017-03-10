@@ -21,11 +21,19 @@ describe "Ride_share_two::Trip" do
 
   describe "#find_driver" do
     it "retrieves the associated driver instance through the driver ID" do
-      Ride_share_two::Trip.find_driver("1").driver_name.must_equal "Bernardo Prosacco"
+      trip1 = Ride_share_two::Trip.new("1","1","54","2016-04-05",3)
+      trip1.find_driver.driver_name.must_equal "Bernardo Prosacco"
     end
   end
 
-  describe "#find_find_trips_for_riders" do
+  describe "#find_rider" do
+    it "retrieves the associated rider instance through the rider ID" do
+      trip1 = Ride_share_two::Trip.new("1","1","54","2016-04-05",3)
+      trip1.find_rider.name.must_equal "Gracie Emmerich"
+    end
+  end
+
+  describe "#self_find_trips_for_riders" do
     it"retrieves the associated rider instance through the rider ID" do
       Ride_share_two::Trip.find_trips_for_rider("2").length.must_equal 1
     end
@@ -33,7 +41,6 @@ describe "Ride_share_two::Trip" do
     describe "#self.find_trips_for_drivers" do
       it "find all trip instances for a given driver ID" do
         Ride_share_two::Trip.find_trips_for_drivers("1").length.must_equal 9
-
       end
     end
 

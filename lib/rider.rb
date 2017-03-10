@@ -1,5 +1,4 @@
 require 'csv'
-#require_relative 'trip'
 
 module Ride_share_two
   class Rider
@@ -8,9 +7,7 @@ module Ride_share_two
       @rider_id = rider_id
       @name = name
       @phone_num = phone_num
-      #@riders =[]
     end
-
     # retrieve all riders from the CSV file
     def self.all_riders
       @riders = []
@@ -38,19 +35,13 @@ module Ride_share_two
       end
       return trips_for_rider
     end
-
     #retrieve the list of all previous driver instances (through the trips functionality built above)
     def find_drivers_by_find_trips_for_rider
       drivers = []
       find_trips_for_rider.each do |trip|
         drivers << trip.driver_id
       end
-      return drivers
+      return drivers.uniq
     end
   end
 end
-
-#  rider1 = Ride_share_two::Rider.new("1","Nina Hintz Sr.","560.815.3059")
-# # #p Ride_share_two::Rider.all_riders.length
-#   p rider1.find_trips_for_rider
-#  p rider1.find_drivers_by_find_trips_for_rider

@@ -16,7 +16,13 @@ describe "Ride_share_two::Driver" do
 
     it "Raises an ArgumentError when vin is not proper length" do
       proc {
-        Ride_share_two::Driver.new("1", "Bernardo Prosacco", "aaaaaa")
+        Ride_share_two::Driver.new(0, "Bernardo Prosacco", "aaaaaa")
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an ArgumentError when driver_id is not type of Integer" do
+      proc {
+        Ride_share_two::Driver.new(-1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
       }.must_raise ArgumentError
     end
   end
@@ -31,7 +37,14 @@ describe "Ride_share_two::Driver" do
     it " finds a specific driver using their numeric ID" do
       Ride_share_two::Driver.find_driver(1).must_equal "Bernardo Prosacco"
     end
+
+    it "has parameter of id as integer " do
+      proc {
+        Ride_share_two::Driver.find_driver("a")
+      }.must_raise ArgumentError
+    end
   end
+
   describe "#find_trips_for_driver" do
     it "retrieve the list of trip instances that only this driver has taken" do
       drivers[0].find_trips_for_driver.length.must_equal 9
