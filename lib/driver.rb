@@ -3,7 +3,7 @@ require 'pry'
 
 class Driver
 
-  attr_accessor :driver_id, :name,  :vehicle_id
+  attr_accessor :driver_id, :name, :vehicle_id
 
   def initialize(hash)
     @driver_id = hash[:driver_id]
@@ -23,7 +23,7 @@ class Driver
       driver_hash[:vehicle_id] = line[2]
       # if line[2].length != 17
       #   raise Invalid_ID.new("This is not a valid id.")
-        drivers << Driver.new(driver_hash)
+      drivers << Driver.new(driver_hash)
     end
     return drivers
   end
@@ -37,7 +37,7 @@ class Driver
     end
     raise ArgumentError.new("Drivers don't match") if find_driver == nil
     return find_driver
-    #think of above loop as searching to reset from nil
+    #remember above loop as searching to reset from nil
   end
 
 
