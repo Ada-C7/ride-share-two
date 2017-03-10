@@ -27,26 +27,6 @@ module RideShare
   ######################################################
                     ## Class methods ##
   ######################################################
-
-    def self.all(rides_data = nil)
-
-      if rides_data.nil?
-        ride_data = FileData.new("./support/riders.csv")
-        rides_data = ride_data.read_csv_and_remove_headings
-      end
-
-      raise ArgumentError if rides_data.empty?
-      riders = rides_data.map do |rider_info|
-        raise ArgumentError unless rider_info.length == 3
-        rider = Hash.new
-        rider[:id] = test_for_integer(rider_info[0])
-        rider[:name] = test_name(rider_info[1])
-        rider[:phone_number] = test_phone_number(rider_info[2])
-        self.new(rider)
-      end
-      return riders
-    end
-
     def self.test_for_integer(num)
       Integer(num)
     end
@@ -59,6 +39,27 @@ module RideShare
     def self.test_phone_number(phone_number)
       raise ArgumentError.new "Phone number's length under 7" if phone_number.length < 7
       phone_number
+    end
+
+    def self.get_data
+      ride_data = FileData.new("./support/riders.csv")
+      rides_data = ride_data.read_csv_and_remove_headings
+    end
+
+    def self.all(rides_data = nil)
+      rides_data = get_data if rides_data.nil?
+      raise ArgumentError if rides_data.empty?
+
+      riders = rides_data.map do |rider_info|
+        raise ArgumentError unless rider_info.length == 3
+        rider = Hash.new
+        rider[:id] = test_for_integer(rider_info[0])
+        rider[:name] = test_name(rider_info[1])
+        rider[:phone_number] = test_phone_number(rider_info[2])
+        self.new(rider)
+      end
+
+      return riders
     end
 
     def self.find(rider_id)

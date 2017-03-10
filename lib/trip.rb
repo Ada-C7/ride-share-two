@@ -48,7 +48,6 @@ module RideShare
     # but will default to nil which then gets set to the csv data if nothing is passed
     # when the find methods call all - they will not send any data
     def self.all(trips_data = nil)
-
       trips_data = get_data if trips_data.nil?
       raise ArgumentError if trips_data.empty?
 
@@ -62,7 +61,7 @@ module RideShare
         trip[:rating] = test_for_rating(trip_info[4])
         self.new(trip)
       end
-      
+
       return trips
     end
 

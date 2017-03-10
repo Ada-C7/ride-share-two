@@ -44,13 +44,15 @@ module RideShare
       vin
     end
 
-    def self.all(drivers_data = nil)
-      if drivers_data == nil
-        data = FileData.new('./support/drivers.csv')
-        drivers_data = data.read_csv_and_remove_headings
-      end
+    def self.get_data
+      data = FileData.new('./support/drivers.csv')
+      drivers_data = data.read_csv_and_remove_headings
+    end
 
+    def self.all(drivers_data = nil)
+      drivers_data = get_data if drivers_data.nil?
       raise ArgumentError.new("data is empty array") if drivers_data.empty?
+
       drivers = drivers_data.map do |driver_info|
         raise ArgumentError.new("driver info must have 3 parts") unless driver_info.length == 3
         driver = Hash.new
@@ -59,6 +61,7 @@ module RideShare
         driver[:vin] = test_for_vin(driver_info[2])
         self.new(driver)
       end
+      
       return drivers
     end
 
