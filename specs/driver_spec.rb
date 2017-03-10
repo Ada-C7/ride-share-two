@@ -83,7 +83,7 @@ describe "Drivers" do
     end
 
     it "raises error if you try to add bad data" do
-      
+
     end
 
   describe "find" do
@@ -104,9 +104,9 @@ describe "Drivers" do
   describe "trips" do
 
     it "returns an Array of Trip objects" do
-      driver = drivers[50]
-      driver.trips.must_be_instance_of Array
-      driver.trips.each do |trip|
+      driver50 = drivers[50]
+      driver50.trips.must_be_instance_of Array
+      driver50.trips.each do |trip|
         trip.must_be_instance_of RideShare::Trip
       end
       #all elements in Array are Trip instances
