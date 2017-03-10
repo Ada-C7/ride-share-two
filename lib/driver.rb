@@ -40,10 +40,10 @@ class Driver
     #remember above loop as searching to reset from nil
   end
 
+  #eg syntax - local_var/[] = class object.class_method(pass arg)
 
   def driver_trips
     driver_trips = []
-    #local_var[] = class object.class_method(pass arg)
     driver_trips = Trip.trips_by_driver(@driver_id)
   end
 

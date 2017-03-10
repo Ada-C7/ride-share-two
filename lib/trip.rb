@@ -1,9 +1,5 @@
-# Each trip should:
-#
-### have an ID, rider ID, a driver ID, date, rating
-
-# Each rating should be within an acceptable range (1-5)
-
+require 'csv'
+require 'pry'
 
 class Trip
 
@@ -18,7 +14,7 @@ class Trip
     @rating_range = valid_rating? if @rating == (1..5)
   end
 
-  #per trip object
+
   def self.all
     trips = []
     trips_master = CSV.read("support/trips.csv")
@@ -33,6 +29,18 @@ class Trip
       trips << Trip.new(trip_hash)
     end
     return trips
+  end
+
+
+  def self.find(trip_id)
+    all_trips = Trip.all
+    find_trip = nil
+    all_trips.each do |trip|
+      find_trip = trip if trip.trip_id == trip_id
+    end
+    raise ArgumentError.new("Drivers don't match") if find_trip == nil
+    return find_trip
+    #remember above loop as searching to reset from nil
   end
 
 
@@ -58,19 +66,6 @@ class Trip
     end
   end
 
-
-  def self.find(trip_id)
-    all_trips = Trip.all
-    find_trip = nil
-    all_trips.each do |trip|
-      find_trip = trip if trip.trip_id == trip_id
-    end
-    raise ArgumentError.new("Drivers don't match") if find_trip == nil
-    return find_trip
-    #remember above loop as searching to reset from nil
-  end
-
-  #local_var[] = class object.class_method(pass arg)
 
   def trip_driver(driver_id)
     trips_by_driver
