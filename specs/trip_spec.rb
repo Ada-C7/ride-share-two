@@ -42,6 +42,7 @@ describe "Trip Class" do
 
 
       it " Can find the rider of the last trip in csv file " do
+
         trip = Carmmunity::Trip::all.last
         rider = trip.find_rider
 
@@ -51,6 +52,7 @@ describe "Trip Class" do
       end
 
       it " Can find the First rider in the CSV file " do
+
         #need to remove first row from csv
         trip = Carmmunity::Trip::all[1]
         rider = trip.find_rider

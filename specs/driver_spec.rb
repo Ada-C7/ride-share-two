@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe "Driver Class" do
+xdescribe "Driver Class" do
 
   let(:ada) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
 
@@ -127,7 +127,7 @@ describe "Driver Class" do
       end
 
       it " Can find the First driver in the CSV file " do
-        
+
         my_driver = Carmmunity::Driver::find(1)
 
         my_driver.name.must_equal my_drivers[1].name
