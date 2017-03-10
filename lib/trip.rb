@@ -28,6 +28,16 @@ module RideSharing
       return all_trips
     end
 
+    def self.find(trip_id)
+      found_trip = self.all.select { |trip| trip.id == trip_id}
+      begin
+        raise ArgumentError.new("Id number #{trip_id} does not exist") if found_trip == []
+      rescue ArgumentError => exception
+        puts "#{exception.message}"
+      end
+      return found_trip.first
+    end
+
     def self.find_all_trips_for_driver(driv_id)
       all_trips_for_driver = self.all.select { |trip| trip.driver_id == driv_id}
       return all_trips_for_driver

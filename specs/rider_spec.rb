@@ -46,7 +46,7 @@ describe "Rider" do
 
 
   describe "#self.find" do
-    it "returns an object of class RideSharing::Rider" do
+    it "returns an object of class RideSharing::Rider if id is found" do
       returned_object = RideSharing::Rider.find(1)
       returned_object.must_be_kind_of RideSharing::Rider
     end

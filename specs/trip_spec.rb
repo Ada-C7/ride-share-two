@@ -62,6 +62,18 @@ describe "Trip" do
   end # End of describe "Trip#self.all"
 
 
+  describe "#self.find" do
+    it "returns an object of class RideSharing::Trip if id isfound" do
+      returned_object = RideSharing::Trip.find(1)
+      returned_object.must_be_kind_of RideSharing::Trip
+    end
+
+    it "Returns nil if id is not found" do
+      RideSharing::Trip.find(601).must_be_nil
+    end
+  end # End of describe "Trip#self.find"
+
+
   describe "#self.find_all_trips_for_driver" do
     let(:trip_collection) {RideSharing::Trip.find_all_trips_for_driver(1)}
     it "Will return an array" do
