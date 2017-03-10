@@ -66,4 +66,17 @@ describe "Driver class" do
         RideShare::Driver.find(1234).must_be_nil
       end
     end
+
+    describe "trips method" do
+      it "retrieve the list of trip instances that only this driver has taken
+  " do
+  driver.trips.must_be_instance_of Array
+    end
   end
+  
+  describe "average_rating method" do
+    it "retrieve an average rating for that driver based on all trips taken" do
+RideShare::Driver.all[0].average_rating.must_equal 2.33
+    end
+  end
+end

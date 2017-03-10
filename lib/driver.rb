@@ -15,10 +15,15 @@ module RideShare
 
     def trips
       #Call trips_driver method on class Trip with argument of driver_id to return an array of trips that this driver has completed
+      RideShare::Trip.trips_by_driver(driver_id)
+
     end
 
     def average_rating
       #Collect all trip instances and then loop through each to find total rating and divide it by length of trip instances to get average
+      all_ratings = trips.map { |trip| trip.rating }
+      (all_ratings.reduce(:+).to_f / all_ratings.length).round(2)
+
     end
 
 

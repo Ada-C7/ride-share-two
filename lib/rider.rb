@@ -16,10 +16,14 @@ module RideShare
 
     def trips
       #Call trips_rider method on class Trip with argument of rider_id to return an array of trips that this rider has completed
+      RideShare::Trip.trips_by_rider(rider_id)
+
     end
 
     def previous_drivers
       #Collect all trip instances and then loop through each to find driver_id and return a list of previous drivers for the rider
+      previous_drivers = trips.map { |trip| RideShare::Driver.find(trip.driver_id) }
+      return previous_drivers.uniq { |driver| driver.driver_id }
     end
 
     def self.all
