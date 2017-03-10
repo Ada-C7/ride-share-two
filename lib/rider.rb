@@ -10,15 +10,14 @@ module RideShare
       @name = params[:name]
       @phone_number = params[:phone_number]
       @trips = params[:trips]
-      @trips ||= []
     end
 
     def self.all
       @@all ||= super(SOURCE_FILE)
     end
 
-    def import_trips
-      @trips = Trip.by_rider(@id)
+    def trips
+      @trips ||= Trip.by_rider(@id)
     end
 
     def drivers

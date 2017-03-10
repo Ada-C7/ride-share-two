@@ -85,16 +85,13 @@ describe RideShare::Rider do
     let(:real_rider) { RideShare::Rider.new(id: 3, name: "Marcellus Hoeger", phone_number: "(222) 926-0138") }
     let(:inexperienced_rider) { RideShare::Rider.new(id: 4444, name: "Alix Hamilton", phone_number: "(123) 456-7890") }
 
-    describe "#import_trips" do
+    describe "#trips" do
       it "Returns an array of trips for a given rider" do
-        trips = real_rider.import_trips
-
-        trips.must_be_instance_of Array
-        trips.first.must_be_instance_of RideShare::Trip
+        rider.trips.must_be_instance_of Array
+        rider.trips.first.must_be_instance_of RideShare::Trip
       end
 
       it "Sets trips to empty array for a rider w/o trips" do
-        inexperienced_rider.import_trips
         inexperienced_rider.trips.must_equal []
       end
     end
