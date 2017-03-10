@@ -1,28 +1,19 @@
 require_relative 'spec_helper'
-# require 'simplecov'
-# SimpleCov.start
-#
-# require 'rake/testtask'
-# require 'minitest'
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require_relative '../lib/drivers'
-
-# Minitest::Reporters.use!
-# Minitest::Reporters::SpecReporter.new
 
 describe "RideShare: Drivers" do
-  let(:drivers) {RideShare::Drivers.read_csv}
-  before do
-    RideShare::Drivers.read_csv
-  end
+  let(:drivers) {RideShare::Driver.all}
 
   describe "Drivers#initialize" do
-  #   # it "contains individual hashes of ID, Name, VIN" do
-  #   #   ada_drivers = RideShare::Drivers.new
-  #   #   ada_drivers[0].must_be_kind_of Hash
-  #   #   ada_drivers[0].key.must_equal
-  #   # end
+    #   # it "contains individual hashes of ID, Name, VIN" do
+    #   #   ada_drivers = RideShare::Drivers.new
+    #   #   ada_drivers[0].must_be_kind_of Hash
+    #   #   ada_drivers[0].key.must_equal
+    #   # end
+
+    # it "raises argument error when vin length is not 17-digits" do
+    #   # drivers
+    #
+    # end
   end
 
   describe "Drivers.read_csv" do
@@ -31,17 +22,15 @@ describe "RideShare: Drivers" do
       drivers.must_be_kind_of Array
     end
 
-    it "returns a hash of driver details" do
+    it "returns an array of driver objects" do
       drivers
-      drivers[0].must_be_kind_of Hash
-      drivers[0].keys.must_equal [:id, :name, :vin]
+      drivers[0].must_be_instance_of RideShare::Driver
     end
   end
 
   describe "Drivers.all" do
-
     it "returns an array of 100 driver objects" do
-      RideShare::Drivers.all.length.must_equal 100
+      RideShare::Driver.all.length.must_equal 100
     end
   end
 
@@ -55,8 +44,17 @@ describe "RideShare: Drivers" do
 
   describe "Driver.find(id)" do
     it "returns a driver object" do
-      driver = RideShare::Drivers.find(99)
-      driver.must_be_kind_of Hash
+      drivers
+      driver = RideShare::Driver.find(99)
+      driver.must_be_instance_of RideShare::Driver
+    end
+
+    it "returns correct driver details" do
+      drivers
+      driver = RideShare::Driver.find(99)
+      driver.id.must_equal 99
+      driver.name.must_equal "Jayden Ledner"
+      driver.vin.must_equal "RF4AT3WL6JJXPFUJL"
     end
   end
 

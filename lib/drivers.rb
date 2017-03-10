@@ -1,41 +1,39 @@
 require 'csv'
+require_relative 'errors'
 
 module RideShare
-  class Drivers
+  class Driver
     attr_reader :id, :name, :vin
-    # @@drivers
-    # Initialize Drivers
-    # set ID, Name, License and VIN as attr_reader
-    # import csv file
-    # set individual driver instances as details in a hash
 
-    def initialize(id, name, vin)
-      @id = id
-      @name = name
-      @vin = vin
+    def initialize(driver_details)
+      @id = driver_details[:id]
+      @name = driver_details[:name]
+      @vin = driver_details[:vin]
+      # if @vin.length != 17
+      #   #don't create an entry
+      # end
+      # raise VinLengthError.new("Length of Vin is #{@vin.length}, not 17-digits") unless @vin.length = 17
+
+      ## Raise error here (rescue in read_csv)
     end
 
     def self.read_csv
-
-      @@drivers = CSV.read("support/riders.csv")[1..-1].map do |array_of_details|
-        Rider.new(array_of_details[0].to_i, array_of_details[1].to_s, array_of_details[2].to_s)
+      @@drivers = []
+      if @@drivers.empty?
+        CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
+          @@drivers << self.new({id: line[0].to_i, name: line[1].to_s, vin: line[2].to_s})
+        end
       end
-
-      @@drivers = CSV.read("support/drivers.csv")[1..-1].map! do |array_of_details|
-        {
-          id: array_of_details[0].to_i,
-          name: array_of_details[1].to_s,
-          vin: array_of_details[2].to_s
-        }
-      end
+      @@drivers
     end
+
 
     def self.all
       read_csv
     end
 
-    # def find_trips(id)
-    #Trips.find_driver_trips(id)
+    # def find_trips
+    #   Trip.find_driver_trips(@id)
     #
     #   trips = []
     #
@@ -43,9 +41,9 @@ module RideShare
     #   #
     # end
     # Find driver_trips(from trips)
-
-    # end
     #
+    # end
+
     # def avg_ratings(id)
     #   #Ratings are in trips
     #   ratings = []
@@ -61,12 +59,13 @@ module RideShare
 
     def self.find(id)
       driver_details = nil
-      @@drivers.each do |driver|
-        if driver[:id] == id
+      all.each do |driver|
+        if driver.id == id
           driver_details = driver
         end
       end
       driver_details
     end
+
   end
 end

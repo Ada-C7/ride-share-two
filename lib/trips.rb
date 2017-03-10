@@ -10,15 +10,11 @@ module RideShare
 
 
     def self.read_csv
-      @@trips = CSV.read("support/trips.csv")[1..-1].map do |array_of_details|
-        {
-          id: array_of_details[0].to_i,
-          driver_id:array_of_details[1].to_i,
-          rider_id: array_of_details[2].to_i,
-          date: array_of_details[3].to_s,
-          rating: array_of_details[4].to_i
-        }
-      end
+      # @@drivers = []
+      #   CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
+      #   @@drivers << self.new({id: line[0].to_i, name: line[1].to_s, vin: line[2].to_s})
+      # end
+      # @@drivers
     end
 
     def self.all
