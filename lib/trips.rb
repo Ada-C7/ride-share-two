@@ -33,23 +33,26 @@ module RideShare
       trips_array
     end
 
+    # def self.find(id)
+    #   trip_array = self.all
+    #   trip_array.each do |trip|
+    #     if id == trip.trip_id
+    #       return trip
+    #     end
+    #   end
+    #   raise ArgumentError.new "Trip #{id} does not exist"
+    # end
+
     def self.find(id)
       trip_array = self.all
-      trip_array.each do |trip|
-        if id == trip.trip_id
-          return trip
-        end
-      end
-      raise ArgumentError.new "Trip #{id} does not exist"
+      trip_array.find { |trip| id == trip.trip_id }
     end
 
     #class method - find all trip instances for a given Rider ID
     def self.find_by_rider(rider_id)
       some_array = []
       trip_array = self.all
-      trip_array.each do |trip|
-        if rider_id == trip.rider_id
-          some_array << trip
+      trip_array.find_all {|trip| rider_id == trip.rider_id }
         end
       end
       return some_array

@@ -125,9 +125,7 @@ describe "Trip.all" do
     end
 
     it "Raises an error for a trip that doesn't exist" do
-      proc {
-        RideShare::Trip.find("0000")
-      }.must_raise ArgumentError
+      RideShare::Trip.find("0").must_be_nil
     end
   end
 

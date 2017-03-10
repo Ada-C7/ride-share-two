@@ -30,16 +30,20 @@ module RideShare
     end
 
 
+    # def self.find(id)
+    #   driver_array = self.all
+    #   driver_array.each do |driver|
+    #     if id == driver.id
+    #       return driver
+    #     end
+    #   end
+    #   raise ArgumentError.new "Driver #{id} does not exist"
+    # end
+
     def self.find(id)
       driver_array = self.all
-      driver_array.each do |driver|
-        if id == driver.id
-          return driver
-        end
-      end
-      raise ArgumentError.new "Driver #{id} does not exist"
+      driver_array.find { |driver| id == driver.id }
     end
-
 
 
     def trips

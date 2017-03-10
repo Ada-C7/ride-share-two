@@ -9,10 +9,6 @@ describe "Rider initialize" do
     :phone_num => "560.815.3059"
     }
 
-
-    # id = 1
-    # name = "Nina Hintz Sr."
-    # phone_num = "560.815.3059"
     rider = RideShare::Rider.new(args)
 
     rider.must_respond_to :id
@@ -53,18 +49,18 @@ describe "Rider.all" do
 
   #   - The ID and balance of the first and last
   #       riders match what's in the CSV file
-  it " riders match what's in the CSV file" do
-    index = 0
-    # binding.pry
-    CSV.read("support/riders.csv", {:headers => true}).each do |line|
-      # binding.pry
-      @rider_array[index].id.must_equal line[0]
-      @rider_array[index].name.must_equal line[1]
-      @rider_array[index].phone_num.must_equal line[2]
-      # binding.pry
-      index += 1
-    end
-  end
+  # it " riders match what's in the CSV file" do
+  #   index = 0
+  #   # binding.pry
+  #   CSV.read("support/riders.csv", {:headers => true}).each do |line|
+  #     # binding.pry
+  #     @rider_array[index].id.must_equal line[0]
+  #     @rider_array[index].name.must_equal line[1]
+  #     @rider_array[index].phone_num.must_equal line[2]
+  #     # binding.pry
+  #     index += 1
+  #   end
+  # end
 
   it "The info of the first and last match csv" do
     @rider_array.first.id.must_equal "1"
@@ -95,6 +91,10 @@ describe "Rider.find" do
 
   it "Can find the last account from the CSV" do
     RideShare::Rider.find(@test_array[-1].id).id.must_equal "300"
+  end
+
+  it "Returns nil for a non-existan rider id" do
+    RideShare::Rider.find("0").must_be_nil
   end
 end
 

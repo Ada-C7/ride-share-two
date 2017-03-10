@@ -29,15 +29,20 @@ module RideShare
       end
       riders_array
     end
+    #
+    # def self.find(id)
+    #   rider_array = self.all
+    #   rider_array.each do |rider|
+    #     if id == rider.id
+    #       return rider
+    #     end
+    #   end
+    #   raise ArgumentError.new "Rider #{id} does not exist"
+    # end
 
     def self.find(id)
-      rider_array = self.all
-      rider_array.each do |rider|
-        if id == rider.id
-          return rider
-        end
-      end
-      raise ArgumentError.new "Rider #{id} does not exist"
+      riders_array = self.all
+      riders_array.find { |rider| id == rider.id }
     end
 
     def trips

@@ -135,11 +135,8 @@ describe "Driver.find" do
     RideShare::Driver.find(@test_array[-1].id).id.must_equal "100"
   end
 
-
-  it "Raises an error for a rider that doesn't exist" do
-    proc {
-      RideShare::Rider.find("0000")
-    }.must_raise ArgumentError
+  it "Returns nil for a driver that doesn't exist" do
+      RideShare::Driver.find("0").must_be_nil
   end
 end
 
