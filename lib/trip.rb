@@ -1,23 +1,13 @@
 # Each trip should:
 #
-# have an ID, rider ID, a driver ID, date, rating
+### have an ID, rider ID, a driver ID, date, rating
+
 # Each rating should be within an acceptable range (1-5)
 
-# Given a trip object, you should be able to:
-#
-
-# retrieve the associated driver instance through the driver ID
-# retrieve the associated rider instance through the rider ID
-# You should be able to:
-#
-
-# find all trip instances for a given driver ID
-# find all trip instances for a given rider ID
-# retrieve all trips from the CSV file
 
 class Trip
 
-  attr_accessor :trip_id, :driver_id, :rider_id, :date, :rating
+  attr_accessor :trip_id, :driver_id, :rider_id, :date, :rating, :raiting_range
 
   def initialize(hash)
     @trip_id = hash[:trip_id]
@@ -25,6 +15,7 @@ class Trip
     @rider_id = hash[:rider_id]
     @date = hash[:date]
     @rating = hash[:rating]
+    @rating_range = valid_rating? if @rating == (1..5)
   end
 
   #per trip object
@@ -42,42 +33,56 @@ class Trip
       trips << Trip.new(trip_hash)
     end
     return trips
-
   end
 
 
-  def self.trip_by_driver(id)
+  def self.trips_by_driver(driver_id)
     all_trips = Trip.all
-    find_trips = []
+    driver_trips = []
     all_trips.each do |trip|
-      find_trips << trip if trip.driver_id == id
-      return find_trips
+      driver_trips << trip if trip.driver_id == driver_id
+      return driver_trips
       #given a driver id return all trips that have this driver id
     end
-
   end
 
 
-  def self.trips_by_rider(id)
+  def self.trips_by_rider(rider_id)
     all_trips = Trip.all
-    find_trips = []
+    rider_trips = []
     all_trips.each do |trip|
-      find_trips << trip if trip.rider_id == id
-      return find_trips
+      rider_trips << trip if trip.rider_id == rider_id
+      return rider_trips
       #return instances unique to rider
       #trips
     end
-
-
-    def self.find
-      all_trips = Trip.all
-      find_trip = nil
-      all_trips.each do |trip|
-        find_trip = trip if trip.id == trip_id
-      end
-      raise ArgumentError.new("Trips don't match") if find_trip == nil
-      return find_trip
-    end
-
   end
+
+
+  def self.find(trip_id)
+    all_trips = Trip.all
+    find_trip = nil
+    all_trips.each do |trip|
+      find_trip = trip if trip.trip_id == trip_id
+    end
+    raise ArgumentError.new("Drivers don't match") if find_trip == nil
+    return find_trip
+    #remember above loop as searching to reset from nil
+  end
+
+  #local_var[] = class object.class_method(pass arg)
+
+  def trip_driver(driver_id)
+    trips_by_driver
+    driver_instance = Trip.driver_id
+    #find driver for single instance of trip/retrieve the associated driver instance through the driver ID
+  end
+
+
+  def find_rider(rider_id)
+    trips_by_rider
+    rider_instance = Trip.rider_id
+    # find rider for single instance of trip/retrieve the associated driver instance through the driver ID
+  end
+
 end#class end
