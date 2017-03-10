@@ -39,13 +39,19 @@ describe "Rider" do
                     bad_phone: [['15', 'name', 425-678-1234]],
                     missing_part: [['10', 'name']],
                     empty_array: [],
-                    empty_nested_arrays: [[],[],[]]
+                    empty_nested_arrays: [[],[],[]],
+                    bad_name: [['789', 'c', '123-4567']],
+                    bad_phone_number: [['901', 'Cat', '123']]
                   }
     end
 
     let(:riders) { RideShare::Rider.all(@riders_data) }
 
-    it "returns an array" do
+    # it "accepts the csv_file and throws no errors" do
+    #   @riders_data.each { |rider_data| RideShare::Rider.all([riders_data])
+    # end
+
+    it " accepts csv_file data - doesn't raise any errors & returns an array" do
       riders.must_be_instance_of Array
     end
 
@@ -59,30 +65,40 @@ describe "Rider" do
 
     it "raises an error if given bad id data" do
       proc {
-         RideShare::Rider.all(@bad_data[:bad_id])
-      }.must_raise ArgumentError
+             RideShare::Rider.all(@bad_data[:bad_id])
+           }.must_raise ArgumentError
     end
 
     it "raises an error if given an empty array" do
       proc {
-         RideShare::Rider.all(@bad_data[:empty_array])
-      }.must_raise ArgumentError
+             RideShare::Rider.all(@bad_data[:empty_array])
+           }.must_raise ArgumentError
     end
 
     it "raises an error if given empty nested arrays" do
       proc {
-         RideShare::Rider.all(@bad_data[:empty_nested_arrays])
-      }.must_raise ArgumentError
+             RideShare::Rider.all(@bad_data[:empty_nested_arrays])
+           }.must_raise ArgumentError
     end
 
     it "raises an error if given arrays missing data" do
       proc {
-         RideShare::Rider.all(@bad_data[:missing_part])
-      }.must_raise ArgumentError
+             RideShare::Rider.all(@bad_data[:missing_part])
+           }.must_raise ArgumentError
     end
 
     it "raises an error if given bad phone_number" do
-      skip
+      err = proc {
+                  RideShare::Rider.all(@bad_data[:bad_phone_number])
+                  }.must_raise ArgumentError
+      err.message.must_equal "Phone number's length under 7"
+    end
+
+    it "raises an error if given bad name" do
+      err = proc {
+                  RideShare::Rider.all(@bad_data[:bad_name])
+                 }.must_raise ArgumentError
+      err.message.must_equal "Name length is under 3"
     end
 
   end
