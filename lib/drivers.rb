@@ -54,18 +54,37 @@ module RideShare
     end
 
 
+    # def average_rating
+    #   driver_id = id
+    #   rating_array = []
+    #   trips_array = RideShare::Trip.find_by_driver(driver_id)
+    #   trips_array.each do |trip|
+    #     rating_array << trip.rating.to_f
+    #   end
+    #   total  = rating_array.reduce(:+)/rating_array.length
+    #   total.round(2)
+    #   #instance method - retrieve an average rating for that driver based on all trips taken
+    #   # call trips
+    # end
+
     def average_rating
       driver_id = id
       rating_array = []
       trips_array = RideShare::Trip.find_by_driver(driver_id)
-      trips_array.each do |trip|
-        rating_array << trip.rating.to_f
-      end
-      total  = rating_array.reduce(:+)/rating_array.length
+      trips_array.collect! { |trip| trip.rating.to_f }
+      total  = trips_array.reduce(:+)/trips_array.length
       total.round(2)
       #instance method - retrieve an average rating for that driver based on all trips taken
       # call trips
     end
+
+
+
+
+
+
+
+
     #private
 
     def verified_vin(vin)
