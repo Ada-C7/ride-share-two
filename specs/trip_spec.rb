@@ -195,7 +195,13 @@ describe "Trip" do
 #######################################################
 
 ##### NEED TO WRITE THESE SPECS #########
+# these methods are really hard to test because you need
+# call a bunch of methods before hand ... 
   describe "Trip#get_driver" do
+
+    it "returns a driver instance" do
+
+    end
 
   end
 

@@ -39,16 +39,17 @@ module RideShare
       Integer(rating)
     end
 
+    def self.get_data
+      trip_data = FileData.new("./support/trips.csv")
+      return trip_data.read_csv_and_remove_headings
+    end
+
     # all takes in trips_data so you can test bad data
     # but will default to nil which then gets set to the csv data if nothing is passed
     # when the find methods call all - they will not send any data
     def self.all(trips_data = nil)
 
-      if trips_data.nil?
-        trip_data = FileData.new("./support/trips.csv")
-        trips_data = trip_data.read_csv_and_remove_headings
-      end
-
+      trips_data = get_data if trips_data.nil?
       raise ArgumentError if trips_data.empty?
 
       trips = trips_data.map do |trip_info|
@@ -61,6 +62,7 @@ module RideShare
         trip[:rating] = test_for_rating(trip_info[4])
         self.new(trip)
       end
+      
       return trips
     end
 
