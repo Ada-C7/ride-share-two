@@ -15,9 +15,10 @@ describe "Driver class" do
     driver.name.must_equal "Ron Weasley"
   end
 
-  it "returns a list of drivers and IDs of the correct length when you call .all" do
+  it "returns an array of driver objects when you call .all" do
     # skip
-    RideShare::Driver.all.length == CSV.read("./support/drivers.csv").length
+      RideShare::Driver.all.must_be_kind_of Array
+      RideShare::Driver.all[0].id.must_equal 1
   end
 
   it "can return the first driver from the CSV" do
@@ -41,26 +42,17 @@ describe "Driver class" do
     driver.all_trips.length.must_equal 9
   end
 
-  # it "raises an ArgumentError if id is not a driver number in CSV" do
-  #     proc {
-  #       driver.all_trips(101)
-  #     }.must_raise ArgumentError
-  # end
-  #
-  # it "rejects completely invalid input" do
-  #   proc {
-  #     driver.all_trips("bad string of input")
-  #   }.must_raise ArgumentError
-  #
-  #   proc {
-  #     driver.all_trips("#{$12}")
-  #   }.must_raise ArgumentError
-  # end
+  it "returns a message if id has no trips" do
+    driver = RideShare::Driver.new({name: "Ron Weasley", driver_id: 101})
+      proc {
+        driver.all_trips
+      }.must_raise ArgumentError
+  end
 
-  it "can find  a single driver's average rating" do
+  it "can find a single driver's average rating" do
     ron = driver.average_rating
     ron.must_be_kind_of Float
     ron.must_equal 2.33
-
   end
+
 end

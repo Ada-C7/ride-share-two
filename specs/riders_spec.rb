@@ -14,9 +14,10 @@ describe "Rider class" do
     rider.phone_num.must_equal "2062424564"
   end
 
-  it "returns a list of riders of the correct length when you call .all" do
+  it "returns a list of rider objects when you call .all" do
     # skip
-    RideShare::Rider.all.length == CSV.read("./support/riders.csv").length - 1
+      RideShare::Rider.all.must_be_kind_of Array
+      RideShare::Rider.all[0].id.must_equal 1
   end
 
   it "can find the first rider in the csv" do
@@ -41,28 +42,13 @@ describe "Rider class" do
     rider.all_trips.length.must_equal 1
   end
 
-  # it "raises an ArgumentError when a rider exists but has no trips" do
-  #   # skip
-  #   proc {
-  #     rider.all_trips(300)
-  #   }.must_raise ArgumentError
-  # end
-  #
-  # it "raises an ArgumentError if id is not a rider number in CSV" do
-  #   proc {
-  #     rider.all_trips(301)
-  #   }.must_raise ArgumentError
-  # end
-
-  # it "rejects silly input" do
-  #   proc {
-  #     rider.all_trips("bad string of stuff")
-  #   }.must_raise ArgumentError
-  #
-  #   proc {
-  #     rider.all_trips("#s32l")
-  #   }.must_raise ArgumentError
-  # end
+  it "raises an ArgumentError when a rider exists but has no trips" do
+    # skip
+    rider = RideShare::Rider.new({name: "Ron Weasley", rider_id: 300, phone_num: "2062424564"})
+    proc {
+      rider.all_trips
+    }.must_raise ArgumentError
+  end
 
   it "can find the drivers a rider has ridden with" do
     # skip

@@ -45,6 +45,7 @@ describe "Trip class" do
   it "returns a list of trips when you call .all" do
     # skip
       RideShare::Trip.all.must_be_kind_of Array
+      RideShare::Trip.all[0].id.must_equal 1
   end
 
   it "can find the first trip from the csv" do
