@@ -61,6 +61,17 @@ describe "self.all" do
     end
   end
 end
+
+describe "self.find" do
+  it "Return a Driver by #driver_id" do
+    drivers = RideShare::Driver.find(90)
+
+    drivers.must_be_instance_of RideShare::Driver
+    drivers.driver_id.must_equal 90
+    drivers.name.must_equal "Kristy Cremin"
+    drivers.vin.must_equal "1F9FF7C27LJA041VR"
+  end
+end
 #
 # describe "#get_trips: retrieving trips" do
 #   it "a driver takes no trips, should return empty hash" do
@@ -110,13 +121,3 @@ end
 #   end
 # end
 #
-# describe "Driver.find" do
-#   it "Return a Driver by #driver_id" do
-#     drivers = RideShare::Driver.find(90)
-#
-#     drivers.must_be_instance_of RideShare::Driver
-#     drivers.driver_id.must_equal 90
-#     drivers.name.must_equal "Kristy Cremin"
-#     drivers.vin.must_equal "1F9FF7C27LJA041VR"
-#   end
-# end

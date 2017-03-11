@@ -25,6 +25,16 @@ module RideShare
       return @all_drivers
     end
 
+    def self.find(driver_id)
+      drivers = RideShare::Driver.all
+
+      drivers.each do |driver|
+        if driver.driver_id == driver_id
+          return driver
+        end
+      end
+    end
+
     # def get_trips
     #   return @trips
     # end
@@ -33,15 +43,7 @@ module RideShare
     #   @trips << trip
     # end
     #
-    # def self.find(driver_id)
-    #   drivers = RideShare::Driver.all
-    #
-    #   drivers.each do |driver|
-    #     if driver.driver_id == driver_id
-    #       return driver
-    #     end
-    #   end
-    # end
+
 
   end # end of Driver
 end # end of module
