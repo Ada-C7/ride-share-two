@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Ride_share_two::Trip" do
+  let(:trip1){ Ride_share_two::Trip.new("1","1","54","2016-04-05",3) }
   describe "Trip#initialize" do
     it "Takes trip_id, driver_id,rider_id, date, rating" do
       trip_id = "1"
@@ -21,14 +22,12 @@ describe "Ride_share_two::Trip" do
 
   describe "#find_driver" do
     it "retrieves the associated driver instance through the driver ID" do
-      trip1 = Ride_share_two::Trip.new("1","1","54","2016-04-05",3)
       trip1.find_driver.driver_name.must_equal "Bernardo Prosacco"
     end
   end
 
   describe "#find_rider" do
     it "retrieves the associated rider instance through the rider ID" do
-      trip1 = Ride_share_two::Trip.new("1","1","54","2016-04-05",3)
       trip1.find_rider.name.must_equal "Gracie Emmerich"
     end
   end

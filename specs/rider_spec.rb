@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Ride_share_two::Rider" do
+  let(:rider1) {Ride_share_two::Rider.new("1","Nina Hintz Sr.","560.815.3059")}
   describe "Rider#initialize" do
     it "Takes rider_id, name, phone_num" do
       rider_id = "1"
@@ -19,7 +20,6 @@ describe "Ride_share_two::Rider" do
 
   describe "#find_trips_for_rider" do
     it "retrieve the list of trip instances that only this rider has taken" do
-      rider1 = Ride_share_two::Rider.new("1","Nina Hintz Sr.","560.815.3059")
       rider1.find_trips_for_rider.must_be_instance_of Array
       rider1.find_trips_for_rider.length.must_equal 2
     end
@@ -27,7 +27,6 @@ describe "Ride_share_two::Rider" do
 
   describe "#find_drivers_by_find_trips_for_rider" do
     it "find_drivers_by_find_trips_for_rider" do
-      rider1 = Ride_share_two::Rider.new("1","Nina Hintz Sr.","560.815.3059")
       rider1.find_trips_for_rider
       rider1.find_drivers_by_find_trips_for_rider.length.must_equal 2
     end
