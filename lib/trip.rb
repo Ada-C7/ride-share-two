@@ -14,9 +14,9 @@ module Rideshare
       @rider_id = trip_hash[:rider_id]
       @date = trip_hash[:date]
       @rating = trip_hash[:rating]
-      raise StandardError.new("That is an invalid driver id") if @driver_id.to_i > 100 || @driver_id.to_i < 0
-      raise StandardError.new("That is an invalid rating") if @rating.to_i > 5 || @rating.to_i < 1
-      raise StandardError.new("That is an invalid rider id") if @rider_id.to_i > 300 || @rider_id.to_i < 0
+      raise MissingIdError.new("That is an invalid driver id") if @driver_id.to_i > 100 || @driver_id.to_i < 0
+      raise MissingIdError.new("That is an invalid rating") if @rating.to_i > 5 || @rating.to_i < 1
+      raise MissingIdError.new("That is an invalid rider id") if @rider_id.to_i > 300 || @rider_id.to_i < 0
 
     end
 
@@ -36,13 +36,9 @@ module Rideshare
     end
 
     def self.find_by_rider(param)
-      array = Trip.create_trips.select{| value| value.rider_id== param.to_s}
-      raise StandardError.new("That is an invalid rating") if array.length < 1
+      array = Trip.create_trips.select{|value| value.rider_id== param.to_s}
+      raise MissingIdError.new("That is an invalid rating") if array.length < 1
 
-      # array =[]
-      # CSV.foreach('support/trips.csv', {:headers=> true, :header_converters => :symbol}) do |row|
-      # array << Trip.new({trip_id:row[0], driver_id:row[1], rider_id:row[2],date:row[3], rating:row[4]}) if row[2] == param.to_s
-      # end
       return array
 
     end

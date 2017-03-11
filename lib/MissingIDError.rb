@@ -1,7 +1,7 @@
 require_relative './module'
 module Rideshare
 
-  class MissingIDError < StandardError
+  class MissingIdError < StandardError
   end
 
 end

@@ -1,5 +1,5 @@
 require_relative 'spec_helper.rb'
-require_relative '../lib/module.rb'
+# require_relative '../lib/module.rb'
 
 
 describe 'Trip Class Properties' do
@@ -69,6 +69,7 @@ describe 'Trip Class Properties' do
  describe "Instance Methods for Trip" do
 
    describe ".make_driver instance method tests" do
+   let(:bad_trip){Rideshare::Trip.new({trip_id:"5", driver_id:"300", rider_id:"34",date:"05-29-2017", rating:"5"})}
    let(:driver12) {Rideshare::Trip.find_by_driver(12)}
      it "retrives driver object from driver id on trip file" do
 
@@ -76,10 +77,10 @@ describe 'Trip Class Properties' do
        driver[0].driver_id.must_equal "12"
      end
      it "returns an error if a driver has no rides" do
-      #  proc{
+       proc{
       # binding.pry
-          puts Rideshare::Trip.find_by_driver(300)
-          # }.must_raise StandardError
+          bad_trip.make_driver
+        }.must_raise Rideshare::MissingIdError
      end
 
 

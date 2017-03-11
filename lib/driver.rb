@@ -30,8 +30,9 @@ module Rideshare
       CSV.foreach('support/drivers.csv', {:headers=> true}) do |row|
         trip_array <<  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s
       end
-        raise MissingIDError.new("That driver does not exist in our service") unless trip_array.length > 0
-      return trip_array
+      #  trip_array.length <= 0 ? ()) :(return trip_array)
+      trip_array.length <= 0 ? (return raise Rideshare::MissingIdError.new("That driver does not exist in our service")) :(return trip_array)
+
     end
 
     def all_my_trips
