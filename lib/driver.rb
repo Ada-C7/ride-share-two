@@ -8,7 +8,7 @@ require 'pry'
 #
 module Rideshare
   class Driver
-    attr_reader :driver_id, :name
+    attr_reader :driver_id, :name, :vin
     def initialize(trip_hash)
       @driver_id = trip_hash[:driver_id]
       @vin = trip_hash[:vin]
