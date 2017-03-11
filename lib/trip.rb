@@ -15,7 +15,7 @@ module Rideshare
       @date = trip_hash[:date]
       @rating = trip_hash[:rating]
       raise MissingIdError.new("That is an invalid driver id") if @driver_id.to_i > 100 || @driver_id.to_i < 0
-      raise MissingIdError.new("That is an invalid rating") if @rating.to_i > 5 || @rating.to_i < 1
+      raise InvalidDataError.new("That is an invalid rating") if @rating.to_i > 5 || @rating.to_i < 1
       raise MissingIdError.new("That is an invalid rider id") if @rider_id.to_i > 300 || @rider_id.to_i < 0
 
     end
