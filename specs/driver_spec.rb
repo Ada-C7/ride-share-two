@@ -35,32 +35,32 @@ describe "instantiating a Driver" do
     }.must_raise ArgumentError
   end
 end
-#
-# describe "Driver.all" do
-#   it "all drivers stored in array of hashes" do
-#     all_drivers = RideShare::Driver.all
-#     all_drivers.must_be_instance_of Array
-#   end
-# end
-  # it "The ID, name, and VIN of the first and last driver match the CSV file" do
+
+describe "self.all" do
+  it "list of all drivers stored in an array" do
+    all_drivers = RideShare::Driver.all
+    all_drivers.must_be_instance_of Array
+  end
+
+  it "The ID, name, and VIN of the first and last driver match the CSV file" do
+
+      RideShare::Driver.all.first.driver_id.must_equal 1
+      RideShare::Driver.all.first.name.must_equal "Bernardo Prosacco"
+      RideShare::Driver.all.first.vin.must_equal "WBWSS52P9NEYLVDE9"
   #
-  #     RideShare::Driver.all.first.driver_id.must_equal 1
-  #     RideShare::Driver.all.first.name.must_equal "Bernardo Prosacco"
-  #     RideShare::Driver.all.first.vin.must_equal "WBWSS52P9NEYLVDE9"
+      RideShare::Driver.all.last.driver_id.must_equal 100
+      RideShare::Driver.all.last.name.must_equal "Minnie Dach"
+      RideShare::Driver.all.last.vin.must_equal "XF9Z0ST7X18WD41HT"
   #
-  #     RideShare::Driver.all.last.driver_id.must_equal 100
-  #     RideShare::Driver.all.last.name.must_equal "Minnie Dach"
-  #     RideShare::Driver.all.last.vin.must_equal "XF9Z0ST7X18WD41HT"
-  #
-  #   index = 0
-  #   CSV.read("./support/drivers.csv") do |each_driver|
-  #     driver[index].driver_id.must_equal each_driver[:driver_id]
-  #     driver[index].name.must_equal each_driver[:name]
-  #     driver[index].vin.must_equal each_driver[:vin]
-  #     index += 1
-  #   end
-#   # end
-# end
+    index = 0
+    CSV.read("./support/drivers.csv") do |each_driver|
+      driver[index].driver_id.must_equal each_driver[:driver_id]
+      driver[index].name.must_equal each_driver[:name]
+      driver[index].vin.must_equal each_driver[:vin]
+      index += 1
+    end
+  end
+end
 #
 # describe "#get_trips: retrieving trips" do
 #   it "a driver takes no trips, should return empty hash" do

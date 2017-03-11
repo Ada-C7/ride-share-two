@@ -12,17 +12,16 @@ module RideShare
       @vin = drivers[:vin]
 
       raise ArgumentError.new("Invalid VIN") if vin.length != 17
-
     end
+
 
 
     def self.all
       @all_drivers = []
 
-      CSV.open("./support/drivers.csv").each do |line| #look up csv.each...
-          @drivers << self.new(line[0].to_i, line[1].to_s, line[2].to_s)
+      CSV.foreach("./support/drivers.csv", {:headers => true}) do |line|
+        @all_drivers << self.new({driver_id:line[0].to_i, name:line[1].to_s, vin:line[2].to_s})
       end
-
       return @all_drivers
     end
 
