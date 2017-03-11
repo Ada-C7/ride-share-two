@@ -2,14 +2,12 @@ require 'pry'
 require 'csv'
 
 module Rideshare
-  class Driver
+  class Driver < RideshareData
     attr_reader :driver_id, :vin, :name
 
     def initialize(args)
       super
-
-
-      @driver_id = args[:driver_id]
+      @id = args[:driver_id]
       @vin = args[:vin]
       @name = args[:name]
     end
@@ -27,24 +25,11 @@ module Rideshare
 
     # returns a collection of Driver instances, representing all of the drivers described in drivers.csv
     def self.all(csv_filename)
-      #formats numbers properly
-      CSV.read(csv_filename)[1..-1].map do |row|
-        args = { driver_id: row[0].to_i, vin: row[2], name: row[1] }
-        begin
-          self.new(args)
-        rescue
-          # if I had time, I would make class ErrorLogger to write the errors to a csv file
-        end
-      end
+      super
     end
 
     def self.find_driver(csv_filename, id_to_find)
-      fail = proc {
-        raise ArgumentError.new("There is no driver with id #{id_to_find}.")
-      }
-      self.all(csv_filename).find(fail) do |driver|
-        driver.driver_id == id_to_find
-      end
+      super
     end
   end
 end
