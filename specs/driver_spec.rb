@@ -44,6 +44,13 @@ describe "Driver" do
       first_driver_trips.each { |trip| trip.must_be_instance_of Trip }
       first_driver_trips.length.must_equal 9
     end
+
+    it "returns zero trips for a driver that hasn't taken any trips" do
+      minnie = Driver.new(100, "Minnie Dach", "XF9Z0ST7X18WD41HT")
+      minnies_trips = minnie.trips
+      minnies_trips.must_be_instance_of Array
+      minnies_trips.must_be_empty
+    end
   end
 
   describe "Driver#all" do
