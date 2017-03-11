@@ -31,7 +31,7 @@ describe "Driver Initialize" do
   end
 end
 
-# test for "list_driver_trips method"? spoke with tutor and he said you trust the tests in the Trip class to cover this.
+# test for "list_driver_trips method"? spoke with a tutor and he said you trust the tests in the Trip class to cover this.
 
 describe "average_rating" do
   let(:driver) {RideShareTwo::Driver.find_driver(21)}

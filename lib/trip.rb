@@ -16,12 +16,10 @@ module RideShareTwo
         raise ArgumentError.new("rating must be 1-5") if rating >= 6 || rating <= 0
     end
 
-#need tests
     def trip_driver_instance
       RideShareTwo::Driver.find_driver(@driver_id)
     end
 
-#need tests
     def trip_rider_instance
       RideShareTwo::Rider.find_rider(@rider_id)
     end
@@ -34,22 +32,18 @@ module RideShareTwo
           drivers_trips << trip
         end
       end
-      # puts drivers_trips
       return drivers_trips
     end
 
     def self.rider_trips(rider_id)
       riders_trips = []
-      # trip_array = self.all_trips
       all_trips.each do |trip|
         if trip.rider_id.to_i == rider_id
           riders_trips << trip
         end
       end
-      # puts riders_trips
       return riders_trips
     end
-
 
     def self.all_trips
       all_trips = []

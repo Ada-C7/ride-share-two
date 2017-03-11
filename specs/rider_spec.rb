@@ -27,7 +27,9 @@ end
 # end
 
 describe "list_drivers_for_rider method" do
-  let(:rider_object) {RideShareTwo::Rider.all_riders[5]}
+  # let(:rider_object) {RideShareTwo::Rider.all_riders[250]}
+  let(:rider_object) {RideShareTwo::Rider.find_rider(250)}
+  # RideShareTwo::Rider.find_rider(250).list_rider_trips
 
   it "returns as an array" do
     rider_trips = rider_object.list_drivers_for_rider
@@ -41,10 +43,10 @@ describe "list_drivers_for_rider method" do
     # rider_trips[0].must_be_instance_of RideShareTwo::Driver
   end
 
-  # it "retrieves the list of all previous driver instances & returns as an array" do
-  # rider_trips = rider_object.list_drivers_for_rider
-  # rider_trips.must_equal [75, 10, 40, 74]
-  # end
+  it "returns an array of drivers without duplicates" do
+    rider_trips = rider_object.list_drivers_for_rider
+    rider_trips.length.must_equal 3
+  end
 
 end
 

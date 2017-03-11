@@ -27,59 +27,28 @@ module RideShareTwo
       return result.first
     end
 
-    #write tests?
     def list_rider_trips
       RideShareTwo::Trip.rider_trips(@rider_id)
     end
-    #returns array of class trip?
-    #test array contains trip objects?
 
-#this method only returns
+# this method returns driver ids (not driver instances)
     def list_drivers_for_rider
       drivers = []
       list_rider_trips.each do |trip|
-        drivers << trip.driver_id  #tried to write call trip.trip_driver_instance,
+        unless drivers.include?(trip.driver_id)
+          drivers << trip.driver_id
+          # binding.pry
+        end
+        #tried to write call trip.trip_driver_instance,
         # but ended up in a confounding loop about unintitialized constants and harmful circular require_relatives
       end
       return drivers
-      # binding.pry
     end
-
-    # def list_drivers_for_rider
-    #   drivers = list_rider_trips.map{|trip|trip.find_driver}.delete_if{|driver| driver == nil }.uniq{|driver|driver_id}
-    #   # end
-    #   return drivers
-    #   binding.pry
-    # end
-      # RideShareTwo::Trip.rider_trips(@rider_id).each do
-      # drivers <<
-      # drivers << RideShareTwo::Trip.find_driver
-      # drivers << trip.RideShareTwo::Trip.find_driver(@driver_id)#all_trips.driver
-      # end
-      # write the code!
-
-      # RideShareTwo::Trip.rider_trips(@rider_id)
-
-    # def list_drivers_for_rider
-    #   drivers = []
-    #   list_rider_trips.each do |trip|
-    #     drivers << RideShareTwo::Trip.find_driver
-    #     # drivers << trip.RideShareTwo::Trip.find_driver(@driver_id)#all_trips.driver
-    #   end
-    #   # write the code!
-    #   return drivers
-    #   # RideShareTwo::Trip.rider_trips(@rider_id)
-    # end
-
-    # def trip_driver_instance
-    #   RideShareTwo::Driver.find_driver(@driver_id)
-    # end
-
 
   end
 end
 
 
-puts RideShareTwo::Rider.find_rider(280).list_rider_trips
+puts RideShareTwo::Rider.find_rider(250).list_rider_trips
 # puts RideShareTwo::Driver.find_driver(13).list_driver_trips
-puts RideShareTwo::Rider.find_rider(280).list_drivers_for_rider
+puts RideShareTwo::Rider.find_rider(250).list_drivers_for_rider
