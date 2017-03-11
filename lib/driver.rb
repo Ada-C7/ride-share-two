@@ -5,9 +5,9 @@ module RideSharing
 
     attr_reader :id, :name, :vin
     def initialize(driver_hash)
-      raise ArgumentError.new("The input for id must be an integer > 0.\nThis driver will not be recorded.") if  driver_hash[:driver_id].class != Integer || driver_hash[:driver_id] < 1
-      raise ArgumentError.new("The input for id must be a string of characters.\nThis driver will not be recorded.") if  driver_hash[:name].class != String || driver_hash[:name].length < 1
-      raise ArgumentError.new("The input for vehicle number (vin) must be a string of 17 characters.\nThis driver will not be recorded." ) if driver_hash[:vin].class != String || driver_hash[:vin].length != 17
+      raise ArgumentError.new("The input for :id must be an integer > 0.\nThis driver will not be recorded.") if  driver_hash[:driver_id].class != Integer || driver_hash[:driver_id] < 1
+      raise ArgumentError.new("The input for :name must be a string of at least 1 readable characters.\nThis driver will not be recorded.") if  driver_hash[:name].class != String || driver_hash[:name].delete(" ").length < 1
+      raise ArgumentError.new("The input for :vehicle number (vin) must be a string of 17 characters (no white space).\nThis driver will not be recorded." ) if driver_hash[:vin].class != String || driver_hash[:vin].delete(" ").length != 17
 
       @id = driver_hash[:driver_id]
       @name = driver_hash[:name]
@@ -24,14 +24,14 @@ module RideSharing
       all_drivers = []
       CSV.foreach(path, :headers => true, :header_converters => :symbol) do |row|
         begin
-          raise ArgumentError.new("The driver_id \"#{row[0]}\" creates an invalid id number.\nHence this driver will not be recorded." ) if row[0].to_i < 1
+          raise ArgumentError.new("The driver_id \"#{row[0]}\" creates an invalid id number. The id number must be an integer > 0.\nHence this driver will not be recorded." ) if row[0] == nil || row[0].to_i < 1
         rescue ArgumentError => exception
           puts "#{exception.message}"
           next
         end
 
         begin
-          raise ArgumentError.new("The input name for driver_id #{row[0]} must be at least 1 character long.\nHence this driver will not be recorded." ) if row[1].length < 1
+          raise ArgumentError.new("The input name for driver_id #{row[0]} must be at least 1 readable character long.\nHence this driver will not be recorded." ) if row[1] == nil || row[1].delete(" ").length < 1
         rescue ArgumentError => exception
           puts "#{exception.message}"
           next
@@ -39,7 +39,7 @@ module RideSharing
 
 
         begin
-          raise ArgumentError.new("Vehicle number (vin) not valid for\ndriver \"#{row[1]}\" with id# #{row[0]}.\nHence this driver will not be recorded." ) if row[2].length != 17
+          raise ArgumentError.new("Vehicle number (vin) not valid for driver_id #{row[0]}. It must be 17 characters long (no white space)\nHence this driver will not be recorded." ) if row[2] == nil || row[2].delete(" ").length != 17
         rescue ArgumentError => exception
           puts "#{exception.message}"
           next

@@ -42,8 +42,14 @@ describe "Driver" do
         RideSharing::Driver.new({driver_id: 007, name: ["James Bond"], vin: "WBWSS52P9NEYLVDE9"})
       }.must_raise ArgumentError
 
+      RideSharing::Driver.new({driver_id: 007, name: "[James Bond]", vin: "WBWSS52P9NEYLVDE9"}).must_be_kind_of RideSharing::Driver
+
       proc{
         RideSharing::Driver.new({driver_id: 007, name: "", vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: 007, name: "  ", vin: "WBWSS52P9NEYLVDE9"})
       }.must_raise ArgumentError
 
       proc{
@@ -86,10 +92,10 @@ describe "Driver" do
       all_drivers.length.must_equal 3
     end
 
-    it "Does not initialize driver if vin is not valid" do
+    it "Does not initialize driver for any of the invalid inputs in /support/drivers_spec2.csv" do
       path = "./support/drivers_spec2.csv"
       all_drivers = RideSharing::Driver.all(path)
-      all_drivers.length.must_equal 2
+      all_drivers.length.must_equal 14 # out of a total of 20 inputs in support/drivers_spec2.csv
       all_drivers[0].name.must_equal "Bernardo Prosacco"
       all_drivers[1].name.wont_equal "Emory Rosenbaum"
     end
