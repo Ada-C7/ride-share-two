@@ -1,5 +1,6 @@
 require 'csv'
 require 'pry'
+require_relative '../lib/trips'
 
 module RideShare
   class Driver
@@ -10,11 +11,10 @@ module RideShare
       @driver_id = drivers[:driver_id]
       @name = drivers[:name]
       @vin = drivers[:vin]
+      @trips = []
 
       raise ArgumentError.new("Invalid VIN") if vin.length != 17
     end
-
-
 
     def self.all
       @all_drivers = []
@@ -35,15 +35,14 @@ module RideShare
       end
     end
 
-    # def get_trips
-    #   return @trips
-    # end
+    def get_trips
+      return @trips
+    end
     #
-    # def add_trip(trip)
-    #   @trips << trip
+    # def get_trips_driver_id
+    #   binding.pry
+    #   return RideShare::Trips.get_trips_driver_id(@trip_id) #this gets the list of all driver trips using driver id and calls on Trip class
     # end
-    #
-
 
   end # end of Driver
 end # end of module
