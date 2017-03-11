@@ -42,13 +42,13 @@ module RideShare
     end
 
     def findTrips
-      return Trip.getTripsByDriver(id)
+      return Trip.getTripsByDriver(@id)
     end
 
     def avgRating
       avg_rating = nil
       driver_ratings = []
-      driver_trips = Trip.getTripsByDriver(id)
+      driver_trips = Trip.getTripsByDriver(@id)
       driver_trips.each do |trip|
         driver_ratings << trip.rating
       end

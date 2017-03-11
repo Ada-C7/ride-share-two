@@ -36,7 +36,7 @@ module RideShare
     end
 
     def findTrips
-      return Trip.getTripsByRider(id)
+      return Trip.getTripsByRider(@id)
     end
   end
 end
