@@ -4,7 +4,7 @@ describe "Driver" do
   describe "constructor" do
     before do
       @name = 'Ada'
-      @id = 108
+      @id = 68
       @vin = '123456789abcdefeg'
     end
 
@@ -49,19 +49,22 @@ describe "Driver" do
     end
   end
 
-  # describe "trips" do
-  #   it "returns an array" do
-  #     skip
-  #   end
-  #
-  #   it "returns an array of Trip objects" do
-  #     skip
-  #   end
-  #
-  #   it "returns Trips that only THIS driver has taken" do
-  #     skip
-  #   end
-  # end
+  # As this method simply calls the Trip.find_all_for_driver method,
+  # extensive testing was not done.
+  describe "trips" do
+    it "returns only Trips that match this driver's id" do
+      driver_77 = RideShare::Driver.new(id: 77)
+      driver_77.trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+        trip.driver_id.must_equal driver_77.id
+      end
+    end
+
+    it "returns an empty array if driver id is undefined" do
+      driver = RideShare::Driver.new(vin: '123456789abcdefeg')
+      driver.trips.must_be_empty
+    end
+  end
   #
   # describe "avg_rating" do
   #   it "returns a float to 1 decimal point" do

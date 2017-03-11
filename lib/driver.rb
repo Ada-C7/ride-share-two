@@ -3,16 +3,16 @@ module RideShare
     attr_reader :name, :id, :vin
 
     def initialize(args)
-      raise ArgumentError.new("VIN must be a string") unless args[:vin].is_a? String
-
-      if args[:vin].length != 17 || !all_letters_and_numbers?(args[:vin])
-        raise RideShare::InvalidVinError.new("VIN must be 17 characters long and
-          only contain letters and numbers")
-      end
+      check_if_valid_vin(args[:vin]) if args[:vin] != nil
 
       @name = args[:name]
       @id = args[:id]
       @vin = args[:vin]
+    end
+
+    # retrieves the list of trip instances that only this driver has taken
+    def trips
+      RideShare::Trip.find_all_for_driver(@id)
     end
 
     def self.all
@@ -34,6 +34,15 @@ module RideShare
     # determine whether a string contains only letters a-z and numbers 0-9
     def all_letters_and_numbers?(str)
       str[/[a-zA-Z0-9]+/] == str
+    end
+
+    def check_if_valid_vin(vin)
+      raise ArgumentError.new("VIN must be a string") unless vin.is_a? String
+
+      if vin.length != 17 || !all_letters_and_numbers?(vin)
+        raise RideShare::InvalidVinError.new("VIN must be 17 characters long and
+          only contain letters and numbers")
+      end
     end
   end
 end

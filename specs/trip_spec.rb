@@ -186,9 +186,9 @@ describe "Trip" do
     end
 
     it "returns an empty array if the driver_id is not found" do
-      fake_driver_id = 108
-      trips_for_fake_driver = RideShare::Trip.find_all_for_driver(fake_driver_id)
-      trips_for_fake_driver.must_be_empty
+      driver_with_no_trips = 100
+      trips_for_driver_100 = RideShare::Trip.find_all_for_driver(driver_with_no_trips)
+      trips_for_driver_100.must_be_empty
     end
   end
 
@@ -225,9 +225,9 @@ describe "Trip" do
     end
 
     it "returns an empty array if the rider_id is not found" do
-      fake_rider_id = 308
-      trips_for_fake_rider = RideShare::Trip.find_all_for_rider(fake_rider_id)
-      trips_for_fake_rider.must_be_empty
+      rider_with_no_trips = 116
+      trips_for_rider_116 = RideShare::Trip.find_all_for_rider(rider_with_no_trips)
+      trips_for_rider_116.must_be_empty
     end
   end
 end

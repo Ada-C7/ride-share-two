@@ -3,6 +3,7 @@ module RideShare
     attr_reader :id, :rider_id, :driver_id, :date, :rating
 
     def initialize(args)
+      # possible that rider did not give a rating
       check_if_valid_rating(args[:rating]) if args[:rating] != nil
 
       @id = args[:id]
