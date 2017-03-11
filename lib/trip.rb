@@ -42,6 +42,8 @@ module RideShare
       super
       if !params[:rating].between?(1,5)
         raise ArgumentError.new("Rating must be between 1 and 5.")
+      elsif params[:fare] < MIN_FARE
+        raise ArgumentError.new("Fare must be at least $#{MIN_FARE}.")
       end
     end
 

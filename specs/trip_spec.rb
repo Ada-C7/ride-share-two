@@ -5,7 +5,7 @@ describe RideShare::Trip do
       it "Initializes a trip when given valid parameters" do
         trip = RideShare::Trip.new(
           id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14",
-          rating: 4, distance: 5, duration: 5, fare: 5
+          rating: 4, distance: 5, duration: 5, fare: 6
         )
 
         trip.must_be_instance_of RideShare::Trip
@@ -22,25 +22,34 @@ describe RideShare::Trip do
         proc {
           RideShare::Trip.new(
             id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14",
-            rating: 0, distance: 5, duration: 5, fare: 5
+            rating: 0, distance: 5, duration: 5, fare: 6
           )
         }.must_raise ArgumentError
       end
 
-      it "Does not allow a rating 5" do
+      it "Does not allow a rating above 5" do
         proc {
           RideShare::Trip.new(
             id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14",
-            rating: 6, distance: 5, duration: 5, fare: 5
+            rating: 6, distance: 5, duration: 5, fare: 6
           )
         }.must_raise ArgumentError
+      end
+
+      it "Does not allow a fare below 5.15" do
+        proc {
+          RideShare::Trip.new(
+            id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14",
+            rating: 4, distance: 5, duration: 5, fare: 6
+          )
+        }
       end
 
       it "Doesn't create a trip when parameters are set to nil" do
         proc {
           RideShare::Trip.new(
             id: nil, driver_id: 5, rider_id: 263, date: "2015-12-14",
-            rating: 4, distance: 5, duration: 5, fare: 5
+            rating: 4, distance: 5, duration: 5, fare: 6
           )
         }.must_raise ArgumentError
       end
@@ -49,7 +58,7 @@ describe RideShare::Trip do
         proc {
           RideShare::Trip.new(
             id: 5, driver_id: 5, rider_id: 263, date: "",
-            rating: 4, distance: 5, duration: 5, fare: 5
+            rating: 4, distance: 5, duration: 5, fare: 6
           )
         }.must_raise ArgumentError
       end
@@ -97,7 +106,7 @@ describe RideShare::Trip do
     describe "Instance Methods" do
       let(:trip) { RideShare::Trip.new(
         id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14",
-        rating: 5, distance: 5, duration: 5, fare: 5
+        rating: 5, distance: 5, duration: 5, fare: 6
       )}
 
       describe "#driver" do

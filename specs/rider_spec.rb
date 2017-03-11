@@ -78,15 +78,15 @@ describe RideShare::Rider do
       trips: [
         RideShare::Trip.new(
           id: 1, rider_id: 3333, driver_id: 4, date: "1-2-2017",
-          rating: 4, distance: 5, duration: 5, fare: 5
+          rating: 4, distance: 5, duration: 5, fare: 6
         ),
         RideShare::Trip.new(
           id: 2, rider_id: 3333, driver_id: 5, date: "1-2-2017",
-          rating: 3, distance: 5, duration: 5, fare: 5
+          rating: 3, distance: 5, duration: 5, fare: 6
         ),
         RideShare::Trip.new(
           id: 3, rider_id: 3333, driver_id: 3, date: "1-2-2017",
-          rating: 2, distance: 5, duration: 5, fare: 5
+          rating: 2, distance: 5, duration: 5, fare: 6
         )
       ])
     }
@@ -133,7 +133,7 @@ describe RideShare::Rider do
 
     describe "#cumulative_spending" do
       it "Calculates the total spending for a given rider" do
-        rider.cumulative_spending.must_equal 15
+        rider.cumulative_spending.must_equal 18
       end
 
       it "Returns 0 for a rider without any spending" do
