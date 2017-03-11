@@ -5,9 +5,13 @@ module RideSharing
 
     attr_reader :id, :name, :vin
     def initialize(driver_hash)
-      @id = driver_hash[:driver_id].to_i
-      @name = driver_hash[:name].to_s
-      @vin = driver_hash[:vin].to_s
+      raise ArgumentError.new("The input for id must be an integer > 0.\nThis driver will not be recorded.") if  driver_hash[:driver_id].class != Integer || driver_hash[:driver_id] < 1
+      raise ArgumentError.new("The input for id must be a string of characters.\nThis driver will not be recorded.") if  driver_hash[:name].class != String || driver_hash[:name].length < 1
+      raise ArgumentError.new("The input for vehicle number (vin) must be a string of 17 characters.\nThis driver will not be recorded." ) if driver_hash[:vin].class != String || driver_hash[:vin].length != 17
+
+      @id = driver_hash[:driver_id]
+      @name = driver_hash[:name]
+      @vin = driver_hash[:vin]
     end
 
     # def initialize(id, name, vin)
@@ -20,12 +24,30 @@ module RideSharing
       all_drivers = []
       CSV.foreach(path, :headers => true, :header_converters => :symbol) do |row|
         begin
+          raise ArgumentError.new("The driver_id \"#{row[0]}\" creates an invalid id number.\nHence this driver will not be recorded." ) if row[0].to_i < 1
+        rescue ArgumentError => exception
+          puts "#{exception.message}"
+          next
+        end
+
+        begin
+          raise ArgumentError.new("The input name for driver_id #{row[0]} must be at least 1 character long.\nHence this driver will not be recorded." ) if row[1].length < 1
+        rescue ArgumentError => exception
+          puts "#{exception.message}"
+          next
+        end
+
+
+        begin
           raise ArgumentError.new("Vehicle number (vin) not valid for\ndriver \"#{row[1]}\" with id# #{row[0]}.\nHence this driver will not be recorded." ) if row[2].length != 17
         rescue ArgumentError => exception
           puts "#{exception.message}"
           next
         end
-        all_drivers << self.new(row.to_hash)
+
+        driver_hash = row.to_hash
+        driver_hash[:driver_id] = driver_hash[:driver_id].to_i
+        all_drivers << self.new(driver_hash)
       end
       return all_drivers
       # all_drivers =[]

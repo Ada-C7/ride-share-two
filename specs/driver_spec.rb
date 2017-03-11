@@ -18,6 +18,54 @@ describe "Driver" do
       driver1.must_respond_to :vin
       driver1.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
+
+    it "Must raise an ArgumentError if :driver_id input is not an integer > 0" do
+      proc{
+        RideSharing::Driver.new({driver_id: "007", name: "James Bond", vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: -2, name: "James Bond", vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: 11.0, name: "James Bond", vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({name: "James Bond", vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+    end
+
+    it "Must raise an ArgumentError if :name is not a string" do
+      proc{
+        RideSharing::Driver.new({driver_id: 007, name: ["James Bond"], vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: 007, name: "", vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: 007,  vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+    end
+
+    it "Must raise an ArgumentError if :vin is not a string of 17 characters" do
+      proc{
+        RideSharing::Driver.new({driver_id: 007, name: "James Bond", vin: "WBWSS52P9NE"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: 007, name: "James Bond", vin: ["WBWSS52P9NEYLVDE9"]})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Driver.new({driver_id: 007, name: "James Bond", vin: 42})
+      }.must_raise ArgumentError
+    end
+
+
   end # End of describe "Driver#initialize"
 
 
