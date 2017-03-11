@@ -64,10 +64,11 @@ module RideShare
     # end
 
     def self.test_data_for_duplicates(drivers)
-      drivers_id = drivers.map { |driver| driver.id }
-      if drivers_id.length != drivers_id.uniq.length
+      driver_ids = drivers.map { |driver| driver.id }
+      if driver_ids.length != driver_ids.uniq.length
+        duplicates = driver_ids.detect { |id| driver_ids.count(id) > 1 }
         # would be nice to know the ids of the duplicate id
-        raise ArgumentError.new("There are two drivers with the same id")
+        raise ArgumentError.new("There are two drivers with the same id: #{duplicates}")
       end
       drivers
     end

@@ -219,7 +219,7 @@ describe "Trip" do
     # Should return an error
     # don't want to return drivers that have not been initialized
     #- that aren't in csv/database
-    it "raises an error if no matching driver instance for driver_id" do
+    it "raises an error if no matching driver instance" do
       err = proc {
              trips_bad_driver_id.each { |trip| trip.get_driver }
            }.must_raise ArgumentError
@@ -242,13 +242,13 @@ describe "Trip" do
       end
     end
 
-    it "returns an error if no matching rider instance for rider_id" do
+    it "returns an error if no matching rider instance" do
       err = proc {
              trips_bad_rider_id.each { |trip| trip.get_rider }
            }.must_raise ArgumentError
       err.message.must_equal "No rider with id: #{@bad_rider_id} in rider csv"
     end
 
-    # edge cases - find first and last in database? 
+    # edge cases - find first and last in database?
   end
 end

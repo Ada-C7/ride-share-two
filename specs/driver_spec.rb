@@ -110,9 +110,9 @@ describe "Driver" do
 
     it "raises an error if two drivers have same id" do
       err = proc {
-                   RideShare::Driver.all(@data_with_duplicate)
-                 }.must_raise ArgumentError
-      err.message.must_equal "There are two drivers with the same id"
+              RideShare::Driver.all(@data_with_duplicate)
+           }.must_raise ArgumentError
+      err.message.must_equal "There are two drivers with the same id: 502"
     end
   end
 
