@@ -33,6 +33,17 @@ module Rideshare
       end
     end
 
+    def find_my_trips
+       Trip.find_by_rider(@rider_id)
+    end
+
+    def find_my_drivers
+       trips = find_my_trips
+       trips.map!{|value| value.make_driver}
+
+       return make_drivers.name
+    end
+
   end
 end
 

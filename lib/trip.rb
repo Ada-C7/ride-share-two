@@ -56,7 +56,7 @@ module Rideshare
 
     def make_rider
     #helper method to extract driver_id from trip object
-      Rider.find_rider(Trip.rider_id)
+      Rider.find_rider(self.rider_id)
 
     end
   end
