@@ -9,7 +9,6 @@ module Carmmunity
       @rider_id = rider_hash[:rider_id]
       @name = rider_hash[:name]
       @phone_number = rider_hash[:phone_number]
-      # vin number should be a specific length to ensure it is a valid vehicle identification number <-method?
     end
 
     def trips_taken
