@@ -53,6 +53,16 @@ module RideShare
       return trip_data.read_csv_and_remove_headings
     end
 
+    def self.test_for_duplicates(trips)
+      trip_ids = trips.map { |trip| trip.id }
+      if trip_ids.length != trip_ids.uniq.length
+        duplicates = trip_ids.detect { |id| trip_ids.count(id) > 1 }
+        # would be nice to know the ids of the duplicate id
+        raise ArgumentError.new("There are two trips with the same id: #{duplicates}")
+      end
+      trips
+    end
+
     # this method create mock data to use with testing
     # def self.get_data
     #   [
@@ -81,7 +91,7 @@ module RideShare
         trip[:rating] = test_for_rating(trip_info[4])
         self.new(trip)
       end
-
+      test_for_duplicates(trips)
       return trips
     end
 

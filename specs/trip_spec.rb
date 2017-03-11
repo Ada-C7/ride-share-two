@@ -61,6 +61,14 @@ describe "Trip" do
                     empty_nested_arrays: [[]]
 
                   }
+      @duplicate_data = [
+                          ['901', '502', '999', "2016-04-05", '3'],
+                          ['902', '501', '988', "2016-04-06", '5'],
+                          ['903', '520', '978', "2016-04-07", '5'],
+                          ['903', '519', '968', "2016-04-07", '5'],
+                          ['904', '505', '958', "2016-04-07", '5']
+                        ]
+
     end
 
     # let does not run this block untill it is called - which is good you want
@@ -133,10 +141,17 @@ describe "Trip" do
       }.must_raise ArgumentError
     end
 
-    it "riases an error if not given all info pieces" do
+    it "raises an error if not given all info pieces" do
       proc {
         RideShare::Trip.all(@bad_data[:missing_part])
       }.must_raise ArgumentError
+    end
+
+    it "raises an error if given data with dupliate trip ids" do
+      err = proc {
+                  RideShare::Trip.all(@duplicate_data)
+                }.must_raise ArgumentError
+      err.message.must_equal "There are two trips with the same id: 903"
     end
   end
 
