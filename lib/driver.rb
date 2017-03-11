@@ -12,13 +12,14 @@ module RideShare
       @vin = info[:vin]
     end
 
+# dont need to worry about calling these methods on a driver that doesn't exsits
+# because you have to call this method on a driver instance
+# IE driver must exists cause you have a driver istance you are calling this method from...
+
     def get_trips()
       RideShare::Trip.find_by_driver(@id)
     end
 
-    # dont need to worry about calling this method on a driver that doesn't exsits
-    # because you have to call this method on a driver instance
-    # IE driver must exists cause you have a driver istance you are calling this method from...
     def calculate_average_rating()
       trips = get_trips
       return nil if trips.nil?
@@ -50,6 +51,17 @@ module RideShare
       data = FileData.new(file_path)
       data.read_csv_and_remove_headings
     end
+
+    # this method will return mock data for testing
+    # def self.get_data
+    #   [
+    #     ['500', 'Jane Doe', 'WX1234567890ABCDE'],
+    #     ['501', 'John Smith','WX1234567890ABCDE'],
+    #     ['502', 'Cyn Bin','ZZ1234567890ABCDE'],
+    #     ['503', 'Ms. Squishy','YY1234567890ABCDE'],
+    #     ['505', 'Travis Crosby','XX1234567890ABCDE']
+    #   ]
+    # end
 
     def self.all(drivers_data = nil)
       drivers_data = get_data if drivers_data.nil?

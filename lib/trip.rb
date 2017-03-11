@@ -53,6 +53,15 @@ module RideShare
       return trip_data.read_csv_and_remove_headings
     end
 
+    # this method create mock data to use with testing
+    # def self.get_data
+    #   [
+    #     ['901', '502', '999', "2016-04-05", '3'],
+    #     ['902', '500', '998', "2016-04-06", '5'],
+    #     ['903', '500', '998', "2016-04-07", '5'],
+    #   ]
+    # end
+
     # all takes in trips_data because it is better to inject data as an object
     # this also lets you test the data more easily (you can more easily pass in bad data)
     # but there is a default for trips_data
