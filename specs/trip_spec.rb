@@ -40,9 +40,9 @@ describe RideShare::Trip do
         proc {
           RideShare::Trip.new(
             id: 10, driver_id: 8, rider_id: 263, date: "2015-12-14",
-            rating: 4, distance: 5, duration: 5, fare: 6
+            rating: 4, distance: 5, duration: 5, fare: 4
           )
-        }
+        }.must_raise ArgumentError
       end
 
       it "Doesn't create a trip when parameters are set to nil" do
