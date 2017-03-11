@@ -16,6 +16,14 @@ module RideShare
       @@all ||= super(SOURCE_FILE)
     end
 
+    def self.earnings(fare)
+      raise ArgumentError.new("Invalid Fare: Below $5.15 minimum.") if fare < 5.15
+      ride_fee = 1.65
+      earn_rate = 0.80
+
+      ((fare - ride_fee) * earn_rate).round(2)
+    end
+
     def trips
       @trips ||= Trip.by_driver(@id)
     end
@@ -23,6 +31,11 @@ module RideShare
     def average_rating
       return nil if trips.empty?
       trips.map { |trip| trip.rating }.reduce(:+).to_f/(trips.length).round(1)
+    end
+
+    def total_earnings
+      fares = trips.map { |trip| trip.fare }
+      fares.inject(0) { |total, fare| total + Driver.earnings(fare) }.round(2)
     end
 
     private

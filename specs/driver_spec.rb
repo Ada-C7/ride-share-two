@@ -76,6 +76,22 @@ describe RideShare::Driver do
     end
   end
 
+  describe "self.earnings" do
+    it "Calculates earnings for a fare, using the fee and earnings rate" do
+      RideShare::Driver.earnings(10).must_equal 6.68
+    end
+
+    it "Rounds a float to two decimals" do
+      RideShare::Driver.earnings(9.999).must_equal 6.68
+    end
+
+    it "Raises an ArgumentError when the given fare is below the minimum" do
+      proc {
+        RideShare::Driver.earnings(2)
+      }.must_raise ArgumentError
+    end
+  end
+
   describe "Instance Methods" do
     let(:driver) { RideShare::Driver.new(
       id: 3333,
@@ -84,15 +100,15 @@ describe RideShare::Driver do
       trips: [
         RideShare::Trip.new(
           id: 1, driver_id: 3333, rider_id: 1111, date: "1-2-2017",
-          rating: 4, distance: 5, duration: 5, fare: 5
+          rating: 4, distance: 5, duration: 5, fare: 6
         ),
         RideShare::Trip.new(
           id: 2, driver_id: 3333, rider_id: 1111, date: "1-2-2017",
-          rating: 5, distance: 5, duration: 5, fare: 5
+          rating: 5, distance: 5, duration: 5, fare: 6
         ),
         RideShare::Trip.new(
           id: 3, driver_id: 3333, rider_id: 1111, date: "1-2-2017",
-          rating: 3, distance: 5, duration: 5, fare: 5
+          rating: 3, distance: 5, duration: 5, fare: 6
         )
       ])
     }
@@ -128,6 +144,16 @@ describe RideShare::Driver do
       it "Returns an average rating within the expected range" do
         real_driver.average_rating.must_be :<=, 5
         real_driver.average_rating.must_be :>=, 1
+      end
+    end
+
+    describe "#total_earnings" do
+      it "Calculates the total earnings for a given rider" do
+        driver.total_earnings.must_equal 10.44
+      end
+
+      it "Returns 0 for a rider without any trips" do
+        inexperienced_driver.total_earnings.must_equal 0
       end
     end
 
