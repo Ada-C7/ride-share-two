@@ -24,5 +24,9 @@ module RideShare
       trips.map { |trip| Driver.find(trip.driver_id) }.uniq
     end
 
+    def cumulative_spending
+      trips.map { |trip| trip.fare }.reduce(0, :+).round(2)
+    end
+
   end
 end

@@ -131,5 +131,15 @@ describe RideShare::Rider do
       end
     end
 
+    describe "#cumulative_spending" do
+      it "Calculates the total spending for a given rider" do
+        rider.cumulative_spending.must_equal 15
+      end
+
+      it "Returns 0 for a rider without any spending" do
+        inexperienced_rider.cumulative_spending.must_equal 0
+      end
+    end
+
   end
 end
