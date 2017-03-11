@@ -10,6 +10,8 @@ module Carmmunity
     @rider_id = trip_hash[:rider_id]
     @date = trip_hash[:date]
     @rating = trip_hash[:rating] #(1-5) <-method?
+
+    raise InvalidRating.new "Rating must be between 1-5" if @rating < 1 || @rating > 5
   end
 
 
@@ -32,9 +34,7 @@ module Carmmunity
 
     trips = Trip.all.select {|trip| trip.driver_id == id }
 
-    # driver_trips = all_trips.map do |trip|
-    #   trip if trip.driver_id == id
-    # end
+    raise NoResults.new "#{id} returned no results" if trips.length == 0
 
     return trips
   end
@@ -43,6 +43,8 @@ module Carmmunity
   def self.rider_trips(id)
 
     trips = Trip.all.select {|trip| trip.rider_id == id }
+
+    raise NoResults.new "#{id} returned no results" if trips.length == 0
 
     return trips
   end
