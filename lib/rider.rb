@@ -42,6 +42,16 @@ module RideShare
       phone_number
     end
 
+    def self.test_data_for_duplicates(riders)
+      rider_ids = riders.map { |rider| rider.id }
+      if rider_ids.length != rider_ids.uniq.length
+        duplicates = rider_ids.detect { |id| rider_ids.count(id) > 1 }
+        # would be nice to know the ids of the duplicate id
+        raise ArgumentError.new("There are two riders with the same id: #{duplicates}")
+      end
+      riders
+    end
+
     # If I use the full path path, it will work no matter if I run program
     # can run from spec file, rakefile, or lib file
     def self.get_data
@@ -62,7 +72,7 @@ module RideShare
         rider[:phone_number] = test_phone_number(rider_info[2])
         self.new(rider)
       end
-
+      test_data_for_duplicates(riders)
       return riders
     end
 

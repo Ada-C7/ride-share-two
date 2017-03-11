@@ -44,6 +44,14 @@ describe "Rider" do
                     bad_name: [['789', 'c', '123-4567']],
                     bad_phone_number: [['901', 'Cat', '123']]
                   }
+
+      @duplicate_data = [
+                          ['700', 'selena cobb', '123-456-7890'],
+                          ['701', 'allie cobb', '980-765-4321'],
+                          ['702', 'isaac cobb', '234-567-8901'],
+                          ['702', 'micah cobb', '345-678-9012'],
+                          ['703', 'selah cobb', '456-789-0123']
+                        ]
     end
 
     let(:riders) { RideShare::Rider.all(@riders_data) }
@@ -52,7 +60,7 @@ describe "Rider" do
     #   @riders_data.each { |rider_data| RideShare::Rider.all([riders_data])
     # end
 
-    it "doesn't raise any errors & returns an array when given rider.csv data" do
+    it "returns an array" do
       riders.must_be_instance_of Array
     end
 
@@ -102,6 +110,12 @@ describe "Rider" do
       err.message.must_equal "Name length is under 1"
     end
 
+    it "raises an error if there are duplicate ids" do
+      err = proc {
+                   RideShare::Rider.all(@duplicate_data)
+                 }.must_raise ArgumentError
+      err.message.must_equal "There are two riders with the same id: 702"
+    end
   end
 
   describe "Rider#find" do
