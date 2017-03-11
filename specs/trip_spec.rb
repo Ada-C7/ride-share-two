@@ -6,7 +6,7 @@ describe "Trip" do
     @rider_id = 78
     @driver_id = 88
     @date = '2017-8-03' #can't be a future date
-    @rating = 3 # int, 1-5
+    @rating = 3 
   end
 
   let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,

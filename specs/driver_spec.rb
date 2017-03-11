@@ -65,17 +65,25 @@ describe "Driver" do
       driver.trips.must_be_empty
     end
   end
-  #
-  # describe "avg_rating" do
-  #   it "returns a float to 1 decimal point" do
-  #     skip
-  #   end
-  #
-  #   it "returns the overall avg_rating for a driver" do
-  #     #test decimal point
-  #     skip
-  #   end
-  # end
+
+  describe "avg_rating" do
+    let (:avg_rating_for_driver_44) {RideShare::Driver.new(id:44).avg_rating}
+    # ratings_for_driver_44 = [5, 4, 4, 2, 4, 5, 3, 1]
+
+    it "returns a float to 1 decimal point" do
+      avg_rating_for_driver_44.must_be_instance_of Float
+      avg_rating_for_driver_44.to_s.length.must_equal 3
+    end
+
+    it "returns the overall avg_rating for a driver" do
+      avg_rating_for_driver_44.must_equal 3.5
+    end
+
+    it "returns nil if a Driver has no ratings and/or trips" do
+      driver_with_no_trips = RideShare::Driver.new(id:100)
+      driver_with_no_trips.avg_rating.must_be_nil
+    end
+  end
 
   describe "Driver.all" do
     let (:drivers) {RideShare::Driver.all}
