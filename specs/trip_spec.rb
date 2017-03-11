@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe "Trip Class" do
+xdescribe "Trip Class" do
 
   xdescribe "Instance Methods" do
 

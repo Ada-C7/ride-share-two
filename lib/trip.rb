@@ -11,7 +11,7 @@ module Carmmunity
     @date = trip_hash[:date]
     @rating = trip_hash[:rating] #(1-5) <-method?
 
-    raise InvalidRating.new "Rating must be between 1-5" if @rating < 1 || @rating > 5
+    #raise InvalidRating.new "Rating must be between 1-5" if @rating < 1 || @rating > 5
   end
 
 

@@ -1,21 +1,29 @@
 require_relative 'spec_helper'
 
-xdescribe "Driver Class" do
+describe "Driver Class" do
 
-  let(:ada) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: 12345338303493234 )}
+  let(:driver_test) { Carmmunity::Driver.new(name: 'Ada', driver_id: 2, vin: "12345338303493234" )}
 
   describe "Instance Methods" do
-    xdescribe "initialize method" do
+    describe "initialize method" do
 
       it "Instantiates a new instance of Driver class" do
-        ada.must_be_instance_of Carmmunity::Driver
+        driver_test.must_be_instance_of Carmmunity::Driver
       end
 
       it "Stored data must match what was passed as an argument" do
-        ada.name.must_equal "Ada"
-        ada.driver_id.must_equal 2
-        ada.vin.must_equal 12345338303493234
+
+        driver_test.name.must_equal "Ada"
+        driver_test.driver_id.must_equal 2
+        driver_test.vin.must_equal "12345338303493234"
       end
+
+      it "raises Invalid Vin Number error" do
+
+        vin_test = "12345"
+        proc { Carmmunity::Driver.new(vin: vin_test)}.must_raise Carmmunity::InvalidVinNumber
+      end
+
     end #end of initialze method
 
 
@@ -25,16 +33,17 @@ xdescribe "Driver Class" do
       let(:trips) {driver.trips_taken}
 
       it "Trips taken must be an array" do
-
+        binding.pry 
         driver.trips_taken.must_be_instance_of Array
       end
 
       it "returns more than one trip instance" do
+        skip
         trips.length.must_be :>, 1
       end
 
       it "The driver id number matches the trip's driver id " do
-
+        skip
         trips.map{|trip| trip.driver_id}.must_include  driver.driver_id
 
       end
@@ -45,6 +54,7 @@ xdescribe "Driver Class" do
       end
 
       it "Returns the correct trip infromation" do
+        skip
         trip = trips.first
         trip.driver_id.must_equal     12
         trip.rating.must_equal        1
@@ -54,7 +64,7 @@ xdescribe "Driver Class" do
       end
     end #end of trips taken
 
-    describe "average_rating method" do
+    xdescribe "average_rating method" do
 
       let(:driver) {Carmmunity::Driver::find(12)}
 
