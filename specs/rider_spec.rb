@@ -26,26 +26,22 @@ describe "Rider" do
     end
   end
 
-  # describe "trips" do
-  #   # handle the case that @rider_id is nil?
-  #   it "returns an array" do
-  #     skip
-  #   end
-  #
-  #   it "returns only Trip objects in the array" do
-  #     skip
-  #   end
-  #
-  #   it "returns only Trip instances that this rider has taken" do
-  #     #must_include id
-  #     #must_not_include id
-  #     #length
-  #   end
-  #
-  #   it "returns nil if @rider_id is undefined" do
-  #
-  #   end
-  # end
+  # As this method simply calls the Trip.find_all_for_rider method,
+  # extensive testing was not done.
+  describe "trips" do
+    it "returns only Trips that match this rider's id" do
+      rider_77 = RideShare::Rider.new(id: 77)
+      rider_77.trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+        trip.rider_id.must_equal rider_77.id
+      end
+    end
+
+    it "returns an empty array if rider id is undefined" do
+      rider = RideShare::Rider.new(name: 'Ada')
+      rider.trips.must_be_empty
+    end
+  end
   #
   # describe "drivers" do
   #   # handle the case that @rider_id is nil?

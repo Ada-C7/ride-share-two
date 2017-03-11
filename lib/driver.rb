@@ -15,6 +15,11 @@ module RideShare
       RideShare::Trip.find_all_for_driver(@id)
     end
 
+    # retrieves an average rating for that driver based on all trips taken
+    def avg_rating
+    end
+
+    # retrieves all drivers from the CSV file
     def self.all
       drivers = []
       CSV.foreach('support/drivers.csv', headers: true) do |row|
@@ -24,6 +29,7 @@ module RideShare
         #CSV.foreach('support/drivers.csv', headers: true, header_converters: :symbol) do |row|
     end
 
+    # finds a specific driver using their numeric ID
     def self.find(driver_id)
       self.all.find {|driver| driver.id == driver_id}
       # If no driver is found, returns nil
@@ -31,7 +37,7 @@ module RideShare
 
     private
 
-    # determine whether a string contains only letters a-z and numbers 0-9
+    # determines whether a string contains only letters a-z and numbers 0-9
     def all_letters_and_numbers?(str)
       str[/[a-zA-Z0-9]+/] == str
     end

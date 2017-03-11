@@ -14,6 +14,7 @@ module RideShare
 
     # retrieves the list of trip instances that only this rider has taken
     def trips
+      RideShare::Trip.find_all_for_rider(@id)
     end
 
     # retrieves the list of all previous driver instances
