@@ -31,12 +31,15 @@ describe "Driver Initialize" do
   end
 end
 
-# describe "list_driver_trips method" do
-#
-#   it "retrieves the list of trip instances that a specific driver has taken" do
-#     RideShareTwo::Driver.list_driver_trips("88").must_be_kind_of RideShareTwo::Driver, "Oops that is not an array of trips"
-#   end
-# end
+# test for "list_driver_trips method"? spoke with tutor and he said you trust the tests in the Trip class to cover this.
+
+describe "average_rating" do
+  let(:driver) {RideShareTwo::Driver.find_driver(21)}
+
+  it "retrieves an average rating for a driver based on all trips taken" do
+    driver.average_rating.must_equal 2
+  end
+end
 
 describe "self.all_drivers" do
   let(:driver_list) {RideShareTwo::Driver.all_drivers}

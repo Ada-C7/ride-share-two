@@ -29,16 +29,23 @@ end
 describe "list_drivers_for_rider method" do
   let(:rider_object) {RideShareTwo::Rider.all_riders[5]}
 
-  it "retrieves the list of all previous driver instances & returns as an array" do
+  it "returns as an array" do
     rider_trips = rider_object.list_drivers_for_rider
     rider_trips.must_be_kind_of Array
   end
 
-#write this test
   it "retrieves the list of all previous driver instances & returns as an array" do
     rider_trips = rider_object.list_drivers_for_rider
-    rider_trips.must_be_kind_of Array
+    rider_trips[0].must_be_instance_of Integer
+    # wanted to write line 41 to be line below, but couldn't figure out the code
+    # rider_trips[0].must_be_instance_of RideShareTwo::Driver
   end
+
+  # it "retrieves the list of all previous driver instances & returns as an array" do
+  # rider_trips = rider_object.list_drivers_for_rider
+  # rider_trips.must_equal [75, 10, 40, 74]
+  # end
+
 end
 
 

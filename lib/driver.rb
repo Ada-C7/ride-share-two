@@ -1,5 +1,6 @@
 require "csv"
 require_relative 'trip'
+require "pry"
 
 module RideShareTwo
   class Driver
@@ -33,11 +34,22 @@ module RideShareTwo
     def list_driver_trips
       RideShareTwo::Trip.driver_trips(@driver_id)
     end
-    #returns array of class trip?
-    #test array contains trip objects?
+
+# wasn't sure if you are looking for a float or an integer to be returned as the average.
+# went with integer because thinking in terms of a start system.
+    def average_rating
+      total_rating = 0
+      ratings = list_driver_trips.map {|trip| trip.rating}
+      total_rating = ratings.sum
+      average = total_rating / ratings.length
+      return average
+    end
 
   end
 
 end
 
-puts RideShareTwo::Driver.find_driver(13).list_driver_trips
+# puts RideShareTwo::Driver.find_driver(13).list_driver_trips
+driver = RideShareTwo::Driver.find_driver(13)
+puts driver.list_driver_trips
+puts driver.average_rating
