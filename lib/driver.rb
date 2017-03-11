@@ -6,7 +6,7 @@ module RideShare
     def initialize(driver_hash)
       @id = validate_int(driver_hash[:id], "Driver ID")
       @name = validate_string(driver_hash[:name], "Name")
-      @vin = validate_string(driver_hash[:vin], "VIN")
+      @vin = validate_string_length(driver_hash[:vin], "VIN", 17)
     end
 
     def self.all
