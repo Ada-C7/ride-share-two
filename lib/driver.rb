@@ -10,6 +10,7 @@ module Carmmunity
       @name = driver_hash[:name]
       @vin = driver_hash[:vin]
       # vin number should be a specific length to ensure it is a valid vehicle identification number <-method?
+      raise InvalidVinNumber.new("The vin number is invalid") if @vin.length != 17
     end
 
 
@@ -42,7 +43,7 @@ module Carmmunity
       end
     end
 
-    raise ArgumentError.new "#{id} returned no results"
+    raise NoResults.new "#{id} returned no results"
   end #end self.find
 
 
