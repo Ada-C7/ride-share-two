@@ -36,23 +36,22 @@ class Driver
     raise ArgumentError.new "Driver doesn't exist"
   end
 
-  def trips(id)
+  def trips
     #pass in driver id
     #get back a collection of all the trip instances of that driver
     #calls trip(class)'s find_many_for_driver method
-    Trip.find_all_for_driver(id)
+    Trip.find_all_for_driver(self.id)
   end
 
-  def rating(id)
+  def rating
     #pass in driver id
     #gets an average rating for that driver
     #calls Driver(class)'s trip(id) method, which will give all the trips (with ratings for each)
     #sum all the ratings, divide by the number of trips/ratings
-    all_trips = Trip.find_all_for_driver(id)
+    all_trips = self.trips
     all_ratings = []
-    all_trips.each { |trip| all_ratings << trip.rating }
+    all_ratings = all_trips.map { |trip| trip.rating }
     average = (all_ratings.reduce(:+))/all_ratings.length.to_f
     return average
   end
-
 end

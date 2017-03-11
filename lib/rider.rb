@@ -36,7 +36,7 @@ class Rider
     # all_trips = Trip.find_all_for_rider(id)
     all_trips = self.trips
     previous_drivers_by_id = []
-    all_trips.each { |trip| previous_drivers_by_id << trip.driver_id }
+    previous_drivers_by_id = all_trips.map { |trip| trip.driver_id }
     # now, an array of driver_ids
     rider_previous_drivers = []
     previous_drivers_by_id.each { |driver_id| rider_previous_drivers << Driver.find(driver_id) }

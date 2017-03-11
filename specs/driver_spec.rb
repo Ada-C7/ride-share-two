@@ -39,7 +39,7 @@ describe "Driver" do
   describe "#trips" do
     it "returns the list of trip instances that only this driver has taken" do
       first_driver = Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
-      first_driver_trips = first_driver.trips(1)
+      first_driver_trips = first_driver.trips
       first_driver_trips.must_be_instance_of Array
       first_driver_trips.each { |trip| trip.must_be_instance_of Trip }
       first_driver_trips.length.must_equal 9
@@ -57,11 +57,6 @@ describe "Driver" do
       drivers.each { |i| i.must_be_instance_of Driver }
 
       drivers.length.must_equal 100
-    end
-
-    it "only returns drivers listed in the CSV file" do
-      # created new driver
-      # .all should not include this driver
     end
   end
 
@@ -90,10 +85,6 @@ describe "Driver" do
         Driver.find(111111)
       }.must_raise ArgumentError
     end
-
-    it "will only find drivers in the CSV file" do
-      #will ignore driver objects not in CSV file
-    end
   end
 
   describe "#rating" do
@@ -106,12 +97,12 @@ describe "Driver" do
     # does it get the right average?
     it "returns the average rating for a driver" do
       new_driver = Driver.new(1, "Santa Claus", 98109999999999999)
-      new_driver.rating(1).must_be_instance_of Float
-      new_driver.rating(1).must_equal 2.3333333333333335
+      new_driver.rating.must_be_instance_of Float
+      new_driver.rating.must_equal 2.3333333333333335
 
       shakira = Driver.new(16, "Shakira Stamm" , "SALUVSAL3WA67SBPZ")
-      shakira.rating(16).must_be_instance_of Float
-      shakira.rating(16).must_equal 2.5
+      shakira.rating.must_be_instance_of Float
+      shakira.rating.must_equal 2.5
     end
   end
 

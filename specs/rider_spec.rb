@@ -35,7 +35,7 @@ describe "Rider" do
       bad_rider = Rider.new(300, "Miss Isom Gleason", "791-114-8423 x70188")
       bad_riders_trips = bad_rider.trips
       bad_riders_trips.must_be_instance_of Array
-      bad_riders_trips.length.must_equal 0
+      bad_riders_trips.must_be_empty
     end
   end
 
@@ -49,8 +49,7 @@ describe "Rider" do
     end
 
     it "must return only unique previous drivers" do
-      # If anyone wants an edge test for the Rider#drivers method to see if the list of drivers it returns is unique, riders 41, 164, 92, 74, 63, and 250 have all had more than one ride with the same driver.
-      westly = Rider.new(41, "Ms. Westley Pouros", "133.000.1809 x9028")
+      westly = Rider.new(41, "Ms. Westley Pouros", "133.000.1809 x9028") #this rider had 3 trips
       westlys_previous_drivers = westly.previous_drivers
       westlys_previous_drivers.length.must_equal 2
       westlys_previous_drivers.each { |driver| driver.must_be_instance_of Driver }
