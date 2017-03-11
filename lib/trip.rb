@@ -52,13 +52,10 @@ module RideShare
         raise ArgumentError.new("Driver id must be non-negative integer")
       end
       all_driver_trips = []
-      csv = CSV.read("support/trips.csv", 'r')
-      csv.each do |line|
-        #to avoid putting first line from CSV file that contains column name:
-        next if line[0] == "trip_id"
-        if driver_id == line[1].to_i
-          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_f, duration: line[6]}
-          all_driver_trips << Trip.new(hash)
+
+      RideShare::Trip.all_trips.each do |trip|
+        if trip.driver_id == driver_id
+          all_driver_trips << trip
         end
       end
       all_driver_trips
@@ -70,16 +67,13 @@ module RideShare
         raise ArgumentError.new("Driver id must be non-negative integer")
       end
       all_rider_trips = []
-      csv = CSV.read("support/trips.csv", 'r')
-      csv.each do |line|
-        #to avoid putting first line from CSV file that contains column name:
-        next if line[0] == "trip_id"
-        if rider_id == line[2].to_i
-          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i,
-            date: line[3], rating: line[4].to_i, cost: line[5].to_f, duration: line[6]}
-          all_rider_trips << Trip.new(hash)
+
+      RideShare::Trip.all_trips.each do |trip|
+        if trip.rider_id == rider_id
+          all_rider_trips << trip
         end
       end
+
       if all_rider_trips.empty?
         puts "Could not find  rider id (#{rider_id}) "
       end

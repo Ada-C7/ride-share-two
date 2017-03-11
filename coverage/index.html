@@ -14,26 +14,26 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-08T18:26:33-08:00">2017-03-08T18:26:33-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-11T14:42:27-08:00">2017-03-11T14:42:27-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">95.61%</span></span>
+    (<span class="covered_percent"><span class="green">95.55%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         545.93
+         1403.24
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>433</b> relevant lines. 
-    <span class="green"><b>414</b> lines covered</span> and
+    <b>427</b> relevant lines. 
+    <span class="green"><b>408</b> lines covered</span> and
     <span class="red"><b>19</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -82,12 +82,12 @@
       
       <tr>
         <td class="strong"><a href="#a80df5812f6e53662a89e2d77b4e2bc2dfdbd4a1" class="src_link" title="lib/trip.rb">lib/trip.rb</a></td>
-        <td class="red strong">78.75 %</td>
-        <td>130</td>
-        <td>80</td>
-        <td>63</td>
+        <td class="red strong">77.03 %</td>
+        <td>124</td>
+        <td>74</td>
+        <td>57</td>
         <td>17</td>
-        <td>1241.3</td>
+        <td>6244.6</td>
       </tr>
       
       <tr>
@@ -1281,10 +1281,10 @@
         <div class="source_table" id="a80df5812f6e53662a89e2d77b4e2bc2dfdbd4a1">
   <div class="header">
     <h3>lib/trip.rb</h3>
-    <h4><span class="red">78.75 %</span> covered</h4>
+    <h4><span class="red">77.03 %</span> covered</h4>
     <div>
-      <b>80</b> relevant lines. 
-      <span class="green"><b>63</b> lines covered</span> and
+      <b>74</b> relevant lines. 
+      <span class="green"><b>57</b> lines covered</span> and
       <span class="red"><b>17</b> lines missed.</span>
     </div>
   </div>
@@ -1358,50 +1358,50 @@
           <code class="ruby">    def initialize(hash)</code>
         </li>
       
-        <li class="covered" data-hits="3156" data-linenumber="12">
-          <span class="hits">3156</span>
+        <li class="covered" data-hits="25815" data-linenumber="12">
+          <span class="hits">25815</span>
           
           <code class="ruby">      validate_input(hash)</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="13">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="13">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @trip_id = hash[:trip_id]</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="14">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="14">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @rider_id = hash[:rider_id]</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="15">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="15">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @driver_id = hash[:driver_id]</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="16">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="16">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @date = Date.strptime(hash[:date], &quot;%Y-%m-%d&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="17">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="17">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @rating = hash[:rating]</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="18">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="18">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @cost = hash[:cost]</code>
         </li>
       
-        <li class="covered" data-hits="3149" data-linenumber="19">
-          <span class="hits">3149</span>
+        <li class="covered" data-hits="25808" data-linenumber="19">
+          <span class="hits">25808</span>
           
           <code class="ruby">      @duration = hash[:duration]</code>
         </li>
@@ -1424,20 +1424,20 @@
           <code class="ruby">    def validate_input(hash)</code>
         </li>
       
-        <li class="covered" data-hits="3156" data-linenumber="23">
-          <span class="hits">3156</span>
+        <li class="covered" data-hits="25815" data-linenumber="23">
+          <span class="hits">25815</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;Parameter must be hash only&quot;) if hash.class != Hash</code>
         </li>
       
-        <li class="covered" data-hits="3155" data-linenumber="24">
-          <span class="hits">3155</span>
+        <li class="covered" data-hits="25814" data-linenumber="24">
+          <span class="hits">25814</span>
           
           <code class="ruby">      raise InvalidRatingError.new(&quot;Raiting should be 1 - 5 only&quot;) if !((1..5).include? hash[:rating])</code>
         </li>
       
-        <li class="covered" data-hits="3154" data-linenumber="25">
-          <span class="hits">3154</span>
+        <li class="covered" data-hits="25813" data-linenumber="25">
+          <span class="hits">25813</span>
           
           <code class="ruby">      if (hash[:trip_id].class != Integer || hash[:trip_id] &lt;= 0)</code>
         </li>
@@ -1454,8 +1454,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="3152" data-linenumber="28">
-          <span class="hits">3152</span>
+        <li class="covered" data-hits="25811" data-linenumber="28">
+          <span class="hits">25811</span>
           
           <code class="ruby">      if hash[:rider_id].class != Integer</code>
         </li>
@@ -1472,8 +1472,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="3151" data-linenumber="31">
-          <span class="hits">3151</span>
+        <li class="covered" data-hits="25810" data-linenumber="31">
+          <span class="hits">25810</span>
           
           <code class="ruby">      if hash[:driver_id].class != Integer</code>
         </li>
@@ -1490,8 +1490,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="3150" data-linenumber="34">
-          <span class="hits">3150</span>
+        <li class="covered" data-hits="25809" data-linenumber="34">
+          <span class="hits">25809</span>
           
           <code class="ruby">      if hash[:date].class  != String</code>
         </li>
@@ -1616,400 +1616,400 @@
           <code class="ruby">      all_driver_trips = []</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="55">
-          <span class="hits">18</span>
+        <li class="never" data-hits="" data-linenumber="55">
           
-          <code class="ruby">      csv = CSV.read(&quot;support/trips.csv&quot;, &#39;r&#39;)</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="18" data-linenumber="56">
           <span class="hits">18</span>
           
-          <code class="ruby">      csv.each do |line|</code>
+          <code class="ruby">      RideShare::Trip.all_trips.each do |trip|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="57">
-          
-          
-          <code class="ruby">        #to avoid putting first line from CSV file that contains column name:</code>
-        </li>
-      
-        <li class="covered" data-hits="10818" data-linenumber="58">
-          <span class="hits">10818</span>
-          
-          <code class="ruby">        next if line[0] == &quot;trip_id&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="10800" data-linenumber="59">
+        <li class="covered" data-hits="10800" data-linenumber="57">
           <span class="hits">10800</span>
           
-          <code class="ruby">        if driver_id == line[1].to_i</code>
+          <code class="ruby">        if trip.driver_id == driver_id</code>
         </li>
       
-        <li class="covered" data-hits="110" data-linenumber="60">
+        <li class="covered" data-hits="110" data-linenumber="58">
           <span class="hits">110</span>
           
-          <code class="ruby">          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_f, duration: line[6]}</code>
+          <code class="ruby">          all_driver_trips &lt;&lt; trip</code>
         </li>
       
-        <li class="covered" data-hits="110" data-linenumber="61">
-          <span class="hits">110</span>
-          
-          <code class="ruby">          all_driver_trips &lt;&lt; Trip.new(hash)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="62">
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="64">
+        <li class="covered" data-hits="18" data-linenumber="61">
           <span class="hits">18</span>
           
           <code class="ruby">      all_driver_trips</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby">    # find all trip instances for a given rider ID:</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="68">
+        <li class="covered" data-hits="1" data-linenumber="65">
           <span class="hits">1</span>
           
           <code class="ruby">    def self.all_trips_by_rider(rider_id)</code>
         </li>
       
-        <li class="covered" data-hits="21" data-linenumber="69">
+        <li class="covered" data-hits="21" data-linenumber="66">
           <span class="hits">21</span>
           
           <code class="ruby">      if rider_id.class != Integer || rider_id &lt;= 0</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="70">
+        <li class="covered" data-hits="1" data-linenumber="67">
           <span class="hits">1</span>
           
           <code class="ruby">        raise ArgumentError.new(&quot;Driver id must be non-negative integer&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="never" data-hits="" data-linenumber="68">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="72">
+        <li class="covered" data-hits="20" data-linenumber="69">
           <span class="hits">20</span>
           
           <code class="ruby">      all_rider_trips = []</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="73">
-          <span class="hits">20</span>
+        <li class="never" data-hits="" data-linenumber="70">
           
-          <code class="ruby">      csv = CSV.read(&quot;support/trips.csv&quot;, &#39;r&#39;)</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="74">
+        <li class="covered" data-hits="20" data-linenumber="71">
           <span class="hits">20</span>
           
-          <code class="ruby">      csv.each do |line|</code>
+          <code class="ruby">      RideShare::Trip.all_trips.each do |trip|</code>
+        </li>
+      
+        <li class="covered" data-hits="12000" data-linenumber="72">
+          <span class="hits">12000</span>
+          
+          <code class="ruby">        if trip.rider_id == rider_id</code>
+        </li>
+      
+        <li class="covered" data-hits="31" data-linenumber="73">
+          <span class="hits">31</span>
+          
+          <code class="ruby">          all_rider_trips &lt;&lt; trip</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="75">
           
           
-          <code class="ruby">        #to avoid putting first line from CSV file that contains column name:</code>
-        </li>
-      
-        <li class="covered" data-hits="12020" data-linenumber="76">
-          <span class="hits">12020</span>
-          
-          <code class="ruby">        next if line[0] == &quot;trip_id&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="12000" data-linenumber="77">
-          <span class="hits">12000</span>
-          
-          <code class="ruby">        if rider_id == line[2].to_i</code>
-        </li>
-      
-        <li class="covered" data-hits="31" data-linenumber="78">
-          <span class="hits">31</span>
-          
-          <code class="ruby">          hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="79">
-          
-          
-          <code class="ruby">            date: line[3], rating: line[4].to_i, cost: line[5].to_f, duration: line[6]}</code>
-        </li>
-      
-        <li class="covered" data-hits="31" data-linenumber="80">
-          <span class="hits">31</span>
-          
-          <code class="ruby">          all_rider_trips &lt;&lt; Trip.new(hash)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="81">
-          
-          
-          <code class="ruby">        end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="82">
-          
-          
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="83">
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="20" data-linenumber="77">
           <span class="hits">20</span>
           
           <code class="ruby">      if all_rider_trips.empty?</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="84">
+        <li class="covered" data-hits="3" data-linenumber="78">
           <span class="hits">3</span>
           
           <code class="ruby">        puts &quot;Could not find  rider id (#{rider_id}) &quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="85">
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="86">
+        <li class="covered" data-hits="20" data-linenumber="80">
           <span class="hits">20</span>
           
           <code class="ruby">      return all_rider_trips</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="87">
+        <li class="never" data-hits="" data-linenumber="81">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
+        <li class="never" data-hits="" data-linenumber="82">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="89">
+        <li class="covered" data-hits="1" data-linenumber="83">
           <span class="hits">1</span>
           
           <code class="ruby">    def self.all_trips</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="90">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="43" data-linenumber="84">
+          <span class="hits">43</span>
           
           <code class="ruby">      all_trips = []</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="91">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="43" data-linenumber="85">
+          <span class="hits">43</span>
           
           <code class="ruby">      csv = CSV.read(&quot;support/trips.csv&quot;, &#39;r&#39;)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="92">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="43" data-linenumber="86">
+          <span class="hits">43</span>
           
           <code class="ruby">      csv.each do |line|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="93">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby">        #to avoid putting first line from CSV file that contains column name:</code>
         </li>
       
-        <li class="covered" data-hits="3005" data-linenumber="94">
-          <span class="hits">3005</span>
+        <li class="covered" data-hits="25843" data-linenumber="88">
+          <span class="hits">25843</span>
           
           <code class="ruby">        next if line[0] == &quot;trip_id&quot;</code>
         </li>
       
-        <li class="covered" data-hits="3000" data-linenumber="95">
-          <span class="hits">3000</span>
+        <li class="covered" data-hits="25800" data-linenumber="89">
+          <span class="hits">25800</span>
           
           <code class="ruby">        hash = {trip_id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3], rating: line[4].to_i, cost: line[5].to_i, duration: line[6]}</code>
         </li>
       
-        <li class="covered" data-hits="3000" data-linenumber="96">
-          <span class="hits">3000</span>
+        <li class="covered" data-hits="25800" data-linenumber="90">
+          <span class="hits">25800</span>
           
           <code class="ruby">        all_trips &lt;&lt; Trip.new(hash)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="97">
+        <li class="never" data-hits="" data-linenumber="91">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="98">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="43" data-linenumber="92">
+          <span class="hits">43</span>
           
           <code class="ruby">      all_trips</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="93">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="94">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="never" data-hits="" data-linenumber="95">
           
           
           <code class="ruby"># Optional. Method adds two new column with randomly selected data to trips.csv</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="96">
           
           
           <code class="ruby"># It&#39;s hard to test this method, so my test coverage for Trip class is only 78%</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="103">
+        <li class="covered" data-hits="1" data-linenumber="97">
           <span class="hits">1</span>
           
           <code class="ruby">    def self.add_cost_duration_to_csv</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="104">
+        <li class="missed" data-hits="0" data-linenumber="98">
           
           
           <code class="ruby">      array_of_random_prices = [&quot;trip_cost&quot;] # column name</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="105">
+        <li class="missed" data-hits="0" data-linenumber="99">
           
           
           <code class="ruby">      600.times do</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="106">
+        <li class="missed" data-hits="0" data-linenumber="100">
           
           
           <code class="ruby">        rand_num = rand(20.00...150.00).round(2)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="107">
+        <li class="missed" data-hits="0" data-linenumber="101">
           
           
           <code class="ruby">        array_of_random_prices &lt;&lt; rand_num</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="108">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="109">
+        <li class="missed" data-hits="0" data-linenumber="103">
           
           
           <code class="ruby">      array_of_random_durations = [&quot;trip_duration(hours:minutes&quot;]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="110">
+        <li class="missed" data-hits="0" data-linenumber="104">
           
           
-          <code class="ruby">        t1 = Time.new(2017, 01, 02, 0, 0, 0)</code>
+          <code class="ruby">      t1 = Time.new(2017, 01, 02, 0, 0, 0)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="111">
+        <li class="missed" data-hits="0" data-linenumber="105">
           
           
-          <code class="ruby">        t2 = Time.new(2017, 01, 02, 3, 0, 0)</code>
+          <code class="ruby">      t2 = Time.new(2017, 01, 02, 3, 0, 0)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="112">
+        <li class="missed" data-hits="0" data-linenumber="106">
           
           
-          <code class="ruby">        600.times do</code>
+          <code class="ruby">      600.times do</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="113">
+        <li class="missed" data-hits="0" data-linenumber="107">
           
           
-          <code class="ruby">            rand_time = Time.at(t1.to_f + rand * (t2.to_f - t1.to_f))</code>
+          <code class="ruby">          rand_time = Time.at(t1.to_f + rand * (t2.to_f - t1.to_f))</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="114">
+        <li class="missed" data-hits="0" data-linenumber="108">
           
           
-          <code class="ruby">            array_of_random_durations &lt;&lt; &quot;#{rand_time.hour}:#{rand_time.min}&quot;</code>
+          <code class="ruby">          array_of_random_durations &lt;&lt; &quot;#{rand_time.hour}:#{rand_time.min}&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="115">
+        <li class="never" data-hits="" data-linenumber="109">
           
           
-          <code class="ruby">        end</code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
+        <li class="never" data-hits="" data-linenumber="110">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="117">
+        <li class="missed" data-hits="0" data-linenumber="111">
           
           
           <code class="ruby">      helpers_array = CSV.read(&quot;support/trips.csv&quot;)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="118">
+        <li class="missed" data-hits="0" data-linenumber="112">
           
           
           <code class="ruby">      helpers_array.each do |c|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="119">
+        <li class="missed" data-hits="0" data-linenumber="113">
           
           
           <code class="ruby">        c &lt;&lt; array_of_random_prices.shift</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="120">
+        <li class="missed" data-hits="0" data-linenumber="114">
           
           
           <code class="ruby">        c &lt;&lt; array_of_random_durations.shift</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby">      # rewrite csv file with new columns &quot;trip_cost&quot; and &quot;duration&quot;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="117">
+          
+          
+          <code class="ruby">      CSV.open(&#39;support/trips.csv&#39;, &#39;w&#39;) do |csv_object|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="118">
+          
+          
+          <code class="ruby">        helpers_array.each do |row_array|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="119">
+          
+          
+          <code class="ruby">          csv_object &lt;&lt; row_array</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="120">
+          
+          
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="121">
@@ -2021,52 +2021,16 @@
         <li class="never" data-hits="" data-linenumber="122">
           
           
-          <code class="ruby">      # rewrite csv file with new columns &quot;trip_cost&quot; and &quot;duration&quot;</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="123">
-          
-          
-          <code class="ruby">      CSV.open(&#39;support/trips.csv&#39;, &#39;w&#39;) do |csv_object|</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="124">
-          
-          
-          <code class="ruby">        helpers_array.each do |row_array|</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="125">
-          
-          
-          <code class="ruby">          csv_object &lt;&lt; row_array</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="126">
-          
-          
-          <code class="ruby">        end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="127">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="128">
-          
-          
           <code class="ruby">    end # end of method</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="129">
+        <li class="never" data-hits="" data-linenumber="123">
           
           
           <code class="ruby">  end # end of class</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="130">
+        <li class="never" data-hits="" data-linenumber="124">
           
           
           <code class="ruby">end # end of method</code>
@@ -3059,7 +3023,7 @@
         <li class="covered" data-hits="1" data-linenumber="162">
           <span class="hits">1</span>
           
-          <code class="ruby">      RideShare::Rider.all[73].total_money_spent.must_equal 314.72</code>
+          <code class="ruby">      RideShare::Rider.all[73].total_money_spent.must_equal 313.0</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="163">

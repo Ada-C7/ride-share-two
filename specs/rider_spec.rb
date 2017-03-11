@@ -159,7 +159,7 @@ describe "Rider class" do
       rider.total_money_spent.class.must_equal Float
     end
     it "Returns actual total amount for this rider" do
-      RideShare::Rider.all[73].total_money_spent.must_equal 314.72
+      RideShare::Rider.all[73].total_money_spent.must_equal 313.0
     end
   end
 

@@ -157,7 +157,7 @@ describe "Driver class" do
     end
     it "Return actual total revenue of this driver:" do
       dr = RideShare::Driver.all[3]
-      dr.total_revenue.must_equal 463.256
+      dr.total_revenue.must_equal  459.48
     end
   end
 
