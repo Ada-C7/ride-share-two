@@ -20,11 +20,11 @@ module RideShare
           @@trips << self.new({id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3].to_s, rating: line[4].to_f})
         end
       end
-      @@trips
+      return @@trips
     end
 
     def self.getAll
-      read_csv
+      return read_csv
     end
 
     def self.getDriver(id)
@@ -34,7 +34,7 @@ module RideShare
           trip_object = trip
         end
       end
-      Driver.find(trip_object.driver_id)
+      return Driver.find(trip_object.driver_id)
     end
 
     def self.getRider(id)
@@ -55,7 +55,7 @@ module RideShare
           driver_trips << trip
         end
       end
-      driver_trips
+      return driver_trips
     end
 
     def self.getTripsByRider(rider_id)
@@ -65,7 +65,7 @@ module RideShare
           rider_trips << trip
         end
       end
-      rider_trips
+      return rider_trips
     end
   end
 end

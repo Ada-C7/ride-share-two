@@ -24,11 +24,11 @@ module RideShare
           @@drivers << self.new({id: line[0].to_i, name: line[1].to_s, vin: line[2].to_s})
         end
       end
-      @@drivers
+      return @@drivers
     end
 
     def self.getAll
-      readCSV
+      return readCSV
     end
 
     def self.find(id)
@@ -38,11 +38,11 @@ module RideShare
           driver_details = driver
         end
       end
-      driver_details
+      return driver_details
     end
 
     def findTrips
-      Trip.getTripsByDriver(id)
+      return Trip.getTripsByDriver(id)
     end
 
     def avgRating
@@ -53,6 +53,7 @@ module RideShare
         driver_ratings << trip.rating
       end
       avg_rating = (driver_ratings.inject {|sum, element| sum + element} / driver_ratings.size).round(2)
+      return avg_rating
     end
   end
 end

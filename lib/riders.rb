@@ -18,11 +18,11 @@ module RideShare
           @@riders << self.new({id: line[0].to_i, name: line[1].to_s, phone_num: line[2].to_s})
         end
       end
-      @@riders
+      return @@riders
     end
 
     def self.getAll
-      readCSV
+      return readCSV
     end
 
     def self.find(id)
@@ -32,11 +32,11 @@ module RideShare
           rider_details = rider
         end
       end
-      rider_details
+      return rider_details
     end
 
     def findTrips
-      Trip.getTripsByRider(id)
+      return Trip.getTripsByRider(id)
     end
   end
 end
