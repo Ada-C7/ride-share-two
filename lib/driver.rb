@@ -52,7 +52,7 @@ module RideShare
       data.read_csv_and_remove_headings
     end
 
-    # this method will return mock data for testing
+    # this method will return mock data for testing when you need to call find
     # def self.get_data
     #   [
     #     ['500', 'Jane Doe', 'WX1234567890ABCDE'],
@@ -62,6 +62,15 @@ module RideShare
     #     ['505', 'Travis Crosby','XX1234567890ABCDE']
     #   ]
     # end
+
+    def self.test_data_for_duplicates(drivers)
+      drivers_id = drivers.map { |driver| driver.id }
+      if drivers_id.length != drivers_id.uniq.length
+        # would be nice to know the ids of the duplicate id
+        raise ArgumentError.new("There are two drivers with the same id")
+      end
+      drivers
+    end
 
     def self.all(drivers_data = nil)
       drivers_data = get_data if drivers_data.nil?
@@ -76,6 +85,7 @@ module RideShare
         self.new(driver)
       end
 
+      test_data_for_duplicates(drivers)
       return drivers
     end
 

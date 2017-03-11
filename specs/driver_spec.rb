@@ -46,6 +46,13 @@ describe "Driver" do
                     missing_part: [['10', 'name']],
                     bad_name: [['3', 'a', 'WBWSS52P9NEYLVDE9']]
                    }
+      @data_with_duplicate = [
+                                ['500', 'Jane Doe', 'WX1234567890ABCDE'],
+                                ['501', 'John Smith','WX1234567890ABCDE'],
+                                ['502', 'Cyn Bin','ZZ1234567890ABCDE'],
+                                ['502', 'Ms. Squishy','YY1234567890ABCDE'],
+                                ['505', 'Travis Crosby','XX1234567890ABCDE']
+                             ]
     end
 
     let(:drivers) { RideShare::Driver.all(@drivers_data) }
@@ -99,6 +106,13 @@ describe "Driver" do
                    RideShare::Driver.all(@bad_data[:bad_name])
                  }.must_raise ArgumentError
       err.message.must_equal "Name length is under 1"
+    end
+
+    it "raises an error if two drivers have same id" do
+      err = proc {
+                   RideShare::Driver.all(@data_with_duplicate)
+                 }.must_raise ArgumentError
+      err.message.must_equal "There are two drivers with the same id"
     end
   end
 
