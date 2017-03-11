@@ -76,14 +76,28 @@ describe RideShare::Rider do
       name: "Hamlet Hamilton",
       phone_number: "123-4567",
       trips: [
-        RideShare::Trip.new(id: 1, rider_id: 3333, driver_id: 4, date: "1-2-2017", rating: 4),
-        RideShare::Trip.new(id: 2, rider_id: 3333, driver_id: 5, date: "1-2-2017", rating: 3),
-        RideShare::Trip.new(id: 3, rider_id: 3333, driver_id: 3, date: "1-2-2017", rating: 2)
+        RideShare::Trip.new(
+          id: 1, rider_id: 3333, driver_id: 4, date: "1-2-2017",
+          rating: 4, distance: 5, duration: 5, fare: 5
+        ),
+        RideShare::Trip.new(
+          id: 2, rider_id: 3333, driver_id: 5, date: "1-2-2017",
+          rating: 3, distance: 5, duration: 5, fare: 5
+        ),
+        RideShare::Trip.new(
+          id: 3, rider_id: 3333, driver_id: 3, date: "1-2-2017",
+          rating: 2, distance: 5, duration: 5, fare: 5
+        )
       ])
     }
 
-    let(:real_rider) { RideShare::Rider.new(id: 3, name: "Marcellus Hoeger", phone_number: "(222) 926-0138") }
-    let(:inexperienced_rider) { RideShare::Rider.new(id: 4444, name: "Alix Hamilton", phone_number: "(123) 456-7890") }
+    let(:real_rider) { RideShare::Rider.new(
+      id: 3, name: "Marcellus Hoeger", phone_number: "(222) 926-0138"
+    )}
+
+    let(:inexperienced_rider) { RideShare::Rider.new(
+      id: 4444, name: "Alix Hamilton", phone_number: "(123) 456-7890"
+    )}
 
     describe "#trips" do
       it "Returns an array of trips for a given rider" do

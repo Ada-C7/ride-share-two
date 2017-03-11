@@ -82,14 +82,28 @@ describe RideShare::Driver do
       name: "Hamlet Hamilton",
       vin: "IAMACAT1233400349",
       trips: [
-        RideShare::Trip.new(id: 1, driver_id: 3333, rider_id: 1111, date: "1-2-2017", rating: 4),
-        RideShare::Trip.new(id: 2, driver_id: 3333, rider_id: 1111, date: "1-2-2017", rating: 5),
-        RideShare::Trip.new(id: 3, driver_id: 3333, rider_id: 1111, date: "1-2-2017", rating: 3)
+        RideShare::Trip.new(
+          id: 1, driver_id: 3333, rider_id: 1111, date: "1-2-2017",
+          rating: 4, distance: 5, duration: 5, fare: 5
+        ),
+        RideShare::Trip.new(
+          id: 2, driver_id: 3333, rider_id: 1111, date: "1-2-2017",
+          rating: 5, distance: 5, duration: 5, fare: 5
+        ),
+        RideShare::Trip.new(
+          id: 3, driver_id: 3333, rider_id: 1111, date: "1-2-2017",
+          rating: 3, distance: 5, duration: 5, fare: 5
+        )
       ])
     }
 
-    let(:real_driver) { RideShare::Driver.new(id: 3, name: "Daryl Nitzsche", vin: "SAL6P2M2XNHC5Y656") }
-    let(:inexperienced_driver) { RideShare::Driver.new(id: 4444, name: "Alix Hamilton", vin: "SALMON12345678901") }
+    let(:real_driver) { RideShare::Driver.new(
+      id: 3, name: "Daryl Nitzsche", vin: "SAL6P2M2XNHC5Y656"
+    )}
+
+    let(:inexperienced_driver) { RideShare::Driver.new(
+      id: 4444, name: "Alix Hamilton", vin: "SALMON12345678901"
+    )}
 
     describe "#trips" do
       it "Returns an array of trips for a given driver" do

@@ -1,16 +1,19 @@
 module RideShare
   class Trip < Uber
     attr_reader :id, :rider_id, :driver_id, :date, :rating
-    SOURCE_FILE = "support/trips.csv"
+    SOURCE_FILE = "support/trips_with_cost.csv"
 
     def initialize(params)
-      validate_params(params, [:id, :rider_id, :driver_id, :date, :rating])
+      validate_params(params, [:id, :rider_id, :driver_id, :date, :rating, :duration, :distance, :fare])
 
       @id = params[:id]
       @rider_id = params[:rider_id]
       @driver_id = params[:driver_id]
       @date = params[:date]
       @rating = params[:rating]
+      @duration = params[:duration]
+      @distance = params[:distance]
+      @fare = params[:fare]
     end
 
     def self.all
