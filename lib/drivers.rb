@@ -11,7 +11,7 @@ module RideShare
       @name = params[:name]
       @id = params[:driver_id].to_i
       raise ArgumentError.new "that's not a valid id" if @id == 0
-
+      @vin = params[:vin]
     end
 
     def self.all
