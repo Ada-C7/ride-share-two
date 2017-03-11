@@ -7,6 +7,7 @@ module RideShare
     attr_reader :id, :name, :phone_num
     def initialize(params)
       @id = params[:rider_id].to_i
+      raise ArgumentError.new "that's not a valid id" if @id == 0
       @name = params[:name]
       @phone_num = params[:phone_num]
     end

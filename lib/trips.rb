@@ -8,6 +8,7 @@ module RideShare
 
     def initialize(params)
       @id = params[:trip_id].to_i
+      raise ArgumentError.new "Sorry, that's not a valid id" if params[:trip_id] == 0
       @driver_id = params[:driver_id].to_i
       @rider_id = params[:rider_id].to_i
       @date = params[:date]

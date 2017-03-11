@@ -15,6 +15,12 @@ describe "Driver class" do
     driver.name.must_equal "Ron Weasley"
   end
 
+  it "doesn't let you initialize an id that's a string or 0" do
+    proc {
+      driver = RideShare::Driver.new({name: "Ron Weasley", driver_id: "stuff and things"})
+    }.must_raise ArgumentError
+  end
+
   it "returns an array of driver objects when you call .all" do
     # skip
       RideShare::Driver.all.must_be_kind_of Array
@@ -55,6 +61,13 @@ describe "Driver class" do
     ron.must_equal 2.33
   end
 
+  it "will return a message if a driver has no ratings yet" do
+    driver = RideShare::Driver.new({name: "Ron Weasley", driver_id: 101})
+    proc {
+      driver.average_rating
+    }.must_raise ArgumentError
+  end
+
   it "can find the total time a driver has spent driving" do
     driver.total_time.must_be_kind_of Integer
     driver.total_time.must_equal 342
@@ -63,6 +76,13 @@ describe "Driver class" do
   it "can calculate the total revenue a driver has received" do
     driver.total_revenue.must_be_kind_of Float
     driver.total_revenue.must_equal 223.32
+  end
+
+  it "raises an error if a driver has no money" do
+    driver = RideShare::Driver.new({name: "Ron Weasley", driver_id: 101})
+    proc {
+      driver.total_revenue
+    }.must_raise ArgumentError
   end
 
 end

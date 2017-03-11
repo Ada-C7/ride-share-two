@@ -14,6 +14,12 @@ describe "Rider class" do
     rider.phone_num.must_equal "2062424564"
   end
 
+  it "doesn't let you initialize an id that's a string or 0" do
+    proc {
+      rider = RideShare::Rider.new({name: "Ron Weasley", rider_id: "things and stuff", phone_num: "2062424564"})
+    }.must_raise ArgumentError
+  end
+
   it "returns a list of rider objects when you call .all" do
     # skip
       RideShare::Rider.all.must_be_kind_of Array
@@ -73,5 +79,5 @@ describe "Rider class" do
     rider.total_time.must_equal 56
   end
 
-  
+
 end
