@@ -1,3 +1,5 @@
+require 'csv'
+
 module RideShare
   class Trip
     attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -8,7 +10,7 @@ module RideShare
       @rider_id = trip_details[:rider_id]
       @date = trip_details[:date]
       @rating = trip_details[:rating]
-      #Need to ensure rating is 1-5 integer, throw argument error and rescue in read csv?
+      ## Validate: Rating is 1-5 integer, throw argument error and rescue in read csv?
     end
 
     def self.read_csv

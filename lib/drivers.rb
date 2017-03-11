@@ -31,19 +31,6 @@ module RideShare
       readCSV
     end
 
-    def findTrips
-      Trip.getTripsByDriver(id)
-    end
-
-    def avgRating
-      driver_ratings = []
-      driver_trips = Trip.getTripsByDriver(id)
-      driver_trips.each do |trip|
-        driver_ratings << trip.rating
-      end
-      avg_rating = (driver_ratings.inject {|sum, element| sum + element} / driver_ratings.size).round(2)
-    end
-
     def self.find(id)
       driver_details = nil
       getAll.each do |driver|
@@ -52,6 +39,20 @@ module RideShare
         end
       end
       driver_details
+    end
+
+    def findTrips
+      Trip.getTripsByDriver(id)
+    end
+
+    def avgRating
+      avg_rating = nil
+      driver_ratings = []
+      driver_trips = Trip.getTripsByDriver(id)
+      driver_trips.each do |trip|
+        driver_ratings << trip.rating
+      end
+      avg_rating = (driver_ratings.inject {|sum, element| sum + element} / driver_ratings.size).round(2)
     end
   end
 end

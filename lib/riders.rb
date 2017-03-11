@@ -1,14 +1,17 @@
+require 'csv'
+
 module RideShare
   class Rider
     attr_reader :id, :name, :phone_num
-    
+
     def initialize(rider_details)
       @id = rider_details[:id]
       @name = rider_details[:name]
       @phone_num = rider_details[:phone_num]
+      ## TW: Would I not need to initialize since I'm not validating anything?
     end
 
-    def self.read_csv
+    def self.readCSV
       @@riders = []
       if @@riders.empty?
         CSV.foreach("support/riders.csv", {:headers => true}) do |line|
@@ -18,20 +21,13 @@ module RideShare
       @@riders
     end
 
-    # def find_trips #< Trip.find_rider_trips(id)
-    #   #given rider_id find a list of trips
-    #   #also return the driver instances for each trip
-    #   Trip.find_rider_trips(@id)
-    #   # super
-    # end
-
-    def self.all
-      read_csv
+    def self.getAll
+      readCSV
     end
 
     def self.find(id)
       rider_details = nil
-      all.each do |rider|
+      getAll.each do |rider|
         if rider.id == id
           rider_details = rider
         end
@@ -39,5 +35,8 @@ module RideShare
       rider_details
     end
 
+    def findTrips
+      Trip.getTripsByRider(id)
+    end
   end
 end

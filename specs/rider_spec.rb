@@ -1,14 +1,10 @@
 require_relative 'spec_helper'
 
 describe "RideShare: Rider" do
-  let(:riders) {RideShare::Rider.all}
+  let(:riders) {RideShare::Rider.getAll}
 
   describe "Rider#initialize" do
-    #   # it "contains individual hashes of ID, Name, VIN" do
-    #   #   ada_drivers = RideShare::Drivers.new
-    #   #   ada_drivers[0].must_be_kind_of Hash
-    #   #   ada_drivers[0].key.must_equal
-    #   # end
+
   end
 
   describe "Rider.read_csv" do
@@ -19,7 +15,7 @@ describe "RideShare: Rider" do
     end
   end
 
-  describe "Rider.all" do
+  describe "Rider.getAll" do
     it "returns an array of 300 rider objects" do
       riders
       riders.length.must_equal 300
@@ -33,20 +29,15 @@ describe "RideShare: Rider" do
     end
   end
 
-  describe "Rider.find_trips" do
-    it "returns an array of trips" do
-    skip
+  describe "Rider.findTrips" do
+    it "returns an array of trip objects" do
       riders
-      trips = riders[0].find_trips
-      trips.must_be_kind_of Array
+      rider = riders[0]
+      rider.findTrips.must_be_kind_of Array
+      rider.findTrips[0].must_be_instance_of RideShare::Trip
     end
-
   end
-
-  # describe "Driver.avg_ratings" do
-  #
-  # end
-  #
+  
   describe "Rider.find(id)" do
     it "returns a rider object" do
       riders
