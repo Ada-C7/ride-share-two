@@ -49,7 +49,7 @@ describe "Trip" do
     end
   end
   #
-  #  it "Raises ArgumentError if id is not found." do
-  #    proc { find_trip = Trip.find(602) }.must_raise ArgumentError
-  #   end
+   it "Raises ArgumentError if id is not found." do
+     proc { find_trip = Trip.find(602) }.must_raise ArgumentError
+    end
    end
