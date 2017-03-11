@@ -31,6 +31,5 @@ describe "Ride_share_two::Rider" do
       rider1.find_drivers_by_find_trips_for_rider.length.must_equal 2
     end
 
-
   end
 end
