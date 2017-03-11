@@ -14,10 +14,10 @@ module RideShare
       # end
       # raise VinLengthError.new("Length of Vin is #{@vin.length}, not 17-digits") unless @vin.length = 17
 
-      ## Raise error here (rescue in read_csv)
+      ## Raise error here (rescue in readCSV)
     end
 
-    def self.read_csv
+    def self.readCSV
       @@drivers = []
       if @@drivers.empty?
         CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
@@ -28,25 +28,21 @@ module RideShare
     end
 
     def self.getAll
-      read_csv
+      readCSV
     end
 
     def findTrips
       Trip.getTripsByDriver(id)
     end
 
-    # def avg_ratings(id)
-    #   #Ratings are in trips
-    #   ratings = []
-    #   drivers.each do |driver|
-    #     if driver[:id] == id
-    #     end
-    # Calculate Average Rating(driver_id)
-    # take getAll the ratings from RideShare::Trips.find_driver_trips
-    #push ratings into an array and find average
-
-    # Find a specific driver(driver_id)
-    # return the instance of that driver (hash of details)
+    def avgRating
+      driver_ratings = []
+      driver_trips = Trip.getTripsByDriver(id)
+      driver_trips.each do |trip|
+        driver_ratings << trip.rating
+      end
+      avg_rating = (driver_ratings.inject {|sum, element| sum + element} / driver_ratings.size).round(2)
+    end
 
     def self.find(id)
       driver_details = nil
@@ -57,6 +53,5 @@ module RideShare
       end
       driver_details
     end
-
   end
 end
