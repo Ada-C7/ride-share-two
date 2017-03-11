@@ -30,24 +30,29 @@ describe "Tests Class Methods for Driver " do
   end
    #tests that you can generate a specific driver from the driver id
    it "can generate a specific driver from their driver_id" do
-     Rideshare::Driver.find_driver(23)[0].class.must_equal Rideshare::Driver
+     Rideshare::Driver.find_driver("77").class.must_equal Rideshare::Driver
 
    end
    #tests that you can generate the first and last driver from the csv
    it "will generate the first and last driver without" do
-     Rideshare::Driver.find_driver(1)[0].class.must_equal Rideshare::Driver
-     Rideshare::Driver.find_driver(100)[0].class.must_equal Rideshare::Driver
+     Rideshare::Driver.find_driver(1).class.must_equal Rideshare::Driver
+     Rideshare::Driver.find_driver(100).class.must_equal Rideshare::Driver
 
    end
 end
-#
-# describe "Tests instance methods for Driver " do
-#   let(:my_driver) {Rideshare::Driver.new}
-#    #tests that you can retrieve all of a drivers trips
-#    #tests that you can use those trips to generate the driver's average rating
- #
- # it "calculates driver average rating" do
- #   driver = driver12[0].make_driver
- #   driver.driver_rating
- # end
-#  end
+
+describe "Tests instance methods for Driver " do
+  let(:my_driver) {Rideshare::Driver.new({driver_id:"37",name:"Arnulfo Anderson",vin:"WBW8W7DC0FJLMYCCR"})}
+  let(:driver_77){Rideshare::Driver.find_driver(77)}
+  it "will find all my trips by driver" do
+    my_driver.all_my_trips.class.must_equal Array
+    my_driver.all_my_trips.length.must_equal 1
+    # binding.pry
+  end
+   #tests that you can retrieve all of a drivers trips
+   #tests that you can use those trips to generate the driver's average rating
+
+ it "calculates driver average rating" do
+   my_driver.driver_rating
+ end
+ end

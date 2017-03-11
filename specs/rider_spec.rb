@@ -2,7 +2,7 @@ require_relative 'spec_helper.rb'
 
 
 describe 'Tests Rider Class Properties' do
-  skip
+  
   let(:my_rider) {Rideshare::Rider.new({rider_id:"5", name:"tehut", phone_num:"WBWSS52P9NEYLVDE9"})}
   #tests that rider class initalizes
   it 'will find rider class' do

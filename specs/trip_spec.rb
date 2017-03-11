@@ -73,7 +73,7 @@ describe "Class Methods for Trip " do
      it "retrives driver object from driver id on trip file" do
 
        driver = driver12[0].make_driver
-       driver[0].driver_id.must_equal "12"
+       driver.driver_id.must_equal "12"
      end
      it "returns an error if a driver has no rides" do
        proc{
