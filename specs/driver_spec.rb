@@ -16,7 +16,7 @@ describe "RideShare: Driver" do
     # end
   end
 
-  describe "Driver.read_csv" do
+  describe "Driver.readCSV" do
     it "returns an array of driver objects" do
       drivers
       drivers.must_be_kind_of Array
@@ -26,7 +26,8 @@ describe "RideShare: Driver" do
 
   describe "Driver.getAll" do
     it "returns an array of 100 driver objects" do
-      RideShare::Driver.getAll.length.must_equal 100
+      drivers
+      drivers.length.must_equal 100
     end
 
     it "returns correct instances of driver objects" do
@@ -39,23 +40,26 @@ describe "RideShare: Driver" do
 
   describe "Driver.findTrips" do
     it "returns an array of trip objects" do
-      RideShare::Trip.getAll
       drivers
       driver = drivers[0]
-      #Is this how you test? By just selecting the first one? Seems off as I'm not citing id, and the first one might look good, but maybe not the last one?
+      #is this really the best way to reference a driver? Could I do it without a loop to find the id of a specific driver?
       driver.findTrips.must_be_kind_of Array
       driver.findTrips[0].must_be_instance_of RideShare::Trip
-
     end
   end
 
   describe "Driver.avg_ratings" do
-
+    it "calculates the correct average as a float" do
+      drivers
+      driver = RideShare::Driver.find(90)
+      driver.avgRating.must_equal 3.29
+    end
   end
 
   describe "Driver.find(id)" do
     it "returns a driver object" do
       drivers
+      ## TW: Why does the below work in pry even if I haven't "loaded" the array with getAll?
       driver = RideShare::Driver.find(99)
       driver.must_be_instance_of RideShare::Driver
     end
@@ -68,5 +72,4 @@ describe "RideShare: Driver" do
       driver.vin.must_equal "RF4AT3WL6JJXPFUJL"
     end
   end
-
 end
