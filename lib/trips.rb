@@ -67,7 +67,8 @@ module RideShare
       #instance method retrieve the associated rider instance through the rider ID
     end
 
-    #private
+    private
+    
     def error_checked_rating(rating)
       if rating == nil || (1..5).include?(rating.to_i)
         return rating

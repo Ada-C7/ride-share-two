@@ -51,11 +51,12 @@ module RideShare
       driver_id = id
       trips_array = RideShare::Trip.find_by_driver(driver_id)
       trips_array.collect! { |trip| trip.rating.to_f }
+      trips_array.reject! { |trip| trip < 1 }
       total = trips_array.reduce(:+)/trips_array.length
       total.round(2)
     end
 
-    #private
+    private
 
     def verified_vin(vin)
       if vin == nil || vin.length == 17
