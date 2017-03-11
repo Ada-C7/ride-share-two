@@ -30,7 +30,7 @@ describe "Trip tests" do
       proc { RideShare::Trip.new(trip_hash1) }.must_raise ArgumentError
       proc { RideShare::Trip.new(trip_hash2) }.must_raise ArgumentError
 
-      trip_hash3 = { id: 2, driver_id: "four", rider_id: 8, date: "2014-07-12", rating: 5 }
+      trip_hash3 = { id: 2, driver_id: 4.5, rider_id: 8, date: "2014-07-12", rating: 5 }
       trip_hash4 = { id: 2, driver_id: -4, rider_id: 8, date: "2014-07-12", rating: 5 }
 
       proc { RideShare::Trip.new(trip_hash3) }.must_raise ArgumentError
@@ -142,6 +142,8 @@ describe "Trip tests" do
       trip.driver.must_be_instance_of RideShare::Driver
     end
 
+    #test if info on driver is correct
+
     it "outputs message and returns nil if driver doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 0, rider_id: 8, date: "2014-07-12", rating: 5 })
       proc { bad_trip.driver }.must_output (/.+/)
@@ -150,9 +152,11 @@ describe "Trip tests" do
   end
 
   describe "Trip#rider" do
-    it "returns a Rider object if the driver exists" do
+    it "returns a Rider object if the rider exists" do
       trip.rider.must_be_instance_of RideShare::Rider
     end
+
+    #test if info on rider is correct
 
     it "outputs message and returns nil if rider doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 4, rider_id: 0, date: "2014-07-12", rating: 5 })
