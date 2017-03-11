@@ -13,40 +13,38 @@ describe "Driver" do
   end
 
   describe "Driver.create_all_drivers" do
-
-    before do
-      @drivers = RideShare::Driver.create_all_drivers
-    end
-
+    let(:drivers) {RideShare::Driver.create_all_drivers}
+    
     it "Returns an array of all accounts" do
-      @drivers.must_be_instance_of Array
+      drivers.must_be_instance_of Array
     end
 
     it "The number of drivers is correct" do
-      @drivers.length.must_equal 100
-    end
-
-    it "The driver_id and vin of the first and last" do
-      skip
-
+      drivers.length.must_equal 100
     end
 
   end
 
   describe "Driver.find(driver_id)" do
 
-    it "should return the id that was passed through" do
+    it "should return the driver_id that was passed through" do
       RideShare::Driver.find(1)[:driver_id].must_equal(1)
     end
-    
 
+    it "should return the vin that corresponds to the driver_id" do
+      RideShare::Driver.find(50)[:vin].must_equal("1B6FU8M80MVDHHTMD")
+    end
+
+    it "should return the name that corresponds to the driver_id" do
+      RideShare::Driver.find(100)[:name].must_equal("Minnie Dach")
+    end
 
   end
 
   describe "Driver trips(driver_id)" do
-    # driver with id 100 does not have any trip. look out for your tests.
-    it "finds all the trips for a Driver" do
+    it "finds all the trips for a Driver in an Array" do
       skip
+
     end
 
     it "finds all the trips for the first Driver" do
@@ -54,8 +52,10 @@ describe "Driver" do
     end
 
     it "finds all the trips for the last Driver" do
+      # driver 100 does not have any trips. look out for your tests.
       skip
     end
+
   end
 
 end
