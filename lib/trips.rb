@@ -1,53 +1,65 @@
 module RideShare
   class Trip
-    # def initialize(id, driver_id, rider_id, date, rating)
-    #   @id = id
-    #   @driver_id = driver_id
-    #   @rider_id = rider_id
-    #   @date = date
-    #   @rating = rating
-    # end
+    attr_reader :id, :driver_id, :rider_id, :date, :rating
 
+    def initialize(trip_details)
+      @id = trip_details[:id]
+      @driver_id = trip_details[:driver_id]
+      @rider_id = trip_details[:rider_id]
+      @date = trip_details[:date]
+      @rating = trip_details[:rating]
+      #Need to ensure rating is 1-5 integer, throw argument error and rescue in read csv?
+    end
 
     def self.read_csv
-      # @@drivers = []
-      #   CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
-      #   @@drivers << self.new({id: line[0].to_i, name: line[1].to_s, vin: line[2].to_s})
-      # end
-      # @@drivers
+      @@trips = []
+      if @@trips.empty?
+        CSV.foreach("support/trips.csv", {:headers => true}) do |line|
+          @@trips << self.new({id: line[0].to_i, driver_id: line[1].to_i, rider_id: line[2].to_i, date: line[3].to_s, rating: line[4].to_f})
+        end
+      end
+      @@trips
     end
 
-    def self.all
-      @@trips ||= read_csv
+    def self.getAll
+      read_csv
     end
 
-    # def self.find(id)
-    #   #given trip_id, find driver instance
-    #   trip_details = nil
-    #   all.each do |trip|
-    #     if trip[:id] == id
-    #       trip_details = trip
-    #     end
-    #   end
-    #   trip_details
-    # end
+    def self.getDriver(id)
+      trip_object = nil
+      getAll.each do |trip|
+        if trip.id == id
+          trip_object = trip
+        end
+      end
+      Driver.find(trip_object.driver_id)
+    end
 
-    def self.find_driver_trips(driver_id)
-      #given driver_id find list of all trips
+    def self.getRider(id)
+      trip_object = nil
+      getAll.each do |trip|
+        if trip.id == id
+          trip_object = trip
+        end
+      end
+      Rider.find(trip_object.rider_id)
+    end
+
+    def self.getTripsByDriver(driver_id)
+      #given driver_id find list of getAll trips
       driver_trips = []
-      all.each do |trip|
-        if trip[:driver_id] == driver_id
+      getAll.each do |trip|
+        if trip.driver_id == driver_id
           driver_trips << trip
         end
       end
       driver_trips
     end
 
-    def self.find_rider_trips(rider_id)
-      #given rider_id find list of all trips
+    def self.getTripsByRider(rider_id)
       rider_trips = []
-      all.each do |trip|
-        if trip[:rider_id] == rider_id
+      getAll.each do |trip|
+        if trip.rider_id == rider_id
           rider_trips << trip
         end
       end

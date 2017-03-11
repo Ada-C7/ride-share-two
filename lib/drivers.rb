@@ -27,22 +27,13 @@ module RideShare
       @@drivers
     end
 
-
-    def self.all
+    def self.getAll
       read_csv
     end
 
-    # def find_trips
-    #   Trip.find_driver_trips(@id)
-    #
-    #   trips = []
-    #
-    #   # return all trip_ID of the driver in an array
-    #   #
-    # end
-    # Find driver_trips(from trips)
-    #
-    # end
+    def findTrips
+      Trip.getTripsByDriver(id)
+    end
 
     # def avg_ratings(id)
     #   #Ratings are in trips
@@ -51,7 +42,7 @@ module RideShare
     #     if driver[:id] == id
     #     end
     # Calculate Average Rating(driver_id)
-    # take all the ratings from RideShare::Trips.find_driver_trips
+    # take getAll the ratings from RideShare::Trips.find_driver_trips
     #push ratings into an array and find average
 
     # Find a specific driver(driver_id)
@@ -59,7 +50,7 @@ module RideShare
 
     def self.find(id)
       driver_details = nil
-      all.each do |driver|
+      getAll.each do |driver|
         if driver.id == id
           driver_details = driver
         end

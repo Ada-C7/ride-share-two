@@ -12,13 +12,9 @@ describe "RideShare: Rider" do
   end
 
   describe "Rider.read_csv" do
-    it "returns an array of riders" do
-      riders
-      riders.must_be_kind_of Array
-    end
-
     it "returns an array of rider objects" do
       riders
+      riders.must_be_kind_of Array
       riders[0].must_be_instance_of RideShare::Rider
     end
   end
