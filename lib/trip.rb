@@ -31,13 +31,17 @@ module Rideshare
 
 
     def self.find_by_driver(param)
-      return Trip.create_trips.select{|value| value.driver_id== param.to_s}
+
+      trip_array = Trip.create_trips.select{|value| value.driver_id== param.to_s}
+      raise MissingIdError.new("That is an invalid rider") if trip_array.length < 1
+      return trip_array
 
     end
 
     def self.find_by_rider(param)
+
       array = Trip.create_trips.select{|value| value.rider_id== param.to_s}
-      raise MissingIdError.new("That is an invalid rating") if array.length < 1
+      raise MissingIdError.new("That is an invalid rider") if array.length < 1
 
       return array
 
