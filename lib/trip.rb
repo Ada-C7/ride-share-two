@@ -1,6 +1,6 @@
 module RideShare
   class Trip < Uber
-    attr_reader :id, :rider_id, :driver_id, :date, :rating, :fare
+    attr_reader :id, :rider_id, :driver_id, :date, :rating, :duration, :fare
     SOURCE_FILE = "support/trips_with_cost.csv"
 
     def initialize(params)

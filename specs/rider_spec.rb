@@ -141,5 +141,15 @@ describe RideShare::Rider do
       end
     end
 
+    describe "#cumulative_time" do
+      it "Calculates the total time spend for a given rider" do
+        rider.cumulative_time.must_equal 15
+      end
+
+      it "Returns 0 for a rider without any trips" do
+        inexperienced_rider.cumulative_time.must_equal 0
+      end
+    end
+
   end
 end

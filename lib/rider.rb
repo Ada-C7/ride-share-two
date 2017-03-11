@@ -28,5 +28,9 @@ module RideShare
       trips.map { |trip| trip.fare }.reduce(0, :+).round(2)
     end
 
+    def cumulative_time
+      trips.map { |trip| trip.duration }.reduce(0, :+)
+    end
+
   end
 end
