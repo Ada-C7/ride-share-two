@@ -79,7 +79,7 @@ describe "Rider" do
       rider1.previous_drivers.must_be_kind_of Array
     end
 
-    it "The elements of the array must be of kind RideSharing::Rider" do
+    it "The elements of the array must be of kind RideSharing::Driver" do
       rider1.previous_drivers.each do |obj|
         obj.must_be_kind_of RideSharing::Driver
       end

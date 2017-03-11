@@ -3,24 +3,26 @@ require_relative "spec_helper"
 describe "Driver" do
   describe "#initialize" do
     it "Takes an id, name and vehicle number" do
-      id = "007"
-      name = "James Bond"
-      vin = "WBWSS52P9NEYLVDE9"
-      driver1 = RideSharing::Driver.new(id, name, vin)
+      # id = "007"
+      # name = "James Bond"
+      # vin = "WBWSS52P9NEYLVDE9"
+      # driver1 = RideSharing::Driver.new(id, name, vin)
 
+      driver1 = RideSharing::Driver.new({driver_id: 007, name: "James Bond", vin: "WBWSS52P9NEYLVDE9"})
       driver1.must_respond_to :id
-      driver1.id.must_equal id
+      driver1.id.must_equal 007
 
       driver1.must_respond_to :name
-      driver1.name.must_equal name
+      driver1.name.must_equal "James Bond"
 
       driver1.must_respond_to :vin
-      driver1.vin.must_equal vin
+      driver1.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
   end # End of describe "Driver#initialize"
 
 
   describe "#self.all" do
+
     it "Returns an array." do
       path = "./support/drivers_spec1.csv"
       all_drivers = RideSharing::Driver.all(path)
