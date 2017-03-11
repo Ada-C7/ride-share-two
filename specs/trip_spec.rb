@@ -80,9 +80,9 @@ describe "Trip" do
     let(:my_trip) {RideShare::Trip.new(1, 1, 54, "2016-04-05", 3)}
 
     it "Should return an instance of Rideshare::Trip" do
-      # my_trip.trip_get_driver(1).must_be_kind_of(Array)
+       my_trip.trip_get_driver(1).must_be_kind_of(RideShare::Driver)
       # binding.pry
-      my_trip.must_be_instance_of(RideShare::Trip)
+      # my_trip.must_be_instance_of(RideShare::Trip)
       # binding.pry
 
     end

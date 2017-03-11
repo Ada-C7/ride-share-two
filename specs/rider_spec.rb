@@ -62,17 +62,19 @@ describe "Rider" do
 
 describe "Rider#find_drivers" do
 
-  let(:new_rider) {RideShare::Rider.new(2, "Kaia Klocko", "(392) 217-0777")}
-  # 2,Kaia Klocko,(392) 217-0777
+  let(:new_rider) {RideShare::Rider.new(12, "Jean Donnelly", "120-307-6251 x164")}
+# 12,Jean Donnelly,120-307-6251 x164
     it "Should retrieve trip's drivers" do
-      driver = new_rider.find_drivers.each do |x|
-         return x.id
-       end
+      new_rider.find_drivers.length.must_equal 4
+      new_rider.find_drivers.first.must_be_kind_of(RideShare::Driver)
+      # binding.pry
     end
-   id.must_equal(11)
+# returns 0 when there is none
+# rider that has no trips
+  #  driver.must_equal(11)
            # .must_equal 10
       # new_rider.must_equal 1
 
-    # binding.pry
+
   end
 end

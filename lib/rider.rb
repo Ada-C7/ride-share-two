@@ -44,15 +44,17 @@ module RideShare
     # drivers
     def find_drivers
 
-      drivers = {}
-
-      retrieve_trips.map! do |trip|
-        drivers[trip.driver_id] = 1
-        drivers.each do |id, value|
-          drivers[id] = RideShare::Driver.find(id)
-        end
+      retrieve_trips.map do |trip|
+        RideShare::Driver.find(trip.driver_id)
       end
-      return drivers.values
+
+      # retrieve_trips.map! do |trip|
+      #   drivers[trip.driver_id] = 1
+      #   drivers.each do |id, value|
+      #     drivers[id] = RideShare::Driver.find(id)
+      #   end
+      # end
+      # return drivers.values
     end
 
   end

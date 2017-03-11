@@ -5,7 +5,9 @@ describe "Driver" do
 
   describe "Driver#initialize" do
 
-    let(:new_driver) {RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")}
+    let(:new_driver) do
+      RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+    end
 
     it "Should create an instance of Driver" do
       new_driver.must_be_instance_of RideShare::Driver
@@ -46,16 +48,21 @@ describe "Driver" do
     end
 
     it "Raises an error when the account does not exist" do
-      proc { RideShare::Driver.find(101)}.must_raise(ArgumentError)
+      proc { RideShare::Driver.find(101) }.must_raise(ArgumentError)
     end
   end
 
   describe "#get_trips" do
 
-    let(:new_driver) {RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")}
+    let(:new_driver) do
+      RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+    end
+
 
     it "Should return all trips taken by driver_id" do
-      new_driver.get_trips
+      new_driver.get_trips.length.must_equal 9
+      # puts new_driver.get_trips
+
       # binding.pry
       # .must_be_kind_of(Array)
       # binding.pry
@@ -64,5 +71,18 @@ describe "Driver" do
     end
   end
 
+  describe "rating_average" do
 
+    let(:new_driver) do
+      RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
+    end
+
+    it "Should return the average trip rating for the driver" do
+
+      new_driver.rating_average.must_be_kind_of(Numeric)
+      average = new_driver.rating_average
+      average.must_be_within_delta(3.01, 0.01)
+    end
+
+  end
 end
