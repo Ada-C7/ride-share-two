@@ -21,7 +21,7 @@ describe "Driver class" do
 
   describe "trips method" do
     it "Retrieves the list of trip instances unique to one instance of driver" do
-      skip
+      # skip
       # Returns the trips in an array?
 
       # example code from lecture does not take an id argument (does not take an argument at all - argument is taken in the find_many method from trips class) How would I make that work?

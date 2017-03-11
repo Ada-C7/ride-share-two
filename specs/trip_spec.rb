@@ -24,8 +24,12 @@ describe "Trip class" do
   end
 
   describe "self.find_many class method" do
-  end
+    # Not sure if this is going to work for both Rider and Driver or if I will need a separate method for both find_many_drivers and find_many_riders
+    it "Returns array of many Trip instances for given argument" do
 
+    end
+  end
+# Need more tests here for self.all method
   describe "self.all class method" do
     it "Returns array of all trips from CSV" do
       RideShare::Trip.all.must_be_instance_of Array, "Not an array"
