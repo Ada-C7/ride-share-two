@@ -156,7 +156,6 @@ describe "Trip" do
       trip.rider.name.must_equal name
     end
 
-    # trip exists, but rider does not - improve!!!
     it "Returns nil if rider doesn't exist" do
       trip = Trip.new(267, 14, 0, "2015-04-23", 4)
       trip.rider.must_equal nil

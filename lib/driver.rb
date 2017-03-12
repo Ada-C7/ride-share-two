@@ -7,7 +7,7 @@ class Driver
   def initialize(id, name, vin)
     @id = id
     @name = name
-    @vin = vin
+    @vin = vin if vin.length == 17
   end
 
   def self.all
@@ -19,7 +19,7 @@ class Driver
   end
 
   def self.find(driver_id)
-    unless (driver_id.is_a? Integer) && driver_id > 0
+    unless (driver_id.is_a? Integer) && driver_id >= 0
       raise ArgumentError.new("driver ID:#{driver_id} is not valid")
     end
     # searches .all for all driver matching parameter
