@@ -16,9 +16,13 @@ describe "Driver class" do
       driver.vin.must_equal driver_hash[:vin]
     end
 
-    it "Raises an argument error if the vin number is invalid: must have length 17" do
+    it "Raises an argument error if the parameter is not hash" do
       proc {
-        RideShare::Driver.new({ id: 6, name: "Mr. Hyman Wolf", vin: "L1CXMYNZ3MMGTTYWUXXX" })
+        RideShare::Driver.new()
+      }.must_raise ArgumentError
+
+      proc {
+        RideShare::Driver.new("6, Mr. Hyman Wolf, L1CXMYNZ3MMGTTYWU")
       }.must_raise ArgumentError
     end
 
@@ -36,13 +40,9 @@ describe "Driver class" do
       }.must_raise ArgumentError
     end
 
-    it "Raises an argument error if the parameter is not hash" do
+    it "Raises an argument error if the vin number is invalid: must have length 17" do
       proc {
-        RideShare::Driver.new()
-      }.must_raise ArgumentError
-
-      proc {
-        RideShare::Driver.new("6, Mr. Hyman Wolf, L1CXMYNZ3MMGTTYWU")
+        RideShare::Driver.new({ id: 6, name: "Mr. Hyman Wolf", vin: "L1CXMYNZ3MMGTTYWUXXX" })
       }.must_raise ArgumentError
     end
   end
@@ -57,23 +57,25 @@ describe "Driver class" do
     end
 
     it "First element inside the returned array matches the CSV file" do
-        trip = trips_by_driver.first
-        trip.id.must_equal 162
-        trip.driver_id.must_equal 6
-        trip.rider_id.must_equal 93
-        trip.date.must_equal "2015-03-09"
-        trip.rating.must_equal 4
+      trip = trips_by_driver.first
+      trip.id.must_equal 162
+      trip.driver_id.must_equal 6
+      trip.rider_id.must_equal 93
+      trip.date.must_equal "2015-03-09"
+      trip.rating.must_equal 4
     end
 
     it "The last element inside the returned array matches the CSV file" do
       trip = trips_by_driver.last
-      if trip != nil
-        trip.id.must_equal 295
-        trip.driver_id.must_equal 6
-        trip.rider_id.must_equal 87
-        trip.date.must_equal "2015-08-14"
-        trip.rating.must_equal 1
-      end
+      trip.id.must_equal 295
+      trip.driver_id.must_equal 6
+      trip.rider_id.must_equal 87
+      trip.date.must_equal "2015-08-14"
+      trip.rating.must_equal 1
+    end
+
+    it "Returns an empty array if the driver has't made any trips yet" do
+      RideShare::Driver.new({ id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT" }).trips.must_equal []
     end
   end
 
@@ -86,14 +88,31 @@ describe "Driver class" do
 
     it "Returned value is in the range 1 - 5" do
       average = RideShare::Driver.new({ id: 23,	name: "Bo Stroman DVM", vin: "1F8C93JX5D62SYRYY" }).avg_rating
-      average.must_be :>, 0
-      average.must_be :<, 5
+      average.must_be :>=, 1.0
+      average.must_be :<=, 5.0
+    end
+
+    it "Returns 0.0 if the driver hasn't made any trips yet" do
+      RideShare::Driver.new({ id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT" }).avg_rating.must_equal 0.0
+    end
+  end
+
+  describe "#revenue method" do
+    it "Calculate the total revenue for all trips by the driver" do
+      driver.revenue.must_be_instance_of Integer
+      driver.revenue.must_be :>=, 0
+      driver.revenue.must_equal 5568
+    end
+
+    it "Returns zero if the driver hasn't made any trips yet" do
+      RideShare::Driver.new({ id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT" }).revenue.must_equal 0
     end
   end
 
   let (:all_drivers_array) { RideShare::Driver.all }
-
+  
   describe "#self.all method" do
+
     it "Retrieve all drivers from the CSV file" do
       all_drivers_array.must_be_instance_of Array
       all_drivers_array.length.must_equal 100
@@ -123,24 +142,15 @@ describe "Driver class" do
       driver.name.must_equal "Mr. Hyman Wolf"
       driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
     end
+
     it "Raises an argument error when invalid driver id is passed" do
       proc{
         RideShare::Driver.find("six")
       }.must_raise ArgumentError
     end
 
-    it "Raises an argument error if the driver id does not have a match in the driver.csv" do
-      proc{
-        RideShare::Driver.find(123456789)
-      }.must_raise ArgumentError
-    end
-  end
-
-  describe "#revenue method" do
-    it "Calculate the total revenue for all trips by the driver" do
-      driver.revenue.must_be_instance_of Integer
-      driver.revenue.must_be :>=, 0
-      driver.revenue.must_equal 666
+    it "Returns nil if the driver id does not have a match in the driver.csv" do
+      RideShare::Driver.find(123456789).must_be_nil
     end
   end
 end
