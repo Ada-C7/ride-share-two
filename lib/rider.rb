@@ -1,5 +1,6 @@
 require 'csv'
 require_relative 'trip'
+require_relative 'driver'
 
 class Rider
   attr_reader :id, :name, :phone_num
@@ -20,12 +21,13 @@ class Rider
   end
 
   def self.find(rider_id)
+    unless (rider_id.is_a? Integer) && rider_id > 0
+      raise ArgumentError.new("rider ID:#{rider_id} is not valid")
+    end
     # searches .all for rider matching the parameter
     # returns a driver instance
-    found_rider = Rider.all.find { |rider| rider.id == rider_id }
-    return found_rider if found_rider
+    Rider.all.find { |rider| rider.id == rider_id }
     # create a special NoDriver error, maybe rescue it?
-    raise ArgumentError.new("rider #{rider_id} does not exist")
   end
 
   def list_trips
@@ -52,4 +54,4 @@ class Rider
 end
 
 variable = Rider.new(93, "Mrs. Rickey Dickens", "5FS0Y47Z59YGGSXS0")
-puts variable.list_trips
+puts variable.list_drivers
