@@ -1,13 +1,5 @@
 # Trip
 
-# Given a trip object, you should be able to:
-#
-# TODO: retrieve the associated driver instance through the driver ID
-# TODO: retrieve the associated rider instance through the rider ID
-
-# You should be able to:
-#
-
 require 'csv'
 
 module RideShare
@@ -44,6 +36,7 @@ module RideShare
     end
 
     # DONE: find all trip instances for a given driver ID
+    # DONE: retrieve the associated driver instance through the driver ID
     def find_all_driver_instances(driver_id)
       driver_instance_array = []
       new_instance = RideShare::Trip.all
@@ -57,6 +50,7 @@ module RideShare
     end
 
     # DONE: find all trip instances for a given rider ID
+    # DONE: retrieve the associated rider instance through the rider ID
     def find_all_rider_instances(rider_id)
       rider_instance_array = []
       new_instance = RideShare::Trip.all
@@ -83,4 +77,4 @@ end
 
 # test_1 = RideShare::Trip.new("", "", "", "", "")
 #
-# puts test_1.find_all_rider_instances("54")
+# puts test_1.find_all_driver_instances("1")

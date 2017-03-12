@@ -2,10 +2,9 @@
 
 # Given a rider object, you should be able to:
 #
-# TODO: retrieve the list of trip instances that only this rider has taken
 # TODO: retrieve the list of all previous driver instances (through the trips functionality built above)
 
-
+require_relative 'trip'
 require 'csv'
 
 module RideShare
@@ -54,7 +53,15 @@ module RideShare
 
     end
 
-    def trips
+    # DONE: retrieve the list of trip instances that only this rider has taken
+    # TODO: retrieve the list of all previous driver instances (through the trips functionality built above)
+    def trips(rider_id)
+      new_instance = RideShare::Trip.new("", "", "", "", "")
+      trips = new_instance.find_all_rider_instances(rider_id)
+      return trips
+    end
+
+    def previous_driver_instances
     end
 
   end
@@ -68,3 +75,7 @@ end
 # test_1 = RideShare::Rider.find("50")
 #
 # puts test_1
+
+# test_1 = RideShare::Rider.new("", "", "")
+#
+# puts test_1.trips("1")

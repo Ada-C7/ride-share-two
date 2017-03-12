@@ -1,12 +1,5 @@
 # Driver
 
-
-# Given a driver object, you should be able to:
-#
-# TODO: retrieve an average rating for that driver based on all trips taken
-# TODO: retrieve the list of trip instances that only this driver has taken
-
-
 require_relative 'trip'
 require 'csv'
 
@@ -57,16 +50,36 @@ module RideShare
 
     end
 
-    # TODO: retrieve the list of trip instances that only this driver has taken
+    # DONE: retrieve the list of trip instances that only this driver has taken
     def trips(driver_id)
       new_instance = RideShare::Trip.new("", "", "", "", "")
       trips = new_instance.find_all_driver_instances(driver_id)
+      # print trips
+      # puts "Working"
+
+
+      # new_instance = RideShare::Trip.new("", "", "", "", "")
+      # trips = new_instance.find_all_driver_instances(driver_id)
       # puts trips
       # puts "Working"
       # new_instance = RideShare::Trip::find_all_driver_instances("1")
     end
 
-    def avg_rating
+    # DONE: retrieve an average rating for that driver based on all trips taken
+    def avg_rating(driver_id)
+      rating_sum = 0
+      trips_array = trips(driver_id)
+
+      trips_array.each do |instance|
+        # FIXME: Can't call rating, produces error
+        rating_sum += instance[4].to_i
+      end
+      if trips_array.length == 0
+        # TODO: Argument Error
+      else
+        avg_rating = rating_sum / (trips_array.length)
+        return avg_rating
+      end
     end
 
   end
@@ -87,10 +100,14 @@ end
 #
 # print test_1#.is_a? Array
 
-# test_1 = RideShare::Driver.find("50")
+# test_1 = RideShare::Driver.find("1")
 #
 # puts test_1
 
-test_1 = RideShare::Driver.new("1", "1", "1")
-
-puts test_1.trips("1")
+# test_1 = RideShare::Driver.new("", "", "")
+#
+# print test_1.trips("13")
+#
+# test_1 = RideShare::Driver.new("", "", "")
+#
+# puts test_1.avg_rating("13")
