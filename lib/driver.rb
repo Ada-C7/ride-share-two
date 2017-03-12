@@ -1,4 +1,5 @@
 require 'csv'
+require_relative 'trip'
 
 class Driver
   attr_reader :id, :name, :vin
@@ -49,6 +50,10 @@ class Driver
     # accesses rating form each trip instance
     # calcualtes average
     # returns an average rating for that driver based on all trips taken
+    ratings = list_trips.map { |trip| trip.rating.to_f }
+    return 0 if ratings == []
+    rating = (ratings.reduce(:+)) / ratings.length
+    rating.round(2)
   end
 
 end
