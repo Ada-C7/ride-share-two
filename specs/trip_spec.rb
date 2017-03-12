@@ -38,6 +38,30 @@ describe "Trip" do
 
       trip.must_be_kind_of Trip
     end
+
+    it "Accepts rating" do
+      trip = Trip.new(12, 21, 382, "2016-01-04", 1)
+      trip.rating.must_equal 1
+    end
+
+    it "Accepts rating only as integers" do
+      proc {
+        Trip.new(12, 21, 382, "2016-01-04", 1.3)
+      }.must_raise ArgumentError
+    end
+
+    it "Allows rating only within acceptable range (1 - 5)" do
+      proc {
+        Trip.new(12, 21, 382, "2016-01-04", 0)
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an error if invalid rating is given" do
+      proc {
+        Trip.new(12, 21, 382, "2016-01-04", "a")
+      }.must_raise ArgumentError
+    end
+
   end
 
   describe "Trip.all" do
@@ -63,7 +87,6 @@ describe "Trip" do
       @trips.last.date.must_equal "2016-04-25"
       @trips.last.rating.must_equal 3
 
-      # not working, CSV file is not being read
       # index = 0
       # CSV.read("support/trips.csv", { :headers => true }) do |line|
       #   @trips[index].id.must_equal line[0].to_i
@@ -140,7 +163,7 @@ describe "Trip" do
 
     it "Returns nil if driver doesn't exist" do
       trip = Trip.new(83, 0, 103, "2015-12-25", 2)
-      trip.driver.must_equal nil
+      trip.driver.must_be_nil
     end
   end
 
@@ -158,7 +181,7 @@ describe "Trip" do
 
     it "Returns nil if rider doesn't exist" do
       trip = Trip.new(267, 14, 0, "2015-04-23", 4)
-      trip.rider.must_equal nil
+      trip.rider.must_be_nil
     end
   end
 
