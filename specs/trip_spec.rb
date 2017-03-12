@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 require_relative '../lib/trip'
 
 describe "Trip class" do
-  let (:trip_hash) { { id: 162, driver_id: 6, rider_id: 93, date: "2015-03-09", rating: 4 } }
+  let (:trip_hash) { { id: 162, driver_id: 6, rider_id: 93, date: "2015-03-09", rating: 4 , cost: 2090, duration: 30 } }
   let (:trip)  { RideShare::Trip.new(trip_hash) }
 
   describe "#initialize method" do
@@ -18,26 +18,10 @@ describe "Trip class" do
       trip.date.must_equal trip_hash[:date]
       trip.must_respond_to :rating
       trip.rating.must_equal trip_hash[:rating]
-    end
-
-    it "Raises an argument error if the rating is invalid: must be in the range (1..5)" do
-      proc {
-        RideShare::Driver.new({ id: 162, driver_id: 6, rider_id: 93, date: "2015-03-09", rating: 9 })
-      }.must_raise ArgumentError
-    end
-
-    it "Raises an argument error if the trip_hash parameter is incomplete" do
-      proc {
-        RideShare::Trip.new({})
-      }.must_raise ArgumentError
-
-      proc {
-        RideShare::Trip.new({ id: 162, rider_id: 93, date: "2015-03-09", rating: 4 })
-      }.must_raise ArgumentError
-
-      proc {
-        RideShare::Trip.new({ nick_name: "Betsy", rating: 4 })
-      }.must_raise ArgumentError
+      trip.must_respond_to :cost
+      trip.cost.must_equal trip_hash[:cost]
+      trip.must_respond_to :duration
+      trip.duration.must_equal trip_hash[:duration]
     end
 
     it "Raises an argument error if the parameter is not hash" do
@@ -47,6 +31,38 @@ describe "Trip class" do
 
       proc {
         RideShare::Trip.new("162,6,93,2015-03-09,4")
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an argument error if the trip_hash parameter is missing any keys" do
+      proc {
+        RideShare::Trip.new({})
+      }.must_raise ArgumentError
+
+      proc {
+        RideShare::Trip.new({ id: 162, rider_id: 93, date: "2015-03-09", rating: 4 , cost: 2090, duration: 30 })
+      }.must_raise ArgumentError
+
+      proc {
+        RideShare::Trip.new({ nick_name: "Betsy", rating: 4 })
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an argument error if the rating is invalid: must be in the range (1..5)" do
+      proc {
+        RideShare::Trip.new({ id: 162, driver_id: 6, rider_id: 93, date: "2015-03-09", rating: 9 , cost: 2090, duration: 30 })
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an argument error if the cost is invalid: must be in a positive amount in cents" do
+      proc {
+        RideShare::Trip.new({ id: 162, driver_id: 6, rider_id: 93, date: "2015-03-09", rating: 4 , cost: 0, duration: 30 })
+      }.must_raise ArgumentError
+    end
+
+    it "Raises an argument error if the duration is invalid: must be in a positive value in full minutes" do
+      proc {
+        RideShare::Trip.new({ id: 162, driver_id: 6, rider_id: 93, date: "2015-03-09", rating: 4 , cost: 2090, duration: -30 })
       }.must_raise ArgumentError
     end
   end
@@ -60,11 +76,9 @@ describe "Trip class" do
       driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
     end
 
-    it "Outputs a message if the driver id does not have a match in the rider.csv" do
-      trip = RideShare::Trip.new({ id: 88, driver_id: 0, rider_id: 39, date: "2015-11-19", rating: 3 })
-      proc {
-        trip.find_driver
-      }.must_output (/.+/)
+    it "Nil returned if the driver id does not have a match in the rider.csv" do
+      trip = RideShare::Trip.new({ id: 88, driver_id: 0, rider_id: 39, date: "2015-11-19", rating: 3 , cost: 1485, duration: 34 })
+      trip.find_driver.must_be_nil
     end
   end
 
@@ -77,11 +91,9 @@ describe "Trip class" do
       driver.phone_number.must_equal "(170) 751-2406"
     end
 
-    it "Outputs a message if the rider id does not have a match in the rider.csv" do
-      trip = RideShare::Trip.new({ id: 267, driver_id: 14, rider_id: 0, date: "2015-04-23", rating: 4 })
-      proc {
-        trip.find_rider
-      }.must_output (/.+/)
+    it "Nil returned if the driver id does not have a match in the rider.csv" do
+      trip = RideShare::Trip.new({ id: 267, driver_id: 14, rider_id: 0, date: "2015-04-23", rating: 4, cost: 250, duration: 5 })
+      trip.find_rider.must_be_nil
     end
   end
 
@@ -114,7 +126,6 @@ describe "Trip class" do
   end
 
   describe "#self.trips_by_driver method" do
-
     let (:trips) { RideShare::Trip.trips_by_driver(6) }
 
     it "Find all trip instances for a given driver ID" do
@@ -143,16 +154,18 @@ describe "Trip class" do
       end
     end
 
-    it "Raises an ArgumentError if trip instances specified by the driver id does not exist" do
-      proc {
-        RideShare::Trip.trips_by_driver(123456789)
+    it "Raises an argument error when invalid driver id is passed" do
+      proc{
+        RideShare::Driver.find("six")
       }.must_raise ArgumentError
     end
 
+    it "Returns nil if trip instances specified by the driver id does not exist" do
+      RideShare::Trip.trips_by_driver(123456789).must_be_nil
+    end
   end
 
   describe "#self.trips_by_rider method" do
-
     let (:trips) { RideShare::Trip.trips_by_rider(93) }
 
     it "Find all trip instances for a given rider ID" do
@@ -181,26 +194,14 @@ describe "Trip class" do
       end
     end
 
-    it "Raises an ArgumentError if trip instances specified by the driver id does not exist" do
-      proc {
-        RideShare::Trip.trips_by_rider(123456789)
+    it "Raises an argument error when invalid driver id is passed" do
+      proc{
+        RideShare::Driver.find("six")
       }.must_raise ArgumentError
     end
-  end
-  
-  describe "#total_cost method" do
-    it "Calculate the total amount of money spent on all trips taken by the rider" do
-      rider.total_cost.must_be_instance_of Integer
-      rider.total_cost.must_be :>=, 0
-      rider.total_cost.must_equal 666
-    end
-  end
 
-  describe "#total_durtion method" do
-    it "Calculate the total amount of money spent on all trips taken by the rider" do
-      rider.total_durtion.must_be_instance_of Integer
-      rider.total_durtion.must_be :>=, 0
-      rider.total_durtion.must_equal 666
+    it "Returns nil if trip instances specified by the rider id does not exist" do
+      RideShare::Trip.trips_by_rider(123456789).must_be_nil
     end
   end
 end
