@@ -7,6 +7,14 @@ describe "Driver class" do
 
   describe "Driver#initialize" do
 
+    it "Raises ArgumentError if driver_id is not class type integer" do
+      proc { RideShare::Driver.new(driver_id: "7", name: "Ada", vin: "W09XNTZR9KTFK10WWW") }.must_raise ArgumentError
+    end
+
+    it "Raises ArgumentError if name is not class type string" do
+      proc { RideShare::Driver.new(driver_id: 7, name: 1337, vin: 1337) }.must_raise ArgumentError
+    end
+
     it "Raises ArgumentError if vin is not 17 characters long" do
       proc { RideShare::Driver.new(driver_id: 7, name: "Ada", vin: "W09XNTZR9KTFK10WWW") }.must_raise ArgumentError
     end
@@ -106,12 +114,12 @@ describe "Driver class" do
     it "Checking that Driver#trips returns an array with correct length" do
 
       casper.trips.class.must_equal Array
-      
+
       casper.trips.length.must_equal RideShare::Trip.find_many_drivers(30).length
     end
 
     it "Returns the correct average trip ratings for a spacific driver" do
-      # (5 + 3 + 3 + 4 + 2 + 2 + 2) / 7 =
+      # (5 + 3 + 3 + 4 + 2 + 2 + 2) / 7 = 3.0
       casper.average_rating.must_equal 3.0
 
     end

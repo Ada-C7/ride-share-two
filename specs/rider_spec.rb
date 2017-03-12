@@ -2,9 +2,17 @@ require_relative 'spec_helper'
 
 # Try to use let! :) instead of before
 describe "Rider class" do
-  let(:riding) { RideShare::Rider.new(rider_id: 1337, name: "bob", phone_num: "123.456.789") }
+  let(:riding) { RideShare::Rider.new(rider_id: 1337, name: "bob", phone_num: "123.456.7890") }
 
   describe "Rider#initialize" do
+    it "Raises ArgumentError if rider_id is not an integer" do
+      proc { RideShare::Rider.new(rider_id: "30", name: "bob", phone_num: "123.456.7890") }.must_raise ArgumentError
+    end
+
+    it "Raises ArgumentError if the name and phone number are not strings" do
+      proc { RideShare::Rider.new(rider_id: 30, name: 1337, phone_num: 1337) }.must_raise ArgumentError
+    end
+
     it "It takes a rider_hash argument" do
       riding.must_be_instance_of RideShare::Rider
     end
@@ -12,7 +20,7 @@ describe "Rider class" do
     it "Has the correct values that were passed" do
       riding.rider_id.must_equal 1337
       riding.name.must_equal "bob"
-      riding.phone_num.must_equal "123.456.789"
+      riding.phone_num.must_equal "123.456.7890"
     end
   end
 

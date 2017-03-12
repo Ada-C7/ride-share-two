@@ -1,10 +1,15 @@
 require 'csv'
+require 'pry'
 
 module RideShare
   class Rider
     attr_reader :rider_id, :name, :phone_num
 
     def initialize(rider_hash)
+      raise ArgumentError.new "Rider id must be an integer" if rider_hash[:rider_id].class != Integer
+      raise ArgumentError.new "Rider name and phone number must be a string" if rider_hash[:name].class != String || rider_hash[:phone_num].class != String
+
+
       @rider_id = rider_hash[:rider_id]
       @name = rider_hash[:name]
       @phone_num = rider_hash[:phone_num]
@@ -36,7 +41,7 @@ module RideShare
     end
 
     def trip
-      # gets the list of trip instances for this rider
+      #argument error if rider id given is not in the csv file
       RideShare::Trip.find_many_riders(@rider_id)
     end
 

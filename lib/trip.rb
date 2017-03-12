@@ -1,6 +1,5 @@
 require 'csv'
-#require_relative 'rider'
-#require_relative 'driver'
+require 'pry'
 
 module RideShare
   class Trip
@@ -69,6 +68,6 @@ module RideShare
   end
 end
 
-puts "#{RideShare::Trip.find_many_drivers(30)}"
+#puts "#{RideShare::Trip.find_many_drivers(30)}"
 # puts "#{RideShare::Trip.find_many_drivers(1337)}"
 #puts "#{RideShare::Trip.find_many_riders(5).length}"
