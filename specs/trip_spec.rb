@@ -121,6 +121,10 @@ describe "Trip" do
     it "Returns an empty array for a driver ID that doesn't exist" do
       Trip.find_trips_driver(101).must_equal []
     end
+    
+    it "Returns an empty array if there are no trips for this driver ID" do
+      Trip.find_trips_driver(100).must_equal []
+    end
   end
 
   describe "Trip.find_trips_rider" do
@@ -155,10 +159,6 @@ describe "Trip" do
       trip = Trip.new(100, 29, 138, "2016-09-04", 2)
       name = "Miss Gustave Erdman"
       trip.driver.name.must_equal name
-    end
-
-    it "Returns an empty array if there are no trips for this driver ID" do
-      Trip.find_trips_driver(100).must_equal []
     end
 
     it "Returns nil if driver doesn't exist" do
