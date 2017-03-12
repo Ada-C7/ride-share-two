@@ -24,11 +24,11 @@ module RideShare
       temp_csv = CSV.read("support/riders.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
       temp_csv.each do |rider|
-          rider_hash = Hash.new
-          rider_hash[:id] = rider[0].to_i
-          rider_hash[:name] = rider[1]
-          rider_hash[:phone] = rider[2]
-          riders << Rider.new(rider_hash)
+        rider_hash = Hash.new
+        rider_hash[:id] = rider[0].to_i
+        rider_hash[:name] = rider[1]
+        rider_hash[:phone] = rider[2]
+        riders << Rider.new(rider_hash)
       end
       return riders
     end
@@ -54,6 +54,22 @@ module RideShare
 
       #look through trips and for each trip instance, use the driver_id associated with the trip (trip.driver_id) to call Driver.find(driver_id)
       #store those Driver class instances in an array that gets returned
+    end
+
+    def total_costs
+      all_trips = trips
+      trip_cost = all_trips.map { |trip| trip.cost }
+      return trip_cost.inject(:+)
+    end
+
+    def total_duration
+      all_trips = trips
+      return nil if all_trips == []
+      trip_duration = all_trips.map { |trip| trip.duration }
+      all_trips_duration = trip_duration.inject(:+) #in minutes
+      hours = all_trips_duration / 60
+      minute_fraction = (all_trips_duration % 60 ) / 60.00
+      return (hours + minute_fraction).round(2)
     end
 
   end

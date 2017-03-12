@@ -21,7 +21,8 @@ describe "Rider" do
     end
 
     it "gets everything in the csv" do
-       riders.length.must_equal 300
+      length_check = CSV.readlines("support/riders.csv").size
+       riders.length.must_equal length_check-1
     end
 
     it "gets the first item" do
@@ -69,6 +70,13 @@ describe "Rider" do
       end
     end
 
+    it "returns empty Array if Rider has no trips" do
+      rider116 = riders[115]
+      rider116.trips.must_be_instance_of Array
+      rider116.id.must_equal 116
+      rider116.trips.length.must_equal 0
+    end
+
   end
 
   describe "drivers" do
@@ -92,6 +100,42 @@ describe "Rider" do
 
       rider250 = riders[249]
       rider250.drivers.length.must_equal 3
+    end
+
+    it "returns an empty array if a rider has no drivers (b/c no trips)" do
+      rider116 = riders[115]
+      rider116.drivers.must_be_instance_of Array
+      rider116.drivers.length.must_equal 0
+    end
+
+  end
+
+  describe "total_costs" do
+    it "returns a Float" do
+      rider92 = riders[91]
+      rider92.total_costs.must_be_instance_of Float
+    end
+
+    it "returns nil if Rider has no trips" do
+      rider116 = riders[115]
+      rider116.total_costs.must_equal nil
+    end
+  end
+
+  describe "total_duration" do
+    it "returns a Float" do
+      rider164 = riders[163]
+      rider164.total_duration.must_be_instance_of Float
+      rider164.total_duration.must_equal 2.47
+    end
+
+    it "returns nil if rider has no trips" do
+      rider116 = riders[115]
+      rider116.total_duration.must_equal nil
+    end
+
+    it "works if a rider has one trip" do
+
     end
 
   end

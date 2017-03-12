@@ -70,8 +70,10 @@ describe "Trip" do
       end
     end
 
-    it "Array length is no. of lines in csv file minus header row" do
-      trips.length.must_equal 600
+    it "Array length is no. of lines in csv file minus header row & minus rescues" do
+      length_check = CSV.readlines("support/trips.csv").size
+
+      trips.length.must_equal length_check - 1 - 2 #(1 for header row, 2 for bad_vin lines added to csv )
     end
 
     it "does not include trips with invalid ratings" do
@@ -127,7 +129,7 @@ describe "Trip" do
 
   end
 
-  xdescribe "driver" do
+  describe "driver" do
 
     it "returns a Driver instance" do
       trip = trips[30]
@@ -142,7 +144,7 @@ describe "Trip" do
   end
 
 
-  xdescribe "rider" do
+  describe "rider" do
     it "returns a Rider instance" do
       trip = trips[23]
       rider_info = trip.rider

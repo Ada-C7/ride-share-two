@@ -3,7 +3,7 @@ require 'bad_rating_error'
 
 module RideShare
   class Trip
-    attr_reader :id, :driver_id, :rider_id, :date, :rating
+    attr_reader :id, :driver_id, :rider_id, :date, :rating, :cost, :duration
 
     def initialize (trip_hash)
       #check if inputs are valid
@@ -14,6 +14,9 @@ module RideShare
       @rider_id = trip_hash[:rider_id]
       @date = trip_hash[:date]
       @rating = trip_hash[:rating]
+      @cost = trip_hash[:cost] #2 decimal places
+      @duration = trip_hash[:duration] #in minutes
+
     end
 
     def validate_input trip_hash
@@ -29,6 +32,7 @@ module RideShare
     end
 
     def self.all
+
       trips = []
       temp_csv = CSV.read("support/trips.csv")
       temp_csv.shift #removes first row, which is a header row (thx, google)
@@ -41,6 +45,8 @@ module RideShare
           trip_hash[:rider_id] = trip[2].to_i
           trip_hash[:date] = trip[3]
           trip_hash[:rating] = trip[4].to_i
+          trip_hash[:cost] = trip[5].to_f
+          trip_hash[:duration] = trip[6].to_i
           trips << Trip.new(trip_hash)
         rescue BadRatingError #specify which error to rescue otherwise will rescue all raised Errors
           puts "Rating needs to be a number between 1 and 5. You entered: #{trip[4]}.\nEntry not included. Please update CSV file."
