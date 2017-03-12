@@ -3,7 +3,6 @@ module RideShare
   class Trip
   attr_reader :trip_id, :driver_id, :rider_id, :date, :rating
 
-    # creates trips that have an ID, rider ID, driver ID, date, and rating
     def initialize(trip_id, driver_id, rider_id, date, rating)
       raise ArgumentError.new("Trip ID must be integer") if trip_id.class != Integer
       raise ArgumentError.new("Driver ID must be integer") if driver_id.class != Integer
@@ -18,20 +17,14 @@ module RideShare
       @rating = (1..5).include?(rating.to_i) ? rating.to_i : invalid_rating
     end
 
-
-    # retrieve the associated driver instance using the driver ID
     def trip_driver
       return RideShare::Driver.find(@driver_id)
     end
 
-
-    # retrieve the associated rider instance using the rider ID
     def trip_rider
       return RideShare::Rider.find(@rider_id)
     end
 
-
-    # retrieve all trips from the CSV file and initializes each line as a new trip
     def self.all
       all_trips = []
 
@@ -48,8 +41,6 @@ module RideShare
       return all_trips
     end
 
-
-    # find all trip instances for a given driver ID
     def self.drivers_trips(driver_id)
       all_trips = RideShare::Trip.all
 
@@ -60,8 +51,6 @@ module RideShare
       raise ArgumentError.new("Invalid Driver ID in RideShare::Trip #drivers_trips")
     end
 
-
-    # find all trip instances for a given rider ID
     def self.riders_trips(rider_id)
       all_trips = RideShare::Trip.all
 
@@ -74,7 +63,6 @@ module RideShare
 
 
     private
-
 
     def invalid_rating # should make this an exception
       raise ArgumentError.new("Invalid Rating")

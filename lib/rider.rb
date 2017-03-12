@@ -3,21 +3,19 @@ module RideShare
   class Rider
     attr_reader :id, :name, :phone
 
-    # creates riders that have an ID, name, and phone number
     def initialize(id, name, phone)
-      @id = id.to_i
+      raise ArgumentError.new("Id must be an integer") if id.class != Integer
+      raise ArgumentError.new("Name must be a string") if name.class != String
+      raise ArgumentError.new("Phone must be a string") if phone.class != String
+      @id = id #.to_i
       @name = name
       @phone = phone
     end
 
-
-    # retreives list of trips for specific rider
     def trips
       return RideShare::Trip.riders_trips(@id)
     end
 
-
-    # retreives list of all previous drivers for specific rider
     def drivers
       drivers = []
 
@@ -28,12 +26,11 @@ module RideShare
       return drivers
     end
 
-    # retreives all riders from the CSV
     def self.all
       all_riders = []
 
       CSV.foreach("support/riders.csv", :headers => true) do | line |
-        id = line[0]
+        id = line[0].to_i
         name = line[1]
         phone = line[2]
 
@@ -43,8 +40,6 @@ module RideShare
       return all_riders
     end
 
-
-    # finds a specific rider using their numeric ID
     def self.find(rider_id)
       all_riders = RideShare::Rider.all
 

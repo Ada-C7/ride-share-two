@@ -53,14 +53,18 @@ describe "RideShare::Driver" do
       driver_trips.length.must_equal 6
     end
 
+    it "Will raise an argument error if driver has no trips" do
+      proc { RideShare::Driver.find(100).trips}.must_raise ArgumentError
+    end
+
   end
 
 
   describe "RideShare::Driver#avg_rating" do
 
-    let(:driver_rating) { RideShare::Driver.find(55).avg_rating }
+    let(:driver_rating) { RideShare::Driver.find(21).avg_rating }
 
-    it "Returns an Float" do
+    it "Returns a Float" do
       driver_rating.must_be_kind_of Float
     end
 
@@ -73,6 +77,10 @@ describe "RideShare::Driver" do
       proc { RideShare::Driver.find(100).avg_rating }.must_raise ArgumentError
     end
 
+    it "Calculates the average rating accurately" do
+      driver_rating.must_equal 30/11.to_f
+    end
+
   end
 
 
@@ -81,18 +89,30 @@ describe "RideShare::Driver" do
     let (:all_drivers) { RideShare::Driver.all }
 
     it "Initializes first line from drivers.csv as a new RideShare::Driver instance" do
+      all_drivers.first.must_be_instance_of RideShare::Driver
+    end
+
+    it "Correctly reads first line from drivers.csv" do
       all_drivers.first.id.must_equal 1
       all_drivers.first.name.must_equal "Bernardo Prosacco"
       all_drivers.first.vin.must_equal "WBWSS52P9NEYLVDE9"
     end
 
     it "Ititializes last line from drivers.csv as a new RideShare::Driver instance" do
+      all_drivers.last.must_be_instance_of RideShare::Driver
+    end
+
+    it "Correctly reads last line from drivers.csv" do
       all_drivers.last.id.must_equal 100
       all_drivers.last.name.must_equal "Minnie Dach"
       all_drivers.last.vin.must_equal "XF9Z0ST7X18WD41HT"
     end
 
     it "Ititializes random line from drivers.csv as a new RideShare::Driver instance" do
+      all_drivers[30].must_be_instance_of RideShare::Driver
+    end
+
+    it "Correctly reads random line from drivers.csv" do
       all_drivers[36].id.must_equal 37
       all_drivers[36].name.must_equal "Arnulfo Anderson"
       all_drivers[36].vin.must_equal "WBW8W7DC0FJLMYCCR"
