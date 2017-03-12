@@ -46,6 +46,7 @@ describe "trip class" do
     }.must_raise ArgumentError
   end
 
+  #tests all_trip_info method
   it "returns an array of all trips" do
   a = RideShare::Trip.all_trip_info
   a.must_be_instance_of Array
@@ -78,6 +79,8 @@ describe "trip class" do
     end
   end
 
+  #tests self.driver_trip_instances(driver_id)
+  
 
 end
 

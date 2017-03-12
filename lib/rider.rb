@@ -42,9 +42,15 @@ module RideShare
     end
 
     # retrieve the list of all previous driver instances (through the trips functionality built above)
-    def driver_rider_trips
-
-
+    def previous_driver_trips(driver_id)
+      driver_list = []
+      rider_trips = RideShare::Trip.all_rider_trip_instances(@rider_id)#does this mean i need to make a self method of rider trip instances?
+      rider_trips.each do |object|
+        if @driver_id == rider_trips.driver_id
+          driver_list << object.driver_id
+        end
+      end
+      return driver_list
     end
 
 
