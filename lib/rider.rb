@@ -12,10 +12,20 @@ module RideShare
     def self.all
       riders = []
       CSV.open("./support/riders.csv", "r").each do |line|
-        riders << self.new(line[0], line[1], line[2])
+        riders << self.new(line[0].to_s, line[1].to_s, line[2].to_s)
       end
       return riders
     end
 
+    def self.find(id)
+      riders = self.all
+
+      riders.each do |rider|
+        if rider.rider_id == id
+          return rider
+        end
+      end
+      raise ArgumentError.new("Rider not found")
+    end  
   end
 end

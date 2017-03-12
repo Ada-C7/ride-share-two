@@ -40,7 +40,7 @@ describe "Rider class" do
 
   describe "self.find method" do
     it "finds a specific rider given their rider ID" do
-
+      RideShare::Rider.find("1").name.must_equal "Nina Hintz Sr."
     end
   end
 end
