@@ -3,6 +3,7 @@ require_relative 'spec_helper'
 describe "Trip" do
   let(:trips) { RideShare::Trip.all }
   let(:shakira_trips) { RideShare::Trip.find_by_driver(16) }
+  let(:clementina_trips) { RideShare::Trip.find_by_rider(283) }
   let(:hipolito_trips) { RideShare::Trip.find_by_rider(100) }
 
   describe "Trip#initialize" do
@@ -96,19 +97,15 @@ describe "Trip" do
       end
     end
 
-    it "can find any trip based on a randomly generated number" do
+    it "returns an array with all of the driver's Trip instances" do
       # come back to this - find_all returns array of trips! have to verify entire array, not just one trip instance in the array
+      trip_ids = shakira_trips.map { |trip| trip.id }
+      trip_ids.must_equal [38, 115, 302, 323, 428, 570]
+    end
 
-      # random_driver_id = rand(1..100)
-      # driver_trip_check = trips[random_driver_id - 1].id
-      # driver_trips = RideShare::Trip.find_by_driver(random_driver_id)
-      # expect(driver_trip.id).must_equal driver_trip_check
-      #
-      # random_rider_id = rand(1..300)
-      # rider_trip_check = trips[random_rider_id - 1].id
-      # rider_trip = RideShare::Trip.find_by_rider(random_rider_id)
-      # expect(rider_trip.id).must_equal rider_trip_check
-
+    it "returns an array with all of the rider's Trip instances" do
+      trip_ids = clementina_trips.map { |trip| trip.id }
+      trip_ids.must_equal [518]
     end
 
     it "returns empty array if trip doesn't exist" do
@@ -124,7 +121,7 @@ describe "Trip" do
     my_trip = trips[3]
     my_trip.find_driver.must_be_instance_of RideShare::Driver
 
-    my_trip.find_driver.id.must_equal drivers[12].id
+    my_trip.find_driver.id.must_equal trips[12].id
   end
 
   end
