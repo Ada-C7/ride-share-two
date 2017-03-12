@@ -31,7 +31,7 @@ module RideShare
       avg_rating = rating_array_sum / rating_array_lenth
       return avg_rating
     end
-#can come back to this and make so that it's a float instead of an integer
+      #can come back to this and make so that it's a float instead of an integer
       #now that I have the driver trip instances, I need to sum the ratings
       # driver_avg_rating.
 

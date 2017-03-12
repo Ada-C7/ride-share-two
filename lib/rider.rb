@@ -27,14 +27,13 @@ module RideShare
     end
 
     def self.find_rider(rider_id)
-      rider_info = []
       all_riders = RideShare::Rider.all_rider_info
       all_riders.each do |object|
-        if object.rider_id = rider_id
-          rider_info << object
+        if object.rider_id == rider_id
+          return object
         end
-          return rider_info
       end
+      raise ArgumentError.new("Rider #{rider_id} does not exist")
     end
 
 

@@ -35,20 +35,24 @@ describe "rider class" do
 
   #for self.find_rider(rider_info)
 
-  it "returns an array of info related to rider" do
+  it "returns a rider account that exists" do
     test_class = RideShare::Rider.find_rider(1)
-    test_class.must_be_instance_of Array
-  end
-
-  it "returns an account that exists" do
-    test_class = RideShare::Rider.find_rider(1)
-    test_class.must_be_instance_of Array 
     test_class.rider_id.must_equal 1
     test_class.name.must_equal "Nina Hintz Sr."
     test_class.phone_num.must_equal "560.815.3059"
   end
 
+  it "can find the last rider that exists" do
+    test_class = RideShare::Rider.find_rider(300)
+      test_class.must_be_instance_of RideShare::Rider
+     test_class.rider_id.must_equal 300
+     test_class.name.must_equal "Miss Isom Gleason"
+     test_class.phone_num.must_equal "791-114-8423 x70188"
+  end
 
+it "raises an argument error if the driver doesn't exist" do
+  proc { RideShare::Rider.find_rider(90493928) }.must_raise ArgumentError
+end
 
 
 

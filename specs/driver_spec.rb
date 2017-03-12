@@ -93,7 +93,7 @@ end
   end
 
 # self.find_drivers(driver_id) 7,Lizeth Dickens,W09XNTZR9KTFK10WW
-  it "returns an account that exists" do
+  it "returns a driver account that exists" do
     search = RideShare::Driver.find_driver(7)
     search.must_be_instance_of RideShare::Driver
     search.driver_id.must_equal 7
