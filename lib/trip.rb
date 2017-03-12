@@ -13,17 +13,6 @@ module RideShare
       @rating = rating
     end
 
-    def self.driver_trip_instances(driver_id)
-      driver_trips = []
-      trips = RideShare::Trip.all_trip_info
-      trips.each do |object|
-        if driver_id == object.driver_id
-          driver_trips << object
-        end
-      end
-      return driver_trips
-    end
-
     def self.all_trip_info
       all_trips_array = []
       CSV.read('support/trips.csv').each do |object|
@@ -39,10 +28,27 @@ module RideShare
       # return all the trips in the trip csv
     end
 
-    def self.all_rider_info
-      rider_trips = []
-      rider_trips
+    def self.driver_trip_instances(driver_id)
+      driver_trips = []
+      trips = RideShare::Trip.all_trip_info
+      trips.each do |object|
+        if driver_id == object.driver_id
+          driver_trips << object
+        end
+      end
+      return driver_trips
+    end
 
+    # retrieve the associated rider instance through the rider ID
+    def self.all_rider_trip_instances(rider_id)
+      rider_trips = []
+      trips = RideShare::Rider.all_rider_info
+      trips.each do |object|
+        if rider_id == object.rider_id
+        rider_trips << trips
+        end
+      end
+      return rider_trips
     end
 
   end

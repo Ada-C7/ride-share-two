@@ -50,9 +50,9 @@ describe "rider class" do
      test_class.phone_num.must_equal "791-114-8423 x70188"
   end
 
-it "raises an argument error if the driver doesn't exist" do
-  proc { RideShare::Rider.find_rider(90493928) }.must_raise ArgumentError
-end
+  it "raises an argument error if the driver doesn't exist" do
+    proc { RideShare::Rider.find_rider(90493928) }.must_raise ArgumentError
+  end
 
 
 
