@@ -1,6 +1,7 @@
 require 'csv'
 require_relative 'trip'
 require_relative 'driver'
+require_relative 'InvalidIDError'
 
 class Rider
   attr_reader :id, :name, :phone_num
@@ -24,7 +25,7 @@ class Rider
 
   def self.find(rider_id)
     unless (rider_id.is_a? Integer) && rider_id >= 0
-      raise ArgumentError.new("rider ID:#{rider_id} is not valid")
+      raise InvalidIDError.new("rider ID:#{rider_id} is not valid")
     end
 
     Rider.all.find { |rider| rider.id == rider_id }

@@ -1,5 +1,7 @@
 require 'csv'
 require_relative 'trip'
+require_relative 'InvalidVinError'
+require_relative 'InvalidIDError'
 
 class Driver
   attr_reader :id, :name, :vin
@@ -13,7 +15,7 @@ class Driver
     if vin.length == 17
       @vin = vin
     else
-      raise ArgumentError.new("vin must be 17 characters long")
+      raise InvalidVinError.new("vin must be 17 characters long")
     end
   end
 
@@ -27,7 +29,7 @@ class Driver
 
   def self.find(driver_id)
     unless (driver_id.is_a? Integer) && driver_id >= 0
-      raise ArgumentError.new("driver ID:#{driver_id} is not valid")
+      raise InvalidIDError.new("driver ID:#{driver_id} is not valid")
     end
 
     Driver.all.find { |driver| driver.id == driver_id }

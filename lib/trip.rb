@@ -1,4 +1,5 @@
 require 'csv'
+require_relative 'InvalidRatingError'
 
 class Trip
   attr_reader :id, :driver_id, :rider_id, :date, :rating
@@ -12,7 +13,7 @@ class Trip
     @date = date
 
     unless (rating.is_a? Integer) && (1..5).include?(rating)
-      raise ArgumentError.new("rating must be an integer within range 1-5")
+      raise InvalidRatingError.new("rating must be an integer within range 1-5")
     else
       @rating = rating
     end
