@@ -13,6 +13,15 @@ module RideShare
       @rating = rating
     end
 
+
+    def driver_object
+      return RideShare::Driver.find_driver(@driver_id)
+    end
+
+    def rider_object
+      return RideShare::Rider.find_rider(@rider_id)
+    end 
+
     def self.all_trip_info
       all_trips_array = []
       CSV.read('support/trips.csv').each do |object|
