@@ -27,6 +27,94 @@ describe "Trip" do
       trip1.date.must_be_kind_of String
       trip1.rating.must_be_kind_of Integer
     end
+
+    it "The input for :trip_id must be an integer > 0" do
+      proc{
+        RideSharing::Trip.new({trip_id: "3", driver_id: 1, rider_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 0, driver_id: 1, rider_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({ driver_id: 1, rider_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+    end
+
+    it "The input for :driver_id must be an integer >= 0" do
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: "1", rider_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: -1, rider_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, rider_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+    end
+
+    it "The input for :rider_id must be an integer >= 0" do
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: "1", date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: -1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, date: "2017-03-13", rating:5})
+      }.must_raise ArgumentError
+    end
+
+
+    it "The input for :date must be a string of format yyyy-mm-dd" do
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "17-03-13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "2017/03/13", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: ["2017-03-13"], rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "[2017-03-13]", rating:5})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, rating:5})
+      }.must_raise ArgumentError
+    end
+
+    it "The input for :rating must be an integer between and including 1 and 5" do
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "2017-03-13", rating: 6})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "2017-03-13", rating: 0})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "2017-03-13", rating: "1"})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "2017-03-13", rating: [5]})
+      }.must_raise ArgumentError
+
+      proc{
+        RideSharing::Trip.new({trip_id: 1, driver_id: 1, rider_id: 1, date: "2017-03-13"})
+      }.must_raise ArgumentError
+
+    end
   end # End of describe "Trip#initialize"
 
 
@@ -49,10 +137,10 @@ describe "Trip" do
     it "Does not initialize trip if rating is not valid" do
       path = "./support/trips_spec_false.csv"
       all_trips = RideSharing::Trip.all(path)
-      all_trips.length.must_equal 3
+      all_trips.length.must_equal 14 #Out of 20
       all_trips.first.id.must_equal 1
       all_trips[1].id.wont_equal 2
-      all_trips.last.id.wont_equal 5
+      all_trips.last.id.wont_equal 20
     end
 
     it "trips.csv should return 600 trips" do
