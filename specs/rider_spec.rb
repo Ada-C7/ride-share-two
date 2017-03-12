@@ -49,5 +49,11 @@ describe "Rider class" do
         RideShare::Rider.find("300").name.must_equal "Miss Isom Gleason"
       end
     end
+
+    it "Raises ArgumentError if no rider is found that matches argument given" do
+      proc {
+        RideShare::Rider.find("1000")
+      }.must_raise ArgumentError
+    end
   end
 end
