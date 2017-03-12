@@ -8,6 +8,12 @@ module Validation
     return field
   end
 
+  def validate_int_range(field, field_name, min, max)
+    valid_int = validate_int(field, field_name)
+    raise ArgumentError.new("#{field_name} must be between #{min} and #{max}") if !(valid_int.between?(min, max))
+    return valid_int
+  end
+
   def validate_string(field, field_name)
     if field.class != String || field == ""
       raise ArgumentError.new("Required field #{field_name} must be a non-empty string.")
