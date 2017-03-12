@@ -138,12 +138,9 @@ describe "Trip" do
       Trip.find_trips_driver(100).must_equal []
     end
 
-    # trip exists, but driver does not - improve!!!
-    it "Raises an error if driver doesn't exist" do
+    it "Returns nil if driver doesn't exist" do
       trip = Trip.new(83, 0, 103, "2015-12-25", 2)
-      proc {
-        trip.driver
-      }.must_raise ArgumentError
+      trip.driver.must_equal nil
     end
   end
 
@@ -160,11 +157,9 @@ describe "Trip" do
     end
 
     # trip exists, but rider does not - improve!!!
-    it "Raises an error if rider doesn't exist" do
+    it "Returns nil if rider doesn't exist" do
       trip = Trip.new(267, 14, 0, "2015-04-23", 4)
-      proc {
-        trip.rider
-      }.must_raise ArgumentError
+      trip.rider.must_equal nil
     end
   end
 
