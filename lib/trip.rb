@@ -38,7 +38,7 @@ module RideShare
 
     def driver
       # retrieve the associated driver instance through the driver ID
-      RideShare::Driver.find(@driver_id)
+      return RideShare::Driver.find(@driver_id)
     end
 
   end

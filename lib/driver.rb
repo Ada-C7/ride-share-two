@@ -39,8 +39,14 @@ module RideShare
     end
 
     def trips
+      # *Given a driver object*
       # retrieve the list of trip instances that only this driver has taken
-      RideShare::Trip.driver_trips(@driver_id)
+      return RideShare::Trip.driver_trips(@driver_id)
+      # right now, giving it the array of hashes.
+      # works when it's one .new object, so I said array[0]
+      # but then it complains can't .trips on a hashes
+      # hash != class object
+      # I'd like to try something like this: http://pullmonkey.com/2008/01/06/convert-a-ruby-hash-into-a-class-object/
     end
 
   end
