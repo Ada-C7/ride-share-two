@@ -67,12 +67,20 @@ module RideShare
     end
 
     def rating
-      driver_trips = Trip.find_trips_by_driver @id
+      driver_trips = trips
       ratings = driver_trips.map { |trip| trip.rating}
       total_rating = ratings.inject(:+).to_f
       average_rating = total_rating/driver_trips.length
       return average_rating.round(2)
       #returns average rating of those trips
+    end
+
+    def moneys
+      driver_trips = trips
+      trip_costs = driver_trips.map{ |trip| trip.cost }
+      total_costs = trip_costs.inject(:+)
+      driver_pay = (total_costs - 1.65) * 0.80
+      return driver_pay
     end
 
 
