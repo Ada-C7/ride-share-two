@@ -28,13 +28,19 @@ describe "Driver class" do
 
       # oh - driver_instance.trips
       # This will run Trips.find_many(id) and will somehow pull the driver_id to find the trips
+
+      # Is it ok that #trips requires #self.find to run?
       bernardo_trips = RideShare::Driver.find("1").trips
       bernardo_trips.must_be_instance_of Array
       bernardo_trips.length.must_equal 9
     end
 
     it "Retrieves an average rating for a driver based on all trips taken" do
-      skip
+      # skip
+      # bernardo_trips = RideShare::Driver.find("1").trips
+      rate_bernardo = RideShare::Driver.find("1")
+      # oh "rate_bernardo" is not an instance of Driver, so I can't call ".rating" on rate_bernardo
+      rate_bernardo.rating.must_equal 2.3
     end
   end
 

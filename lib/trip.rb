@@ -14,7 +14,7 @@ module RideShare
     def self.all
       trips = []
       CSV.open("./support/trips.csv", "r").each do |line|
-        trips << self.new(line[0], line[1], line[2], line[3], line[4])
+        trips << self.new(line[0], line[1], line[2], line[3], line[4].to_f)
       end
       return trips
     end
