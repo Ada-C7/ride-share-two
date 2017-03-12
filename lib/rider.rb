@@ -46,19 +46,16 @@ module RideShare
     end
 
     def drivers
+      #argument error if there is a driver that does not exist in the trip instance selected
 
-      # array of drivers for trips that rider has taken
       drivers_ids_for_rider_trips = trip.map { |trips| trips.driver_id }
 
-      #find driver info for each trip
       driver_info = drivers_ids_for_rider_trips.map do |driver_ids|
         RideShare::Trip.find_many_drivers(driver_ids)
       end
-      # no repeat drivers
+
       driver_info.uniq
     end
 
   end
 end
-
-# puts "#{RideShare::Rider.all}"

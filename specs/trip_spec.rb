@@ -1,7 +1,5 @@
 require_relative 'spec_helper'
 
-# Try to use let! :) instead of before
-
 describe "Trip class" do
   let(:tripin) { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 2) }
 
@@ -9,6 +7,10 @@ describe "Trip class" do
 
 
   describe "Trip#initialize" do
+    it "Raises ArgumentError if trip, driver, or rider id are not integers" do
+      proc { RideShare::Trip.new(trip_id: "5", driver_id: "5", rider_id: "5", date: "1.1.11", rating: 0) }.must_raise ArgumentError
+    end
+
     it "It takes a trip_hash argument" do
       tripin.must_be_instance_of RideShare::Trip
     end
@@ -24,7 +26,7 @@ describe "Trip class" do
     it "Raises ArgumentError if the rating is not within an acceptable range" do
 
       proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 0) }.must_raise ArgumentError
-    
+
       proc { RideShare::Trip.new(trip_id: 5, driver_id: 3, rider_id: 12, date: "2015-12-14", rating: 34) }.must_raise ArgumentError
     end
   end
@@ -41,7 +43,7 @@ describe "Trip class" do
     end
 
     it "Trip info matches what is in the CSV file" do
-      #index = 1
+
       CSV.read("support/trips.csv") do
         trips[index].trip_id.must_equal line[0].to_i
         trips[index].driver_id.must_equal line[1].to_i
@@ -49,7 +51,6 @@ describe "Trip class" do
         trips[index].date.must_equal line[3]
         trips[index].rating.must_equal line[4].to_i
 
-        #index += 1
       end
     end
   end
