@@ -109,8 +109,7 @@ describe "Trip" do
   describe "find_trips_by_driver" do
 
     it "returns empty array if no trips assoc. with driver" do
-      skip
-      driver_trips = RideShare::Trip.find_trips_by_driver 777
+      driver_trips = RideShare::Trip.find_trips_by_driver 100
       driver_trips.must_be_instance_of Array
       driver_trips.length.must_equal 0
     end
@@ -137,9 +136,9 @@ describe "Trip" do
     end
 
     it "returns nil if driver isn't found" do
-      fake_trip_hash = { trip_id: 450, driver_id: 7676, rider_id: 8734, date:  "2017-03-12", rating: 5}
-      fake_trip = RideShare::Trip.new(fake_trip_hash)
-      fake_trip.driver.must_be_instance_of NilClass
+      trip88 = trips[87] #driver_id in trips.csv = 0
+
+      trip88.driver.must_be_instance_of NilClass
     end
   end
 
@@ -148,6 +147,7 @@ describe "Trip" do
     it "returns a Rider instance" do
       trip = trips[23]
       rider_info = trip.rider
+
       rider_info.must_be_instance_of RideShare::Rider
       rider_info.id.must_equal trip.rider_id
       rider_info.id.must_equal 280
@@ -158,6 +158,7 @@ describe "Trip" do
       #don't think this is possible to test through current CSV files?
       trip_hash = { trip_id: 6500, driver_id: 727272, rider_id: 7845, date: "2017-03-12", rating: 4}
       trip =  RideShare::Trip.new(trip_hash)
+
       rider_info = trip.rider
       rider_info.must_be_instance_of NilClass
     end
