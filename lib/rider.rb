@@ -7,9 +7,9 @@ module Rideshare
       @rider_id = rider_id
       @name = name
       @phone_num = phone_num
-
     end
 #
+
     def self.all
       @riders = []
 
@@ -19,9 +19,11 @@ module Rideshare
       end
     end
 
-    def self.all_riders
+
+    def self.all_riders #method to return array from self.all
       return @riders
     end
+
 
     def self.find id
       raise ArgumentError.new "Not a valid rider id" if id > 300 || id < 1
@@ -32,6 +34,7 @@ module Rideshare
         end
       end
     end
+
 
     def trips
       rider_trips = []

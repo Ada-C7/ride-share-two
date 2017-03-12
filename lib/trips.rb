@@ -1,3 +1,6 @@
+require 'csv'
+
+
 module Rideshare
 
   class Trips
@@ -40,6 +43,8 @@ module Rideshare
     def self.all_by_driver id
 
     Rideshare::Driver.find(id).trips
+      # driver.trips
+      # call find method from this class...some type of dependency injection
 
       # trips = Rideshare::Trips.all_trips
       # trips.delete_if { |trip| trip.driver_id != id}

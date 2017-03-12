@@ -105,8 +105,10 @@
         null,
         null,
         null,
+        null,
         1,
         12,
+        null,
         null,
         null,
         1,
@@ -115,6 +117,7 @@
         10,
         1283,
         10,
+        null,
         null,
         null,
         null,
@@ -146,14 +149,17 @@
         null,
         3,
         null,
-        null,
         13,
+        null,
         null,
         null,
         null,
         null
       ],
       "/Users/adai/Documents/ada/projects/ride-share-two/lib/trips.rb": [
+        1,
+        null,
+        null,
         1,
         null,
         1,
@@ -196,6 +202,8 @@
         1,
         null,
         3,
+        null,
+        null,
         null,
         null,
         null,
@@ -356,6 +364,6 @@
         null
       ]
     },
-    "timestamp": 1489017242
+    "timestamp": 1489336408
   }
 }

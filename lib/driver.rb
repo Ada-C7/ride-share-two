@@ -1,9 +1,9 @@
 module Rideshare
 
   class Driver
-    attr_accessor :id, :name, :vin
+    attr_reader :id, :name, :vin
 
-    def initialize id, name, vin #used by .all to create instances of Drivers
+    def initialize id, name, vin
       @id = id
       @name = name
       @vin = vin.length == 17 ? vin : nil
