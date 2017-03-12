@@ -47,19 +47,19 @@ describe "Trip" do
     it "Accepts rating only as integers" do
       proc {
         Trip.new(12, 21, 382, "2016-01-04", 1.3)
-      }.must_raise ArgumentError
+      }.must_raise InvalidRatingError
     end
 
     it "Allows rating only within acceptable range (1 - 5)" do
       proc {
         Trip.new(12, 21, 382, "2016-01-04", 0)
-      }.must_raise ArgumentError
+      }.must_raise InvalidRatingError
     end
 
     it "Raises an error if invalid rating is given" do
       proc {
         Trip.new(12, 21, 382, "2016-01-04", "a")
-      }.must_raise ArgumentError
+      }.must_raise InvalidRatingError
     end
 
   end

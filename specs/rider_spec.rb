@@ -89,7 +89,7 @@ describe "Rider" do
     it "Raises an error for an invalid rider ID" do
       proc {
         Rider.find("a")
-      }.must_raise ArgumentError
+      }.must_raise InvalidIDError
     end
   end
 

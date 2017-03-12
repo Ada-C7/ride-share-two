@@ -31,7 +31,7 @@ describe "Driver" do
     it "Doesn't create a driver if vin is not 17 characters long" do
       proc {
         Driver.new(123, "Tina Belcher", "w3475rs78t")
-      }.must_raise ArgumentError
+      }.must_raise InvalidVinError
     end
   end
 
@@ -95,7 +95,7 @@ describe "Driver" do
     it "Raises an error for an invalid driver ID" do
       proc {
         Driver.find("a")
-      }.must_raise ArgumentError
+      }.must_raise InvalidIDError
     end
   end
 
