@@ -6,7 +6,7 @@ describe "Driver" do
     it "Takes an ID, name, and vin" do
       name = "Bob Belcher"
       id = 12345
-      vin = 98765
+      vin = "9e87e65r98302e984"
       driver = Driver.new(id, name, vin)
 
       driver.must_respond_to :id
@@ -22,11 +22,17 @@ describe "Driver" do
     it "Is a kind of Driver" do
       name = "Bob Belcher"
       id = 12345
-      vin = 98765
+      vin = "9e87e65r98302e984"
       driver = Driver.new(id, name, vin)
 
       driver.must_be_kind_of Driver
     end
+
+      it "Doesn't create a driver if vin is not 17 characters long" do
+        proc {
+          Driver.new(123, "Tina Belcher", "w3475rs78t")
+        }.must_raise ArgumentError
+      end
   end
 
   describe "Driver.all" do
@@ -83,7 +89,7 @@ describe "Driver" do
 
     it "Returns nil for a driver that doesn't exist" do
       driver = Driver.find(101)
-      driver.must_equal nil
+      driver.must_be_nil
     end
 
     it "Raises an error for an invalid driver ID" do
