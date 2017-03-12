@@ -81,9 +81,14 @@ describe "Driver" do
       driver.name.must_equal @drivers.last.name
     end
 
-    it "Raises an error for a driver that doesn't exist" do
+    it "Returns nil for a driver that doesn't exist" do
+      driver = Driver.find(101)
+      driver.must_equal nil
+    end
+
+    it "Raises an error for an invalid driver ID" do
       proc {
-        Driver.find(101)
+        Driver.find("a")
       }.must_raise ArgumentError
     end
   end
@@ -102,6 +107,23 @@ describe "Driver" do
     it "Returns an empty array if there are no trips for that driver" do
       driver = Driver.new(100, "Minnie Dach",	"XF9Z0ST7X18WD41HT")
       driver.list_trips.must_equal []
+    end
+  end
+
+  describe "Driver#avg_rating" do
+    it "Returns a number" do
+      driver = Driver.new(60, "Oma Swift DDS", "TAMCBRPM7EN5GD88L")
+      driver.avg_rating.must_be_kind_of Float
+    end
+
+    it "Returns correct average for a specific driver" do
+      driver = Driver.new(1, "Bernardo Prosacco",	"WBWSS52P9NEYLVDE9")
+      driver.avg_rating.must_equal 2.33
+    end
+
+    it "Returns (something) if there are no trips for this driver" do
+      driver = Driver.new(100, "Minnie Dach",	"XF9Z0ST7X18WD41HT")
+      driver.avg_rating.must_equal 0
     end
   end
 
