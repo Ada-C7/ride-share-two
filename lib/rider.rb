@@ -10,15 +10,6 @@ module RideShare
       @phone = rider_hash[:phone]
     end
 
-    def validate_input rider_hash
-      raise ArgumentError.new("Rider ID needs to be an integer; entry is #{rider_hash[:id]}") if rider_hash[:id].class != Integer
-
-      raise ArgumentError.new("Name needs to be a String; entry is #{rider_hash[:name]}") if rider_hash[:name].class != String
-
-      raise ArgumentError.new("Phone number needs to be a String; entry is #{rider_hash[:phone]}") if rider_hash[:phone].class != String
-
-    end
-
     def self.all
       riders = []
       temp_csv = CSV.read("support/riders.csv")
@@ -37,7 +28,6 @@ module RideShare
       all_riders = Rider.all
       return all_riders.find { |rider| rider.id == rider_id }
     end
-    #will return nil if rider is not found
 
 
     def trips
@@ -50,10 +40,6 @@ module RideShare
       # unique_driver_ids = driver_ids.uniq
       unique_driver_ids = driver_ids.uniq
       return unique_driver_ids.map { |id| Driver.find(id) }
-
-
-      #look through trips and for each trip instance, use the driver_id associated with the trip (trip.driver_id) to call Driver.find(driver_id)
-      #store those Driver class instances in an array that gets returned
     end
 
     def total_costs
@@ -70,6 +56,17 @@ module RideShare
       hours = all_trips_duration / 60
       minute_fraction = (all_trips_duration % 60 ) / 60.00
       return (hours + minute_fraction).round(2)
+    end
+
+    private
+
+    def validate_input rider_hash
+      raise ArgumentError.new("Rider ID needs to be an integer; entry is #{rider_hash[:id]}") if rider_hash[:id].class != Integer
+
+      raise ArgumentError.new("Name needs to be a String; entry is #{rider_hash[:name]}") if rider_hash[:name].class != String
+
+      raise ArgumentError.new("Phone number needs to be a String; entry is #{rider_hash[:phone]}") if rider_hash[:phone].class != String
+
     end
 
   end
