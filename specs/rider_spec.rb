@@ -81,9 +81,14 @@ describe "Rider" do
       rider.name.must_equal @riders.last.name
     end
 
-    it "Raises an error for a rider that doesn't exist" do
+    it "Returns nil for a rider that doesn't exist" do
+      rider = Rider.find(301)
+      rider.must_equal nil
+    end
+
+    it "Raises an error for an invalid rider ID" do
       proc {
-        Rider.find(301)
+        Rider.find("a")
       }.must_raise ArgumentError
     end
   end
@@ -92,6 +97,7 @@ describe "Rider" do
     it "Returns a list of trips for a specific rider" do
       rider = Rider.new(210, "Rhea Zieme", "940-838-2968 x4910")
       rider.list_trips.must_be_kind_of Array
+      rider.list_trips.each { |trip| trip.must_be_kind_of Trip }
     end
 
     it "Returns a correct number of trips for a specific rider" do
@@ -107,8 +113,10 @@ describe "Rider" do
 
   describe "Rider#list_drivers" do
     it "Returns a list of drivers for a specific rider" do
-      rider_trips = Rider.new(93, "Mrs. Rickey Dickens", "5FS0Y47Z59YGGSXS0")
-      rider_trips.list_drivers.must_be_kind_of Array
+      rider = Rider.new(93, "Mrs. Rickey Dickens", "5FS0Y47Z59YGGSXS0")
+      rider_drivers = rider.list_drivers
+      rider_drivers.must_be_kind_of Array
+      rider_drivers.each { |driver| driver.must_be_kind_of Driver }
     end
 
     it "Returns a correct number of drivers for a specific rider" do
