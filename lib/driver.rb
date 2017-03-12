@@ -4,6 +4,8 @@ require_relative 'trip'
 class Driver
   attr_reader :id, :name, :vin
 
+  @@all_drivers = nil
+
   def initialize(id, name, vin)
     @id = id
     @name = name
@@ -16,11 +18,13 @@ class Driver
   end
 
   def self.all
-    # read SCV
+    # read CSV
     # returns a list of driver instances
+    return @@all_drivers if @@all_drivers
     drivers = CSV.read("support/drivers.csv", { :headers => true })
 
-    drivers.map { |line| Driver.new(line[0].to_i, line[1], line[2]) }
+    @@all_drivers = drivers.map { |line| Driver.new(line[0].to_i, line[1], line[2]) }
+    return @@all_drivers
   end
 
   def self.find(driver_id)
