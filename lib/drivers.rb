@@ -9,19 +9,22 @@ module RideShare
       @id = driver_details[:id]
       @name = driver_details[:name]
       @vin = driver_details[:vin]
-      # if @vin.length != 17
-      #   #don't create an entry
-      # end
-      # raise VinLengthError.new("Length of Vin is #{@vin.length}, not 17-digits") unless @vin.length = 17
-
-      ## Raise error here (rescue in readCSV)
+      raise VinLengthError.new("Length of Vin is #{@vin.length}, not 17-digits") unless @vin.length == 17
     end
 
     def self.readCSV
       @@drivers = []
       if @@drivers.empty?
         CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
-          @@drivers << self.new({id: line[0].to_i, name: line[1].to_s, vin: line[2].to_s})
+          begin
+            @@drivers << self.new({
+              id: line[0].to_i,
+              name: line[1].to_s,
+              vin: line[2].to_s
+              })
+          rescue VinLengthError
+              # Ignore drivers without VIN length of 17-digits
+          end
         end
       end
       return @@drivers
@@ -33,7 +36,7 @@ module RideShare
 
     def self.find(id)
       driver_details = nil
-      getAll.each do |driver|
+      getAll().each do |driver|
         if driver.id == id
           driver_details = driver
         end

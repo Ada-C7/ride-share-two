@@ -10,10 +10,11 @@ describe "RideShare: Driver" do
     #   #   ada_drivers[0].key.must_equal
     #   # end
 
-    # it "raises argument error when vin length is not 17-digits" do
-    #   # drivers
-    #
-    # end
+    it "raises argument error when vin length is not 17-digits" do
+      proc { RideShare::Driver.new(
+        {id: 1234, name: "Ting", vin: 12345})
+      }.must_raise NoMethodError
+    end
   end
 
   describe "Driver.readCSV" do
@@ -31,6 +32,7 @@ describe "RideShare: Driver" do
     end
 
     it "returns correct instances of driver objects" do
+      #use findid
       drivers
       drivers[6].id.must_equal 7
       drivers[6].name.must_equal "Lizeth Dickens"
@@ -43,31 +45,24 @@ describe "RideShare: Driver" do
       drivers
       driver = drivers[0]
       #is this really the best way to reference a driver? Could I do it without a loop to find the id of a specific driver?
+      # can use findid once proven in tests
       driver.findTrips.must_be_kind_of Array
       driver.findTrips[0].must_be_instance_of RideShare::Trip
     end
   end
 
-  describe "Driver.avg_ratings" do
+  describe "Driver.avgRatings" do
     it "calculates the correct average as a float" do
-      drivers
       driver = RideShare::Driver.find(90)
+      # driver.must_not_be_nil
       driver.avgRating.must_equal 3.29
     end
   end
 
   describe "Driver.find(id)" do
     it "returns a driver object" do
-      drivers
-      ## TW: Why does the below work in pry even if I haven't "loaded" the array with getAll?
       driver = RideShare::Driver.find(99)
       driver.must_be_instance_of RideShare::Driver
-    end
-
-    it "returns correct driver details" do
-      drivers
-      driver = RideShare::Driver.find(99)
-      driver.id.must_equal 99
       driver.name.must_equal "Jayden Ledner"
       driver.vin.must_equal "RF4AT3WL6JJXPFUJL"
     end

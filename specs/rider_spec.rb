@@ -1,13 +1,18 @@
 require_relative 'spec_helper'
 
-describe "RideShare: Rider" do
+describe RideShare::Rider, "RideShare: Rider" do
   let(:riders) {RideShare::Rider.getAll}
 
   describe "Rider#initialize" do
-
+    #rider = RideShare::Rider.new({id: 1234, name: "Ting", phone_num: "333 333 3333"})
+    #puts rider
+    #puts rider.id
+    #rider.id.must_equal 1234
+    #rider.name.must_equal "Ting"
+    #rider.phone_num.must_equal "333 333 3333"
   end
 
-  describe "Rider.read_csv" do
+  describe "Rider.readCsv" do
     it "returns an array of rider objects" do
       riders
       riders.must_be_kind_of Array
@@ -37,7 +42,7 @@ describe "RideShare: Rider" do
       rider.findTrips[0].must_be_instance_of RideShare::Trip
     end
   end
-  
+
   describe "Rider.find(id)" do
     it "returns a rider object" do
       riders
