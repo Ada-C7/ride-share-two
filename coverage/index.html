@@ -14,14 +14,14 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-12T03:22:07-07:00">2017-03-12T03:22:07-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-12T03:24:42-07:00">2017-03-12T03:24:42-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">36.67%</span></span>
+    (<span class="covered_percent"><span class="red">36.59%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -32,9 +32,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>120</b> relevant lines. 
-    <span class="green"><b>44</b> lines covered</span> and
-    <span class="red"><b>76</b> lines missed </span>
+    <b>123</b> relevant lines. 
+    <span class="green"><b>45</b> lines covered</span> and
+    <span class="red"><b>78</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -82,11 +82,11 @@
       
       <tr>
         <td class="strong"><a href="#1de1f303ec72d36c27507d33d43df1526c9b9639" class="src_link" title="specs/rider_spec.rb">specs/rider_spec.rb</a></td>
-        <td class="red strong">47.83 %</td>
-        <td>46</td>
-        <td>23</td>
-        <td>11</td>
+        <td class="red strong">46.15 %</td>
+        <td>53</td>
+        <td>26</td>
         <td>12</td>
+        <td>14</td>
         <td>0.5</td>
       </tr>
       
@@ -923,11 +923,11 @@
         <div class="source_table" id="1de1f303ec72d36c27507d33d43df1526c9b9639">
   <div class="header">
     <h3>specs/rider_spec.rb</h3>
-    <h4><span class="red">47.83 %</span> covered</h4>
+    <h4><span class="red">46.15 %</span> covered</h4>
     <div>
-      <b>23</b> relevant lines. 
-      <span class="green"><b>11</b> lines covered</span> and
-      <span class="red"><b>12</b> lines missed.</span>
+      <b>26</b> relevant lines. 
+      <span class="green"><b>12</b> lines covered</span> and
+      <span class="red"><b>14</b> lines missed.</span>
     </div>
   </div>
   
@@ -1201,10 +1201,52 @@
         <li class="never" data-hits="" data-linenumber="45">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;Finds the last driver in the database&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby">      # skip</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="48">
+          
+          
+          <code class="ruby">      if RideShare::Rider.all[-1].rider_id == &quot;300&quot;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="49">
+          
+          
+          <code class="ruby">        RideShare::Rider.find(&quot;300&quot;).name.must_equal &quot;Miss Isom Gleason&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby">end</code>

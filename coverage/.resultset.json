@@ -178,6 +178,13 @@
         0,
         null,
         null,
+        1,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
         null
       ],
       "/Users/valliere/ada/week_five/ride-share-two/specs/trip_spec.rb": [
@@ -238,6 +245,6 @@
         null
       ]
     },
-    "timestamp": 1489314127
+    "timestamp": 1489314282
   }
 }

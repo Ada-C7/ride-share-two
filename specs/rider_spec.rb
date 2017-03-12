@@ -42,5 +42,12 @@ describe "Rider class" do
     it "finds a specific rider given their rider ID" do
       RideShare::Rider.find("1").name.must_equal "Nina Hintz Sr."
     end
+
+    it "Finds the last driver in the database" do
+      # skip
+      if RideShare::Rider.all[-1].rider_id == "300"
+        RideShare::Rider.find("300").name.must_equal "Miss Isom Gleason"
+      end
+    end
   end
 end
