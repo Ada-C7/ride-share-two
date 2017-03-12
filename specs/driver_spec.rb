@@ -154,5 +154,19 @@ describe "Drivers" do
     end
 
   end
-  
+
+  describe "moneys" do
+    it "returns a float" do
+      driver48 = drivers[47]
+      driver48.moneys.must_be_instance_of Float
+      driver48.moneys.must_equal 186.07
+    end
+
+    it "returns nil if a driver has no trips" do
+      driver100 = drivers[99]
+      driver100.moneys.must_be_instance_of NilClass
+    end
+
+  end
+
 end

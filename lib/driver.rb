@@ -15,13 +15,6 @@ module RideShare
 
     end
 
-    def validate_input driver_hash
-      raise ArgumentError.new("Driver ID must be a number") if driver_hash[:id].class != Integer
-      raise ArgumentError.new("Name must be a string of characters") if driver_hash[:name].class != String
-      raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{driver_hash[:vin]})") if driver_hash[:vin].length != 17 || driver_hash[:vin] !~ /^[0-9A-Z]+$/
-    end
-
-
     def self.all
       drivers = []
       temp_csv = CSV.read("support/drivers.csv")
@@ -77,12 +70,20 @@ module RideShare
 
     def moneys
       driver_trips = trips
+      return nil if driver_trips == []
       trip_costs = driver_trips.map{ |trip| trip.cost }
       total_costs = trip_costs.inject(:+)
       driver_pay = (total_costs - 1.65) * 0.80
-      return driver_pay
+      return driver_pay.round(2)
     end
 
+    private
+
+    def validate_input driver_hash
+      raise ArgumentError.new("Driver ID must be a number") if driver_hash[:id].class != Integer
+      raise ArgumentError.new("Name must be a string of characters") if driver_hash[:name].class != String
+      raise BadVinError.new("invalid entry for vin; must be 17 characters and only letters or numbers. (you entered #{driver_hash[:vin]})") if driver_hash[:vin].length != 17 || driver_hash[:vin] !~ /^[0-9A-Z]+$/
+    end
 
   end
 end
