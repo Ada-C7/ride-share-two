@@ -10,7 +10,12 @@ class Trip
     @driver_id = driver_id
     @rider_id = rider_id
     @date = date
-    @rating = rating
+
+    unless (rating.is_a? Integer) && (1..5).include?(rating)
+      raise ArgumentError.new("Rating must be an integer within range 1-5")
+    else
+      @rating = rating
+    end
   end
 
   def self.all
@@ -29,29 +34,13 @@ class Trip
   def self.find_trips_driver(driver_id)
     # searches .all for trips matching the driver_id
     # returns a list of trip instances associated with one driver
-    # trips = []
-    # Trip.all.each do |trip|
-    #   if trip.driver_id == driver_id
-    #     trips << trip
-    #   end
-    # end
-
     Trip.all.select { |trip| trip.driver_id == driver_id }
-
-    # return trips
   end
 
   def self.find_trips_rider(rider_id)
     # searches .all for trips matching the rider_id
     # returns a list of trip instances associated with one rider
-    # trips = []
-    # Trip.all.each do |trip|
-    #   if trip.rider_id == rider_id
-    #     trips << trip
-    #   end
-    # end
     Trip.all.select { |trip| trip.rider_id == rider_id }
-    # return trips
   end
 
   def driver
@@ -59,7 +48,7 @@ class Trip
     # passes driver_id to find
     # returns a driver instance
     Driver.find(@driver_id)
-    # if I look driver and cannot driver (driver 0)
+    # if I look driver and cannot find driver (driver 0)
     # it should give me a driver back and I should do something
   end
 
@@ -67,6 +56,7 @@ class Trip
     # looks for a specific rider of a specific trip
     # passes rider_id to find
     # returns a rider instance
+    Rider.find(@rider_id)
   end
 
 end
