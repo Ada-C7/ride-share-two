@@ -35,23 +35,19 @@ class Rider
     end
     raise ArgumentError.new("Riders don't match") if find_rider == nil
     return find_rider
-    #remember above loop as searching to reset from nil
-    # FIND a specific rider using their numeric ID
   end
 
 
   def rider_trips(rider_id)
     rider_trips = []
     rider_trips = Rider.trips_by_rider(@rider_id)
-    #find all previous trip instances for this rider instance
   end
 
-  # retrieve the list of all previous driver instances (through the trips functionality built above) #DRIVERS(TRIPS)
 
   def drivers_per_rider(rider_id)
     rider_drivers = []
+    rider_trips = []
     trips_by_rider
-    #^returns all trips for single rider instance "rider_trips"
     rider_trips.each do |driver_id|
       rider_drivers << driver_id
     end

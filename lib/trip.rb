@@ -50,7 +50,6 @@ class Trip
     all_trips.each do |trip|
       driver_trips << trip if trip.driver_id == driver_id
       return driver_trips
-      #given a driver id return all trips that have this driver id
     end
   end
 
@@ -61,8 +60,6 @@ class Trip
     all_trips.each do |trip|
       rider_trips << trip if trip.rider_id == rider_id
       return rider_trips
-      #return instances unique to rider
-      #trips
     end
   end
 
@@ -70,14 +67,12 @@ class Trip
   def trip_driver(driver_id)
     trips_by_driver
     driver_instance = Trip.driver_id
-    #find driver for single instance of trip/retrieve the associated driver instance through the driver ID
   end
 
 
   def find_rider(rider_id)
     trips_by_rider
     rider_instance = Trip.rider_id
-    # find rider for single instance of trip/retrieve the associated driver instance through the driver ID
   end
 
 end#class end

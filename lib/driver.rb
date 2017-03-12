@@ -37,7 +37,6 @@ class Driver
     end
     raise ArgumentError.new("Drivers don't match") if find_driver == nil
     return find_driver
-    #remember above loop as searching to reset from nil
   end
 
   #eg syntax - local_var/[] = class object.class_method(pass arg)

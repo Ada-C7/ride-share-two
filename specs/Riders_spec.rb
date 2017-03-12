@@ -3,17 +3,11 @@ require_relative 'spec_helper'
 
 describe "Rider" do
 
-  # before do
-  #   @name
-  #   @id
-  #   @vehichle_id
-  # end
-
   describe "self.all" do
 
     it "returns an array" do
       all_riders = Rider.all
-      all_riders.must_be_instance_of   Array
+      all_riders.must_be_instance_of Array
     end
 
     it "all elements of array should be riders" do
@@ -40,18 +34,55 @@ describe "Rider" do
       mid_rider = all_riders[149]
       mid_rider.rider_id.must_equal 150
     end
-    # end
+  end
 
-    describe "self.find" do
-      it "Should return an instance of rider" do
-        my_rider = Rider.find(1)
-        my_rider.must_be_instance_of Rider
-      end
+  describe "self.find" do
+
+    it "Should return an instance of rider" do
+      my_rider = Rider.find(1)
+      my_rider.must_be_instance_of Rider
     end
-    #
+
     it "Raises ArgumentError if id is not found." do
       proc { Rider.find(302) }.must_raise ArgumentError
-
     end
+  end
+end
+
+describe "rider_trips(rider_id)" do
+
+  it "Should return an array" do
+    rider_trips = Rider.all
+    rider_trips.must_be_instance_of Array
+  end
+
+  it "Should be an instance of rider" do
+    rider_trips = Rider.all
+    rider_trips.each do |rider|
+      rider.must_be_instance_of Rider
+    end
+  end
+  #edge?
+  it "Check if rider has at least one trip" do
+  end
+end
+
+  describe "drivers_per_rider" do
+
+    it "Should return an array" do
+      rider_drivers = Rider.all
+      rider_drivers.must_be_instance_of Array
+    end
+
+    it "Should be an instance of Driver" do
+      all_riders = Rider.all
+      all_drivers = Driver.all
+      all_riders.drivers_per_rider(5)
+      my_driver = rider_drivers(1)
+      my_driver.must_be_instance_of Driver
+    end
+
+  #edge?
+  it "Should check if rider has multiple trips with a single driver." do
   end
 end
