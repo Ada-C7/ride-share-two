@@ -9,7 +9,7 @@ module RideShare
     end
 
     def trips
-      Trip.find_many(@driver_id)
+      Trip.find_many_drivers(@driver_id)
     end
 
     def rating

@@ -19,7 +19,7 @@ module RideShare
       return trips
     end
 
-    def self.find_many(id)
+    def self.find_many_drivers(id)
       driver_trips = []
       trips = self.all
 
@@ -29,6 +29,18 @@ module RideShare
         end
       end
       return driver_trips
+    end
+
+    def self.find_many_riders(id)
+      rider_trips = []
+      trips = self.all
+
+      trips.each do |trip|
+        if trip.rider_id == id
+          rider_trips << trip
+        end
+      end
+      return rider_trips
     end
 
   end

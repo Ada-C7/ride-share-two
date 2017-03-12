@@ -22,7 +22,9 @@ describe "Rider class" do
 
   describe "Trips method" do
     it "Retrieves list of trip instances that given rider instance has taken" do
-
+      rider_trips = RideShare::Rider.find("296").trips
+      rider_trips.must_be_instance_of Array
+      rider_trips.length.must_equal 3
     end
 
     it "Retrieves list of all previous drivers for trips associated with given rider" do
