@@ -16,6 +16,16 @@ describe "Rider class" do
       rider.phone_number.must_equal rider_hash[:phone_number]
     end
 
+    it "Raises an argument error if the parameter is not hash" do
+      proc {
+        RideShare::Rider.new()
+      }.must_raise ArgumentError
+
+      proc {
+        RideShare::Rider.new("93, Kaylie Okuneva IV, (170) 751-2406")
+      }.must_raise ArgumentError
+    end
+
     it "Raises an argument error if the rider_hash parameter is incomplete" do
       proc {
         RideShare::Rider.new({})
@@ -29,20 +39,9 @@ describe "Rider class" do
         RideShare::Rider.new({ nick_name: "Betsy", phone_number: "(170) 751-2406" })
       }.must_raise ArgumentError
     end
-
-    it "Raises an argument error if the parameter is not hash" do
-      proc {
-        RideShare::Rider.new()
-      }.must_raise ArgumentError
-
-      proc {
-        RideShare::Rider.new("93, Kaylie Okuneva IV, (170) 751-2406")
-      }.must_raise ArgumentError
-    end
   end
 
   describe "#trips method" do
-
     let (:trips_by_rider) { rider.trips }
 
     it "Retrieve the list of trip instances that only this rider has taken" do
@@ -52,28 +51,29 @@ describe "Rider class" do
     end
 
     it "First element inside the returned array matches the CSV file" do
-        trip = trips_by_rider.first
-        trip.id.must_equal 162
-        trip.driver_id.must_equal 6
-        trip.rider_id.must_equal 93
-        trip.date.must_equal "2015-03-09"
-        trip.rating.must_equal 4
+      trip = trips_by_rider.first
+      trip.id.must_equal 162
+      trip.driver_id.must_equal 6
+      trip.rider_id.must_equal 93
+      trip.date.must_equal "2015-03-09"
+      trip.rating.must_equal 4
     end
 
     it "The last element inside the returned array matches the CSV file" do
       trip = trips_by_rider.last
-      if trip != nil
-        trip.id.must_equal 184
-        trip.driver_id.must_equal 75
-        trip.rider_id.must_equal 93
-        trip.date.must_equal "2016-04-01"
-        trip.rating.must_equal 2
-      end
+      trip.id.must_equal 184
+      trip.driver_id.must_equal 75
+      trip.rider_id.must_equal 93
+      trip.date.must_equal "2016-04-01"
+      trip.rating.must_equal 2
+    end
+
+    it "Returns an empty array if the rider has't made any trips yet" do
+      RideShare::Rider.new({ id: 10, name:	"Katharina Fisher", phone_number: "686-561-4711 x308" }).trips.must_equal []
     end
   end
 
   describe "#drivers method" do
-
     let (:drivers) { rider.drivers }
 
     it "Retrieve the list of all previous driver instances" do
@@ -83,27 +83,48 @@ describe "Rider class" do
     end
 
     it "First element inside the returned array matches the CSV file" do
-        driver = drivers.first
-        driver.id.must_equal 6
-        driver.name.must_equal "Mr. Hyman Wolf"
-        driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
+      driver = drivers.first
+      driver.id.must_equal 6
+      driver.name.must_equal "Mr. Hyman Wolf"
+      driver.vin.must_equal "L1CXMYNZ3MMGTTYWU"
     end
 
     it "The last element inside the returned array matches the CSV file" do
       driver = drivers.last
-      if driver != nil
-        driver.id.must_equal 75
-        driver.name.must_equal "Mohammed Barrows"
-        driver.vin.must_equal "4RACJHJL843CUJ46R"
-      end
+      driver.id.must_equal 75
+      driver.name.must_equal "Mohammed Barrows"
+      driver.vin.must_equal "4RACJHJL843CUJ46R"
     end
 
     it "Returned array contains unique driver instances" do
       rider = RideShare::Rider.new({ id: 164, name: "Dominique Gleason PhD", phone_number:	"460.497.2371" })
       drivers = rider.drivers
-
       rider.trips.length.must_equal 6
       drivers.length.must_equal 5
+    end
+  end
+
+  describe "#total_cost method" do
+    it "Calculate the total amount of money spent on all trips taken by the rider" do
+      rider.total_cost.must_be_instance_of Integer
+      rider.total_cost.must_be :>=, 0
+      rider.total_cost.must_equal 5748
+    end
+
+    it "Returns zero if the rider hasn't made any trips yet" do
+      RideShare::Rider.new({ id: 10, name:	"Katharina Fisher", phone_number: "686-561-4711 x308" }).total_cost.must_equal 0
+    end
+  end
+
+  describe "#total_duration method" do
+    it "Calculate the total amount of money spent on all trips taken by the rider" do
+      rider.total_duration.must_be_instance_of Integer
+      rider.total_duration.must_be :>=, 0
+      rider.total_duration.must_equal 84
+    end
+
+    it "Returns zero if the rider hasn't made any trips yet" do
+      RideShare::Rider.new({ id: 10, name:	"Katharina Fisher", phone_number: "686-561-4711 x308" }).total_duration.must_equal 0
     end
   end
 
@@ -139,16 +160,15 @@ describe "Rider class" do
       rider.name.must_equal "Kaylie Okuneva IV"
       rider.phone_number.must_equal "(170) 751-2406"
     end
+
     it "Raises an argument error when invalid rider id is passed" do
       proc{
         RideShare::Rider.find("ninetythree")
       }.must_raise ArgumentError
     end
 
-    it "Raises an argument error if the rider id does not have a match in the rider.csv" do
-      proc{
-        RideShare::Rider.find(123456789)
-      }.must_raise ArgumentError
+    it "Returns nil if the rider id does not have a match in the rider.csv" do
+      RideShare::Rider.find(123456789).must_be_nil
     end
   end
 end
