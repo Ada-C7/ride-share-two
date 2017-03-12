@@ -4,5 +4,52 @@
 # require_relative '../lib/'
 # require 'csv'
 # Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-require_relative 'spec_helper'
 require 'csv'
+require_relative 'spec_helper'
+
+describe "rider class" do
+
+  it "requires three parameters for an instance of the rider class" do
+    rider_id = 540
+    name = "Bugs Bunny"
+    phone_num = "206-230-9140"
+
+    new_rider = RideShare::Rider.new(rider_id, name, phone_num)
+
+    new_rider.must_respond_to :rider_id
+    new_rider.rider_id.must_equal rider_id
+
+    new_rider.must_respond_to :name
+    new_rider.name.must_equal name
+
+    new_rider.must_respond_to :phone_num
+    new_rider.phone_num.must_equal phone_num
+  end
+
+  #for the self.all_rider_info method
+  it "returns an array or all rider info" do
+    # a_ride = RideShare::Rider.new(913, "Harry Potter", "509-979-7638")
+    test_class = RideShare::Rider.all_rider_info
+    test_class.must_be_instance_of Array
+  end
+
+  #for self.find_rider(rider_info)
+
+  it "returns an array of info related to rider" do
+    test_class = RideShare::Rider.find_rider(1)
+    test_class.must_be_instance_of Array
+  end
+
+  it "returns an account that exists" do
+    test_class = RideShare::Rider.find_rider(1)
+    test_class.must_be_instance_of Array 
+    test_class.rider_id.must_equal 1
+    test_class.name.must_equal "Nina Hintz Sr."
+    test_class.phone_num.must_equal "560.815.3059"
+  end
+
+
+
+
+
+end

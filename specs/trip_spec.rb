@@ -37,13 +37,13 @@ describe "trip class" do
   it "raises an ArgumentError if rating is more than 5" do
     proc {
       RideShare::Trip.new(111, 2, 500, "2016-04-05", 7)
-    }
+    }.must_raise ArgumentError
   end
 
   it "raises an ArgumentError if rating is less than 1" do
     proc {
       RideShare::Trip.new(111, 2, 500, "2016-04-05", -1)
-    }
+    }.must_raise ArgumentError
   end
 
   it "returns an array of all trips" do

@@ -12,11 +12,7 @@ module RideShare
       @date = date
       @rating = rating
     end
-    #
-    # def calculate_rating(rating)
-    #   between 1-5 avg find this in the trip csv
-    # end
-    #
+
     def self.driver_trip_instances(driver_id)
       driver_trips = []
       trips = RideShare::Trip.all_trip_info
@@ -27,11 +23,7 @@ module RideShare
       end
       return driver_trips
     end
-    #
-    # def rider_trips
-    #   use trip instances in rider (its a self method)
-    # end
-    #
+
     def self.all_trip_info
       all_trips_array = []
       CSV.read('support/trips.csv').each do |object|
@@ -45,6 +37,12 @@ module RideShare
       end
       return all_trips_array
       # return all the trips in the trip csv
+    end
+
+    def self.all_rider_info
+      rider_trips = []
+      rider_trips
+
     end
 
   end

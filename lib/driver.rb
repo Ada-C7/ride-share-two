@@ -25,15 +25,16 @@ module RideShare
       driver_avg_rating = RideShare::Trip.driver_trip_instances(@driver_id)
       driver_avg_rating.each do |object|
           rating_array << object.rating
-        end
-        rating_array_lenth = rating_array.length
-        rating_array_sum = rating_array.inject(:+)
-        avg_rating = rating_array_sum / rating_array_lenth
-        return avg_rating
+      end
+      rating_array_lenth = rating_array.length
+      rating_array_sum = rating_array.inject(:+)
+      avg_rating = rating_array_sum / rating_array_lenth
+      return avg_rating
     end
 #can come back to this and make so that it's a float instead of an integer
       #now that I have the driver trip instances, I need to sum the ratings
       # driver_avg_rating.
+
 
 
     def self.all_driver_info
