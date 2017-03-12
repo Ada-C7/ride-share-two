@@ -29,7 +29,6 @@ module RideShare
         end
       end
       return driver_trips
-      puts "yo ho yo ho a pirate's life for me"
     end
 
   end
