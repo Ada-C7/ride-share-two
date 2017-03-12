@@ -28,6 +28,7 @@ module RideShare
       # return all the trips in the trip csv
     end
 
+    #all trip instances with a particular driver id
     def self.driver_trip_instances(driver_id)
       driver_trips = []
       trips = RideShare::Trip.all_trip_info
@@ -39,7 +40,7 @@ module RideShare
       return driver_trips
     end
 
-    # retrieve the associated rider instance through the rider ID
+    # all trip instances with a particular rider id
     def self.all_rider_trip_instances(rider_id)
       rider_trips = []
       trips = RideShare::Rider.all_rider_info

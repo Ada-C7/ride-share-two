@@ -10,8 +10,6 @@ module RideShare
       @phone_num = phone_num
     end
 
-
-
     def self.all_rider_info
       all_rider_info = []
       CSV.read('support/riders.csv').each do |object|
@@ -36,7 +34,18 @@ module RideShare
       raise ArgumentError.new("Rider #{rider_id} does not exist")
     end
 
+    # retrieve the list of trip instances that only this rider has taken
 
+    def rider_trip_instances
+      rider_trips = RideShare::Trip.all_rider_trip_instances(@rider_id)
+      return rider_trips
+    end
+
+    # retrieve the list of all previous driver instances (through the trips functionality built above)
+    def driver_rider_trips
+
+
+    end
 
 
 
