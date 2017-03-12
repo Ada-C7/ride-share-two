@@ -19,6 +19,17 @@ module RideShare
       Trip.find_many_riders(@rider_id)
     end
 
+    def drivers
+      # Currently just returning IDs for drivers. May want to refactor to return names of drivers?
+      drivers = []
+      rider_trips = Rider.find(@rider_id).trips
+
+      rider_trips.each do |trip|
+        drivers << trip.driver_id
+      end
+      return drivers
+    end
+
     def self.all
       riders = []
       CSV.open("./support/riders.csv", "r").each do |line|

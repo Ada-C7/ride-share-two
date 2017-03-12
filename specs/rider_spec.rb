@@ -28,7 +28,11 @@ describe "Rider class" do
     end
 
     it "Retrieves list of all previous drivers for trips associated with given rider" do
-
+      rider_trips = RideShare::Rider.find("296")
+      drivers_for_rider = rider_trips.drivers
+      drivers_for_rider.must_be_instance_of Array
+      drivers_for_rider.length.must_equal 3
+      drivers_for_rider[0].must_equal "87"
     end
   end
 
