@@ -61,4 +61,9 @@ describe "Rideshare::Rider" do
 
   end
 
+  describe "Rider#all_spend" do
+    it "returns total spending of rider instance" do
+      Rideshare::Rider.all_riders.first.all_spend.must_be_instance_of Integer
+    end
+  end
 end

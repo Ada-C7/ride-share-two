@@ -67,5 +67,15 @@ module Rideshare
       #removes duplicate driver/rider pairs
 
     end
+
+    def all_spend
+      cost = []
+      trips.each do |trip|
+        cost << trip.cost
+      end
+
+      return cost.inject { |sum, n| sum + n }
+    end
+
   end
 end

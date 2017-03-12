@@ -83,4 +83,10 @@ describe "Rideshare::Driver" do
       Rideshare::Driver.all_drivers.first.rating.must_be :<=, 5
     end
   end
+
+  describe "Driver#earnings" do
+    it "returns all earnings of a driver instance" do
+      Rideshare::Driver.all_drivers.first.earnings.must_be_instance_of Float
+    end
+  end
 end

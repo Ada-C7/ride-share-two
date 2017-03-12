@@ -73,4 +73,18 @@ describe "Rideshare::Trips" do
 
   end
 
+  describe "Trips#cost" do
+
+    it "returns the cost of the trip instance" do
+      Rideshare::Trips.all_trips.first.cost.must_equal 2
+    end
+  end
+
+  describe "Trips#duration" do
+
+    it "returns the duration of the trip instance" do
+      Rideshare::Trips.all_trips.first.duration.must_equal 30
+    end
+  end
+
 end

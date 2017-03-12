@@ -66,5 +66,16 @@ module Rideshare
       return (total_rating / driver_rating.length).round(2)
 
     end
+
+    def earnings
+      earnings = []
+      trips.each do |trip|
+        per_trip = (trip.cost - 1.65) * 0.8
+        earnings << per_trip
+      end
+      return earnings.inject{ |sum, n| sum + n }
+    end
+
+
   end
 end
