@@ -7,7 +7,8 @@ module RideShare
         attr_reader :rider_id, :name, :phone_number
 
         def initialize(id)
-            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
+            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id >= 1
+            raise ArgumentError, "#{id} Cannot be found" unless (RIDER_INFO.map { |line| line[0].to_i }).include? id
             RIDER_INFO.each do |line|
                 next unless line[0].to_i == id
                 @rider_id = id
@@ -22,7 +23,7 @@ module RideShare
 
         def previous_drivers
             @rider_trips = trips
-            @all_drivers = @rider_trips.map { |trip| Driver.find(trip.driver_id.to_i).shift }
+            @all_drivers = @rider_trips.map { |trip| trip.driver.shift }
           end
 
         def self.all

@@ -21,6 +21,10 @@ describe RideShare::Driver do
             proc { RideShare::Driver.new(18, vin: 'JCIUAHS8E9U9WUEFO23U4RJBS') }.must_raise ArgumentError
             proc { RideShare::Driver.new(18, vin: 'JC98U') }.must_raise ArgumentError
         end
+        it 'Raises an error if ID doesnt exist' do
+            proc { RideShare::Driver.new(8_387_764) }.must_raise ArgumentError
+            proc { RideShare::Driver.new(0) }.must_raise ArgumentError
+        end
     end
 
     describe 'avg_rating' do

@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 module RideShare
     class Driver
@@ -8,13 +7,16 @@ module RideShare
         attr_accessor :driver_id, :name, :vin
 
         def initialize(id)
-            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
+            raise ArgumentError, "#{id} is not a valid ID number, only positive whole numbers are accepted" unless id.is_a?(Integer) && id >= 1
+            raise ArgumentError, "#{id} Cannot be found" unless (DRIVER_INFO.map { |line| line[0].to_i }).include? id
+
             DRIVER_INFO.each do |line|
                 next unless line[0].to_i == id
                 @driver_id = id
                 @name = line[1]
                 @vin = line[2]
             end
+
             raise ArgumentError, "#{vin} is an invalid VIN number" unless @vin.length == 17
         end
 
@@ -36,17 +38,7 @@ module RideShare
             all
             driver_found = (@all_drivers.map { |driver| driver if driver.driver_id == id }).compact!
         end
-    end
+      end
 end
 
-print RideShare::Driver.find(89)
-#
-# test = RideShare::Driver.new(18)
-# #
-# print test.trips
-# puts
-# print test.trips
-# puts
-# puts test.avg_rating
-# puts test.avg_rating
-# print test.trips
+# print RideShare::Driver.new(726_175)

@@ -7,7 +7,8 @@ module RideShare
         attr_reader :trip_id, :driver_id, :rider_id, :trip_date, :trip_rating
 
         def initialize(id)
-            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
+            raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id >= 1
+            raise ArgumentError, "#{id} Cannot be found" unless (TRIP_INFO.map { |line| line[0].to_i }).include? id
             TRIP_INFO.each do |line|
                 next unless line[0].to_i == id
                 @trip_id = id
@@ -16,6 +17,8 @@ module RideShare
                 @trip_date = line[3]
                 @trip_rating = line[4]
             end
+
+            raise ArgumentError, "#{trip_rating} is an invalid rating number" unless (1..5).cover? @trip_rating.to_f
         end
 
         def driver
@@ -34,20 +37,22 @@ module RideShare
             raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
             all
             @driver_trips = (@all_trips.map { |trip| trip if trip.driver_id.to_i == id }).compact!
+            if @driver_trips == []
+                puts 'This driver has no trips'
+            else
+                @driver_trips
+            end
         end
 
         def self.rider_trips(id)
             raise ArgumentError, "#{id} is not a valid ID number" unless id.is_a?(Integer) && id > 0
             all
             @rider_trips = (@all_trips.map { |trip| trip if trip.rider_id.to_i == id }).compact!
+            if @rider_trips == []
+                puts 'This rider has no trips'
+            else
+                @rider_trips
+            end
         end
     end
 end
-
-# print RideShare::Trip.rider_trips(5)
-# puts
-# puts
-# print RideShare::Trip.driver_trips(12)
-# puts
-# puts
-# print RideShare::Trip.rider_trips(76)

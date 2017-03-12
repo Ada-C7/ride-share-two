@@ -19,6 +19,10 @@ describe RideShare::Rider do
             proc { RideShare::Rider.new('$*2hus') }.must_raise ArgumentError
             proc { RideShare::Rider.new(-47) }.must_raise ArgumentError
         end
+        it 'Raises an error if ID doesnt exist' do
+            proc { RideShare::Rider.new(8_387_764) }.must_raise ArgumentError
+            proc { RideShare::Rider.new(0) }.must_raise ArgumentError
+        end
     end
     describe 'previous_drivers' do
         it 'Returns an array of accurate driver data' do
