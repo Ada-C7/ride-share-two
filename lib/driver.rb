@@ -49,7 +49,6 @@ class Driver
     #calls Driver(class)'s trip(id) method, which will give all the trips (with ratings for each)
     #sum all the ratings, divide by the number of trips/ratings
     all_trips = self.trips
-    all_ratings = []
     all_ratings = all_trips.map { |trip| trip.rating }
     average = (all_ratings.reduce(:+))/all_ratings.length.to_f
     return average

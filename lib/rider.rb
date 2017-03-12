@@ -33,13 +33,10 @@ class Rider
   end
 
   def previous_drivers
-    # all_trips = Trip.find_all_for_rider(id)
     all_trips = self.trips
-    previous_drivers_by_id = []
     previous_drivers_by_id = all_trips.map { |trip| trip.driver_id }
     # now, an array of driver_ids
-    rider_previous_drivers = []
-    previous_drivers_by_id.each { |driver_id| rider_previous_drivers << Driver.find(driver_id) }
+    rider_previous_drivers = previous_drivers_by_id.map { |driver_id| Driver.find(driver_id) }
     rider_previous_uniq_drivers = rider_previous_drivers.uniq { |driver| driver.id } # gets only unique drivers, no repeats for same driver different trips
     return rider_previous_uniq_drivers
   end

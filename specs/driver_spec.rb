@@ -104,12 +104,14 @@ describe "Driver" do
     # does it get the right average?
     it "returns the average rating for a driver" do
       new_driver = Driver.new(1, "Santa Claus", 98109999999999999)
-      new_driver.rating.must_be_instance_of Float
-      new_driver.rating.must_equal 2.3333333333333335
+      average = new_driver.rating
+      average.must_be_instance_of Float
+      average.must_be_within_delta(2.33, 0.01)
 
       shakira = Driver.new(16, "Shakira Stamm" , "SALUVSAL3WA67SBPZ")
-      shakira.rating.must_be_instance_of Float
-      shakira.rating.must_equal 2.5
+      average = shakira.rating
+      average.must_be_instance_of Float
+      average.must_be_within_delta(2.5, 0.01)
     end
   end
 
