@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'no_account_found_error'
+require_relative 'duplicate_account_error'
 
 # new Driver, subclass of RideShare
 module RideShare
@@ -8,7 +10,7 @@ module RideShare
     def initialize(driver_info={})
       @id = driver_info[:id].to_i
       @name = driver_info[:name]
-      unless (driver_info[:vin] == nil || driver_info[:vin].length == 17)
+      unless driver_info[:vin] == nil || valid_vin?(driver_info[:vin])
         raise ArgumentError.new("vin is invalid")
       end
       @vin = driver_info[:vin]
@@ -41,13 +43,26 @@ module RideShare
     end
 
     def self.find(driver_id)
-      found_driver = @all_drivers.select { |instance| instance.id == driver_id }
-      # if found_driver == []
-      #   raise NoDriverError.new("No driver with matching ID exists!")
-      # rescue NoDriverError
-      # end
-      return found_driver[0]
-      # return specific instance of driver (previously instantiated)
+      begin
+        found_driver = @all_drivers.select { |instance| instance.id == driver_id }
+        raise NoAccountFoundError.new("Driver ID not found.") if found_driver.empty?
+        raise DuplicateAccountError.new("Duplicate accounts found.") if found_driver.length > 1
+      rescue NoAccountFoundError => alert
+        puts alert.message
+      rescue DuplicateAccountError => alert
+        puts alert.message
+      else
+        return found_driver[0]
+      end
+    end
+
+    private
+
+    def valid_vin?(vin)
+    vin.length == 17 && !vin.match(/\A[a-zA-Z0-9]*\z/).nil?
     end
   end
 end
+
+# RideShare::Driver.all
+# RideShare::Driver.find(1000)

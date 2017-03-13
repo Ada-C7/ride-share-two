@@ -1,8 +1,11 @@
 require_relative 'spec_helper'
 
 describe "RideShare::Driver" do
-  let(:all_drivers) { RideShare::Driver.all }
-  let(:all_trips) { RideShare::Trip.all }
+  before do
+    RideShare::Driver.all
+    RideShare::Rider.all
+    RideShare::Trip.all
+  end
 
   describe "Driver#initialize" do
     let(:driver9) { RideShare::Driver.new(id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4") }
@@ -31,6 +34,8 @@ describe "RideShare::Driver" do
   end
 
   describe "Driver#all" do
+    let(:all_drivers) { RideShare::Driver.all }
+    
     it "returns an array" do
       all_drivers.must_be_kind_of Array
     end
@@ -61,7 +66,6 @@ describe "RideShare::Driver" do
   end
 
   describe "Driver#find" do
-    before { all_drivers }
     let(:driver_found) { RideShare::Driver.find(31) }
 
     it "return value is a Driver instance" do
@@ -73,10 +77,13 @@ describe "RideShare::Driver" do
       driver_found.name.must_equal "Sheila VonRueden"
       driver_found.vin.must_equal "KPH9RLSZ9YKNVMGH2"
     end
+
+    it "will not find a nonexistent Driver" do
+      RideShare::Driver.find(999)
+    end
   end
 
   describe "Driver#Trips" do
-    before { all_trips }
     let (:driver9_trips) { RideShare::Driver.new({id: "9"}).trips }
 
     it "returns value as an Array" do
@@ -93,7 +100,6 @@ describe "RideShare::Driver" do
   end
 
   describe "Driver#avg_rating" do
-    before { all_trips }
     let (:driver9_avg) { RideShare::Driver.new(id: "9").avg_rating }
 
     it "returns value as a Float" do
