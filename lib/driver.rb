@@ -1,7 +1,7 @@
 require 'csv'
 # http://alvinalexander.com/blog/post/ruby/ruby-nameerror-uninitialized-constant-error-message
 # I was getting "NameError: uninitialized constant" b/c need to require trip.rb file
-require_relative 'trip'
+require_relative 'trip' #moved to Rakefile... didn't work
 
 module RideShare
   class Driver

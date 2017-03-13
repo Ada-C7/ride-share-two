@@ -24,15 +24,15 @@ describe "Driver" do
 
   describe "Driver.find(driver_id)" do
     it "should return the driver_id that was passed through" do
-      RideShare::Driver.find(1)[:driver_id].must_equal(1)
+      RideShare::Driver.find(1)[:driver_id].must_equal 1
     end
 
     it "should return the vin that corresponds to the driver_id" do
-      RideShare::Driver.find(50)[:vin].must_equal("1B6FU8M80MVDHHTMD")
+      RideShare::Driver.find(50)[:vin].must_equal "1B6FU8M80MVDHHTMD"
     end
 
     it "should return the name that corresponds to the driver_id" do
-      RideShare::Driver.find(100)[:name].must_equal("Minnie Dach")
+      RideShare::Driver.find(100)[:name].must_equal "Minnie Dach"
     end
   end
 
@@ -44,6 +44,8 @@ describe "Driver" do
     it "finds all the trips for the first Driver" do
       RideShare::Driver.new(driver_id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9").trips.length.must_equal 9
       # RideShare::Driver.find(1).trips.length.must_equal 9 doesn't work b/c not class object it's a hash
+      # **This test isn't necessary and can cause problems as Bernando takes more trips.**
+      # I wanted to make sure it was actually making an array with all the trips.
     end
 
     it "finds all the trips for the last Driver" do

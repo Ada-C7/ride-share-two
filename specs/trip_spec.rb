@@ -43,12 +43,14 @@ describe "Trip" do
 
   describe "Find all trips for a rider" do
     it "should return an array of all trips for a rider" do
+      skip
       RideShare::Trip.rider_trips(1).must_be_instance_of Array
     end
   end
 
   describe "rider method" do
     it "collects rider information: name and phone number" do
+      skip
       RideShare::Trip.new(trip_id: 1, driver_id: 1, rider_id: 54, date: 2016-04-05, rating: 3).driver.must_be_instance_of Hash
     end
   end

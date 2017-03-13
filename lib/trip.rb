@@ -42,7 +42,15 @@ module RideShare
       return RideShare::Driver.find(@driver_id)
     end
 
+    def self.rider_trips(rider_id)
+      # find all trip instances for a given rider ID
+      # TODO
+    end
 
+    def rider
+      # retrieve the associated rider instance through the rider ID
+      # TODO
+    end
 
   end
 end
