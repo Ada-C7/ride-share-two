@@ -27,11 +27,8 @@ describe "rider_id" do
 
     it "trips.length matches number of trips from CSV file" do
       trips_number = my_rider.trips.length
-      lines_from_csv = []
-      trips_csv.each do |line|
-        if line[2].to_i == my_rider.id
-          lines_from_csv << line
-        end
+      lines_from_csv = trips_csv.find_all do |line|
+        line[2].to_i == my_rider.id
       end
       lines_from_csv.length.must_equal trips_number
     end

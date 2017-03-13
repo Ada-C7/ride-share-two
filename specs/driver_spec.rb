@@ -53,7 +53,6 @@ describe "Driver" do
       new_driver = RideShare::Driver.new(123456, "Ms. Lynn Trickey", "ZFLHHMKS402GD4P09")
       new_driver.average_rating.must_equal 0
     end
-
   end
 
   describe "find_all Driver class method" do
@@ -91,5 +90,4 @@ describe "Driver" do
       other_bad_id.must_equal 0
     end
   end
-
 end
