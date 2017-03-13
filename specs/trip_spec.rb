@@ -75,7 +75,7 @@ describe "Trip class" do
     it "returns an array" do
       all_trips.must_be_kind_of Array
     end
-    it "all elements are Rider instances" do
+    it "all elements are Trip instances" do
       all_trips.each do |trip|
         trip.must_be_kind_of Trip
       end
