@@ -1,17 +1,20 @@
-# new Rider, subclass of RideShare
+require 'csv'
+
+# Rider class, subclass of RideShare
 module RideShare
   class Rider
     attr_reader :id, :name, :phone_number
-    # create new rider and take in id, name, and phone
+    # creates new rider and take in id, name, and phone
     def initialize(rider_info={})
       @id = rider_info[:id].to_i
       @name = rider_info[:name]
       @phone_number = rider_info[:phone_number]
     end
 
+    # class method: .all  (calls .new)
     def self.all
       @all_riders = []
-      # read in CSV file to create Rider instances
+      # read in CSV and create new Rider instances from each row
       CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/riders.csv", {:headers => true}) do |row| # file directory for rake
         @all_riders << RideShare::Rider.new(
           id: row[0],
@@ -22,22 +25,25 @@ module RideShare
       return @all_riders # array of Rider instances
     end
 
+    # class method: .find  (calls .all)
     def self.find(rider_id)
+      # finds an instance of Rider by ID
       found_rider = all.select { |instance| instance.id == rider_id }
-      return found_rider[0] # single instance of rider
+      return found_rider[0] # a Rider instance
     end
 
+    # instance method: .past_trips  (calls Trip class)
     def past_trips
       RideShare::Trip.by_rider(@id)
-      # returns array of Trip instances
+      # returns all Trip instances for this Rider instance
     end
 
+    # instance method: .past_drivers  (calls Trip/Driver class)
     def past_drivers
-      trips = RideShare::Trip.by_rider(@id) # Trip instances of Rider
+      trips = RideShare::Trip.by_rider(@id) # all trip instances of Rider
       driver_ids = trips.map { |trip| trip.driver_id }
-      # find instances of Driver for unique ids
-      driver_ids.uniq.map { |id| RideShare::Driver.find(id) }
-      # returns array of Driver instances
+      driver_ids.uniq.map { |id| RideShare::Driver.find(id) } # removes duplicates
+      # returns all Driver instances for this Rider instance
     end
   end
 end
