@@ -88,13 +88,13 @@ describe "Driver" do
       new_driver.get_trips.each do |object| object.must_be_instance_of(RideShare::Trip)
       end
     end
-    
-      it "Returns no trip when driver has not taken any trips" do
-          # binding.pry
+
+    it "Returns no trip when driver has not taken any trips" do
+      # binding.pry
       minnie.get_trips.must_be_empty
       minnie.get_trips.must_be_kind_of Array
-      end
     end
+  end
 
   describe "avg_rating" do
 

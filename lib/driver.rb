@@ -43,6 +43,6 @@ module RideShare
       #Cool feature with #map that my tutor showed me :)
       ratings.sum / ratings.size.to_f
     end
-    
+
   end
 end
