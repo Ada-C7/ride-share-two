@@ -39,7 +39,7 @@ module RideShare
     # instance method: avg_rating  (calls .trips)
     def avg_rating
       # average rating of all trips for this Driver instance
-      ratings = trips.map {|trip| trip.rating } # calls trips method above
+      ratings = trips.map {|trip| trip.rating.to_f } # calls trips method above
       average = ratings.inject(:+)/ratings.length
       return average.round(2) # a rounded float
     end
@@ -49,8 +49,8 @@ module RideShare
       # finds an instance of Driver by ID (calls .all)
       begin
         found_driver = all.select { |instance| instance.id == driver_id }
-        raise MissingAccountError.new("Driver ID not found.") if found_driver.empty?
-        raise DuplicateAccountError.new("Duplicate accounts found.") if found_driver.length > 1
+        raise MissingAccountError.new("Missing Driver: Driver_#{driver_id}.") if found_driver.empty?
+        raise DuplicateAccountError.new("Duplicates found: Driver_#{driver_id}.") if found_driver.length > 1
       rescue MissingAccountError => alert
         puts alert.message
       rescue DuplicateAccountError => alert
@@ -64,11 +64,11 @@ module RideShare
 
     # instance method: vin_verify  (calls custom exceptions)
     def vin_verify(vin)
-      # raises exceptions if vin is not 17-char. or alphanumeric
+      # exceptions if vin is not 17-char. or alphanumeric
       begin
-        raise MissingVinError.new("Missing VIN, Driver_#{@id}!") if vin == nil
+        raise MissingVinError.new("Missing VIN: Driver_#{@id}.") if vin == nil
         if (vin.length == 17 && !vin.match(/\A[a-zA-Z0-9]*\z/).nil?) == false
-          raise InvalidVinError.new("Invalid VIN, Driver_#{@id}!")
+          raise InvalidVinError.new("Invalid VIN: Driver_#{@id}.")
         end
       rescue MissingVinError => alert
         puts alert.message

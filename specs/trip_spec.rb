@@ -4,7 +4,8 @@ describe "RideShare::Trip" do
   let(:all_trips) { RideShare::Trip.all }
   let(:all_riders) { RideShare::Rider.all }
   let(:all_drivers) { RideShare::Driver.all }
-
+  let(:example_trip) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5" }) }
+  # initialize .all for each class--as default dataset
   before do
     all_trips
     all_riders
@@ -12,10 +13,16 @@ describe "RideShare::Trip" do
   end
 
   describe "Trip#initialize" do
-    let(:example_trip) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5" }) }
-
     it "creates a new instance of trip" do
       example_trip.must_be_instance_of RideShare::Trip
+    end
+
+    it "responds to being called" do
+      example_trip.must_respond_to :id
+      example_trip.must_respond_to :driver_id
+      example_trip.must_respond_to :rider_id
+      example_trip.must_respond_to :date
+      example_trip.must_respond_to :rating
     end
 
     it "passes in values correctly" do
@@ -26,9 +33,10 @@ describe "RideShare::Trip" do
       example_trip.rating.must_equal 5
     end
 
-    it "can create a new trip with a missing date" do
+    # EDGE CASE
+    it "can create a new trip with missing date" do
       no_date_trip =  RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", rating: "5" })
-      no_date_trip.date.must_equal nil
+      no_date_trip.date.must_be_nil
     end
   end
 
@@ -47,6 +55,7 @@ describe "RideShare::Trip" do
       all_trips.length.must_equal 600 # rows in CSV file
     end
 
+    # EDGE CASE
     it "correctly reads in the first row of the CSV file" do
       # last row of data: 1,1,54,2016-04-05,3
       all_trips[0].id.must_equal 1
@@ -56,6 +65,7 @@ describe "RideShare::Trip" do
       all_trips[0].rating.must_equal 3
     end
 
+    # EDGE CASE
     it "correctly reads in the last row of the CSV file" do
       # last row of data: (600,61,168,2016-04-25,3)
       all_trips[-1].id.must_equal 600
@@ -73,9 +83,16 @@ describe "RideShare::Trip" do
       example_by_rider.must_be_kind_of Array
     end
 
-    it "each returned element is a trip instances" do
+    it "each returned element is a Trip instance" do
       example_by_rider.each { |element| element.must_be_instance_of RideShare::Trip }
     end
+
+    it "prints message if rider_id doesn't exist" do
+      proc {
+        RideShare::Trip.by_rider("999")
+      }.must_output("")
+    end
+
   end
 
   describe "Trip#by_driver(driver_id)" do
@@ -85,23 +102,19 @@ describe "RideShare::Trip" do
       example_by_driver.must_be_kind_of Array
     end
 
-    it "each returned element is a trip instances" do
+    it "each returned element is a Trip instance" do
       example_by_driver.each { |element| element.must_be_instance_of RideShare::Trip }
     end
 
-    it "returns empty array if no trips are found for driver" do
+    # EDGE CASE
+    it "returns empty array if no trips are found" do
       by_driver_no_trips= RideShare::Trip.by_driver("100") # has no trips recorded
       by_driver_no_trips.must_equal []
-    end
-
-    it "returns nil if the driver_id is not a valid one" do
-      by_driver_missing = RideShare::Trip.by_driver("999") # nonexistent driver_id lookup
-      by_driver_missing.must_equal []
     end
   end
 
   describe "Trip#find_driver" do
-    let(:example_find_driver) { RideShare::Trip.new({driver_id: "83"}).find_driver }
+    let(:example_find_driver) { example_trip.find_driver }
 
     it "returns the instance of Driver" do
       example_find_driver.must_be_instance_of RideShare::Driver
@@ -115,7 +128,7 @@ describe "RideShare::Trip" do
   end
 
   describe "Trip#find_rider" do
-    let(:example_find_rider) { RideShare::Trip.new({rider_id: "298"}).find_rider }
+    let(:example_find_rider) { example_trip.find_rider }
 
     it "returns the instance of Rider" do
       example_find_rider.must_be_instance_of RideShare::Rider

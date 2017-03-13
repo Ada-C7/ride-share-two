@@ -5,7 +5,7 @@ describe "RideShare::Rider" do
   let(:all_riders) { RideShare::Rider.all }
   let(:all_drivers) { RideShare::Driver.all }
   let(:rider) { RideShare::Rider.new({ id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540" }) }
-
+  # initialize .all for each class--as default dataset
   before do
     all_trips
     all_riders
@@ -25,7 +25,7 @@ describe "RideShare::Rider" do
 
     it "can create a new rider with a missing phone" do
       no_phone = RideShare::Rider.new({id: "87", name: "Tamiko Terada"})
-      no_phone.phone_number.must_equal nil
+      no_phone.phone_number.must_be_nil
     end
   end
 
@@ -44,6 +44,7 @@ describe "RideShare::Rider" do
       all_riders.length.must_equal 300 # rows in CSV file
     end
 
+    # EDGE CASE
     it "correctly reads in the first row of the CSV file" do
       # last row of data: 1,Nina Hintz Sr.,560.815.3059
       all_riders[0].id.must_equal 1
@@ -51,6 +52,7 @@ describe "RideShare::Rider" do
       all_riders[0].phone_number.must_equal "560.815.3059"
     end
 
+    # EDGE CASE
     it "correctly reads in the last row of the CSV file" do
       # last row of data: 300,Miss Isom Gleason,791-114-8423 x70188
       all_riders[-1].id.must_equal 300
@@ -78,13 +80,25 @@ describe "RideShare::Rider" do
       rider.past_trips.must_be_kind_of Array
     end
 
-    it "first element is an instance of Trip" do
+    it "first element is a Trip with expected rider" do
       rider.past_trips[0].must_be_instance_of RideShare::Trip
+      rider.past_trips[0].rider_id.must_equal 13
     end
 
-    it "last element is a Trip associated with the expected rider" do
+    it "last element is a Trip with expected rider" do
+      rider.past_trips[-1].must_be_instance_of RideShare::Trip
       rider.past_trips[-1].rider_id.must_equal 13
     end
+
+    # # EDGE CASE
+    # it "returns empty array for rider with no trips" do
+    #   # expects no error message because rider exists
+    #   proc {
+    #     RideShare::Rider.find(116)
+    #   }.must_be_silent
+    #   rider116 = RideShare::Rider.find(116)
+    #   rider116.past_trips.must_be_empty
+    # end
   end
 
   describe "Rider#past_drivers" do

@@ -28,8 +28,17 @@ module RideShare
     # class method: .find  (calls .all)
     def self.find(rider_id)
       # finds an instance of Rider by ID
-      found_rider = all.select { |instance| instance.id == rider_id }
-      return found_rider[0] # a Rider instance
+      begin
+        found_rider = all.select { |instance| instance.id == rider_id }
+        raise MissingAccountError.new("Missing rider: Rider_#{rider_id}.") if found_rider.empty?
+        raise DuplicateAccountError.new("Duplicates found: Rider_#{rider_id}.") if found_rider.length > 1
+      rescue MissingAccountError => alert
+        puts alert.message
+      rescue DuplicateAccountError => alert
+        puts alert.message
+      else
+        return found_rider[0] # a Rider instance
+      end
     end
 
     # instance method: .past_trips  (calls Trip class)
