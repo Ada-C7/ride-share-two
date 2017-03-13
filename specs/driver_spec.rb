@@ -1,12 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
 require 'csv'
-require_relative '../lib/driver'
-require_relative '../lib/trips'
+require_relative '../specs/spec_helper'
 
 describe "instantiating a Driver" do
   it "#driver_id: returns the value of the @driver_id instance variable" do

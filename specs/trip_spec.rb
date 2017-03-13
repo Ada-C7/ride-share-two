@@ -1,13 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
 require 'csv'
-require_relative '../lib/driver'
-require_relative '../lib/trips'
-require_relative '../lib/rider'
+require_relative '../specs/spec_helper'
 
 describe "Trips initialize" do
 
@@ -36,10 +31,12 @@ describe "Trips initialize" do
     trips.rating.must_equal 3
   end
 
-  # it "#rating should be within an acceptable range (1-5)" do
-  #   trips = RideShare::Trips.new(trip_id: 33, driver_id: 1, rider_id: 54, date: "2016-04-05", rating: 3)
-  #   trips.rating.must_include 1..5
-  # end
+  it "#rating should be within an acceptable range (1-5)" do
+    trips = RideShare::Trips.new(trip_id: 33, driver_id: 1, rider_id: 54, date: "2016-04-05", rating: 3)
+    (1..5).must_include trips.rating
+  end
+
+  
 end
 
 #

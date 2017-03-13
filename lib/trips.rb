@@ -1,3 +1,5 @@
+require 'csv'
+
 module RideShare
   class Trips
     attr_reader :trip_id, :driver_id, :rider_id, :date, :rating

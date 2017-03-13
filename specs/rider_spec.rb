@@ -1,11 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
 require 'csv'
-require_relative '../lib/rider'
+require_relative '../specs/spec_helper'
 
 describe "instantiating a Rider" do
   it "#rider_id: returns the value of the @rider_id instance variable" do
@@ -25,7 +22,7 @@ describe "instantiating a Rider" do
 end
 
 describe "Rider.all" do
-  it "all riders stored in an array" do # change to array of hashes to call by key (i.e. driver_id)?
+  it "all riders stored in an array" do
     all_riders = RideShare::Rider.all
     all_riders.must_be_instance_of Array
   end
