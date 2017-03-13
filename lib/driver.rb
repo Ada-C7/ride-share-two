@@ -6,11 +6,10 @@ module RideShare
   class Driver
     attr_reader :driver_id, :name, :vin
 
-    def initialize(drivers)
-
-      @driver_id = drivers[:driver_id]
-      @name = drivers[:name]
-      @vin = drivers[:vin]
+    def initialize(driver)
+      @driver_id = driver[:driver_id]
+      @name = driver[:name]
+      @vin = driver[:vin]
       @trips = []
 
       raise ArgumentError.new("Invalid VIN") if vin.length != 17

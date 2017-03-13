@@ -3,28 +3,31 @@ require 'csv'
 module RideShare
   class Rider
     attr_reader :rider_id, :name, :phone
-    def initialize(rider_id, name, phone)
 
-      @rider_id = rider_id
-      @name = name
-      @phone = phone
+    def initialize(riders)
+
+      @rider_id = riders[:rider_id]
+      @name = riders[:name]
+      @phone = riders[:phone]
     end
 
-
     def self.all
-      all_riders = []
+        @all_riders = []
 
-      csv_contents = CSV.read("./support/riders.csv")
-      csv_contents.shift
-      csv_contents.each do |each_rider|
-          rider_id = each_rider[0].to_i
-          name = each_rider[1].to_s
-          phone = each_rider[2].to_s
+        CSV.foreach("./support/riders.csv", {:headers => true}) do |line|
+          @all_riders << self.new({rider_id:line[0].to_i, name:line[1].to_s, phone:line[2].to_s})
+        end
+        return @all_riders
+    end
 
-          rider = RideShare::Rider.new(rider_id, name, phone)
-          all_riders << rider
+    def self.find(rider_id)
+      riders = RideShare::Rider.all
+
+      riders.each do |rider|
+        if rider.rider_id == rider_id
+          return rider
+        end
       end
-        return all_riders
     end
 
   end # end of Driver
