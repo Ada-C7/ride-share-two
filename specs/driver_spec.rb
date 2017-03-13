@@ -4,11 +4,13 @@ describe "RideShare: Driver" do
   let(:drivers) {RideShare::Driver.getAll}
 
   describe "Driver#initialize" do
-    #   # it "contains individual hashes of ID, Name, VIN" do
-    #   #   ada_drivers = RideShare::Driver.new
-    #   #   ada_drivers[0].must_be_kind_of Hash
-    #   #   ada_drivers[0].key.must_equal
-    #   # end
+    it "creates the instance of a Driver" do
+      driver = RideShare::Driver.new({id: 1234, name: "Ada", vin: "33333333333333333"})
+      driver.must_be_instance_of RideShare::Driver
+      driver.id.must_equal 1234
+      driver.name.must_equal "Ada"
+      driver.vin.must_equal "33333333333333333"
+    end
 
     it "raises argument error when vin length is not 17-digits" do
       proc { RideShare::Driver.new(
@@ -25,6 +27,15 @@ describe "RideShare: Driver" do
     end
   end
 
+  describe "Driver.find(id)" do
+    it "returns a driver object" do
+      driver = RideShare::Driver.find(99)
+      driver.must_be_instance_of RideShare::Driver
+      driver.name.must_equal "Jayden Ledner"
+      driver.vin.must_equal "RF4AT3WL6JJXPFUJL"
+    end
+  end
+
   describe "Driver.getAll" do
     it "returns an array of 100 driver objects" do
       drivers
@@ -32,20 +43,16 @@ describe "RideShare: Driver" do
     end
 
     it "returns correct instances of driver objects" do
-      #use findid
-      drivers
-      drivers[6].id.must_equal 7
-      drivers[6].name.must_equal "Lizeth Dickens"
-      drivers[6].vin.must_equal "W09XNTZR9KTFK10WW"
+      driver = RideShare::Driver.find(7)
+      driver.id.must_equal 7
+      driver.name.must_equal "Lizeth Dickens"
+      driver.vin.must_equal "W09XNTZR9KTFK10WW"
     end
   end
 
   describe "Driver.findTrips" do
     it "returns an array of trip objects" do
-      drivers
-      driver = drivers[0]
-      #is this really the best way to reference a driver? Could I do it without a loop to find the id of a specific driver?
-      # can use findid once proven in tests
+      driver = RideShare::Driver.find(7)
       driver.findTrips.must_be_kind_of Array
       driver.findTrips[0].must_be_instance_of RideShare::Trip
     end
@@ -54,17 +61,7 @@ describe "RideShare: Driver" do
   describe "Driver.avgRatings" do
     it "calculates the correct average as a float" do
       driver = RideShare::Driver.find(90)
-      # driver.must_not_be_nil
       driver.avgRating.must_equal 3.29
-    end
-  end
-
-  describe "Driver.find(id)" do
-    it "returns a driver object" do
-      driver = RideShare::Driver.find(99)
-      driver.must_be_instance_of RideShare::Driver
-      driver.name.must_equal "Jayden Ledner"
-      driver.vin.must_equal "RF4AT3WL6JJXPFUJL"
     end
   end
 end

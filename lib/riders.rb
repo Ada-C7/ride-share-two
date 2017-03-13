@@ -8,7 +8,6 @@ module RideShare
       @id = rider_details[:id]
       @name = rider_details[:name]
       @phone_num = rider_details[:phone_num]
-      ## TW: Would I not need to initialize since I'm not validating anything?
     end
 
     def self.readCSV
@@ -27,7 +26,7 @@ module RideShare
 
     def self.find(id)
       rider_details = nil
-      getAll.each do |rider|
+      getAll().each do |rider|
         if rider.id == id
           rider_details = rider
         end
@@ -37,6 +36,16 @@ module RideShare
 
     def findTrips
       return Trip.getTripsByRider(@id)
+    end
+
+    def findDrivers
+      drivers = []
+      rider_trips = findTrips()
+      rider_trips.each do |trip|
+        driver_object = RideShare::Driver.find(trip.driver_id)
+        drivers << driver_object
+      end
+      return drivers.uniq { |driver| driver.id }
     end
   end
 end

@@ -10,7 +10,10 @@ module RideShare
       @rider_id = trip_details[:rider_id]
       @date = trip_details[:date]
       @rating = trip_details[:rating]
-      ## Validate: Rating is 1-5 integer, throw argument error and rescue in read csv?
+
+      if @rating < 1 || @rating > 5
+        then @rating = nil
+      end
     end
 
     def self.read_csv
@@ -29,7 +32,7 @@ module RideShare
 
     def self.getDriver(id)
       trip_object = nil
-      getAll.each do |trip|
+      getAll().each do |trip|
         if trip.id == id
           trip_object = trip
         end
@@ -39,7 +42,7 @@ module RideShare
 
     def self.getRider(id)
       trip_object = nil
-      getAll.each do |trip|
+      getAll().each do |trip|
         if trip.id == id
           trip_object = trip
         end
@@ -48,24 +51,13 @@ module RideShare
     end
 
     def self.getTripsByDriver(driver_id)
-      #given driver_id find list of getAll trips
-      driver_trips = []
-      getAll.each do |trip|
-        if trip.driver_id == driver_id
-          driver_trips << trip
-        end
-      end
-      return driver_trips
+      return getAll().select { |trip| trip.driver_id == driver_id
+      }
     end
 
     def self.getTripsByRider(rider_id)
-      rider_trips = []
-      getAll.each do |trip|
-        if trip.rider_id == rider_id
-          rider_trips << trip
-        end
-      end
-      return rider_trips
+      return getAll().select { |trip| trip.rider_id == rider_id
+      }
     end
   end
 end

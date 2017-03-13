@@ -4,14 +4,28 @@ describe "RideShare: Trip" do
   let(:trips) {RideShare::Trip.getAll}
 
   describe "Trip#initialize" do
-    #   # it "contains individual hashes of ID, Name, VIN" do
-    #   #   ada_drivers = RideShare::Drivers.new
-    #   #   ada_drivers[0].must_be_kind_of Hash
-    #   #   ada_drivers[0].key.must_equal
-    #   # end
+    it "instantiates a trip correctly" do
+      trip = RideShare::Trip.new(id: 12, driver_id: 33, rider_id: 44, date: "2017-03-08", rating: 5)
+      trip.must_be_instance_of RideShare::Trip
+      trip.id.must_equal 12
+      trip.driver_id.must_equal 33
+      trip.rider_id.must_equal 44
+      trip.date.must_equal "2017-03-08"
+      trip.rating.must_equal 5
+    end
+
+    it "enters rating of nil if rating is not between 1 and 5" do
+      trip = RideShare::Trip.new(id: 12, driver_id: 33, rider_id: 44, date: "2017-03-08", rating: -1)
+      trip.must_be_instance_of RideShare::Trip
+      trip.id.must_equal 12
+      trip.driver_id.must_equal 33
+      trip.rider_id.must_equal 44
+      trip.date.must_equal "2017-03-08"
+      trip.rating.must_be_nil
+    end
   end
 
-  describe "Trip.read_csv" do
+  describe "Trip.readCSV" do
     it "returns an array of trip objects" do
       trips
       trips.must_be_kind_of Array
@@ -34,15 +48,7 @@ describe "RideShare: Trip" do
       trips[6].rating.must_equal 4.0
     end
   end
-  # #
-  # # describe "Drivers.find_trips" do
-  # #
-  # # end
-  # #
-  # # describe "Driver.avg_ratings" do
-  # #
-  # # end
-  # #
+
   describe "Trip.getDriver(id)" do
     it "returns the correct driver object" do
       trips
@@ -95,4 +101,3 @@ describe "RideShare: Trip" do
     end
   end
 end
-# end
