@@ -10,9 +10,6 @@ module RideSharing
       raise ArgumentError.new("The input for :rider_id must be an integer > 0.\nThis trip will not be recorded.") if  trip_hash[:rider_id].class != Integer || trip_hash[:rider_id] < 0
       raise ArgumentError.new("The input for :date must be a string of format yyyy-mm-dd.\nThis driver will not be recorded.") if  trip_hash[:date].class != String || !(/^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/ === trip_hash[:date])
       raise ArgumentError.new("The input for :rating must be an integer between 1 and 5.\nThis driver will not be recorded." ) if trip_hash[:rating].class != Integer || !(1..5).include?(trip_hash[:rating].to_i)
-
-
-
       @id = trip_hash[:trip_id]
       @driver_id = trip_hash[:driver_id].to_i
       @rider_id = trip_hash[:rider_id].to_i
@@ -75,9 +72,6 @@ module RideSharing
         all_trips << self.new(trip_hash)
       end
       return all_trips
-
-
-
 
       # all_trips =[]
       # CSV.foreach(path, {:headers => true}) do |line_array|
