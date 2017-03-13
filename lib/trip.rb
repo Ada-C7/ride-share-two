@@ -45,12 +45,14 @@ module RideShare
       Integer(rating)
     end
 
+    # this method returns the read trips.csv data
     def self.get_data
-      file_path = '/Users/Cynthia/Documents/Ada/queues/ruby_exercises/ruby_week5/ride-share-two/support/trips.csv'
+      file_path = './support/trips.csv'
       trip_data = FileData.new(file_path)
       return trip_data.read_csv_and_remove_headings
     end
 
+    # this method checks the array of trips for duplicate trip ids
     def self.test_for_duplicates(trips)
       trip_ids = trips.map { |trip| trip.id }
       if trip_ids.length != trip_ids.uniq.length
@@ -60,20 +62,8 @@ module RideShare
       trips
     end
 
-    # this method create mock data to use with testing
-    # def self.get_data
-    #   [
-    #     ['901', '502', '999', "2016-04-05", '3'],
-    #     ['902', '500', '998', "2016-04-06", '5'],
-    #     ['903', '500', '998', "2016-04-07", '5'],
-    #   ]
-    # end
-
-    # all takes in trips_data because it is better to inject data as an object
-    # this also lets you test the data more easily since you can pass in bad data)
-    # there is a default for trips_data
-    # this project needs the default because lots of methods call each other and
-    # expect that all is reading the csv data
+    # this all method also requires the trips_data as a FileData object
+    # if the data is not passed in an arguments, the get_data method will be called
     def self.all(trips_data = nil)
       trips_data = get_data if trips_data.nil?
       raise ArgumentError if trips_data.empty?
@@ -106,12 +96,3 @@ module RideShare
     end
   end
 end
-
-# p RideShare::Trip.find_by_driver(2, '../support/trips.csv')
-# p RideShare::Trip.test_for_date("hello")
-# p RideShare::Trip.all([['3', '1', '54', "2016-04-05", '4']])
-# p RideShare::Trip.all([['3', 'one', '54', "2016-04-05", '4']])
-# p RideShare::Trip.test_for_rating("7")
-# p RideShare::Trip.test_for_integer('7')
-# this will fail when you try to send nothing to test for intger etc...
-# p RideShare::Trip.all([[]])

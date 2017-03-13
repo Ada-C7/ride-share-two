@@ -40,6 +40,7 @@ module RideShare
       phone_number
     end
 
+    # this method will check to see if any two or more riders have the same id
     def self.test_data_for_duplicates(riders)
       rider_ids = riders.map { |rider| rider.id }
       if rider_ids.length != rider_ids.uniq.length
@@ -49,17 +50,19 @@ module RideShare
       riders
     end
 
-    # If I use the full path path, it will work no matter where I run the program
-    # can run from spec file, rakefile, or lib file :)
+    # this method returns the read riders.csv data
     def self.get_data
-      file_path = '/Users/Cynthia/Documents/Ada/queues/ruby_exercises/ruby_week5/ride-share-two/support/riders.csv'
+      file_path = './support/riders.csv'
       ride_data = FileData.new(file_path)
       ride_data.read_csv_and_remove_headings
     end
 
-    # all method is doing a lot - checks input
-    #- iterates truns data into hash and sends off to initialize - can I call this a factory method?
-    # - final test for duplicates - returns array of rider instances
+    # the all method accepts an argument - A FileData object of the read
+    # csv riders data. Injecting this object vs reading the csv directly from the method
+    # lets me easily test with bad mock data
+    # thie method does have a default since the requirments of the this project
+    # expect all to me reading the csv - if no argument is passed, nil is set
+    # and then get_data is classed which will return the FileData object
     def self.all(rides_data = nil)
       rides_data = get_data if rides_data.nil?
       raise ArgumentError if rides_data.empty?
@@ -85,6 +88,3 @@ module RideShare
     end
   end
 end
-
-# rider = RideShare::Rider.find(164)
-# p rider.get_drivers

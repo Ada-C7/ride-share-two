@@ -32,9 +32,9 @@ describe "Driver" do
     # 2,Emory Rosenbaum,1B9WEX2R92R12900E
     # 3,Daryl Nitzsche,SAL6P2M2XNHC5Y656
 
+    # instance variables are assigned to use throughout specs
     before do
       csv_file = './support/drivers.csv'
-      # @trips_data = RideShare::FileData.read_csv(csv_file)
       data = FileData.new(csv_file)
       @drivers_data = data.read_csv_and_remove_headings
 
@@ -146,39 +146,40 @@ describe "Driver" do
       last_driver.vin.must_equal 'XF9Z0ST7X18WD41HT'
     end
   end
-#######################################################################
 
-  before do
-    # manually calculated driver_id 21's average: 30.0/11
-    @driver_id = 21
-    trips = RideShare::Trip.all
+                        ###########################
+                        ## instance method specs ##
+                        ###########################
 
-    # returns one array - sorted_by_driver_id
-    # array_of_trips_sorted_by_driver_id = trips.sort_by { |trip| trip.driver_id }
-
-    # want array of arrays - each array is trips sorted by driver_id
-    # make sure to use number of drivers - not number of trips for array length
-    trips_sorted_by_driver_id = Array.new(100) { |i| i = [] }
+  # wrote this loop to sort trips by driver - this returns an array of arrays
+  # each nested array contains trips for same driver - can use to find driver
+  # with one trip and the most trips
+  def sort_trips_by_driver(trips, number_of_drivers)
+    trips_sorted_by_driver_id = Array.new(number_of_drivers) { |i| i = [] }
     trips.each do |trip|
-      100.times do |i|
+      number_of_drivers.times do |i|
         trips_sorted_by_driver_id[i] << trip if trip.driver_id == i
       end
     end
-    # using min_by will return first driver with least amount of trips
-    # drivers 27 and 37 have only 1 trip
+    trips_sorted_by_driver_id
+  end
+
+  before do
+    # hand calculated driver_id 21's average: 30.0/11 = 2.73
+    @driver_id = 21
+    trips = RideShare::Trip.all
+    number_of_drivers = RideShare::Driver.all.length
+    trips_sorted_by_driver_id = sort_trips_by_driver(trips, number_of_drivers)
+    # drivers 27 and 37 have only 1 trip - driver 27's one trip rating is 1
     @driver_with_one_trip = trips_sorted_by_driver_id.min_by { |array| array.length }
-    # trying to find driver with most trips - max_by will return first
     # drivers: 54 has most trips (12 of them)
     @driver_with_most_trips = trips_sorted_by_driver_id.max_by { |array| array.length }
   end
 
   let(:drivers) {RideShare::Driver.all}
   let(:driver_know_avg) { RideShare::Driver.find(@driver_id) }
-  # driver_id 100 has no trips
   let(:driver_no_trips) { RideShare::Driver.find(100) }
-  # driver_id 27 has one trip & rating is 1
   let(:driver_1_trip) { RideShare::Driver.find(@driver_with_one_trip[0].driver_id)}
-  # driver_id 57 has the most trips - 12
   let(:drivers_with_most_trips) {RideShare::driver.find(@drivers_with_most_trips[0].driver_id)}
 
   describe "Driver#get_trips" do
@@ -195,8 +196,10 @@ describe "Driver" do
 
   describe "Driver#calculate_average_rating" do
 
-    # could test all drivers - but if drivers got lot larger
-    # you wouldn't want to test all so can use a sample
+    # used sample here to get a sample of the trips and makes sure they are
+    # returning an average in the expected range of 1-5
+    # could test all drivers for this data, but if data was significantly larger
+    # it might take too much time to test them all
     it "returns a float between 1 and 5" do
       drivers.sample(25).each do |driver|
         return nil if driver.calculate_average_rating.nil?
@@ -207,8 +210,8 @@ describe "Driver" do
     end
 
     it "calculates the correct average" do
-      # this is the average for driver_id 21
-      driver_know_avg.calculate_average_rating.must_equal 30.0 / 11
+      # this is the average for driver_id 21 calculated by hand
+      driver_know_avg.calculate_average_rating.must_equal 2.73
     end
 
     it "returns nil if there are no trips for driver" do
@@ -216,7 +219,7 @@ describe "Driver" do
     end
 
     it "returns correct average for driver with 1 trip" do
-      driver_1_trip.calculate_average_rating.must_equal 1
+      driver_1_trip.calculate_average_rating.must_equal 1.0
     end
   end
 end

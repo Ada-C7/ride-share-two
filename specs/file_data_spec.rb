@@ -1,9 +1,3 @@
-# require 'simplecov'
-# SimpleCov.start
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require 'minitest/skip_dsl'
-# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative './spec_helper.rb'
 require_relative '../lib/file'
 
@@ -45,35 +39,5 @@ describe "FileData" do
       file.read_csv_and_remove_headings.must_be_instance_of Array
       file.read_csv_and_remove_headings[0].must_be_instance_of Array
     end
-
-    # wont initialize unless this thing is a file so this isn't needed
-    # it "raises an error if not given csv_file" do
-    #   proc {
-    #     pass_string.read_csv_and_remove_headings()
-    #  }.must_raise Errno::ENOENT
-    # end
-
   end
 end
-
-
-
-  # specs for File-read with read as class method
-  # describe "File#read_csv_and_remove_headings" do
-  #
-  #   let(:data) { RideShare::FileData.read_csv_and_remove_headings('./support/trips.csv') }
-  #
-  #   it "returns an array" do
-  #     data.must_be_instance_of Array
-  #   end
-  #
-  #   it "returns an array of arrays" do
-  #     data[0].must_be_instance_of Array
-  #   end
-  #
-  #   it "requires a csv file" do
-  #     proc {
-  #       RideShare::FileData.read_csv_and_remove_headings('hello')
-  #     }.must_raise Errno::ENOENT
-  #   end
-  # end

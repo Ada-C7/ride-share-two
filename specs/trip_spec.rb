@@ -4,8 +4,6 @@ require_relative '../lib/trip'
 require_relative './spec_helper.rb'
 
 describe "Trip" do
-  # trip_id,driver_id,rider_id,date,rating
-  # 12,12,237,2016-08-21,1
 
   describe "Trip#initialize" do
     before do
@@ -23,8 +21,8 @@ describe "Trip" do
       @new_trip.must_be_instance_of RideShare::Trip
     end
 
-    # this is more testing the reader methods for the instance variables
-    it "assigns reader method for instance variables" do
+    # this is testing the reader methods for the instance variables
+    it "assigns reader method for each instance variable" do
       @new_trip.id.must_equal 12
       @new_trip.driver_id.must_equal 12
       @new_trip.rider_id.must_equal 237
@@ -39,13 +37,10 @@ describe "Trip" do
     # trip_id,driver_id,rider_id,date,rating
     # 1,1,54,2016-04-05,3
     # 2,67,146,2016-01-13,5
-    # 3,50,87,2016-05-02,3
-    # 4,13,70,2016-05-14,4
-    # 5,3,12,2015-12-14,2
 
+    # this assigns a bunch of instance variables to use throughout the all specs
     before do
       csv_file = './support/trips.csv'
-      # @trips_data = RideShare::FileData.read_csv(csv_file)
       data = FileData.new(csv_file)
       @trips_data = data.read_csv_and_remove_headings
 
@@ -71,8 +66,6 @@ describe "Trip" do
 
     end
 
-    # let does not run this block untill it is called - which is good you want
-    # the testing of the all method to happen in the it - do - end block
     let(:trips) {RideShare::Trip.all(@trips_data)}
 
     it "returns an array" do
@@ -83,13 +76,12 @@ describe "Trip" do
       trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
-    # this spec only well with the data in the csv file
     it "has the same number of trips as the CSV file" do
       trips.length.must_equal 600
     end
 
     it "raises an error if not given integer for trip ID  " do
-      # proc also equals ->
+      # can also use -> instead of proc
       proc {
         RideShare::Trip.all(@bad_data[:bad_id])
       }.must_raise ArgumentError
@@ -108,13 +100,11 @@ describe "Trip" do
     end
 
     it "raises an error if not given proper date" do
-      # at this point using Ruby's built in error for this
       proc {
         RideShare::Trip.all(@bad_data[:bad_date])
       }.must_raise ArgumentError
     end
 
-    # if you send "four" as rating - it wont pass the test_rating method
     it "raises an error if not given integer for rating" do
       proc {
         RideShare::Trip.all(@bad_data[:bad_rating])
@@ -134,7 +124,6 @@ describe "Trip" do
       }.must_raise ArgumentError
     end
 
-    # good example of testing an error with the expected error message
     it "raises an error message when given [[]]" do
       proc {
         RideShare::Trip.all(@bad_data[:empty_nested_arrays])
@@ -211,19 +200,15 @@ describe "Trip" do
 
   let(:trips) { RideShare::Trip.all }
 
+  before do
+    # there is not driver_id 0 in drivers.csv but trips.csv has trips for driver_id 0
+    # you don't want trips registered under an unknown driver
+    @bad_driver_id = 0
+  end
+  let(:trips_bad_driver_id) { RideShare::Trip.find_by_driver(@bad_driver_id)}
+
   describe "Trip#get_driver" do
 
-    before do
-      # there is not driver_id 0 in drivers.csv but trips.csv has trips for driver_id 0
-      @bad_driver_id = 0
-    end
-    let(:trips_bad_driver_id) { RideShare::Trip.find_by_driver(@bad_driver_id)}
-
-    # had spec interating through every trip (from csv)
-    # but if csv gets way larger you wouldn't want this - so using sample
-    # you now know there are trips for driver_id 0 -this driver DNE in drivers data
-    # need to change how you test or figure out how to ignore bad driver ids
-    # one solution to ignore is using this recuse false
     it "returns a driver instance for good driver_id" do
       trips.sample(100).each do |trip|
         driver = trip.get_driver rescue nil
@@ -233,7 +218,7 @@ describe "Trip" do
 
     # Should return an error
     # don't want to return drivers that have not been initialized
-    #- that aren't in csv/database
+    # - that aren't in csv/database
     it "raises an error if no matching driver instance" do
       err = proc {
              trips_bad_driver_id.each { |trip| trip.get_driver }
@@ -245,6 +230,7 @@ describe "Trip" do
   describe "Trip#get_rider" do
 
     before do
+      # there are trips for rider with id 0 but not rider with id 0
       @bad_rider_id = 0
     end
 
@@ -263,7 +249,5 @@ describe "Trip" do
            }.must_raise ArgumentError
       err.message.must_equal "No rider with id: #{@bad_rider_id} in rider csv"
     end
-
-    # edge cases - find first and last in database?
   end
 end

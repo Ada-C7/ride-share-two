@@ -1,8 +1,4 @@
 require 'rake/testtask'
-require './lib/driver.rb'
-require './lib/rider.rb'
-require './lib/trip.rb'
-require './lib/file.rb'
 
 Rake::TestTask.new do |t|
   t.libs = ["lib"]

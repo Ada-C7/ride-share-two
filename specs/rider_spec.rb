@@ -25,8 +25,14 @@ describe "Rider" do
     end
   end
 
+  ########################
+  ## class method specs ##
+  ########################
+
   describe "Rider#all" do
 
+    # this will create instance variables that
+    # will be used throughout the all specs
     before do
       csv_file = './support/riders.csv'
       data = FileData.new(csv_file)
@@ -112,23 +118,17 @@ describe "Rider" do
 
   describe "Rider#find" do
 
-    # before do
-    #   csv_file = './support/riders.csv'
-    #   data = FileData.new(csv_file)
-    #   @riders_data = data.read_csv_and_remove_headings
-    # end
-
     it "requires an id argument" do
       proc {
         RideShare::Rider.find()
       }.must_raise ArgumentError
     end
 
-    it "returns a rider instane when passed a valid id" do
+    it "returns a rider instance when passed a valid id" do
       RideShare::Rider.find(7).must_be_instance_of RideShare::Rider
     end
 
-    it "returns nil when given a driver id that does no exist" do
+    it "returns nil when given a driver id that does not exist" do
       RideShare::Rider.find(900).must_be_nil
     end
 
@@ -147,13 +147,12 @@ describe "Rider" do
     end
   end
 
-#############################################################
+                    ###########################
+                    ## instance method specs ##
+                    ###########################
 
-  before do
-    @rider_id = 12
-  end
-
-  let(:rider) { RideShare::Rider.find(@rider_id) }
+  # id 12 corresponds to a known driver id
+  let(:rider) { RideShare::Rider.find(12) }
   # rider 42 also doesn't have any trips
   let(:rider_no_trips) { RideShare::Rider.find(300) }
    # riders with more than one trip with same drivers - 41, 164, 92, 74, 63, 250
@@ -167,10 +166,9 @@ describe "Rider" do
     end
 
     it "each trip instance has the same rider id" do
-      rider.get_trips.each { |trip| trip.rider_id.must_equal @rider_id }
+      rider.get_trips.each { |trip| trip.rider_id.must_equal 12 }
     end
 
-    # is this an edge case?
     it "returns nil if rider has no trips" do
       rider_no_trips.get_trips.must_be_nil
     end

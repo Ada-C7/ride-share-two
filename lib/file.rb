@@ -1,4 +1,6 @@
 require 'csv'
+#this class creates a FileData object which is an object that has csv_file and
+# you can call read method(s) on this object 
 class FileData
   attr_reader :csv_file
 
@@ -7,7 +9,6 @@ class FileData
     @csv_file = csv_file
   end
 
-  # you could work on this method - look at examples where you expect headings
   def read_csv_and_remove_headings
     CSV.read(@csv_file)[1..-1]
   end
