@@ -54,6 +54,10 @@ describe "Rider" do
       }.must_raise ArgumentError
 
       proc{
+        RideSharing::Rider.new({rider_id: 007, name: "Al", phone_num: "1-580-581-8405 x079"})
+      }.must_raise ArgumentError
+
+      proc{
         RideSharing::Rider.new({rider_id: 007,  phone_num: "1-580-581-8405 x079"})
       }.must_raise ArgumentError
     end
