@@ -31,8 +31,7 @@ module RideShare
       return avg_rating
     end
     #TODO can come back to this and make so that it's a float instead of an integer
-    #now that I have the driver trip instances, I need to sum the ratings
-    # driver_avg_rating.
+
 
     # retrieve all drivers from the CSV file
     def self.all_driver_info

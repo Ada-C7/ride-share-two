@@ -32,33 +32,26 @@ describe "driver class" do
   }.must_raise ArgumentError
   end
 
-# #TODO test def driver_trip_instances
 it "returns an array of all driver info" do
   driver_trips = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
   driver_trips.driver_trip_instances.must_be_instance_of Array
 end
 
-# it "returns the correct instance of driver_id"
-#   driver_trips = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
-# end
-
-
-
 #tests def average_rating
 it "returns an integer" do
   #do I have to test it here or in the trips
   avg_driver_rating = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9" )
-  avg_driver_rating.average_rating.must_be_instance_of Integer
+  avg_driver_rating.average_rating.must_be_instance_of Float
 end
 
 it "the integer is between 1 and 5" do
   avg_driver_rating = avg_driver_rating = RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9" )
-  avg_driver_rating.average_rating.must_equal 2
+  avg_driver_rating.average_rating.must_equal 2.3333333333333335
 end
 
 it "the integer is between 1 and 5" do
   avg_driver_rating = RideShare::Driver.new(5, "hello", "WBWSS52P9NEYXVDE9" )
-  avg_driver_rating.average_rating.must_equal 3
+  avg_driver_rating.average_rating.must_equal 3.5
 end
 
 #tests self.all_driver_info
@@ -92,7 +85,7 @@ end
     end
   end
 
-# self.find_drivers(driver_id) 7,Lizeth Dickens,W09XNTZR9KTFK10WW
+# self.find_drivers(driver_id) 
   it "returns a driver account that exists" do
     search = RideShare::Driver.find_driver(7)
     search.must_be_instance_of RideShare::Driver

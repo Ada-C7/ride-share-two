@@ -1,9 +1,3 @@
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require 'minitest/skip_dsl'
-# require_relative '../lib/'
-# require 'csv'
-# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require 'csv'
 require_relative 'spec_helper'
 
@@ -28,7 +22,6 @@ describe "rider class" do
 
   #for the self.all_rider_info method
   it "returns an array or all rider info" do
-    # a_ride = RideShare::Rider.new(913, "Harry Potter", "509-979-7638")
     test_class = RideShare::Rider.all_rider_info
     test_class.must_be_instance_of Array
   end
