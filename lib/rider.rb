@@ -6,7 +6,9 @@ module RideShare
     attr_reader :rider_id, :name, :phone_num
     def initialize(rider_info)
       # have an ID, name and phone number
-      
+      @rider_id = rider_info[:rider_id]
+      @name = rider_info[:name]
+      @phone_num = rider_info[:phone_num]
     end
 
     def self.ceate_all_riders

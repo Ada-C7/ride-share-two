@@ -9,10 +9,16 @@ require 'pry'
 describe "Rider" do
 
   describe "initialize" do
-    it "Creates a new instance of the Rider class" do
+    let(:rider) {RideShare::Rider.new(rider_id: 554, name: "Kaitlin Ramirez", phone_num: "555-555-1234")}
+    it "Can create a new instance of the Rider class" do
       # skip
-      rider = RideShare::Rider.new
       rider.must_be_instance_of RideShare::Rider
+    end
+
+    it "can assign instance variables according to the input hash" do
+      rider.name.must_equal "Kaitlin Ramirez"
+      rider.rider_id.must_be_instance_of Fixnum
+      rider.phone_num.must_be_instance_of String
     end
   end
 
@@ -61,7 +67,7 @@ describe "Rider" do
   describe "unique_drivers" do
     it "returns an Array of all the drivers a rider has had" do
       skip
-      RideShare::Rider.new().unique_drivers.must_be_instance_of Array
+      RideShare::Rider.new(rider_id: 56, name: "Rebecca Moen DVM", phone_num: "(117) 028-4562 x913").unique_drivers.must_be_instance_of Array
     end
 
     it "returns an empty Array if the rider has not taken any trips, thus no drivers" do
