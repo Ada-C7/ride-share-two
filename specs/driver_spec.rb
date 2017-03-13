@@ -94,9 +94,7 @@ describe "Driver" do
     end
 
     it "contains only Driver elements in the returned array" do
-      drivers.each do |driver|
-        driver.must_be_instance_of RideShare::Driver
-      end
+      drivers.each { |driver| driver.must_be_instance_of RideShare::Driver }
     end
 
     it "returns the correct number of drivers" do

@@ -19,6 +19,7 @@ module RideShare
 
     # retrieves the list of all previous driver instances
     def drivers
+      return []
     end
 
     # retrieves all riders from the CSV file

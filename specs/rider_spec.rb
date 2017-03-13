@@ -42,32 +42,52 @@ describe "Rider" do
       rider.trips.must_be_empty
     end
   end
-  #
-  # describe "drivers" do
-  #   # handle the case that @rider_id is nil?
-  #   it "returns an array" do
-  #
-  #   end
-  #
-  #   it "returns only Driver objects in the array" do
-  #
-  #   end
 
-      # it "returns the correct number of Drivers" do
-      #
-      # end
-  #
-  #   it "returns all previous driver instances" do
-  #     # posibly break into more tests
-  #     #array.length, check ids
-  #   end
-  #
-  #   it "retruns nil if @driver_id is undefined" do
-  #
-  #   end
-  # end
+  describe "drivers" do
+    let (:drivers_for_rider_54) {RideShare::Rider.new(id: 54).drivers}
+    # driver_ids for every trip of rider_54 = [1, 39]
 
-  # retrieves all riders from the CSV file
+    let (:drivers_for_rider_41) {RideShare::Rider.new(id: 41).drivers}
+    # driver_ids for every trip of rider 41 -> [94, 94, 91]
+
+    it "returns an array" do
+      drivers_for_rider_54.must_be_instance_of Array
+    end
+
+    it "returns only Driver objects in the array" do
+      drivers_for_rider_54.each { |driver| driver.must_be_kind_of RideShare::Driver }
+    end
+
+    it "returns the correct number of Drivers" do
+      drivers_for_rider_54.length.must_equal 2
+    end
+
+    it "finds the first driver id listed for that rider in the csv file" do
+      first_driver = drivers_for_rider_54.first
+      first_driver.id.must_equal 1
+    end
+
+    it "find the last driver id listed for that rider in the csv file" do
+      last_driver = drivers_for_rider_54.first.last
+      last_driver.id.must_equal 39
+    end
+
+    it "returns an empty array if the rider has not taken any trips" do
+      # Rider 116 has no trips
+      RideShare::Rider.new(id: 116).drivers.must_be_empty
+    end
+
+    it "removes any driver duplicates from the returned array" do
+      # drivers should only return [94, 91]
+      drivers_for_rider_41.length.must_equal 2
+    end
+
+    it "lists the drivers from lowest to highest driver id" do
+      drivers_for_rider_41.first.id.must_equal 91
+      drivers_for_rider_41.last.id.must_equal 94
+    end
+  end
+
   describe "Rider.all" do
     let (:riders) {RideShare::Rider.all}
     let (:rider_csv_info) {CSV.read("support/riders.csv")[1 .. -1]} # ignore headers
@@ -77,9 +97,7 @@ describe "Rider" do
     end
 
     it "returns only Rider instances in the array" do
-      riders.each do |rider|
-        rider.must_be_instance_of RideShare::Rider
-      end
+      riders.each { |rider| rider.must_be_instance_of RideShare::Rider }
     end
 
     it "returns the correct number of riders" do

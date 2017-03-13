@@ -6,7 +6,7 @@ describe "Trip" do
     @rider_id = 78
     @driver_id = 88
     @date = '2017-8-03' #can't be a future date
-    @rating = 3 
+    @rating = 3
   end
 
   let (:trip) {RideShare::Trip.new(id: @id, rider_id: @rider_id,
@@ -109,9 +109,7 @@ describe "Trip" do
     end
 
     it "contains only Trip elements in the returned array" do
-      trips.each do |trip|
-        trip.must_be_instance_of RideShare::Trip
-      end
+      trips.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "returns the correct number of trips" do
@@ -162,9 +160,7 @@ describe "Trip" do
     end
 
     it "contains only Trip instances in the returned array" do
-      trips_for_driver_88.each do |trip|
-        trip.must_be_instance_of RideShare::Trip
-      end
+      trips_for_driver_88.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "returns the correct number of Trips" do
@@ -172,9 +168,7 @@ describe "Trip" do
     end
 
     it "returns Trip instances that have a driver_id matching the one given" do
-      trips_for_driver_88.each do |trip|
-        trip.driver_id.must_equal 88
-      end
+      trips_for_driver_88.each { |trip| trip.driver_id.must_equal 88 }
     end
 
     it "finds the first Trip associated with a given driver_id from the csv file" do
@@ -201,9 +195,7 @@ describe "Trip" do
     end
 
     it "contains only Trip instances in the returned array" do
-      trips_for_rider_88.each do |trip|
-        trip.must_be_instance_of RideShare::Trip
-      end
+      trips_for_rider_88.each { |trip| trip.must_be_instance_of RideShare::Trip }
     end
 
     it "returns the correct number of Trips" do
@@ -211,9 +203,7 @@ describe "Trip" do
     end
 
     it "returns Trip instances that have a rider_id matching the one given" do
-      trips_for_rider_88.each do |trip|
-        trip.rider_id.must_equal 88
-      end
+      trips_for_rider_88.each { |trip| trip.rider_id.must_equal 88 }
     end
 
     it "finds the first Trip associated with a given rider_id from the csv file" do
