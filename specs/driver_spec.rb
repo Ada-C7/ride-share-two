@@ -17,7 +17,6 @@ describe RideShare::Driver do
     end
   end
 
-
   describe "self.all" do
     before do
       @all_trips = RideShare::Driver.all
@@ -75,4 +74,4 @@ describe RideShare::Driver do
     end
   end
 
-end #end of module
+end

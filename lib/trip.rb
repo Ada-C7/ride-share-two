@@ -1,6 +1,5 @@
 require 'csv'
 require 'ap'
-# require_relative 'driver'
 
 module RideShare
   class Trip
@@ -14,7 +13,6 @@ module RideShare
       raise ArgumentError.new("Rating must be between 1 and 5") unless @rating >= 1 && @rating <= 5
     end
 
-    #retrieve all trips from the CSV file
     def self.all
       @trips = []
       CSV.foreach("./support/trips.csv", {:headers => true}).each do |line|
@@ -23,7 +21,6 @@ module RideShare
       return @trips
     end
 
-    #find all trip instances for a given driver ID
     def self.find_trips_of_driver(id)
       trip_find = RideShare::Trip.all
       array_of_trips = []
@@ -32,7 +29,7 @@ module RideShare
           array_of_trips << trip
         end
       end
-      #checking to see if array is empty, meaning the id given did not match any of the drivers
+
       if array_of_trips.length == 0
         raise ArgumentError.new "Sorry, there is no trip with an ID:#{id}."
       else
@@ -40,7 +37,6 @@ module RideShare
       end
     end
 
-    #find all trip instances for a given rider ID
     def self.find_trips_of_rider(id)
       rider_find = RideShare::Trip.all
       array_of_riders = []
@@ -49,15 +45,14 @@ module RideShare
           array_of_riders << rider
         end
       end
-      #checking to see if array is empty, meaning the id given did not match any of the riders
       if array_of_riders.length == 0
         raise ArgumentError.new "Sorry, there is no rider with an ID:#{id}."
       end
       return array_of_riders
     end
 
-  end    #end of class
-end  #end of module
+  end
+end
 
 
 # puts "retrieve all trips from the CSV file"

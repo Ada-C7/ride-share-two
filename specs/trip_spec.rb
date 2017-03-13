@@ -70,5 +70,4 @@ describe RideShare::Trip do
            }.must_raise ArgumentError
     end
   end
-
 end

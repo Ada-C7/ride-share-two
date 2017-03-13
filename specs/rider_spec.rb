@@ -67,4 +67,4 @@ describe RideShare::Rider do
     end
   end
 
-end #end of module
+end

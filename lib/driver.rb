@@ -12,7 +12,6 @@ module RideShare
       raise ArgumentError.new("vin number should be exactly 17") unless @vin.length == 17
     end
 
-    #retrieve all drivers from the CSV file
     def self.all
       @drivers = []
       CSV.foreach("./support/drivers.csv", {:headers => true}).each do |line|
@@ -21,7 +20,6 @@ module RideShare
       return @drivers
     end
 
-    #find a specific driver using their numeric ID
     def self.find(id)
       driver_find = RideShare::Driver.all
       driver_find.each do |driver|
@@ -32,7 +30,6 @@ module RideShare
       raise ArgumentError.new "Sorry, a driver with ID:#{id} doesn't exist."
     end
 
-    #retrieve the list of trip instances that only this driver has taken
     def trip_instances_for_driver
       list_instances_of_trips = RideShare::Trip.find_trips_of_driver(id)
       if list_instances_of_trips.length == 0
@@ -42,7 +39,6 @@ module RideShare
       end
     end
 
-    #retrieve an average rating for that driver based on all trips taken
     def rating
       trips = RideShare::Trip.find_trips_of_driver(id)
       total = 0
@@ -52,8 +48,8 @@ module RideShare
       return average.round
     end
 
-  end    #end of class
-end  #end of module
+  end
+end
 
 
 # puts "creates instance for non-self methods"

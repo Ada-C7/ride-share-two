@@ -12,7 +12,6 @@ module RideShare
       @phone_number = phone_number
     end
 
-    #retrieve all riders from the CSV file
     def self.all
       @riders = []
       CSV.foreach("./support/riders.csv", {:headers => true}).each do |line|
@@ -21,7 +20,6 @@ module RideShare
       return @riders
     end
 
-    #find a specific rider using their numeric ID
     def self.find(id)
       rider_find = RideShare::Rider.all
       rider_find.each do |rider|
@@ -32,7 +30,6 @@ module RideShare
       raise ArgumentError.new "Sorry, a rider with an ID:#{id} does not exist"
     end
 
-    #retrieve the list of trip instances that only this rider has taken
     def trip_instances_for_rider
       list_of_riders = RideShare::Trip.find_trips_of_rider(id)
       if list_of_riders.length == 0
@@ -42,7 +39,6 @@ module RideShare
       end
     end
 
-    #retrieve the list of all previous driver instances (through the trips functionality built above)
     def retrieve_list_of_previous_drivers
       array_of_rider_trips = RideShare::Trip.find_trips_of_rider(id)
       array_of_driver_ids = []
@@ -54,8 +50,8 @@ module RideShare
       end
     end
 
-  end #end of class
-end #end of module
+  end
+end
 
 # puts "creates instance for non-self methods\n\n"
 # instance_of_rider = RideShare::Rider.find(12)
