@@ -54,12 +54,12 @@ describe "Rider" do
 
   describe "trips" do
     it "finds all the trips for a Rider in an Array" do
-      skip
+      # skip
       RideShare::Rider.new(rider_id: 1, name: "Nina Hintz Sr.", phone_num: "560.815.3059").trips.must_be_instance_of Array
     end
 
     it "finds trips for a Rider without trips" do
-      skip
+      # skip
       RideShare::Rider.new(rider_id: 42, name: "Marcelina Howe", phone_num: "656-421-8363 x85791").trips.must_be_empty
     end
   end

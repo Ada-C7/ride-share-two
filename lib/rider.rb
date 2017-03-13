@@ -33,6 +33,8 @@ module RideShare
 
     def trips
       # retrieve the list of trip instances that only this rider has taken
+      @all_trips = RideShare::Trip.rider_trips(@rider_id)
+      return @all_trips
     end
 
     def unique_drivers
