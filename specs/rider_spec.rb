@@ -1,11 +1,8 @@
-# TODO: Make sure array is picking values correctly.
-
 require_relative 'spec_helper.rb'
 
 
 describe "rider: self.all" do
   before do
-    # TODO: update to let()
     @rider = RideShare::Rider.all
   end
 
@@ -26,7 +23,6 @@ describe "rider: self.all" do
   end
 
   it "retrieves the rider_id, name, and phone_num" do
-    # FIXME: Fix object calling issue. Test passing but not correct.
     CSV.readlines('support/riders.csv') do |line|
       counter = 0
 
@@ -44,23 +40,62 @@ describe "rider: self.all" do
     @rider[0].rider_id.must_equal "1"
     @rider[225].rider_id.must_equal "226"
   end
-  # TODO: Edgecase and 'middle' case test
+
+  it "retrieves random rider_id" do
+    @rider[27].rider_id.must_equal "28"
+  end
 end
 
 describe "rider: self.find" do
-  # before do
-  #   @rider = RideShare::Rider.all
-  # end
 
-  it "return a rider from self.all" do
-    skip "Error message"
-    # TODO: Fix object calling issue
-    #  NoMethodError: undefined method `name' for "Marcellus Hoeger":String
+  it "returns the first rider using rider_id" do
+    rider = RideShare::Rider.find("1")
+
+    rider.must_equal "Nina Hintz Sr."
+  end
+
+  it "returns the last driver using rider_id" do
+    rider = RideShare::Rider.find("40")
+
+    rider.must_equal "Julius Johns"
+  end
+
+  it "return a random rider using rider_id" do
+    # skip
     rider = RideShare::Rider.find("3")
 
-    # @rider.must_be_instance_of RideShare::Rider
-    # rider.rider_id.must_equal rider_id
-    rider.name.must_equal "Marcellus Hoeger"
-    # rider.phone_num.must_equal "(222) 926-0138"
+    rider.must_equal "Marcellus Hoeger"
+  end
+end
+
+describe "rider: trips" do
+  before do
+    @rider = RideShare::Rider.new("", "", "")
+  end
+
+  it "finds first and last rider instances of first rider" do
+    instances = @rider.trips("1")
+
+    array_1 = ["46", "98", "1", "2016-06-28", "2"]
+    array_2 = ["272", "17", "1", "2015-09-14", "4"]
+
+    instances[0].must_equal array_1
+    instances[-1].must_equal array_2
+  end
+
+  it "finds rider instance of last rider" do
+    instance = @rider.trips("300")
+    array_1 = nil
+
+    instance[0].must_equal array_1
+  end
+
+  it "finds first and last rider instance of random rider" do
+    instances = @rider.trips("19")
+    array_1 = ["93", "57", "19", "2015-06-25", "5"]
+    array_2 = ["228", "18", "19", "2015-10-10", "5"]
+
+    instances[0].must_equal array_1
+    instances[-1].must_equal array_2
   end
 end

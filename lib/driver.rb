@@ -11,14 +11,11 @@ module RideShare
       @driver_id = driver_id
       @name = name
       @vin = vin
-
     end
 
     # DONE:retrieve all drivers from the CSV file
     # DONE: Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number
     def self.all
-      # TODO: Clean up variable names.
-      # TODO: Add 'or' statement to delete_if for vins.
       read_file = CSV.readlines('support/drivers.csv')
 
       cleaned_array = read_file.delete_if do |row|
@@ -54,15 +51,7 @@ module RideShare
     def trips(driver_id)
       new_instance = RideShare::Trip.new("", "", "", "", "")
       trips = new_instance.find_all_driver_instances(driver_id)
-      # print trips
-      # puts "Working"
-
-
-      # new_instance = RideShare::Trip.new("", "", "", "", "")
-      # trips = new_instance.find_all_driver_instances(driver_id)
-      # puts trips
-      # puts "Working"
-      # new_instance = RideShare::Trip::find_all_driver_instances("1")
+      return trips
     end
 
     # DONE: retrieve an average rating for that driver based on all trips taken
@@ -71,11 +60,11 @@ module RideShare
       trips_array = trips(driver_id)
 
       trips_array.each do |instance|
-        # FIXME: Can't call rating, produces error
         rating_sum += instance[4].to_i
       end
       if trips_array.length == 0
-        # TODO: Argument Error
+        # DONE: Argument Error
+        raise ArgumentError.new ("Can not divide by zero") if trips_array.length == 0
       else
         avg_rating = rating_sum / (trips_array.length)
         return avg_rating
@@ -84,30 +73,3 @@ module RideShare
 
   end
 end
-
-#### Note: did not pass any vars through trips.
-# new_instance = RideShare::Trip.new("1", "", "", "", "")
-# trips = new_instance.find_all_driver_instances(driver_id)
-# # puts trips
-# # puts "Working"
-####
-
-
-
-
-
-# test_1 = RideShare::Driver.all
-#
-# print test_1#.is_a? Array
-
-# test_1 = RideShare::Driver.find("1")
-#
-# puts test_1
-
-# test_1 = RideShare::Driver.new("", "", "")
-#
-# print test_1.trips("13")
-#
-# test_1 = RideShare::Driver.new("", "", "")
-#
-# puts test_1.avg_rating("13")

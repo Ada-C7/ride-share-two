@@ -1,10 +1,7 @@
-# TODO: Make sure array is picking values correctly.
-
 require_relative 'spec_helper.rb'
 
 describe "driver: self.all" do
   before do
-    # TODO: update to let()
     @driver = RideShare::Driver.all
   end
 
@@ -60,28 +57,22 @@ describe "driver: self.all" do
     it "retrieves random vin length" do
       @driver[61].vin.must_equal "WD251GUW8HGMJ0ZNZ"
     end
-  # TODO: Edgecase and 'middle' case test
 end
 
 describe "driver: self.find" do
-  # before do
-  #   # TODO: update to let()
-  #   @driver = RideShare::Driver.find
-  # end
-
-  it "retrieves first driver using driver_id" do
+  it "returns first driver using driver_id" do
     @driver = RideShare::Driver.find("1")
 
     @driver.must_equal "Bernardo Prosacco"
   end
 
-  it "retrieves last driver using driver_id" do
+  it "returns last driver using driver_id" do
     @driver = RideShare::Driver.find("100")
 
     @driver.must_equal "Minnie Dach"
   end
 
-  it "retrieves random driver using driver_id" do
+  it "returns random driver using driver_id" do
     # skip
     @driver = RideShare::Driver.find("66")
 
@@ -91,7 +82,6 @@ end
 
 describe "driver: trips" do
   before do
-    # TODO: update to let()
     @driver = RideShare::Driver.new("", "", "")
   end
 
@@ -124,7 +114,6 @@ end
 
 describe "driver: avg_rating" do
   before do
-    # TODO: update to let()
     @driver = RideShare::Driver.new("", "", "")
   end
   it "finds average rating for first driver" do
@@ -142,5 +131,11 @@ describe "driver: avg_rating" do
     avg_rating = @driver.avg_rating("13")
 
     avg_rating.must_equal 4
+  end
+
+  it "produces argument error to avoid dividing by zero" do
+    proc {
+      @driver.avg_rating("100")
+    }
   end
 end

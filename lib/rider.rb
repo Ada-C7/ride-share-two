@@ -20,7 +20,6 @@ module RideShare
 
     # DONE: retrieve all riders from the CSV file
     def self.all
-      # TODO: Clean up variable names.
       read_file = CSV.readlines('support/riders.csv')
 
       cleaned_array = read_file.delete_if do |row|
@@ -40,8 +39,6 @@ module RideShare
     def self.find(rider_id)
       riders = RideShare::Rider.all
       counter = 0
-      # puts riders[counter].rider_id.is_a? String
-      # puts rider_id.is_a? String
 
       riders.each do |rider|
         if rider.rider_id == rider_id
@@ -66,16 +63,3 @@ module RideShare
 
   end
 end
-
-
-# test_1 = RideShare::Rider.all
-#
-# puts test_1
-
-# test_1 = RideShare::Rider.find("50")
-#
-# puts test_1
-
-# test_1 = RideShare::Rider.new("", "", "")
-#
-# puts test_1.trips("1")
