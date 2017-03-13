@@ -53,6 +53,10 @@ describe "Driver" do
       }.must_raise ArgumentError
 
       proc{
+        RideSharing::Driver.new({driver_id: 007, name: "Al" , vin: "WBWSS52P9NEYLVDE9"})
+      }.must_raise ArgumentError
+
+      proc{
         RideSharing::Driver.new({driver_id: 007,  vin: "WBWSS52P9NEYLVDE9"})
       }.must_raise ArgumentError
     end
