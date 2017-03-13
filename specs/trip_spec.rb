@@ -1,7 +1,6 @@
 require_relative 'spec_helper'
 require 'pry'
 
-
 describe "Trip" do
   let(:my_trip) {RideShare::Trip.new(1, 1, 54, 2016-04-05, 3)}
   let(:all_trips) {RideShare::Trip.find_all}
@@ -27,7 +26,6 @@ describe "Trip" do
     it "returns an a specific driver instance" do
       my_trip.driver.must_be_instance_of RideShare::Driver
     end
-
   end
 
   describe "Testing #rider method" do
@@ -71,7 +69,9 @@ describe "Trip" do
 
     it "Returns 0 if driver ID not found" do
       bad_id = RideShare::Trip.find_all_driver("bad driver ID")
-        bad_id.must_equal 0
+      bad_id.must_equal 0
+      other_bad_id = RideShare::Trip.find_all_rider(100000)
+      other_bad_id.must_equal 0
     end
   end
 
@@ -88,7 +88,9 @@ describe "Trip" do
 
     it "Returns 0 if ID not found" do
       bad_id = RideShare::Trip.find_all_rider("bad rider ID")
-        bad_id.must_equal 0
+      bad_id.must_equal 0
+      other_bad_id = RideShare::Trip.find_all_rider(100000)
+      other_bad_id.must_equal 0
     end
   end
 end

@@ -35,7 +35,7 @@ class RideShare::Trip
   end
 
   def self.find_all_driver(driver_id)
-    all_trips = find_all
+    all_trips = RideShare::Trip.find_all
     driver_trips = all_trips.find_all do |trip|
       trip.driver_id == driver_id
     end
@@ -44,7 +44,7 @@ class RideShare::Trip
   end
 
   def self.find_all_rider(rider_id)
-    all_trips = find_all
+    all_trips = RideShare::Trip.find_all
     rider_trips = all_trips.find_all do |trip|
       trip.rider_id == rider_id
     end

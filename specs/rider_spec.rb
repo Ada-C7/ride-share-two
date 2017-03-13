@@ -101,7 +101,5 @@ describe "rider_id" do
       bad_id = RideShare::Rider.find_rider("apple")
       bad_id.must_equal 0
     end
-
   end
-
 end
