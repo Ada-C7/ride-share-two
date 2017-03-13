@@ -9,9 +9,12 @@ module RideShare
       @name = args[:name]
       @phone_num = args[:phone_num]
 
-      raise ArgumentError.new("rider id must be an integer") unless @rider_id.class == Integer
+      # Verify that rider id is valid
+      raise ArgumentError.new("rider id must be a positive integer") unless @rider_id.class == Integer && @rider_id > 0
     end
 
+    # Read all values from the rider csv file
+    # Store each line as an array of Rider instances
     def self.all
       riders = []
       CSV.foreach("support/riders.csv", {:headers => true, header_converters: :symbol, converters: :all}) do |line|
@@ -20,6 +23,8 @@ module RideShare
       return riders
     end
 
+    # Find a rider based on rider id
+    # Raise error if that rider does not exist
     def self.find(rider_id)
       all.each do |rider|
         if rider.rider_id == rider_id
@@ -29,10 +34,12 @@ module RideShare
       raise InvalidRider.new("that rider does not exist")
     end
 
+    # Find all trips for a particular rider
     def trips
       Trip.find_for_rider(@rider_id)
     end
 
+    # Find all drivers for a particular rider
     def drivers
       drivers = []
       trips.each do |trip|

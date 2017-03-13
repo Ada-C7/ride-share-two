@@ -1,3 +1,6 @@
+## Everything in this file was just for practice/ to help me better understand what my code was doing 
+
+
 require 'csv'
 # require_relative './lib/driver.rb'
 # def list_of_drivers
