@@ -8,6 +8,7 @@ module RideShare
     def initialize(id, name, vin)
       @id = id.to_i
       @name = name
+      raise ArgumentError.new("Vin must be 17 characters") if vin.to_s.length != 17
       @vin = vin
       #Vin should be a specific length to ensure validity(raise error)
     end #end initialize method
@@ -44,9 +45,16 @@ module RideShare
 
     #create method that uses internal trips list to calculate average rating of driver
     def avg_rating
+      ratings = get_trips.map(&:rating)
+
+      # do |trip|
+      #   trip.rating
+      # end
+      # binding.pry
+      ratings.sum / ratings.size.to_f
       # ratings = []
       #  get_trips[rating].inject  |sum, el|
-      (sum + el).to_f
+      # ((sum + el).to_f) / get_trips.length
       #
     end
   end

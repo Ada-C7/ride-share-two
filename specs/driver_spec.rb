@@ -20,10 +20,27 @@ describe "Driver" do
     end
   end
 
+  describe "Invalid Vin" do
+
+    let(:new_driver) do
+      RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE")
+    end
+
+    it "The Vin must be 17 characters, an error will be raised if the vin length is invalid" do
+      proc { new_driver }.must_raise ArgumentError
+    end
+  end
+
   describe "Driver#all" do
 
+    let (:drivers) do
+      RideShare::Driver.all
+    end
+
     it "Should create instances of drivers and their associated data" do
-      RideShare::Driver.all.must_be_kind_of Array
+      drivers.must_be_kind_of Array
+      drivers.length.must_equal 100
+      drivers.each { |object| object.must_be_instance_of RideShare::Driver }
     end
   end
 
@@ -71,18 +88,15 @@ describe "Driver" do
     end
   end
 
-  describe "rating_average" do
+  describe "avg_rating" do
 
     let(:new_driver) do
       RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
     end
 
     it "Should return the average trip rating for the driver" do
-
-      new_driver.rating_average.must_be_kind_of(Numeric)
-      average = new_driver.rating_average
-      average.must_be_within_delta(3.01, 0.01)
+      average = new_driver.avg_rating
+      average.must_be_within_delta(2.33, 0.01)
     end
-
   end
 end

@@ -35,7 +35,7 @@ module RideShare
       rider = RideShare::Trip.by_rider(id)
       return rider
     end
-    #Each rider should have an ID, name, and phone number
+
     #Should be able to retrieve the list of trip instances that only this specific rider has taken
     #Retrieve list of all previous driver instances
     #Uses the all method in find method
@@ -48,13 +48,6 @@ module RideShare
         RideShare::Driver.find(trip.driver_id)
       end
 
-      # retrieve_trips.map! do |trip|
-      #   drivers[trip.driver_id] = 1
-      #   drivers.each do |id, value|
-      #     drivers[id] = RideShare::Driver.find(id)
-      #   end
-      # end
-      # return drivers.values
     end
 
   end
