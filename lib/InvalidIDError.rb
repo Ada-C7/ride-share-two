@@ -1,0 +1,2 @@
+class InvalidIDError < StandardError
+end
