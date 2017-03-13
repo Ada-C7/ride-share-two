@@ -38,6 +38,7 @@ module RideShare
 
     def driver
       # retrieve the associated driver instance through the driver ID
+      # hmm... my code isn't an instance. it's a hash
       return RideShare::Driver.find(@driver_id)
     end
 

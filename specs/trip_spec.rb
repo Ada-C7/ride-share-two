@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+require 'pry'
 
 # Also if you weren't already testing for it, there are a bunch of invalid trip lines in the csv file that will make trip objects with driver ids that don't exist
 describe "Trip" do
@@ -28,6 +29,28 @@ describe "Trip" do
     end
   end
 
+  describe "Find all trips for a driver" do
+    it "should return an array of all trips for a driver" do
+      RideShare::Trip.driver_trips(1).must_be_instance_of Array
+    end
+  end
 
+  describe "driver method" do
+    it "collects driver information: name and vin" do
+      RideShare::Trip.new(trip_id: 1, driver_id: 1, rider_id: 54, date: 2016-04-05, rating: 3).driver.must_be_instance_of Hash
+    end
+  end
+
+  describe "Find all trips for a rider" do
+    it "should return an array of all trips for a rider" do
+      RideShare::Trip.rider_trips(1).must_be_instance_of Array
+    end
+  end
+
+  describe "rider method" do
+    it "collects rider information: name and phone number" do
+      RideShare::Trip.new(trip_id: 1, driver_id: 1, rider_id: 54, date: 2016-04-05, rating: 3).driver.must_be_instance_of Hash
+    end
+  end
 
 end

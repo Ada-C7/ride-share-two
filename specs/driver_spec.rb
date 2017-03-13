@@ -43,6 +43,7 @@ describe "Driver" do
 
     it "finds all the trips for the first Driver" do
       RideShare::Driver.new(driver_id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9").trips.length.must_equal 9
+      # RideShare::Driver.find(1).trips.length.must_equal 9 doesn't work b/c not class object it's a hash
     end
 
     it "finds all the trips for the last Driver" do
