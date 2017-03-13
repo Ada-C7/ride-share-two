@@ -1,5 +1,4 @@
 require 'csv'
-# require_relative 'driver' Got: "rb:2: warning: loading in progress, circular require considered harmful"
 
 module RideShare
   class Trip
@@ -38,7 +37,6 @@ module RideShare
 
     def driver
       # retrieve the associated driver instance through the driver ID
-      # hmm... my code isn't an instance. it's a hash
       return RideShare::Driver.find(@driver_id)
     end
 
@@ -57,24 +55,3 @@ module RideShare
 
   end
 end
-
-
-################## FAILED CODE ########################
-
-# NOT WORKING TAKE 2
-# def self.find_all_driver_trips(driver_id)
-#   # find all trip instances for a given driver ID
-#   # http://stackoverflow.com/questions/2244915/how-do-i-search-within-an-array-of-hashes-by-hash-values-in-ruby
-#   self.create_all_trips.select { |trip| trip[:driver_id] == driver_id }
-# end
-#
-# def find_all_rider_trips(rider_id)
-#   # find all trip instances for a given rider ID
-#
-# end
-
-# NOT WORKING TAKE 1
-# def self.find(driver_id)
-#   # find a specific driver using their numeric ID
-#   self.create_all_drivers[driver_id]
-# end

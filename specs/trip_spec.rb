@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-require 'pry'
 
 # Also if you weren't already testing for it, there are a bunch of invalid trip lines in the csv file that will make trip objects with driver ids that don't exist
 describe "Trip" do
