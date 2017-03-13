@@ -36,7 +36,11 @@ describe "Trips initialize" do
     (1..5).must_include trips.rating
   end
 
-  
+  it "raise an ArgumentError if the rating is not is not a number from 1-5" do
+    proc{
+      driver = RideShare::Trips.new({rating: 7})
+    }.must_raise ArgumentError
+  end
 end
 
 #
