@@ -1,7 +1,4 @@
 require 'csv'
-require 'pry'
-require_relative 'driver'
-require_relative 'trip'
 
 module RideShare
   class Rider
@@ -11,7 +8,9 @@ module RideShare
       raise ArgumentError.new("no valid ID") if id_r.class != Integer
       raise ArgumentError.new("no valid ID") if id_r < 0
       raise ArgumentError.new("name must be a string") if name_r.class != String
-      raise ArgumentError.new("phone_number must be a string") if phone_number.class != String
+      if phone_number.class != String
+        raise ArgumentError.new("phone_number must be a string")
+      end
       @id_r = id_r
       @name_r = name_r
       @phone_number = phone_number
@@ -19,7 +18,6 @@ module RideShare
 
     def self.all
       info = []
-      # CSV.open("../support/rider.csv", :headers => true).each do |line|
       CSV.open("support/riders.csv", :headers => true).each do |line|
         info << self.new(line[0].to_i, line[1].to_s, line[2].to_s)
       end

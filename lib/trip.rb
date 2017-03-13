@@ -1,7 +1,4 @@
 require 'csv'
-require 'pry'
-# require_relative 'driver'
-# require_relative 'rider'
 
 module RideShare
   class Trip
@@ -28,9 +25,9 @@ module RideShare
 
     def self.all
       info = []
-      # CSV.open("../support/trips.csv", :headers => true).each do |line|
       CSV.open("support/trips.csv", :headers => true).each do |line|
-        info << self.new(line[0].to_i, line[1].to_i, line[2].to_i, line[3].to_s, line[4].to_f)
+        info << self.new(line[0].to_i, line[1].to_i, line[2].to_i, line[3].to_s,
+        line[4].to_f)
       end
       info
     end
@@ -71,8 +68,3 @@ module RideShare
 
   end#end of Trip class
 end#end of the module RideShare
-
-# puts RideShare::Trip.new(1,1,54,'2016-04-05',3).find_rider
-# driver1 = RideShare::Trip.new(1,1,54,'2016-04-05',3)
-# puts driver1.driver
-# print RideShare::Trip.all

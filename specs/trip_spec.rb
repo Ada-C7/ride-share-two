@@ -1,7 +1,6 @@
 require_relative 'spec_helper'
 
 describe "RideShare Module" do
-
   describe "Trip class" do
     let(:first_trip) {RideShare::Trip.new(1, 1, 54, '2016-04-05', 3)}
     let(:last_trip) {RideShare::Trip.new(600, 61, 168, '2016-04-25', 3)}
@@ -175,14 +174,14 @@ describe "RideShare Module" do
       end
 
       it "Returns message if id_d does not exist" do
-          trip1 = trip.new(1, 1000, 54, '2016-04-05', 3)
-          trip1.driver.class.must_equal String
+        trip1 = trip.new(1, 1000, 54, '2016-04-05', 3)
+        trip1.driver.class.must_equal String
       end
 
       it "Raises ArgumentError if Driver's Id no an Integer" do
         proc {
-         trip.new(1, "1000", 54, '2016-04-05', 3).driver
-       }.must_raise ArgumentError
+          trip.new(1, "1000", 54, '2016-04-05', 3).driver
+        }.must_raise ArgumentError
       end
     end
 
@@ -198,14 +197,14 @@ describe "RideShare Module" do
       end
 
       it "Returns message if id_r does not exist" do
-          trip1 = trip.new(1, 1, 5400, '2016-04-05', 3)
-          trip1.rider.class.must_equal String
+        trip1 = trip.new(1, 1, 5400, '2016-04-05', 3)
+        trip1.rider.class.must_equal String
       end
 
       it "Raises ArgumentError if Rider's Id no an Integer" do
         proc {
-         trip.new(1, 1, "54", '2016-04-05', 3).rider
-       }.must_raise ArgumentError
+          trip.new(1, 1, "54", '2016-04-05', 3).rider
+        }.must_raise ArgumentError
       end
     end
   end#end of Trip class
