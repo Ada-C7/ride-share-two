@@ -1,5 +1,4 @@
 require 'csv'
-require 'time'
 require 'pry'
 require_relative 'driver'
 require_relative 'trip'
@@ -10,6 +9,7 @@ module RideShare
 
     def  initialize(id_r, name_r, phone_number)
       raise ArgumentError.new("no valid ID") if id_r.class != Integer
+      raise ArgumentError.new("no valid ID") if id_r < 0
       raise ArgumentError.new("name must be a string") if name_r.class != String
       raise ArgumentError.new("phone_number must be a string") if phone_number.class != String
       @id_r = id_r
@@ -27,23 +27,24 @@ module RideShare
     end
 
     def self.find_rider(id_r)
+      raise ArgumentError.new('No valid ID') if id_r < 0
+      raise ArgumentError.new('No valid ID') if id_r.class != Integer
       all.each do |line|
-        # return line.name_r if line.id_r == id_r
         return line if line.id_r == id_r
-
       end
+      return "There is no rider with this ID"
     end
 
-    def find_riders_trips
+    def riders_trips
       RideShare::Trip.trips_taken_by_rider(@id_r)
     end
 
     def rider_drivers
-      @rider_drivers = []
-      find_riders_trips.each do |trip|
-        @rider_drivers << RideShare::Driver.find_driver(trip.id_d)
+      rider_drivers = []
+      riders_trips.each do |trip|
+        rider_drivers << RideShare::Driver.find_driver(trip.id_d)
       end
-      @rider_drivers
+      rider_drivers
     end
   end#end of Rider class
 end#end of the module RideShare

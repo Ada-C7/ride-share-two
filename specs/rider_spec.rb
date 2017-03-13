@@ -28,9 +28,12 @@ describe "RideShare Module" do
         random_rider.class.must_equal RideShare::Rider
       end
 
-      it "Raises ArgumentError if id is not an integer" do
+      it "Raises ArgumentError if id is not positive integer" do
         proc {
           rider.new("1", "Laura", "213981238jkds")
+        }.must_raise ArgumentError
+        proc {
+          rider.new(-1, "Laura", "213981238jkds")
         }.must_raise ArgumentError
       end
 
@@ -52,7 +55,16 @@ describe "RideShare Module" do
         rider.all.must_be_instance_of Array
       end
 
-      it "Contain the first and last rider nformation" do
+      it "Returns an array filled with Rider instances" do
+        rider.all.first.must_be_instance_of RideShare::Rider
+        rider.all.last.must_be_instance_of RideShare::Rider
+      end
+
+      it "there are the correct amount of objects in the array" do
+        rider.all.length.must_equal 300
+      end
+
+      it "Contains the first and last rider information" do
         rider.all[0].id_r.must_equal first_rider.id_r
         rider.all[0].name_r.must_equal first_rider.name_r
         rider.all[0].phone_number.must_equal first_rider.phone_number
@@ -61,7 +73,7 @@ describe "RideShare Module" do
         rider.all[299].phone_number.must_equal last_rider.phone_number
       end
 
-      it "Contain a random rider nformation" do
+      it "Contains a random rider information" do
         rider.all[168].id_r.must_equal random_rider.id_r
         rider.all[168].name_r.must_equal random_rider.name_r
         rider.all[168].phone_number.must_equal random_rider.phone_number
@@ -69,30 +81,51 @@ describe "RideShare Module" do
     end#end of method all
 
     describe "Rider#self.find_rider" do
-      it "Returns the correct 's information" do
+      it "raise ArgumentError if id no valid" do
+        proc {
+          rider.find_rider(-1)
+        }.must_raise ArgumentError
+        proc {
+          rider.find_rider("0")
+        }.must_raise ArgumentError
+      end
+
+      it "returns an object of Rider class" do
+        rider.find_rider(1).must_be_instance_of RideShare::Rider
+      end
+
+      it "Returns the correct rider's information" do
         rider.find_rider(300).name_r.must_equal last_rider.name_r
         rider.find_rider(1).id_r.must_equal first_rider.id_r
         rider.find_rider(169).phone_number.must_equal random_rider.phone_number
       end
-      # it "return an object of String class" do
-      #   rider.find_rider(1).must_be_instance_of String
-      # end
-      #
-      # it "Returns rider's name" do
-      #   rider.find_rider(1).must_equal 'Nina Hintz Sr.'
-      #   rider.find_rider(300).must_equal 'Miss Isom Gleason'
-      #   rider.find_rider(169).must_equal 'Jaclyn Upton'
-      # end
+
+      it "Returns a message if Id do not exist" do
+        rider.find_rider(1000).must_be_instance_of String
+        rider.find_rider(1000).must_equal "There is no rider with this ID"
+      end
     end#end of self.find_rider method
 
-    describe "Rider#find_riders_trips" do
+    describe "Rider#self.find_rider" do
+      it "Returns the correct information for exiting riders" do
+        rider.find_rider(300).name_r.must_equal last_rider.name_r
+        rider.find_rider(1).id_r.must_equal first_rider.id_r
+        rider.find_rider(169).phone_number.must_equal random_rider.phone_number
+      end
+    end#end of self.find_rider method
+
+    describe "Rider#riders_trips" do
       it "return an Array" do
-        first_rider.find_riders_trips.must_be_instance_of Array
+        first_rider.riders_trips.must_be_instance_of Array
       end
 
       it "return an Array filled with objects from Trip class" do
-        first_rider.find_riders_trips.first.must_be_instance_of RideShare::Trip
-        random_rider.find_riders_trips.last.must_be_instance_of RideShare::Trip
+        first_rider.riders_trips.first.must_be_instance_of RideShare::Trip
+        random_rider.riders_trips.last.must_be_instance_of RideShare::Trip
+      end
+
+      it "Returns an empty array if the rider did not make any trip" do
+        last_rider.riders_trips.must_be_empty
       end
     end#end of find_riders_trips method
 
@@ -107,6 +140,10 @@ describe "RideShare Module" do
         first_rider.rider_drivers[0].name_d.must_equal 'Ms. Winston Emard'
         first_rider.rider_drivers[1].name_d.must_equal 'Federico Bins V'
         random_rider.rider_drivers.first.name_d.must_equal 'Dr. Kenton Berge'
+      end
+
+      it "returns an empty array if rider has not trips" do
+        last_rider.riders_trips.must_be_empty
       end
     end
   end#end of the Rider class
