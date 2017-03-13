@@ -122,7 +122,14 @@ describe "Trip" do
     my_trip.find_driver.must_be_instance_of RideShare::Driver
 
     my_trip.find_driver.id.must_equal trips[12].id
-  end
+    end
+
+    it "find_rider returns the right Rider" do
+    my_trip = trips[5]
+    my_trip.find_rider.must_be_instance_of RideShare::Rider
+
+    my_trip.find_rider.id.must_equal trips[136].id
+    end
 
   end
 

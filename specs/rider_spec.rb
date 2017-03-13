@@ -1,8 +1,5 @@
 require_relative 'spec_helper'
 
-require_relative 'spec_helper'
-
-
 describe "Rider" do
   let(:riders) { RideShare::Rider.all }
 
