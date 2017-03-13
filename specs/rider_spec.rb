@@ -76,6 +76,10 @@ describe "Rider" do
       }.must_raise ArgumentError
 
       proc{
+        RideSharing::Rider.new({rider_id: 007, name: "James Bond", phone_num: "2-580-581-8405 x079"})
+      }.must_raise ArgumentError
+
+      proc{
         RideSharing::Rider.new({rider_id: 007, name: "James Bond", phone_num: "1-580-511-8405 x079"})
       }.must_raise ArgumentError
 
@@ -122,6 +126,14 @@ describe "Rider" do
     it "The name of rider with id number 252 must be Mrs. Keara Kozey" do
       rider253 = RideSharing::Rider.all.select {|rider_obj| rider_obj.id == 253}.first
       rider253.name.must_equal "Mrs. Keara Kozey"
+    end
+
+    it "Does not initialize rider for any of the invalid inputs in /support/riders_spec_false.csv" do
+      path = "./support/riders_spec_false.csv"
+      all_riders = RideSharing::Rider.all(path)
+      all_riders.length.must_equal 17
+      all_riders[0].name.must_equal "Nina Hintz Sr."
+      all_riders[1].name.wont_equal "Kaia Klocko"
     end
   end # End of describe "Driver#self.all"
 

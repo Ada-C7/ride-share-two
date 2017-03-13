@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-12T23:39:44-07:00">2017-03-12T23:39:44-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-13T00:10:07-07:00">2017-03-13T00:10:07-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">97.67%</span></span>
+    (<span class="covered_percent"><span class="green">100.0%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2161.1
+         2107.68
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>386</b> relevant lines. 
-    <span class="green"><b>377</b> lines covered</span> and
-    <span class="red"><b>9</b> lines missed </span>
+    <b>396</b> relevant lines. 
+    <span class="green"><b>396</b> lines covered</span> and
+    <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,32 +62,32 @@
       
       <tr>
         <td class="strong"><a href="#1d72931c8c650cabf2d8c38411d8b2af2c025da9" class="src_link" title="lib/rider.rb">lib/rider.rb</a></td>
-        <td class="green strong">90.57 %</td>
+        <td class="green strong">100.0 %</td>
         <td>86</td>
         <td>53</td>
-        <td>48</td>
-        <td>5</td>
-        <td>2213.2</td>
+        <td>53</td>
+        <td>0</td>
+        <td>2222.5</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#68a00a0d6053d75ac1798a56a4f253fd9f9134f8" class="src_link" title="lib/trip.rb">lib/trip.rb</a></td>
-        <td class="green strong">93.22 %</td>
+        <td class="green strong">100.0 %</td>
         <td>94</td>
         <td>59</td>
-        <td>55</td>
-        <td>4</td>
-        <td>10989.5</td>
+        <td>59</td>
+        <td>0</td>
+        <td>10988.8</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#8874fe0d002de1d6247dcd1b354cc58efbbe3b35" class="src_link" title="specs/rider_spec.rb">specs/rider_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>246</td>
-        <td>94</td>
-        <td>94</td>
+        <td>262</td>
+        <td>104</td>
+        <td>104</td>
         <td>0</td>
-        <td>5.6</td>
+        <td>5.1</td>
       </tr>
       
       <tr>
@@ -563,11 +563,11 @@
         <div class="source_table" id="1d72931c8c650cabf2d8c38411d8b2af2c025da9">
   <div class="header">
     <h3>lib/rider.rb</h3>
-    <h4><span class="green">90.57 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>53</b> relevant lines. 
-      <span class="green"><b>48</b> lines covered</span> and
-      <span class="red"><b>5</b> lines missed.</span>
+      <span class="green"><b>53</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -610,38 +610,38 @@
           <code class="ruby">    def initialize(rider_hash)</code>
         </li>
       
-        <li class="covered" data-hits="3362" data-linenumber="7">
-          <span class="hits">3362</span>
+        <li class="covered" data-hits="3381" data-linenumber="7">
+          <span class="hits">3381</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :rider_id must be an integer &gt; 0.\nThis driver will not be recorded.&quot;) if  rider_hash[:rider_id].class != Integer || rider_hash[:rider_id] &lt; 1</code>
         </li>
       
-        <li class="covered" data-hits="3358" data-linenumber="8">
-          <span class="hits">3358</span>
+        <li class="covered" data-hits="3377" data-linenumber="8">
+          <span class="hits">3377</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :name must be a string of at least 1 readable characters.\nThis driver will not be recorded.&quot;) if  rider_hash[:name].class != String || rider_hash[:name].delete(&quot; &quot;).length &lt; 3</code>
         </li>
       
-        <li class="covered" data-hits="3354" data-linenumber="9">
-          <span class="hits">3354</span>
+        <li class="covered" data-hits="3372" data-linenumber="9">
+          <span class="hits">3372</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :phone_num must be in accordance with North Americas Numbering Plan.\nThis driver will not be recorded.&quot; ) if rider_hash[:phone_num].class != String || self.class.invalid_phone_num?(rider_hash[:phone_num])</code>
         </li>
       
-        <li class="covered" data-hits="3346" data-linenumber="10">
-          <span class="hits">3346</span>
+        <li class="covered" data-hits="3363" data-linenumber="10">
+          <span class="hits">3363</span>
           
           <code class="ruby">      @id = rider_hash[:rider_id]</code>
         </li>
       
-        <li class="covered" data-hits="3346" data-linenumber="11">
-          <span class="hits">3346</span>
+        <li class="covered" data-hits="3363" data-linenumber="11">
+          <span class="hits">3363</span>
           
           <code class="ruby">      @name = rider_hash[:name]</code>
         </li>
       
-        <li class="covered" data-hits="3346" data-linenumber="12">
-          <span class="hits">3346</span>
+        <li class="covered" data-hits="3363" data-linenumber="12">
+          <span class="hits">3363</span>
           
           <code class="ruby">      @phone_num = rider_hash[:phone_num]</code>
         </li>
@@ -664,26 +664,26 @@
           <code class="ruby">    def self.all(path = &quot;./support/riders.csv&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="16">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="17" data-linenumber="16">
+          <span class="hits">17</span>
           
           <code class="ruby">      all_riders = []</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="17">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="17" data-linenumber="17">
+          <span class="hits">17</span>
           
           <code class="ruby">      CSV.foreach(path, :headers =&gt; true, :header_converters =&gt; :symbol) do |row|</code>
         </li>
       
-        <li class="covered" data-hits="4800" data-linenumber="18">
-          <span class="hits">4800</span>
+        <li class="covered" data-hits="4820" data-linenumber="18">
+          <span class="hits">4820</span>
           
           <code class="ruby">        begin</code>
         </li>
       
-        <li class="covered" data-hits="4800" data-linenumber="19">
-          <span class="hits">4800</span>
+        <li class="covered" data-hits="4820" data-linenumber="19">
+          <span class="hits">4820</span>
           
           <code class="ruby">          raise ArgumentError.new(&quot;The rider_id \&quot;#{row[0]}\&quot; creates an invalid id number. The id number must be an integer &gt; 0.\nHence this driver will not be recorded.&quot; ) if row[0] == nil || row[0].to_i &lt; 1</code>
         </li>
@@ -694,14 +694,14 @@
           <code class="ruby">        rescue ArgumentError =&gt; exception</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="21">
-          
+        <li class="covered" data-hits="2" data-linenumber="21">
+          <span class="hits">2</span>
           
           <code class="ruby">          puts &quot;#{exception.message}&quot;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="22">
-          
+        <li class="covered" data-hits="2" data-linenumber="22">
+          <span class="hits">2</span>
           
           <code class="ruby">          next</code>
         </li>
@@ -718,14 +718,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4800" data-linenumber="25">
-          <span class="hits">4800</span>
+        <li class="covered" data-hits="4818" data-linenumber="25">
+          <span class="hits">4818</span>
           
           <code class="ruby">        begin</code>
         </li>
       
-        <li class="covered" data-hits="4800" data-linenumber="26">
-          <span class="hits">4800</span>
+        <li class="covered" data-hits="4818" data-linenumber="26">
+          <span class="hits">4818</span>
           
           <code class="ruby">          raise ArgumentError.new(&quot;The input name for rider_id #{row[0]} must be at least 1 readable character long.\nHence this driver will not be recorded.&quot; ) if row[1] == nil || row[1].delete(&quot; &quot;).length &lt; 3</code>
         </li>
@@ -736,14 +736,14 @@
           <code class="ruby">        rescue ArgumentError =&gt; exception</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="28">
-          
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
           
           <code class="ruby">          puts &quot;#{exception.message}&quot;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="29">
-          
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
           
           <code class="ruby">          next</code>
         </li>
@@ -760,8 +760,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4800" data-linenumber="32">
-          <span class="hits">4800</span>
+        <li class="covered" data-hits="4817" data-linenumber="32">
+          <span class="hits">4817</span>
           
           <code class="ruby">        begin</code>
         </li>
@@ -772,8 +772,8 @@
           <code class="ruby">          # raise ArgumentError.new(&quot;The phone_num is not valid for rider_id #{row[0]}. It must be in accordance with North Americas Numbering Plan.\nHence this driver will not be recorded.&quot; ) if row[2] == nil || !(row[2].gsub(/(x.*)/, &quot;&quot;).gsub(/[^\d]/, &quot;&quot;).gsub(/^1/, &quot;&quot;).length == 10)</code>
         </li>
       
-        <li class="covered" data-hits="4800" data-linenumber="34">
-          <span class="hits">4800</span>
+        <li class="covered" data-hits="4817" data-linenumber="34">
+          <span class="hits">4817</span>
           
           <code class="ruby">          raise ArgumentError.new(&quot;The phone_num is not valid for rider_id #{row[0]}. It must be in accordance with North Americas Numbering Plan.\nHence this driver will not be recorded.&quot; ) if row[2] == nil || invalid_phone_num?(row[2])</code>
         </li>
@@ -808,20 +808,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3344" data-linenumber="40">
-          <span class="hits">3344</span>
+        <li class="covered" data-hits="3361" data-linenumber="40">
+          <span class="hits">3361</span>
           
           <code class="ruby">        rider_hash = row.to_hash</code>
         </li>
       
-        <li class="covered" data-hits="3344" data-linenumber="41">
-          <span class="hits">3344</span>
+        <li class="covered" data-hits="3361" data-linenumber="41">
+          <span class="hits">3361</span>
           
           <code class="ruby">        rider_hash[:rider_id] = rider_hash[:rider_id].to_i</code>
         </li>
       
-        <li class="covered" data-hits="3344" data-linenumber="42">
-          <span class="hits">3344</span>
+        <li class="covered" data-hits="3361" data-linenumber="42">
+          <span class="hits">3361</span>
           
           <code class="ruby">        all_riders &lt;&lt; self.new(rider_hash)</code>
         </li>
@@ -832,8 +832,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="44">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="17" data-linenumber="44">
+          <span class="hits">17</span>
           
           <code class="ruby">      return all_riders</code>
         </li>
@@ -982,14 +982,14 @@
           <code class="ruby">    def self.invalid_phone_num?(number)</code>
         </li>
       
-        <li class="covered" data-hits="8153" data-linenumber="69">
-          <span class="hits">8153</span>
+        <li class="covered" data-hits="8188" data-linenumber="69">
+          <span class="hits">8188</span>
           
           <code class="ruby">      numbers_wo_extension = number.gsub(/(x.*)/, &quot;&quot;).gsub(/[^\d]/, &quot;&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="8153" data-linenumber="70">
-          <span class="hits">8153</span>
+        <li class="covered" data-hits="8188" data-linenumber="70">
+          <span class="hits">8188</span>
           
           <code class="ruby">      if numbers_wo_extension.length &gt; 11 || numbers_wo_extension.length &lt; 10</code>
         </li>
@@ -1000,26 +1000,26 @@
           <code class="ruby">        invalid_number = true</code>
         </li>
       
-        <li class="covered" data-hits="8152" data-linenumber="72">
-          <span class="hits">8152</span>
+        <li class="covered" data-hits="8187" data-linenumber="72">
+          <span class="hits">8187</span>
           
           <code class="ruby">      elsif numbers_wo_extension.length == 11</code>
         </li>
       
-        <li class="covered" data-hits="1911" data-linenumber="73">
-          <span class="hits">1911</span>
+        <li class="covered" data-hits="1914" data-linenumber="73">
+          <span class="hits">1914</span>
           
           <code class="ruby">        numbers_wo_extension = numbers_wo_extension.gsub(/^1/, &quot;&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1911" data-linenumber="74">
-          <span class="hits">1911</span>
+        <li class="covered" data-hits="1914" data-linenumber="74">
+          <span class="hits">1914</span>
           
           <code class="ruby">        if numbers_wo_extension.length == 11</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="75">
-          
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
           
           <code class="ruby">          invalid_number = true</code>
         </li>
@@ -1042,14 +1042,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="8153" data-linenumber="79">
-          <span class="hits">8153</span>
+        <li class="covered" data-hits="8188" data-linenumber="79">
+          <span class="hits">8188</span>
           
           <code class="ruby">      if numbers_wo_extension.length == 10</code>
         </li>
       
-        <li class="covered" data-hits="8152" data-linenumber="80">
-          <span class="hits">8152</span>
+        <li class="covered" data-hits="8186" data-linenumber="80">
+          <span class="hits">8186</span>
           
           <code class="ruby">          /[2-9][0-9][0-9][2-9]([02-9][0-9]|[1][02-9])[0-9][0-9][0-9][0-9]/  === numbers_wo_extension ? invalid_number = false : invalid_number = true</code>
         </li>
@@ -1060,8 +1060,8 @@
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="8153" data-linenumber="82">
-          <span class="hits">8153</span>
+        <li class="covered" data-hits="8188" data-linenumber="82">
+          <span class="hits">8188</span>
           
           <code class="ruby">      return invalid_number</code>
         </li>
@@ -1097,11 +1097,11 @@
         <div class="source_table" id="68a00a0d6053d75ac1798a56a4f253fd9f9134f8">
   <div class="header">
     <h3>lib/trip.rb</h3>
-    <h4><span class="green">93.22 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>59</b> relevant lines. 
-      <span class="green"><b>55</b> lines covered</span> and
-      <span class="red"><b>4</b> lines missed.</span>
+      <span class="green"><b>59</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -1144,62 +1144,62 @@
           <code class="ruby">    def initialize(trip_hash)</code>
         </li>
       
-        <li class="covered" data-hits="24043" data-linenumber="7">
-          <span class="hits">24043</span>
+        <li class="covered" data-hits="24041" data-linenumber="7">
+          <span class="hits">24041</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :id must be an integer &gt; 0.\nThis trip will not be recorded.&quot;) if  trip_hash[:trip_id].class != Integer || trip_hash[:trip_id] &lt; 1</code>
         </li>
       
-        <li class="covered" data-hits="24040" data-linenumber="8">
-          <span class="hits">24040</span>
+        <li class="covered" data-hits="24038" data-linenumber="8">
+          <span class="hits">24038</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :driver_id must be an integer &gt; 0.\nThis trip will not be recorded.&quot;) if  trip_hash[:driver_id].class != Integer || trip_hash[:driver_id] &lt; 0</code>
         </li>
       
-        <li class="covered" data-hits="24037" data-linenumber="9">
-          <span class="hits">24037</span>
+        <li class="covered" data-hits="24035" data-linenumber="9">
+          <span class="hits">24035</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :rider_id must be an integer &gt; 0.\nThis trip will not be recorded.&quot;) if  trip_hash[:rider_id].class != Integer || trip_hash[:rider_id] &lt; 0</code>
         </li>
       
-        <li class="covered" data-hits="24034" data-linenumber="10">
-          <span class="hits">24034</span>
+        <li class="covered" data-hits="24032" data-linenumber="10">
+          <span class="hits">24032</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :date must be a string of format yyyy-mm-dd.\nThis driver will not be recorded.&quot;) if  trip_hash[:date].class != String || !(/^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/ === trip_hash[:date])</code>
         </li>
       
-        <li class="covered" data-hits="24029" data-linenumber="11">
-          <span class="hits">24029</span>
+        <li class="covered" data-hits="24027" data-linenumber="11">
+          <span class="hits">24027</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;The input for :rating must be an integer between 1 and 5.\nThis driver will not be recorded.&quot; ) if trip_hash[:rating].class != Integer || !(1..5).include?(trip_hash[:rating].to_i)</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="12">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="12">
+          <span class="hits">24022</span>
           
           <code class="ruby">      @id = trip_hash[:trip_id]</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="13">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="13">
+          <span class="hits">24022</span>
           
           <code class="ruby">      @driver_id = trip_hash[:driver_id].to_i</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="14">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="14">
+          <span class="hits">24022</span>
           
           <code class="ruby">      @rider_id = trip_hash[:rider_id].to_i</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="15">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="15">
+          <span class="hits">24022</span>
           
           <code class="ruby">      @date = trip_hash[:date]</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="16">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="16">
+          <span class="hits">24022</span>
           
           <code class="ruby">      @rating = trip_hash[:rating]</code>
         </li>
@@ -1294,14 +1294,14 @@
           <code class="ruby">        rescue ArgumentError =&gt; exception</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="32">
-          
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
           
           <code class="ruby">          puts &quot;#{exception.message}&quot;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="33">
-          
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
           
           <code class="ruby">          next</code>
         </li>
@@ -1318,14 +1318,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="24028" data-linenumber="36">
-          <span class="hits">24028</span>
+        <li class="covered" data-hits="24027" data-linenumber="36">
+          <span class="hits">24027</span>
           
           <code class="ruby">        begin</code>
         </li>
       
-        <li class="covered" data-hits="24028" data-linenumber="37">
-          <span class="hits">24028</span>
+        <li class="covered" data-hits="24027" data-linenumber="37">
+          <span class="hits">24027</span>
           
           <code class="ruby">          raise ArgumentError.new(&quot;The rider_id \&quot;#{row[2]}\&quot; creates an invalid id number. The id number must be an integer &gt;= 0.\nHence this trip will not be recorded.&quot; ) if row[2] == nil || row[2].to_i &lt; 0</code>
         </li>
@@ -1336,14 +1336,14 @@
           <code class="ruby">        rescue ArgumentError =&gt; exception</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="39">
-          
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
           
           <code class="ruby">          puts &quot;#{exception.message}&quot;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="40">
-          
+        <li class="covered" data-hits="1" data-linenumber="40">
+          <span class="hits">1</span>
           
           <code class="ruby">          next</code>
         </li>
@@ -1360,14 +1360,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="24028" data-linenumber="43">
-          <span class="hits">24028</span>
+        <li class="covered" data-hits="24026" data-linenumber="43">
+          <span class="hits">24026</span>
           
           <code class="ruby">        begin</code>
         </li>
       
-        <li class="covered" data-hits="24028" data-linenumber="44">
-          <span class="hits">24028</span>
+        <li class="covered" data-hits="24026" data-linenumber="44">
+          <span class="hits">24026</span>
           
           <code class="ruby">          raise ArgumentError.new(&quot;The input date for trip_id ##{row[0]} is invalid. It must be a string with format yyyy-mm-dd.\nHence this trip will not be recorded.&quot; ) if row[3] == nil ||  !(/^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/ === row[3])</code>
         </li>
@@ -1402,14 +1402,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="24026" data-linenumber="50">
-          <span class="hits">24026</span>
+        <li class="covered" data-hits="24024" data-linenumber="50">
+          <span class="hits">24024</span>
           
           <code class="ruby">        begin</code>
         </li>
       
-        <li class="covered" data-hits="24026" data-linenumber="51">
-          <span class="hits">24026</span>
+        <li class="covered" data-hits="24024" data-linenumber="51">
+          <span class="hits">24024</span>
           
           <code class="ruby">          raise ArgumentError.new(&quot;The rating for trip ##{row[0]} is invalid. It must be an integer between 1 and 5. This trip will not be recorded.&quot; ) if row[4] == nil || !(1..5).include?(row[4].to_i)</code>
         </li>
@@ -1444,38 +1444,38 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="57">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="57">
+          <span class="hits">24022</span>
           
           <code class="ruby">        trip_hash = row.to_hash</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="58">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="58">
+          <span class="hits">24022</span>
           
           <code class="ruby">        trip_hash[:trip_id] = trip_hash[:trip_id].to_i</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="59">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="59">
+          <span class="hits">24022</span>
           
           <code class="ruby">        trip_hash[:driver_id] = trip_hash[:driver_id].to_i</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="60">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="60">
+          <span class="hits">24022</span>
           
           <code class="ruby">        trip_hash[:rider_id] = trip_hash[:rider_id].to_i</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="61">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="61">
+          <span class="hits">24022</span>
           
           <code class="ruby">        trip_hash[:rating] = trip_hash[:rating].to_i</code>
         </li>
       
-        <li class="covered" data-hits="24024" data-linenumber="62">
-          <span class="hits">24024</span>
+        <li class="covered" data-hits="24022" data-linenumber="62">
+          <span class="hits">24022</span>
           
           <code class="ruby">        all_trips &lt;&lt; self.new(trip_hash)</code>
         </li>
@@ -1681,8 +1681,8 @@
     <h3>specs/rider_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>94</b> relevant lines. 
-      <span class="green"><b>94</b> lines covered</span> and
+      <b>104</b> relevant lines. 
+      <span class="green"><b>104</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -2029,7 +2029,7 @@
         <li class="covered" data-hits="1" data-linenumber="57">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007,  phone_num: &quot;1-580-581-8405 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;Al&quot;, phone_num: &quot;1-580-581-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
@@ -2041,43 +2041,43 @@
         <li class="never" data-hits="" data-linenumber="59">
           
           
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="60">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="61">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;Invalid phone number must raise ArgumentError&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="62">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
           <code class="ruby">      proc{</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot; &quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007,  phone_num: &quot;1-580-581-8405 x079&quot;})</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">      }.must_raise ArgumentError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;Invalid phone number must raise ArgumentError&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="66">
@@ -2089,7 +2089,7 @@
         <li class="covered" data-hits="1" data-linenumber="67">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot; &quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="68">
@@ -2113,7 +2113,7 @@
         <li class="covered" data-hits="1" data-linenumber="71">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-581-840 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="72">
@@ -2137,7 +2137,7 @@
         <li class="covered" data-hits="1" data-linenumber="75">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-511-8405 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-581-840 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="76">
@@ -2161,7 +2161,7 @@
         <li class="covered" data-hits="1" data-linenumber="79">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-181-8405 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;2-580-581-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="80">
@@ -2185,7 +2185,7 @@
         <li class="covered" data-hits="1" data-linenumber="83">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-180-581-8405 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-511-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="84">
@@ -2209,7 +2209,7 @@
         <li class="covered" data-hits="1" data-linenumber="87">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-081-8405 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-181-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="88">
@@ -2233,7 +2233,7 @@
         <li class="covered" data-hits="1" data-linenumber="91">
           <span class="hits">1</span>
           
-          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-080-581-8405 x079&quot;})</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-180-581-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="92">
@@ -2245,217 +2245,217 @@
         <li class="never" data-hits="" data-linenumber="93">
           
           
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="94">
-          
-          
-          <code class="ruby">  end # End of describe &quot;#initialize&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="95">
-          
-          
           <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="94">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      proc{</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="95">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-580-081-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="96">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      }.must_raise ArgumentError</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="97">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="97">
           
-          <code class="ruby">  describe &quot;#self.all&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="98">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;Returns an array.&quot; do</code>
+          <code class="ruby">      proc{</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="99">
           <span class="hits">1</span>
           
-          <code class="ruby">      RideSharing::Rider.all.must_be_kind_of Array</code>
+          <code class="ruby">        RideSharing::Rider.new({rider_id: 007, name: &quot;James Bond&quot;, phone_num: &quot;1-080-581-8405 x079&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      }.must_raise ArgumentError</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="101">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="102">
+          
+          
+          <code class="ruby">  end # End of describe &quot;#initialize&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="104">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="105">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;The elements in the returned array must be RideSharing::Rider instances &quot; do</code>
+          <code class="ruby">  describe &quot;#self.all&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="103">
+        <li class="covered" data-hits="1" data-linenumber="106">
           <span class="hits">1</span>
           
-          <code class="ruby">      all_riders = RideSharing::Rider.all</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="104">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      all_riders.each do |rider_obj|</code>
-        </li>
-      
-        <li class="covered" data-hits="209" data-linenumber="105">
-          <span class="hits">209</span>
-          
-          <code class="ruby">        rider_obj.must_be_kind_of RideSharing::Rider</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="106">
-          
-          
-          <code class="ruby">      end</code>
+          <code class="ruby">    it &quot;Returns an array.&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="107">
           <span class="hits">1</span>
           
-          <code class="ruby">      all_riders.length.must_equal 209</code>
+          <code class="ruby">      RideSharing::Rider.all.must_be_kind_of Array</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="108">
           
           
-          <code class="ruby">      # A bunch of phone numbers does not match up with the North American Numbering Plan</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="109">
           
           
-          <code class="ruby">      # They must be in the format  NPA-NXX-xxxx</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="110">
-          
-          
-          <code class="ruby">      # N cannot be 0 or 1</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="111">
-          
-          
-          <code class="ruby">      # XX cannot be 11</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="112">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="113">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="114">
+        <li class="covered" data-hits="1" data-linenumber="110">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;The phone number of the second instance must be (392) 217-0777&quot; do</code>
+          <code class="ruby">    it &quot;The elements in the returned array must be RideSharing::Rider instances &quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="111">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      all_riders = RideSharing::Rider.all</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="112">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      all_riders.each do |rider_obj|</code>
+        </li>
+      
+        <li class="covered" data-hits="209" data-linenumber="113">
+          <span class="hits">209</span>
+          
+          <code class="ruby">        rider_obj.must_be_kind_of RideSharing::Rider</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="114">
+          
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="115">
           <span class="hits">1</span>
           
-          <code class="ruby">      RideSharing::Rider.all[1].phone_num.must_equal &quot;(392) 217-0777&quot;</code>
+          <code class="ruby">      all_riders.length.must_equal 209</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="116">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      # A bunch of phone numbers does not match up with the North American Numbering Plan</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="117">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # They must be in the format  NPA-NXX-xxxx</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="118">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="118">
           
-          <code class="ruby">    it &quot;The name of rider with id number 252 must be Mrs. Keara Kozey&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="210" data-linenumber="119">
-          <span class="hits">210</span>
           
-          <code class="ruby">      rider253 = RideSharing::Rider.all.select {|rider_obj| rider_obj.id == 253}.first</code>
+          <code class="ruby">      # N cannot be 0 or 1</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="120">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="119">
           
-          <code class="ruby">      rider253.name.must_equal &quot;Mrs. Keara Kozey&quot;</code>
+          
+          <code class="ruby">      # XX cannot be 11</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="121">
+        <li class="never" data-hits="" data-linenumber="120">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
-          
-          
-          <code class="ruby">  end # End of describe &quot;Driver#self.all&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="123">
+        <li class="never" data-hits="" data-linenumber="121">
           
           
           <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="122">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;The phone number of the second instance must be (392) 217-0777&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="123">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      RideSharing::Rider.all[1].phone_num.must_equal &quot;(392) 217-0777&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="124">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="125">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="125">
           
-          <code class="ruby">  describe &quot;#self.find&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="126">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns an object of class RideSharing::Rider if id is found&quot; do</code>
+          <code class="ruby">    it &quot;The name of rider with id number 252 must be Mrs. Keara Kozey&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="127">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="210" data-linenumber="127">
+          <span class="hits">210</span>
           
-          <code class="ruby">      returned_object = RideSharing::Rider.find(1)</code>
+          <code class="ruby">      rider253 = RideSharing::Rider.all.select {|rider_obj| rider_obj.id == 253}.first</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="128">
           <span class="hits">1</span>
           
-          <code class="ruby">      returned_object.must_be_kind_of RideSharing::Rider</code>
+          <code class="ruby">      rider253.name.must_equal &quot;Mrs. Keara Kozey&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="129">
@@ -2473,85 +2473,85 @@
         <li class="covered" data-hits="1" data-linenumber="131">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns right name&quot; do</code>
+          <code class="ruby">    it &quot;Does not initialize rider for any of the invalid inputs in /support/riders_spec_false.csv&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="132">
           <span class="hits">1</span>
           
-          <code class="ruby">      returned_object = RideSharing::Rider.find(1)</code>
+          <code class="ruby">      path = &quot;./support/riders_spec_false.csv&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="133">
           <span class="hits">1</span>
           
-          <code class="ruby">      returned_object.name.must_equal &quot;Nina Hintz Sr.&quot;</code>
+          <code class="ruby">      all_riders = RideSharing::Rider.all(path)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="134">
           <span class="hits">1</span>
           
-          <code class="ruby">      returned_object = RideSharing::Rider.find(298)</code>
+          <code class="ruby">      all_riders.length.must_equal 17</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="135">
           <span class="hits">1</span>
           
-          <code class="ruby">      returned_object.name.must_equal &quot;Maybelle Wilkinson&quot;</code>
+          <code class="ruby">      all_riders[0].name.must_equal &quot;Nina Hintz Sr.&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="136">
+        <li class="covered" data-hits="1" data-linenumber="136">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      all_riders[1].name.wont_equal &quot;Kaia Klocko&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="137">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="138">
           
           
-          <code class="ruby">    # it &quot;Throws an error if id is not found&quot; do</code>
+          <code class="ruby">  end # End of describe &quot;Driver#self.all&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="139">
           
           
-          <code class="ruby">    #   proc{</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="140">
           
           
-          <code class="ruby">    #     RideSharing::Rider.find(301)</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="141">
+        <li class="covered" data-hits="1" data-linenumber="141">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #   }.must_raise ArgumentError</code>
+          <code class="ruby">  describe &quot;#self.find&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="142">
+        <li class="covered" data-hits="1" data-linenumber="142">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # end</code>
+          <code class="ruby">    it &quot;returns an object of class RideSharing::Rider if id is found&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="143">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;Returns nil if id is not found&quot; do</code>
+          <code class="ruby">      returned_object = RideSharing::Rider.find(1)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="144">
           <span class="hits">1</span>
           
-          <code class="ruby">      RideSharing::Driver.find(301).must_be_nil</code>
+          <code class="ruby">      returned_object.must_be_kind_of RideSharing::Rider</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="145">
@@ -2563,43 +2563,43 @@
         <li class="never" data-hits="" data-linenumber="146">
           
           
-          <code class="ruby">  end # End of describe &quot;Rider#self.find&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="147">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="148">
+        <li class="covered" data-hits="1" data-linenumber="147">
+          <span class="hits">1</span>
           
+          <code class="ruby">    it &quot;returns right name&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="148">
+          <span class="hits">1</span>
           
-          <code class="ruby"></code>
+          <code class="ruby">      returned_object = RideSharing::Rider.find(1)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="149">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;#list_of_trips&quot; do</code>
+          <code class="ruby">      returned_object.name.must_equal &quot;Nina Hintz Sr.&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="150">
+        <li class="covered" data-hits="1" data-linenumber="150">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # This method is solely dependent upon a class method in the class Trip.</code>
+          <code class="ruby">      returned_object = RideSharing::Rider.find(298)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="151">
+        <li class="covered" data-hits="1" data-linenumber="151">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # Blind trust is giving that no tests should be needed. The method used should have been thouroughly tested in the class Trip.</code>
+          <code class="ruby">      returned_object.name.must_equal &quot;Maybelle Wilkinson&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="152">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="153">
@@ -2611,55 +2611,55 @@
         <li class="never" data-hits="" data-linenumber="154">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    # it &quot;Throws an error if id is not found&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="155">
+        <li class="never" data-hits="" data-linenumber="155">
+          
+          
+          <code class="ruby">    #   proc{</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="156">
+          
+          
+          <code class="ruby">    #     RideSharing::Rider.find(301)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="157">
+          
+          
+          <code class="ruby">    #   }.must_raise ArgumentError</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="158">
+          
+          
+          <code class="ruby">    # end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="159">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;#previous_drivers&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="156">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    let(:rider1) {RideSharing::Rider.find(1)}</code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="157">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    let(:rider103) {RideSharing::Rider.find(103)} # rider103 has used a driver with id# 0</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="158">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    let(:rider92) {RideSharing::Rider.find(92)} # rider92 has used a driver twice</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="159">
-          
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &quot;Returns nil if id is not found&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="160">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;The method must return an array&quot; do</code>
+          <code class="ruby">      RideSharing::Driver.find(301).must_be_nil</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="161">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="161">
           
-          <code class="ruby">      rider1.previous_drivers.must_be_kind_of Array</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="162">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end # End of describe &quot;Rider#self.find&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="163">
@@ -2668,148 +2668,148 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="164">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="164">
           
-          <code class="ruby">    it &quot;The elements of the array must be of kind RideSharing::Driver&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="165">
           <span class="hits">1</span>
           
-          <code class="ruby">      rider1.previous_drivers.each do |obj|</code>
+          <code class="ruby">  describe &quot;#list_of_trips&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="166">
-          <span class="hits">2</span>
+        <li class="never" data-hits="" data-linenumber="166">
           
-          <code class="ruby">        obj.must_be_kind_of RideSharing::Driver</code>
+          
+          <code class="ruby">    # This method is solely dependent upon a class method in the class Trip.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="167">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">    # Blind trust is giving that no tests should be needed. The method used should have been thouroughly tested in the class Trip.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="168">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="169">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      rider103.previous_drivers.each do |obj|</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="170">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        obj.must_be_kind_of RideSharing::Driver</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="171">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="172">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="173">
+        <li class="never" data-hits="" data-linenumber="169">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="174">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="170">
           
-          <code class="ruby">    it &quot;Find previous drivers for rider with id#85&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="175">
+        <li class="covered" data-hits="1" data-linenumber="171">
           <span class="hits">1</span>
           
-          <code class="ruby">      rider85 = RideSharing::Rider.find(85)</code>
+          <code class="ruby">  describe &quot;#previous_drivers&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="172">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    let(:rider1) {RideSharing::Rider.find(1)}</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="173">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    let(:rider103) {RideSharing::Rider.find(103)} # rider103 has used a driver with id# 0</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="174">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    let(:rider92) {RideSharing::Rider.find(92)} # rider92 has used a driver twice</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="175">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="176">
           <span class="hits">1</span>
           
-          <code class="ruby">      rider85.previous_drivers.length.must_equal 7</code>
+          <code class="ruby">    it &quot;The method must return an array&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="177">
+        <li class="covered" data-hits="1" data-linenumber="177">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      rider1.previous_drivers.must_be_kind_of Array</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="178">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="179">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="179">
+        <li class="covered" data-hits="1" data-linenumber="180">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;Find previous drivers for rider with id#39&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="180">
-          <span class="hits">3</span>
-          
-          <code class="ruby">      rider103.list_of_trips.map { |trip| trip.find_driver}.length.must_equal 2</code>
+          <code class="ruby">    it &quot;The elements of the array must be of kind RideSharing::Driver&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="181">
           <span class="hits">1</span>
           
-          <code class="ruby">      rider103.previous_drivers.length.must_equal 1</code>
+          <code class="ruby">      rider1.previous_drivers.each do |obj|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="182">
+        <li class="covered" data-hits="2" data-linenumber="182">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">        obj.must_be_kind_of RideSharing::Driver</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="183">
           
           
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="184">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="184">
+        <li class="covered" data-hits="1" data-linenumber="185">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;Find previous drivers for rider with id#41&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="5" data-linenumber="185">
-          <span class="hits">5</span>
-          
-          <code class="ruby">      rider92.list_of_trips.map { |trip| trip.find_driver}.length.must_equal 4</code>
+          <code class="ruby">      rider103.previous_drivers.each do |obj|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="186">
           <span class="hits">1</span>
           
-          <code class="ruby">      rider92.previous_drivers.length.wont_equal 4</code>
+          <code class="ruby">        obj.must_be_kind_of RideSharing::Driver</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="187">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="187">
           
-          <code class="ruby">      rider92.previous_drivers.length.must_equal 3</code>
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="188">
@@ -2821,346 +2821,442 @@
         <li class="never" data-hits="" data-linenumber="189">
           
           
-          <code class="ruby">  end # End describe &quot;#previous_drivers&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="190">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="191">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="192">
-          
-          
-          <code class="ruby">################################################################################</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="193">
+        <li class="covered" data-hits="1" data-linenumber="190">
           <span class="hits">1</span>
           
-          <code class="ruby">  xdescribe &quot;EXPLORING DATA&quot; do</code>
+          <code class="ruby">    it &quot;Find previous drivers for rider with id#85&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="191">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      rider85 = RideSharing::Rider.find(85)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="192">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      rider85.previous_drivers.length.must_equal 7</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="193">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="194">
           
           
-          <code class="ruby">    # it &quot;Printout of number of trips and drivers for each rider.&quot; do</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="195">
+        <li class="covered" data-hits="1" data-linenumber="195">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #   RideSharing::Rider.all.each do |rider|</code>
+          <code class="ruby">    it &quot;Find previous drivers for rider with id#39&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="196">
+        <li class="covered" data-hits="3" data-linenumber="196">
+          <span class="hits">3</span>
           
-          
-          <code class="ruby">    #     drivers = rider.list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}</code>
+          <code class="ruby">      rider103.list_of_trips.map { |trip| trip.find_driver}.length.must_equal 2</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="197">
+        <li class="covered" data-hits="1" data-linenumber="197">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #     drivers = drivers.uniq { |driver| driver.id}</code>
+          <code class="ruby">      rider103.previous_drivers.length.must_equal 1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="198">
           
           
-          <code class="ruby">    #     puts &quot;Rider ##{rider.id}: #{rider.list_of_trips.length} trips with #{drivers.length} drivers&quot;</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="199">
           
           
-          <code class="ruby">    #   end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="200">
+        <li class="covered" data-hits="1" data-linenumber="200">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # end</code>
+          <code class="ruby">    it &quot;Find previous drivers for rider with id#41&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="201">
+        <li class="covered" data-hits="5" data-linenumber="201">
+          <span class="hits">5</span>
           
-          
-          <code class="ruby">    #</code>
+          <code class="ruby">      rider92.list_of_trips.map { |trip| trip.find_driver}.length.must_equal 4</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="202">
+        <li class="covered" data-hits="1" data-linenumber="202">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # it &quot;Find all driver-ids for rider 85, should be 7 of them&quot; do</code>
+          <code class="ruby">      rider92.previous_drivers.length.wont_equal 4</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="203">
+        <li class="covered" data-hits="1" data-linenumber="203">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #   rider85 = RideSharing::Rider.find(85)</code>
+          <code class="ruby">      rider92.previous_drivers.length.must_equal 3</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="204">
           
           
-          <code class="ruby">    #   drivers_of_85 = rider85.list_of_trips.map { |trip| trip.find_driver.id}</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="205">
           
           
-          <code class="ruby">    #   puts drivers_of_85</code>
+          <code class="ruby">  end # End describe &quot;#previous_drivers&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="206">
           
           
-          <code class="ruby">    # end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="207">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="208">
           
           
-          <code class="ruby">    # it &quot;Find all driver-ids for rider 1, should be ? of them&quot; do</code>
+          <code class="ruby">################################################################################</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="209">
+        <li class="covered" data-hits="1" data-linenumber="209">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #   rider1 = RideSharing::Rider.find(1)</code>
+          <code class="ruby">  xdescribe &quot;EXPLORING DATA&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="210">
           
           
-          <code class="ruby">    #   drivers_of_1 = rider1.list_of_trips.map { |trip| trip.find_driver.id}</code>
+          <code class="ruby">    # it &quot;Printout of number of trips and drivers for each rider.&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="211">
           
           
-          <code class="ruby">    #   puts drivers_of_1</code>
+          <code class="ruby">    #   RideSharing::Rider.all.each do |rider|</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="212">
           
           
-          <code class="ruby">    # end</code>
+          <code class="ruby">    #     drivers = rider.list_of_trips.map { |trip| trip.find_driver}.delete_if {|driver| driver == nil}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="213">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby">    #     drivers = drivers.uniq { |driver| driver.id}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="214">
           
           
-          <code class="ruby">    # it &quot;Find all driver-ids for rider 92, should be 3 of them, not 4, due to riding with 1 driver twice&quot; do</code>
+          <code class="ruby">    #     puts &quot;Rider ##{rider.id}: #{rider.list_of_trips.length} trips with #{drivers.length} drivers&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="215">
           
           
-          <code class="ruby">    #   rider92 = RideSharing::Rider.find(92)</code>
+          <code class="ruby">    #   end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="216">
           
           
-          <code class="ruby">    #   drivers_of_92 = rider92.list_of_trips.map { |trip| trip.find_driver.id}</code>
+          <code class="ruby">    # end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="217">
           
           
-          <code class="ruby">    #   print drivers_of_92</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="218">
           
           
-          <code class="ruby">    #   puts &quot;&quot;</code>
+          <code class="ruby">    # it &quot;Find all driver-ids for rider 85, should be 7 of them&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="219">
           
           
-          <code class="ruby">    #   print drivers_of_92.uniq</code>
+          <code class="ruby">    #   rider85 = RideSharing::Rider.find(85)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="220">
           
           
-          <code class="ruby">    #   puts &quot;&quot;</code>
+          <code class="ruby">    #   drivers_of_85 = rider85.list_of_trips.map { |trip| trip.find_driver.id}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="221">
           
           
-          <code class="ruby">    # end</code>
+          <code class="ruby">    #   puts drivers_of_85</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="222">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby">    # end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="223">
           
           
-          <code class="ruby">    # it &quot;Find all riders with no trips&quot; do</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="224">
           
           
-          <code class="ruby">    #   RideSharing::Rider.all.each do |rider|</code>
+          <code class="ruby">    # it &quot;Find all driver-ids for rider 1, should be ? of them&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="225">
           
           
-          <code class="ruby">    #     # rider_with_0_trips = []</code>
+          <code class="ruby">    #   rider1 = RideSharing::Rider.find(1)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="226">
           
           
-          <code class="ruby">    #     if rider.list_of_trips == []</code>
+          <code class="ruby">    #   drivers_of_1 = rider1.list_of_trips.map { |trip| trip.find_driver.id}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="227">
           
           
-          <code class="ruby">    #       print &quot;#{rider.id} &quot;</code>
+          <code class="ruby">    #   puts drivers_of_1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="228">
           
           
-          <code class="ruby">    #     end</code>
+          <code class="ruby">    # end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="229">
           
           
-          <code class="ruby">    #   end</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="230">
           
           
-          <code class="ruby">    #   puts &quot;&quot;</code>
+          <code class="ruby">    # it &quot;Find all driver-ids for rider 92, should be 3 of them, not 4, due to riding with 1 driver twice&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="231">
           
           
-          <code class="ruby">    # end</code>
+          <code class="ruby">    #   rider92 = RideSharing::Rider.find(92)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="232">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    #   drivers_of_92 = rider92.list_of_trips.map { |trip| trip.find_driver.id}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="233">
           
           
-          <code class="ruby">    # it &quot;Find all riders with trips having an unidentified driver&quot; do</code>
+          <code class="ruby">    #   print drivers_of_92</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="234">
           
           
-          <code class="ruby">    #   RideSharing::Rider.all.each do |rider|</code>
+          <code class="ruby">    #   puts &quot;&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="235">
           
           
-          <code class="ruby">    #     drivers = rider.list_of_trips.map { |trip| trip.find_driver}</code>
+          <code class="ruby">    #   print drivers_of_92.uniq</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="236">
           
           
-          <code class="ruby">    #     unidentified_drivers = drivers.select {|driver| driver == nil}</code>
+          <code class="ruby">    #   puts &quot;&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="237">
           
           
-          <code class="ruby">    #     if unidentified_drivers != []</code>
+          <code class="ruby">    # end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="238">
           
           
-          <code class="ruby">    #       puts rider.id</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="239">
           
           
-          <code class="ruby">    #       rider.list_of_trips.map { |trip| puts &quot;Trip ##{trip.id}&quot;}</code>
+          <code class="ruby">    # it &quot;Find all riders with no trips&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="240">
           
           
-          <code class="ruby">    #     end</code>
+          <code class="ruby">    #   RideSharing::Rider.all.each do |rider|</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="241">
           
           
-          <code class="ruby">    #   end</code>
+          <code class="ruby">    #     # rider_with_0_trips = []</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="242">
           
           
-          <code class="ruby">    # end</code>
+          <code class="ruby">    #     if rider.list_of_trips == []</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="243">
           
           
-          <code class="ruby">  end # End of describe &quot;EXPLORING CODE:</code>
+          <code class="ruby">    #       print &quot;#{rider.id} &quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="244">
           
           
-          <code class="ruby">################################################################################</code>
+          <code class="ruby">    #     end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="245">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    #   end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="246">
+          
+          
+          <code class="ruby">    #   puts &quot;&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="247">
+          
+          
+          <code class="ruby">    # end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="248">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="249">
+          
+          
+          <code class="ruby">    # it &quot;Find all riders with trips having an unidentified driver&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="250">
+          
+          
+          <code class="ruby">    #   RideSharing::Rider.all.each do |rider|</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="251">
+          
+          
+          <code class="ruby">    #     drivers = rider.list_of_trips.map { |trip| trip.find_driver}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="252">
+          
+          
+          <code class="ruby">    #     unidentified_drivers = drivers.select {|driver| driver == nil}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="253">
+          
+          
+          <code class="ruby">    #     if unidentified_drivers != []</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="254">
+          
+          
+          <code class="ruby">    #       puts rider.id</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="255">
+          
+          
+          <code class="ruby">    #       rider.list_of_trips.map { |trip| puts &quot;Trip ##{trip.id}&quot;}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="256">
+          
+          
+          <code class="ruby">    #     end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="257">
+          
+          
+          <code class="ruby">    #   end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="258">
+          
+          
+          <code class="ruby">    # end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="259">
+          
+          
+          <code class="ruby">  end # End of describe &quot;EXPLORING CODE:</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="260">
+          
+          
+          <code class="ruby">################################################################################</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="261">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="262">
           
           
           <code class="ruby">end # End of describe &quot;Rider&quot;</code>
@@ -4021,7 +4117,7 @@
         <li class="covered" data-hits="1" data-linenumber="140">
           <span class="hits">1</span>
           
-          <code class="ruby">      all_trips.length.must_equal 14 #Out of 20</code>
+          <code class="ruby">      all_trips.length.must_equal 12 #Out of 20</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="141">

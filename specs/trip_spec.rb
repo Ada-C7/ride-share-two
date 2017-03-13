@@ -137,7 +137,7 @@ describe "Trip" do
     it "Does not initialize trip if rating is not valid" do
       path = "./support/trips_spec_false.csv"
       all_trips = RideSharing::Trip.all(path)
-      all_trips.length.must_equal 14 #Out of 20
+      all_trips.length.must_equal 12 #Out of 20
       all_trips.first.id.must_equal 1
       all_trips[1].id.wont_equal 2
       all_trips.last.id.wont_equal 20
