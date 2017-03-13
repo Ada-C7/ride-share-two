@@ -1,9 +1,17 @@
 require_relative 'spec_helper'
 
 describe "RideShare::Rider" do
-  let(:rider) { RideShare::Rider.new({ id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540" }) }
+  let(:all_trips) { RideShare::Trip.all }
   let(:all_riders) { RideShare::Rider.all }
+  let(:all_drivers) { RideShare::Driver.all }
+  let(:rider) { RideShare::Rider.new({ id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540" }) }
   let(:rider_found) { RideShare::Rider.find(13) }
+
+  before do
+    all_trips
+    all_riders
+    all_drivers
+  end
 
   describe "Rider#initialize" do
     it "creates a new instance of Rider" do

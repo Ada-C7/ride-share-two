@@ -16,18 +16,18 @@ module RideShare
 
     # class method: all
     def self.all
-      @all = []
       # for each row in CSV file read in and create an instance of trip
-      CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/trips.csv", {:headers => true}) do |row| # file directory for rake
-        @all << RideShare::Trip.new(
-          id: row[0],
-          driver_id: row[1],
-          rider_id: row[2],
-          date: row[3],
-          rating: row[4]
+      @all_drivers = []
+      CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/trips.csv", {:headers => true}) do |row|
+        @all_drivers << RideShare::Trip.new(
+        id: row[0],
+        driver_id: row[1],
+        rider_id: row[2],
+        date: row[3],
+        rating: row[4]
         )
       end
-      return @all # return all instances of trips
+      return @all_drivers # return all instances of trips
     end
 
     # class method: by_ridertr(rider_id)
@@ -40,7 +40,7 @@ module RideShare
       # class method: by_driver(driver_id)
     def self.by_driver(driver_id)
       # find all instances of trips where driver_id matches
-        @all.select { |trip| trip.driver_id == driver_id }
+      all.select { |trip| trip.driver_id == driver_id }
       # return collection of trips by specific driver
     end
 
@@ -57,3 +57,18 @@ module RideShare
     end
   end
 end
+
+# CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/trips.csv", {:headers => true}) do |row| # file directory for rake
+#   if @@all_drivers.select { |driver| driver.id == row[0] } != []
+#     next
+#   else
+#     @@all_drivers << RideShare::Trip.new(
+#       id: row[0],
+#       driver_id: row[1],
+#       rider_id: row[2],
+#       date: row[3],
+#       rating: row[4]
+#     )
+#   end
+# end
+# return @@all_drivers # return all instances of trips

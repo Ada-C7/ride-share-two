@@ -1,6 +1,8 @@
 require 'csv'
-require_relative 'no_account_found_error'
+require_relative 'missing_account_error'
 require_relative 'duplicate_account_error'
+require_relative 'invalid_vin_error'
+require_relative 'missing_vin_error'
 
 # new Driver, subclass of RideShare
 module RideShare
@@ -10,10 +12,8 @@ module RideShare
     def initialize(driver_info={})
       @id = driver_info[:id].to_i
       @name = driver_info[:name]
-      unless driver_info[:vin] == nil || valid_vin?(driver_info[:vin])
-        raise ArgumentError.new("vin is invalid")
-      end
       @vin = driver_info[:vin]
+      vin_verify(@vin)
     end
 
     def trips
@@ -44,10 +44,10 @@ module RideShare
 
     def self.find(driver_id)
       begin
-        found_driver = @all_drivers.select { |instance| instance.id == driver_id }
-        raise NoAccountFoundError.new("Driver ID not found.") if found_driver.empty?
+        found_driver = all.select { |instance| instance.id == driver_id }
+        raise MissingAccountError.new("Driver ID not found.") if found_driver.empty?
         raise DuplicateAccountError.new("Duplicate accounts found.") if found_driver.length > 1
-      rescue NoAccountFoundError => alert
+      rescue MissingAccountError => alert
         puts alert.message
       rescue DuplicateAccountError => alert
         puts alert.message
@@ -58,11 +58,21 @@ module RideShare
 
     private
 
-    def valid_vin?(vin)
-    vin.length == 17 && !vin.match(/\A[a-zA-Z0-9]*\z/).nil?
+    def vin_verify(vin)
+      begin
+        raise MissingVinError.new("Missing VIN, Driver_#{@id}!") if vin == nil
+        if (vin.length == 17 && !vin.match(/\A[a-zA-Z0-9]*\z/).nil?) == false
+          raise InvalidVinError.new("Invalid VINDriver_#{@id}!")
+        end
+      rescue MissingVinError => alert
+        puts alert.message
+      rescue InvalidVinError => alert
+        puts alert.message
+      end
     end
   end
 end
 
 # RideShare::Driver.all
 # RideShare::Driver.find(1000)
+RideShare::Driver.new(vin: "TTT")

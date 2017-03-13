@@ -24,7 +24,7 @@ module RideShare
     end
 
     def self.find(rider_id)
-      found_rider = @all_riders.select { |instance| instance.id == rider_id }
+      found_rider = all.select { |instance| instance.id == rider_id }
       return found_rider[0]
       # return specific instance of rider (previously instantiated)
     end

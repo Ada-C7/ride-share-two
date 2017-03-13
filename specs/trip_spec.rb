@@ -5,6 +5,12 @@ describe "RideShare::Trip" do
   let(:all_riders) { RideShare::Rider.all }
   let(:all_drivers) { RideShare::Driver.all }
 
+  before do
+    all_trips
+    all_riders
+    all_drivers
+  end
+
   describe "Trip#initialize" do
     let(:trip13) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5" }) }
     let(:trip_no_date) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", rating: "5" }) }
@@ -104,8 +110,10 @@ describe "RideShare::Trip" do
       find_driver83.must_be_instance_of RideShare::Driver
     end
 
-    it "returns correct instance of driver by driver_id" do
-      find_driver83.must_equal RideShare::Driver.find(83)
+    it "has the same driver info as Driver.find" do
+      find_driver83.id.must_equal RideShare::Driver.find(83).id
+      find_driver83.name.must_equal RideShare::Driver.find(83).name
+      find_driver83.vin.must_equal RideShare::Driver.find(83).vin
     end
   end
 
@@ -117,8 +125,10 @@ describe "RideShare::Trip" do
       find_rider298.must_be_instance_of RideShare::Rider
     end
 
-    it "returns correct instance of Rider by Rider_id" do
-      find_rider298.must_equal RideShare::Rider.find(298)
+    it "has the same rider info as Rider.find" do
+      find_rider298.id.must_equal RideShare::Rider.find(298).id
+      find_rider298.name.must_equal RideShare::Rider.find(298).name
+      find_rider298.phone_number.must_equal RideShare::Rider.find(298).phone_number
     end
   end
 end

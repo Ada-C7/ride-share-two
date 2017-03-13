@@ -1,10 +1,14 @@
 require_relative 'spec_helper'
 
 describe "RideShare::Driver" do
+  let(:all_trips) { RideShare::Trip.all }
+  let(:all_riders) { RideShare::Rider.all }
+  let(:all_drivers) { RideShare::Driver.all }
+
   before do
-    RideShare::Driver.all
-    RideShare::Rider.all
-    RideShare::Trip.all
+    all_trips
+    all_riders
+    all_drivers
   end
 
   describe "Driver#initialize" do
@@ -34,8 +38,7 @@ describe "RideShare::Driver" do
   end
 
   describe "Driver#all" do
-    let(:all_drivers) { RideShare::Driver.all }
-    
+
     it "returns an array" do
       all_drivers.must_be_kind_of Array
     end
