@@ -10,12 +10,6 @@ module RideShare
     end
 
     def trips
-      # first run, is returning 9 trips when I expect 2. Driver with same ID ("1") as Rider I'm testing here has 9 trips - is it checking for Driver ID instead of Rider ID?
-
-      # Now testing with Rider IDs that I know drivers won't have and it is turning up 0 trips
-
-      # Gah! I forgot I programmed 'find_many' Trip method to only look for Driver IDs!
-
       Trip.find_many_riders(@rider_id)
     end
 

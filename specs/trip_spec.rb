@@ -1,6 +1,3 @@
-# require 'minitest/autorun'
-# require 'minitest/reporters'
-# require_relative '../lib/trip'
 require_relative 'spec_helper'
 
 describe "Trip class" do
@@ -28,7 +25,7 @@ describe "Trip class" do
 
       trip.must_respond_to :rating
       trip.rating.must_equal rating
-
+      # Needs test to see that rating is between 1 and 5
     end
   end
 
