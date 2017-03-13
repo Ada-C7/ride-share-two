@@ -40,7 +40,8 @@ module RideShare
     def unique_drivers
       trips
       # retrieve the list of all previous driver instances (through the trips functionality built above)
-      
+      unique = @all_trips.uniq { |i| i[:driver_id] }
+      return unique
       # return drivers.uniq { |d| d.id }
 
     end

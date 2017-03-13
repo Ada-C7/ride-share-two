@@ -67,18 +67,19 @@ describe "Rider" do
 
   describe "unique_drivers" do
     it "returns an Array of all the drivers a rider has had" do
-      skip
+      # skip
       RideShare::Rider.new(rider_id: 56, name: "Rebecca Moen DVM", phone_num: "(117) 028-4562 x913").unique_drivers.must_be_instance_of Array
     end
 
     it "returns an empty Array if the rider has not taken any trips, thus no drivers" do
-      skip
+      # skip
       RideShare::Rider.new(rider_id: 116, name: "Laurianne Larkin", phone_num: "567.228.1637 x86366").unique_drivers.must_be_empty
     end
 
     it "returns an Array of one item if the rider has had only one driver" do
-      skip
-      RideShare::Rider.new(rider_id: 41, name: "Ms. Westley Pouros", phone_num: "133.000.1809 x9028" ).unique_drivers.length.must_equal 1
+      # skip
+      # binding.pry
+      RideShare::Rider.new(rider_id: 164, name: "Dominique Gleason PhD", phone_num: "460.497.2371").unique_drivers.wont_be_same_as RideShare::Rider.new(rider_id: 164, name: "Dominique Gleason PhD", phone_num: "460.497.2371").trips
     end
   end
 
