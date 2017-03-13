@@ -1,6 +1,6 @@
 # require 'csv'
-require_relative 'file'
-require_relative 'trip'
+# require_relative 'file'
+# require_relative 'trip'
 
 module RideShare
   class Driver
@@ -14,8 +14,7 @@ module RideShare
 
 # dont need to worry about calling these methods on a driver that doesn't exsits
 # because you have to call this method on a driver instance
-# IE driver must exists cause you have a driver istance you are calling this method from...
-
+# IE you can't call an method on a object that doesn't exists
     def get_trips()
       RideShare::Trip.find_by_driver(@id)
     end
@@ -27,15 +26,14 @@ module RideShare
       (ratings.sum.to_f) / (ratings.length)
     end
 
-                ###################
-                ## Class methods ##
-                ###################
+                          ###################
+                          ## Class methods ##
+                          ###################
 
     def self.test_for_integer(num)
       Integer(num)
     end
 
-    # do you need to test this string? or is making sure it is included enough
     def self.test_name(name)
       raise ArgumentError.new "Name length is under 1" if name.length <= 1
       name
@@ -53,6 +51,9 @@ module RideShare
     end
 
     # this method will return mock data for testing when you need to call find
+    # but this can also cause lots of problems with other specs
+    # you need mock data to correlate across all three classes
+    #
     # def self.get_data
     #   [
     #     ['500', 'Jane Doe', 'WX1234567890ABCDE'],

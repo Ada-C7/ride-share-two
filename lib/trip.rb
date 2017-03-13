@@ -1,5 +1,5 @@
 require 'date'
-require_relative 'file'
+# require_relative 'file'
 # require_relative 'driver'
 # require_relative 'rider'
 
@@ -21,8 +21,6 @@ module RideShare
       raise ArgumentError.new("No driver with id: #{driver_id} in driver csv")
     end
 
-    # there is no other class calling this method
-    # OMG YOUR ERROR MESSAGE HELPED YOU FIND THE BAD RIDER - AMAZING!!
     def get_rider
       rider = RideShare::Rider.find(rider_id)
       return rider unless rider.nil?
@@ -57,7 +55,6 @@ module RideShare
       trip_ids = trips.map { |trip| trip.id }
       if trip_ids.length != trip_ids.uniq.length
         duplicates = trip_ids.detect { |id| trip_ids.count(id) > 1 }
-        # would be nice to know the ids of the duplicate id
         raise ArgumentError.new("There are two trips with the same id: #{duplicates}")
       end
       trips
@@ -73,8 +70,8 @@ module RideShare
     # end
 
     # all takes in trips_data because it is better to inject data as an object
-    # this also lets you test the data more easily (you can more easily pass in bad data)
-    # but there is a default for trips_data
+    # this also lets you test the data more easily since you can pass in bad data)
+    # there is a default for trips_data
     # this project needs the default because lots of methods call each other and
     # expect that all is reading the csv data
     def self.all(trips_data = nil)
@@ -91,6 +88,7 @@ module RideShare
         trip[:rating] = test_for_rating(trip_info[4])
         self.new(trip)
       end
+
       test_for_duplicates(trips)
       return trips
     end

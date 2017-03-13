@@ -25,10 +25,6 @@ describe "Rider" do
     end
   end
 
-  # AHHH - what about duplicate riders ... duplicate ids...
-  # - people could have same name but not phone numbers
-
-
   describe "Rider#all" do
 
     before do
@@ -55,10 +51,6 @@ describe "Rider" do
     end
 
     let(:riders) { RideShare::Rider.all(@riders_data) }
-
-    # it "accepts the csv_file and throws no errors" do
-    #   @riders_data.each { |rider_data| RideShare::Rider.all([riders_data])
-    # end
 
     it "returns an array" do
       riders.must_be_instance_of Array
@@ -100,7 +92,7 @@ describe "Rider" do
       err = proc {
                   RideShare::Rider.all(@bad_data[:bad_phone_number])
                   }.must_raise ArgumentError
-      err.message.must_equal "Phone num less than 7"
+      err.message.must_equal "Phone number less than 7"
     end
 
     it "raises an error if given bad name" do
