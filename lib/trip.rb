@@ -44,7 +44,10 @@ module RideShare
 
     def self.rider_trips(rider_id)
       # find all trip instances for a given rider ID
-      # TODO
+      trip_search = self.create_all_trips
+      trip_search.find_all do |i|
+        i[:rider_id] == rider_id
+      end
     end
 
     def rider
