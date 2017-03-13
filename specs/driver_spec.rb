@@ -68,54 +68,19 @@ describe "self.find" do
     drivers.vin.must_equal "1F9FF7C27LJA041VR"
   end
 end
-#
-# describe "#get_trips: retrieving trips" do
-#   it "returns an array of all the driver's trips" do
-#     driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
-#     driver.get_trips.must_equal []
-#   end
 
+describe "get_trips: retrieving trips" do
+  it "returns an array of all the driver's trips" do
+    driver = RideShare::Driver.new(driver_id: 25, name: "Briana Braun", vin: "SU9PYDRK6214WL15M")
+    driver.get_trips.each do |trip|
+      trip.driver_id.must_equal 25
+    end
+  end
+end
 
-
-#   it "if driver takes trips, should return an array of Trips the driver has taken" do
-#     driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
-#
-#     t1 = RideShare::Trip.new(20813)
-#     t2 = RideShare::Trip.new(38623)
-#
-#     # this trip should not be included in trips
-#     t3 = RideShare::Trip.new(45656)
-#     driver.add_trip(t1)
-#     driver.add_trip(t2)
-#
-#     driver.get_trips.must_equal [t1, t2]
+# describe "average_rating" do
+#   it "return the average rating of driver" do
+#     driver = RideShare::Driver.new(driver_id: 25, name: "Briana Braun", vin: "SU9PYDRK6214WL15M")
+#     driver.average_rating
 #   end
 # end
-#
-# describe "#add_trips: driver trips should increment when add_trips is called" do
-#   it "add a trip to the driver's list of trips" do
-#     driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
-#     t1 = RideShare::Trip.new(20813)
-# #
-#     # checks that it's empty
-#     driver.get_trips.must_equal []
-#     # add the trip
-#     driver.add_trip(t1)
-#     # checks the trip was added
-#     driver.get_trips.must_equal [t1]
-#   end
-# #
-#   it "add can be called multiple times" do
-#     driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
-#     t1 = RideShare::Trip.new(20813)
-#     t2 = RideShare::Trip.new(38623)
-#     t3 = RideShare::Trip.new(45656)
-#
-#     driver.add_trip(t1)
-#     driver.add_trip(t2)
-#     driver.add_trip(t3)
-#
-#     driver.get_trips.must_equal [t1, t2, t3]
-#   end
-# end
-#

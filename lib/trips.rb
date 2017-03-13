@@ -28,8 +28,9 @@ module RideShare
       RideShare::Trips.all.select{ |trip| trip.driver_id == id }
     end
 
-    # def rating_range(input)
-    #   input
-    # end
+    def self.get_trips_rider_id(id)
+      RideShare::Trips.all.select{ |trip| trip.rider_id == id }
+    end
+
   end # end of Trip
 end # end of module

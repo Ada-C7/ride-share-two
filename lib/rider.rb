@@ -30,5 +30,8 @@ module RideShare
       end
     end
 
+    def get_trips
+      return RideShare::Trips.get_trips_rider_id(@rider_id)
+    end
   end # end of Driver
 end # end of module

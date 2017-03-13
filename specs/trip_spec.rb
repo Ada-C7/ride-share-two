@@ -57,3 +57,11 @@ describe "Trips.get_trips_driver_id" do
     end
   end
 end
+
+describe "Trips.get_trips_driver_id" do
+  it "returns an array of trips by the driver id" do
+    RideShare::Trips.get_trips_rider_id(40).each do |trip|
+      trip.rider_id.must_equal 40
+    end
+  end
+end

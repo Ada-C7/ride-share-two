@@ -57,3 +57,12 @@ describe "self.find" do
     riders.phone.must_equal "1-658-210-5542 x085"
   end
 end
+
+describe "get_trips: retrieving rider trips" do
+  it "returns an array of all the riders's trips" do
+    rider = RideShare::Rider.new(rider_id: 40, name: "Julius Johns", phone: "569-206-0528 x7060")
+    rider.get_trips.each do |trip|
+      trip.rider_id.must_equal 40
+    end
+  end
+end
