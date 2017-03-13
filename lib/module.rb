@@ -1,5 +1,4 @@
-SimpleCov.start
-require 'simplecov'
+
 require 'csv'
 require 'pry'
 

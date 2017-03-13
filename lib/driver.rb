@@ -1,11 +1,3 @@
-require 'csv'
-require 'pry'
-# require_relative 'module.rb'
-
-# require_relative 'trip'
-# require_relative 'missingiderror'
-# require_relative 'rider'
-#
 module Rideshare
   class Driver
     attr_reader :driver_id, :name, :vin
@@ -29,13 +21,9 @@ module Rideshare
 
 
     def self.find_driver(param)
-      driver = ""
-      CSV.foreach('support/drivers.csv', {:headers=> true}) do |row|
-        driver =  Driver.new({driver_id:row[0], name:row[1], vin:row[2]}) if row[0] == param.to_s
-      end
-      #  trip_array.length <= 0 ? ()) :(return trip_array)
-      driver.class != Driver  ? (return raise Rideshare::MissingIdError.new("That driver has not completed any trips")) : (return driver)
 
+      driver = self.create_drivers.select!{|key,value| key == param.to_s}
+      return driver.values[0]
     end
 
     def all_my_trips(param = @driver_id)
@@ -49,5 +37,6 @@ module Rideshare
        array.map!{|value| value.rating.to_i}
        return array.reduce(:+)/array.length
     end
+
   end
 end

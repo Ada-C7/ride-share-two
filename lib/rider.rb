@@ -1,11 +1,5 @@
-require 'csv'
-require 'pry'
-# require_relative 'module.rb'
-
-# require_relative 'driver'
-# require_relative 'trip'
 module Rideshare
-  #
+
   class Rider
     attr_reader :rider_id, :name, :phone_num
 
@@ -27,21 +21,19 @@ module Rideshare
 
 
     def self.find_rider(param)
-
-      CSV.foreach('support/riders.csv', {:headers=> true, :header_converters => :symbol}) do |row|
-        return  Rider.new({rider_id:row[0], name:row[1], phone_num:row[2]}) if row[0] == param.to_s
-      end
+      rider = self.create_rider.select!{|key,value| key == param.to_s}
+      return rider.values[0]
     end
+
 
     def find_my_trips
-       Trip.find_by_rider(@rider_id)
+       Trip.find_by_rider(self.rider_id)
     end
 
-    def find_my_drivers
-       trips = find_my_trips
-       trips.map!{|value| value.make_driver}
 
-       return make_drivers.name
+    def find_my_drivers
+       trips = self.find_my_trips
+       trips.map!{|value| value.make_driver.name}
     end
 
   end
