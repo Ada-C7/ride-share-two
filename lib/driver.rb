@@ -17,7 +17,7 @@ module Rideshare
     def self.all #method to create instances of Drivers
       @drivers = []
 
-      CSV.open("/Users/adai/Documents/ada/projects/ride-share-two/support/drivers.csv", {:headers => true}).each do |line|
+      CSV.open("support/drivers.csv", {:headers => true}).each do |line|
         driver = Rideshare::Driver.new(line[0].to_i, line[1], line[2])
         @drivers << driver #class variable to store all driver objects
       end

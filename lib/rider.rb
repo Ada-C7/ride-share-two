@@ -13,7 +13,7 @@ module Rideshare
     def self.all
       @riders = []
 
-      CSV.open("/Users/adai/Documents/ada/projects/ride-share-two/support/riders.csv", {:headers => true}).each do |line|
+      CSV.open("support/riders.csv", {:headers => true}).each do |line|
         rider = Rideshare::Rider.new(line[0].to_i, line[1], line[2])
         @riders << rider
       end
