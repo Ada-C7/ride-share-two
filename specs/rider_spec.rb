@@ -5,7 +5,6 @@ describe "RideShare::Rider" do
   let(:all_riders) { RideShare::Rider.all }
   let(:all_drivers) { RideShare::Driver.all }
   let(:rider) { RideShare::Rider.new({ id: "13", name: "Dr. Leilani Mertz", phone_number: "777.380.7540" }) }
-  let(:rider_found) { RideShare::Rider.find(13) }
 
   before do
     all_trips
@@ -61,7 +60,7 @@ describe "RideShare::Rider" do
   end
 
   describe "Rider#find" do
-    before { RideShare::Rider.all }
+    let(:rider_found) { RideShare::Rider.find(13) }
 
     it "return value is a Rider instance" do
       rider_found.must_be_instance_of RideShare::Rider
@@ -75,8 +74,6 @@ describe "RideShare::Rider" do
   end
 
   describe "Rider#past_trips" do
-    before { RideShare::Trip.all }
-
     it "returns value an an Array" do
       rider.past_trips.must_be_kind_of Array
     end
@@ -91,11 +88,6 @@ describe "RideShare::Rider" do
   end
 
   describe "Rider#past_drivers" do
-    before do
-      RideShare::Trip.all
-      RideShare::Driver.all
-    end
-
     it "returns value as an Array" do
       rider.past_drivers.must_be_kind_of Array
     end

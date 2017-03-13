@@ -12,23 +12,23 @@ describe "RideShare::Trip" do
   end
 
   describe "Trip#initialize" do
-    let(:trip13) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5" }) }
-    let(:trip_no_date) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", rating: "5" }) }
+    let(:example_trip) { RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", date: "2015-05-27", rating: "5" }) }
 
     it "creates a new instance of trip" do
-      trip13.must_be_instance_of RideShare::Trip
+      example_trip.must_be_instance_of RideShare::Trip
     end
 
     it "passes in values correctly" do
-      trip13.id.must_equal 13
-      trip13.driver_id.must_equal 83
-      trip13.rider_id.must_equal 298
-      trip13.date.must_equal "2015-05-27"
-      trip13.rating.must_equal 5
+      example_trip.id.must_equal 13
+      example_trip.driver_id.must_equal 83
+      example_trip.rider_id.must_equal 298
+      example_trip.date.must_equal "2015-05-27"
+      example_trip.rating.must_equal 5
     end
 
     it "can create a new trip with a missing date" do
-      trip_no_date.date.must_equal nil
+      no_date_trip =  RideShare::Trip.new({ id: "13", driver_id: "83",rider_id: "298", rating: "5" })
+      no_date_trip.date.must_equal nil
     end
   end
 
@@ -67,68 +67,64 @@ describe "RideShare::Trip" do
   end
 
   describe "Trip#by_rider(rider_id)" do
-    before { all_trips }
-    let(:by_rider54) { RideShare::Trip.by_rider("54")}
+    let(:example_by_rider) { RideShare::Trip.by_rider("54")}
 
     it "returns an array" do
-      by_rider54.must_be_kind_of Array
+      example_by_rider.must_be_kind_of Array
     end
 
     it "each returned element is a trip instances" do
-      by_rider54.each { |element| element.must_be_instance_of RideShare::Trip }
+      example_by_rider.each { |element| element.must_be_instance_of RideShare::Trip }
     end
   end
 
   describe "Trip#by_driver(driver_id)" do
-    before { all_trips }
-    let(:by_driver61) { RideShare::Trip.by_driver("61") }
-    let(:by_driver100) { RideShare::Trip.by_driver("100") } # no trips
-    let(:by_driver999) { RideShare::Trip.by_driver("999") } # no driver_id
+    let(:example_by_driver) { RideShare::Trip.by_driver("61") }
 
     it "returns an array" do
-      by_driver61.must_be_kind_of Array
+      example_by_driver.must_be_kind_of Array
     end
 
     it "each returned element is a trip instances" do
-      by_driver61.each { |element| element.must_be_instance_of RideShare::Trip }
+      example_by_driver.each { |element| element.must_be_instance_of RideShare::Trip }
     end
 
     it "returns empty array if no trips are found for driver" do
-      by_driver100.must_equal []
+      by_driver_no_trips= RideShare::Trip.by_driver("100") # has no trips recorded
+      by_driver_no_trips.must_equal []
     end
 
     it "returns nil if the driver_id is not a valid one" do
-      by_driver999.must_equal []
+      by_driver_missing = RideShare::Trip.by_driver("999") # nonexistent driver_id lookup
+      by_driver_missing.must_equal []
     end
   end
 
   describe "Trip#find_driver" do
-    before { all_drivers }
-    let(:find_driver83) { RideShare::Trip.new({driver_id: "83"}).find_driver }
+    let(:example_find_driver) { RideShare::Trip.new({driver_id: "83"}).find_driver }
 
     it "returns the instance of Driver" do
-      find_driver83.must_be_instance_of RideShare::Driver
+      example_find_driver.must_be_instance_of RideShare::Driver
     end
 
     it "has the same driver info as Driver.find" do
-      find_driver83.id.must_equal RideShare::Driver.find(83).id
-      find_driver83.name.must_equal RideShare::Driver.find(83).name
-      find_driver83.vin.must_equal RideShare::Driver.find(83).vin
+      example_find_driver.id.must_equal RideShare::Driver.find(83).id
+      example_find_driver.name.must_equal RideShare::Driver.find(83).name
+      example_find_driver.vin.must_equal RideShare::Driver.find(83).vin
     end
   end
 
   describe "Trip#find_rider" do
-    before { all_riders }
-    let(:find_rider298) { RideShare::Trip.new({rider_id: "298"}).find_rider }
+    let(:example_find_rider) { RideShare::Trip.new({rider_id: "298"}).find_rider }
 
     it "returns the instance of Rider" do
-      find_rider298.must_be_instance_of RideShare::Rider
+      example_find_rider.must_be_instance_of RideShare::Rider
     end
 
     it "has the same rider info as Rider.find" do
-      find_rider298.id.must_equal RideShare::Rider.find(298).id
-      find_rider298.name.must_equal RideShare::Rider.find(298).name
-      find_rider298.phone_number.must_equal RideShare::Rider.find(298).phone_number
+      example_find_rider.id.must_equal RideShare::Rider.find(298).id
+      example_find_rider.name.must_equal RideShare::Rider.find(298).name
+      example_find_rider.phone_number.must_equal RideShare::Rider.find(298).phone_number
     end
   end
 end

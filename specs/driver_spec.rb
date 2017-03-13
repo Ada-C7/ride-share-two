@@ -4,6 +4,7 @@ describe "RideShare::Driver" do
   let(:all_trips) { RideShare::Trip.all }
   let(:all_riders) { RideShare::Rider.all }
   let(:all_drivers) { RideShare::Driver.all }
+  let(:example_driver) { RideShare::Driver.new(id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4") }
 
   before do
     all_trips
@@ -12,18 +13,15 @@ describe "RideShare::Driver" do
   end
 
   describe "Driver#initialize" do
-    let(:driver9) { RideShare::Driver.new(id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4") }
-    let(:no_vin) { RideShare::Driver.new(id: "87", name: "Tamiko Terada") }
-
     it "creates a new instance of trip" do
-      driver9.must_be_instance_of RideShare::Driver
+      example_driver.must_be_instance_of RideShare::Driver
     end
 
     it "passes in driver data correctly" do
       #9,Simone Hackett,4RA34A5K3YPN8H5P4
-      driver9.id.must_equal 9
-      driver9.name.must_equal "Simone Hackett"
-      driver9.vin.must_equal "4RA34A5K3YPN8H5P4"
+      example_driver.id.must_equal 9
+      example_driver.name.must_equal "Simone Hackett"
+      example_driver.vin.must_equal "4RA34A5K3YPN8H5P4"
     end
 
     it "throws an ArgumentError if the vin is invalid" do
@@ -33,12 +31,12 @@ describe "RideShare::Driver" do
     end
 
     it "can create a new driver with a missing vin" do
-      no_vin.vin.must_equal nil
+      no_vin_driver = RideShare::Driver.new(id: "87", name: "Tamiko Terada")
+      no_vin_driver.vin.must_equal nil
     end
   end
 
   describe "Driver#all" do
-
     it "returns an array" do
       all_drivers.must_be_kind_of Array
     end
@@ -87,31 +85,29 @@ describe "RideShare::Driver" do
   end
 
   describe "Driver#Trips" do
-    let (:driver9_trips) { RideShare::Driver.new({id: "9"}).trips }
-
+    let (:example_driver_trips) { RideShare::Driver.new({id: "9"}).trips }
     it "returns value as an Array" do
-      driver9_trips.must_be_kind_of Array
+      example_driver_trips.must_be_kind_of Array
     end
 
     it "first element is an instance of Trip" do
-      driver9_trips[0].must_be_instance_of RideShare::Trip
+      example_driver_trips[0].must_be_instance_of RideShare::Trip
     end
 
     it "last element is a Trip associated with the expected driver" do
-      driver9_trips[-1].driver_id.must_equal 9
+      example_driver_trips[-1].driver_id.must_equal 9
     end
   end
 
   describe "Driver#avg_rating" do
-    let (:driver9_avg) { RideShare::Driver.new(id: "9").avg_rating }
-
+    let (:example_driver_avg) { RideShare::Driver.new(id: "9").avg_rating }
     it "returns value as a Float" do
-      driver9_avg.must_be_kind_of Float
+      example_driver_avg.must_be_kind_of Float
     end
 
     it "return value is min 0, max 5" do
-      driver9_avg.must_be :<=, 5
-      driver9_avg.must_be :>=, 0
+      example_driver_avg.must_be :<=, 5
+      example_driver_avg.must_be :>=, 0
     end
   end
 end
