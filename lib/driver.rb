@@ -1,6 +1,6 @@
 require 'csv'
 require 'ap'
-
+require_relative 'trip'
 
 module RideShare
   class Driver
@@ -23,7 +23,7 @@ module RideShare
 
     #find a specific driver using their numeric ID
     def self.find(id)
-      driver_find = Driver.all
+      driver_find = RideShare::Driver.all
       driver_find.each do |driver|
         if driver.id == id
           return driver
@@ -34,7 +34,7 @@ module RideShare
 
     #retrieve the list of trip instances that only this driver has taken
     def trip_instances_for_driver
-      list_instances_of_trips = Trip.find_trips_of_driver(id)
+      list_instances_of_trips = RideShare::Trip.find_trips_of_driver(id)
       if list_instances_of_trips.length == 0
         raise ArgumentError.new "Sorry, there is no driver with an ID:#{id}."
       else
@@ -44,26 +44,20 @@ module RideShare
 
     #retrieve an average rating for that driver based on all trips taken
     def rating
-      trips = Trip.find_trips_of_driver(id)
+      trips = RideShare::Trip.find_trips_of_driver(id)
       total = 0
       array = trips.map{|item_in_object| item_in_object.rating }
       array.each {|x| total += x.to_f}
       average = (total/array.length)
       return average.round
-
-      #need to write test
     end
 
-    #end of class
-  end
-  #end of module
-end
-
-
+  end    #end of class
+end  #end of module
 
 
 # puts "creates instance for non-self methods"
-# instance_of_driver = Driver.find(9)
+# instance_of_driver = RideShare::Driver.find(9)
 
 # puts "retrieve the list of trip instances that only this driver has taken"
 # ap instance_of_driver.trip_instances_for_driver
@@ -72,8 +66,7 @@ end
 # ap instance_of_driver.rating
 
 # puts "retrieve all drivers from the CSV file"
-
-# ap Driver.all
+# ap RideShare::Driver.all
 
 # puts "find a specific driver using their numeric ID"
-# ap Driver.find(9)
+# ap RideShare::Driver.find(9)
