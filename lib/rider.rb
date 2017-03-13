@@ -11,8 +11,14 @@ module RideShare
       @phone_num = rider_info[:phone_num]
     end
 
-    def self.ceate_all_riders
+    def self.create_all_riders
       # retrieve all riders from the CSV file
+      CSV.read(
+      "support/riders.csv",
+      headers: true,
+      header_converters: :symbol,
+      converters: :all
+      ).map { |line| line.to_h }
     end
 
     def self.find(rider_id)

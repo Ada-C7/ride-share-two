@@ -25,12 +25,12 @@ describe "Rider" do
   describe "create_all_riders" do
     let(:riders) {RideShare::Rider.create_all_riders}
     it "returns an array of all riders" do
-      skip
+      # skip
       riders.must_be_instance_of Array
     end
 
     it "returns the correct number of riders" do
-      skip
+      # skip
       riders.length.must_equal 300
     end
   end
