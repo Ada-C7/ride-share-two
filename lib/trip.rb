@@ -13,15 +13,17 @@ module RideShare
       @rating = rating
     end
 
-
+    # retrieve the associated driver instance through the driver ID
     def driver_object
       return RideShare::Driver.find_driver(@driver_id)
     end
 
+    # retrieve the associated rider instance through the rider ID
     def rider_object
       return RideShare::Rider.find_rider(@rider_id)
-    end 
+    end
 
+    # retrieve all trips from the CSV file
     def self.all_trip_info
       all_trips_array = []
       CSV.read('support/trips.csv').each do |object|
@@ -52,10 +54,10 @@ module RideShare
     # all trip instances with a particular rider id
     def self.all_rider_trip_instances(rider_id)
       rider_trips = []
-      trips = RideShare::Rider.all_rider_info
+      trips = RideShare::Trip.all_trip_info
       trips.each do |object|
         if rider_id == object.rider_id
-        rider_trips << trips
+          rider_trips << object
         end
       end
       return rider_trips
@@ -63,23 +65,3 @@ module RideShare
 
   end
 end
-
-# RideShare::Trip.driver_trip_instances(1)
-# new_trip = RideShare::Trip.new( 1, 1, 54, "2016-04-05", 3)
-# new_trip
-# trip_id,driver_id,rider_id,date,rating
-# 1,1,54,2016-04-05,3
-# 2,67,146,2016-01-13,5
-
-#
-# have an ID, rider ID, a driver ID, date, rating
-# Each rating should be within an acceptable range (1-5)
-# Given a trip object, you should be able to:
-#
-# retrieve the associated driver instance through the driver ID
-# retrieve the associated rider instance through the rider ID
-# You should be able to:
-#
-# find all trip instances for a given driver ID
-# find all trip instances for a given rider ID
-# retrieve all trips from the CSV file
