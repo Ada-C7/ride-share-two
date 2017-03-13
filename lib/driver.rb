@@ -24,7 +24,6 @@ class Driver
     drivers = CSV.read("support/drivers.csv", { :headers => true })
 
     @@all_drivers = drivers.map { |line| Driver.new(line[0].to_i, line[1], line[2]) }
-    return @@all_drivers
   end
 
   def self.find(driver_id)

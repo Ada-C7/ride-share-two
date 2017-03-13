@@ -26,8 +26,6 @@ class Trip
     @@all_trips = trips.map do |line|
       Trip.new(line[0].to_i, line[1].to_i, line[2].to_i, line[3], line[4].to_i)
     end
-
-    return @@all_trips
   end
 
   def self.find_trips_driver(driver_id)

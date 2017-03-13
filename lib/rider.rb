@@ -19,8 +19,6 @@ class Rider
     riders = CSV.read("support/riders.csv", { :headers => true })
 
     @@all_riders = riders.map { |line| Rider.new(line[0].to_i, line[1], line[2]) }
-
-    return @@all_riders
   end
 
   def self.find(rider_id)
