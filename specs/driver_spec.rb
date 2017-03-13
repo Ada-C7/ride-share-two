@@ -31,11 +31,8 @@ describe "Driver" do
 
     it "trips.length matches number of trips from CSV file for that driver" do
       trips_number = my_driver.trips.length
-      lines_from_csv = []
-      trips_csv.each do |line|
-        if line[1].to_i == my_driver.id
-          lines_from_csv << line
-        end
+      lines_from_csv = trips_csv.find_all do |line|
+        line[1].to_i == my_driver.id
       end
       lines_from_csv.length.must_equal trips_number
     end
@@ -50,6 +47,11 @@ describe "Driver" do
     it "returns an average_rating based on all trips given" do
       my_driver.average_rating.must_be_instance_of Float
       my_driver.average_rating.must_equal 4.2
+    end
+
+    it "returns 0 if that driver has not yet had any trips" do
+      new_driver = RideShare::Driver.new(123456, "Ms. Lynn Trickey", "ZFLHHMKS402GD4P09")
+      new_driver.average_rating.must_equal 0
     end
 
   end
@@ -84,7 +86,9 @@ describe "Driver" do
 
     it "should return 0 if no driver found by that ID" do
       bad_id = RideShare::Driver.find_driver("apple")
+      other_bad_id = RideShare::Driver.find_driver(98098098098)
       bad_id.must_equal 0
+      other_bad_id.must_equal 0
     end
   end
 

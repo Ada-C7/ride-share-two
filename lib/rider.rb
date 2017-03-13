@@ -17,9 +17,8 @@ class RideShare::Rider
   end
 
   def drivers
-    drivers = trips.map do |trip|
-      trip.driver
-    end
+    drivers = trips.map { |trip| trip.driver }
+
     return drivers.uniq { |driver| driver.id }
   end
 

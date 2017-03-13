@@ -18,8 +18,12 @@ class RideShare::Driver
 
   def average_rating
     total = 0
-    trips.each { |trip| total += trip.rating }
-
+    if trips == 0
+      return 0
+    else
+      trips.each { |trip| total += trip.rating }
+    end
+    
     rating = (total.to_f / trips.length)
     return rating.round(1)
   end
