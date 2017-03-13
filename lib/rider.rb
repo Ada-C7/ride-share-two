@@ -3,10 +3,10 @@ require 'trip'
 
 module RideShare
   class Rider
-
-    def initialize
+    attr_reader :rider_id, :name, :phone_num
+    def initialize(rider_info)
       # have an ID, name and phone number
-
+      
     end
 
     def self.ceate_all_riders

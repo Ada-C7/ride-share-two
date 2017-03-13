@@ -10,7 +10,7 @@ describe "Rider" do
 
   describe "initialize" do
     it "Creates a new instance of the Rider class" do
-      skip
+      # skip
       rider = RideShare::Rider.new
       rider.must_be_instance_of RideShare::Rider
     end
