@@ -68,18 +68,13 @@ describe "self.find" do
     drivers.vin.must_equal "1F9FF7C27LJA041VR"
   end
 end
+#
+# describe "#get_trips: retrieving trips" do
+#   it "returns an array of all the driver's trips" do
+#     driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
+#     driver.get_trips.must_equal []
+#   end
 
-describe "#get_trips: retrieving trips" do
-  it "returns an array of all the driver's trips" do
-    driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
-    driver.get_trips.must_equal []
-  end
-
-  # it "returns an array of trips by the driver id" do
-  #   driver = RideShare::Driver.new(driver_id: 109, name: "Bob", vin: "1VINR567YEDWERTYU")
-  #   driver.get_trips_driver_id.must_equal 109
-  # end
-end
 
 
 #   it "if driver takes trips, should return an array of Trips the driver has taken" do

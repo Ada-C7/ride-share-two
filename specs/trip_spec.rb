@@ -43,10 +43,17 @@ describe "Trips initialize" do
   end
 end
 
-#
-# describe "Trips.all" do
-#   it "all rides stored in an array" do
-#    all_rides = RideShare::Trip.all
-#    all_rides.must_be_instance_of Array
-#   end
-# end
+describe "Trips.all" do
+  it "all rides stored in an array" do
+   all_rides = RideShare::Trips.all
+   all_rides.must_be_instance_of Array
+  end
+end
+
+describe "Trips.get_trips_driver_id" do
+  it "returns an array of trips by the driver id" do
+    RideShare::Trips.get_trips_driver_id(25).each do |trip|
+      trip.driver_id.must_equal 25
+    end
+  end
+end
