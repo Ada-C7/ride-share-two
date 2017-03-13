@@ -1,6 +1,4 @@
 require "csv"
-# require_relative 'rider'
-# require_relative 'driver'
 
 module RideShareTwo
   class Trip
@@ -24,7 +22,6 @@ module RideShareTwo
       RideShareTwo::Rider.find_rider(@rider_id)
     end
 
-# find all trip instances for a given driver ID
     def self.driver_trips(driver_id)
       drivers_trips = []
       all_trips.each do |trip|
@@ -57,5 +54,6 @@ module RideShareTwo
 
 end
 
+# these were lines for me for testing
 # puts RideShareTwo::Trip.all_trips[1].driver_id
 # puts RideShareTwo::Trip.driver_trips(1)

@@ -1,6 +1,5 @@
 require "csv"
 require_relative 'trip'
-require "pry"
 
 module RideShareTwo
   class Driver
@@ -48,7 +47,8 @@ module RideShareTwo
 
 end
 
+# these were lines for me for testing
 # puts RideShareTwo::Driver.find_driver(13).list_driver_trips
-driver = RideShareTwo::Driver.find_driver(13)
-puts driver.list_driver_trips
-puts driver.average_rating
+# driver = RideShareTwo::Driver.find_driver(13)
+# puts driver.list_driver_trips
+# puts driver.average_rating

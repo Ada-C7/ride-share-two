@@ -20,16 +20,8 @@ describe "Rider Initialize" do
 
 end
 
-# describe "list_rider_trips method" do
-#   it "retrieves the list of trip instances that a specific rider has taken" do
-#     RideShareTwo::Rider.list_driver_trips("88").must_be_kind_of RideShareTwo::Rider, "Oops that is not an array of trips"
-#   end
-# end
-
 describe "list_drivers_for_rider method" do
-  # let(:rider_object) {RideShareTwo::Rider.all_riders[250]}
   let(:rider_object) {RideShareTwo::Rider.find_rider(250)}
-  # RideShareTwo::Rider.find_rider(250).list_rider_trips
 
   it "returns as an array" do
     rider_trips = rider_object.list_drivers_for_rider
@@ -39,13 +31,10 @@ describe "list_drivers_for_rider method" do
   it "retrieves the list of all previous driver instances & returns as an array" do
     rider_trips = rider_object.list_drivers_for_rider
     rider_trips[0].must_be_instance_of RideShareTwo::Driver
-    # wanted to write line 41 to be line below, but couldn't figure out the code
-    # rider_trips[0].must_be_instance_of RideShareTwo::Driver
   end
 
   it "returns an array of drivers without duplicates" do
     rider_trips = rider_object.list_drivers_for_rider
-    print rider_trips
     rider_trips.length.must_equal 3
   end
 
@@ -55,7 +44,7 @@ end
 describe "self.all_riders" do
   let(:rider_list) {RideShareTwo::Rider.all_riders}
 
-  it "Returns an array of all riders" do
+  it "Returns an array" do
     rider_list
     rider_list.must_be_kind_of Array, "Oops - the class is not an array"
   end
@@ -94,7 +83,6 @@ describe "self.all_riders" do
 
 end
 
-#I think I need more tests for this
 describe "self.find_rider" do
   it "finds a specific rider using their numeric ID" do
     RideShareTwo::Rider.find_rider(88).must_be_kind_of RideShareTwo::Rider, "Oops that ID does not match a rider"
