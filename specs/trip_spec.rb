@@ -109,4 +109,12 @@ describe "Trip" do
     end
   end
 
+  describe "#get_rider" do
+    let(:my_trip) {RideShare::Trip.new(1, 1, 54, "2016-04-05", 3)}
+
+    it "Should return an instance of RideShare::Rider" do
+      my_trip.get_rider.must_be_instance_of RideShare::Rider
+    end
+  end
+
 end
