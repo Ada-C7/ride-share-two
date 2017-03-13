@@ -17,7 +17,7 @@ module RideShareTwo
     def self.all_drivers
       all_drivers = []
       CSV.open("support/drivers.csv",{:headers => true}).each do |array|
-        all_drivers << self.new(array[0].to_i, array[1], array[2].to_s)
+        all_drivers << self.new(array[0].to_i, array[1], array[2])
       end
       return all_drivers
     end
@@ -35,13 +35,12 @@ module RideShareTwo
       RideShareTwo::Trip.driver_trips(@driver_id)
     end
 
-# wasn't sure if you are looking for a float or an integer to be returned as the average.
-# went with integer because thinking in terms of a start system.
+
     def average_rating
       total_rating = 0
       ratings = list_driver_trips.map {|trip| trip.rating}
       total_rating = ratings.sum
-      average = total_rating / ratings.length
+      average = total_rating.to_f / ratings.length.to_f
       return average
     end
 

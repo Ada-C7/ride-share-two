@@ -1,5 +1,6 @@
 require "csv"
 require_relative 'trip'
+require_relative 'driver'
 # require "pry"
 
 module RideShareTwo
@@ -16,7 +17,7 @@ module RideShareTwo
     def self.all_riders
       all_riders = []
       CSV.open("support/riders.csv",{:headers => true}).each do |array|
-        all_riders << self.new(array[0].to_i, array[1], array[2].to_s)
+        all_riders << self.new(array[0].to_i, array[1], array[2])
       end
       return all_riders
     end
@@ -35,15 +36,30 @@ module RideShareTwo
     def list_drivers_for_rider
       drivers = []
       list_rider_trips.each do |trip|
-        unless drivers.include?(trip.driver_id)
-          drivers << trip.driver_id
+        # unless drivers. == (trip.driver_id)
+          drivers << trip.trip_driver_instance
+
           # binding.pry
-        end
+        # end
         #tried to write call trip.trip_driver_instance,
         # but ended up in a confounding loop about unintitialized constants and harmful circular require_relatives
       end
-      return drivers
+      return drivers.uniq { |driver| driver.driver_id }
     end
+
+    # # this method returns driver ids (not driver instances)
+    #     def list_drivers_for_rider
+    #       drivers = []
+    #       list_rider_trips.each do |trip|
+    #         unless drivers.include?(trip.driver_id)
+    #           drivers << trip.driver_id
+    #           # binding.pry
+    #         end
+    #         #tried to write call trip.trip_driver_instance,
+    #         # but ended up in a confounding loop about unintitialized constants and harmful circular require_relatives
+    #       end
+    #       return drivers
+    #     end
 
   end
 end

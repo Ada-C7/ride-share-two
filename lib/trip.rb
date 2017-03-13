@@ -28,7 +28,7 @@ module RideShareTwo
     def self.driver_trips(driver_id)
       drivers_trips = []
       all_trips.each do |trip|
-        if trip.driver_id.to_i == driver_id
+        if trip.driver_id == driver_id
           drivers_trips << trip
         end
       end
@@ -38,7 +38,7 @@ module RideShareTwo
     def self.rider_trips(rider_id)
       riders_trips = []
       all_trips.each do |trip|
-        if trip.rider_id.to_i == rider_id
+        if trip.rider_id == rider_id
           riders_trips << trip
         end
       end

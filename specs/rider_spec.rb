@@ -38,13 +38,14 @@ describe "list_drivers_for_rider method" do
 
   it "retrieves the list of all previous driver instances & returns as an array" do
     rider_trips = rider_object.list_drivers_for_rider
-    rider_trips[0].must_be_instance_of Integer
+    rider_trips[0].must_be_instance_of RideShareTwo::Driver
     # wanted to write line 41 to be line below, but couldn't figure out the code
     # rider_trips[0].must_be_instance_of RideShareTwo::Driver
   end
 
   it "returns an array of drivers without duplicates" do
     rider_trips = rider_object.list_drivers_for_rider
+    print rider_trips
     rider_trips.length.must_equal 3
   end
 

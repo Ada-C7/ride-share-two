@@ -37,7 +37,7 @@ describe "average_rating" do
   let(:driver) {RideShareTwo::Driver.find_driver(21)}
 
   it "retrieves an average rating for a driver based on all trips taken" do
-    driver.average_rating.must_equal 2
+    driver.average_rating.must_equal 30.0 / 11.0
   end
 end
 
