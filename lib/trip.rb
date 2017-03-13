@@ -1,8 +1,5 @@
-require 'pry'
-require 'csv'
-require_relative 'record_magic.rb'
-
 module Rideshare
+
   class Trip
     extend RecordMagic
     attr_reader :id, :trip_id, :driver_id, :name, :rating, :rider_id
@@ -16,7 +13,9 @@ module Rideshare
       @rating = args[:rating]
     end
 
-    def self.get_trips(id_to_find, search_var)
+    # the base funcionality (ie find, all) are in the RecordsMagic module
+
+    def self.get_trips_by_var(id_to_find, search_var)
       find_records("../support/trips.csv",search_var, id_to_find)
     end
 
@@ -26,6 +25,3 @@ module Rideshare
     end
   end
 end
-
-x = Rideshare::Trip.get_trips(100, :rider_id)
-puts x.rider_id

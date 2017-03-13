@@ -1,7 +1,10 @@
-require 'csv'
-require'pry'
-
 module RecordMagic
+  require 'pry'
+  require 'csv'
+  require_relative 'driver.rb'
+  require_relative 'trip.rb'
+  require_relative 'rider.rb'
+
   def proof_data
 
     raise ArgumentError.new("Warning: Bad driver ID: must be a number, but was reported as #{args[:driver_id]} data not included ") unless (args[:driver_id].is_a? Integer) && (args[:driver_id] > 0 )
@@ -21,18 +24,10 @@ module RecordMagic
         begin
           self.new(args,search_var)
         rescue
-          #if I had time I would make an error log here
+          #if I had time I would make an error
         end
       end
     end
-
-    def find_records(csv_filename, search_var, id_to_find)
-      fail = proc {
-        raise ArgumentError.new("#{search_var.to_s} # #{id_to_find}. Does not exist")
-      }
-      self.all(csv_filename,search_var).find(fail) do |record|
-        record.remove_instance_variable(:@id) == id_to_find
-
-      end
-    end
   end
+
+  

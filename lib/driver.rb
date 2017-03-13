@@ -1,28 +1,28 @@
-require 'pry'
-require 'csv'
-require_relative 'record_magic.rb'
-
+require_relative 'record_magic'
 module Rideshare
   class Driver
     extend RecordMagic
     attr_reader :id, :vin, :driver_id, :name
 
-    def initialize(args, varname)
-      @id = args[:varname]
+    def initialize(args, search_var)
+      proof_data
+      @id = args[:search_var]
       @driver_id = args[:driver_id]
       @vin = args[:vin]
       @name = args[:name]
     end
 
-    def get_driver_instance(driver_id)
-      find_records('csv = ../support/driver.rb', "Driver", driver_id)
+    # the base funcionality (ie find, all) are in the RecordsMagic module
+
+    def self.get_driver_instances(driver_id)
+      find_records('csv = ../support/driver.rb', :driver, driver_id)
     end
 
-    def get_trips(driver)
-      get_trips(driver, :driver_id)
+    def self.get_trips(driver)
+      Trip.get_trips_by_var(driver, :driver_id)
     end
 
-    def get_avg_rating(driver)
+    def self.get_avg_rating(driver)
       get_trips(driver).rating.sum / length(get_trips)
     end
 
@@ -31,4 +31,6 @@ module Rideshare
       raise ArgumentError.new("Warning: bad VIN: #{args[:vin]}; Driver #{args[:driver_id]} data not included ") if args[:vin].length != 17
     end
   end
+
 end
+puts Rideshare::Driver.get_trips(2)

@@ -1,34 +1,34 @@
 require_relative 'spec_helper'
+
 describe "Driver" do
   describe "initialize" do
-    let(:ok_driver) {Rideshare::Driver.new(driver_id: 1, name: "Margerie Stewart-Baxter", vin: "12345678901234567")}
+    let(:ok_driver) {Rideshare::Driver.new(id: "1", name: "OK Driver", vin: "1234567890123456B")}
 
     let(:bad_vin_2short) {
       proc{
-        Rideshare::Driver.new(driver_id: 1, name: "Hubert Cumberdale", vin: "1234567890123456")
+        Rideshare::Driver.new(id: "1", name: "Ms. Short Vin", vin: "123456789012345B")
       }
     }
 
     let(:bad_vin_2long) {
       proc {
-        Rideshare::Driver.new(driver_id: 1, name: "Jeremy Fisher", vin: "123456789012345678")
+        Rideshare::Driver.new(driver_id: "1", name: "Ms.. Long Vin", vin: "12345678901234567B")
       }
     }
 
     let(:bad_id) {
       proc{
-        Rideshare::Driver.new(driver_id: 'b', name: "Hubert Cumberdale", vin: "12345678901234567")}
+        Rideshare::Driver.new(id: 'b', name: "Miss No ID", vin: "12345678901234567")}
       }
 
       let(:no_name) {
-        proc{Rideshare::Driver.new(name: "Ralph Waldo Emerson", name: "", vin: "12345678901234567")}
+        proc{Rideshare::Driver.new(name: "Miss No Name", name: "", vin: "12345678901234567")}
       }
 
-
       it "has a driver id, a name of the right types" do
-        ok_driver.driver_id.must_be_kind_of Integer
+        ok_driver.id.must_be_kind_of Integer
         ok_driver.vin.must_be_kind_of String
-        ok_driver.vin.must_be_kind_of String
+        ok_driver.name.must_be_kind_of String
       end
 
       it "raises an argument error if vin isn't right length" do
@@ -46,7 +46,7 @@ describe "Driver" do
     end
 
 
-    describe "self.all" do
+    describe "all" do
       let(:all_drivers) {Rideshare::Driver.all("support/drivers.csv")}
 
       it "returns a collection with right number of rows" do
@@ -84,14 +84,16 @@ describe "Driver" do
       end
     end
 
+    describe "subset_driver_trips" do
+      it "retrieves all the trip instances that the driver has taken" do
+      end
+    end
+
 
     describe "get_driver_rating" do
       it "retrieves an average rating for that driver based on all trips taken" do
       end
     end
 
-    describe "subset_driver_trips" do
-      it "retrieves all the trip instances that the driver has taken" do
-      end
-    end
+
   end
