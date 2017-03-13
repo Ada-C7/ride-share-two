@@ -52,7 +52,7 @@ module RideShare
 
     def rider
       # retrieve the associated rider instance through the rider ID
-      # TODO
+      return RideShare::Rider.find(@rider_id)
     end
 
   end

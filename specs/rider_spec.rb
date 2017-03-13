@@ -60,6 +60,7 @@ describe "Rider" do
 
     it "finds trips for a Rider without trips" do
       # skip
+      # binding.pry
       RideShare::Rider.new(rider_id: 42, name: "Marcelina Howe", phone_num: "656-421-8363 x85791").trips.must_be_empty
     end
   end
