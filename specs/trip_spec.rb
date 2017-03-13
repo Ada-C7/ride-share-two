@@ -5,7 +5,7 @@ describe "Trip" do
     @id = 68
     @rider_id = 78
     @driver_id = 88
-    @date = '2017-8-03' #can't be a future date
+    @date = '2017-8-03'
     @rating = 3
   end
 

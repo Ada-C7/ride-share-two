@@ -1,7 +1,3 @@
-# require 'pry'
-# require 'csv'
-# require 'pp'
-
 module RideShare
   class Rider
     attr_reader :name, :id, :phone_num
@@ -19,7 +15,10 @@ module RideShare
 
     # retrieves the list of all previous driver instances
     def drivers
-      return []
+      driver_ids = trips.map { |trip| trip.driver_id }
+      driver_ids.sort!.uniq! # sort by ascending id and remove any duplicates
+      # find the driver instances matching the given driver ids
+      driver_ids.map { |driver_id| Driver.find(driver_id)}
     end
 
     # retrieves all riders from the CSV file

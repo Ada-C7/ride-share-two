@@ -68,7 +68,7 @@ describe "Rider" do
     end
 
     it "find the last driver id listed for that rider in the csv file" do
-      last_driver = drivers_for_rider_54.first.last
+      last_driver = drivers_for_rider_54.last
       last_driver.id.must_equal 39
     end
 
