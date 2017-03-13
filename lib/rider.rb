@@ -11,7 +11,7 @@ module RideShare
 
     def self.all
       @all_riders = []
-      # read in CSV file for all instances of riders
+      # read in CSV file to create Rider instances
       CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/riders.csv", {:headers => true}) do |row| # file directory for rake
         @all_riders << RideShare::Rider.new(
           id: row[0],
@@ -19,28 +19,25 @@ module RideShare
           phone_number: row[2]
         )
       end
-      return @all_riders
-      # return all instances of rider
+      return @all_riders # array of Rider instances
     end
 
     def self.find(rider_id)
       found_rider = all.select { |instance| instance.id == rider_id }
-      return found_rider[0]
-      # return specific instance of rider (previously instantiated)
+      return found_rider[0] # single instance of rider
     end
 
     def past_trips
       RideShare::Trip.by_rider(@id)
-      # return collection of trip instances by this rider
+      # returns array of Trip instances
     end
 
     def past_drivers
-      # instances of all Trips by the rider
-      trips = RideShare::Trip.by_rider(@id)
-      # find instances of Driver for unique ids
+      trips = RideShare::Trip.by_rider(@id) # Trip instances of Rider
       driver_ids = trips.map { |trip| trip.driver_id }
+      # find instances of Driver for unique ids
       driver_ids.uniq.map { |id| RideShare::Driver.find(id) }
-      # return collection of rider instances (through the trips functionality)
+      # returns array of Driver instances
     end
   end
 end

@@ -8,7 +8,7 @@ require_relative 'missing_vin_error'
 module RideShare
   class Driver
     attr_reader :id, :name, :vin
-    # create new driver and take in id, name, vin
+    # create new Driver and take in id, name, vin
     def initialize(driver_info={})
       @id = driver_info[:id].to_i
       @name = driver_info[:name]
@@ -18,19 +18,19 @@ module RideShare
 
     def trips
     RideShare::Trip.by_driver(@id)
-    # return collection of trip instances by this driver
+    # return array of Trip instances
     end
 
     def avg_rating
       ratings = trips.map {|trip| trip.rating }
       average = ratings.inject(:+)/ratings.length
       return average.round(2)
-      # return rounded average rating across all trips by this driver
+      # return average as rounded float
     end
 
     def self.all
       @all_drivers = []
-      # read in CSV file for all instances of drivers
+      # read in CSV file to create Driver instances
       CSV.foreach("/Users/tamikulon/ada/classwork/week5/ride-share-two/support/drivers.csv", {:headers => true}) do |row| # file directory for rake
         @all_drivers << RideShare::Driver.new(
           id: row[0],
@@ -38,8 +38,7 @@ module RideShare
           vin: row[2]
         )
       end
-      return @all_drivers
-      # return all instances of driver
+      return @all_drivers # array of driver instances
     end
 
     def self.find(driver_id)
@@ -52,7 +51,7 @@ module RideShare
       rescue DuplicateAccountError => alert
         puts alert.message
       else
-        return found_driver[0]
+        return found_driver[0] # return Driver instance
       end
     end
 
@@ -62,7 +61,7 @@ module RideShare
       begin
         raise MissingVinError.new("Missing VIN, Driver_#{@id}!") if vin == nil
         if (vin.length == 17 && !vin.match(/\A[a-zA-Z0-9]*\z/).nil?) == false
-          raise InvalidVinError.new("Invalid VINDriver_#{@id}!")
+          raise InvalidVinError.new("Invalid VIN, Driver_#{@id}!")
         end
       rescue MissingVinError => alert
         puts alert.message
