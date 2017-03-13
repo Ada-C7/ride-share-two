@@ -50,7 +50,8 @@ describe "Trip" do
   describe "rider method" do
     it "collects rider information: name and phone number" do
       # skip
-      RideShare::Trip.new(trip_id: 1, driver_id: 1, rider_id: 54, date: 2016-04-05, rating: 3).driver.must_be_instance_of Hash
+      #OOPS, submitted this and forgot to update this
+      RideShare::Trip.new(trip_id: 1, driver_id: 1, rider_id: 54, date: 2016-04-05, rating: 3).rider.must_be_instance_of Hash
     end
   end
 
