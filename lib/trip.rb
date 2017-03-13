@@ -31,18 +31,11 @@ module RideShare
       return all_trips_array
     end
 
-    def self.print_all
-      find_driver_trips("17").each do |trip|
-        puts "trip id: #{trip.id}, driver id: #{trip.driver_id}, date: #{trip.date}, rating: #{trip.rating}"
-      end
-    end
-
     def self.find_driver_trips(driver_id)
       #find the list of trip instances for a driver
       #returns list of trips instances.
       driver_trips = all.select {|trip| (trip.driver_id == driver_id) }
     end
-
 
     def self.find_rider_trips(rider_id)
       #find the list of trip instances for a rider
@@ -52,29 +45,13 @@ module RideShare
 
     def retrieve_driver
       #retrieve the associated driver instance through driver ID for a specific trip
-
-      # begin
-        RideShare::Driver.find(@driver_id)
-      #    raise InvalidData.new if RideShare::Driver.find(@driver_id).class != Array
-      #
-      # rescue InvalidData => exception
-      #   puts "driver id is not in the database: #{exception.message}"
-      # end
-      # return RideShare::Driver.find(@driver_id)
+      RideShare::Driver.find(@driver_id)
     end
 
     def retrieve_rider
       #retrieve the associated rider instance through rider ID for a specific trip
-
-      # begin
       RideShare::Rider.find(@rider_id)
-    #   raise InvalidData.new if RideShare::Rider.find(@rider_id).class != Array
-    # rescue InvalidData => exception
-    #   puts "rider id is not in the database: #{exception.message}"
-    # end
-    # return RideShare::Rider.find(@rider_id)
     end
-
   end
 end
 

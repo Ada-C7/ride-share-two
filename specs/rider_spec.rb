@@ -62,8 +62,8 @@ describe "Rider Class" do
       all_riders.last.phone_number.must_equal phone_number
     end
   end
-  describe "Rider#find" do
 
+  describe "Rider#find" do
     it "Check that class have a find method" do
       RideShare::Rider.must_respond_to :find
     end
@@ -88,8 +88,8 @@ describe "Rider Class" do
       RideShare::Rider.find(rider_id).must_equal nil
     end
   end
-  describe "Rider#retrieve_trips" do
 
+  describe "Rider#retrieve_trips" do
     it "Check that class have a retrieve_trips method" do
       rider = RideShare::Rider.new(name: 'Rana', rider_id: "2", phone_num: "425343" )
       rider.must_respond_to :retrieve_trips
@@ -106,6 +106,29 @@ describe "Rider Class" do
       trips = RideShare::Trip.find_rider_trips(specific_rider_id)
       trips.each do |trip|
         trip.must_be_instance_of RideShare::Trip
+      end
+    end
+  end
+
+  describe "Rider#retrieve_drivers" do
+    it "Check that class have a retrieve_drivers method" do
+      rider = RideShare::Rider.new(name: 'Rana', rider_id: "2", phone_num: "425343" )
+      rider.must_respond_to :retrieve_drivers
+    end
+
+    it "The length of driver list is the same count as in csv file" do
+      specific_rider_id = "3"
+      rider = RideShare::Rider.find(specific_rider_id)
+      drivers = rider.retrieve_drivers
+      drivers.length.must_equal 2
+    end
+
+    it "Returns the list of driver instances for a specific rider" do
+      specific_rider_id = "3"
+      rider = RideShare::Rider.find(specific_rider_id)
+      drivers = rider.retrieve_drivers
+      drivers.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
       end
     end
   end

@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 require_relative "../ride_share"
 require "csv"
+require "pry"
 
 describe "Driver class" do
   describe "Driver#initialize" do
@@ -18,8 +19,9 @@ describe "Driver class" do
     end
 
     it "Raises InvalidVehicleNumber if vin != 17" do
-
-      proc { RideShare::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")}.must_raise InvalidVehicleNumber
+      proc { RideShare::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52")}.must_output "invalid Vehilcle Numberxxx\n"
+      #binding.pry
+      #proc { RideShare::Driver.new(name: 'Jack', driver_id: "2", vin: "WBWSS52P9NEYL")}.must_raise InvalidVehicleNumber
     end
   end
 
@@ -87,7 +89,6 @@ describe "Driver class" do
   end
 
   describe "Driver#retrieve_trips" do
-
     it "The lenfth of trips list is the same count as in csv file" do
       specific_driver_id = "13"
       trips = RideShare::Trip.find_driver_trips(specific_driver_id)

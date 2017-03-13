@@ -33,7 +33,6 @@ describe "Trip class" do
       proc { RideShare::Trip.new(trip_id: '2', driver_id: "1", rider_id: "54", date: "2016-04-05", rating: "10" )}.must_raise RatingError
     end
 
-
     describe "Trip#self.all" do
       let(:all_trips) { RideShare::Trip.all}
 
@@ -81,8 +80,8 @@ describe "Trip class" do
         all_trips.last.rating.must_equal rating
       end
     end
-    describe "Trip#self.find_driver_trips" do
 
+    describe "Trip#self.find_driver_trips" do
       it "The lenfth of trips list is the same count as in csv file" do
         specific_driver_id = "13"
         trips = RideShare::Trip.find_driver_trips(specific_driver_id)
@@ -103,7 +102,6 @@ describe "Trip class" do
     end
 
     describe "Trip#self.find_rider_trips" do
-
       it "Returns the list of trip instances for a specific rider" do
         specific_rider_id = "54"
         trips = RideShare::Trip.find_rider_trips(specific_rider_id)
@@ -121,7 +119,6 @@ describe "Trip class" do
       it "Check the driver name for the first trip" do
         # first_trip: 1,1,54,2016-04-05,3
         trip = RideShare::Trip.all.first
-
         trip.retrieve_driver.name.must_equal "Bernardo Prosacco"
       end
 
@@ -132,7 +129,6 @@ describe "Trip class" do
       #   proc { trip.retrieve_driver }.must_raise InvalidData
       #   #binding.pry
       # end
-
     end
 
     describe "Trip#retrieve_rider" do

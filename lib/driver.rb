@@ -14,7 +14,8 @@ module RideShare
       @id = args_hash[:driver_id]
       @name = args_hash[:name]
       @vin = args_hash[:vin]
-      raise InvalidVehicleNumber.new "invalid Vehilcle Number" if @vin.length !=17
+      puts "invalid Vehilcle Numberxxx" if @vin.length !=17
+      #raise InvalidVehicleNumber.new "invalid Vehilcle Number" if @vin.length !=17
     end
 
     def self.all
@@ -35,17 +36,9 @@ module RideShare
       # (driver != nil) ? (return driver) : (raise InvalidData.new "invalid driver id")
     end
 
-    def self.print_all
-      all.each do |driver|
-        puts "id: #{driver.id}, name: #{driver.name}, vin: #{driver.vin}"
-      end
-    end
-
     def retrieve_trips
       # retrieve the list of trip instances for a cpecific driver
       RideShare::Trip.find_driver_trips(@id)
-
-
     end
 
     def calculate_avg_rating
@@ -56,8 +49,6 @@ module RideShare
       rating_sum = trips_rating.inject {|sum, num| sum + num }
       trips_rating.length == 0 ? 0 : ((rating_sum / trips_rating.length)).round(2)
     end
-
-
   end
 end
 

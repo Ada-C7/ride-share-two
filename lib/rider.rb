@@ -13,7 +13,6 @@ module RideShare
       @id = args_hash[:rider_id]
       @name = args_hash[:name]
       @phone_number = args_hash[:phone_num]
-
     end
 
     def self.all
@@ -33,12 +32,6 @@ module RideShare
       # (rider != nil) ? (return rider) : (raise InvalidData.new "invalid rider id")
     end
 
-    def self.print_all
-      all.each do |rider|
-        puts "rider id: #{rider.id}, name: #{rider.name}, phone: #{rider.phone_number}"
-      end
-    end
-
     def retrieve_trips
       #retrieve the list of trip instances for a rider
       RideShare::Trip.find_rider_trips(@id)
@@ -49,7 +42,6 @@ module RideShare
       #returns list of driver instances
       retrieve_trips.map {|trip| RideShare::Driver.find(trip.driver_id)}.uniq
     end
-
   end
 end
 
