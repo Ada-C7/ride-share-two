@@ -43,12 +43,22 @@ describe "Trip tests" do
       proc { RideShare::Trip.new(trip_hash6) }.must_raise ArgumentError
     end
 
-    it "Only accepts strings for Date" do
+    it "Only accepts non-empty strings for Date" do
       trip_hash1 = { id: 2, driver_id: 4, rider_id: 8, date: 87, rating: 5 }
       trip_hash2 = { id: 2, driver_id: 4, rider_id: 8, date: "", rating: 5 }
 
       proc { RideShare::Trip.new(trip_hash1) }.must_raise ArgumentError
       proc { RideShare::Trip.new(trip_hash2) }.must_raise ArgumentError
+    end
+
+    it "raises ArgumentError if the date string cannot be parsed to a Date" do
+      trip_hash1 = { id: 2, driver_id: 4, rider_id: 8, date: "jsad;flk", rating: 5 }
+      trip_hash2 = { id: 2, driver_id: 4, rider_id: 8, date: "Two weeks ago", rating: 5 }
+      trip_hash3 = { id: 2, driver_id: 4, rider_id: 8, date: "a trip happend at some point", rating: 5 }
+
+      proc { RideShare::Trip.new(trip_hash1) }.must_raise ArgumentError
+      proc { RideShare::Trip.new(trip_hash2) }.must_raise ArgumentError
+      proc { RideShare::Trip.new(trip_hash3) }.must_raise ArgumentError
     end
 
     it "Once initialized, date must be a Date" do
@@ -63,6 +73,20 @@ describe "Trip tests" do
       proc { RideShare::Trip.new(trip_hash1) }.must_raise ArgumentError
       proc { RideShare::Trip.new(trip_hash2) }.must_raise ArgumentError
       proc { RideShare::Trip.new(trip_hash3) }.must_raise ArgumentError
+    end
+
+    it "All fields are required" do
+      trip_hash1 = { driver_id: 4, rider_id: 8, date: "2014-07-12", rating: 1 }
+      trip_hash2 = { id: 2, rider_id: 8, date: "2014-07-12", rating: 1 }
+      trip_hash3 = { id: 2, driver_id: 4, date: "2014-07-12", rating: 1 }
+      trip_hash4 = { id: 2, driver_id: 4, rider_id: 8, rating: 1 }
+      trip_hash5 = { id: 2, driver_id: 4, rider_id: 8, date: "2014-07-12" }
+
+      proc { RideShare::Trip.new(trip_hash1) }.must_raise ArgumentError
+      proc { RideShare::Trip.new(trip_hash2) }.must_raise ArgumentError
+      proc { RideShare::Trip.new(trip_hash3) }.must_raise ArgumentError
+      proc { RideShare::Trip.new(trip_hash4) }.must_raise ArgumentError
+      proc { RideShare::Trip.new(trip_hash5) }.must_raise ArgumentError
     end
   end
 
@@ -142,7 +166,10 @@ describe "Trip tests" do
       trip.driver.must_be_instance_of RideShare::Driver
     end
 
-    #test if info on driver is correct
+    it "returns the correct Driver for a driver that exists" do
+      driver = trip.driver
+      driver.name.must_equal "Jeromy O'Keefe DVM"
+    end
 
     it "outputs message and returns nil if driver doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 0, rider_id: 8, date: "2014-07-12", rating: 5 })
@@ -156,7 +183,10 @@ describe "Trip tests" do
       trip.rider.must_be_instance_of RideShare::Rider
     end
 
-    #test if info on rider is correct
+    it "returns the correct Rider for a rider that exists" do
+      rider = trip.rider
+      rider.phone.must_equal "1-904-093-5211 x9183"
+    end
 
     it "outputs message and returns nil if rider doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 4, rider_id: 0, date: "2014-07-12", rating: 5 })
