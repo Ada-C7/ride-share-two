@@ -5,7 +5,7 @@ describe "RideShare::Driver" do
   let(:all_riders) { RideShare::Rider.all }
   let(:all_drivers) { RideShare::Driver.all }
   let(:example_driver) { RideShare::Driver.new(id: "9", name: "Simone Hackett", vin: "4RA34A5K3YPN8H5P4") }
-
+  # initialize .all for each class--as default dataset
   before do
     all_trips
     all_riders
@@ -19,6 +19,10 @@ describe "RideShare::Driver" do
 
     it "passes in driver data correctly" do
       #9,Simone Hackett,4RA34A5K3YPN8H5P4
+      example_driver.must_respond_to :id
+      example_driver.must_respond_to :name
+      example_driver.must_respond_to :vin
+
       example_driver.id.must_equal 9
       example_driver.name.must_equal "Simone Hackett"
       example_driver.vin.must_equal "4RA34A5K3YPN8H5P4"
