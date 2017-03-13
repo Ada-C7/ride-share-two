@@ -2,7 +2,6 @@ require "csv"
 
 module RideSharing
   class Trip
-
     attr_reader :id, :driver_id, :rider_id, :date, :rating
     def initialize(trip_hash)
       raise ArgumentError.new("The input for :id must be an integer > 0.\nThis trip will not be recorded.") if  trip_hash[:trip_id].class != Integer || trip_hash[:trip_id] < 1
@@ -16,14 +15,6 @@ module RideSharing
       @date = trip_hash[:date]
       @rating = trip_hash[:rating]
     end
-    # def initialize(id, driver_id, rider_id, date, rating)
-    #   @id = id
-    #   @driver_id = driver_id
-    #   @rider_id = rider_id
-    #   @date = date
-    #   @rating = rating
-    # end
-
 
     def self.all(path = "./support/trips.csv")
       all_trips = []
@@ -56,7 +47,6 @@ module RideSharing
           next
         end
 
-
         begin
           raise ArgumentError.new("The rating for trip ##{row[0]} is invalid. It must be an integer between 1 and 5. This trip will not be recorded." ) if row[4] == nil || !(1..5).include?(row[4].to_i)
         rescue ArgumentError => exception
@@ -72,19 +62,6 @@ module RideSharing
         all_trips << self.new(trip_hash)
       end
       return all_trips
-
-      # all_trips =[]
-      # CSV.foreach(path, {:headers => true}) do |line_array|
-      # # CSV.open(path).each do |line_array|
-      #   begin
-      #     raise ArgumentError.new("Sorry, the rating for trip ##{line_array[0]} is not between 1 and 5. This trip will not be recorded." ) if !(1..5).include? line_array[4].to_i
-      #   rescue ArgumentError => exception
-      #     puts "#{exception.message}"
-      #     next
-      #   end
-      #   all_trips << self.new(line_array[0].to_i, line_array[1].to_i, line_array[2].to_i, line_array[3], line_array[4].to_i)
-      # end
-      # return all_trips
     end
 
     def self.find(trip_id)
