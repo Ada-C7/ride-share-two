@@ -37,17 +37,17 @@ describe "Rider" do
 
   describe "find(rider_id)" do
     it "should return the rider_id that was passed through" do
-      skip
+      # skip
       RideShare::Rider.find(1)[:rider_id].must_equal 1
     end
 
     it "should return the name of the given rider_id" do
-      skip
+      # skip
       RideShare::Rider.find(150)[:name].must_equal "Angelita Donnelly III"
     end
 
     it "should return the phone number of the given rider_id" do
-      skip
+      # skip
       RideShare::Rider.find(300)[:phone_num].must_equal "791-114-8423 x70188"
     end
   end

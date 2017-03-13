@@ -23,6 +23,12 @@ module RideShare
 
     def self.find(rider_id)
       # find a specific rider using their numeric ID
+      id_find = self.create_all_riders
+      id_find.each do |i|
+        if i[:rider_id] == rider_id
+          return i
+        end
+      end
     end
 
     def trips
