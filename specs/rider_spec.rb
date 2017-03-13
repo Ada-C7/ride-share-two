@@ -90,10 +90,7 @@ describe "Rider" do
       proc{
         RideSharing::Rider.new({rider_id: 007, name: "James Bond", phone_num: "1-080-581-8405 x079"})
       }.must_raise ArgumentError
-
     end
-
-
   end # End of describe "#initialize"
 
 
@@ -143,11 +140,16 @@ describe "Rider" do
     #     RideSharing::Rider.find(301)
     #   }.must_raise ArgumentError
     # end
-
     it "Returns nil if id is not found" do
       RideSharing::Driver.find(301).must_be_nil
     end
   end # End of describe "Rider#self.find"
+
+
+  describe "#list_of_trips" do
+    # This method is solely dependent upon a class method in the class Trip.
+    # Blind trust is giving that no tests should be needed. The method used should have been thouroughly tested in the class Trip.
+  end
 
 
   describe "#previous_drivers" do
@@ -196,37 +198,37 @@ describe "Rider" do
     #     puts "Rider ##{rider.id}: #{rider.list_of_trips.length} trips with #{drivers.length} drivers"
     #   end
     # end
-
-    it "Find all driver-ids for rider 85, should be 7 of them" do
-      rider85 = RideSharing::Rider.find(85)
-      drivers_of_85 = rider85.list_of_trips.map { |trip| trip.find_driver.id}
-      puts drivers_of_85
-    end
-
-    it "Find all driver-ids for rider 1, should be ? of them" do
-      rider1 = RideSharing::Rider.find(1)
-      drivers_of_1 = rider1.list_of_trips.map { |trip| trip.find_driver.id}
-      puts drivers_of_1
-    end
-
-    it "Find all driver-ids for rider 92, should be 3 of them, not 4, due to riding with 1 driver twice" do
-      rider92 = RideSharing::Rider.find(92)
-      drivers_of_92 = rider92.list_of_trips.map { |trip| trip.find_driver.id}
-      print drivers_of_92
-      puts ""
-      print drivers_of_92.uniq
-      puts ""
-    end
-
-    it "Find all riders with no trips" do
-      RideSharing::Rider.all.each do |rider|
-        # rider_with_0_trips = []
-        if rider.list_of_trips == []
-          print "#{rider.id} "
-        end
-      end
-      puts ""
-    end
+    #
+    # it "Find all driver-ids for rider 85, should be 7 of them" do
+    #   rider85 = RideSharing::Rider.find(85)
+    #   drivers_of_85 = rider85.list_of_trips.map { |trip| trip.find_driver.id}
+    #   puts drivers_of_85
+    # end
+    #
+    # it "Find all driver-ids for rider 1, should be ? of them" do
+    #   rider1 = RideSharing::Rider.find(1)
+    #   drivers_of_1 = rider1.list_of_trips.map { |trip| trip.find_driver.id}
+    #   puts drivers_of_1
+    # end
+    #
+    # it "Find all driver-ids for rider 92, should be 3 of them, not 4, due to riding with 1 driver twice" do
+    #   rider92 = RideSharing::Rider.find(92)
+    #   drivers_of_92 = rider92.list_of_trips.map { |trip| trip.find_driver.id}
+    #   print drivers_of_92
+    #   puts ""
+    #   print drivers_of_92.uniq
+    #   puts ""
+    # end
+    #
+    # it "Find all riders with no trips" do
+    #   RideSharing::Rider.all.each do |rider|
+    #     # rider_with_0_trips = []
+    #     if rider.list_of_trips == []
+    #       print "#{rider.id} "
+    #     end
+    #   end
+    #   puts ""
+    # end
 
     # it "Find all riders with trips having an unidentified driver" do
     #   RideSharing::Rider.all.each do |rider|

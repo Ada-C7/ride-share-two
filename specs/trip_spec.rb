@@ -210,6 +210,8 @@ describe "Trip" do
     it "Must return an empty array if driver id is not found or not valid" do
       RideSharing::Trip.find_all_trips_for_rider(301).must_be_kind_of Array
       RideSharing::Trip.find_all_trips_for_rider(301).must_be_empty
+      RideSharing::Trip.find_all_trips_for_rider("1").must_be_kind_of Array
+      RideSharing::Trip.find_all_trips_for_rider("1").must_be_empty
     end
   end # End of describe "#self.find_all_trips_for_rider"
 
