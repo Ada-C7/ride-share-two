@@ -38,21 +38,34 @@ describe "Driver" do
 
   describe "Driver trips" do
     it "finds all the trips for a Driver in an Array" do
-      # skip
       RideShare::Driver.new(driver_id: 50, name: "Maye Bauch", vin: "1B6FU8M80MVDHHTMD").trips.must_be_instance_of Array
     end
 
     it "finds all the trips for the first Driver" do
-      # skip
       RideShare::Driver.new(driver_id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9").trips.length.must_equal 9
     end
 
     it "finds all the trips for the last Driver" do
       # driver 100 does not have any trips. look out for your tests.
-      # skip
       RideShare::Driver.new(driver_id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT").trips.must_be_empty
     end
+  end
 
+  describe "Driver trip average" do
+    it "finds the average for the first Driver" do
+      # skip
+      RideShare::Driver.new(driver_id: 1, name: "Bernardo Prosacco", vin: "WBWSS52P9NEYLVDE9").trip_average.must_equal 2
+    end
+
+    it "gives warning if driver has not given any ratings b/c not taken any trips" do
+      # skip
+      proc {
+        RideShare::Driver.new(driver_id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT").trip_average
+      }.must_raise ArgumentError
+
+      #  DUH, below didn't work, dividing by 0
+      # RideShare::Driver.new(driver_id: 100, name: "Minnie Dach", vin: "XF9Z0ST7X18WD41HT").trip_average.must_equal 0
+    end
   end
 
 end

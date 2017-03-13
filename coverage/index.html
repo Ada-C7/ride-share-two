@@ -14,26 +14,26 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-12T16:42:09-07:00">2017-03-12T16:42:09-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-12T17:09:20-07:00">2017-03-12T17:09:20-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">82.5%</span></span>
+    (<span class="covered_percent"><span class="yellow">84.78%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         107.78
+         146.74
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>40</b> relevant lines. 
-    <span class="green"><b>33</b> lines covered</span> and
+    <b>46</b> relevant lines. 
+    <span class="green"><b>39</b> lines covered</span> and
     <span class="red"><b>7</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -53,11 +53,11 @@
       <tr>
         <td class="strong"><a href="#77aa9d9c563f131d9f1b771d4a2a4470271699ed" class="src_link" title="lib/driver.rb">lib/driver.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>122</td>
-        <td>19</td>
-        <td>19</td>
+        <td>131</td>
+        <td>25</td>
+        <td>25</td>
         <td>0</td>
-        <td>36.4</td>
+        <td>29.0</td>
       </tr>
       
       <tr>
@@ -73,11 +73,11 @@
       <tr>
         <td class="strong"><a href="#56c3f4a30e1ed90de5abe74708f502eba9526bb3" class="src_link" title="lib/trip.rb">lib/trip.rb</a></td>
         <td class="red strong">63.16 %</td>
-        <td>66</td>
+        <td>68</td>
         <td>19</td>
         <td>12</td>
         <td>7</td>
-        <td>190.4</td>
+        <td>317.0</td>
       </tr>
       
       <tr>
@@ -121,8 +121,8 @@
     <h3>lib/driver.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>19</b> relevant lines. 
-      <span class="green"><b>19</b> lines covered</span> and
+      <b>25</b> relevant lines. 
+      <span class="green"><b>25</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -196,14 +196,14 @@
           <code class="ruby">      # have an ID, name and vehicle identification number</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="12">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="12">
+          <span class="hits">6</span>
           
           <code class="ruby">      @driver_id = driver_info[:driver_id]</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="13">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="13">
+          <span class="hits">6</span>
           
           <code class="ruby">      @name = driver_info[:name]</code>
         </li>
@@ -220,8 +220,8 @@
           <code class="ruby">      # Each vehicle identification number should be a specific length to ensure it is a valid vehicle identification number</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="16">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="16">
+          <span class="hits">6</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;A valid vin is 17 characters long&quot;) if driver_info[:vin].length &lt; 17</code>
         </li>
@@ -232,8 +232,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="18">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="18">
+          <span class="hits">5</span>
           
           <code class="ruby">      @vin = driver_info[:vin]</code>
         </li>
@@ -388,100 +388,100 @@
           <code class="ruby">      # retrieve the list of trip instances that only this driver has taken</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="44">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="44">
+          <span class="hits">5</span>
           
-          <code class="ruby">      return RideShare::Trip.driver_trips(@driver_id)</code>
+          <code class="ruby">      @all_trips = RideShare::Trip.driver_trips(@driver_id)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="covered" data-hits="5" data-linenumber="45">
+          <span class="hits">5</span>
           
-          
-          <code class="ruby">      # right now, giving it the array of hashes.</code>
+          <code class="ruby">      return @all_trips</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby">      # works when it&#39;s one .new object, so I said array[0]</code>
+          <code class="ruby">      # right now, giving it the array of hashes.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby">      # but then it complains can&#39;t .trips on a hashes</code>
+          <code class="ruby">      # works when it&#39;s one .new object, so I said array[0]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="48">
           
           
-          <code class="ruby">      # hash != class object</code>
+          <code class="ruby">      # but then it complains can&#39;t .trips on a hashes</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="49">
           
           
-          <code class="ruby">      # I&#39;d like to try something like this: http://pullmonkey.com/2008/01/06/convert-a-ruby-hash-into-a-class-object/</code>
+          <code class="ruby">      # hash != class object</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="50">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      # I&#39;d like to try something like this: http://pullmonkey.com/2008/01/06/convert-a-ruby-hash-into-a-class-object/</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="51">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="52">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="53">
-          
-          
-          <code class="ruby">end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="54">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    def trip_average</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
+        <li class="covered" data-hits="2" data-linenumber="54">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">#it&#39;s ok for something to return nil, don&#39;t necessarily need an Error/Exception</code>
+          <code class="ruby">      trips</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="57">
+        <li class="covered" data-hits="11" data-linenumber="55">
+          <span class="hits">11</span>
           
+          <code class="ruby">      trip_ratings = @all_trips.map { |each_trip| each_trip[:rating] }</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="56">
+          <span class="hits">2</span>
           
-          <code class="ruby"></code>
+          <code class="ruby">      raise ArgumentError.new(&quot;This driver has no ratings at this time&quot;) if trip_ratings.length == 0</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      trip_ratings.inject(0, :+)/trip_ratings.length</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
           
           
-          <code class="ruby">################## FAILED CODE ########################</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
@@ -493,265 +493,265 @@
         <li class="never" data-hits="" data-linenumber="61">
           
           
-          <code class="ruby"># SOMETHING HERE ISN&#39;T WORKING!!</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby"># def trips(driver_id)</code>
+          <code class="ruby">end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="63">
           
           
-          <code class="ruby">#   # Given a driver object, you should be able to:</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">#   # retrieve the list of trip instances that only this driver has taken</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="65">
           
           
-          <code class="ruby">#   @all_trips = RideShare::Trip.find_all_driver_trips(driver_id)</code>
+          <code class="ruby">#it&#39;s ok for something to return nil, don&#39;t necessarily need an Error/Exception</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
           
           
-          <code class="ruby">#   return @all_trips</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="67">
           
           
-          <code class="ruby"># end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="68">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby">################## FAILED CODE ########################</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="69">
           
           
-          <code class="ruby"># def trip_average</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="70">
           
           
-          <code class="ruby">#   # self.trips(driver_id)</code>
+          <code class="ruby"># SOMETHING HERE ISN&#39;T WORKING!!</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="71">
           
           
-          <code class="ruby">#   # retrieve an average rating for that driver based on all trips taken</code>
+          <code class="ruby"># def trips(driver_id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="72">
           
           
-          <code class="ruby">#   # @average = @all_trips[:rating] / @all_trips.length =&gt; NO GO. Not doing what I think</code>
+          <code class="ruby">#   # Given a driver object, you should be able to:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="73">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby">#   # retrieve the list of trip instances that only this driver has taken</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="74">
           
           
-          <code class="ruby">#   #http://stackoverflow.com/questions/2238767/retrieving-specific-hash-key-values-from-an-array-of-hashes</code>
+          <code class="ruby">#   @all_trips = RideShare::Trip.find_all_driver_trips(driver_id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="75">
           
           
-          <code class="ruby">#   #array_of_hashes.map { |hash_from_array| hash_from_array[:key] }</code>
+          <code class="ruby">#   return @all_trips</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="76">
           
           
-          <code class="ruby">#   array_of_ratings = @all_trips.map { |each_trip| each_trip[:rating] }</code>
+          <code class="ruby"># end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="77">
           
           
-          <code class="ruby">#   # add all the ratings together</code>
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="78">
           
           
-          <code class="ruby">#   # http://stackoverflow.com/questions/1538789/how-to-sum-array-of-numbers-in-ruby</code>
+          <code class="ruby"># def trip_average</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="79">
           
           
-          <code class="ruby">#   # want 0 for any driver that didn&#39;t take any trips and therefore no ratings so empty array</code>
+          <code class="ruby">#   # self.trips(driver_id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="80">
           
           
-          <code class="ruby">#   average = array_of_ratings.inject(0, :+) / array_of_ratings.length</code>
+          <code class="ruby">#   # retrieve an average rating for that driver based on all trips taken</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="81">
           
           
-          <code class="ruby">#   return average</code>
+          <code class="ruby">#   # @average = @all_trips[:rating] / @all_trips.length =&gt; NO GO. Not doing what I think</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="82">
           
           
-          <code class="ruby"># end</code>
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="83">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">#   #http://stackoverflow.com/questions/2238767/retrieving-specific-hash-key-values-from-an-array-of-hashes</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="84">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">#   #array_of_hashes.map { |hash_from_array| hash_from_array[:key] }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="85">
           
           
-          <code class="ruby">#NOT THE PROPER OUTPUT, figured out how Alix/Sahana&#39;s works, going with it</code>
+          <code class="ruby">#   array_of_ratings = @all_trips.map { |each_trip| each_trip[:rating] }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="86">
           
           
-          <code class="ruby"># csv_contents = CSV.read(&quot;support/drivers.csv&quot;)</code>
+          <code class="ruby">#   # add all the ratings together</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="87">
           
           
-          <code class="ruby"># csv_contents.shift</code>
+          <code class="ruby">#   # http://stackoverflow.com/questions/1538789/how-to-sum-array-of-numbers-in-ruby</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="88">
           
           
-          <code class="ruby"># #http://stackoverflow.com/questions/11740439/how-can-i-skip-the-header-row-when-reading-a-csv-in-ruby</code>
+          <code class="ruby">#   # want 0 for any driver that didn&#39;t take any trips and therefore no ratings so empty array</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="89">
           
           
-          <code class="ruby"># #http://stackoverflow.com/questions/5347949/whats-different-between-each-and-collect-method-in-ruby</code>
+          <code class="ruby">#   average = array_of_ratings.inject(0, :+) / array_of_ratings.length</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="90">
           
           
-          <code class="ruby"># csv_contents.collect do |single_driver_info|</code>
+          <code class="ruby">#   return average</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="91">
           
           
-          <code class="ruby">#   Driver.new(</code>
+          <code class="ruby"># end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="92">
           
           
-          <code class="ruby">#   driver_id: single_driver_info[0].to_i,</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="93">
           
           
-          <code class="ruby">#   name: single_driver_info[1],</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="94">
           
           
-          <code class="ruby">#   vin: single_driver_info[2]</code>
+          <code class="ruby">#NOT THE PROPER OUTPUT, figured out how Alix/Sahana&#39;s works, going with it</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="95">
           
           
-          <code class="ruby">#   )</code>
+          <code class="ruby"># csv_contents = CSV.read(&quot;support/drivers.csv&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="96">
           
           
-          <code class="ruby"># end</code>
+          <code class="ruby"># csv_contents.shift</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="97">
           
           
-          <code class="ruby"></code>
+          <code class="ruby"># #http://stackoverflow.com/questions/11740439/how-can-i-skip-the-header-row-when-reading-a-csv-in-ruby</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="98">
           
           
-          <code class="ruby"></code>
+          <code class="ruby"># #http://stackoverflow.com/questions/5347949/whats-different-between-each-and-collect-method-in-ruby</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="99">
           
           
-          <code class="ruby"># Trying to hard to make this an array of hashes. Just do what works for now</code>
+          <code class="ruby"># csv_contents.collect do |single_driver_info|</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby"># def initialize(driver_info)</code>
+          <code class="ruby">#   Driver.new(</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="101">
           
           
-          <code class="ruby">#   @driver_id = driver_info[:driver_id]</code>
+          <code class="ruby">#   driver_id: single_driver_info[0].to_i,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="102">
           
           
-          <code class="ruby">#   @name = driver_info[:name]</code>
+          <code class="ruby">#   name: single_driver_info[1],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="103">
           
           
-          <code class="ruby">#   # raise ArgumentError.new(&quot;Invalid VIN. VIN&#39;s are 17 characters long&quot;) if @vin.length &lt; 17</code>
+          <code class="ruby">#   vin: single_driver_info[2]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="104">
           
           
-          <code class="ruby">#   @vin = driver_info[:vin]</code>
+          <code class="ruby">#   )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="105">
@@ -763,100 +763,154 @@
         <li class="never" data-hits="" data-linenumber="106">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
           
           
-          <code class="ruby"># def self.create_all_drivers</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="108">
           
           
-          <code class="ruby">#   # http://technicalpickles.com/posts/parsing-csv-with-ruby/</code>
+          <code class="ruby"># Trying to hard to make this an array of hashes. Just do what works for now</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="109">
           
           
-          <code class="ruby">#   # SEEMS LIKE A GREAT idea DOES IT WORK??</code>
+          <code class="ruby"># def initialize(driver_info)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="110">
           
           
-          <code class="ruby">#   #http://stackoverflow.com/questions/14199784/convert-csv-file-into-array-of-hashes</code>
+          <code class="ruby">#   @driver_id = driver_info[:driver_id]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="111">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby">#   @name = driver_info[:name]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="112">
           
           
-          <code class="ruby">#   # CSV::Converters[:blank_to_nil] = lambda do |field|</code>
+          <code class="ruby">#   # raise ArgumentError.new(&quot;Invalid VIN. VIN&#39;s are 17 characters long&quot;) if @vin.length &lt; 17</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="113">
           
           
-          <code class="ruby">#   #   field &amp;&amp; field.empty? ? nil : field</code>
+          <code class="ruby">#   @vin = driver_info[:vin]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="114">
           
           
-          <code class="ruby">#   # end</code>
+          <code class="ruby"># end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="115">
           
           
-          <code class="ruby">#   # , header_converters: symbol, converters: [:all, :blank_to_nil]</code>
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="116">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby"># def self.create_all_drivers</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="117">
           
           
-          <code class="ruby">#   all_drivers = []</code>
+          <code class="ruby">#   # http://technicalpickles.com/posts/parsing-csv-with-ruby/</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="118">
           
           
-          <code class="ruby">#   CSV.foreach(&quot;support/drivers.csv&quot;, headers: true) do |line|</code>
+          <code class="ruby">#   # SEEMS LIKE A GREAT idea DOES IT WORK??</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="119">
           
           
-          <code class="ruby">#     all_drivers &lt;&lt; RideShare::Driver.new(line)</code>
+          <code class="ruby">#   #http://stackoverflow.com/questions/14199784/convert-csv-file-into-array-of-hashes</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="120">
           
           
-          <code class="ruby">#   end</code>
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="121">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby">#   # CSV::Converters[:blank_to_nil] = lambda do |field|</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="122">
+          
+          
+          <code class="ruby">#   #   field &amp;&amp; field.empty? ? nil : field</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby">#   # end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="124">
+          
+          
+          <code class="ruby">#   # , header_converters: symbol, converters: [:all, :blank_to_nil]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">#</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
+          
+          
+          <code class="ruby">#   all_drivers = []</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="127">
+          
+          
+          <code class="ruby">#   CSV.foreach(&quot;support/drivers.csv&quot;, headers: true) do |line|</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="128">
+          
+          
+          <code class="ruby">#     all_drivers &lt;&lt; RideShare::Driver.new(line)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="129">
+          
+          
+          <code class="ruby">#   end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="130">
+          
+          
+          <code class="ruby">#</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="131">
           
           
           <code class="ruby"># end</code>
@@ -1060,8 +1114,8 @@
           <code class="ruby">      converters: :all</code>
         </li>
       
-        <li class="covered" data-hits="1803" data-linenumber="28">
-          <span class="hits">1803</span>
+        <li class="covered" data-hits="3005" data-linenumber="28">
+          <span class="hits">3005</span>
           
           <code class="ruby">      ).map { |line| line.to_h }</code>
         </li>
@@ -1090,20 +1144,20 @@
           <code class="ruby">      # find all trip instances for a given driver ID</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="33">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="33">
+          <span class="hits">5</span>
           
           <code class="ruby">      trip_search = self.create_all_trips</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="34">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="34">
+          <span class="hits">5</span>
           
           <code class="ruby">      trip_search.find_all do |i|</code>
         </li>
       
-        <li class="covered" data-hits="1800" data-linenumber="35">
-          <span class="hits">1800</span>
+        <li class="covered" data-hits="3000" data-linenumber="35">
+          <span class="hits">3000</span>
           
           <code class="ruby">        i[:driver_id] == driver_id</code>
         </li>
@@ -1159,31 +1213,31 @@
         <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="45">
           
           
-          <code class="ruby">end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="48">
           
           
-          <code class="ruby">################## FAILED CODE ########################</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="49">
@@ -1195,100 +1249,112 @@
         <li class="never" data-hits="" data-linenumber="50">
           
           
-          <code class="ruby"># NOT WORKING TAKE 2</code>
+          <code class="ruby">################## FAILED CODE ########################</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="51">
           
           
-          <code class="ruby"># def self.find_all_driver_trips(driver_id)</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="52">
           
           
-          <code class="ruby">#   # find all trip instances for a given driver ID</code>
+          <code class="ruby"># NOT WORKING TAKE 2</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="53">
           
           
-          <code class="ruby">#   # http://stackoverflow.com/questions/2244915/how-do-i-search-within-an-array-of-hashes-by-hash-values-in-ruby</code>
+          <code class="ruby"># def self.find_all_driver_trips(driver_id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="54">
           
           
-          <code class="ruby">#   self.create_all_trips.select { |trip| trip[:driver_id] == driver_id }</code>
+          <code class="ruby">#   # find all trip instances for a given driver ID</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="55">
           
           
-          <code class="ruby"># end</code>
+          <code class="ruby">#   # http://stackoverflow.com/questions/2244915/how-do-i-search-within-an-array-of-hashes-by-hash-values-in-ruby</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="56">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby">#   self.create_all_trips.select { |trip| trip[:driver_id] == driver_id }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="57">
           
           
-          <code class="ruby"># def find_all_rider_trips(rider_id)</code>
+          <code class="ruby"># end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
           
           
-          <code class="ruby">#   # find all trip instances for a given rider ID</code>
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby"># def find_all_rider_trips(rider_id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
           
           
-          <code class="ruby"># end</code>
+          <code class="ruby">#   # find all trip instances for a given rider ID</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby"># NOT WORKING TAKE 1</code>
+          <code class="ruby"># end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="63">
           
           
-          <code class="ruby"># def self.find(driver_id)</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">#   # find a specific driver using their numeric ID</code>
+          <code class="ruby"># NOT WORKING TAKE 1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="65">
           
           
-          <code class="ruby">#   self.create_all_drivers[driver_id]</code>
+          <code class="ruby"># def self.find(driver_id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby">#   # find a specific driver using their numeric ID</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="67">
+          
+          
+          <code class="ruby">#   self.create_all_drivers[driver_id]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
           
           
           <code class="ruby"># end</code>

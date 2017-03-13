@@ -41,13 +41,22 @@ module RideShare
     def trips
       # *Given a driver object*
       # retrieve the list of trip instances that only this driver has taken
-      return RideShare::Trip.driver_trips(@driver_id)
+      @all_trips = RideShare::Trip.driver_trips(@driver_id)
+      return @all_trips
       # right now, giving it the array of hashes.
       # works when it's one .new object, so I said array[0]
       # but then it complains can't .trips on a hashes
       # hash != class object
       # I'd like to try something like this: http://pullmonkey.com/2008/01/06/convert-a-ruby-hash-into-a-class-object/
     end
+
+    def trip_average
+      trips
+      trip_ratings = @all_trips.map { |each_trip| each_trip[:rating] }
+      raise ArgumentError.new("This driver has no ratings at this time") if trip_ratings.length == 0
+      trip_ratings.inject(0, :+)/trip_ratings.length
+    end
+
 
   end
 end

@@ -41,6 +41,8 @@ module RideShare
       return RideShare::Driver.find(@driver_id)
     end
 
+    
+
   end
 end
 
