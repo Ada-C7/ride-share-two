@@ -18,7 +18,14 @@ describe "Trip" do
   end
 
   describe "create_all_trips" do
+    let(:trips) {RideShare::Trip.create_all_trips}
+    it "Returns an array of all trips" do
+      trips.must_be_instance_of Array
+    end
 
+    it "The number of trips is correct" do
+      trips.length.must_equal 600
+    end
   end
 
 
