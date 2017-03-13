@@ -134,9 +134,7 @@ describe "Rider tests" do
 
     it "Drivers are not duplicated for a rider that's had a driver > 1 time" do
       rider164_drivers = RideShare::Rider.find(164).drivers
-
       rider164_drivers.length.must_equal 5
-      rider164_drivers.each { |driver| rider164_drivers.count(driver).must_equal 1 }
     end
 
     it "Returns an empty array if no trips were taken" do
@@ -147,7 +145,7 @@ describe "Rider tests" do
       proc { rider103.drivers }.must_output (/.+/)
     end
 
-    it "Doesn't include drivers with invalid driver ids for driver ID that doesn't exist" do
+    it "Trips taken with driver IDs that don't return a Driver won't add to the array" do
       rider103.drivers.length.must_equal 1
     end
   end

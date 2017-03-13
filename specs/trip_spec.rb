@@ -54,7 +54,7 @@ describe "Trip tests" do
     it "raises ArgumentError if the date string cannot be parsed to a Date" do
       trip_hash1 = { id: 2, driver_id: 4, rider_id: 8, date: "jsad;flk", rating: 5 }
       trip_hash2 = { id: 2, driver_id: 4, rider_id: 8, date: "Two weeks ago", rating: 5 }
-      trip_hash3 = { id: 2, driver_id: 4, rider_id: 8, date: "a trip happend at some point", rating: 5 }
+      trip_hash3 = { id: 2, driver_id: 4, rider_id: 8, date: "a trip happened at some point", rating: 5 }
 
       proc { RideShare::Trip.new(trip_hash1) }.must_raise ArgumentError
       proc { RideShare::Trip.new(trip_hash2) }.must_raise ArgumentError
@@ -136,7 +136,7 @@ describe "Trip tests" do
     end
 
     it "Returns empty array if no trips are found" do
-      RideShare::Trip.find_driver_trips(10000).length.must_equal 0
+      RideShare::Trip.find_driver_trips(10000).must_equal []
     end
   end
 
@@ -157,39 +157,41 @@ describe "Trip tests" do
     end
 
     it "Returns empty array if no trips are found" do
-      RideShare::Trip.find_rider_trips(10000).length.must_equal 0
+      RideShare::Trip.find_rider_trips(10000).must_equal []
     end
   end
 
   describe "Trip#driver" do
-    it "returns a Driver object if the driver exists" do
+    it "Returns a Driver object if the driver exists" do
       trip.driver.must_be_instance_of RideShare::Driver
     end
 
-    it "returns the correct Driver for a driver that exists" do
+    it "Returns the correct Driver for a driver that exists" do
       driver = trip.driver
       driver.name.must_equal "Jeromy O'Keefe DVM"
     end
 
-    it "outputs message and returns nil if driver doesn't exist" do
+    it "Outputs message and returns nil if driver doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 0, rider_id: 8, date: "2014-07-12", rating: 5 })
+
       proc { bad_trip.driver }.must_output (/.+/)
       bad_trip.driver.must_equal nil
     end
   end
 
   describe "Trip#rider" do
-    it "returns a Rider object if the rider exists" do
+    it "Returns a Rider object if the rider exists" do
       trip.rider.must_be_instance_of RideShare::Rider
     end
 
-    it "returns the correct Rider for a rider that exists" do
+    it "Returns the correct Rider for a rider that exists" do
       rider = trip.rider
       rider.phone.must_equal "1-904-093-5211 x9183"
     end
 
-    it "outputs message and returns nil if rider doesn't exist" do
+    it "Outputs message and returns nil if rider doesn't exist" do
       bad_trip = RideShare::Trip.new({ id: 2, driver_id: 4, rider_id: 0, date: "2014-07-12", rating: 5 })
+
       proc { bad_trip.rider }.must_output (/.+/)
       bad_trip.rider.must_equal nil
     end

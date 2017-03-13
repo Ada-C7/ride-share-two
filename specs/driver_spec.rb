@@ -119,7 +119,7 @@ describe "Driver tests" do
     end
 
     it "Returns an empty array if no trips are found" do
-      driver100.trips.length.must_equal 0
+      driver100.trips.must_equal []
     end
   end
 
@@ -136,6 +136,9 @@ describe "Driver tests" do
       proc { driver100.avg_rating }.must_raise NoRatingError
     end
 
-    #make test for formatting??
+    it "Returns rating with no more than two decimal places" do
+      rating_string = driver64.avg_rating.to_s
+      rating_string.length.must_be :<=, 4
+    end
   end
 end
