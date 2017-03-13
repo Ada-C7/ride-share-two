@@ -8,7 +8,7 @@ module RideShare
 
     def initialize(trip_info)
       #have an ID, rider ID, a driver ID, date, rating
-      @trip_info = trip_info[:trip_id]
+      @trip_id = trip_info[:trip_id]
       @driver_id = trip_info[:driver_id]
       @rider_id = trip_info[:rider_id]
       @date = trip_info[:date]
@@ -41,7 +41,7 @@ module RideShare
       return RideShare::Driver.find(@driver_id)
     end
 
-    
+
 
   end
 end

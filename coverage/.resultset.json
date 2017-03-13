@@ -145,13 +145,13 @@
         null,
         1,
         null,
-        0,
-        0,
-        0,
-        0,
+        2,
+        2,
+        2,
+        2,
         null,
         null,
-        0,
+        2,
         0,
         null,
         null,
@@ -205,7 +205,14 @@
         null
       ],
       "/Users/arrozconcurry/Documents/ada_assignments/5week/ride-share-two/lib/rider.rb": [
-
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
       ],
       "/Users/arrozconcurry/Documents/ada_assignments/5week/ride-share-two/specs/rider_spec.rb": [
         1,
@@ -220,10 +227,31 @@
         1,
         null,
         null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ]
     },
-    "timestamp": 1489363760
+    "timestamp": 1489367231
   }
 }
