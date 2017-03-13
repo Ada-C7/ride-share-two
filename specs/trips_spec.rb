@@ -51,7 +51,6 @@ describe "RideShare: Trip" do
 
   describe "Trip.getDriver(id)" do
     it "returns the correct driver object" do
-      trips
       driver = RideShare::Trip.getDriver(67)
       driver.must_be_instance_of RideShare::Driver
       driver.id.must_equal 9
@@ -62,7 +61,6 @@ describe "RideShare: Trip" do
 
   describe "Trip.getRider(id)" do
     it "returns the correct rider object" do
-      trips
       rider = RideShare::Trip.getRider(13)
       rider.must_be_instance_of RideShare::Rider
       rider.id.must_equal 298
@@ -73,14 +71,12 @@ describe "RideShare: Trip" do
 
   describe "Trips#getTripsByDriver(driver_id)" do
     it "returns an array of trip objects" do
-      trips
       driver_trips = RideShare::Trip.getTripsByDriver(26)
       driver_trips.must_be_kind_of Array
       driver_trips[0].must_be_instance_of RideShare::Trip
     end
 
     it "returns the correct number of trips" do
-      trips
       driver_trips = RideShare::Trip.getTripsByDriver(26)
       driver_trips.length.must_equal 8
     end
@@ -88,14 +84,12 @@ describe "RideShare: Trip" do
 
   describe "Trips#getTripsByRider(rider)" do
     it "returns an array of trip objects" do
-      trips
       rider_trips = RideShare::Trip.getTripsByRider(137)
       rider_trips.must_be_kind_of Array
       rider_trips[0].must_be_instance_of RideShare::Trip
     end
 
     it "returns the correct number of trips" do
-      trips
       rider_trips = RideShare::Trip.getTripsByRider(137)
       rider_trips.length.must_equal 6
     end
