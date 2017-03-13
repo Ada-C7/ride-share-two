@@ -3,6 +3,8 @@ require 'bad_vin_error'
 
 module RideShare
   class Driver
+    CORP_FEE = 1.65 #gets subtracted from trip cost
+    PAY_RATE = 0.80 #percent of trip cost that goes to driver
 
     attr_reader :id, :name, :vin
 
@@ -73,7 +75,7 @@ module RideShare
       return nil if driver_trips == []
       trip_costs = driver_trips.map{ |trip| trip.cost }
       total_costs = trip_costs.inject(:+)
-      driver_pay = (total_costs - 1.65) * 0.80
+      driver_pay = (total_costs - CORP_FEE) * PAY_RATE
       return driver_pay.round(2)
     end
 
