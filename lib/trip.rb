@@ -75,13 +75,11 @@ module RideSharing
     end
 
     def self.find_all_trips_for_driver(driv_id)
-      all_trips_for_driver = self.all.select { |trip| trip.driver_id == driv_id}
-      return all_trips_for_driver
+      return self.all.select { |trip| trip.driver_id == driv_id}
     end
 
     def self.find_all_trips_for_rider(ride_id)
-      all_trips_for_rider = self.all.select { |trip| trip.rider_id == ride_id}
-      return all_trips_for_rider
+      return self.all.select { |trip| trip.rider_id == ride_id}
     end
 
     def find_driver
