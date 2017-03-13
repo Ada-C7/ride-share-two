@@ -16,6 +16,9 @@ describe "Driver class" do
 
       driver.must_respond_to :name
       driver.name.must_equal name
+
+      driver.must_respond_to :vin
+      driver.vin.must_equal vin
     end
   end
 

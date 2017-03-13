@@ -20,6 +20,15 @@ describe "Trip class" do
       trip.must_respond_to :date
       trip.date.must_equal date
 
+      trip.must_respond_to :driver_id
+      trip.driver_id.must_equal driver_id
+
+      trip.must_respond_to :rider_id
+      trip.rider_id.must_equal rider_id
+
+      trip.must_respond_to :rating
+      trip.rating.must_equal rating
+
     end
   end
 
