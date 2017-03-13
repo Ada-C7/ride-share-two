@@ -1,0 +1,70 @@
+Trip CLASS
+
+  Each trip should be INSTANTIATED (initialize) with an ID, rider ID, driver ID, date, rating (each rating should be within an acceptable range 1-5)
+    input: Trip.new
+    output: new Trip object w/ applicable ratings
+
+  Retrieve associated driver instance through driver ID
+    input: Driver ID - send this information to Driver class
+    output: Driver Class returns Driver Object associated w/ trip
+
+  Retrieve associated Rider instance through Rider ID
+    input: Rider ID
+    output: Rider object associated w/ trip
+
+  Find all trip instances (driver) CLASS METHOD
+    input: Driver ID
+    output: list (ARRAY) of all trip instances for that Driver
+
+  Find all trip instances (rider) CLASS METHOD
+    input: Rider ID
+    output: list (ARRAY) of all trip instances for that Rider
+
+  Retrieve all trips from CSV file CLASS METHOD
+    input: calling Class method Trips.find_all
+    output: list all trips from CSV file.
+
+Driver CLASS
+
+  Each driver should be INSTANTIATED (initialize) with an ID, name and VIN (VIN must be specific length to make sure it is actually a vin)
+    input: Driver.new
+    output: new instance of Driver with associated ID, Name and VIN.  Each of those should be ACCESSIBLE (attr_reader)
+
+  with Driver ID we need to retrieve a list of trip instances (objects class: trip) that only this driver has taken.
+    input: Driver ID
+    output: ARRAY of Trips that this driver has taken
+
+  retrieve an average rating for that driver based on all trips taken.
+    input: ARRAY of trips that this driver has taken
+    output: Average star rating FIXNUM
+
+  Retrieve all drivers from the CSV file
+    input: calling the CLASS METHOD
+    output: list of all drivers (ARRAY) from CSV file
+
+  Find a specific driver using numeric ID
+    input: Numeric Driver_ID
+    output: Specific driver from list of drivers.
+
+
+Riders CLASS
+
+  Each rider should be instantiated (INITIALIZE) with an ID, name and phone number
+    input: Rider.new
+    output: new rider object.
+
+  Retrieve a list of trips only this rider has taken
+    input: Rider ID
+    output: Array of Trip instances
+
+  Retrieve a list of all previous driver instances this rider has rode with.
+    input: Array of Trip instances (from above)
+    output: Array of the associated drivers.
+
+  Retrieve all riders from CSV file
+    input: calling CLASS METHOD
+    output: list of all RIDERS
+
+  Retrieve specific rider using numeric ID
+    input: Rider ID
+    output: Specific rider (from list above)
