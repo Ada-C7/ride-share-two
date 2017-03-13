@@ -129,8 +129,12 @@ describe "Driver" do
       RideSharing::Driver.find(0).must_be_nil
       RideSharing::Driver.find(101).must_be_nil
     end
-
   end # End of describe "Driver#self.find"
+
+  describe "#list_of_trips" do
+    # This method is solely dependent upon a class method in the class Trip.
+    # Blind trust is giving that no tests should be needed. The method used should have been thouroughly tested in the class Trip.
+  end
 
 
   describe "#average_rating" do
