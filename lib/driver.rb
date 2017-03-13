@@ -1,6 +1,4 @@
 require 'csv'
-require 'pry'
-require_relative '../lib/trips'
 
 module RideShare
   class Driver
@@ -37,5 +35,11 @@ module RideShare
     def get_trips
       return RideShare::Trips.get_trips_driver_id(@driver_id)
     end
+
+    def get_ratings
+      ratings_array = get_trips.map {|trip| trip.rating}
+      ratings_array.sum/ratings_array.length.to_f
+    end
+
   end # end of Driver
 end # end of module

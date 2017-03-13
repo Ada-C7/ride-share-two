@@ -43,11 +43,11 @@ describe "self.all" do
       RideShare::Driver.all.first.driver_id.must_equal 1
       RideShare::Driver.all.first.name.must_equal "Bernardo Prosacco"
       RideShare::Driver.all.first.vin.must_equal "WBWSS52P9NEYLVDE9"
-  #
+
       RideShare::Driver.all.last.driver_id.must_equal 100
       RideShare::Driver.all.last.name.must_equal "Minnie Dach"
       RideShare::Driver.all.last.vin.must_equal "XF9Z0ST7X18WD41HT"
-  #
+  
     index = 0
     CSV.read("./support/drivers.csv") do |each_driver|
       driver[index].driver_id.must_equal each_driver[:driver_id]
@@ -78,9 +78,9 @@ describe "get_trips: retrieving trips" do
   end
 end
 
-# describe "average_rating" do
-#   it "return the average rating of driver" do
-#     driver = RideShare::Driver.new(driver_id: 25, name: "Briana Braun", vin: "SU9PYDRK6214WL15M")
-#     driver.average_rating
-#   end
-# end
+describe "get average ratings" do
+  it "#get_ratings: returns the sum of ratings" do
+    driver = RideShare::Driver.new(driver_id: 25, name: "Briana Braun", vin: "SU9PYDRK6214WL15M")
+    driver.get_ratings.must_equal 3.5
+  end
+end
