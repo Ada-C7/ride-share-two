@@ -27,7 +27,7 @@ describe "Driver" do
     end
 
     it "The Vin must be 17 characters, an error will be raised if the vin length is invalid" do
-      proc { new_driver }.must_raise ArgumentError
+      proc { new_driver }.must_raise(InvalidVinError)
     end
   end
 
@@ -45,27 +45,31 @@ describe "Driver" do
   end
 
   describe "Driver#find" do
+    let(:bernardo) { RideShare::Driver.find(1)}
+    let(:verla) { RideShare::Driver.find(5)}
+    let(:minnie) { RideShare::Driver.find(100)}
+    let(:invalid_driver) { RideShare::Driver.find(101)}
 
     it "Returns the first account from the CSV file" do
-      RideShare::Driver.find(1).id.must_equal(1)
-      RideShare::Driver.find(1).name.must_equal("Bernardo Prosacco")
-      RideShare::Driver.find(1).vin.must_equal("WBWSS52P9NEYLVDE9")
+      bernardo.id.must_equal(1)
+      bernardo.name.must_equal("Bernardo Prosacco")
+      bernardo.vin.must_equal("WBWSS52P9NEYLVDE9")
     end
 
     it "Returns an account that exists" do
-      RideShare::Driver.find(5).id.must_equal(5)
-      RideShare::Driver.find(5).name.must_equal("Verla Marquardt")
-      RideShare::Driver.find(5).vin.must_equal("TAMLE35L3MAYRV1JD")
+      verla.id.must_equal(5)
+      verla.name.must_equal("Verla Marquardt")
+      verla.vin.must_equal("TAMLE35L3MAYRV1JD")
     end
 
     it "Can find the last account of the CSV file" do
-      RideShare::Driver.find(100).id.must_equal(100)
-      RideShare::Driver.find(100).name.must_equal("Minnie Dach")
-      RideShare::Driver.find(100).vin.must_equal("XF9Z0ST7X18WD41HT")
+      minnie.id.must_equal(100)
+      minnie.name.must_equal("Minnie Dach")
+      minnie.vin.must_equal("XF9Z0ST7X18WD41HT")
     end
 
     it "Raises an error when the account does not exist" do
-      proc { RideShare::Driver.find(101) }.must_raise(ArgumentError)
+      proc { invalid_driver }.must_raise(InvalidFileError)
     end
   end
 
@@ -75,18 +79,22 @@ describe "Driver" do
       RideShare::Driver.new(1, "Bernardo Prosacco", "WBWSS52P9NEYLVDE9")
     end
 
+    let(:minnie) do
+      RideShare::Driver.new(100, "Minnie Dach", "XF9Z0ST7X18WD41HT")
+    end
 
     it "Should return all trips taken by driver_id" do
       new_driver.get_trips.length.must_equal 9
-      # puts new_driver.get_trips
-
-      # binding.pry
-      # .must_be_kind_of(Array)
-      # binding.pry
-      # new_driver.get_trips.must_be_instance_of(RideShare::Driver)
-      # binding.pry
+      new_driver.get_trips.each do |object| object.must_be_instance_of(RideShare::Trip)
+      end
     end
-  end
+    
+      it "Returns no trip when driver has not taken any trips" do
+          # binding.pry
+      minnie.get_trips.must_be_empty
+      minnie.get_trips.must_be_kind_of Array
+      end
+    end
 
   describe "avg_rating" do
 
