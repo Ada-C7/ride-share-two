@@ -29,9 +29,6 @@ module RideShare
           driver_hash[:vin] = driver[2]
           drivers << Driver.new(driver_hash)
         rescue BadVinError
-          driver_hash = Hash.new
-          driver_hash[:id] = driver[0].to_i
-          driver_hash[:name]= driver[1]
           driver_hash[:vin] = "0"*17
           drivers << Driver.new(driver_hash)
           puts "Invalid vin! Dummy vin {#{'0'*17}} used in\nentry #{driver} from CSV file"
