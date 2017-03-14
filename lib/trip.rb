@@ -26,19 +26,23 @@ module RideShare
       temp_csv.shift #removes first row, which is a header row (thx, google)
 
       temp_csv.each do |trip|
+        trip_hash = Hash.new
+        trip_hash[:trip_id] = trip[0].to_i
+        trip_hash[:driver_id] = trip[1].to_i
+        trip_hash[:rider_id] = trip[2].to_i
+        trip_hash[:date] = trip[3]
+        trip_hash[:cost] = trip[5].to_f
+        trip_hash[:duration] = trip[6].to_i
+        trip_hash[:rating] = trip[4].to_i
+
         begin
-          trip_hash = Hash.new
-          trip_hash[:trip_id] = trip[0].to_i
-          trip_hash[:driver_id] = trip[1].to_i
-          trip_hash[:rider_id] = trip[2].to_i
-          trip_hash[:date] = trip[3]
-          trip_hash[:rating] = trip[4].to_i
-          trip_hash[:cost] = trip[5].to_f
-          trip_hash[:duration] = trip[6].to_i
           trips << Trip.new(trip_hash)
         rescue BadRatingError #specify which error to rescue otherwise will rescue all raised Errors
           puts "Rating needs to be a number between 1 and 5. You entered: #{trip[4]}.\nEntry not included. Please update CSV file."
         end
+
+
+
       end
 
       return trips
