@@ -1,36 +1,57 @@
-require_relative 'record_magic'
 module Rideshare
-  class Driver
-    extend RecordMagic
-    attr_reader :id, :vin, :driver_id, :name
+  class Driver < Rideshare::Record
+    attr_reader :vin, :driver_id, :name, :id
 
     def initialize(args, search_var)
-      proof_data
-      @id = args[:search_var]
+      proof_data(args)
+      @id = args[search_var]
       @driver_id = args[:driver_id]
       @vin = args[:vin]
       @name = args[:name]
     end
 
-    # the base funcionality (ie find, all) are in the RecordsMagic module
+    def proof_data(args)
+      begin
+        raise ArgumentError.new("Warning: bad VIN: #{args[:vin]}; Driver #{args[:driver_id]} data not included ") if args[:vin].length != 17
+      rescue
+      end
 
-    def self.get_driver_instances(driver_id)
-      find_records('csv = ../support/driver.rb', :driver, driver_id)
+      begin
+        raise ArgumentError.new("Warning: Driver name not reported") unless (args[:name].is_a? String) && (args[:name].length > 0)
+      rescue
+        puts "Data included anyway"
+      end
     end
 
-    def self.get_trips(driver)
-      Trip.get_trips_by_var(driver, :driver_id)
+    def self.csv_name
+      "support/drivers.csv"
     end
 
-    def self.get_avg_rating(driver)
-      get_trips(driver).rating.sum / length(get_trips)
+    def self.all(search_var)
+      super(search_var)
     end
 
-    private
-    def proof_data
-      raise ArgumentError.new("Warning: bad VIN: #{args[:vin]}; Driver #{args[:driver_id]} data not included ") if args[:vin].length != 17
+    def self.find_records(search_var, id_to_find)
+      super(search_var, id_to_find)
     end
   end
-
 end
-puts Rideshare::Driver.get_trips(2)
+
+
+# the base funcionality (ie find, all) are in the RecordsMagic module
+#   def self.get_driver_instances(driver_id)
+#     find_records('../support/drivers.csv', :driver, driver_id)
+#   end
+#
+#   def self.get_trips(driver)
+#     Trip.get_trips_by_var(driver, :driver_id)
+#   end
+#
+#   def self.get_avg_rating(driver)
+#     get_trips(driver).rating.sum / length(get_trips)
+#   end
+#
+#   private
+#   def proof_data
+#     raise ArgumentError.new("Warning: bad VIN: #{args[:vin]}; Driver #{args[:driver_id]} data not included ") if args[:vin].length != 17
+#   end
