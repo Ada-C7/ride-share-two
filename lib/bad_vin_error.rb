@@ -1,0 +1,2 @@
+class BadVinError < StandardError
+end
