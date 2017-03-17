@@ -50,12 +50,18 @@ class Rider
 
   def drivers
     drivers = {}
-
-    trips.map { |trip| drivers[trip.driver_id] = 1 }
-
-    drivers.each { |id, value| drivers[id] = Driver.find(id) }
+    trips.map { |trip| drivers[trip.driver_id] = Trip.driver(trip.driver_id) }
 
     return drivers.values
+
+
+    # drivers = {}
+    #
+    # trips.map { |trip| drivers[trip.driver_id] = 1 }
+    #
+    # drivers.each { |id, value| drivers[id] = Driver.find(id) }
+    #
+    # return drivers.values
 
     #original code I wrote before... Haley the tutor helped me refactor code using a hash
 
