@@ -21,7 +21,6 @@ class Rider
       phone = line[2]
 
       riders << Rider.new(id, name, phone)
-
     end
     return riders
   end
@@ -34,7 +33,6 @@ class Rider
     raise ArgumentError.new("There were no riders with that ID")
 
   end
-
 
   def trips
     Trip.rider_find_all(@id)
@@ -76,7 +74,5 @@ class Rider
     #
     # end
     # return rider_drivers
-
   end
-
 end

@@ -12,7 +12,6 @@ class Driver
     @vin = vin.to_s
   end
 
-
   def self.all
     drivers = []
     # binding.pry
@@ -49,5 +48,4 @@ class Driver
 
     return rating = rating.to_f / trips.length
   end
-
 end

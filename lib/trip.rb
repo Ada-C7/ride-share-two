@@ -12,7 +12,6 @@ class Trip
     @date = date
     raise ArgumentError.new("Rating must be an integer 1-5") if rating <= 0 || rating > 5 || rating.class != Integer
     @rating = rating
-
   end
 
   def self.driver(search_id)
@@ -22,8 +21,6 @@ class Trip
   def self.rider(search_id)
     return Rider.find(search_id)
   end
-
-
 
   def self.all
     trips = []
@@ -55,7 +52,6 @@ class Trip
 
   end
 
-
   def self.driver_find_all(search_id)
     raise ArgumentError.new("The ID you want to search for must be an integer") if search_id.class != Integer
     driver_trips = []
@@ -67,6 +63,4 @@ class Trip
 
     return driver_trips
   end
-
-
 end
