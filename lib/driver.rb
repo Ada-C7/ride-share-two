@@ -12,6 +12,7 @@ class Driver
     @vin = vin.to_s
   end
 
+
   def self.all
     drivers = []
     # binding.pry
@@ -37,7 +38,7 @@ class Driver
 
   def trips
     driver_trips = []
-    Trip.all.map { |trip| driver_trips << trip if trip.driver == @id }
+    Trip.all.map { |trip| driver_trips << trip if trip.driver_id == @id }
 
     return driver_trips
   end

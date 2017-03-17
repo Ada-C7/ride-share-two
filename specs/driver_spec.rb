@@ -86,7 +86,7 @@ describe "Driver tests" do
       new_driver.trips.length.must_equal 8
 
       new_driver.trips.each do |trip|
-        trip.driver.must_equal 78
+        trip.driver_id.must_equal 78
       end
 
 

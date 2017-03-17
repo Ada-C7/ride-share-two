@@ -4,17 +4,17 @@ require_relative '../lib/trip'
 
 describe "Trip tests" do
   describe "Trip#initialize" do
-    it "takes an id, driver, rider, date, and rating" do
+    it "takes an id, driver_id, rider_id, date, and rating" do
         new_trip = Trip.new(1234, 1, 56, "2016-04-05", 5)
 
         new_trip.must_respond_to :id
         new_trip.id.must_equal 1234
 
-        new_trip.must_respond_to :driver
-        new_trip.driver.must_equal 1
+        new_trip.must_respond_to :driver_id
+        new_trip.driver_id.must_equal 1
 
-        new_trip.must_respond_to :rider
-        new_trip.rider.must_equal 56
+        new_trip.must_respond_to :rider_id
+        new_trip.rider_id.must_equal 56
 
         new_trip.must_respond_to :date
         new_trip.date.must_equal "2016-04-05"
@@ -58,9 +58,9 @@ describe "Trip tests" do
     it "First element in array is first line in csv" do
       @all_trips[0].id.must_equal @csv_file[0][0].to_i
 
-      @all_trips[0].driver.must_equal @csv_file[0][1].to_i
+      @all_trips[0].driver_id.must_equal @csv_file[0][1].to_i
 
-      @all_trips[0].rider.must_equal @csv_file[0][2].to_i
+      @all_trips[0].rider_id.must_equal @csv_file[0][2].to_i
 
       @all_trips[0].date.must_equal @csv_file[0][3]
 
@@ -70,12 +70,52 @@ describe "Trip tests" do
     it "Last element in array is last line in csv" do
       @all_trips[-1].id.must_equal @csv_file[-1][0].to_i
 
-      @all_trips[-1].driver.must_equal @csv_file[-1][1].to_i
+      @all_trips[-1].driver_id.must_equal @csv_file[-1][1].to_i
 
-      @all_trips[-1].rider.must_equal @csv_file[-1][2].to_i
+      @all_trips[-1].rider_id.must_equal @csv_file[-1][2].to_i
 
       @all_trips[-1].date.must_equal @csv_file[-1][3]
 
+    end
+
+
+  end
+
+  describe "Trip.driver(search_id)" do
+    it "returns a Driver object given a driver id" do
+      Trip.driver(34).must_be_instance_of Driver
+    end
+
+    it "returns the correct driver" do
+      Trip.driver(34).name.must_equal "Velma O'Connell"
+    end
+
+    it "returns an error if invalid id is put in" do
+      proc {Trip.driver("Asdf")}.must_raise ArgumentError
+    end
+
+    it "returns an error if driver does not exist" do
+      proc {Trip.driver(000)}.must_raise ArgumentError
+    end
+
+  end
+
+  describe "Trip.rider(search_id)" do
+    it "returns a Rider object given a rider id" do
+      Trip.rider(23).must_be_instance_of Rider
+    end
+
+    it "returns the correct driver" do
+      Trip.rider(23).name.must_equal "Kevin Stark"
+    end
+
+    # DOUBLE CHECK THIS!!
+    it "returns an error if invalid id is put in" do
+      proc {Trip.driver("Asdf")}.must_raise ArgumentError
+    end
+
+    it "returns an error if rider does not exist" do
+      proc {Trip.rider(000)}.must_raise ArgumentError
     end
 
 

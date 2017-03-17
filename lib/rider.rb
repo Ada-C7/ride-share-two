@@ -53,7 +53,7 @@ class Rider
   def drivers
     drivers = {}
 
-    trips.map { |trip| drivers[trip.driver] = 1 }
+    trips.map { |trip| drivers[trip.driver_id] = 1 }
 
     drivers.each { |id, value| drivers[id] = Driver.find(id) }
 

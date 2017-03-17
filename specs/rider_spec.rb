@@ -91,7 +91,7 @@ describe "Rider tests" do
       new_rider = Rider.new(2, "Kaia Klocko", "(392) 217-0777")
 
       new_rider.trips.each do |element|
-        element.rider.must_equal 2
+        element.rider_id.must_equal 2
       end
     end
 
