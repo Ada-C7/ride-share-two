@@ -81,42 +81,50 @@ describe "Trip tests" do
 
   end
 
-  describe "Trip.driver(search_id)" do
+  describe "Trip.driver" do
+    before do
+      @new_trip = Trip.new(3, 50, 87, "2016-05-02", 3)
+    end
+
     it "returns a Driver object given a driver id" do
-      Trip.driver(34).must_be_instance_of Driver
+      @new_trip.driver.must_be_instance_of Driver
     end
 
     it "returns the correct driver" do
-      Trip.driver(34).name.must_equal "Velma O'Connell"
+      @new_trip.driver.name.must_equal "Maye Bauch"
     end
 
-    it "returns an error if invalid id is put in" do
-      proc {Trip.driver("Asdf")}.must_raise ArgumentError
-    end
-
-    it "returns an error if driver does not exist" do
-      proc {Trip.driver(000)}.must_raise ArgumentError
-    end
+    # it "returns an error if invalid id is put in" do
+    #   proc {Trip.driver("Asdf")}.must_raise ArgumentError
+    # end
+    #
+    # it "returns an error if driver does not exist" do
+    #   proc {Trip.driver(000)}.must_raise ArgumentError
+    # end
 
   end
 
-  describe "Trip.rider(search_id)" do
+  describe "Trip.rider" do
+    before do
+      @new_trip = Trip.new(3, 50, 87, "2016-05-02", 3)
+    end
+
     it "returns a Rider object given a rider id" do
-      Trip.rider(23).must_be_instance_of Rider
+      @new_trip.rider.must_be_instance_of Rider
     end
 
     it "returns the correct driver" do
-      Trip.rider(23).name.must_equal "Kevin Stark"
+      @new_trip.rider.name.must_equal "Ms. Emmalee Orn"
     end
 
     # DOUBLE CHECK THIS!!
-    it "returns an error if invalid id is put in" do
-      proc {Trip.driver("Asdf")}.must_raise ArgumentError
-    end
-
-    it "returns an error if rider does not exist" do
-      proc {Trip.rider(000)}.must_raise ArgumentError
-    end
+    # it "returns an error if invalid id is put in" do
+    #   proc {Trip.driver("Asdf")}.must_raise ArgumentError
+    # end
+    #
+    # it "returns an error if rider does not exist" do
+    #   proc {Trip.rider(000)}.must_raise ArgumentError
+    # end
 
 
   end

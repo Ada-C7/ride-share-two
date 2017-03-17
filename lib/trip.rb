@@ -14,12 +14,12 @@ class Trip
     @rating = rating
   end
 
-  def self.driver(search_id)
-    return Driver.find(search_id)
+  def driver
+    return Driver.find(@driver_id)
   end
 
-  def self.rider(search_id)
-    return Rider.find(search_id)
+  def rider
+    return Rider.find(@rider_id)
   end
 
   def self.all

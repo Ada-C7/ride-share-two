@@ -49,6 +49,7 @@ class Rider
   end
 
   def drivers
+
     drivers = {}
     trips.map { |trip| drivers[trip.driver_id] = Trip.driver(trip.driver_id) }
 
