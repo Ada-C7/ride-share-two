@@ -86,16 +86,28 @@ describe "Rider class" do
     end
   end
 
-  describe "Rider#trip" do
-    let(:dortha) { RideShare::Rider.new(rider_id: 14, name: "Dortha Wiegand", phone_num: "989.272.6045") }
+  describe "Rider#rider_trip" do
+    let(:dortha_info) { RideShare::Rider.new(rider_id: 14, name: "Dortha Wiegand", phone_num: "989.272.6045") }
 
     it "Returns an array of rider trips" do
-      dortha.trip.class.must_equal Array
+      dortha_info.rider_trips.class.must_equal Array
+    end
 
+    it "Each item in array is a Trip instance" do
+      dortha_info.rider_trips.each do |trip|
+        trip.must_be_kind_of RideShare::Trip
+      end
+    end
+
+    it "Returns correct length of array or trip instances a rider has taken" do
+      dortha_info.rider_trips.each do |trip|
+        trip.rider_id.must_equal 14
+      end
     end
   end
 
-  describe "Rider#drivers" do
+  xdescribe "Rider#drivers" do
+
     #rider without trips
     let(:miss) { RideShare::Rider.new(rider_id: 300, name: "Miss Isom Gleason", phone_num: "791-114-8423 x70188") }
     #rider with multiple trips with same driver_id

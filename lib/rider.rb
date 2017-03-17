@@ -40,13 +40,16 @@ module RideShare
       save_rider
     end
 
-    def trip
+    def rider_trips
       #argument error if rider id given is not in the csv file
+      #MAIN GOAL: retrieve the list of trip instances that only this rider has taken
       RideShare::Trip.find_many_riders(@rider_id)
     end
 
     def drivers
       #argument error if there is a driver that does not exist in the trip instance selected
+
+      #MAIN GOAL:retrieve the list of all previous driver instances (through the trips functionality built above)
 
       drivers_ids_for_rider_trips = trip.map { |trips| trips.driver_id }
 
