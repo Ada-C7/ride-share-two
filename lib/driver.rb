@@ -44,17 +44,24 @@ module Rideshare
       Rideshare::Trip.find_records(:driver_id, id_to_find.to_i)
     end
 
-    def get_driver_rating(id_to_find)
-      trips = self.subset_trips_to_driver(id_to_find)
+    def self.get_driver_rating(id_to_find)
+      trips = self.subset_driver_trips(id_to_find)
       total_trips = trips.length
 
-      trips.map { |x| x.rating if x.rating }
+      if trips.length == 0
+        average_rating = nil
+        puts "Driver has not given any rides yet."
+      else
+        trips.map! { |x| x.rating if (1..5).include? x.rating }
+        average_rating = (trips.sum * 1.0 / trips.length).round(1)
+      end
 
       if trips.length < total_trips
         puts "#{total_trips - trips.length} trips not included in calculations due to missing rating."
       end
 
-      average_rating = trips.sum / trips.length
+      average_rating
+
     end
   end
 end

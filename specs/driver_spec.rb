@@ -97,6 +97,8 @@ describe "Driver" do
     describe "subset_driver_trips" do
       let(:first_driver_trips) {Rideshare::Driver.subset_driver_trips(1)}
 
+      let(:last_driver_trips) {Rideshare::Driver.subset_driver_trips(99)}
+
 
       it "returns the correct trips for the first driver" do
 
@@ -109,13 +111,47 @@ describe "Driver" do
         trip_ids.sort.must_equal [1, 122, 124, 216, 417, 434, 439, 530, 553]
       end
 
+
+      it "returns the correct trips for the last driver" do
+
+        last_driver_trips.length.must_equal 6
+
+        trip_ids = []
+        last_driver_trips.each do |trip|
+          trip_ids << trip.trip_id.to_i
+        end
+        trip_ids.sort.must_equal [54, 86, 230, 420, 423, 531]
+      end
+
     end
 
 
     describe "get_driver_rating" do
-      it "retrieves an average rating for that driver based on all trips taken" do
+
+      let(:first_driver_rating) {Rideshare::Driver.get_driver_rating(1)}
+
+      let(:last_driver_rating) {Rideshare::Driver.get_driver_rating(99)}
+
+      let(:non_driving_rating) { Rideshare::Driver.get_driver_rating(100)}
+
+
+
+      it "correctly calculates the average rating for the first driver based on all trips taken" do
+        first_driver_rating.must_equal 2.3
+      end
+
+      it "correctly calculates the average rating for the last driver based on all trips taken" do
+        last_driver_rating.must_equal 2.8
+      end
+
+      it "returns nil and outputs a warning if the driver has not done any trips yet" do
+        non_driving_rating.must_be_nil
+        proc{Rideshare::Driver.get_driver_rating(100)}.must_output /.+/
+      end
+
+      it "outputs a warning and " do
+        non_driving_rating.must_be_nil
+        proc{Rideshare::Driver.get_driver_rating(100)}.must_output /.+/
       end
     end
-
-
   end
