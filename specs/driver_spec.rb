@@ -6,13 +6,13 @@ describe "Driver" do
 
     let(:bad_vin_2short) {
       proc{
-        Rideshare::Driver.new({driver_id: 1, name: "Ms.. Long Vin", vin: "123456789012345B"}, :driver_id)
+        Rideshare::Driver.new({driver_id: 1, name: "Ms. Short Vin", vin: "123456789012345B"}, :driver_id)
       }
     }
 
     let(:bad_vin_2long) {
       proc {
-        Rideshare::Driver.new({driver_id: 1, name: "Ms.. Long Vin", vin: "12345678901234567B"}, :driver_id)
+        Rideshare::Driver.new({driver_id: 1, name: "Ms. Long Vin", vin: "12345678901234567B"}, :driver_id)
       }
     }
 
@@ -31,9 +31,9 @@ describe "Driver" do
         ok_driver.name.must_be_kind_of String
       end
 
-      it "gives a warning if the vin isn't right" do
-        bad_vin_2short.must_raise ArgumentError
-        bad_vin_2long.must_raise ArgumentError
+      it "raises an argument error if the vin isn't right" do
+        bad_vin_2short.must_raise VinError
+        bad_vin_2long.must_raise VinError
       end
 
 
@@ -44,62 +44,76 @@ describe "Driver" do
 
 
     describe "all" do
-      let(:all_drivers) {Rideshare::Driver.all("support/drivers.csv")}
+      let(:all_drivers) {Rideshare::Driver.all(:driver_id)}
 
       it "returns a collection with right number of rows" do
-        all_drivers.length.must_equal 100
+        all_drivers.length.must_equal 99
       end
 
-        it "has returns values of the correct class (and no nil values)" do
-          all_drivers.each do |driver|
-            driver.must_be_kind_of Rideshare::Driver
-            driver.driver_id.must_be_kind_of Integer
-            driver.vin.must_be_kind_of String
-            driver.name.must_be_kind_of String
-          end
+      it "returns values of the correct class (and no nil values)" do
+        all_drivers.each do |driver|
+          driver.must_be_kind_of Rideshare::Driver
+          driver.driver_id.must_be_kind_of Integer
+          driver.vin.must_be_kind_of String
+          driver.name.must_be_kind_of String
         end
+      end
 
-        it 'has a test value from the csv' do
-          all_drivers[3].name.must_equal "Jeromy O'Keefe DVM"
-        end
+      it 'has a test value from the csv' do
+        all_drivers[3].name.must_equal "Jeromy O'Keefe DVM"
+      end
     end
-    #
-    # describe "find_driver" do
-    #   let(:found_driver) {Rideshare::Driver.find_records('support/drivers.csv', 4)}
-    #
-    #   let(:imaginary_driver) {
-    #     proc {Rideshare::Driver.find_records('support/drivers.csv', 500)}
-    #   }
-    #
-    #   let(:double_driver) {Rideshare::Driver.find_records('support/double_drivers.csv', 94)}
-    #
-    #
-    #   it "finds a spec`ific driver using their numeric ID" do
-    #     found_driver[0].name.must_equal "Jeromy O'Keefe DVM"
-    #     found_driver[0].vin.must_equal "L1CKRVH55W8S6S9T1"
-    #   end
-    #
-    #   it "returns an error if the driver doesn't exist" do
-    #     imaginary_driver.must_raise ArgumentError
-    #   end
-    #
-    #   it "returns an error if two drivers have the same id" do
-    #     double_driver.must_raise ArgumentError
-    #
-    #   end
-    # end
-    #
-    #
-    # describe "subset_driver_trips" do
-    #   it "retrieves all the trip instances that the driver has taken" do
-    #   end
-    # end
 
-    #
-    # describe "get_driver_rating" do
-    #   it "retrieves an average rating for that driver based on all trips taken" do
-    #   end
-    # end
+    describe "find_driver" do
+      let(:first_driver) {Rideshare::Driver.find_records(:driver_id, 1)}
 
+      let(:last_driver) {Rideshare::Driver.find_records(:driver_id, 100)}
+
+      let(:imaginary_driver) {Rideshare::Driver.find_records(:driver_id, 500)}
+
+      let(:double_driver) {Rideshare::Driver.find_records('support/double_drivers.csv', 94)}
+
+
+      it "finds the first driver from the csv using their numeric ID" do
+        first_driver[0].name.must_equal "Bernardo Prosacco"
+        first_driver[0].vin.must_equal "WBWSS52P9NEYLVDE9"
+      end
+
+      it "finds the last driver from the csv using their numeric ID" do
+        last_driver[0].name.must_equal "Minnie Dach"
+        last_driver[0].vin.must_equal "XF9Z0ST7X18WD41HT"
+      end
+
+      it "returns only one driver for first and last" do
+        last_driver.length.must_equal 1
+        first_driver.length.must_equal 1
+      end
+
+      it "returns empty array if the driver does not exist" do
+        imaginary_driver.must_be_empty
+      end
+
+      it "returns empty array if the driver does not exist" do
+        imaginary_driver.must_be_empty
+      end
+
+      it "raises an error if there are two drivers with the same id" do
+        double_driver.must_raise DuplicateError
+      end
 
   end
+  #
+  # describe "subset_driver_trips" do
+  #   it "retrieves all the trip instances that the driver has taken" do
+  #   end
+  # end
+  #
+  #
+  # describe "get_driver_rating" do
+  #   it "retrieves an average rating for that driver based on all trips taken" do
+  #   end
+  # end
+
+
+  # end
+end

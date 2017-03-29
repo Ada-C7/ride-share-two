@@ -1,6 +1,16 @@
 module Rideshare
   class Record
 
+    def self.add_record(args, search_var)
+      begin
+        self.new(args, search_var)
+      rescue ArgumentError => e
+        puts "#{e.message}"
+      rescue VinError => e
+        puts "#{e.message}"
+      end
+    end
+
     def self.all(search_var)
       csv = CSV.read(self.csv_name,
       { headers: true,
@@ -8,17 +18,22 @@ module Rideshare
         converters: :all  # format Integers
         })
 
-        csv.map do |row|
-          args = row.to_hash
-          self.new(args, search_var)
-        end
-    end
 
-    def self.find_records(search_var, id_to_find)
-        self.all(search_var).find_all do |record|
-          record.id == id_to_find
+        csv.inject([])  do |arr, row|
+          row_obj = self.add_record(row.to_hash, search_var)
+          # avoid adding records where argument error was raised
+          row_obj ? arr.push(row_obj):arr
         end
+      end
+
+      def self.find_records(search_var, id_to_find)
+        self.all(search_var).find_all do |record|
+          record.id ==id_to_find
+        end
+      end
+
+      def proof_data(type, args)
+        raise ArgumentError.new("#{type} # #{args[:id]} removed from dataset due to missing information.") if ( args.values & [0,"", nil]).any?
       end
     end
   end
-  # raise ArgumentError.new("Driver # #{id_to_find} does not exist")if x.length == 0

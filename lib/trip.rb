@@ -22,10 +22,6 @@ module Rideshare
     def self.find_records(search_var, id_to_find)
       super(search_var, id_to_find)
     end
-    #
-    # private
-    # def proof_data
-    #   raise ArgumentError.new("Warning: bad VIN: #{args[:vin]}; Driver #{args[:driver_id]} data not included ") if args[:vin].length != 17
-    # end
+
   end
 end

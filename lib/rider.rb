@@ -9,14 +9,14 @@ module Rideshare
     end
 
     def self.csv_name
-      "support/drivers.csv"
+      "support/trips.csv"
     end
 
     def self.all(search_var)
       super(search_var)
     end
 
-    def self.find_records(search_var, id_to_find)
+    def find_records(search_var, id_to_find)
       super(search_var, id_to_find)
     end
   end
