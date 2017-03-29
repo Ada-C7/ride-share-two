@@ -71,7 +71,7 @@ describe "Driver" do
 
       let(:imaginary_driver) {Rideshare::Driver.find_records(:driver_id, 500)}
 
-      let(:double_driver) {Rideshare::Driver.find_records('support/double_drivers.csv', 94)}
+      # let(:double_driver) {Rideshare::Driver.find_records(':driver_id, 94)}
 
 
       it "finds the first driver from the csv using their numeric ID" do
@@ -92,28 +92,30 @@ describe "Driver" do
       it "returns empty array if the driver does not exist" do
         imaginary_driver.must_be_empty
       end
+    end
 
-      it "returns empty array if the driver does not exist" do
-        imaginary_driver.must_be_empty
+    describe "subset_driver_trips" do
+      let(:first_driver_trips) {Rideshare::Driver.subset_driver_trips(1)}
+
+
+      it "returns the correct trips for the first driver" do
+
+        first_driver_trips.length.must_equal 9
+
+        trip_ids = []
+        first_driver_trips.each do |trip|
+          trip_ids << trip.trip_id.to_i
+        end
+        trip_ids.sort.must_equal [1, 122, 124, 216, 417, 434, 439, 530, 553]
       end
 
-      it "raises an error if there are two drivers with the same id" do
-        double_driver.must_raise DuplicateError
+    end
+
+
+    describe "get_driver_rating" do
+      it "retrieves an average rating for that driver based on all trips taken" do
       end
+    end
+
 
   end
-  #
-  # describe "subset_driver_trips" do
-  #   it "retrieves all the trip instances that the driver has taken" do
-  #   end
-  # end
-  #
-  #
-  # describe "get_driver_rating" do
-  #   it "retrieves an average rating for that driver based on all trips taken" do
-  #   end
-  # end
-
-
-  # end
-end

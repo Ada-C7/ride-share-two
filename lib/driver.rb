@@ -39,6 +39,23 @@ module Rideshare
     def self.find_records(search_var, id_to_find)
       super(search_var, id_to_find.to_i)
     end
+
+    def self.subset_driver_trips(id_to_find)
+      Rideshare::Trip.find_records(:driver_id, id_to_find.to_i)
+    end
+
+    def get_driver_rating(id_to_find)
+      trips = self.subset_trips_to_driver(id_to_find)
+      total_trips = trips.length
+
+      trips.map { |x| x.rating if x.rating }
+
+      if trips.length < total_trips
+        puts "#{total_trips - trips.length} trips not included in calculations due to missing rating."
+      end
+
+      average_rating = trips.sum / trips.length
+    end
   end
 end
 
