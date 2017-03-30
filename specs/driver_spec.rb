@@ -134,24 +134,59 @@ describe "Driver" do
 
       let(:non_driving_rating) { Rideshare::Driver.get_driver_rating(100)}
 
+      let(:rating_too_high){Rideshare::Driver.driver_rating([
+        Rideshare::Trip.new({ trip_id: 1,driver_id: 1,rider_id: 1,date: "today",rating: 6 }, :driver_id),
 
+        Rideshare::Trip.new( { trip_id: 2,driver_id: 2,rider_id: 2,date: "today",rating: 6 }, :driver_id ),
 
-      it "correctly calculates the average rating for the first driver based on all trips taken" do
-        first_driver_rating.must_equal 2.3
-      end
+        Rideshare::Trip.new( { trip_id: 3,driver_id: 3,rider_id: 3,date: "today",rating: 3 }, :driver_id),
 
-      it "correctly calculates the average rating for the last driver based on all trips taken" do
-        last_driver_rating.must_equal 2.8
-      end
+        Rideshare::Trip.new( { trip_id: 4,driver_id: 4,rider_id: 4,date: "today",rating: 3 }, :driver_id)
+        ])}
 
-      it "returns nil and outputs a warning if the driver has not done any trips yet" do
-        non_driving_rating.must_be_nil
-        proc{Rideshare::Driver.get_driver_rating(100)}.must_output /.+/
-      end
+        let(:rating_too_low){Rideshare::Driver.driver_rating([
+          Rideshare::Trip.new({ trip_id: 1,driver_id: 1,rider_id: 1,date: "today",rating: 0 }, :driver_id),
 
-      it "outputs a warning and " do
-        non_driving_rating.must_be_nil
-        proc{Rideshare::Driver.get_driver_rating(100)}.must_output /.+/
-      end
-    end
-  end
+          Rideshare::Trip.new( { trip_id: 2,driver_id: 2,rider_id: 2,date: "today",rating: 0 }, :driver_id ),
+
+          Rideshare::Trip.new( { trip_id: 3,driver_id: 3,rider_id: 3,date: "today",rating: 3 }, :driver_id),
+
+          Rideshare::Trip.new( { trip_id: 4,driver_id: 4,rider_id: 4,date: "today",rating: 3 }, :driver_id)
+          ])}
+
+          let(:only_weird_rating){Rideshare::Driver.driver_rating([Rideshare::Trip.new( { trip_id: 4,driver_id: 4,rider_id: 4,date: "today",rating: 6 }, :driver_id ) ] ) }
+
+            it "correctly calculates the average rating for the first driver based on all trips taken" do
+              first_driver_rating.must_equal 2.6
+            end
+
+            it "correctly calculates the average rating for the last driver based on all trips taken" do
+              last_driver_rating.must_equal 2.8
+            end
+
+            it "returns nil and outputs a warning if the driver has not done any properly rated trips yet" do
+              non_driving_rating.must_be_nil
+              proc{Rideshare::Driver.get_driver_rating(100)}.must_output /.+/
+
+              proc{only_weird_rating}.must_output /.+/
+
+              only_weird_rating.must_be_nil
+            end
+
+            it "outputs a warning if the driver has ratings outside the acceptable range, and removes the scores when calculating a rating" do
+              proc{rating_too_high}.must_output /.+/
+              rating_too_high.must_equal 3.0
+
+              proc{rating_too_low}.must_output /.+/
+              rating_too_low.must_equal 3.0
+            end
+
+            it "outputs a warning if the driver has ratings outside the acceptable range, and removes the scores when calculating a rating" do
+              proc{rating_too_high}.must_output /.+/
+              rating_too_high.must_equal 3.0
+
+              proc{rating_too_low}.must_output /.+/
+              rating_too_low.must_equal 3.0
+            end
+          end
+        end
