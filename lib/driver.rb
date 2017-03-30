@@ -1,4 +1,5 @@
 require_relative 'records.rb'
+require_relative 'trip.rb'
 require_relative 'vin_error.rb'
 require 'csv'
 require 'pry'
@@ -44,29 +45,31 @@ module Rideshare
       Rideshare::Trip.find_records(:driver_id, id_to_find.to_i)
     end
 
-    def self.get_driver_rating(id_to_find)
-      trips = self.subset_driver_trips(id_to_find)
+    def self.driver_rating(trips)
       total_trips = trips.length
+      trips.select! { |x| (1..5).include? x.rating }
 
       if trips.length == 0
         average_rating = nil
-        puts "Driver has not given any rides yet."
+        puts "No valid ratings for Driver"
       else
-        trips.map! { |x| x.rating if (1..5).include? x.rating }
+        trips.map! { |y| y.rating}
         average_rating = (trips.sum * 1.0 / trips.length).round(1)
       end
 
       if trips.length < total_trips
-        puts "#{total_trips - trips.length} trips not included in calculations due to missing rating."
+        puts "#{total_trips - trips.length} trips not included in calculations due to missing or out-of-acceptable-range ratings."
       end
 
       average_rating
 
     end
+
+    def self.get_driver_rating(id_to_find)
+      driver_rating(self.subset_driver_trips(id_to_find))
+    end
+
   end
 end
 
-
-# all_drivers = Rideshare::Driver.all(:driver_id)
-# puts all_drivers.length
-# puts all_drivers[82].nil?
+Rideshare::Driver.driver_rating([Rideshare::Trip.new( { trip_id: 4,driver_id: 4,rider_id: 4,date: "today",rating: 6 }, :driver_id ) ] )
