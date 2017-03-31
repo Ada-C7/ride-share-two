@@ -45,14 +45,21 @@ module Rideshare
     end
 
     def self.get_rider_info(search_var, id)
-      rider_id = self.find_records(search_var, id).rider_id
-      Rideshare::Rider.find_records(:rider_id,rider_id)
+      riders = self.find_records(search_var, id).uniq { |trip| trip.rider_id }
+
+      riders.map! do |r| Rideshare::Rider.find_records(:rider_id, r.rider_id).first
+      end
     end
 
     def self.get_driver_info(search_var, id)
-      rider_id = self.find_records(search_var, id).driver_id
-      Rideshare::Driver.find_records(:driver_id, driver_id)
-    end
+      drivers = self.find_records(search_var, id).uniq { |trip| trip.driver_id }
 
+      puts ("No documented trips for rider.") if drivers.length == 0
+
+      drivers.map! do |d|
+        Rideshare::Driver.find_records(:driver_id, d.driver_id).first
+      end
+
+    end
   end
 end

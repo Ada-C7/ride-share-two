@@ -49,12 +49,12 @@ describe "Trip" do
     end
   end
 
-  describe "drivers_for_rider" do
-    let(:first_rider) {Rideshare::Rider.drivers_for_rider(:rider_id, 1)}
+  describe "find_rider" do
+    let(:first_rider) {Rideshare::Rider.find_records(:rider_id, 1)}
 
-    let(:last_rider) {Rideshare::Rider.drivers_for_rider(:rider_id, 300)}
+    let(:last_rider) {Rideshare::Rider.find_records(:rider_id, 300)}
 
-    let(:imaginary_rider) {Rideshare::Rider.drivers_for_rider(:rider_id, 500)}
+    let(:imaginary_rider) {Rideshare::Rider.find_records(:rider_id, 500)}
 
     # let(:double_rider) {Rideshare::Rider.find_records(':rider_id, 94)}
 
@@ -83,7 +83,9 @@ describe "Trip" do
   describe "drivers for rider" do
     let(:first_rider_drivers) {Rideshare::Rider.drivers_for_rider(1)}
 
-    let(:last_rider_drivers) {Rideshare::Rider.drivers_for_rider(300)}
+    let(:last_rider_drivers) {Rideshare::Rider.drivers_for_rider(296)}
+
+    let(:no_rides_rider) {Rideshare::Rider.drivers_for_rider(300)}
 
 
     it "returns the correct drivers for the first rider" do
@@ -97,11 +99,15 @@ describe "Trip" do
 
     it "returns the correct drivers for the last driver" do
 
-      last_rider_drivers.length.must_equal 1
-      last_rider[0].name.must_equal "Charley Kiehn"
+      last_rider_drivers.length.must_equal 3
+      last_rider_drivers.map! { |driver| driver.name}
+
+      last_rider_drivers.sort.must_equal ["Casimir Vandervort","Ernesto Torp", "Jannie Lubowitz"]
     end
 
-
+    it "outputs a warning if no rides and returns an empty array" do
+      proc{no_rides_rider}.must_output(/.+/)
+      no_rides_rider.must_be_empty
+    end
   end
-
 end

@@ -24,7 +24,7 @@ module Rideshare
     end
 
     def proof_data(args)
-      super("Driver", args)
+      super(:driver, args)
 
       raise VinError.new("Driver #{args[:driver_id]} removed from dataset due to bad vin.") unless args[:vin].nil? || args[:vin].length == 17
     end
