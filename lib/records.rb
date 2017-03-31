@@ -2,17 +2,15 @@ module Rideshare
   class Record
 
     def proof_data(type, args)
-      raise ArgumentError.new("#{type} # #{args[:id]} removed from dataset due to missing information.") if ( args.values & [0,"", nil]).any?
+      raise ArgumentError.new("#{type} # #{args[:id]} removed from dataset due to missing information.") unless (args.values & [0,"", nil]).empty?
     end
 
     def self.add_record(args, search_var)
-      begin
-        self.new(args, search_var)
-      rescue ArgumentError => e
-        puts "#{e.message}"
-      rescue VinError => e
-        puts "#{e.message}"
-      end
+      self.new(args, search_var)
+    rescue ArgumentError => e
+      puts "#{e.message}"
+    rescue VinError => e
+      puts "#{e.message}"
     end
 
     def self.all(search_var)
@@ -28,12 +26,12 @@ module Rideshare
           # avoid adding records where argument error was raised
           row_obj ? arr.push(row_obj):arr
         end
-    end
+      end
 
-    def self.find_records(search_var, id_to_find)
-      self.all(search_var).find_all do |record|
-        record.id ==id_to_find
+      def self.find_records(search_var, id_to_find)
+        self.all(search_var).find_all do |record|
+          record.id ==id_to_find
+        end
       end
     end
   end
-end

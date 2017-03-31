@@ -12,7 +12,7 @@ module Rideshare
 
       #current policy is to delete ALL records that contain ANY questionable data
       proof_data(args)
-
+      
       @id = args[:id]
       @driver_id = args[:driver_id]
       @vin = args[:vin]
@@ -71,5 +71,3 @@ module Rideshare
 
   end
 end
-
-Rideshare::Driver.driver_rating([Rideshare::Trip.new( { trip_id: 4,driver_id: 4,rider_id: 4,date: "today",rating: 6 }, :driver_id ) ] )
