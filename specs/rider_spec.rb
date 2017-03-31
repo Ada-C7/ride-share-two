@@ -27,29 +27,25 @@ describe "Trip" do
       proc{no_id_rider}.must_raise ArgumentError
       proc{no_phone_rider}.must_raise ArgumentError
     end
+  end
 
-    describe "all" do
-      let(:all_trips) {Rideshare::Trip.all(:trip_id)}
+  describe "all" do
+    let(:all_riders) {Rideshare::Rider.all(:rider_id)}
 
-      it "returns a collection with right number of rows" do
-        all_trips.length.must_equal 595
-      end
+    it "returns a collection with right number of rows" do
+      all_riders.length.must_equal 300
+    end
 
-      it 'works for the first trip in the csv' do
-        all_trips.first.trip_id.must_equal 1
-        all_trips.first.driver_id.must_equal 1
-        all_trips.first.rider_id.must_equal 54
-        all_trips.first.date.must_equal "2016-04-05"
-        all_trips.first.rating.must_equal 5
-      end
+    it 'returns right values for first line in csv' do
+      all_riders[0].name.must_equal "Nina Hintz Sr."
+      all_riders[0].rider_id.must_equal 1
+      all_riders[0].phone_num.must_equal  "560.815.3059"
+    end
 
-      it 'works for the last trip in the csv' do
-        all_trips.last.trip_id.must_equal 600
-        all_trips.last.driver_id.must_equal 61
-        all_trips.last.rider_id.must_equal 168
-        all_trips.last.date.must_equal "2016-04-25"
-        all_trips.last.rating.must_equal 3
-      end
-
+    it 'returns right values for last line in csv' do
+      all_riders.last.name.must_equal "Miss Isom Gleason"
+      all_riders.last.rider_id.must_equal 300
+      all_riders.last.phone_num.must_equal  "791-114-8423 x70188"
+    end
   end
 end

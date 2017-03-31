@@ -58,83 +58,83 @@ describe "Trip" do
       all_trips.last.date.must_equal "2016-04-25"
       all_trips.last.rating.must_equal 3
     end
+  end
 
-    describe "find_records" do
-      let(:first_trip) {Rideshare::Trip.find_records(:trip_id, 1)}
+  describe "find_records" do
+    let(:first_trip) {Rideshare::Trip.find_records(:trip_id, 1)}
 
-      let(:last_trip) {Rideshare::Trip.find_records(:trip_id, 600)}
+    let(:last_trip) {Rideshare::Trip.find_records(:trip_id, 600)}
 
-      let(:imaginary_trip) {Rideshare::Trip.find_records(:trip_id, 601)}
+    let(:imaginary_trip) {Rideshare::Trip.find_records(:trip_id, 601)}
 
-      let(:first_driver_trips) {Rideshare::Trip.find_records(:driver_id, 1)}
+    let(:first_driver_trips) {Rideshare::Trip.find_records(:driver_id, 1)}
 
-      let(:last_driver_trips) {Rideshare::Trip.find_records(:driver_id, 99)}
+    let(:last_driver_trips) {Rideshare::Trip.find_records(:driver_id, 99)}
 
-      let(:first_rider_trips) {Rideshare::Trip.find_records(:rider_id, 1)}
+    let(:first_rider_trips) {Rideshare::Trip.find_records(:rider_id, 1)}
 
-      let(:last_rider_trips) {Rideshare::Trip.find_records(:rider_id, 99)}
+    let(:last_rider_trips) {Rideshare::Trip.find_records(:rider_id, 99)}
 
-      # let(:double_driver) {Rideshare::Driver.find_records(':driver_id, 94)}
+    # let(:double_driver) {Rideshare::Driver.find_records(':driver_id, 94)}
 
 
-      it 'works for the first trip in the csv' do
-        first_trip[0].trip_id.must_equal 1
-        first_trip[0].driver_id.must_equal 1
-        first_trip[0].rider_id.must_equal 54
-        first_trip[0].date.must_equal "2016-04-05"
-        first_trip[0].rating.must_equal 5
+    it 'works for the first trip in the csv' do
+      first_trip[0].trip_id.must_equal 1
+      first_trip[0].driver_id.must_equal 1
+      first_trip[0].rider_id.must_equal 54
+      first_trip[0].date.must_equal "2016-04-05"
+      first_trip[0].rating.must_equal 5
+    end
+
+    it 'works for the last trip in the csv' do
+      last_trip[0].trip_id.must_equal 600
+      last_trip[0].driver_id.must_equal 61
+      last_trip[0].rider_id.must_equal 168
+      last_trip[0].date.must_equal "2016-04-25"
+      last_trip[0].rating.must_equal 3
+    end
+
+    it "returns only one trip for first and last" do
+      last_trip.length.must_equal 1
+      first_trip.length.must_equal 1
+    end
+
+    it "returns empty array if the trip does not exist" do
+      imaginary_trip.must_be_empty
+    end
+
+    it "returns the correct trips for the first driver" do
+
+      first_driver_trips.length.must_equal 9
+
+      trip_ids = []
+      first_driver_trips.each do |trip|
+        trip_ids << trip.trip_id.to_i
       end
+      trip_ids.sort.must_equal [1, 122, 124, 216, 417, 434, 439, 530, 553]
+    end
 
-      it 'works for the last trip in the csv' do
-        last_trip[0].trip_id.must_equal 600
-        last_trip[0].driver_id.must_equal 61
-        last_trip[0].rider_id.must_equal 168
-        last_trip[0].date.must_equal "2016-04-25"
-        last_trip[0].rating.must_equal 3
+
+    it "returns the correct trips for the first rider" do
+
+      first_rider_trips.length.must_equal 2
+
+      trip_ids = []
+      first_rider_trips.each do |trip|
+        trip_ids << trip.trip_id.to_i
       end
+      trip_ids.sort.must_equal [46, 272]
+    end
 
-      it "returns only one trip for first and last" do
-        last_trip.length.must_equal 1
-        first_trip.length.must_equal 1
+    it "returns the correct trips for the last rider" do
+
+      last_rider_trips.length.must_equal 3
+
+      trip_ids = []
+      last_rider_trips.each do |trip|
+        trip_ids << trip.trip_id.to_i
       end
-
-      it "returns empty array if the trip does not exist" do
-        imaginary_trip.must_be_empty
-      end
-
-      it "returns the correct trips for the first driver" do
-
-        first_driver_trips.length.must_equal 9
-
-        trip_ids = []
-        first_driver_trips.each do |trip|
-          trip_ids << trip.trip_id.to_i
-        end
-        trip_ids.sort.must_equal [1, 122, 124, 216, 417, 434, 439, 530, 553]
-      end
-
-
-      it "returns the correct trips for the first rider" do
-
-        first_rider_trips.length.must_equal 2
-
-        trip_ids = []
-        first_rider_trips.each do |trip|
-          trip_ids << trip.trip_id.to_i
-        end
-        trip_ids.sort.must_equal [46, 272]
-      end
-
-      it "returns the correct trips for the last rider" do
-
-        last_rider_trips.length.must_equal 3
-
-        trip_ids = []
-        last_rider_trips.each do |trip|
-          trip_ids << trip.trip_id.to_i
-        end
-        trip_ids.sort.must_equal [345, 509, 577]
-      end
+      trip_ids.sort.must_equal [345, 509, 577]
     end
   end
 end

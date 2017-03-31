@@ -18,7 +18,7 @@ module Rideshare
     end
 
     def self.csv_name
-      "support/trips.csv"
+      "support/riders.csv"
     end
 
     def self.all(search_var)
