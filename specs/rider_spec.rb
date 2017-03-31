@@ -48,4 +48,36 @@ describe "Trip" do
       all_riders.last.phone_num.must_equal  "791-114-8423 x70188"
     end
   end
+
+  describe "find_rider" do
+    let(:first_rider) {Rideshare::Rider.find_records(:rider_id, 1)}
+
+    let(:last_rider) {Rideshare::Rider.find_records(:rider_id, 300)}
+
+    let(:imaginary_rider) {Rideshare::Rider.find_records(:rider_id, 500)}
+
+    # let(:double_rider) {Rideshare::Rider.find_records(':rider_id, 94)}
+
+
+    it "finds the first rider from the csv using their numeric ID" do
+      first_rider[0].name.must_equal "Nina Hintz Sr."
+      first_rider[0].rider_id.must_equal 1
+      first_rider[0].phone_num.must_equal "560.815.3059"
+    end
+
+    it "finds the last rider from the csv using their numeric ID" do
+      last_rider.last.name.must_equal "Miss Isom Gleason"
+      last_rider.last.rider_id.must_equal 300
+      last_rider.last.phone_num.must_equal  "791-114-8423 x70188"
+    end
+
+    it "returns only one rider for first and last" do
+      last_rider.length.must_equal 1
+      first_rider.length.must_equal 1
+    end
+
+    it "returns empty array if the rider does not exist" do
+      imaginary_rider.must_be_empty
+    end
+  end
 end
