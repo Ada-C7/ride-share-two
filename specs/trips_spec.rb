@@ -66,6 +66,14 @@ describe "Trip" do
 
       let(:imaginary_trip) {Rideshare::Trip.find_records(:trip_id, 601)}
 
+      let(:first_driver_trips) {Rideshare::Trip.find_records(:driver_id, 1)}
+
+      let(:last_driver_trips) {Rideshare::Trip.find_records(:driver_id, 99)}
+
+      let(:first_rider_trips) {Rideshare::Trip.find_records(:rider_id, 1)}
+
+      let(:last_rider_trips) {Rideshare::Trip.find_records(:rider_id, 99)}
+
       # let(:double_driver) {Rideshare::Driver.find_records(':driver_id, 94)}
 
 
@@ -92,6 +100,40 @@ describe "Trip" do
 
       it "returns empty array if the trip does not exist" do
         imaginary_trip.must_be_empty
+      end
+
+      it "returns the correct trips for the first driver" do
+
+        first_driver_trips.length.must_equal 9
+
+        trip_ids = []
+        first_driver_trips.each do |trip|
+          trip_ids << trip.trip_id.to_i
+        end
+        trip_ids.sort.must_equal [1, 122, 124, 216, 417, 434, 439, 530, 553]
+      end
+
+
+      it "returns the correct trips for the first rider" do
+
+        first_rider_trips.length.must_equal 2
+
+        trip_ids = []
+        first_rider_trips.each do |trip|
+          trip_ids << trip.trip_id.to_i
+        end
+        trip_ids.sort.must_equal [46, 272]
+      end
+
+      it "returns the correct trips for the last rider" do
+
+        last_rider_trips.length.must_equal 3
+
+        trip_ids = []
+        last_rider_trips.each do |trip|
+          trip_ids << trip.trip_id.to_i
+        end
+        trip_ids.sort.must_equal [345, 509, 577]
       end
     end
   end
