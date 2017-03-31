@@ -12,7 +12,7 @@ module Rideshare
 
       #current policy is to delete ALL records that contain ANY questionable data
       proof_data(args)
-      
+
       @id = args[:id]
       @driver_id = args[:driver_id]
       @vin = args[:vin]

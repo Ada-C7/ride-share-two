@@ -2,7 +2,7 @@ module Rideshare
   class Record
 
     def proof_data(type, args)
-      raise ArgumentError.new("#{type} # #{args[:id]} removed from dataset due to missing information.") unless (args.values & [0,"", nil]).empty?
+      raise ArgumentError.new("#{type.to_s.capitalize[0..-4]} # #{args[:trip_id]} removed from dataset due to missing information.") unless (args.values & [0,"", nil]).empty?
     end
 
     def self.add_record(args, search_var)

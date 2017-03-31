@@ -3,8 +3,6 @@ module Rideshare
     attr_reader :id, :trip_id, :driver_id, :name, :rating, :rider_id, :date
 
     def initialize(args, search_var)
-      args[:id] = args[search_var]
-
       # current policy is to eliminate ALL records that contain questionable driver, rider, or trip id
 
       # missing or faulty rating or date are OK.
@@ -22,16 +20,20 @@ module Rideshare
 
       # subset hash to only required info (trip_id, rider_id, driver_id)
       # fill in nil if missing any critical values
-      must_haves = { trip_id: nil, driver_id: nil,  rider_id: nil, id: nil }
+      must_haves = { trip_id: nil, driver_id: nil,  rider_id: nil }
       must_haves.merge! args.select { |k, v| must_haves.keys.include? k }
 
-      super("Trip", must_haves)
+      super(:trip_id, must_haves)
 
-      puts "Warning: invalid rating (Trip ##{args[:id]})" unless (1..5).include? args[:rating]
+      puts "Warning: invalid rating for trip ##{args[:trip_id]}" unless (1..5).include? args[:rating]
     end
 
     def self.csv_name
       "support/trips.csv"
+    end
+
+    def self.add_record(args, search_var)
+      super(args, search_var)
     end
 
     def self.all(search_var)
