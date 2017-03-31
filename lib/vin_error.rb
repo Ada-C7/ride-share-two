@@ -1,0 +1,2 @@
+class VinError < StandardError
+end
