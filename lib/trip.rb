@@ -44,13 +44,13 @@ module Rideshare
       super(search_var, id_to_find)
     end
 
-    def self.get_rider_info(trip_id)
-      rider_id = self.find_records(:trip_id, trip_id).rider_id
+    def self.get_rider_info(search_var, id)
+      rider_id = self.find_records(search_var, id).rider_id
       Rideshare::Rider.find_records(:rider_id,rider_id)
     end
 
-    def self.get_driver_info(trip_id)
-      rider_id = self.find_records(:trip_id, trip_id).rider_id
+    def self.get_driver_info(search_var, id)
+      rider_id = self.find_records(search_var, id).driver_id
       Rideshare::Driver.find_records(:driver_id, driver_id)
     end
 

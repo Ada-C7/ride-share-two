@@ -49,15 +49,14 @@ describe "Trip" do
     end
   end
 
-  describe "find_rider" do
-    let(:first_rider) {Rideshare::Rider.find_records(:rider_id, 1)}
+  describe "drivers_for_rider" do
+    let(:first_rider) {Rideshare::Rider.drivers_for_rider(:rider_id, 1)}
 
-    let(:last_rider) {Rideshare::Rider.find_records(:rider_id, 300)}
+    let(:last_rider) {Rideshare::Rider.drivers_for_rider(:rider_id, 300)}
 
-    let(:imaginary_rider) {Rideshare::Rider.find_records(:rider_id, 500)}
+    let(:imaginary_rider) {Rideshare::Rider.drivers_for_rider(:rider_id, 500)}
 
     # let(:double_rider) {Rideshare::Rider.find_records(':rider_id, 94)}
-
 
     it "finds the first rider from the csv using their numeric ID" do
       first_rider[0].name.must_equal "Nina Hintz Sr."
@@ -80,4 +79,29 @@ describe "Trip" do
       imaginary_rider.must_be_empty
     end
   end
+
+  describe "drivers for rider" do
+    let(:first_rider_drivers) {Rideshare::Rider.drivers_for_rider(1)}
+
+    let(:last_rider_drivers) {Rideshare::Rider.drivers_for_rider(300)}
+
+
+    it "returns the correct drivers for the first rider" do
+
+      first_rider_drivers.length.must_equal 2
+
+      first_rider_drivers.map!{ |driver| driver.name}
+      first_rider_drivers.sort.must_equal ["Federico Bins V", "Ms. Winston Emard"]
+    end
+
+
+    it "returns the correct drivers for the last driver" do
+
+      last_rider_drivers.length.must_equal 1
+      last_rider[0].name.must_equal "Charley Kiehn"
+    end
+
+
+  end
+
 end

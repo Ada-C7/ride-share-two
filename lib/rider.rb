@@ -11,6 +11,10 @@ module Rideshare
       @phone_num= args[:phone_num]
     end
 
+    def self.drivers_for_rider(rider_id)
+      Rideshare::Trip.get_driver_info(:rider_id, rider_id)
+    end
+
     def proof_data(args)
       must_haves = { rider_id: nil, phone_num: nil,  name: nil }
       must_haves.merge! args
