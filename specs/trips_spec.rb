@@ -31,7 +31,7 @@ describe "Trip" do
       proc{no_trip_id}.must_raise ArgumentError
     end
 
-    it "outputs a warning if :rating is outside acceptable range, but stores row with rating as nil" do
+    it "outputs a warning if :rating is outside acceptable range" do
       proc{weird_rating}.must_output /.+/
     end
   end

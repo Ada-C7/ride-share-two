@@ -1,11 +1,20 @@
 module Rideshare
-  class Rider
-    def initialize(args)
-      proof(args)
-      @id = args[:varname]
+  class Rider < Rideshare::Record
+
+    attr_reader :phone_num, :rider_id, :name, :id
+
+    def initialize(args, search_var)
+      proof_data(args)
+      @id = args[search_var]
       @rider_id = args[:rider_id]
       @name = args[:name]
       @phone_num= args[:phone_num]
+    end
+
+    def proof_data(args)
+      must_haves = { rider_id: nil, phone_num: nil,  name: nil }
+      must_haves.merge! args
+      super(:rider_id, must_haves)
     end
 
     def self.csv_name
