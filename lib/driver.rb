@@ -1,8 +1,3 @@
-require_relative 'records.rb'
-require_relative 'trip.rb'
-require_relative 'vin_error.rb'
-require 'csv'
-require 'pry'
 module Rideshare
   class Driver < Rideshare::Record
     attr_reader :vin, :driver_id, :name, :id
