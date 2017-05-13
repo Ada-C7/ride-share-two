@@ -51,9 +51,26 @@ class Rider
   def drivers
 
     drivers = {}
-    trips.map { |trip| drivers[trip.driver_id] = Trip.driver(trip.driver_id) }
 
-    return drivers.values
+    trips.map { |trip| drivers[trip.driver_id] = Drivers.find(trip.driver_id) }
+
+    return driver.values
+
+
+    # drivers = {}
+    #
+    #   trips.map do |trip|
+    #     Driver.find(trip.driver_id)
+    #   end
+
+
+
+
+
+    # drivers = {}
+    # trips.map { |trip| drivers[trip.driver_id] = Trip.driver(trip.driver_id) }
+    #
+    # return drivers.values
 
 
     # drivers = {}
