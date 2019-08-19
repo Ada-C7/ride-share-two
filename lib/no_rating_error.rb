@@ -1,0 +1,2 @@
+class NoRatingError < StandardError
+end
